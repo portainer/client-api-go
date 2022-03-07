@@ -17,10 +17,10 @@ import (
 // swagger:model portainer.Tag
 type PortainerTag struct {
 
-	// A set of environment(endpoint) group ids that have this tag
+	// A set of endpoint group ids that have this tag
 	EndpointGroups map[string]bool `json:"EndpointGroups,omitempty"`
 
-	// A set of environment(endpoint) ids that have this tag
+	// A set of endpoint ids that have this tag
 	Endpoints map[string]bool `json:"Endpoints,omitempty"`
 
 	// Tag name

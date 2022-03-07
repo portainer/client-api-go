@@ -30,13 +30,55 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	ResourceControlCreate(params *ResourceControlCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlCreateOK, error)
+	DeleteResourceControlsID(params *DeleteResourceControlsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteResourceControlsIDNoContent, error)
 
-	ResourceControlDelete(params *ResourceControlDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlDeleteNoContent, error)
+	ResourceControlCreate(params *ResourceControlCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlCreateOK, error)
 
 	ResourceControlUpdate(params *ResourceControlUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  DeleteResourceControlsID removes a resource control
+
+  Remove a resource control.
+**Access policy**: administrator
+*/
+func (a *Client) DeleteResourceControlsID(params *DeleteResourceControlsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteResourceControlsIDNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteResourceControlsIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteResourceControlsID",
+		Method:             "DELETE",
+		PathPattern:        "/resource_controls/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteResourceControlsIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteResourceControlsIDNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteResourceControlsID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,52 +124,10 @@ func (a *Client) ResourceControlCreate(params *ResourceControlCreateParams, auth
 }
 
 /*
-  ResourceControlDelete removes a resource control
-
-  Remove a resource control.
-**Access policy**: administrator
-*/
-func (a *Client) ResourceControlDelete(params *ResourceControlDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlDeleteNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewResourceControlDeleteParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ResourceControlDelete",
-		Method:             "DELETE",
-		PathPattern:        "/resource_controls/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &ResourceControlDeleteReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ResourceControlDeleteNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ResourceControlDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
   ResourceControlUpdate updates a resource control
 
   Update a resource control
-**Access policy**: authenticated
+**Access policy**: restricted
 */
 func (a *Client) ResourceControlUpdate(params *ResourceControlUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlUpdateOK, error) {
 	// TODO: Validate the params before sending

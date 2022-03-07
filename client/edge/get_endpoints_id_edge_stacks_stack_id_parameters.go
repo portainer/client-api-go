@@ -61,7 +61,7 @@ type GetEndpointsIDEdgeStacksStackIDParams struct {
 
 	/* ID.
 
-	   environment(endpoint) Id
+	   Endpoint Id
 	*/
 	ID string
 
@@ -159,8 +159,8 @@ func (o *GetEndpointsIDEdgeStacksStackIDParams) WriteToRequest(r runtime.ClientR
 		return err
 	}
 
-	// path param stackId
-	if err := r.SetPathParam("stackId", o.StackID); err != nil {
+	// path param stackID
+	if err := r.SetPathParam("stackID", o.StackID); err != nil {
 		return err
 	}
 

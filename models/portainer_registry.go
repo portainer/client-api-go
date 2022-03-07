@@ -20,28 +20,20 @@ import (
 // swagger:model portainer.Registry
 type PortainerRegistry struct {
 
-	// Stores temporary access token
-	AccessToken string `json:"AccessToken,omitempty"`
-
-	// access token expiry
-	AccessTokenExpiry int64 `json:"AccessTokenExpiry,omitempty"`
-
 	// Is authentication against this registry enabled
 	// Example: true
 	Authentication bool `json:"Authentication,omitempty"`
 
-	// Deprecated in DBVersion == 18
+	// authorized teams
 	AuthorizedTeams []int64 `json:"AuthorizedTeams"`
 
+	// Deprecated fields
 	// Deprecated in DBVersion == 18
 	AuthorizedUsers []int64 `json:"AuthorizedUsers"`
 
-	// Base URL, introduced for ProGet registry
+	// Base URL or IP address of the ProGet registry
 	// Example: registry.mydomain.tld:2375
 	BaseURL string `json:"BaseURL,omitempty"`
-
-	// ecr
-	Ecr *PortainerEcrData `json:"Ecr,omitempty"`
 
 	// gitlab
 	Gitlab *PortainerGitlabRegistryData `json:"Gitlab,omitempty"`
@@ -57,32 +49,25 @@ type PortainerRegistry struct {
 	// Example: my-registry
 	Name string `json:"Name,omitempty"`
 
-	// Password or SecretAccessKey used to authenticate against this registry
+	// Password used to authenticate against this registry
 	// Example: registry_password
 	Password string `json:"Password,omitempty"`
 
-	// quay
-	Quay *PortainerQuayRegistryData `json:"Quay,omitempty"`
-
-	// registry accesses
-	RegistryAccesses PortainerRegistryAccesses `json:"RegistryAccesses,omitempty"`
-
-	// Deprecated in DBVersion == 31
+	// team access policies
 	TeamAccessPolicies PortainerTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
 
-	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
-	// Enum: [1 2 3 4 5 6 7]
+	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet)
+	// Enum: [1 2 3 4 5]
 	Type int64 `json:"Type,omitempty"`
 
 	// URL or IP address of the Docker registry
 	// Example: registry.mydomain.tld:2375
 	URL string `json:"URL,omitempty"`
 
-	// Deprecated fields
-	// Deprecated in DBVersion == 31
+	// user access policies
 	UserAccessPolicies PortainerUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
 
-	// Username or AccessKeyID used to authenticate against this registry
+	// Username used to authenticate against this registry
 	// Example: registry user
 	Username string `json:"Username,omitempty"`
 }
@@ -91,23 +76,11 @@ type PortainerRegistry struct {
 func (m *PortainerRegistry) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateEcr(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateGitlab(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateManagementConfiguration(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateQuay(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateRegistryAccesses(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -126,25 +99,6 @@ func (m *PortainerRegistry) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainerRegistry) validateEcr(formats strfmt.Registry) error {
-	if swag.IsZero(m.Ecr) { // not required
-		return nil
-	}
-
-	if m.Ecr != nil {
-		if err := m.Ecr.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Ecr")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Ecr")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -186,44 +140,6 @@ func (m *PortainerRegistry) validateManagementConfiguration(formats strfmt.Regis
 	return nil
 }
 
-func (m *PortainerRegistry) validateQuay(formats strfmt.Registry) error {
-	if swag.IsZero(m.Quay) { // not required
-		return nil
-	}
-
-	if m.Quay != nil {
-		if err := m.Quay.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Quay")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Quay")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PortainerRegistry) validateRegistryAccesses(formats strfmt.Registry) error {
-	if swag.IsZero(m.RegistryAccesses) { // not required
-		return nil
-	}
-
-	if m.RegistryAccesses != nil {
-		if err := m.RegistryAccesses.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("RegistryAccesses")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("RegistryAccesses")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *PortainerRegistry) validateTeamAccessPolicies(formats strfmt.Registry) error {
 	if swag.IsZero(m.TeamAccessPolicies) { // not required
 		return nil
@@ -247,7 +163,7 @@ var portainerRegistryTypeTypePropEnum []interface{}
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[1,2,3,4,5]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -299,23 +215,11 @@ func (m *PortainerRegistry) validateUserAccessPolicies(formats strfmt.Registry) 
 func (m *PortainerRegistry) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateEcr(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateGitlab(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateManagementConfiguration(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateQuay(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateRegistryAccesses(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -330,22 +234,6 @@ func (m *PortainerRegistry) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainerRegistry) contextValidateEcr(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Ecr != nil {
-		if err := m.Ecr.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Ecr")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Ecr")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -376,36 +264,6 @@ func (m *PortainerRegistry) contextValidateManagementConfiguration(ctx context.C
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *PortainerRegistry) contextValidateQuay(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Quay != nil {
-		if err := m.Quay.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Quay")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Quay")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PortainerRegistry) contextValidateRegistryAccesses(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.RegistryAccesses.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("RegistryAccesses")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("RegistryAccesses")
-		}
-		return err
 	}
 
 	return nil

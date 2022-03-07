@@ -40,7 +40,7 @@ type PortainerTemplate struct {
 	// Example: High performance web server
 	Description string `json:"description,omitempty"`
 
-	// A list of environment(endpoint) variables used during the template deployment
+	// A list of environment variables used during the template deployment
 	Env []*PortainerTemplateEnv `json:"env"`
 
 	// Container hostname
@@ -69,7 +69,7 @@ type PortainerTemplate struct {
 	// Example: mystackname
 	Name string `json:"name,omitempty"`
 
-	// Name of a network that will be used on container deployment if it exists inside the environment(endpoint)
+	// Name of a network that will be used on container deployment if it exists inside the environment
 	// Example: mynet
 	Network string `json:"network,omitempty"`
 

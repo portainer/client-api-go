@@ -25,6 +25,10 @@ type PortainerUser struct {
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
+	// password
+	// Example: passwd
+	Password string `json:"Password,omitempty"`
+
 	// Deprecated fields
 	// Deprecated in DBVersion == 25
 	PortainerAuthorizations PortainerAuthorizations `json:"PortainerAuthorizations,omitempty"`
@@ -36,10 +40,6 @@ type PortainerUser struct {
 	// username
 	// Example: bob
 	Username string `json:"Username,omitempty"`
-
-	// User Theme
-	// Example: dark
-	UserTheme string `json:"userTheme,omitempty"`
 }
 
 // Validate validates this portainer user

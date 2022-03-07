@@ -18,17 +18,8 @@ import (
 // swagger:model portainer.RegistryManagementConfiguration
 type PortainerRegistryManagementConfiguration struct {
 
-	// access token
-	AccessToken string `json:"AccessToken,omitempty"`
-
-	// access token expiry
-	AccessTokenExpiry int64 `json:"AccessTokenExpiry,omitempty"`
-
 	// authentication
 	Authentication bool `json:"Authentication,omitempty"`
-
-	// ecr
-	Ecr *PortainerEcrData `json:"Ecr,omitempty"`
 
 	// password
 	Password string `json:"Password,omitempty"`
@@ -47,10 +38,6 @@ type PortainerRegistryManagementConfiguration struct {
 func (m *PortainerRegistryManagementConfiguration) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateEcr(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateTLSConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -58,25 +45,6 @@ func (m *PortainerRegistryManagementConfiguration) Validate(formats strfmt.Regis
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainerRegistryManagementConfiguration) validateEcr(formats strfmt.Registry) error {
-	if swag.IsZero(m.Ecr) { // not required
-		return nil
-	}
-
-	if m.Ecr != nil {
-		if err := m.Ecr.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Ecr")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Ecr")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -103,10 +71,6 @@ func (m *PortainerRegistryManagementConfiguration) validateTLSConfig(formats str
 func (m *PortainerRegistryManagementConfiguration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateEcr(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateTLSConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -114,22 +78,6 @@ func (m *PortainerRegistryManagementConfiguration) ContextValidate(ctx context.C
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainerRegistryManagementConfiguration) contextValidateEcr(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Ecr != nil {
-		if err := m.Ecr.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Ecr")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Ecr")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

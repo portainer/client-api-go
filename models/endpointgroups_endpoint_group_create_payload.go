@@ -19,20 +19,20 @@ import (
 // swagger:model endpointgroups.endpointGroupCreatePayload
 type EndpointgroupsEndpointGroupCreatePayload struct {
 
-	// List of environment(endpoint) identifiers that will be part of this group
+	// List of endpoint identifiers that will be part of this group
 	// Example: [1,3]
 	AssociatedEndpoints []int64 `json:"associatedEndpoints"`
 
-	// Environment(Endpoint) group description
+	// Endpoint group description
 	// Example: description
 	Description string `json:"description,omitempty"`
 
-	// Environment(Endpoint) group name
-	// Example: my-environment-group
+	// Endpoint group name
+	// Example: my-endpoint-group
 	// Required: true
 	Name *string `json:"name"`
 
-	// List of tag identifiers to which this environment(endpoint) group is associated
+	// List of tag identifiers to which this endpoint group is associated
 	// Example: [1,2]
 	TagIDs []int64 `json:"tagIDs"`
 }

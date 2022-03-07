@@ -58,13 +58,6 @@ func NewTeamMembershipsParamsWithHTTPClient(client *http.Client) *TeamMembership
    Typically these are written to a http.Request.
 */
 type TeamMembershipsParams struct {
-
-	/* ID.
-
-	   Team Id
-	*/
-	ID string
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -118,17 +111,6 @@ func (o *TeamMembershipsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the team memberships params
-func (o *TeamMembershipsParams) WithID(id string) *TeamMembershipsParams {
-	o.SetID(id)
-	return o
-}
-
-// SetID adds the id to the team memberships params
-func (o *TeamMembershipsParams) SetID(id string) {
-	o.ID = id
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *TeamMembershipsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -136,11 +118,6 @@ func (o *TeamMembershipsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
-
-	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
-		return err
-	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

@@ -30,13 +30,13 @@ type EndpointsEndpointStatusInspectResponse struct {
 	// Example: 8732
 	Port int64 `json:"port,omitempty"`
 
-	// List of requests for jobs to run on the environment(endpoint)
+	// List of requests for jobs to run on the endpoint
 	Schedules []*EndpointsEdgeJobResponse `json:"schedules"`
 
-	// List of stacks to be deployed on the environments(endpoints)
+	// List of stacks to be deployed on the endpoints
 	Stacks []*EndpointsStackStatusResponse `json:"stacks"`
 
-	// Status represents the environment(endpoint) status
+	// Status represents the endpoint status
 	// Example: REQUIRED
 	Status string `json:"status,omitempty"`
 }

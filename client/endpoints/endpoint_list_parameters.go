@@ -62,13 +62,13 @@ type EndpointListParams struct {
 
 	/* EndpointIds.
 
-	   will return only these environments(endpoints)
+	   will return only these endpoints
 	*/
 	EndpointIds []int64
 
 	/* GroupID.
 
-	   List environments(endpoints) of this group
+	   List endpoints of this group
 	*/
 	GroupID *int64
 
@@ -92,21 +92,21 @@ type EndpointListParams struct {
 
 	/* TagIds.
 
-	   search environments(endpoints) with these tags (depends on tagsPartialMatch)
+	   search endpoints with these tags (depends on tagsPartialMatch)
 	*/
 	TagIds []int64
 
 	/* TagsPartialMatch.
 
-	   If true, will return environment(endpoint) which has one of tagIds, if false (or missing) will return only environments(endpoints) that has all the tags
+	   If true, will return endpoint which has one of tagIds, if false (or missing) will return only endpoints that has all the tags
 	*/
 	TagsPartialMatch *bool
 
-	/* Types.
+	/* Type.
 
-	   List environments(endpoints) of this type
+	   List endpoints of this type
 	*/
-	Types []int64
+	Type *int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -238,15 +238,15 @@ func (o *EndpointListParams) SetTagsPartialMatch(tagsPartialMatch *bool) {
 	o.TagsPartialMatch = tagsPartialMatch
 }
 
-// WithTypes adds the types to the endpoint list params
-func (o *EndpointListParams) WithTypes(types []int64) *EndpointListParams {
-	o.SetTypes(types)
+// WithType adds the typeVar to the endpoint list params
+func (o *EndpointListParams) WithType(typeVar *int64) *EndpointListParams {
+	o.SetType(typeVar)
 	return o
 }
 
-// SetTypes adds the types to the endpoint list params
-func (o *EndpointListParams) SetTypes(types []int64) {
-	o.Types = types
+// SetType adds the type to the endpoint list params
+func (o *EndpointListParams) SetType(typeVar *int64) {
+	o.Type = typeVar
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -364,14 +364,20 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.Types != nil {
+	if o.Type != nil {
 
-		// binding items for types
-		joinedTypes := o.bindParamTypes(reg)
+		// query param type
+		var qrType int64
 
-		// query array param types
-		if err := r.SetQueryParam("types", joinedTypes...); err != nil {
-			return err
+		if o.Type != nil {
+			qrType = *o.Type
+		}
+		qType := swag.FormatInt64(qrType)
+		if qType != "" {
+
+			if err := r.SetQueryParam("type", qType); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -413,21 +419,4 @@ func (o *EndpointListParams) bindParamTagIds(formats strfmt.Registry) []string {
 	tagIdsIS := swag.JoinByFormat(tagIdsIC, "")
 
 	return tagIdsIS
-}
-
-// bindParamEndpointList binds the parameter types
-func (o *EndpointListParams) bindParamTypes(formats strfmt.Registry) []string {
-	typesIR := o.Types
-
-	var typesIC []string
-	for _, typesIIR := range typesIR { // explode []int64
-
-		typesIIV := swag.FormatInt64(typesIIR) // int64 as string
-		typesIC = append(typesIC, typesIIV)
-	}
-
-	// items.CollectionFormat: ""
-	typesIS := swag.JoinByFormat(typesIC, "")
-
-	return typesIS
 }

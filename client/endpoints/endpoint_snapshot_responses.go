@@ -98,7 +98,7 @@ func NewEndpointSnapshotNotFound() *EndpointSnapshotNotFound {
 
 /* EndpointSnapshotNotFound describes a response with status code 404, with default header values.
 
-Environment(Endpoint) not found
+Endpoint not found
 */
 type EndpointSnapshotNotFound struct {
 }

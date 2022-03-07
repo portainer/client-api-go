@@ -18,15 +18,15 @@ import (
 // swagger:model endpointgroups.endpointGroupUpdatePayload
 type EndpointgroupsEndpointGroupUpdatePayload struct {
 
-	// Environment(Endpoint) group description
+	// Endpoint group description
 	// Example: description
 	Description string `json:"description,omitempty"`
 
-	// Environment(Endpoint) group name
-	// Example: my-environment-group
+	// Endpoint group name
+	// Example: my-endpoint-group
 	Name string `json:"name,omitempty"`
 
-	// List of tag identifiers associated to the environment(endpoint) group
+	// List of tag identifiers associated to the endpoint group
 	// Example: [3,4]
 	TagIDs []int64 `json:"tagIDs"`
 

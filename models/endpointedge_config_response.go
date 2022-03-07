@@ -20,6 +20,9 @@ type EndpointedgeConfigResponse struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// prune
+	Prune bool `json:"prune,omitempty"`
+
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`
 }

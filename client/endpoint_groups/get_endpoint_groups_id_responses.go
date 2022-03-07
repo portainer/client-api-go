@@ -66,7 +66,7 @@ type GetEndpointGroupsIDOK struct {
 }
 
 func (o *GetEndpointGroupsIDOK) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /endpoint_groups/:id][%d] getEndpointGroupsIdOK  %+v", 200, o.Payload)
 }
 func (o *GetEndpointGroupsIDOK) GetPayload() *models.PortainerEndpointGroup {
 	return o.Payload
@@ -97,7 +97,7 @@ type GetEndpointGroupsIDBadRequest struct {
 }
 
 func (o *GetEndpointGroupsIDBadRequest) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoint_groups/:id][%d] getEndpointGroupsIdBadRequest ", 400)
 }
 
 func (o *GetEndpointGroupsIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -118,7 +118,7 @@ type GetEndpointGroupsIDNotFound struct {
 }
 
 func (o *GetEndpointGroupsIDNotFound) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoint_groups/:id][%d] getEndpointGroupsIdNotFound ", 404)
 }
 
 func (o *GetEndpointGroupsIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -139,7 +139,7 @@ type GetEndpointGroupsIDInternalServerError struct {
 }
 
 func (o *GetEndpointGroupsIDInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoint_groups/:id][%d] getEndpointGroupsIdInternalServerError ", 500)
 }
 
 func (o *GetEndpointGroupsIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

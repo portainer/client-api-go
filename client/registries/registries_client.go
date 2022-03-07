@@ -49,7 +49,7 @@ type ClientService interface {
   RegistryConfigure configures a registry
 
   Configures a registry.
-**Access policy**: restricted
+**Access policy**: admin
 */
 func (a *Client) RegistryConfigure(params *RegistryConfigureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryConfigureNoContent, error) {
 	// TODO: Validate the params before sending
@@ -91,7 +91,7 @@ func (a *Client) RegistryConfigure(params *RegistryConfigureParams, authInfo run
   RegistryCreate creates a new registry
 
   Create a new registry.
-**Access policy**: restricted
+**Access policy**: administrator
 */
 func (a *Client) RegistryCreate(params *RegistryCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -133,7 +133,7 @@ func (a *Client) RegistryCreate(params *RegistryCreateParams, authInfo runtime.C
   RegistryDelete removes a registry
 
   Remove a registry
-**Access policy**: restricted
+**Access policy**: administrator
 */
 func (a *Client) RegistryDelete(params *RegistryDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -175,7 +175,7 @@ func (a *Client) RegistryDelete(params *RegistryDeleteParams, authInfo runtime.C
   RegistryInspect inspects a registry
 
   Retrieve details about a registry.
-**Access policy**: restricted
+**Access policy**: administrator
 */
 func (a *Client) RegistryInspect(params *RegistryInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryInspectOK, error) {
 	// TODO: Validate the params before sending
@@ -261,7 +261,7 @@ func (a *Client) RegistryList(params *RegistryListParams, authInfo runtime.Clien
   RegistryUpdate updates a registry
 
   Update a registry
-**Access policy**: restricted
+**Access policy**: administrator
 */
 func (a *Client) RegistryUpdate(params *RegistryUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryUpdateOK, error) {
 	// TODO: Validate the params before sending

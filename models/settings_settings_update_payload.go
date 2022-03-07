@@ -19,6 +19,34 @@ import (
 // swagger:model settings.settingsUpdatePayload
 type SettingsSettingsUpdatePayload struct {
 
+	// Whether non-administrator should be able to use bind mounts when creating containers
+	// Example: false
+	AllowBindMountsForRegularUsers bool `json:"allowBindMountsForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to use container capabilities
+	// Example: true
+	AllowContainerCapabilitiesForRegularUsers bool `json:"allowContainerCapabilitiesForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to use device mapping
+	// Example: true
+	AllowDeviceMappingForRegularUsers bool `json:"allowDeviceMappingForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to use the host pid
+	// Example: true
+	AllowHostNamespaceForRegularUsers bool `json:"allowHostNamespaceForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to use privileged mode when creating containers
+	// Example: false
+	AllowPrivilegedModeForRegularUsers bool `json:"allowPrivilegedModeForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to manage stacks
+	// Example: true
+	AllowStackManagementForRegularUsers bool `json:"allowStackManagementForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to browse volumes
+	// Example: true
+	AllowVolumeBrowserForRegularUsers bool `json:"allowVolumeBrowserForRegularUsers,omitempty"`
+
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
 	AuthenticationMethod int64 `json:"authenticationMethod,omitempty"`
@@ -34,21 +62,13 @@ type SettingsSettingsUpdatePayload struct {
 	// Example: true
 	EnableEdgeComputeFeatures bool `json:"enableEdgeComputeFeatures,omitempty"`
 
+	// Whether host management features are enabled
+	// Example: true
+	EnableHostManagementFeatures bool `json:"enableHostManagementFeatures,omitempty"`
+
 	// Whether telemetry is enabled
 	// Example: false
 	EnableTelemetry bool `json:"enableTelemetry,omitempty"`
-
-	// Helm repository URL
-	// Example: https://charts.bitnami.com/bitnami
-	HelmRepositoryURL string `json:"helmRepositoryURL,omitempty"`
-
-	// The expiry of a Kubeconfig
-	// Example: 24h
-	KubeconfigExpiry *string `json:"kubeconfigExpiry,omitempty"`
-
-	// Kubectl Shell Image
-	// Example: portainer/kubectl-shell:latest
-	KubectlShellImage string `json:"kubectlShellImage,omitempty"`
 
 	// ldapsettings
 	Ldapsettings *PortainerLDAPSettings `json:"ldapsettings,omitempty"`
@@ -60,7 +80,7 @@ type SettingsSettingsUpdatePayload struct {
 	// oauth settings
 	OauthSettings *PortainerOAuthSettings `json:"oauthSettings,omitempty"`
 
-	// The interval in which environment(endpoint) snapshots are created
+	// The interval in which endpoint snapshots are created
 	// Example: 5m
 	SnapshotInterval string `json:"snapshotInterval,omitempty"`
 

@@ -62,7 +62,7 @@ type EndpointGroupDeleteEndpointParams struct {
 
 	/* EndpointID.
 
-	   Environment(Endpoint) identifier
+	   Endpoint identifier
 	*/
 	EndpointID int64
 
