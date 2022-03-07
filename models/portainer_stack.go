@@ -19,13 +19,7 @@ import (
 // swagger:model portainer.Stack
 type PortainerStack struct {
 
-	// Only applies when deploying stack with multiple files
-	AdditionalFiles []string `json:"AdditionalFiles"`
-
-	// The auto update settings of a git stack
-	AutoUpdate *PortainerStackAutoUpdate `json:"AutoUpdate,omitempty"`
-
-	// Environment(Endpoint) identifier. Reference the environment(endpoint) that will be used for deployment
+	// Endpoint identifier. Reference the endpoint that will be used for deployment
 	// Example: 1
 	EndpointID int64 `json:"EndpointId,omitempty"`
 
@@ -33,7 +27,7 @@ type PortainerStack struct {
 	// Example: docker-compose.yml
 	EntryPoint string `json:"EntryPoint,omitempty"`
 
-	// A list of environment(endpoint) variables used during stack deployment
+	// A list of environment variables used during stack deployment
 	Env []*PortainerPair `json:"Env"`
 
 	// Stack Identifier
@@ -67,17 +61,6 @@ type PortainerStack struct {
 	// Example: 1587399600
 	CreationDate int64 `json:"creationDate,omitempty"`
 
-	// The git config of this stack
-	GitConfig *GittypesRepoConfig `json:"gitConfig,omitempty"`
-
-	// IsComposeFormat indicates if the Kubernetes stack is created from a Docker Compose file
-	// Example: false
-	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
-
-	// Kubernetes namespace if stack is a kube application
-	// Example: default
-	Namespace string `json:"namespace,omitempty"`
-
 	// Path on disk to the repository hosting the Stack file
 	// Example: /data/compose/myStack_jpofkc0i9uo9wtx1zesuk649w
 	ProjectPath string `json:"projectPath,omitempty"`
@@ -95,10 +78,6 @@ type PortainerStack struct {
 func (m *PortainerStack) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAutoUpdate(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateEnv(formats); err != nil {
 		res = append(res, err)
 	}
@@ -107,32 +86,9 @@ func (m *PortainerStack) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateGitConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainerStack) validateAutoUpdate(formats strfmt.Registry) error {
-	if swag.IsZero(m.AutoUpdate) { // not required
-		return nil
-	}
-
-	if m.AutoUpdate != nil {
-		if err := m.AutoUpdate.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("AutoUpdate")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("AutoUpdate")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -181,32 +137,9 @@ func (m *PortainerStack) validateResourceControl(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *PortainerStack) validateGitConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.GitConfig) { // not required
-		return nil
-	}
-
-	if m.GitConfig != nil {
-		if err := m.GitConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("gitConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("gitConfig")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this portainer stack based on the context it is used
 func (m *PortainerStack) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.contextValidateAutoUpdate(ctx, formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.contextValidateEnv(ctx, formats); err != nil {
 		res = append(res, err)
@@ -216,29 +149,9 @@ func (m *PortainerStack) ContextValidate(ctx context.Context, formats strfmt.Reg
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateGitConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainerStack) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.AutoUpdate != nil {
-		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("AutoUpdate")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("AutoUpdate")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -270,22 +183,6 @@ func (m *PortainerStack) contextValidateResourceControl(ctx context.Context, for
 				return ve.ValidateName("ResourceControl")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ResourceControl")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PortainerStack) contextValidateGitConfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.GitConfig != nil {
-		if err := m.GitConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("gitConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("gitConfig")
 			}
 			return err
 		}

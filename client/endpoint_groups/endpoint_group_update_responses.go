@@ -66,7 +66,7 @@ type EndpointGroupUpdateOK struct {
 }
 
 func (o *EndpointGroupUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}][%d] endpointGroupUpdateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /endpoint_groups/:id][%d] endpointGroupUpdateOK  %+v", 200, o.Payload)
 }
 func (o *EndpointGroupUpdateOK) GetPayload() *models.PortainerEndpointGroup {
 	return o.Payload
@@ -97,7 +97,7 @@ type EndpointGroupUpdateBadRequest struct {
 }
 
 func (o *EndpointGroupUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}][%d] endpointGroupUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoint_groups/:id][%d] endpointGroupUpdateBadRequest ", 400)
 }
 
 func (o *EndpointGroupUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -118,7 +118,7 @@ type EndpointGroupUpdateNotFound struct {
 }
 
 func (o *EndpointGroupUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}][%d] endpointGroupUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoint_groups/:id][%d] endpointGroupUpdateNotFound ", 404)
 }
 
 func (o *EndpointGroupUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -139,7 +139,7 @@ type EndpointGroupUpdateInternalServerError struct {
 }
 
 func (o *EndpointGroupUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}][%d] endpointGroupUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoint_groups/:id][%d] endpointGroupUpdateInternalServerError ", 500)
 }
 
 func (o *EndpointGroupUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

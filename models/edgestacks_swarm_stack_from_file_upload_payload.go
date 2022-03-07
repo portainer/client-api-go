@@ -7,26 +7,15 @@ package models
 
 import (
 	"context"
-	"encoding/json"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // EdgestacksSwarmStackFromFileUploadPayload edgestacks swarm stack from file upload payload
 //
 // swagger:model edgestacks.swarmStackFromFileUploadPayload
 type EdgestacksSwarmStackFromFileUploadPayload struct {
-
-	// Deployment type to deploy this stack
-	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
-	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-	// kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-	// Example: 0
-	// Enum: [0 1]
-	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// edge groups
 	EdgeGroups []int64 `json:"edgeGroups"`
@@ -40,48 +29,6 @@ type EdgestacksSwarmStackFromFileUploadPayload struct {
 
 // Validate validates this edgestacks swarm stack from file upload payload
 func (m *EdgestacksSwarmStackFromFileUploadPayload) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateDeploymentType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-var edgestacksSwarmStackFromFileUploadPayloadTypeDeploymentTypePropEnum []interface{}
-
-func init() {
-	var res []int64
-	if err := json.Unmarshal([]byte(`[0,1]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		edgestacksSwarmStackFromFileUploadPayloadTypeDeploymentTypePropEnum = append(edgestacksSwarmStackFromFileUploadPayloadTypeDeploymentTypePropEnum, v)
-	}
-}
-
-// prop value enum
-func (m *EdgestacksSwarmStackFromFileUploadPayload) validateDeploymentTypeEnum(path, location string, value int64) error {
-	if err := validate.EnumCase(path, location, value, edgestacksSwarmStackFromFileUploadPayloadTypeDeploymentTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *EdgestacksSwarmStackFromFileUploadPayload) validateDeploymentType(formats strfmt.Registry) error {
-	if swag.IsZero(m.DeploymentType) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
-		return err
-	}
-
 	return nil
 }
 

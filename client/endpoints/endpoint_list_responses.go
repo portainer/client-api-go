@@ -77,7 +77,7 @@ func NewEndpointListInternalServerError() *EndpointListInternalServerError {
 
 /* EndpointListInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Internal Server Error
 */
 type EndpointListInternalServerError struct {
 }

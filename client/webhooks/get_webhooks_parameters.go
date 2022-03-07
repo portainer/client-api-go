@@ -15,6 +15,8 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+
+	"github.com/portainer/client-api/models"
 )
 
 // NewGetWebhooksParams creates a new GetWebhooksParams object,
@@ -65,6 +67,12 @@ type GetWebhooksParams struct {
 
 	// ResourceID.
 	ResourceID *string
+
+	/* Body.
+
+	   Webhook data
+	*/
+	Body *models.WebhooksWebhookCreatePayload
 
 	timeout    time.Duration
 	Context    context.Context
@@ -141,6 +149,17 @@ func (o *GetWebhooksParams) SetResourceID(resourceID *string) {
 	o.ResourceID = resourceID
 }
 
+// WithBody adds the body to the get webhooks params
+func (o *GetWebhooksParams) WithBody(body *models.WebhooksWebhookCreatePayload) *GetWebhooksParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the get webhooks params
+func (o *GetWebhooksParams) SetBody(body *models.WebhooksWebhookCreatePayload) {
+	o.Body = body
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetWebhooksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -180,6 +199,11 @@ func (o *GetWebhooksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 			if err := r.SetQueryParam("ResourceID", qResourceID); err != nil {
 				return err
 			}
+		}
+	}
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
 		}
 	}
 

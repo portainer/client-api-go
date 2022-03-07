@@ -19,25 +19,27 @@ import (
 // swagger:model portainer.Settings
 type PortainerSettings struct {
 
-	// allow bind mounts for regular users
+	// Whether non-administrator should be able to use bind mounts when creating containers
+	// Example: false
 	AllowBindMountsForRegularUsers bool `json:"AllowBindMountsForRegularUsers,omitempty"`
 
-	// allow container capabilities for regular users
+	// Whether non-administrator should be able to use container capabilities
 	AllowContainerCapabilitiesForRegularUsers bool `json:"AllowContainerCapabilitiesForRegularUsers,omitempty"`
 
-	// allow device mapping for regular users
+	// Whether non-administrator should be able to use device mapping
 	AllowDeviceMappingForRegularUsers bool `json:"AllowDeviceMappingForRegularUsers,omitempty"`
 
-	// allow host namespace for regular users
+	// Whether non-administrator should be able to use the host pid
 	AllowHostNamespaceForRegularUsers bool `json:"AllowHostNamespaceForRegularUsers,omitempty"`
 
-	// allow privileged mode for regular users
+	// Whether non-administrator should be able to use privileged mode when creating containers
+	// Example: false
 	AllowPrivilegedModeForRegularUsers bool `json:"AllowPrivilegedModeForRegularUsers,omitempty"`
 
-	// allow stack management for regular users
+	// Whether non-administrator should be able to manage stacks
 	AllowStackManagementForRegularUsers bool `json:"AllowStackManagementForRegularUsers,omitempty"`
 
-	// allow volume browser for regular users
+	// Whether non-administrator should be able to browse volumes
 	AllowVolumeBrowserForRegularUsers bool `json:"AllowVolumeBrowserForRegularUsers,omitempty"`
 
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
@@ -54,27 +56,12 @@ type PortainerSettings struct {
 	// Whether edge compute features are enabled
 	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
 
-	// Deprecated fields v26
+	// Whether host management features are enabled
 	EnableHostManagementFeatures bool `json:"EnableHostManagementFeatures,omitempty"`
 
 	// Whether telemetry is enabled
 	// Example: false
 	EnableTelemetry bool `json:"EnableTelemetry,omitempty"`
-
-	// feature flag settings
-	FeatureFlagSettings map[string]bool `json:"FeatureFlagSettings,omitempty"`
-
-	// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
-	// Example: https://charts.bitnami.com/bitnami
-	HelmRepositoryURL string `json:"HelmRepositoryURL,omitempty"`
-
-	// The expiry of a Kubeconfig
-	// Example: 24h
-	KubeconfigExpiry string `json:"KubeconfigExpiry,omitempty"`
-
-	// KubectlImage, defaults to portainer/kubectl-shell
-	// Example: portainer/kubectl-shell
-	KubectlShellImage string `json:"KubectlShellImage,omitempty"`
 
 	// l d a p settings
 	LDAPSettings *PortainerLDAPSettings `json:"LDAPSettings,omitempty"`
@@ -86,7 +73,7 @@ type PortainerSettings struct {
 	// o auth settings
 	OAuthSettings *PortainerOAuthSettings `json:"OAuthSettings,omitempty"`
 
-	// The interval in which environment(endpoint) snapshots are created
+	// The interval in which endpoint snapshots are created
 	// Example: 5m
 	SnapshotInterval string `json:"SnapshotInterval,omitempty"`
 

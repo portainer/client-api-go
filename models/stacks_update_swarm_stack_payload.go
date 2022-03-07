@@ -19,7 +19,7 @@ import (
 // swagger:model stacks.updateSwarmStackPayload
 type StacksUpdateSwarmStackPayload struct {
 
-	// A list of environment(endpoint) variables used during stack deployment
+	// A list of environment variables used during stack deployment
 	Env []*PortainerPair `json:"env"`
 
 	// Prune services that are no longer referenced (only available for Swarm stacks)

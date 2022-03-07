@@ -20,7 +20,7 @@ import (
 // swagger:model stacks.composeStackFromFileContentPayload
 type StacksComposeStackFromFileContentPayload struct {
 
-	// A list of environment(endpoint) variables used during stack deployment
+	// A list of environment variables used during stack deployment
 	Env []*PortainerPair `json:"env"`
 
 	// Name of the stack

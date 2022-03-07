@@ -127,7 +127,7 @@ func (a *Client) TagDelete(params *TagDeleteParams, authInfo runtime.ClientAuthI
   TagList lists tags
 
   List tags.
-**Access policy**: authenticated
+**Access policy**: administrator
 */
 func (a *Client) TagList(params *TagListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TagListOK, error) {
 	// TODO: Validate the params before sending

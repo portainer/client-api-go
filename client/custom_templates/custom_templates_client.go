@@ -61,7 +61,7 @@ func (a *Client) CustomTemplateCreate(params *CustomTemplateCreateParams, authIn
 		Method:             "POST",
 		PathPattern:        "/custom_templates",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
+		ConsumesMediaTypes: []string{" multipart/form-data", "application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &CustomTemplateCreateReader{formats: a.formats},
@@ -91,7 +91,7 @@ func (a *Client) CustomTemplateCreate(params *CustomTemplateCreateParams, authIn
   CustomTemplateDelete removes a template
 
   Remove a template.
-**Access policy**: authenticated
+**Access policy**: authorized
 */
 func (a *Client) CustomTemplateDelete(params *CustomTemplateDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -133,7 +133,7 @@ func (a *Client) CustomTemplateDelete(params *CustomTemplateDeleteParams, authIn
   CustomTemplateFile gets template stack file content
 
   Retrieve the content of the Stack file for the specified custom template
-**Access policy**: authenticated
+**Access policy**: authorized
 */
 func (a *Client) CustomTemplateFile(params *CustomTemplateFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateFileOK, error) {
 	// TODO: Validate the params before sending

@@ -17,6 +17,34 @@ import (
 // swagger:model settings.publicSettingsResponse
 type SettingsPublicSettingsResponse struct {
 
+	// Whether non-administrator should be able to use bind mounts when creating containers
+	// Example: true
+	AllowBindMountsForRegularUsers bool `json:"AllowBindMountsForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to use container capabilities
+	// Example: true
+	AllowContainerCapabilitiesForRegularUsers bool `json:"AllowContainerCapabilitiesForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to use device mapping
+	// Example: true
+	AllowDeviceMappingForRegularUsers bool `json:"AllowDeviceMappingForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to use the host pid
+	// Example: true
+	AllowHostNamespaceForRegularUsers bool `json:"AllowHostNamespaceForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to use privileged mode when creating containers
+	// Example: true
+	AllowPrivilegedModeForRegularUsers bool `json:"AllowPrivilegedModeForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to manage stacks
+	// Example: true
+	AllowStackManagementForRegularUsers bool `json:"AllowStackManagementForRegularUsers,omitempty"`
+
+	// Whether non-administrator should be able to browse volumes
+	// Example: true
+	AllowVolumeBrowserForRegularUsers bool `json:"AllowVolumeBrowserForRegularUsers,omitempty"`
+
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
 	AuthenticationMethod int64 `json:"AuthenticationMethod,omitempty"`
@@ -25,12 +53,13 @@ type SettingsPublicSettingsResponse struct {
 	// Example: true
 	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
 
+	// Whether host management features are enabled
+	// Example: true
+	EnableHostManagementFeatures bool `json:"EnableHostManagementFeatures,omitempty"`
+
 	// Whether telemetry is enabled
 	// Example: true
 	EnableTelemetry bool `json:"EnableTelemetry,omitempty"`
-
-	// Supported feature flags
-	Features map[string]bool `json:"Features,omitempty"`
 
 	// URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
 	// Example: https://mycompany.mydomain.tld/logo.png
@@ -39,14 +68,6 @@ type SettingsPublicSettingsResponse struct {
 	// The URL used for oauth login
 	// Example: https://gitlab.com/oauth
 	OAuthLoginURI string `json:"OAuthLoginURI,omitempty"`
-
-	// The URL used for oauth logout
-	// Example: https://gitlab.com/oauth/logout
-	OAuthLogoutURI string `json:"OAuthLogoutURI,omitempty"`
-
-	// The expiry of a Kubeconfig
-	// Example: 24h
-	KubeconfigExpiry *string `json:"kubeconfigExpiry,omitempty"`
 }
 
 // Validate validates this settings public settings response

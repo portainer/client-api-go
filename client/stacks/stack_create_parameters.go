@@ -64,7 +64,7 @@ type StackCreateParams struct {
 
 	/* Env.
 
-	   Environment(Endpoint) variables passed during deployment, represented as a JSON array [{'name': 'name', 'value': 'value'}]. Optional, used when method equals file and type equals 1.
+	   Environment variables passed during deployment, represented as a JSON array [{'name': 'name', 'value': 'value'}]. Optional, used when method equals file and type equals 1.
 	*/
 	Env *string
 
@@ -106,7 +106,7 @@ type StackCreateParams struct {
 
 	/* EndpointID.
 
-	   Identifier of the environment(endpoint) that will be used to deploy the stack
+	   Identifier of the endpoint that will be used to deploy the stack
 	*/
 	EndpointID int64
 

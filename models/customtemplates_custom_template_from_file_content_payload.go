@@ -39,20 +39,20 @@ type CustomtemplatesCustomTemplateFromFileContentPayload struct {
 
 	// Platform associated to the template.
 	// Valid values are: 1 - 'linux', 2 - 'windows'
-	// Required for Docker stacks
 	// Example: 1
+	// Required: true
 	// Enum: [1 2]
-	Platform int64 `json:"platform,omitempty"`
+	Platform *int64 `json:"platform"`
 
 	// Title of the template
 	// Example: Nginx
 	// Required: true
 	Title *string `json:"title"`
 
-	// Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
+	// Type of created stack (1 - swarm, 2 - compose)
 	// Example: 1
 	// Required: true
-	// Enum: [1 2 3]
+	// Enum: [1 2]
 	Type *int64 `json:"type"`
 }
 
@@ -125,12 +125,13 @@ func (m *CustomtemplatesCustomTemplateFromFileContentPayload) validatePlatformEn
 }
 
 func (m *CustomtemplatesCustomTemplateFromFileContentPayload) validatePlatform(formats strfmt.Registry) error {
-	if swag.IsZero(m.Platform) { // not required
-		return nil
+
+	if err := validate.Required("platform", "body", m.Platform); err != nil {
+		return err
 	}
 
 	// value enum
-	if err := m.validatePlatformEnum("platform", "body", m.Platform); err != nil {
+	if err := m.validatePlatformEnum("platform", "body", *m.Platform); err != nil {
 		return err
 	}
 
@@ -150,7 +151,7 @@ var customtemplatesCustomTemplateFromFileContentPayloadTypeTypePropEnum []interf
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[1,2,3]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

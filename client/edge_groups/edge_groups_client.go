@@ -30,79 +30,36 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	EdgeGroupCreate(params *EdgeGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupCreateOK, error)
+	DeleteEdgeGroupsID(params *DeleteEdgeGroupsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEdgeGroupsIDNoContent, error)
 
-	EdgeGroupDelete(params *EdgeGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupDeleteNoContent, error)
+	GetEdgeGroups(params *GetEdgeGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeGroupsOK, error)
 
-	EdgeGroupInspect(params *EdgeGroupInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupInspectOK, error)
+	GetEdgeGroupsID(params *GetEdgeGroupsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeGroupsIDOK, error)
 
-	EdgeGroupList(params *EdgeGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupListOK, error)
+	PostEdgeGroups(params *PostEdgeGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEdgeGroupsOK, error)
 
-	EgeGroupUpdate(params *EgeGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EgeGroupUpdateOK, error)
+	PutEdgeGroupsID(params *PutEdgeGroupsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutEdgeGroupsIDOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  EdgeGroupCreate creates an edge group
-
-  **Access policy**: administrator
+  DeleteEdgeGroupsID deletes an edge group
 */
-func (a *Client) EdgeGroupCreate(params *EdgeGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupCreateOK, error) {
+func (a *Client) DeleteEdgeGroupsID(params *DeleteEdgeGroupsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEdgeGroupsIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEdgeGroupCreateParams()
+		params = NewDeleteEdgeGroupsIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EdgeGroupCreate",
-		Method:             "POST",
-		PathPattern:        "/edge_groups",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeGroupCreateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeGroupCreateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeGroupCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EdgeGroupDelete deletes an edge group
-
-  **Access policy**: administrator
-*/
-func (a *Client) EdgeGroupDelete(params *EdgeGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupDeleteNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeGroupDeleteParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeGroupDelete",
+		ID:                 "DeleteEdgeGroupsID",
 		Method:             "DELETE",
 		PathPattern:        "/edge_groups/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EdgeGroupDeleteReader{formats: a.formats},
+		Reader:             &DeleteEdgeGroupsIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -115,76 +72,33 @@ func (a *Client) EdgeGroupDelete(params *EdgeGroupDeleteParams, authInfo runtime
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EdgeGroupDeleteNoContent)
+	success, ok := result.(*DeleteEdgeGroupsIDNoContent)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeGroupDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for DeleteEdgeGroupsID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  EdgeGroupInspect inspects an edge group
-
-  **Access policy**: administrator
+  GetEdgeGroups lists edge groups
 */
-func (a *Client) EdgeGroupInspect(params *EdgeGroupInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupInspectOK, error) {
+func (a *Client) GetEdgeGroups(params *GetEdgeGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeGroupsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEdgeGroupInspectParams()
+		params = NewGetEdgeGroupsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EdgeGroupInspect",
-		Method:             "GET",
-		PathPattern:        "/edge_groups/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeGroupInspectReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeGroupInspectOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeGroupInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EdgeGroupList lists edge groups
-
-  **Access policy**: administrator
-*/
-func (a *Client) EdgeGroupList(params *EdgeGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupListOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeGroupListParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeGroupList",
+		ID:                 "GetEdgeGroups",
 		Method:             "GET",
 		PathPattern:        "/edge_groups",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EdgeGroupListReader{formats: a.formats},
+		Reader:             &GetEdgeGroupsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -197,35 +111,111 @@ func (a *Client) EdgeGroupList(params *EdgeGroupListParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EdgeGroupListOK)
+	success, ok := result.(*GetEdgeGroupsOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeGroupList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetEdgeGroups: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  EgeGroupUpdate updates an edge group
-
-  **Access policy**: administrator
+  GetEdgeGroupsID inspects an edge group
 */
-func (a *Client) EgeGroupUpdate(params *EgeGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EgeGroupUpdateOK, error) {
+func (a *Client) GetEdgeGroupsID(params *GetEdgeGroupsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeGroupsIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEgeGroupUpdateParams()
+		params = NewGetEdgeGroupsIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EgeGroupUpdate",
+		ID:                 "GetEdgeGroupsID",
+		Method:             "GET",
+		PathPattern:        "/edge_groups/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetEdgeGroupsIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetEdgeGroupsIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetEdgeGroupsID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  PostEdgeGroups creates an edge group
+*/
+func (a *Client) PostEdgeGroups(params *PostEdgeGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEdgeGroupsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostEdgeGroupsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostEdgeGroups",
+		Method:             "POST",
+		PathPattern:        "/edge_groups",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PostEdgeGroupsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostEdgeGroupsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostEdgeGroups: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  PutEdgeGroupsID updates an edge group
+*/
+func (a *Client) PutEdgeGroupsID(params *PutEdgeGroupsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutEdgeGroupsIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPutEdgeGroupsIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PutEdgeGroupsID",
 		Method:             "PUT",
 		PathPattern:        "/edge_groups/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EgeGroupUpdateReader{formats: a.formats},
+		Reader:             &PutEdgeGroupsIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -238,13 +228,13 @@ func (a *Client) EgeGroupUpdate(params *EgeGroupUpdateParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EgeGroupUpdateOK)
+	success, ok := result.(*PutEdgeGroupsIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EgeGroupUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for PutEdgeGroupsID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

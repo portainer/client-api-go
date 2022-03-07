@@ -62,19 +62,19 @@ type EndpointCreateParams struct {
 
 	/* AzureApplicationID.
 
-	   Azure application ID. Required if environment(endpoint) type is set to 3
+	   Azure application ID. Required if endpoint type is set to 3
 	*/
 	AzureApplicationID *string
 
 	/* AzureAuthenticationKey.
 
-	   Azure authentication key. Required if environment(endpoint) type is set to 3
+	   Azure authentication key. Required if endpoint type is set to 3
 	*/
 	AzureAuthenticationKey *string
 
 	/* AzureTenantID.
 
-	   Azure tenant ID. Required if environment(endpoint) type is set to 3
+	   Azure tenant ID. Required if endpoint type is set to 3
 	*/
 	AzureTenantID *string
 
@@ -84,21 +84,21 @@ type EndpointCreateParams struct {
 	*/
 	EdgeCheckinInterval *int64
 
-	/* EndpointCreationType.
+	/* EndpointType.
 
-	   Environment(Endpoint) type. Value must be one of: 1 (Local Docker environment), 2 (Agent environment), 3 (Azure environment), 4 (Edge agent environment) or 5 (Local Kubernetes Environment
+	   Environment type. Value must be one of: 1 (Local Docker environment), 2 (Agent environment), 3 (Azure environment), 4 (Edge agent environment) or 5 (Local Kubernetes Environment
 	*/
-	EndpointCreationType int64
+	EndpointType int64
 
 	/* GroupID.
 
-	   Environment(Endpoint) group identifier. If not specified will default to 1 (unassigned).
+	   Endpoint group identifier. If not specified will default to 1 (unassigned).
 	*/
 	GroupID *int64
 
 	/* Name.
 
-	   Name that will be used to identify this environment(endpoint) (example: my-environment)
+	   Name that will be used to identify this endpoint (example: my-endpoint)
 	*/
 	Name string
 
@@ -110,7 +110,7 @@ type EndpointCreateParams struct {
 
 	/* TLS.
 
-	   Require TLS to connect against this environment(endpoint)
+	   Require TLS to connect against this endpoint
 	*/
 	TLS *bool
 
@@ -146,7 +146,7 @@ type EndpointCreateParams struct {
 
 	/* TagIDs.
 
-	   List of tag identifiers to which this environment(endpoint) is associated
+	   List of tag identifiers to which this endpoint is associated
 	*/
 	TagIDs []int64
 
@@ -253,15 +253,15 @@ func (o *EndpointCreateParams) SetEdgeCheckinInterval(edgeCheckinInterval *int64
 	o.EdgeCheckinInterval = edgeCheckinInterval
 }
 
-// WithEndpointCreationType adds the endpointCreationType to the endpoint create params
-func (o *EndpointCreateParams) WithEndpointCreationType(endpointCreationType int64) *EndpointCreateParams {
-	o.SetEndpointCreationType(endpointCreationType)
+// WithEndpointType adds the endpointType to the endpoint create params
+func (o *EndpointCreateParams) WithEndpointType(endpointType int64) *EndpointCreateParams {
+	o.SetEndpointType(endpointType)
 	return o
 }
 
-// SetEndpointCreationType adds the endpointCreationType to the endpoint create params
-func (o *EndpointCreateParams) SetEndpointCreationType(endpointCreationType int64) {
-	o.EndpointCreationType = endpointCreationType
+// SetEndpointType adds the endpointType to the endpoint create params
+func (o *EndpointCreateParams) SetEndpointType(endpointType int64) {
+	o.EndpointType = endpointType
 }
 
 // WithGroupID adds the groupID to the endpoint create params
@@ -453,11 +453,11 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		}
 	}
 
-	// form param EndpointCreationType
-	frEndpointCreationType := o.EndpointCreationType
-	fEndpointCreationType := swag.FormatInt64(frEndpointCreationType)
-	if fEndpointCreationType != "" {
-		if err := r.SetFormParam("EndpointCreationType", fEndpointCreationType); err != nil {
+	// form param EndpointType
+	frEndpointType := o.EndpointType
+	fEndpointType := swag.FormatInt64(frEndpointType)
+	if fEndpointType != "" {
+		if err := r.SetFormParam("EndpointType", fEndpointType); err != nil {
 			return err
 		}
 	}

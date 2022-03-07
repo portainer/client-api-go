@@ -139,7 +139,7 @@ func NewStackStopNotFound() *StackStopNotFound {
 
 /* StackStopNotFound describes a response with status code 404, with default header values.
 
-Not found
+not found
 */
 type StackStopNotFound struct {
 }

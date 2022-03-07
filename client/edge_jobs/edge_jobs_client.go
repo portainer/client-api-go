@@ -30,89 +30,46 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	EdgeJobCreate(params *EdgeJobCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateOK, error)
+	DeleteEdgeJobsID(params *DeleteEdgeJobsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEdgeJobsIDNoContent, error)
 
-	EdgeJobDelete(params *EdgeJobDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobDeleteNoContent, error)
+	DeleteEdgeJobsIDTasksTaskIDLogs(params *DeleteEdgeJobsIDTasksTaskIDLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEdgeJobsIDTasksTaskIDLogsNoContent, error)
 
-	EdgeJobFile(params *EdgeJobFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobFileOK, error)
+	GetEdgeJobs(params *GetEdgeJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsOK, error)
 
-	EdgeJobInspect(params *EdgeJobInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobInspectOK, error)
+	GetEdgeJobsID(params *GetEdgeJobsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsIDOK, error)
 
-	EdgeJobList(params *EdgeJobListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobListOK, error)
+	GetEdgeJobsIDFile(params *GetEdgeJobsIDFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsIDFileOK, error)
 
-	EdgeJobTaskLogsInspect(params *EdgeJobTaskLogsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTaskLogsInspectOK, error)
+	GetEdgeJobsIDTasks(params *GetEdgeJobsIDTasksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsIDTasksOK, error)
 
-	EdgeJobTasksClear(params *EdgeJobTasksClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksClearNoContent, error)
+	GetEdgeJobsIDTasksTaskIDLogs(params *GetEdgeJobsIDTasksTaskIDLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsIDTasksTaskIDLogsOK, error)
 
-	EdgeJobTasksCollect(params *EdgeJobTasksCollectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksCollectNoContent, error)
+	PostEdgeJobs(params *PostEdgeJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEdgeJobsOK, error)
 
-	EdgeJobTasksList(params *EdgeJobTasksListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksListOK, error)
+	PostEdgeJobsID(params *PostEdgeJobsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEdgeJobsIDOK, error)
 
-	EdgeJobUpdate(params *EdgeJobUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobUpdateOK, error)
+	PostEdgeJobsIDTasksTaskIDLogs(params *PostEdgeJobsIDTasksTaskIDLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEdgeJobsIDTasksTaskIDLogsNoContent, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  EdgeJobCreate creates an edge job
-
-  **Access policy**: administrator
+  DeleteEdgeJobsID deletes an edge job
 */
-func (a *Client) EdgeJobCreate(params *EdgeJobCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateOK, error) {
+func (a *Client) DeleteEdgeJobsID(params *DeleteEdgeJobsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEdgeJobsIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEdgeJobCreateParams()
+		params = NewDeleteEdgeJobsIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobCreate",
-		Method:             "POST",
-		PathPattern:        "/edge_jobs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeJobCreateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeJobCreateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EdgeJobDelete deletes an edge job
-
-  **Access policy**: administrator
-*/
-func (a *Client) EdgeJobDelete(params *EdgeJobDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobDeleteNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeJobDeleteParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobDelete",
+		ID:                 "DeleteEdgeJobsID",
 		Method:             "DELETE",
 		PathPattern:        "/edge_jobs/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EdgeJobDeleteReader{formats: a.formats},
+		Reader:             &DeleteEdgeJobsIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -125,35 +82,150 @@ func (a *Client) EdgeJobDelete(params *EdgeJobDeleteParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EdgeJobDeleteNoContent)
+	success, ok := result.(*DeleteEdgeJobsIDNoContent)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for DeleteEdgeJobsID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  EdgeJobFile fetches a file of an edge job
-
-  **Access policy**: administrator
+  DeleteEdgeJobsIDTasksTaskIDLogs clears the log for a specifc task on an edge job
 */
-func (a *Client) EdgeJobFile(params *EdgeJobFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobFileOK, error) {
+func (a *Client) DeleteEdgeJobsIDTasksTaskIDLogs(params *DeleteEdgeJobsIDTasksTaskIDLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEdgeJobsIDTasksTaskIDLogsNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEdgeJobFileParams()
+		params = NewDeleteEdgeJobsIDTasksTaskIDLogsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobFile",
+		ID:                 "DeleteEdgeJobsIDTasksTaskIDLogs",
+		Method:             "DELETE",
+		PathPattern:        "/edge_jobs/{id}/tasks/{taskID}/logs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteEdgeJobsIDTasksTaskIDLogsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteEdgeJobsIDTasksTaskIDLogsNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteEdgeJobsIDTasksTaskIDLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  GetEdgeJobs fetches edge jobs list
+*/
+func (a *Client) GetEdgeJobs(params *GetEdgeJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetEdgeJobsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetEdgeJobs",
+		Method:             "GET",
+		PathPattern:        "/edge_jobs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetEdgeJobsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetEdgeJobsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetEdgeJobs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  GetEdgeJobsID inspects an edge job
+*/
+func (a *Client) GetEdgeJobsID(params *GetEdgeJobsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetEdgeJobsIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetEdgeJobsID",
+		Method:             "GET",
+		PathPattern:        "/edge_jobs/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetEdgeJobsIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetEdgeJobsIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetEdgeJobsID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  GetEdgeJobsIDFile fetches a file of an edge job
+*/
+func (a *Client) GetEdgeJobsIDFile(params *GetEdgeJobsIDFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsIDFileOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetEdgeJobsIDFileParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetEdgeJobsIDFile",
 		Method:             "GET",
 		PathPattern:        "/edge_jobs/{id}/file",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EdgeJobFileReader{formats: a.formats},
+		Reader:             &GetEdgeJobsIDFileReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -166,240 +238,33 @@ func (a *Client) EdgeJobFile(params *EdgeJobFileParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EdgeJobFileOK)
+	success, ok := result.(*GetEdgeJobsIDFileOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetEdgeJobsIDFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  EdgeJobInspect inspects an edge job
-
-  **Access policy**: administrator
+  GetEdgeJobsIDTasks fetches the list of tasks on an edge job
 */
-func (a *Client) EdgeJobInspect(params *EdgeJobInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobInspectOK, error) {
+func (a *Client) GetEdgeJobsIDTasks(params *GetEdgeJobsIDTasksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsIDTasksOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEdgeJobInspectParams()
+		params = NewGetEdgeJobsIDTasksParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobInspect",
-		Method:             "GET",
-		PathPattern:        "/edge_jobs/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeJobInspectReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeJobInspectOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EdgeJobList fetches edge jobs list
-
-  **Access policy**: administrator
-*/
-func (a *Client) EdgeJobList(params *EdgeJobListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobListOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeJobListParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobList",
-		Method:             "GET",
-		PathPattern:        "/edge_jobs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeJobListReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeJobListOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EdgeJobTaskLogsInspect fetches the log for a specifc task on an edge job
-
-  **Access policy**: administrator
-*/
-func (a *Client) EdgeJobTaskLogsInspect(params *EdgeJobTaskLogsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTaskLogsInspectOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeJobTaskLogsInspectParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobTaskLogsInspect",
-		Method:             "GET",
-		PathPattern:        "/edge_jobs/{id}/tasks/{taskID}/logs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeJobTaskLogsInspectReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeJobTaskLogsInspectOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobTaskLogsInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EdgeJobTasksClear clears the log for a specifc task on an edge job
-
-  **Access policy**: administrator
-*/
-func (a *Client) EdgeJobTasksClear(params *EdgeJobTasksClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksClearNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeJobTasksClearParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobTasksClear",
-		Method:             "DELETE",
-		PathPattern:        "/edge_jobs/{id}/tasks/{taskID}/logs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeJobTasksClearReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeJobTasksClearNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobTasksClear: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EdgeJobTasksCollect collects the log for a specifc task on an edge job
-
-  **Access policy**: administrator
-*/
-func (a *Client) EdgeJobTasksCollect(params *EdgeJobTasksCollectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksCollectNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeJobTasksCollectParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobTasksCollect",
-		Method:             "POST",
-		PathPattern:        "/edge_jobs/{id}/tasks/{taskID}/logs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeJobTasksCollectReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeJobTasksCollectNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobTasksCollect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EdgeJobTasksList fetches the list of tasks on an edge job
-
-  **Access policy**: administrator
-*/
-func (a *Client) EdgeJobTasksList(params *EdgeJobTasksListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksListOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeJobTasksListParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobTasksList",
+		ID:                 "GetEdgeJobsIDTasks",
 		Method:             "GET",
 		PathPattern:        "/edge_jobs/{id}/tasks",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EdgeJobTasksListReader{formats: a.formats},
+		Reader:             &GetEdgeJobsIDTasksReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -412,35 +277,111 @@ func (a *Client) EdgeJobTasksList(params *EdgeJobTasksListParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EdgeJobTasksListOK)
+	success, ok := result.(*GetEdgeJobsIDTasksOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobTasksList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetEdgeJobsIDTasks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-  EdgeJobUpdate updates an edge job
-
-  **Access policy**: administrator
+  GetEdgeJobsIDTasksTaskIDLogs fetches the log for a specifc task on an edge job
 */
-func (a *Client) EdgeJobUpdate(params *EdgeJobUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobUpdateOK, error) {
+func (a *Client) GetEdgeJobsIDTasksTaskIDLogs(params *GetEdgeJobsIDTasksTaskIDLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeJobsIDTasksTaskIDLogsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEdgeJobUpdateParams()
+		params = NewGetEdgeJobsIDTasksTaskIDLogsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobUpdate",
+		ID:                 "GetEdgeJobsIDTasksTaskIDLogs",
+		Method:             "GET",
+		PathPattern:        "/edge_jobs/{id}/tasks/{taskID}/logs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetEdgeJobsIDTasksTaskIDLogsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetEdgeJobsIDTasksTaskIDLogsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetEdgeJobsIDTasksTaskIDLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  PostEdgeJobs creates an edge job
+*/
+func (a *Client) PostEdgeJobs(params *PostEdgeJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEdgeJobsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostEdgeJobsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostEdgeJobs",
+		Method:             "POST",
+		PathPattern:        "/edge_jobs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PostEdgeJobsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostEdgeJobsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostEdgeJobs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  PostEdgeJobsID updates an edge job
+*/
+func (a *Client) PostEdgeJobsID(params *PostEdgeJobsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEdgeJobsIDOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostEdgeJobsIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostEdgeJobsID",
 		Method:             "POST",
 		PathPattern:        "/edge_jobs/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EdgeJobUpdateReader{formats: a.formats},
+		Reader:             &PostEdgeJobsIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -453,13 +394,52 @@ func (a *Client) EdgeJobUpdate(params *EdgeJobUpdateParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EdgeJobUpdateOK)
+	success, ok := result.(*PostEdgeJobsIDOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for PostEdgeJobsID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  PostEdgeJobsIDTasksTaskIDLogs collects the log for a specifc task on an edge job
+*/
+func (a *Client) PostEdgeJobsIDTasksTaskIDLogs(params *PostEdgeJobsIDTasksTaskIDLogsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEdgeJobsIDTasksTaskIDLogsNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostEdgeJobsIDTasksTaskIDLogsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostEdgeJobsIDTasksTaskIDLogs",
+		Method:             "POST",
+		PathPattern:        "/edge_jobs/{id}/tasks/{taskID}/logs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PostEdgeJobsIDTasksTaskIDLogsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostEdgeJobsIDTasksTaskIDLogsNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostEdgeJobsIDTasksTaskIDLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

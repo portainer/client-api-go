@@ -19,7 +19,7 @@ import (
 // swagger:model stacks.stackMigratePayload
 type StacksStackMigratePayload struct {
 
-	// Environment(Endpoint) identifier of the target environment(endpoint) where the stack will be relocated
+	// Endpoint identifier of the target endpoint where the stack will be relocated
 	// Example: 2
 	// Required: true
 	EndpointID *int64 `json:"endpointID"`

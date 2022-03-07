@@ -28,9 +28,6 @@ type RegistriesRegistryConfigurePayload struct {
 	// Example: registry_password
 	Password string `json:"password,omitempty"`
 
-	// ECR region
-	Region string `json:"region,omitempty"`
-
 	// Use TLS
 	// Example: true
 	TLS bool `json:"tls,omitempty"`

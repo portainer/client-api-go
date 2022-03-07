@@ -62,7 +62,7 @@ type GetEndpointGroupsIDParams struct {
 
 	/* ID.
 
-	   Environment(Endpoint) group identifier
+	   Endpoint group identifier
 	*/
 	ID int64
 

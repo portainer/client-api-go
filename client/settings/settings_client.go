@@ -30,13 +30,56 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	GetSettingsPublic(params *GetSettingsPublicParams, opts ...ClientOption) (*GetSettingsPublicOK, error)
+
 	SettingsInspect(params *SettingsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsInspectOK, error)
 
-	SettingsPublic(params *SettingsPublicParams, opts ...ClientOption) (*SettingsPublicOK, error)
+	SettingsLDAPCheck(params *SettingsLDAPCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsLDAPCheckNoContent, error)
 
 	SettingsUpdate(params *SettingsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  GetSettingsPublic retrieves portainer public settings
+
+  Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.
+**Access policy**: public
+*/
+func (a *Client) GetSettingsPublic(params *GetSettingsPublicParams, opts ...ClientOption) (*GetSettingsPublicOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetSettingsPublicParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetSettingsPublic",
+		Method:             "GET",
+		PathPattern:        "/settings/public",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetSettingsPublicReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetSettingsPublicOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetSettingsPublic: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -82,25 +125,26 @@ func (a *Client) SettingsInspect(params *SettingsInspectParams, authInfo runtime
 }
 
 /*
-  SettingsPublic retrieves portainer public settings
+  SettingsLDAPCheck tests l d a p connectivity
 
-  Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.
-**Access policy**: public
+  Test LDAP connectivity using LDAP details
+**Access policy**: administrator
 */
-func (a *Client) SettingsPublic(params *SettingsPublicParams, opts ...ClientOption) (*SettingsPublicOK, error) {
+func (a *Client) SettingsLDAPCheck(params *SettingsLDAPCheckParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsLDAPCheckNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewSettingsPublicParams()
+		params = NewSettingsLDAPCheckParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "SettingsPublic",
-		Method:             "GET",
-		PathPattern:        "/settings/public",
+		ID:                 "SettingsLDAPCheck",
+		Method:             "PUT",
+		PathPattern:        "/settings/ldap/check",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &SettingsPublicReader{formats: a.formats},
+		Reader:             &SettingsLDAPCheckReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -112,13 +156,13 @@ func (a *Client) SettingsPublic(params *SettingsPublicParams, opts ...ClientOpti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SettingsPublicOK)
+	success, ok := result.(*SettingsLDAPCheckNoContent)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for SettingsPublic: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for SettingsLDAPCheck: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

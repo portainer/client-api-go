@@ -38,9 +38,7 @@ type ClientService interface {
 }
 
 /*
-  GetEndpointsIDEdgeStacksStackID inspects an edge stack for an environment endpoint
-
-  **Access policy**: public
+  GetEndpointsIDEdgeStacksStackID inspects an edge stack for an endpoint
 */
 func (a *Client) GetEndpointsIDEdgeStacksStackID(params *GetEndpointsIDEdgeStacksStackIDParams, opts ...ClientOption) (*GetEndpointsIDEdgeStacksStackIDOK, error) {
 	// TODO: Validate the params before sending
@@ -79,8 +77,6 @@ func (a *Client) GetEndpointsIDEdgeStacksStackID(params *GetEndpointsIDEdgeStack
 
 /*
   PostEndpointsIDEdgeJobsJobIDLogs inspects an edge job log
-
-  **Access policy**: public
 */
 func (a *Client) PostEndpointsIDEdgeJobsJobIDLogs(params *PostEndpointsIDEdgeJobsJobIDLogsParams, opts ...ClientOption) (*PostEndpointsIDEdgeJobsJobIDLogsOK, error) {
 	// TODO: Validate the params before sending

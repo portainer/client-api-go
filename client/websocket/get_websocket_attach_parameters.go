@@ -62,7 +62,7 @@ type GetWebsocketAttachParams struct {
 
 	/* EndpointID.
 
-	   environment(endpoint) ID of the environment(endpoint) where the resource is located
+	   endpoint ID of the endpoint where the resource is located
 	*/
 	EndpointID int64
 
@@ -74,7 +74,7 @@ type GetWebsocketAttachParams struct {
 
 	/* Token.
 
-	   JWT token used for authentication against this environment(endpoint)
+	   JWT token used for authentication against this endpoint
 	*/
 	Token string
 
