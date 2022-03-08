@@ -58,6 +58,13 @@ func NewTeamDeleteParamsWithHTTPClient(client *http.Client) *TeamDeleteParams {
    Typically these are written to a http.Request.
 */
 type TeamDeleteParams struct {
+
+	/* ID.
+
+	   Team Id
+	*/
+	ID string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -111,6 +118,17 @@ func (o *TeamDeleteParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithID adds the id to the team delete params
+func (o *TeamDeleteParams) WithID(id string) *TeamDeleteParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the team delete params
+func (o *TeamDeleteParams) SetID(id string) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *TeamDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -118,6 +136,11 @@ func (o *TeamDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
+
+	// path param id
+	if err := r.SetPathParam("id", o.ID); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

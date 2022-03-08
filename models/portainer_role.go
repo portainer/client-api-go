@@ -22,7 +22,7 @@ type PortainerRole struct {
 	Authorizations PortainerAuthorizations `json:"Authorizations,omitempty"`
 
 	// Role description
-	// Example: Read-only access of all resources in an endpoint
+	// Example: Read-only access of all resources in an environment(endpoint)
 	Description string `json:"Description,omitempty"`
 
 	// Role Identifier

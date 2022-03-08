@@ -25,22 +25,22 @@ type PortainerEndpointGroup struct {
 	// Deprecated in DBVersion == 18
 	AuthorizedUsers []int64 `json:"AuthorizedUsers"`
 
-	// Description associated to the endpoint group
-	// Example: Endpoint group description
+	// Description associated to the environment(endpoint) group
+	// Example: Environment(Endpoint) group description
 	Description string `json:"Description,omitempty"`
 
-	// Endpoint group Identifier
+	// Environment(Endpoint) group Identifier
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
 	// Deprecated fields
 	Labels []*PortainerPair `json:"Labels"`
 
-	// Endpoint group name
-	// Example: my-endpoint-group
+	// Environment(Endpoint) group name
+	// Example: my-environment-group
 	Name string `json:"Name,omitempty"`
 
-	// List of tags associated to this endpoint group
+	// List of tags associated to this environment(endpoint) group
 	TagIds []int64 `json:"TagIds"`
 
 	// Deprecated in DBVersion == 22

@@ -62,7 +62,7 @@ type EndpointGroupAddEndpointParams struct {
 
 	/* EndpointID.
 
-	   Endpoint identifier
+	   Environment(Endpoint) identifier
 	*/
 	EndpointID int64
 

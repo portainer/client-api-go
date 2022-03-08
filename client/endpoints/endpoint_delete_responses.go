@@ -98,7 +98,7 @@ func NewEndpointDeleteNotFound() *EndpointDeleteNotFound {
 
 /* EndpointDeleteNotFound describes a response with status code 404, with default header values.
 
-Endpoint not found
+Environment(Endpoint) not found
 */
 type EndpointDeleteNotFound struct {
 }

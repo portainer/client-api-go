@@ -19,6 +19,10 @@ import (
 // swagger:model portainer.Endpoint
 type PortainerEndpoint struct {
 
+	// The identifier of the AMT Device associated with this environment(endpoint)
+	// Example: 4c4c4544-004b-3910-8037-b6c04f504633
+	AMTDeviceGUID string `json:"AMTDeviceGUID,omitempty"`
+
 	// authorized teams
 	AuthorizedTeams []int64 `json:"AuthorizedTeams"`
 
@@ -28,11 +32,15 @@ type PortainerEndpoint struct {
 	// azure credentials
 	AzureCredentials *PortainerAzureCredentials `json:"AzureCredentials,omitempty"`
 
+	// Maximum version of docker-compose
+	// Example: 3.8
+	ComposeSyntaxMaxVersion string `json:"ComposeSyntaxMaxVersion,omitempty"`
+
 	// The check in interval for edge agent (in seconds)
 	// Example: 5
 	EdgeCheckinInterval int64 `json:"EdgeCheckinInterval,omitempty"`
 
-	// The identifier of the edge agent associated with this endpoint
+	// The identifier of the edge agent associated with this environment(endpoint)
 	EdgeID string `json:"EdgeID,omitempty"`
 
 	// The key which is used to map the agent to Portainer
@@ -41,19 +49,19 @@ type PortainerEndpoint struct {
 	// extensions
 	Extensions []*PortainerEndpointExtension `json:"Extensions"`
 
-	// Endpoint group identifier
+	// Environment(Endpoint) group identifier
 	// Example: 1
 	GroupID int64 `json:"GroupId,omitempty"`
 
-	// Endpoint Identifier
+	// Environment(Endpoint) Identifier
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
 	// Associated Kubernetes data
 	Kubernetes *PortainerKubernetesData `json:"Kubernetes,omitempty"`
 
-	// Endpoint name
-	// Example: my-endpoint
+	// Environment(Endpoint) name
+	// Example: my-environment
 	Name string `json:"Name,omitempty"`
 
 	// URL or IP address where exposed containers will be reachable
@@ -63,7 +71,7 @@ type PortainerEndpoint struct {
 	// List of snapshots
 	Snapshots []*PortainerDockerSnapshot `json:"Snapshots"`
 
-	// The status of the endpoint (1 - up, 2 - down)
+	// The status of the environment(endpoint) (1 - up, 2 - down)
 	// Example: 1
 	Status int64 `json:"Status,omitempty"`
 
@@ -83,25 +91,37 @@ type PortainerEndpoint struct {
 	// TLS key
 	TLSKey string `json:"TLSKey,omitempty"`
 
-	// List of tag identifiers to which this endpoint is associated
+	// List of tag identifiers to which this environment(endpoint) is associated
 	TagIds []int64 `json:"TagIds"`
 
 	// Deprecated in DBVersion == 22
 	Tags []string `json:"Tags"`
 
-	// List of team identifiers authorized to connect to this endpoint
+	// List of team identifiers authorized to connect to this environment(endpoint)
 	TeamAccessPolicies PortainerTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
 
-	// Endpoint environment type. 1 for a Docker environment, 2 for an agent on Docker environment or 3 for an Azure environment.
+	// Environment(Endpoint) environment(endpoint) type. 1 for a Docker environment(endpoint), 2 for an agent on Docker environment(endpoint) or 3 for an Azure environment(endpoint).
 	// Example: 1
 	Type int64 `json:"Type,omitempty"`
 
-	// URL or IP address of the Docker host associated to this endpoint
+	// URL or IP address of the Docker host associated to this environment(endpoint)
 	// Example: docker.mydomain.tld:2375
 	URL string `json:"URL,omitempty"`
 
-	// List of user identifiers authorized to connect to this endpoint
+	// List of user identifiers authorized to connect to this environment(endpoint)
 	UserAccessPolicies PortainerUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
+
+	// IsEdgeDevice marks if the environment was created as an EdgeDevice
+	IsEdgeDevice bool `json:"isEdgeDevice,omitempty"`
+
+	// LastCheckInDate mark last check-in date on checkin
+	LastCheckInDate int64 `json:"lastCheckInDate,omitempty"`
+
+	// Environment(Endpoint) specific security settings
+	SecuritySettings *PortainerEndpointSecuritySettings `json:"securitySettings,omitempty"`
+
+	// Whether the device has been trusted or not by the user
+	UserTrusted bool `json:"userTrusted,omitempty"`
 }
 
 // Validate validates this portainer endpoint
@@ -133,6 +153,10 @@ func (m *PortainerEndpoint) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateUserAccessPolicies(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSecuritySettings(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -289,6 +313,25 @@ func (m *PortainerEndpoint) validateUserAccessPolicies(formats strfmt.Registry) 
 	return nil
 }
 
+func (m *PortainerEndpoint) validateSecuritySettings(formats strfmt.Registry) error {
+	if swag.IsZero(m.SecuritySettings) { // not required
+		return nil
+	}
+
+	if m.SecuritySettings != nil {
+		if err := m.SecuritySettings.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("securitySettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("securitySettings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this portainer endpoint based on the context it is used
 func (m *PortainerEndpoint) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -318,6 +361,10 @@ func (m *PortainerEndpoint) ContextValidate(ctx context.Context, formats strfmt.
 	}
 
 	if err := m.contextValidateUserAccessPolicies(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSecuritySettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -438,6 +485,22 @@ func (m *PortainerEndpoint) contextValidateUserAccessPolicies(ctx context.Contex
 			return ce.ValidateName("UserAccessPolicies")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *PortainerEndpoint) contextValidateSecuritySettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SecuritySettings != nil {
+		if err := m.SecuritySettings.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("securitySettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("securitySettings")
+			}
+			return err
+		}
 	}
 
 	return nil

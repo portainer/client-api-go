@@ -20,6 +20,10 @@ type PortainerStatus struct {
 	// Portainer API version
 	// Example: 2.0.0
 	Version string `json:"Version,omitempty"`
+
+	// Server Instance ID
+	// Example: 299ab403-70a8-4c05-92f7-bf7a994d50df
+	InstanceID string `json:"instanceID,omitempty"`
 }
 
 // Validate validates this portainer status

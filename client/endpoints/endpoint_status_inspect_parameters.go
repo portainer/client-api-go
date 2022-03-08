@@ -62,7 +62,7 @@ type EndpointStatusInspectParams struct {
 
 	/* ID.
 
-	   Endpoint identifier
+	   Environment(Endpoint) identifier
 	*/
 	ID int64
 

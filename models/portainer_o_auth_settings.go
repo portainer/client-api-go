@@ -32,6 +32,12 @@ type PortainerOAuthSettings struct {
 	// default team ID
 	DefaultTeamID int64 `json:"DefaultTeamID,omitempty"`
 
+	// kube secret key
+	KubeSecretKey []int64 `json:"KubeSecretKey"`
+
+	// logout URI
+	LogoutURI string `json:"LogoutURI,omitempty"`
+
 	// o auth auto create users
 	OAuthAutoCreateUsers bool `json:"OAuthAutoCreateUsers,omitempty"`
 
@@ -40,6 +46,9 @@ type PortainerOAuthSettings struct {
 
 	// resource URI
 	ResourceURI string `json:"ResourceURI,omitempty"`
+
+	// s s o
+	SSO bool `json:"SSO,omitempty"`
 
 	// scopes
 	Scopes string `json:"Scopes,omitempty"`

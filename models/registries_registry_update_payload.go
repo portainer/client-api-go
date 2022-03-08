@@ -24,9 +24,12 @@ type RegistriesRegistryUpdatePayload struct {
 	// Required: true
 	Authentication *bool `json:"authentication"`
 
-	// Base URL or IP address of the ProGet registry
+	// BaseURL is used for quay registry
 	// Example: registry.mydomain.tld:2375
-	BaseURL string `json:"baseUrl,omitempty"`
+	BaseURL string `json:"baseURL,omitempty"`
+
+	// ECR data
+	Ecr *PortainerEcrData `json:"ecr,omitempty"`
 
 	// Name that will be used to identify this registry
 	// Example: my-registry
@@ -37,16 +40,16 @@ type RegistriesRegistryUpdatePayload struct {
 	// Example: registry_password
 	Password string `json:"password,omitempty"`
 
-	// team access policies
-	TeamAccessPolicies PortainerTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
+	// Quay data
+	Quay *PortainerQuayRegistryData `json:"quay,omitempty"`
+
+	// Registry access control
+	RegistryAccesses PortainerRegistryAccesses `json:"registryAccesses,omitempty"`
 
 	// URL or IP address of the Docker registry
 	// Example: registry.mydomain.tld:2375
 	// Required: true
 	URL *string `json:"url"`
-
-	// user access policies
-	UserAccessPolicies PortainerUserAccessPolicies `json:"userAccessPolicies,omitempty"`
 
 	// Username used to authenticate against this registry. Required when Authentication is true
 	// Example: registry_user
@@ -61,19 +64,23 @@ func (m *RegistriesRegistryUpdatePayload) Validate(formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.validateEcr(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateTeamAccessPolicies(formats); err != nil {
+	if err := m.validateQuay(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRegistryAccesses(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateURL(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateUserAccessPolicies(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -92,6 +99,25 @@ func (m *RegistriesRegistryUpdatePayload) validateAuthentication(formats strfmt.
 	return nil
 }
 
+func (m *RegistriesRegistryUpdatePayload) validateEcr(formats strfmt.Registry) error {
+	if swag.IsZero(m.Ecr) { // not required
+		return nil
+	}
+
+	if m.Ecr != nil {
+		if err := m.Ecr.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ecr")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ecr")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *RegistriesRegistryUpdatePayload) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -101,17 +127,36 @@ func (m *RegistriesRegistryUpdatePayload) validateName(formats strfmt.Registry) 
 	return nil
 }
 
-func (m *RegistriesRegistryUpdatePayload) validateTeamAccessPolicies(formats strfmt.Registry) error {
-	if swag.IsZero(m.TeamAccessPolicies) { // not required
+func (m *RegistriesRegistryUpdatePayload) validateQuay(formats strfmt.Registry) error {
+	if swag.IsZero(m.Quay) { // not required
 		return nil
 	}
 
-	if m.TeamAccessPolicies != nil {
-		if err := m.TeamAccessPolicies.Validate(formats); err != nil {
+	if m.Quay != nil {
+		if err := m.Quay.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("teamAccessPolicies")
+				return ve.ValidateName("quay")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("teamAccessPolicies")
+				return ce.ValidateName("quay")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *RegistriesRegistryUpdatePayload) validateRegistryAccesses(formats strfmt.Registry) error {
+	if swag.IsZero(m.RegistryAccesses) { // not required
+		return nil
+	}
+
+	if m.RegistryAccesses != nil {
+		if err := m.RegistryAccesses.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("registryAccesses")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("registryAccesses")
 			}
 			return err
 		}
@@ -129,34 +174,19 @@ func (m *RegistriesRegistryUpdatePayload) validateURL(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *RegistriesRegistryUpdatePayload) validateUserAccessPolicies(formats strfmt.Registry) error {
-	if swag.IsZero(m.UserAccessPolicies) { // not required
-		return nil
-	}
-
-	if m.UserAccessPolicies != nil {
-		if err := m.UserAccessPolicies.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("userAccessPolicies")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("userAccessPolicies")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this registries registry update payload based on the context it is used
 func (m *RegistriesRegistryUpdatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateTeamAccessPolicies(ctx, formats); err != nil {
+	if err := m.contextValidateEcr(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateUserAccessPolicies(ctx, formats); err != nil {
+	if err := m.contextValidateQuay(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRegistryAccesses(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -166,27 +196,45 @@ func (m *RegistriesRegistryUpdatePayload) ContextValidate(ctx context.Context, f
 	return nil
 }
 
-func (m *RegistriesRegistryUpdatePayload) contextValidateTeamAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
+func (m *RegistriesRegistryUpdatePayload) contextValidateEcr(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := m.TeamAccessPolicies.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("teamAccessPolicies")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("teamAccessPolicies")
+	if m.Ecr != nil {
+		if err := m.Ecr.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ecr")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ecr")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
-func (m *RegistriesRegistryUpdatePayload) contextValidateUserAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
+func (m *RegistriesRegistryUpdatePayload) contextValidateQuay(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := m.UserAccessPolicies.ContextValidate(ctx, formats); err != nil {
+	if m.Quay != nil {
+		if err := m.Quay.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("quay")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("quay")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *RegistriesRegistryUpdatePayload) contextValidateRegistryAccesses(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.RegistryAccesses.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("userAccessPolicies")
+			return ve.ValidateName("registryAccesses")
 		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("userAccessPolicies")
+			return ce.ValidateName("registryAccesses")
 		}
 		return err
 	}

@@ -30,11 +30,15 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	StackAssociate(params *StackAssociateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackAssociateOK, error)
+
 	StackCreate(params *StackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateOK, error)
 
 	StackDelete(params *StackDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackDeleteNoContent, error)
 
 	StackFileInspect(params *StackFileInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackFileInspectOK, error)
+
+	StackGitRedeploy(params *StackGitRedeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackGitRedeployOK, error)
 
 	StackInspect(params *StackInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackInspectOK, error)
 
@@ -48,14 +52,59 @@ type ClientService interface {
 
 	StackUpdate(params *StackUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackUpdateOK, error)
 
+	StackUpdateGit(params *StackUpdateGitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackUpdateGitOK, error)
+
+	WebhookInvoke(params *WebhookInvokeParams, opts ...ClientOption) (*WebhookInvokeOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+  StackAssociate associates an orphaned stack to a new environment endpoint
+
+  **Access policy**: administrator
+*/
+func (a *Client) StackAssociate(params *StackAssociateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackAssociateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackAssociateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackAssociate",
+		Method:             "PUT",
+		PathPattern:        "/stacks/{id}/associate",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackAssociateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackAssociateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackAssociate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
   StackCreate deploys a new stack
 
-  Deploy a new stack into a Docker environment specified via the endpoint identifier.
-**Access policy**: restricted
+  Deploy a new stack into a Docker environment(endpoint) specified via the environment(endpoint) identifier.
+**Access policy**: authenticated
 */
 func (a *Client) StackCreate(params *StackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -67,7 +116,7 @@ func (a *Client) StackCreate(params *StackCreateParams, authInfo runtime.ClientA
 		Method:             "POST",
 		PathPattern:        "/stacks",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{" multipart/form-data", "application/json"},
+		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &StackCreateReader{formats: a.formats},
@@ -178,6 +227,48 @@ func (a *Client) StackFileInspect(params *StackFileInspectParams, authInfo runti
 }
 
 /*
+  StackGitRedeploy redeploys a stack
+
+  Pull and redeploy a stack via Git
+**Access policy**: authenticated
+*/
+func (a *Client) StackGitRedeploy(params *StackGitRedeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackGitRedeployOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackGitRedeployParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackGitRedeploy",
+		Method:             "PUT",
+		PathPattern:        "/stacks/{id}/git/redeploy",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackGitRedeployReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackGitRedeployOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackGitRedeploy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
   StackInspect inspects a stack
 
   Retrieve details about a stack.
@@ -225,7 +316,7 @@ func (a *Client) StackInspect(params *StackInspectParams, authInfo runtime.Clien
   List all stacks based on the current user authorizations.
 Will return all stacks if using an administrator account otherwise it
 will only return the list of stacks the user have access to.
-**Access policy**: restricted
+**Access policy**: authenticated
 */
 func (a *Client) StackList(params *StackListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackListOK, *StackListNoContent, error) {
 	// TODO: Validate the params before sending
@@ -265,10 +356,10 @@ func (a *Client) StackList(params *StackListParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  StackMigrate migrates a stack to another endpoint
+  StackMigrate migrates a stack to another environment endpoint
 
-  Migrate a stack from an endpoint to another endpoint. It will re-create the stack inside the target endpoint before removing the original stack.
-**Access policy**: restricted
+  Migrate a stack from an environment(endpoint) to another environment(endpoint). It will re-create the stack inside the target environment(endpoint) before removing the original stack.
+**Access policy**: authenticated
 */
 func (a *Client) StackMigrate(params *StackMigrateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackMigrateOK, error) {
 	// TODO: Validate the params before sending
@@ -310,7 +401,7 @@ func (a *Client) StackMigrate(params *StackMigrateParams, authInfo runtime.Clien
   StackStart starts a stopped stack
 
   Starts a stopped Stack.
-**Access policy**: restricted
+**Access policy**: authenticated
 */
 func (a *Client) StackStart(params *StackStartParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackStartOK, error) {
 	// TODO: Validate the params before sending
@@ -352,7 +443,7 @@ func (a *Client) StackStart(params *StackStartParams, authInfo runtime.ClientAut
   StackStop stops a stopped stack
 
   Stops a stopped Stack.
-**Access policy**: restricted
+**Access policy**: authenticated
 */
 func (a *Client) StackStop(params *StackStopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackStopOK, error) {
 	// TODO: Validate the params before sending
@@ -393,8 +484,8 @@ func (a *Client) StackStop(params *StackStopParams, authInfo runtime.ClientAuthI
 /*
   StackUpdate updates a stack
 
-  Update a stack.
-**Access policy**: restricted
+  Update a stack, only for file based stacks.
+**Access policy**: authenticated
 */
 func (a *Client) StackUpdate(params *StackUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -429,6 +520,88 @@ func (a *Client) StackUpdate(params *StackUpdateParams, authInfo runtime.ClientA
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for StackUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  StackUpdateGit updates a stack s git configs
+
+  Update the Git settings in a stack, e.g., RepositoryReferenceName and AutoUpdate
+**Access policy**: authenticated
+*/
+func (a *Client) StackUpdateGit(params *StackUpdateGitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackUpdateGitOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackUpdateGitParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackUpdateGit",
+		Method:             "POST",
+		PathPattern:        "/stacks/{id}/git",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackUpdateGitReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackUpdateGitOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackUpdateGit: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  WebhookInvoke webhooks for triggering stack updates from git
+
+  **Access policy**: public
+*/
+func (a *Client) WebhookInvoke(params *WebhookInvokeParams, opts ...ClientOption) (*WebhookInvokeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWebhookInvokeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "WebhookInvoke",
+		Method:             "POST",
+		PathPattern:        "/stacks/webhooks/{webhookID}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &WebhookInvokeReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WebhookInvokeOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for WebhookInvoke: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

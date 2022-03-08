@@ -125,7 +125,7 @@ func NewStackDeleteNotFound() *StackDeleteNotFound {
 
 /* StackDeleteNotFound describes a response with status code 404, with default header values.
 
-not found
+Not found
 */
 type StackDeleteNotFound struct {
 }

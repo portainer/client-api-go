@@ -63,7 +63,7 @@ type PostEndpointGroupsParams struct {
 
 	/* Body.
 
-	   Endpoint Group details
+	   Environment(Endpoint) Group details
 	*/
 	Body *models.EndpointgroupsEndpointGroupCreatePayload
 

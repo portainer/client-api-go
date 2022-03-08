@@ -74,7 +74,7 @@ type GetWebsocketPodParams struct {
 
 	/* EndpointID.
 
-	   endpoint ID of the endpoint where the resource is located
+	   environment(endpoint) ID of the environment(endpoint) where the resource is located
 	*/
 	EndpointID int64
 
@@ -92,7 +92,7 @@ type GetWebsocketPodParams struct {
 
 	/* Token.
 
-	   JWT token used for authentication against this endpoint
+	   JWT token used for authentication against this environment(endpoint)
 	*/
 	Token string
 

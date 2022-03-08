@@ -31,6 +31,10 @@ type UsersUserUpdatePayload struct {
 	// Enum: [1 2]
 	Role *int64 `json:"role"`
 
+	// user theme
+	// Example: dark
+	UserTheme string `json:"userTheme,omitempty"`
+
 	// username
 	// Example: bob
 	// Required: true

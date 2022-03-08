@@ -61,7 +61,7 @@ type StackListParams struct {
 
 	/* Filters.
 
-	   Filters to process on the stack list. Encoded as JSON (a map[string]string). For example, {
+	   Filters to process on the stack list. Encoded as JSON (a map[string]string). For example, {'SwarmID': 'jpofkc0i9uo9wtx1zesuk649w'} will only return stacks that are part of the specified Swarm cluster. Available filters: EndpointID, SwarmID.
 	*/
 	Filters *string
 

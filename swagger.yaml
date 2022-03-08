@@ -27,6 +27,22 @@ definitions:
         description: OAuth code returned from OAuth Provided
         type: string
     type: object
+  backup.backupPayload:
+    properties:
+      password:
+        type: string
+    type: object
+  backup.restorePayload:
+    properties:
+      fileContent:
+        items:
+          type: integer
+        type: array
+      fileName:
+        type: string
+      password:
+        type: string
+    type: object
   customtemplates.customTemplateFromFileContentPayload:
     properties:
       description:
@@ -48,6 +64,7 @@ definitions:
         description: |-
           Platform associated to the template.
           Valid values are: 1 - 'linux', 2 - 'windows'
+          Required for Docker stacks
         enum:
         - 1
         - 2
@@ -58,16 +75,16 @@ definitions:
         example: Nginx
         type: string
       type:
-        description: Type of created stack (1 - swarm, 2 - compose)
+        description: Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
         enum:
         - 1
         - 2
+        - 3
         example: 1
         type: integer
     required:
     - description
     - fileContent
-    - platform
     - title
     - type
     type: object
@@ -94,6 +111,7 @@ definitions:
         description: |-
           Platform associated to the template.
           Valid values are: 1 - 'linux', 2 - 'windows'
+          Required for Docker stacks
         enum:
         - 1
         - 2
@@ -134,7 +152,6 @@ definitions:
         type: integer
     required:
     - description
-    - platform
     - repositoryURL
     - title
     - type
@@ -160,6 +177,7 @@ definitions:
         description: |-
           Platform associated to the template.
           Valid values are: 1 - 'linux', 2 - 'windows'
+          Required for Docker stacks
         enum:
         - 1
         - 2
@@ -170,16 +188,16 @@ definitions:
         example: Nginx
         type: string
       type:
-        description: Type of created stack (1 - swarm, 2 - compose)
+        description: Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
         enum:
         - 1
         - 2
+        - 3
         example: 1
         type: integer
     required:
     - description
     - fileContent
-    - platform
     - title
     - type
     type: object
@@ -188,24 +206,38 @@ definitions:
       fileContent:
         type: string
     type: object
-  dockerhub.dockerhubUpdatePayload:
+  edgegroups.decoratedEdgeGroup:
     properties:
-      authentication:
-        description: Enable authentication against DockerHub
-        example: false
+      Dynamic:
         type: boolean
-      password:
-        description: Password used to authenticate against the DockerHub
-        example: hub_password
+      Endpoints:
+        items:
+          type: integer
+        type: array
+      HasEdgeStack:
+        type: boolean
+      Id:
+        description: EdgeGroup Identifier
+        example: 1
+        type: integer
+      Name:
         type: string
-      username:
-        description: Username used to authenticate against the DockerHub
-        example: hub_user
-        type: string
-    required:
-    - authentication
-    - password
-    - username
+      PartialMatch:
+        type: boolean
+      TagIds:
+        items:
+          description: Tag identifier
+          example: 1
+          type: integer
+        type: array
+      endpointTypes:
+        items:
+          description: Environment(Endpoint) environment(endpoint) type. 1 for a Docker
+            environment(endpoint), 2 for an agent on Docker environment(endpoint)
+            or 3 for an Azure environment(endpoint).
+          example: 1
+          type: integer
+        type: array
     type: object
   edgegroups.edgeGroupCreatePayload:
     properties:
@@ -318,19 +350,55 @@ definitions:
     type: object
   edgestacks.swarmStackFromFileContentPayload:
     properties:
+      deploymentType:
+        description: |-
+          Deployment type to deploy this stack
+          Valid values are: 0 - 'compose', 1 - 'kubernetes'
+          for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
       edgeGroups:
+        description: List of identifiers of EdgeGroups
+        example:
+        - 1
         items:
           description: EdgeGroup Identifier
           example: 1
           type: integer
         type: array
       name:
+        description: Name of the stack
+        example: myStack
         type: string
       stackFileContent:
+        description: Content of the Stack file
+        example: |-
+          version: 3
+           services:
+           web:
+           image:nginx
         type: string
+    required:
+    - name
+    - stackFileContent
     type: object
   edgestacks.swarmStackFromFileUploadPayload:
     properties:
+      deploymentType:
+        description: |-
+          Deployment type to deploy this stack
+          Valid values are: 0 - 'compose', 1 - 'kubernetes'
+          for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
       edgeGroups:
         items:
           description: EdgeGroup Identifier
@@ -346,37 +414,80 @@ definitions:
     type: object
   edgestacks.swarmStackFromGitRepositoryPayload:
     properties:
-      composeFilePathInRepository:
-        type: string
+      deploymentType:
+        description: |-
+          Deployment type to deploy this stack
+          Valid values are: 0 - 'compose', 1 - 'kubernetes'
+          for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
       edgeGroups:
+        description: List of identifiers of EdgeGroups
+        example:
+        - 1
         items:
           description: EdgeGroup Identifier
           example: 1
           type: integer
         type: array
+      filePathInRepository:
+        default: docker-compose.yml
+        description: Path to the Stack file inside the Git repository
+        example: docker-compose.yml
+        type: string
       name:
+        description: Name of the stack
+        example: myStack
         type: string
       repositoryAuthentication:
+        description: Use basic authentication to clone the Git repository
+        example: true
         type: boolean
       repositoryPassword:
+        description: Password used in basic authentication. Required when RepositoryAuthentication
+          is true.
+        example: myGitPassword
         type: string
       repositoryReferenceName:
+        description: Reference name of a Git repository hosting the Stack file
+        example: refs/heads/master
         type: string
       repositoryURL:
+        description: URL of a Git repository hosting the Stack file
+        example: https://github.com/openfaas/faas
         type: string
       repositoryUsername:
+        description: Username used in basic authentication. Required when RepositoryAuthentication
+          is true.
+        example: myGitUsername
         type: string
+    required:
+    - name
+    - repositoryURL
     type: object
   edgestacks.updateEdgeStackPayload:
     properties:
+      deploymentType:
+        description: |-
+          Deployment type to deploy this stack
+          Valid values are: 0 - 'compose', 1 - 'kubernetes'
+          for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
       edgeGroups:
         items:
           description: EdgeGroup Identifier
           example: 1
           type: integer
         type: array
-      prune:
-        type: boolean
       stackFileContent:
         type: string
       version:
@@ -386,15 +497,14 @@ definitions:
     properties:
       name:
         type: string
-      prune:
-        type: boolean
       stackFileContent:
         type: string
     type: object
   endpointgroups.endpointGroupCreatePayload:
     properties:
       associatedEndpoints:
-        description: List of endpoint identifiers that will be part of this group
+        description: List of environment(endpoint) identifiers that will be part of
+          this group
         example:
         - 1
         - 3
@@ -402,15 +512,16 @@ definitions:
           type: integer
         type: array
       description:
-        description: Endpoint group description
+        description: Environment(Endpoint) group description
         example: description
         type: string
       name:
-        description: Endpoint group name
-        example: my-endpoint-group
+        description: Environment(Endpoint) group name
+        example: my-environment-group
         type: string
       tagIDs:
-        description: List of tag identifiers to which this endpoint group is associated
+        description: List of tag identifiers to which this environment(endpoint) group
+          is associated
         example:
         - 1
         - 2
@@ -425,15 +536,16 @@ definitions:
   endpointgroups.endpointGroupUpdatePayload:
     properties:
       description:
-        description: Endpoint group description
+        description: Environment(Endpoint) group description
         example: description
         type: string
       name:
-        description: Endpoint group name
-        example: my-endpoint-group
+        description: Environment(Endpoint) group name
+        example: my-environment-group
         type: string
       tagIDs:
-        description: List of tag identifiers associated to the endpoint group
+        description: List of tag identifiers associated to the environment(endpoint)
+          group
         example:
         - 3
         - 4
@@ -446,6 +558,15 @@ definitions:
         $ref: '#/definitions/portainer.TeamAccessPolicies'
       userAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
+    type: object
+  endpoints.dockerhubStatusResponse:
+    properties:
+      limit:
+        description: Daily limit
+        type: integer
+      remaining:
+        description: Remaiming images to pull
+        type: integer
     type: object
   endpoints.edgeJobResponse:
     properties:
@@ -470,6 +591,47 @@ definitions:
         example: 2
         type: integer
     type: object
+  endpoints.endpointSettingsUpdatePayload:
+    properties:
+      allowBindMountsForRegularUsers:
+        description: Whether non-administrator should be able to use bind mounts when
+          creating containers
+        example: false
+        type: boolean
+      allowContainerCapabilitiesForRegularUsers:
+        description: Whether non-administrator should be able to use container capabilities
+        example: true
+        type: boolean
+      allowDeviceMappingForRegularUsers:
+        description: Whether non-administrator should be able to use device mapping
+        example: true
+        type: boolean
+      allowHostNamespaceForRegularUsers:
+        description: Whether non-administrator should be able to use the host pid
+        example: true
+        type: boolean
+      allowPrivilegedModeForRegularUsers:
+        description: Whether non-administrator should be able to use privileged mode
+          when creating containers
+        example: false
+        type: boolean
+      allowStackManagementForRegularUsers:
+        description: Whether non-administrator should be able to manage stacks
+        example: true
+        type: boolean
+      allowSysctlSettingForRegularUsers:
+        description: Whether non-administrator should be able to use sysctl settings
+        example: true
+        type: boolean
+      allowVolumeBrowserForRegularUsers:
+        description: Whether non-administrator should be able to browse volumes
+        example: true
+        type: boolean
+      enableHostManagementFeatures:
+        description: Whether host management features are enabled
+        example: true
+        type: boolean
+    type: object
   endpoints.endpointStatusInspectResponse:
     properties:
       checkin:
@@ -483,17 +645,17 @@ definitions:
         example: 8732
         type: integer
       schedules:
-        description: List of requests for jobs to run on the endpoint
+        description: List of requests for jobs to run on the environment(endpoint)
         items:
           $ref: '#/definitions/endpoints.edgeJobResponse'
         type: array
       stacks:
-        description: List of stacks to be deployed on the endpoints
+        description: List of stacks to be deployed on the environments(endpoints)
         items:
           $ref: '#/definitions/endpoints.stackStatusResponse'
         type: array
       status:
-        description: Status represents the endpoint status
+        description: Status represents the environment(endpoint) status
         example: REQUIRED
         type: string
     type: object
@@ -523,8 +685,8 @@ definitions:
         $ref: '#/definitions/portainer.KubernetesData'
         description: Associated Kubernetes data
       name:
-        description: Name that will be used to identify this endpoint
-        example: my-endpoint
+        description: Name that will be used to identify this environment(endpoint)
+        example: my-environment
         type: string
       publicURL:
         description: |-
@@ -533,11 +695,12 @@ definitions:
         example: docker.mydomain.tld:2375
         type: string
       status:
-        description: The status of the endpoint (1 - up, 2 - down)
+        description: The status of the environment(endpoint) (1 - up, 2 - down)
         example: 1
         type: integer
       tagIDs:
-        description: List of tag identifiers to which this endpoint is associated
+        description: List of tag identifiers to which this environment(endpoint) is
+          associated
         example:
         - 1
         - 2
@@ -549,7 +712,7 @@ definitions:
       teamAccessPolicies:
         $ref: '#/definitions/portainer.TeamAccessPolicies'
       tls:
-        description: Require TLS to connect against this endpoint
+        description: Require TLS to connect against this environment(endpoint)
         example: true
         type: boolean
       tlsskipClientVerify:
@@ -566,6 +729,20 @@ definitions:
         type: string
       userAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
+      userTrusted:
+        description: Whether the device has been trusted or not by the user
+        type: boolean
+    type: object
+  endpoints.registryAccessPayload:
+    properties:
+      namespaces:
+        items:
+          type: string
+        type: array
+      teamAccessPolicies:
+        $ref: '#/definitions/portainer.TeamAccessPolicies'
+      userAccessPolicies:
+        $ref: '#/definitions/portainer.UserAccessPolicies'
     type: object
   endpoints.stackStatusResponse:
     properties:
@@ -577,6 +754,96 @@ definitions:
         description: Version of this stack
         example: 3
         type: integer
+    type: object
+  fdo.deviceConfigurePayload:
+    properties:
+      edgeID:
+        type: string
+      edgeKey:
+        type: string
+      name:
+        type: string
+      profile:
+        type: integer
+    type: object
+  fdo.fdoConfigurePayload:
+    properties:
+      enabled:
+        type: boolean
+      ownerPassword:
+        type: string
+      ownerURL:
+        type: string
+      ownerUsername:
+        type: string
+    type: object
+  gittypes.GitAuthentication:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  gittypes.RepoConfig:
+    properties:
+      authentication:
+        $ref: '#/definitions/gittypes.GitAuthentication'
+        description: Git credentials
+      configFilePath:
+        description: Path to where the config file is in this url/refName
+        example: docker-compose.yml
+        type: string
+      configHash:
+        description: Repository hash
+        example: bc4c183d756879ea4d173315338110b31004b8e0
+        type: string
+      referenceName:
+        description: The reference name
+        example: refs/heads/branch_name
+        type: string
+      url:
+        description: The repo url
+        example: https://github.com/portainer/portainer.git
+        type: string
+    type: object
+  helm.addHelmRepoUrlPayload:
+    properties:
+      url:
+        type: string
+    type: object
+  helm.helmUserRepositoryResponse:
+    properties:
+      GlobalRepository:
+        type: string
+      UserRepositories:
+        items:
+          $ref: '#/definitions/portainer.HelmUserRepository'
+        type: array
+    type: object
+  helm.installChartPayload:
+    properties:
+      chart:
+        type: string
+      name:
+        type: string
+      namespace:
+        type: string
+      repo:
+        type: string
+      values:
+        type: string
+    type: object
+  kubernetes.namespacesToggleSystemPayload:
+    properties:
+      system:
+        description: Toggle the system state of this namespace to true or false
+        example: true
+        type: boolean
+    type: object
+  ldap.checkPayload:
+    properties:
+      ldapsettings:
+        $ref: '#/definitions/portainer.LDAPSettings'
     type: object
   motd.motdResponse:
     properties:
@@ -594,6 +861,61 @@ definitions:
         type: string
       Title:
         type: string
+    type: object
+  openamt.deviceActionPayload:
+    properties:
+      action:
+        type: string
+    type: object
+  openamt.deviceFeaturesPayload:
+    properties:
+      features:
+        $ref: '#/definitions/portainer.OpenAMTDeviceEnabledFeatures'
+    type: object
+  openamt.openAMTConfigurePayload:
+    properties:
+      certFileContent:
+        type: string
+      certFileName:
+        type: string
+      certFilePassword:
+        type: string
+      domainName:
+        type: string
+      enabled:
+        type: boolean
+      mpspassword:
+        type: string
+      mpsserver:
+        type: string
+      mpsuser:
+        type: string
+    type: object
+  portainer.APIKey:
+    properties:
+      dateCreated:
+        description: Unix timestamp (UTC) when the API key was created
+        type: integer
+      description:
+        example: portainer-api-key
+        type: string
+      digest:
+        description: Digest represents SHA256 hash of the raw API key
+        items:
+          type: integer
+        type: array
+      id:
+        example: 1
+        type: integer
+      lastUsed:
+        description: Unix timestamp (UTC) when the API key was last used
+        type: integer
+      prefix:
+        description: API key identifier (7 char prefix)
+        type: string
+      userId:
+        example: 1
+        type: integer
     type: object
   portainer.AccessPolicy:
     properties:
@@ -672,21 +994,6 @@ definitions:
         example: 1
         type: integer
     type: object
-  portainer.DockerHub:
-    properties:
-      Authentication:
-        description: Is authentication against DockerHub enabled
-        example: true
-        type: boolean
-      Password:
-        description: Password used to authenticate against the DockerHub
-        example: passwd
-        type: string
-      Username:
-        description: Username used to authenticate against the DockerHub
-        example: user
-        type: string
-    type: object
   portainer.DockerSnapshot:
     properties:
       DockerSnapshotRaw:
@@ -696,6 +1003,8 @@ definitions:
       HealthyContainerCount:
         type: integer
       ImageCount:
+        type: integer
+      NodeCount:
         type: integer
       RunningContainerCount:
         type: integer
@@ -720,18 +1029,18 @@ definitions:
     type: object
   portainer.DockerSnapshotRaw:
     properties:
-      Containers:
-        type: object
-      Images:
-        type: object
-      Info:
-        type: object
-      Networks:
-        type: object
-      Version:
-        type: object
-      Volumes:
-        type: object
+      Containers: {}
+      Images: {}
+      Info: {}
+      Networks: {}
+      Version: {}
+      Volumes: {}
+    type: object
+  portainer.EcrData:
+    properties:
+      Region:
+        example: ap-southeast-2
+        type: string
     type: object
   portainer.EdgeGroup:
     properties:
@@ -807,6 +1116,7 @@ definitions:
       ProjectPath:
         type: string
       Prune:
+        description: Deprecated
         type: boolean
       Status:
         additionalProperties:
@@ -814,6 +1124,19 @@ definitions:
         type: object
       Version:
         type: integer
+      deploymentType:
+        description: |-
+          Deployment type to deploy this stack
+          Valid values are: 0 - 'compose', 1 - 'kubernetes'
+          for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
+      manifestPath:
+        type: string
     type: object
   portainer.EdgeStackStatus:
     properties:
@@ -826,25 +1149,34 @@ definitions:
     type: object
   portainer.Endpoint:
     properties:
+      AMTDeviceGUID:
+        description: The identifier of the AMT Device associated with this environment(endpoint)
+        example: 4c4c4544-004b-3910-8037-b6c04f504633
+        type: string
       AuthorizedTeams:
         items:
+          description: Team Identifier
+          example: 1
           type: integer
         type: array
       AuthorizedUsers:
         description: Deprecated in DBVersion == 18
         items:
-          description: User identifier who created this template
-          example: 3
+          example: 1
           type: integer
         type: array
       AzureCredentials:
         $ref: '#/definitions/portainer.AzureCredentials'
+      ComposeSyntaxMaxVersion:
+        description: Maximum version of docker-compose
+        example: "3.8"
+        type: string
       EdgeCheckinInterval:
         description: The check in interval for edge agent (in seconds)
         example: 5
         type: integer
       EdgeID:
-        description: The identifier of the edge agent associated with this endpoint
+        description: The identifier of the edge agent associated with this environment(endpoint)
         type: string
       EdgeKey:
         description: The key which is used to map the agent to Portainer
@@ -854,19 +1186,19 @@ definitions:
           $ref: '#/definitions/portainer.EndpointExtension'
         type: array
       GroupId:
-        description: Endpoint group identifier
+        description: Environment(Endpoint) group identifier
         example: 1
         type: integer
       Id:
-        description: Endpoint Identifier
+        description: Environment(Endpoint) Identifier
         example: 1
         type: integer
       Kubernetes:
         $ref: '#/definitions/portainer.KubernetesData'
         description: Associated Kubernetes data
       Name:
-        description: Endpoint name
-        example: my-endpoint
+        description: Environment(Endpoint) name
+        example: my-environment
         type: string
       PublicURL:
         description: URL or IP address where exposed containers will be reachable
@@ -878,7 +1210,7 @@ definitions:
           $ref: '#/definitions/portainer.DockerSnapshot'
         type: array
       Status:
-        description: The status of the endpoint (1 - up, 2 - down)
+        description: The status of the environment(endpoint) (1 - up, 2 - down)
         example: 1
         type: integer
       TLS:
@@ -895,7 +1227,8 @@ definitions:
       TLSKey:
         type: string
       TagIds:
-        description: List of tag identifiers to which this endpoint is associated
+        description: List of tag identifiers to which this environment(endpoint) is
+          associated
         items:
           description: Tag identifier
           example: 1
@@ -908,19 +1241,32 @@ definitions:
         type: array
       TeamAccessPolicies:
         $ref: '#/definitions/portainer.TeamAccessPolicies'
-        description: List of team identifiers authorized to connect to this endpoint
+        description: List of team identifiers authorized to connect to this environment(endpoint)
       Type:
-        description: Endpoint environment type. 1 for a Docker environment, 2 for
-          an agent on Docker environment or 3 for an Azure environment.
+        description: Environment(Endpoint) environment(endpoint) type. 1 for a Docker
+          environment(endpoint), 2 for an agent on Docker environment(endpoint) or
+          3 for an Azure environment(endpoint).
         example: 1
         type: integer
       URL:
-        description: URL or IP address of the Docker host associated to this endpoint
+        description: URL or IP address of the Docker host associated to this environment(endpoint)
         example: docker.mydomain.tld:2375
         type: string
       UserAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
-        description: List of user identifiers authorized to connect to this endpoint
+        description: List of user identifiers authorized to connect to this environment(endpoint)
+      isEdgeDevice:
+        description: IsEdgeDevice marks if the environment was created as an EdgeDevice
+        type: boolean
+      lastCheckInDate:
+        description: LastCheckInDate mark last check-in date on checkin
+        type: integer
+      securitySettings:
+        $ref: '#/definitions/portainer.EndpointSecuritySettings'
+        description: Environment(Endpoint) specific security settings
+      userTrusted:
+        description: Whether the device has been trusted or not by the user
+        type: boolean
     type: object
   portainer.EndpointAuthorizations:
     additionalProperties:
@@ -937,21 +1283,22 @@ definitions:
     properties:
       AuthorizedTeams:
         items:
+          description: Team Identifier
+          example: 1
           type: integer
         type: array
       AuthorizedUsers:
         description: Deprecated in DBVersion == 18
         items:
-          description: User identifier who created this template
-          example: 3
+          example: 1
           type: integer
         type: array
       Description:
-        description: Description associated to the endpoint group
-        example: Endpoint group description
+        description: Description associated to the environment(endpoint) group
+        example: Environment(Endpoint) group description
         type: string
       Id:
-        description: Endpoint group Identifier
+        description: Environment(Endpoint) group Identifier
         example: 1
         type: integer
       Labels:
@@ -960,11 +1307,11 @@ definitions:
           $ref: '#/definitions/portainer.Pair'
         type: array
       Name:
-        description: Endpoint group name
-        example: my-endpoint-group
+        description: Environment(Endpoint) group name
+        example: my-environment-group
         type: string
       TagIds:
-        description: List of tags associated to this endpoint group
+        description: List of tags associated to this environment(endpoint) group
         items:
           description: Tag identifier
           example: 1
@@ -980,6 +1327,58 @@ definitions:
       UserAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
     type: object
+  portainer.EndpointSecuritySettings:
+    properties:
+      allowBindMountsForRegularUsers:
+        description: Whether non-administrator should be able to use bind mounts when
+          creating containers
+        example: false
+        type: boolean
+      allowContainerCapabilitiesForRegularUsers:
+        description: Whether non-administrator should be able to use container capabilities
+        example: true
+        type: boolean
+      allowDeviceMappingForRegularUsers:
+        description: Whether non-administrator should be able to use device mapping
+        example: true
+        type: boolean
+      allowHostNamespaceForRegularUsers:
+        description: Whether non-administrator should be able to use the host pid
+        example: true
+        type: boolean
+      allowPrivilegedModeForRegularUsers:
+        description: Whether non-administrator should be able to use privileged mode
+          when creating containers
+        example: false
+        type: boolean
+      allowStackManagementForRegularUsers:
+        description: Whether non-administrator should be able to manage stacks
+        example: true
+        type: boolean
+      allowSysctlSettingForRegularUsers:
+        description: Whether non-administrator should be able to use sysctl settings
+        example: true
+        type: boolean
+      allowVolumeBrowserForRegularUsers:
+        description: Whether non-administrator should be able to browse volumes
+        example: true
+        type: boolean
+      enableHostManagementFeatures:
+        description: Whether host management features are enabled
+        example: true
+        type: boolean
+    type: object
+  portainer.FDOConfiguration:
+    properties:
+      enabled:
+        type: boolean
+      ownerPassword:
+        type: string
+      ownerURL:
+        type: string
+      ownerUsername:
+        type: string
+    type: object
   portainer.GitlabRegistryData:
     properties:
       InstanceURL:
@@ -989,12 +1388,40 @@ definitions:
       ProjectPath:
         type: string
     type: object
+  portainer.HelmUserRepository:
+    properties:
+      Id:
+        description: Membership Identifier
+        example: 1
+        type: integer
+      URL:
+        description: Helm repository URL
+        example: https://charts.bitnami.com/bitnami
+        type: string
+      UserId:
+        description: User identifier
+        example: 1
+        type: integer
+    type: object
+  portainer.K8sNodeLimits:
+    properties:
+      CPU:
+        type: integer
+      Memory:
+        type: integer
+    type: object
+  portainer.K8sNodesLimits:
+    additionalProperties:
+      $ref: '#/definitions/portainer.K8sNodeLimits'
+    type: object
   portainer.KubernetesConfiguration:
     properties:
       IngressClasses:
         items:
           $ref: '#/definitions/portainer.KubernetesIngressClassConfig'
         type: array
+      RestrictDefaultNamespace:
+        type: boolean
       StorageClasses:
         items:
           $ref: '#/definitions/portainer.KubernetesStorageClassConfig'
@@ -1002,8 +1429,6 @@ definitions:
       UseLoadBalancer:
         type: boolean
       UseServerMetrics:
-        type: boolean
-      RestrictDefaultNamespace:
         type: boolean
     type: object
   portainer.KubernetesData:
@@ -1131,15 +1556,58 @@ definitions:
         type: string
       DefaultTeamID:
         type: integer
+      KubeSecretKey:
+        items:
+          type: integer
+        type: array
+      LogoutURI:
+        type: string
       OAuthAutoCreateUsers:
         type: boolean
       RedirectURI:
         type: string
       ResourceURI:
         type: string
+      SSO:
+        type: boolean
       Scopes:
         type: string
       UserIdentifier:
+        type: string
+    type: object
+  portainer.OpenAMTConfiguration:
+    properties:
+      certFileContent:
+        type: string
+      certFileName:
+        type: string
+      certFilePassword:
+        type: string
+      domainName:
+        type: string
+      enabled:
+        type: boolean
+      mpsPassword:
+        type: string
+      mpsServer:
+        type: string
+      mpsToken:
+        description: retrieved from API
+        type: string
+      mpsUser:
+        type: string
+    type: object
+  portainer.OpenAMTDeviceEnabledFeatures:
+    properties:
+      IDER:
+        type: boolean
+      KVM:
+        type: boolean
+      SOL:
+        type: boolean
+      redirection:
+        type: boolean
+      userConsent:
         type: string
     type: object
   portainer.Pair:
@@ -1151,25 +1619,43 @@ definitions:
         example: value
         type: string
     type: object
+  portainer.QuayRegistryData:
+    properties:
+      OrganisationName:
+        type: string
+      UseOrganisation:
+        type: boolean
+    type: object
   portainer.Registry:
     properties:
+      AccessToken:
+        description: Stores temporary access token
+        type: string
+      AccessTokenExpiry:
+        type: integer
       Authentication:
         description: Is authentication against this registry enabled
         example: true
         type: boolean
       AuthorizedTeams:
+        description: Deprecated in DBVersion == 18
         items:
+          description: Team Identifier
+          example: 1
           type: integer
         type: array
       AuthorizedUsers:
-        description: |-
-          Deprecated fields
-          Deprecated in DBVersion == 18
+        description: Deprecated in DBVersion == 18
         items:
-          description: User identifier who created this template
-          example: 3
+          example: 1
           type: integer
         type: array
+      BaseURL:
+        description: Base URL, introduced for ProGet registry
+        example: registry.mydomain.tld:2375
+        type: string
+      Ecr:
+        $ref: '#/definitions/portainer.EcrData'
       Gitlab:
         $ref: '#/definitions/portainer.GitlabRegistryData'
       Id:
@@ -1183,39 +1669,68 @@ definitions:
         example: my-registry
         type: string
       Password:
-        description: Password used to authenticate against this registry
+        description: Password or SecretAccessKey used to authenticate against this
+          registry
         example: registry_password
         type: string
+      Quay:
+        $ref: '#/definitions/portainer.QuayRegistryData'
+      RegistryAccesses:
+        $ref: '#/definitions/portainer.RegistryAccesses'
       TeamAccessPolicies:
         $ref: '#/definitions/portainer.TeamAccessPolicies'
+        description: Deprecated in DBVersion == 31
       Type:
-        description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet)
+        description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5
+          - ProGet, 6 - DockerHub, 7 - ECR)
         enum:
         - 1
         - 2
         - 3
         - 4
         - 5
+        - 6
+        - 7
         type: integer
       URL:
         description: URL or IP address of the Docker registry
         example: registry.mydomain.tld:2375
         type: string
-      BaseURL:
-        description: Base URL or IP address of the ProGet registry
-        example: registry.mydomain.tld:2375
-        type: string
       UserAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
+        description: |-
+          Deprecated fields
+          Deprecated in DBVersion == 31
       Username:
-        description: Username used to authenticate against this registry
+        description: Username or AccessKeyID used to authenticate against this registry
         example: registry user
         type: string
     type: object
+  portainer.RegistryAccessPolicies:
+    properties:
+      Namespaces:
+        items:
+          type: string
+        type: array
+      TeamAccessPolicies:
+        $ref: '#/definitions/portainer.TeamAccessPolicies'
+      UserAccessPolicies:
+        $ref: '#/definitions/portainer.UserAccessPolicies'
+    type: object
+  portainer.RegistryAccesses:
+    additionalProperties:
+      $ref: '#/definitions/portainer.RegistryAccessPolicies'
+    type: object
   portainer.RegistryManagementConfiguration:
     properties:
+      AccessToken:
+        type: string
+      AccessTokenExpiry:
+        type: integer
       Authentication:
         type: boolean
+      Ecr:
+        $ref: '#/definitions/portainer.EcrData'
       Password:
         type: string
       TLSConfig:
@@ -1283,7 +1798,7 @@ definitions:
         description: Authorizations associated to a role
       Description:
         description: Role description
-        example: Read-only access of all resources in an endpoint
+        example: Read-only access of all resources in an environment(endpoint)
         type: string
       Id:
         description: Role Identifier
@@ -1296,32 +1811,32 @@ definitions:
       Priority:
         type: integer
     type: object
+  portainer.SSLSettings:
+    properties:
+      certPath:
+        type: string
+      httpEnabled:
+        type: boolean
+      keyPath:
+        type: string
+      selfSigned:
+        type: boolean
+    type: object
   portainer.Settings:
     properties:
       AllowBindMountsForRegularUsers:
-        description: Whether non-administrator should be able to use bind mounts when
-          creating containers
-        example: false
         type: boolean
       AllowContainerCapabilitiesForRegularUsers:
-        description: Whether non-administrator should be able to use container capabilities
         type: boolean
       AllowDeviceMappingForRegularUsers:
-        description: Whether non-administrator should be able to use device mapping
         type: boolean
       AllowHostNamespaceForRegularUsers:
-        description: Whether non-administrator should be able to use the host pid
         type: boolean
       AllowPrivilegedModeForRegularUsers:
-        description: Whether non-administrator should be able to use privileged mode
-          when creating containers
-        example: false
         type: boolean
       AllowStackManagementForRegularUsers:
-        description: Whether non-administrator should be able to manage stacks
         type: boolean
       AllowVolumeBrowserForRegularUsers:
-        description: Whether non-administrator should be able to browse volumes
         type: boolean
       AuthenticationMethod:
         description: 'Active authentication method for the Portainer instance. Valid
@@ -1334,6 +1849,11 @@ definitions:
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
+      DisableTrustOnFirstConnect:
+        description: DisableTrustOnFirstConnect makes Portainer require explicit user
+          trust of the edge agent before accepting the connection
+        example: false
+        type: boolean
       EdgeAgentCheckinInterval:
         description: The default check in interval for edge agent (in seconds)
         example: 5
@@ -1342,12 +1862,33 @@ definitions:
         description: Whether edge compute features are enabled
         type: boolean
       EnableHostManagementFeatures:
-        description: Whether host management features are enabled
+        description: Deprecated fields v26
         type: boolean
       EnableTelemetry:
         description: Whether telemetry is enabled
         example: false
         type: boolean
+      EnforceEdgeID:
+        description: EnforceEdgeID makes Portainer store the Edge ID instead of accepting
+          anyone
+        example: false
+        type: boolean
+      FeatureFlagSettings:
+        additionalProperties:
+          type: boolean
+        type: object
+      HelmRepositoryURL:
+        description: Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
+        example: https://charts.bitnami.com/bitnami
+        type: string
+      KubeconfigExpiry:
+        description: The expiry of a Kubeconfig
+        example: 24h
+        type: string
+      KubectlShellImage:
+        description: KubectlImage, defaults to portainer/kubectl-shell
+        example: portainer/kubectl-shell
+        type: string
       LDAPSettings:
         $ref: '#/definitions/portainer.LDAPSettings'
       LogoURL:
@@ -1359,7 +1900,7 @@ definitions:
       OAuthSettings:
         $ref: '#/definitions/portainer.OAuthSettings'
       SnapshotInterval:
-        description: The interval in which endpoint snapshots are created
+        description: The interval in which environment(endpoint) snapshots are created
         example: 5m
         type: string
       TemplatesURL:
@@ -1376,12 +1917,24 @@ definitions:
         type: boolean
       displayExternalContributors:
         type: boolean
+      fdoConfiguration:
+        $ref: '#/definitions/portainer.FDOConfiguration'
+      openAMTConfiguration:
+        $ref: '#/definitions/portainer.OpenAMTConfiguration'
     type: object
   portainer.Stack:
     properties:
+      AdditionalFiles:
+        description: Only applies when deploying stack with multiple files
+        items:
+          type: string
+        type: array
+      AutoUpdate:
+        $ref: '#/definitions/portainer.StackAutoUpdate'
+        description: The auto update settings of a git stack
       EndpointId:
-        description: Endpoint identifier. Reference the endpoint that will be used
-          for deployment
+        description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+          that will be used for deployment
         example: 1
         type: integer
       EntryPoint:
@@ -1389,7 +1942,7 @@ definitions:
         example: docker-compose.yml
         type: string
       Env:
-        description: A list of environment variables used during stack deployment
+        description: A list of environment(endpoint) variables used during stack deployment
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
@@ -1423,6 +1976,22 @@ definitions:
         description: The date in unix time when stack was created
         example: 1587399600
         type: integer
+      fromAppTemplate:
+        description: Whether the stack is from a app template
+        example: false
+        type: boolean
+      gitConfig:
+        $ref: '#/definitions/gittypes.RepoConfig'
+        description: The git config of this stack
+      isComposeFormat:
+        description: IsComposeFormat indicates if the Kubernetes stack is created
+          from a Docker Compose file
+        example: false
+        type: boolean
+      namespace:
+        description: Kubernetes namespace if stack is a kube application
+        example: default
+        type: string
       projectPath:
         description: Path on disk to the repository hosting the Stack file
         example: /data/compose/myStack_jpofkc0i9uo9wtx1zesuk649w
@@ -1436,11 +2005,30 @@ definitions:
         example: bob
         type: string
     type: object
+  portainer.StackAutoUpdate:
+    properties:
+      interval:
+        description: Auto update interval
+        example: 1m30s
+        type: string
+      jobID:
+        description: Autoupdate job id
+        example: "15"
+        type: string
+      webhook:
+        description: A UUID generated from client
+        example: 05de31a2-79fa-4644-9c12-faa67e5c49f0
+        type: string
+    type: object
   portainer.Status:
     properties:
       Version:
         description: Portainer API version
         example: 2.0.0
+        type: string
+      instanceID:
+        description: Server Instance ID
+        example: 299ab403-70a8-4c05-92f7-bf7a994d50df
         type: string
     type: object
   portainer.TLSConfiguration:
@@ -1471,12 +2059,12 @@ definitions:
       EndpointGroups:
         additionalProperties:
           type: boolean
-        description: A set of endpoint group ids that have this tag
+        description: A set of environment(endpoint) group ids that have this tag
         type: object
       Endpoints:
         additionalProperties:
           type: boolean
-        description: A set of endpoint ids that have this tag
+        description: A set of environment(endpoint) ids that have this tag
         type: object
       Name:
         description: Tag name
@@ -1556,7 +2144,8 @@ definitions:
         example: High performance web server
         type: string
       env:
-        description: A list of environment variables used during the template deployment
+        description: A list of environment(endpoint) variables used during the template
+          deployment
         items:
           $ref: '#/definitions/portainer.TemplateEnv'
         type: array
@@ -1593,7 +2182,7 @@ definitions:
         type: string
       network:
         description: Name of a network that will be used on container deployment if
-          it exists inside the environment
+          it exists inside the environment(endpoint)
         example: mynet
         type: string
       note:
@@ -1665,7 +2254,7 @@ definitions:
         example: Root password
         type: string
       name:
-        description: name of the environment variable
+        description: name of the environment(endpoint) variable
         example: MYSQL_ROOT_PASSWORD
         type: string
       preset:
@@ -1730,9 +2319,6 @@ definitions:
         description: User Identifier
         example: 1
         type: integer
-      Password:
-        example: passwd
-        type: string
       PortainerAuthorizations:
         $ref: '#/definitions/portainer.Authorizations'
         description: |-
@@ -1744,6 +2330,10 @@ definitions:
         type: integer
       Username:
         example: bob
+        type: string
+      userTheme:
+        description: User Theme
+        example: dark
         type: string
     type: object
   portainer.UserAccessPolicies:
@@ -1765,6 +2355,8 @@ definitions:
         description: Webhook Identifier
         example: 1
         type: integer
+      RegistryId:
+        type: integer
       ResourceId:
         type: string
       Token:
@@ -1782,6 +2374,9 @@ definitions:
         description: Password used to authenticate against this registry. required
           when Authentication is true
         example: registry_password
+        type: string
+      region:
+        description: ECR region
         type: string
       tls:
         description: Use TLS
@@ -1820,6 +2415,13 @@ definitions:
         description: Is authentication against this registry enabled
         example: false
         type: boolean
+      baseURL:
+        description: BaseURL required for ProGet registry
+        example: registry.mydomain.tld:2375
+        type: string
+      ecr:
+        $ref: '#/definitions/portainer.EcrData'
+        description: ECR specific details, required when type = 7
       gitlab:
         $ref: '#/definitions/portainer.GitlabRegistryData'
         description: Gitlab specific details, required when type = 4
@@ -1832,24 +2434,26 @@ definitions:
           when Authentication is true
         example: registry_password
         type: string
+      quay:
+        $ref: '#/definitions/portainer.QuayRegistryData'
+        description: Quay specific details, required when type = 1
       type:
-        description: 'Registry Type. Valid values are: 1 (Quay.io), 2 (Azure container
-          registry), 3 (custom registry), 4 (Gitlab registry) or 5 (ProGet registry)'
+        description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure
+          container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5
+          (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)"
         enum:
         - 1
         - 2
         - 3
         - 4
         - 5
+        - 6
+        - 7
         example: 1
         type: integer
       url:
         description: URL or IP address of the Docker registry
-        example: registry.mydomain.tld:2375
-        type: string
-      baseUrl:
-        description: Base URL or IP address of the ProGet registry
-        example: registry.mydomain.tld:2375
+        example: registry.mydomain.tld:2375/feed
         type: string
       username:
         description: Username used to authenticate against this registry. Required
@@ -1868,6 +2472,13 @@ definitions:
         description: Is authentication against this registry enabled
         example: false
         type: boolean
+      baseURL:
+        description: BaseURL is used for quay registry
+        example: registry.mydomain.tld:2375
+        type: string
+      ecr:
+        $ref: '#/definitions/portainer.EcrData'
+        description: ECR data
       name:
         description: Name that will be used to identify this registry
         example: my-registry
@@ -1877,18 +2488,16 @@ definitions:
           when Authentication is true
         example: registry_password
         type: string
-      teamAccessPolicies:
-        $ref: '#/definitions/portainer.TeamAccessPolicies'
+      quay:
+        $ref: '#/definitions/portainer.QuayRegistryData'
+        description: Quay data
+      registryAccesses:
+        $ref: '#/definitions/portainer.RegistryAccesses'
+        description: Registry access control
       url:
         description: URL or IP address of the Docker registry
         example: registry.mydomain.tld:2375
         type: string
-      baseUrl:
-        description: Base URL or IP address of the ProGet registry
-        example: registry.mydomain.tld:2375
-        type: string
-      userAccessPolicies:
-        $ref: '#/definitions/portainer.UserAccessPolicies'
       username:
         description: Username used to authenticate against this registry. Required
           when Authentication is true
@@ -1898,6 +2507,278 @@ definitions:
     - authentication
     - name
     - url
+    type: object
+  release.Chart:
+    properties:
+      files:
+        description: |-
+          Files are miscellaneous files in a chart archive,
+          e.g. README, LICENSE, etc.
+        items:
+          $ref: '#/definitions/release.File'
+        type: array
+      lock:
+        $ref: '#/definitions/release.Lock'
+        description: Lock is the contents of Chart.lock.
+      metadata:
+        $ref: '#/definitions/release.Metadata'
+        description: Metadata is the contents of the Chartfile.
+      schema:
+        description: Schema is an optional JSON schema for imposing structure on Values
+        items:
+          type: integer
+        type: array
+      templates:
+        description: Templates for this chart.
+        items:
+          $ref: '#/definitions/release.File'
+        type: array
+      values:
+        additionalProperties: true
+        description: Values are default config for this chart.
+        type: object
+    type: object
+  release.Dependency:
+    properties:
+      alias:
+        description: Alias usable alias to be used for the chart
+        type: string
+      condition:
+        description: A yaml path that resolves to a boolean, used for enabling/disabling
+          charts (e.g. subchart1.enabled )
+        type: string
+      enabled:
+        description: Enabled bool determines if chart should be loaded
+        type: boolean
+      import-values:
+        description: |-
+          ImportValues holds the mapping of source values to parent key to be imported. Each item can be a
+          string or pair of child/parent sublist items.
+        items: {}
+        type: array
+      name:
+        description: |-
+          Name is the name of the dependency.
+
+          This must mach the name in the dependency's Chart.yaml.
+        type: string
+      repository:
+        description: |-
+          The URL to the repository.
+
+          Appending `index.yaml` to this string should result in a URL that can be
+          used to fetch the repository index.
+        type: string
+      tags:
+        description: Tags can be used to group charts for enabling/disabling together
+        items:
+          type: string
+        type: array
+      version:
+        description: |-
+          Version is the version (range) of this chart.
+
+          A lock file will always produce a single version, while a dependency
+          may contain a semantic version range.
+        type: string
+    type: object
+  release.File:
+    properties:
+      data:
+        description: Data is the template as byte data.
+        items:
+          type: integer
+        type: array
+      name:
+        description: Name is the path-like name of the template.
+        type: string
+    type: object
+  release.Hook:
+    properties:
+      delete_policies:
+        description: DeletePolicies are the policies that indicate when to delete
+          the hook
+        items:
+          type: string
+        type: array
+      events:
+        description: Events are the events that this hook fires on.
+        items:
+          type: string
+        type: array
+      kind:
+        description: Kind is the Kubernetes kind.
+        type: string
+      last_run:
+        $ref: '#/definitions/release.HookExecution'
+        description: LastRun indicates the date/time this was last run.
+      manifest:
+        description: Manifest is the manifest contents.
+        type: string
+      name:
+        type: string
+      path:
+        description: Path is the chart-relative path to the template.
+        type: string
+      weight:
+        description: Weight indicates the sort order for execution among similar Hook
+          type
+        type: integer
+    type: object
+  release.HookExecution:
+    properties:
+      completed_at:
+        description: CompletedAt indicates the date/time this hook was completed.
+        type: string
+      phase:
+        description: Phase indicates whether the hook completed successfully
+        type: string
+      started_at:
+        description: StartedAt indicates the date/time this hook was started
+        type: string
+    type: object
+  release.Lock:
+    properties:
+      dependencies:
+        description: Dependencies is the list of dependencies that this lock file
+          has locked.
+        items:
+          $ref: '#/definitions/release.Dependency'
+        type: array
+      digest:
+        description: Digest is a hash of the dependencies in Chart.yaml.
+        type: string
+      generated:
+        description: Generated is the date the lock file was last generated.
+        type: string
+    type: object
+  release.Maintainer:
+    properties:
+      email:
+        description: Email is an optional email address to contact the named maintainer
+        type: string
+      name:
+        description: Name is a user name or organization name
+        type: string
+      url:
+        description: URL is an optional URL to an address for the named maintainer
+        type: string
+    type: object
+  release.Metadata:
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: |-
+          Annotations are additional mappings uninterpreted by Helm,
+          made available for inspection by other applications.
+        type: object
+      apiVersion:
+        description: The API Version of this chart. Required.
+        type: string
+      appVersion:
+        description: The version of the application enclosed inside of this chart.
+        type: string
+      condition:
+        description: The condition to check to enable chart
+        type: string
+      dependencies:
+        description: Dependencies are a list of dependencies for a chart.
+        items:
+          $ref: '#/definitions/release.Dependency'
+        type: array
+      deprecated:
+        description: Whether or not this chart is deprecated
+        type: boolean
+      description:
+        description: A one-sentence description of the chart
+        type: string
+      home:
+        description: The URL to a relevant project page, git repo, or contact person
+        type: string
+      icon:
+        description: The URL to an icon file.
+        type: string
+      keywords:
+        description: A list of string keywords
+        items:
+          type: string
+        type: array
+      kubeVersion:
+        description: KubeVersion is a SemVer constraint specifying the version of
+          Kubernetes required.
+        type: string
+      maintainers:
+        description: A list of name and URL/email address combinations for the maintainer(s)
+        items:
+          $ref: '#/definitions/release.Maintainer'
+        type: array
+      name:
+        description: The name of the chart. Required.
+        type: string
+      sources:
+        description: Source is the URL to the source code of this chart
+        items:
+          type: string
+        type: array
+      tags:
+        description: The tags to check to enable chart
+        type: string
+      type:
+        description: 'Specifies the chart type: application or library'
+        type: string
+      version:
+        description: A SemVer 2 conformant version string of the chart. Required.
+        type: string
+    type: object
+  release.Release:
+    properties:
+      chart:
+        $ref: '#/definitions/release.Chart'
+        description: |-
+          Info provides information about a release
+          Info *Info `json:"info,omitempty"`
+          Chart is the chart that was released.
+      config:
+        additionalProperties: true
+        description: |-
+          Config is the set of extra Values added to the chart.
+          These values override the default values inside of the chart.
+        type: object
+      hooks:
+        description: Hooks are all of the hooks declared for this release.
+        items:
+          $ref: '#/definitions/release.Hook'
+        type: array
+      manifest:
+        description: Manifest is the string representation of the rendered template.
+        type: string
+      name:
+        description: Name is the name of the release
+        type: string
+      namespace:
+        description: Namespace is the kubernetes namespace of the release.
+        type: string
+      version:
+        description: Version is an int which represents the revision of the release.
+        type: integer
+    type: object
+  release.ReleaseElement:
+    properties:
+      app_version:
+        type: string
+      chart:
+        type: string
+      name:
+        type: string
+      namespace:
+        type: string
+      revision:
+        type: string
+      status:
+        type: string
+      updated:
+        type: string
     type: object
   resourcecontrols.resourceControlCreatePayload:
     properties:
@@ -1972,36 +2853,6 @@ definitions:
     type: object
   settings.publicSettingsResponse:
     properties:
-      AllowBindMountsForRegularUsers:
-        description: Whether non-administrator should be able to use bind mounts when
-          creating containers
-        example: true
-        type: boolean
-      AllowContainerCapabilitiesForRegularUsers:
-        description: Whether non-administrator should be able to use container capabilities
-        example: true
-        type: boolean
-      AllowDeviceMappingForRegularUsers:
-        description: Whether non-administrator should be able to use device mapping
-        example: true
-        type: boolean
-      AllowHostNamespaceForRegularUsers:
-        description: Whether non-administrator should be able to use the host pid
-        example: true
-        type: boolean
-      AllowPrivilegedModeForRegularUsers:
-        description: Whether non-administrator should be able to use privileged mode
-          when creating containers
-        example: true
-        type: boolean
-      AllowStackManagementForRegularUsers:
-        description: Whether non-administrator should be able to manage stacks
-        example: true
-        type: boolean
-      AllowVolumeBrowserForRegularUsers:
-        description: Whether non-administrator should be able to browse volumes
-        example: true
-        type: boolean
       AuthenticationMethod:
         description: 'Active authentication method for the Portainer instance. Valid
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
@@ -2011,14 +2862,15 @@ definitions:
         description: Whether edge compute features are enabled
         example: true
         type: boolean
-      EnableHostManagementFeatures:
-        description: Whether host management features are enabled
-        example: true
-        type: boolean
       EnableTelemetry:
         description: Whether telemetry is enabled
         example: true
         type: boolean
+      Features:
+        additionalProperties:
+          type: boolean
+        description: Supported feature flags
+        type: object
       LogoURL:
         description: URL to a logo that will be displayed on the login page as well
           as on top of the sidebar. Will use default Portainer logo when value is
@@ -2029,44 +2881,18 @@ definitions:
         description: The URL used for oauth login
         example: https://gitlab.com/oauth
         type: string
-    type: object
-  settings.settingsLDAPCheckPayload:
-    properties:
-      ldapsettings:
-        $ref: '#/definitions/portainer.LDAPSettings'
+      OAuthLogoutURI:
+        description: The URL used for oauth logout
+        example: https://gitlab.com/oauth/logout
+        type: string
+      kubeconfigExpiry:
+        default: "0"
+        description: The expiry of a Kubeconfig
+        example: 24h
+        type: string
     type: object
   settings.settingsUpdatePayload:
     properties:
-      allowBindMountsForRegularUsers:
-        description: Whether non-administrator should be able to use bind mounts when
-          creating containers
-        example: false
-        type: boolean
-      allowContainerCapabilitiesForRegularUsers:
-        description: Whether non-administrator should be able to use container capabilities
-        example: true
-        type: boolean
-      allowDeviceMappingForRegularUsers:
-        description: Whether non-administrator should be able to use device mapping
-        example: true
-        type: boolean
-      allowHostNamespaceForRegularUsers:
-        description: Whether non-administrator should be able to use the host pid
-        example: true
-        type: boolean
-      allowPrivilegedModeForRegularUsers:
-        description: Whether non-administrator should be able to use privileged mode
-          when creating containers
-        example: false
-        type: boolean
-      allowStackManagementForRegularUsers:
-        description: Whether non-administrator should be able to manage stacks
-        example: true
-        type: boolean
-      allowVolumeBrowserForRegularUsers:
-        description: Whether non-administrator should be able to browse volumes
-        example: true
-        type: boolean
       authenticationMethod:
         description: 'Active authentication method for the Portainer instance. Valid
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
@@ -2078,6 +2904,11 @@ definitions:
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
+      disableTrustOnFirstConnect:
+        description: DisableTrustOnFirstConnect makes Portainer require explicit user
+          trust of the edge agent before accepting the connection
+        example: false
+        type: boolean
       edgeAgentCheckinInterval:
         description: The default check in interval for edge agent (in seconds)
         example: 5
@@ -2086,14 +2917,28 @@ definitions:
         description: Whether edge compute features are enabled
         example: true
         type: boolean
-      enableHostManagementFeatures:
-        description: Whether host management features are enabled
-        example: true
-        type: boolean
       enableTelemetry:
         description: Whether telemetry is enabled
         example: false
         type: boolean
+      enforceEdgeID:
+        description: EnforceEdgeID makes Portainer store the Edge ID instead of accepting
+          anyone
+        example: false
+        type: boolean
+      helmRepositoryURL:
+        description: Helm repository URL
+        example: https://charts.bitnami.com/bitnami
+        type: string
+      kubeconfigExpiry:
+        default: "0"
+        description: The expiry of a Kubeconfig
+        example: 24h
+        type: string
+      kubectlShellImage:
+        description: Kubectl Shell Image
+        example: portainer/kubectl-shell:latest
+        type: string
       ldapsettings:
         $ref: '#/definitions/portainer.LDAPSettings'
       logoURL:
@@ -2105,7 +2950,7 @@ definitions:
       oauthSettings:
         $ref: '#/definitions/portainer.OAuthSettings'
       snapshotInterval:
-        description: The interval in which endpoint snapshots are created
+        description: The interval in which environment(endpoint) snapshots are created
         example: 5m
         type: string
       templatesURL:
@@ -2118,13 +2963,26 @@ definitions:
         example: 5m
         type: string
     type: object
+  ssl.sslUpdatePayload:
+    properties:
+      cert:
+        type: string
+      httpenabled:
+        type: boolean
+      key:
+        type: string
+    type: object
   stacks.composeStackFromFileContentPayload:
     properties:
       env:
-        description: A list of environment variables used during stack deployment
+        description: A list of environment(endpoint) variables used during stack deployment
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
+      fromAppTemplate:
+        description: Whether the stack is from a app template
+        example: false
+        type: boolean
       name:
         description: Name of the stack
         example: myStack
@@ -2143,16 +3001,31 @@ definitions:
     type: object
   stacks.composeStackFromGitRepositoryPayload:
     properties:
-      composeFilePathInRepository:
+      additionalFiles:
+        description: Applicable when deploying with multiple stack files
+        example:
+        - '[nz.compose.yml'
+        - ' uat.compose.yml]'
+        items:
+          type: string
+        type: array
+      autoUpdate:
+        $ref: '#/definitions/portainer.StackAutoUpdate'
+        description: Optional auto update configuration
+      composeFile:
         default: docker-compose.yml
         description: Path to the Stack file inside the Git repository
         example: docker-compose.yml
         type: string
       env:
-        description: A list of environment variables used during stack deployment
+        description: A list of environment(endpoint) variables used during stack deployment
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
+      fromAppTemplate:
+        description: Whether the stack is from a app template
+        example: false
+        type: boolean
       name:
         description: Name of the stack
         example: myStack
@@ -2183,6 +3056,55 @@ definitions:
     - name
     - repositoryURL
     type: object
+  stacks.kubernetesGitDeploymentPayload:
+    properties:
+      additionalFiles:
+        items:
+          type: string
+        type: array
+      autoUpdate:
+        $ref: '#/definitions/portainer.StackAutoUpdate'
+      composeFormat:
+        type: boolean
+      manifestFile:
+        type: string
+      namespace:
+        type: string
+      repositoryAuthentication:
+        type: boolean
+      repositoryPassword:
+        type: string
+      repositoryReferenceName:
+        type: string
+      repositoryURL:
+        type: string
+      repositoryUsername:
+        type: string
+      stackName:
+        type: string
+    type: object
+  stacks.kubernetesManifestURLDeploymentPayload:
+    properties:
+      composeFormat:
+        type: boolean
+      manifestURL:
+        type: string
+      namespace:
+        type: string
+      stackName:
+        type: string
+    type: object
+  stacks.kubernetesStringDeploymentPayload:
+    properties:
+      composeFormat:
+        type: boolean
+      namespace:
+        type: string
+      stackFileContent:
+        type: string
+      stackName:
+        type: string
+    type: object
   stacks.stackFileResponse:
     properties:
       StackFileContent:
@@ -2194,11 +3116,43 @@ definitions:
            image:nginx
         type: string
     type: object
+  stacks.stackGitRedployPayload:
+    properties:
+      env:
+        items:
+          $ref: '#/definitions/portainer.Pair'
+        type: array
+      repositoryAuthentication:
+        type: boolean
+      repositoryPassword:
+        type: string
+      repositoryReferenceName:
+        type: string
+      repositoryUsername:
+        type: string
+    type: object
+  stacks.stackGitUpdatePayload:
+    properties:
+      autoUpdate:
+        $ref: '#/definitions/portainer.StackAutoUpdate'
+      env:
+        items:
+          $ref: '#/definitions/portainer.Pair'
+        type: array
+      repositoryAuthentication:
+        type: boolean
+      repositoryPassword:
+        type: string
+      repositoryReferenceName:
+        type: string
+      repositoryUsername:
+        type: string
+    type: object
   stacks.stackMigratePayload:
     properties:
       endpointID:
-        description: Endpoint identifier of the target endpoint where the stack will
-          be relocated
+        description: Environment(Endpoint) identifier of the target environment(endpoint)
+          where the stack will be relocated
         example: 2
         type: integer
       name:
@@ -2216,10 +3170,14 @@ definitions:
   stacks.swarmStackFromFileContentPayload:
     properties:
       env:
-        description: A list of environment variables used during stack deployment
+        description: A list of environment(endpoint) variables used during stack deployment
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
+      fromAppTemplate:
+        description: Whether the stack is from a app template
+        example: false
+        type: boolean
       name:
         description: Name of the stack
         example: myStack
@@ -2243,16 +3201,31 @@ definitions:
     type: object
   stacks.swarmStackFromGitRepositoryPayload:
     properties:
-      composeFilePathInRepository:
+      additionalFiles:
+        description: Applicable when deploying with multiple stack files
+        example:
+        - '[nz.compose.yml'
+        - ' uat.compose.yml]'
+        items:
+          type: string
+        type: array
+      autoUpdate:
+        $ref: '#/definitions/portainer.StackAutoUpdate'
+        description: Optional auto update configuration
+      composeFile:
         default: docker-compose.yml
         description: Path to the Stack file inside the Git repository
         example: docker-compose.yml
         type: string
       env:
-        description: A list of environment variables used during stack deployment
+        description: A list of environment(endpoint) variables used during stack deployment
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
+      fromAppTemplate:
+        description: Whether the stack is from a app template
+        example: false
+        type: boolean
       name:
         description: Name of the stack
         example: myStack
@@ -2291,7 +3264,7 @@ definitions:
   stacks.updateSwarmStackPayload:
     properties:
       env:
-        description: A list of environment variables used during stack deployment
+        description: A list of environment(endpoint) variables used during stack deployment
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
@@ -2420,6 +3393,13 @@ definitions:
       version:
         type: string
     type: object
+  users.accessTokenResponse:
+    properties:
+      apiKey:
+        $ref: '#/definitions/portainer.APIKey'
+      rawAPIKey:
+        type: string
+    type: object
   users.adminInitPayload:
     properties:
       password:
@@ -2433,6 +3413,14 @@ definitions:
     required:
     - password
     - username
+    type: object
+  users.userAccessTokenCreatePayload:
+    properties:
+      description:
+        example: github-api-key
+        type: string
+    required:
+    - description
     type: object
   users.userCreatePayload:
     properties:
@@ -2480,6 +3468,9 @@ definitions:
         - 2
         example: 2
         type: integer
+      userTheme:
+        example: dark
+        type: string
       username:
         example: bob
         type: string
@@ -2492,9 +3483,18 @@ definitions:
     properties:
       endpointID:
         type: integer
+      registryID:
+        description: Registry Identifier
+        example: 1
+        type: integer
       resourceID:
         type: string
       webhookType:
+        type: integer
+    type: object
+  webhooks.webhookUpdatePayload:
+    properties:
+      registryID:
         type: integer
     type: object
 info:
@@ -2504,45 +3504,69 @@ info:
     Portainer API is an HTTP API served by Portainer. It is used by the Portainer UI and everything you can do with the UI can be done using the HTTP API.
     Examples are available at https://documentation.portainer.io/api/api-examples/
     You can find out more about Portainer at [http://portainer.io](http://portainer.io) and get some support on [Slack](http://portainer.io/slack/).
+
     # Authentication
-    Most of the API endpoints require to be authenticated as well as some level of authorization to be used.
+
+    Most of the API environments(endpoints) require to be authenticated as well as some level of authorization to be used.
     Portainer API uses JSON Web Token to manage authentication and thus requires you to provide a token in the **Authorization** header of each request
     with the **Bearer** authentication mechanism.
+
     Example:
+
     ```
     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTQ5OTM3NjE1NH0.NJ6vE8FY1WG6jsRQzfMqeatJ4vh2TWAeeYfDhP71YEE
     ```
+
     # Security
-    Each API endpoint has an associated access policy, it is documented in the description of each endpoint.
+
+    Each API environment(endpoint) has an associated access policy, it is documented in the description of each environment(endpoint).
+
     Different access policies are available:
+
     - Public access
     - Authenticated access
     - Restricted access
     - Administrator access
+
     ### Public access
-    No authentication is required to access the endpoints with this access policy.
+
+    No authentication is required to access the environments(endpoints) with this access policy.
+
     ### Authenticated access
-    Authentication is required to access the endpoints with this access policy.
+
+    Authentication is required to access the environments(endpoints) with this access policy.
+
     ### Restricted access
-    Authentication is required to access the endpoints with this access policy.
+
+    Authentication is required to access the environments(endpoints) with this access policy.
     Extra-checks might be added to ensure access to the resource is granted. Returned data might also be filtered.
+
     ### Administrator access
-    Authentication as well as an administrator role are required to access the endpoints with this access policy.
+
+    Authentication as well as an administrator role are required to access the environments(endpoints) with this access policy.
+
     # Execute Docker requests
-    Portainer **DO NOT** expose specific endpoints to manage your Docker resources (create a container, remove a volume, etc...).
+
+    Portainer **DO NOT** expose specific environments(endpoints) to manage your Docker resources (create a container, remove a volume, etc...).
+
     Instead, it acts as a reverse-proxy to the Docker HTTP API. This means that you can execute Docker requests **via** the Portainer HTTP API.
-    To do so, you can use the `/endpoints/{id}/docker` Portainer API endpoint (which is not documented below due to Swagger limitations). This endpoint has a restricted access policy so you still need to be authenticated to be able to query this endpoint. Any query on this endpoint will be proxied to the Docker API of the associated endpoint (requests and responses objects are the same as documented in the Docker API).
+
+    To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
+
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
-  license: {}
+  license:
+    name: zlib
+    url: https://github.com/portainer/portainer/blob/develop/LICENSE
   title: PortainerCE API
-  version: 2.0.0
+  version: 2.11.1
 paths:
   /auth:
     post:
       consumes:
       - application/json
-      description: Use this endpoint to authenticate against Portainer using a username
-        and password.
+      description: |-
+        **Access policy**: public
+        Use this environment(endpoint) to authenticate against Portainer using a username and password.
       operationId: AuthenticateUser
       parameters:
       - description: Credentials used for authentication
@@ -2569,15 +3593,15 @@ paths:
       - auth
   /auth/logout:
     post:
-      consumes:
-      - application/json
-      operationId: logout
-      produces:
-      - application/json
+      description: '**Access policy**: authenticated'
+      operationId: Logout
       responses:
         "204":
-          description: ""
+          description: Success
+        "500":
+          description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Logout
       tags:
@@ -2586,7 +3610,8 @@ paths:
     post:
       consumes:
       - application/json
-      operationId: authenticate_oauth
+      description: '**Access policy**: public'
+      operationId: ValidateOAuth
       parameters:
       - description: OAuth Credentials used for authentication
         in: body
@@ -2610,12 +3635,54 @@ paths:
       summary: Authenticate with OAuth
       tags:
       - auth
+  /backup:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Creates an archive with a system data snapshot that could be used to restore the system.
+        **Access policy**: admin
+      operationId: Backup
+      parameters:
+      - description: An object contains the password to encrypt the backup with
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/backup.backupPayload'
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Creates an archive with a system data snapshot that could be used to
+        restore the system.
+      tags:
+      - backup
   /custom_templates:
     get:
       description: |-
         List available custom templates.
         **Access policy**: authenticated
       operationId: CustomTemplateList
+      parameters:
+      - description: Template types
+        in: query
+        items:
+          enum:
+          - 1
+          - 2
+          - 3
+          type: integer
+        name: type
+        required: true
+        type: array
       produces:
       - application/json
       responses:
@@ -2628,6 +3695,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List available custom templates
       tags:
@@ -2635,7 +3703,7 @@ paths:
     post:
       consumes:
       - application/json
-      - ' multipart/form-data'
+      - multipart/form-data
       description: |-
         Create a custom template.
         **Access policy**: authenticated
@@ -2704,6 +3772,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create a custom template
       tags:
@@ -2712,7 +3781,7 @@ paths:
     delete:
       description: |-
         Remove a template.
-        **Access policy**: authorized
+        **Access policy**: authenticated
       operationId: CustomTemplateDelete
       parameters:
       - description: Template identifier
@@ -2732,13 +3801,12 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Remove a template
       tags:
       - custom_templates
     get:
-      consumes:
-      - application/json
       description: |-
         Retrieve details about a template.
         **Access policy**: authenticated
@@ -2763,6 +3831,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspect a custom template
       tags:
@@ -2802,6 +3871,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update a template
       tags:
@@ -2810,7 +3880,7 @@ paths:
     get:
       description: |-
         Retrieve the content of the Stack file for the specified custom template
-        **Access policy**: authorized
+        **Access policy**: authenticated
       operationId: CustomTemplateFile
       parameters:
       - description: Template identifier
@@ -2832,62 +3902,15 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Get Template stack file content.
       tags:
       - custom_templates
-  /dockerhub:
-    get:
-      description: |-
-        Use this endpoint to retrieve the information used to connect to the DockerHub
-        **Access policy**: authenticated
-      operationId: DockerHubInspect
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/portainer.DockerHub'
-        "500":
-          description: Server error
-      security:
-      - jwt: []
-      summary: Retrieve DockerHub information
-      tags:
-      - dockerhub
-    put:
-      consumes:
-      - application/json
-      description: |-
-        Use this endpoint to update the information used to connect to the DockerHub
-        **Access policy**: administrator
-      operationId: DockerHubUpdate
-      parameters:
-      - description: DockerHub information
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/dockerhub.dockerhubUpdatePayload'
-      produces:
-      - application/json
-      responses:
-        "204":
-          description: Success
-        "400":
-          description: Invalid request
-        "500":
-          description: Server error
-      security:
-      - jwt: []
-      summary: Update DockerHub information
-      tags:
-      - dockerhub
   /edge_groups:
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeGroupList
       produces:
       - application/json
       responses:
@@ -2895,18 +3918,14 @@ paths:
           description: EdgeGroups
           schema:
             items:
-              allOf:
-              - $ref: '#/definitions/portainer.EdgeGroup'
-              - properties:
-                  HasEdgeStack:
-                    type: boolean
-                type: object
+              $ref: '#/definitions/edgegroups.decoratedEdgeGroup'
             type: array
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: list EdgeGroups
       tags:
@@ -2914,6 +3933,8 @@ paths:
     post:
       consumes:
       - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeGroupCreate
       parameters:
       - description: EdgeGroup data
         in: body
@@ -2931,39 +3952,39 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create an EdgeGroup
       tags:
       - edge_groups
   /edge_groups/{id}:
     delete:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeGroupDelete
       parameters:
       - description: EdgeGroup Id
         in: path
         name: id
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "204":
           description: ""
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Deletes an EdgeGroup
       tags:
       - edge_groups
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeGroupInspect
       parameters:
       - description: EdgeGroup Id
         in: path
@@ -2980,8 +4001,9 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspects an EdgeGroup
       tags:
@@ -2989,6 +4011,8 @@ paths:
     put:
       consumes:
       - application/json
+      description: '**Access policy**: administrator'
+      operationId: EgeGroupUpdate
       parameters:
       - description: EdgeGroup Id
         in: path
@@ -3011,16 +4035,17 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Updates an EdgeGroup
       tags:
       - edge_groups
   /edge_jobs:
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobList
       produces:
       - application/json
       responses:
@@ -3035,15 +4060,16 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Fetch EdgeJobs list
       tags:
       - edge_jobs
     post:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobCreate
       parameters:
       - description: Creation Method
         enum:
@@ -3055,13 +4081,13 @@ paths:
         type: string
       - description: EdgeGroup data when method is string
         in: body
-        name: body
+        name: body_string
         required: true
         schema:
           $ref: '#/definitions/edgejobs.edgeJobCreateFromFileContentPayload'
       - description: EdgeGroup data when method is file
         in: body
-        name: body
+        name: body_file
         required: true
         schema:
           $ref: '#/definitions/edgejobs.edgeJobCreateFromFilePayload'
@@ -3075,24 +4101,23 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create an EdgeJob
       tags:
       - edge_jobs
   /edge_jobs/{id}:
     delete:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobDelete
       parameters:
       - description: EdgeJob Id
         in: path
         name: id
         required: true
         type: string
-      produces:
-      - application/json
       responses:
         "204":
           description: ""
@@ -3101,15 +4126,16 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Delete an EdgeJob
       tags:
       - edge_jobs
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobInspect
       parameters:
       - description: EdgeJob Id
         in: path
@@ -3128,8 +4154,9 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspect an EdgeJob
       tags:
@@ -3137,6 +4164,8 @@ paths:
     post:
       consumes:
       - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobUpdate
       parameters:
       - description: EdgeJob Id
         in: path
@@ -3161,16 +4190,17 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update an EdgeJob
       tags:
       - edge_jobs
   /edge_jobs/{id}/file:
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobFile
       parameters:
       - description: EdgeJob Id
         in: path
@@ -3189,16 +4219,17 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Fetch a file of an EdgeJob
       tags:
       - edge_jobs
   /edge_jobs/{id}/tasks:
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobTasksList
       parameters:
       - description: EdgeJob Id
         in: path
@@ -3219,16 +4250,17 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Fetch the list of tasks on an EdgeJob
       tags:
       - edge_jobs
   /edge_jobs/{id}/tasks/{taskID}/logs:
     delete:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobTasksClear
       parameters:
       - description: EdgeJob Id
         in: path
@@ -3250,15 +4282,16 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Clear the log for a specifc task on an EdgeJob
       tags:
       - edge_jobs
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobTaskLogsInspect
       parameters:
       - description: EdgeJob Id
         in: path
@@ -3282,15 +4315,16 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Fetch the log for a specifc task on an EdgeJob
       tags:
       - edge_jobs
     post:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobTasksCollect
       parameters:
       - description: EdgeJob Id
         in: path
@@ -3312,16 +4346,17 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Collect the log for a specifc task on an EdgeJob
       tags:
       - edge_jobs
   /edge_stacks:
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeStackList
       produces:
       - application/json
       responses:
@@ -3336,15 +4371,16 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Fetches the list of EdgeStacks
       tags:
       - edge_stacks
     post:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeStackCreate
       parameters:
       - description: Creation Method
         enum:
@@ -3383,24 +4419,23 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create an EdgeStack
       tags:
       - edge_stacks
   /edge_stacks/{id}:
     delete:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeStackDelete
       parameters:
       - description: EdgeStack Id
         in: path
         name: id
         required: true
         type: string
-      produces:
-      - application/json
       responses:
         "204":
           description: ""
@@ -3409,15 +4444,16 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Delete an EdgeStack
       tags:
       - edge_stacks
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeStackInspect
       parameters:
       - description: EdgeStack Id
         in: path
@@ -3436,8 +4472,9 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspect an EdgeStack
       tags:
@@ -3445,6 +4482,8 @@ paths:
     put:
       consumes:
       - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeStackUpdate
       parameters:
       - description: EdgeStack Id
         in: path
@@ -3469,16 +4508,17 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update an EdgeStack
       tags:
       - edge_stacks
   /edge_stacks/{id}/file:
     get:
-      consumes:
-      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeStackFile
       parameters:
       - description: EdgeStack Id
         in: path
@@ -3497,8 +4537,9 @@ paths:
         "500":
           description: ""
         "503":
-          description: Service Unavailable
+          description: Edge compute features are disabled
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Fetches the stack file for an EdgeStack
       tags:
@@ -3507,7 +4548,8 @@ paths:
     put:
       consumes:
       - application/json
-      description: Authorized only if the request is done by an Edge Endpoint
+      description: Authorized only if the request is done by an Edge Environment(Endpoint)
+      operationId: EdgeStackStatusUpdate
       parameters:
       - description: EdgeStack Id
         in: path
@@ -3536,6 +4578,8 @@ paths:
     get:
       consumes:
       - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeTemplateList
       produces:
       - application/json
       responses:
@@ -3548,6 +4592,7 @@ paths:
         "500":
           description: ""
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Fetches the list of Edge Templates
       tags:
@@ -3555,16 +4600,16 @@ paths:
   /endpoint_groups:
     get:
       description: |-
-        List all endpoint groups based on the current user authorizations. Will
-        return all endpoint groups if using an administrator account otherwise it will
-        only return authorized endpoint groups.
+        List all environment(endpoint) groups based on the current user authorizations. Will
+        return all environment(endpoint) groups if using an administrator account otherwise it will
+        only return authorized environment(endpoint) groups.
         **Access policy**: restricted
       operationId: EndpointGroupList
       produces:
       - application/json
       responses:
         "200":
-          description: Endpoint group
+          description: Environment(Endpoint) group
           schema:
             items:
               $ref: '#/definitions/portainer.EndpointGroup'
@@ -3572,18 +4617,19 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: List Endpoint groups
+      summary: List Environment(Endpoint) groups
       tags:
       - endpoint_groups
     post:
       consumes:
       - application/json
       description: |-
-        Create a new endpoint group.
+        Create a new environment(endpoint) group.
         **Access policy**: administrator
       parameters:
-      - description: Endpoint Group details
+      - description: Environment(Endpoint) Group details
         in: body
         name: body
         required: true
@@ -3601,19 +4647,46 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Create an Endpoint Group
+      summary: Create an Environment(Endpoint) Group
       tags:
       - endpoint_groups
-  /endpoint_groups/:id:
+  /endpoint_groups/{id}:
+    delete:
+      description: |-
+        Remove an environment(endpoint) group.
+        **Access policy**: administrator
+      operationId: EndpointGroupDelete
+      parameters:
+      - description: EndpointGroup identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "404":
+          description: EndpointGroup not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove an environment(endpoint) group
+      tags:
+      - endpoint_groups
     get:
       consumes:
       - application/json
       description: |-
-        Retrieve details abont an endpoint group.
+        Retrieve details abont an environment(endpoint) group.
         **Access policy**: administrator
       parameters:
-      - description: Endpoint group identifier
+      - description: Environment(Endpoint) group identifier
         in: path
         name: id
         required: true
@@ -3632,15 +4705,16 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Inspect an Endpoint group
+      summary: Inspect an Environment(Endpoint) group
       tags:
       - endpoint_groups
     put:
       consumes:
       - application/json
       description: |-
-        Update an endpoint group.
+        Update an environment(endpoint) group.
         **Access policy**: administrator
       operationId: EndpointGroupUpdate
       parameters:
@@ -3669,38 +4743,9 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Update an endpoint group
-      tags:
-      - endpoint_groups
-  /endpoint_groups/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: |-
-        Remove an endpoint group.
-        **Access policy**: administrator
-      operationId: EndpointGroupDelete
-      parameters:
-      - description: EndpointGroup identifier
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "204":
-          description: Success
-        "400":
-          description: Invalid request
-        "404":
-          description: EndpointGroup not found
-        "500":
-          description: Server error
-      security:
-      - jwt: []
-      summary: Remove an endpoint group
+      summary: Update an environment(endpoint) group
       tags:
       - endpoint_groups
   /endpoint_groups/{id}/endpoints/{endpointId}:
@@ -3713,7 +4758,7 @@ paths:
         name: id
         required: true
         type: integer
-      - description: Endpoint identifier
+      - description: Environment(Endpoint) identifier
         in: path
         name: endpointId
         required: true
@@ -3728,13 +4773,14 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Removes endpoint from an endpoint group
+      summary: Removes environment(endpoint) from an environment(endpoint) group
       tags:
       - endpoint_groups
     put:
       description: |-
-        Add an endpoint to an endpoint group
+        Add an environment(endpoint) to an environment(endpoint) group
         **Access policy**: administrator
       operationId: EndpointGroupAddEndpoint
       parameters:
@@ -3743,7 +4789,7 @@ paths:
         name: id
         required: true
         type: integer
-      - description: Endpoint identifier
+      - description: Environment(Endpoint) identifier
         in: path
         name: endpointId
         required: true
@@ -3758,16 +4804,17 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Add an endpoint to an endpoint group
+      summary: Add an environment(endpoint) to an environment(endpoint) group
       tags:
       - endpoint_groups
   /endpoints:
     get:
       description: |-
-        List all endpoints based on the current user authorizations. Will
-        return all endpoints if using an administrator account otherwise it will
-        only return authorized endpoints.
+        List all environments(endpoints) based on the current user authorizations. Will
+        return all environments(endpoints) if using an administrator account otherwise it will
+        only return authorized environments(endpoints).
         **Access policy**: restricted
       operationId: EndpointList
       parameters:
@@ -3779,7 +4826,7 @@ paths:
         in: query
         name: search
         type: string
-      - description: List endpoints of this group
+      - description: List environments(endpoints) of this group
         in: query
         name: groupId
         type: integer
@@ -3787,22 +4834,25 @@ paths:
         in: query
         name: limit
         type: integer
-      - description: List endpoints of this type
+      - description: List environments(endpoints) of this type
         in: query
-        name: type
-        type: integer
-      - description: search endpoints with these tags (depends on tagsPartialMatch)
+        items:
+          type: integer
+        name: types
+        type: array
+      - description: search environments(endpoints) with these tags (depends on tagsPartialMatch)
         in: query
         items:
           type: integer
         name: tagIds
         type: array
-      - description: If true, will return endpoint which has one of tagIds, if false
-          (or missing) will return only endpoints that has all the tags
+      - description: If true, will return environment(endpoint) which has one of tagIds,
+          if false (or missing) will return only environments(endpoints) that has
+          all the tags
         in: query
         name: tagsPartialMatch
         type: boolean
-      - description: will return only these endpoints
+      - description: will return only these environments(endpoints)
         in: query
         items:
           type: integer
@@ -3818,30 +4868,32 @@ paths:
               $ref: '#/definitions/portainer.Endpoint'
             type: array
         "500":
-          description: Internal Server Error
+          description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: List endpoints
+      summary: List environments(endpoints)
       tags:
       - endpoints
     post:
       consumes:
       - multipart/form-data
       description: |-
-        Create a new endpoint that will be used to manage an environment.
+        Create a new environment(endpoint) that will be used to manage an environment(endpoint).
         **Access policy**: administrator
       operationId: EndpointCreate
       parameters:
-      - description: 'Name that will be used to identify this endpoint (example: my-endpoint)'
+      - description: 'Name that will be used to identify this environment(endpoint)
+          (example: my-environment)'
         in: formData
         name: Name
         required: true
         type: string
-      - description: 'Environment type. Value must be one of: 1 (Local Docker environment),
-          2 (Agent environment), 3 (Azure environment), 4 (Edge agent environment)
-          or 5 (Local Kubernetes Environment'
+      - description: 'Environment(Endpoint) type. Value must be one of: 1 (Local Docker
+          environment), 2 (Agent environment), 3 (Azure environment), 4 (Edge agent
+          environment) or 5 (Local Kubernetes Environment'
         in: formData
-        name: EndpointType
+        name: EndpointCreationType
         required: true
         type: integer
       - description: 'URL or IP address of a Docker host (example: docker.mydomain.tld:2375).
@@ -3855,12 +4907,12 @@ paths:
         in: formData
         name: PublicURL
         type: string
-      - description: Endpoint group identifier. If not specified will default to 1
-          (unassigned).
+      - description: Environment(Endpoint) group identifier. If not specified will
+          default to 1 (unassigned).
         in: formData
         name: GroupID
         type: integer
-      - description: Require TLS to connect against this endpoint
+      - description: Require TLS to connect against this environment(endpoint)
         in: formData
         name: TLS
         type: boolean
@@ -3884,20 +4936,23 @@ paths:
         in: formData
         name: TLSKeyFile
         type: file
-      - description: Azure application ID. Required if endpoint type is set to 3
+      - description: Azure application ID. Required if environment(endpoint) type
+          is set to 3
         in: formData
         name: AzureApplicationID
         type: string
-      - description: Azure tenant ID. Required if endpoint type is set to 3
+      - description: Azure tenant ID. Required if environment(endpoint) type is set
+          to 3
         in: formData
         name: AzureTenantID
         type: string
-      - description: Azure authentication key. Required if endpoint type is set to
-          3
+      - description: Azure authentication key. Required if environment(endpoint) type
+          is set to 3
         in: formData
         name: AzureAuthenticationKey
         type: string
-      - description: List of tag identifiers to which this endpoint is associated
+      - description: List of tag identifiers to which this environment(endpoint) is
+          associated
         in: formData
         items:
           type: integer
@@ -3919,18 +4974,19 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Create a new endpoint
+      summary: Create a new environment(endpoint)
       tags:
       - endpoints
   /endpoints/{id}:
     delete:
       description: |-
-        Remove an endpoint.
+        Remove an environment(endpoint).
         **Access policy**: administrator
       operationId: EndpointDelete
       parameters:
-      - description: Endpoint identifier
+      - description: Environment(Endpoint) identifier
         in: path
         name: id
         required: true
@@ -3941,21 +4997,22 @@ paths:
         "400":
           description: Invalid request
         "404":
-          description: Endpoint not found
+          description: Environment(Endpoint) not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Remove an endpoint
+      summary: Remove an environment(endpoint)
       tags:
       - endpoints
     get:
       description: |-
-        Retrieve details about an endpoint.
+        Retrieve details about an environment(endpoint).
         **Access policy**: restricted
       operationId: EndpointInspect
       parameters:
-      - description: Endpoint identifier
+      - description: Environment(Endpoint) identifier
         in: path
         name: id
         required: true
@@ -3970,28 +5027,29 @@ paths:
         "400":
           description: Invalid request
         "404":
-          description: Endpoint not found
+          description: Environment(Endpoint) not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Inspect an endpoint
+      summary: Inspect an environment(endpoint)
       tags:
       - endpoints
     put:
       consumes:
       - application/json
       description: |-
-        Update an endpoint.
-        **Access policy**: administrator
+        Update an environment(endpoint).
+        **Access policy**: authenticated
       operationId: EndpointUpdate
       parameters:
-      - description: Endpoint identifier
+      - description: Environment(Endpoint) identifier
         in: path
         name: id
         required: true
         type: integer
-      - description: Endpoint details
+      - description: Environment(Endpoint) details
         in: body
         name: body
         required: true
@@ -4007,20 +5065,91 @@ paths:
         "400":
           description: Invalid request
         "404":
-          description: Endpoint not found
+          description: Environment(Endpoint) not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Update an endpoint
+      summary: Update an environment(endpoint)
+      tags:
+      - endpoints
+  /endpoints/{id}/association:
+    put:
+      description: |-
+        De-association an edge environment(endpoint).
+        **Access policy**: administrator
+      operationId: EndpointAssociationDelete
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Endpoint'
+        "400":
+          description: Invalid request
+        "404":
+          description: Environment(Endpoint) not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: De-association an edge environment(endpoint)
+      tags:
+      - endpoints
+  /endpoints/{id}/dockerhub/{registryId}:
+    get:
+      description: |-
+        get docker pull limits for a docker hub registry in the environment
+        **Access policy**:
+      operationId: endpointDockerhubStatus
+      parameters:
+      - description: endpoint ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: registry ID
+        in: path
+        name: registryId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/endpoints.dockerhubStatusResponse'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: registry or endpoint not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: fetch docker pull limits
       tags:
       - endpoints
   /endpoints/{id}/edge/jobs/{jobID}/logs:
     post:
       consumes:
       - application/json
+      description: '**Access policy**: public'
       parameters:
-      - description: Endpoint Id
+      - description: environment(endpoint) Id
         in: path
         name: id
         required: true
@@ -4047,15 +5176,16 @@ paths:
     get:
       consumes:
       - application/json
+      description: '**Access policy**: public'
       parameters:
-      - description: Endpoint Id
+      - description: environment(endpoint) Id
         in: path
         name: id
         required: true
         type: string
       - description: EdgeStack Id
         in: path
-        name: stackID
+        name: stackId
         required: true
         type: string
       produces:
@@ -4071,19 +5201,395 @@ paths:
           description: ""
         "500":
           description: ""
-      summary: Inspect an Edge Stack for an Endpoint
+      summary: Inspect an Edge Stack for an Environment(Endpoint)
       tags:
       - edge
       - endpoints
       - edge_stacks
+  /endpoints/{id}/extensions:
+    post:
+      deprecated: true
+      operationId: endpointExtensionAdd
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: Success
+      tags:
+      - endpoints
+  /endpoints/{id}/extensions/{extensionType}:
+    delete:
+      deprecated: true
+      operationId: endpointExtensionRemove
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Extension Type
+        in: path
+        name: extensionType
+        required: true
+        type: string
+      responses:
+        "204":
+          description: Success
+      tags:
+      - endpoints
+  /endpoints/{id}/kubernetes/helm:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**: authenticated'
+      operationId: HelmList
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        required: true
+        type: string
+      - description: specify an optional filter
+        in: query
+        name: filter
+        required: true
+        type: string
+      - description: specify an optional selector
+        in: query
+        name: selector
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/release.ReleaseElement'
+            type: array
+        "400":
+          description: Invalid environment(endpoint) identifier
+        "401":
+          description: Unauthorized
+        "404":
+          description: Environment(Endpoint) or ServiceAccount not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List Helm Releases
+      tags:
+      - helm
+    post:
+      consumes:
+      - application/json
+      description: '**Access policy**: authenticated'
+      operationId: HelmInstall
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Chart details
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/helm.installChartPayload'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/release.Release'
+        "401":
+          description: Unauthorized
+        "404":
+          description: Environment(Endpoint) or ServiceAccount not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Install Helm Chart
+      tags:
+      - helm
+  /endpoints/{id}/kubernetes/helm/{release}:
+    delete:
+      description: '**Access policy**: authenticated'
+      operationId: HelmDelete
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The name of the release/application to uninstall
+        in: path
+        name: release
+        required: true
+        type: string
+      - description: An optional namespace
+        in: query
+        name: namespace
+        required: true
+        type: string
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid environment(endpoint) id or bad request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Environment(Endpoint) or ServiceAccount not found
+        "500":
+          description: Server error or helm error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Delete Helm Release
+      tags:
+      - helm
+  /endpoints/{id}/kubernetes/helm/repositories:
+    get:
+      description: |-
+        Inspect a user helm repositories.
+        **Access policy**: authenticated
+      operationId: HelmUserRepositoriesList
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/helm.helmUserRepositoryResponse'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List a users helm repositories
+      tags:
+      - helm
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Create a user helm repository.
+        **Access policy**: authenticated
+      operationId: HelmUserRepositoryCreate
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Helm Repository
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/helm.addHelmRepoUrlPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.HelmUserRepository'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a user helm repository
+      tags:
+      - helm
+  /endpoints/{id}/registries:
+    get:
+      description: |-
+        List all registries based on the current user authorizations in current environment.
+        **Access policy**: authenticated
+      operationId: endpointRegistriesList
+      parameters:
+      - description: required if kubernetes environment, will show registries by namespace
+        in: query
+        name: namespace
+        type: string
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portainer.Registry'
+            type: array
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List Registries on environment
+      tags:
+      - endpoints
+  /endpoints/{id}/registries/{registryId}:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: endpointRegistryInspect
+      parameters:
+      - description: identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Registry identifier
+        in: path
+        name: registryId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Registry'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Registry not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: get registry for environment
+      tags:
+      - endpoints
+    put:
+      consumes:
+      - application/json
+      description: '**Access policy**: authenticated'
+      operationId: endpointRegistryAccess
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Registry identifier
+        in: path
+        name: registryId
+        required: true
+        type: integer
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/endpoints.registryAccessPayload'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Endpoint not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: update registry access for environment
+      tags:
+      - endpoints
+  /endpoints/{id}/settings:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Update settings for an environment(endpoint).
+        **Access policy**: authenticated
+      operationId: EndpointSettingsUpdate
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Environment(Endpoint) details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/endpoints.endpointSettingsUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Endpoint'
+        "400":
+          description: Invalid request
+        "404":
+          description: Environment(Endpoint) not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update settings for an environment(endpoint)
+      tags:
+      - endpoints
   /endpoints/{id}/snapshot:
     post:
       description: |-
-        Snapshots an endpoint
-        **Access policy**: restricted
+        Snapshots an environment(endpoint)
+        **Access policy**: administrator
       operationId: EndpointSnapshot
       parameters:
-      - description: Endpoint identifier
+      - description: Environment(Endpoint) identifier
         in: path
         name: id
         required: true
@@ -4094,22 +5600,23 @@ paths:
         "400":
           description: Invalid request
         "404":
-          description: Endpoint not found
+          description: Environment(Endpoint) not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Snapshots an endpoint
+      summary: Snapshots an environment(endpoint)
       tags:
       - endpoints
   /endpoints/{id}/status:
     get:
       description: |-
-        Endpoint for edge agent to check status of environment
-        **Access policy**: restricted only to Edge endpoints
+        Environment(Endpoint) for edge agent to check status of environment(endpoint)
+        **Access policy**: restricted only to Edge environments(endpoints)
       operationId: EndpointStatusInspect
       parameters:
-      - description: Endpoint identifier
+      - description: Environment(Endpoint) identifier
         in: path
         name: id
         required: true
@@ -4122,20 +5629,21 @@ paths:
         "400":
           description: Invalid request
         "403":
-          description: Permission denied to access endpoint
+          description: Permission denied to access environment(endpoint)
         "404":
-          description: Endpoint not found
+          description: Environment(Endpoint) not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Get endpoint status
+      summary: Get environment(endpoint) status
       tags:
       - endpoints
   /endpoints/snapshot:
     post:
       description: |-
-        Snapshot all endpoints
+        Snapshot all environments(endpoints)
         **Access policy**: administrator
       operationId: EndpointSnapshots
       responses:
@@ -4144,12 +5652,390 @@ paths:
         "500":
           description: Server Error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Snapshot all endpoints
+      summary: Snapshot all environments(endpoints)
       tags:
       - endpoints
+  /fdo:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Enable Portainer's FDO capabilities
+        **Access policy**: administrator
+      operationId: fdoConfigure
+      parameters:
+      - description: FDO Settings
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/fdo.fdoConfigurePayload'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Enable Portainer's FDO capabilities
+      tags:
+      - intel
+  /fdo/configure/{guid}:
+    post:
+      description: |-
+        configures an FDO device
+        **Access policy**: administrator
+      operationId: fdoConfigureDevice
+      parameters:
+      - description: Device Configuration
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/fdo.deviceConfigurePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: configures an FDO device
+      tags:
+      - intel
+  /fdo/list:
+    get:
+      description: |-
+        List all known FDO vouchers
+        **Access policy**: administrator
+      operationId: fdoListAll
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: List all known FDO vouchers
+      tags:
+      - intel
+  /fdo/profiles:
+    get:
+      description: |-
+        retrieves all FDO profiles
+        **Access policy**: administrator
+      operationId: fdoProfileList
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Bad gateway
+      security:
+      - jwt: []
+      summary: retrieves all FDO profiles
+      tags:
+      - intel
+    post:
+      description: |-
+        creates a new FDO Profile
+        **Access policy**: administrator
+      operationId: createProfile
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "409":
+          description: Profile name already exists
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: creates a new FDO Profile
+      tags:
+      - intel
+  /fdo/profiles/{id}:
+    delete:
+      description: |-
+        deletes a FDO Profile
+        **Access policy**: administrator
+      operationId: deleteProfile
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: deletes a FDO Profile
+      tags:
+      - intel
+    get:
+      description: |-
+        retrieves a given FDO profile information and content
+        **Access policy**: administrator
+      operationId: fdoProfileInspect
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: retrieves a given FDO profile information and content
+      tags:
+      - intel
+    put:
+      description: |-
+        updates an existing FDO Profile
+        **Access policy**: administrator
+      operationId: updateProfile
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "409":
+          description: Profile name already exists
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: updates an existing FDO Profile
+      tags:
+      - intel
+  /fdo/profiles/{id}/duplicate:
+    post:
+      description: |-
+        duplicated an existing FDO Profile
+        **Access policy**: administrator
+      operationId: duplicate
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: duplicated an existing FDO Profile
+      tags:
+      - intel
+  /fdo/register:
+    post:
+      description: |-
+        register an FDO device
+        **Access policy**: administrator
+      operationId: fdoRegisterDevice
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: register an FDO device
+      tags:
+      - intel
+  /kubernetes/{id}/namespaces/{namespace}/system:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Toggle the system state for a namespace
+        **Access policy**: administrator or environment(endpoint) admin
+      operationId: KubernetesNamespacesToggleSystem
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Namespace name
+        in: path
+        name: namespace
+        required: true
+        type: string
+      - description: Update details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/kubernetes.namespacesToggleSystemPayload'
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "404":
+          description: Environment(Endpoint) not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Toggle the system state for a namespace
+      tags:
+      - kubernetes
+  /kubernetes/{id}/nodes_limits:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Get CPU and memory limits of all nodes within k8s cluster
+        **Access policy**: authenticated
+      operationId: getKubernetesNodesLimits
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.K8sNodesLimits'
+        "400":
+          description: Invalid request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Permission denied
+        "404":
+          description: Environment(Endpoint) not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get CPU and memory limits of all nodes within k8s cluster
+      tags:
+      - kubernetes
+  /kubernetes/config:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Generates kubeconfig file enabling client communication with k8s api server
+        **Access policy**: authenticated
+      operationId: GetKubernetesConfig
+      parameters:
+      - description: will include only these environments(endpoints)
+        in: query
+        items:
+          type: integer
+        name: ids
+        type: array
+      - description: will exclude these environments(endpoints)
+        in: query
+        items:
+          type: integer
+        name: excludeIds
+        type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Permission denied
+        "404":
+          description: Environment(Endpoint) or ServiceAccount not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Generates kubeconfig file enabling client communication with k8s api
+        server
+      tags:
+      - kubernetes
+  /ldap/check:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Test LDAP connectivity using LDAP details
+        **Access policy**: administrator
+      operationId: LDAPCheck
+      parameters:
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ldap.checkPayload'
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Test LDAP connectivity
+      tags:
+      - ldap
   /motd:
     get:
+      description: '**Access policy**: restricted'
+      operationId: MOTD
       produces:
       - application/json
       responses:
@@ -4158,10 +6044,182 @@ paths:
           schema:
             $ref: '#/definitions/motd.motdResponse'
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: fetches the message of the day
       tags:
       - motd
+  /open_amt:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Enable Portainer's OpenAMT capabilities
+        **Access policy**: administrator
+      operationId: OpenAMTConfigure
+      parameters:
+      - description: OpenAMT Settings
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/openamt.openAMTConfigurePayload'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Enable Portainer's OpenAMT capabilities
+      tags:
+      - intel
+  /open_amt/{id}/activate:
+    post:
+      description: |-
+        Activate OpenAMT device and associate to agent endpoint
+        **Access policy**: administrator
+      operationId: openAMTActivate
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Activate OpenAMT device and associate to agent endpoint
+      tags:
+      - intel
+  /open_amt/{id}/devices:
+    get:
+      description: |-
+        Fetch OpenAMT managed devices information for endpoint
+        **Access policy**: administrator
+      operationId: OpenAMTDevices
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Fetch OpenAMT managed devices information for endpoint
+      tags:
+      - intel
+  /open_amt/{id}/devices/{deviceId}/action:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Execute out of band action on an AMT managed device
+        **Access policy**: administrator
+      operationId: DeviceAction
+      parameters:
+      - description: Device Action
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/openamt.deviceActionPayload'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Execute out of band action on an AMT managed device
+      tags:
+      - intel
+  /open_amt/{id}/devices_features/{deviceId}:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Enable features on an AMT managed device
+        **Access policy**: administrator
+      operationId: DeviceFeatures
+      parameters:
+      - description: Device Features
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/openamt.deviceFeaturesPayload'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Enable features on an AMT managed device
+      tags:
+      - intel
+  /open_amt/{id}/info:
+    get:
+      description: |-
+        Request OpenAMT info from a node
+        **Access policy**: administrator
+      operationId: OpenAMTHostInfo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Request OpenAMT info from a node
+      tags:
+      - intel
   /registries:
     get:
       description: |-
@@ -4182,6 +6240,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List Registries
       tags:
@@ -4191,7 +6250,7 @@ paths:
       - application/json
       description: |-
         Create a new registry.
-        **Access policy**: administrator
+        **Access policy**: restricted
       operationId: RegistryCreate
       parameters:
       - description: Registry details
@@ -4212,6 +6271,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create a new registry
       tags:
@@ -4220,7 +6280,7 @@ paths:
     delete:
       description: |-
         Remove a registry
-        **Access policy**: administrator
+        **Access policy**: restricted
       operationId: RegistryDelete
       parameters:
       - description: Registry identifier
@@ -4238,6 +6298,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Remove a registry
       tags:
@@ -4245,7 +6306,7 @@ paths:
     get:
       description: |-
         Retrieve details about a registry.
-        **Access policy**: administrator
+        **Access policy**: restricted
       operationId: RegistryInspect
       parameters:
       - description: Registry identifier
@@ -4269,6 +6330,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspect a registry
       tags:
@@ -4278,7 +6340,7 @@ paths:
       - application/json
       description: |-
         Update a registry
-        **Access policy**: administrator
+        **Access policy**: restricted
       operationId: RegistryUpdate
       parameters:
       - description: Registry identifier
@@ -4308,6 +6370,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update a registry
       tags:
@@ -4318,7 +6381,7 @@ paths:
       - application/json
       description: |-
         Configures a registry.
-        **Access policy**: admin
+        **Access policy**: restricted
       operationId: RegistryConfigure
       parameters:
       - description: Registry identifier
@@ -4346,6 +6409,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Configures a registry
       tags:
@@ -4379,6 +6443,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create a new resource control
       tags:
@@ -4388,6 +6453,7 @@ paths:
       description: |-
         Remove a resource control.
         **Access policy**: administrator
+      operationId: ResourceControlDelete
       parameters:
       - description: Resource control identifier
         in: path
@@ -4404,6 +6470,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Remove a resource control
       tags:
@@ -4413,7 +6480,7 @@ paths:
       - application/json
       description: |-
         Update a resource control
-        **Access policy**: restricted
+        **Access policy**: authenticated
       operationId: ResourceControlUpdate
       parameters:
       - description: Resource control identifier
@@ -4443,10 +6510,36 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update a resource control
       tags:
       - resource_controls
+  /restore:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Triggers a system restore using provided backup file
+        **Access policy**: public
+      operationId: Restore
+      parameters:
+      - description: Restore request payload
+        in: body
+        name: restorePayload
+        required: true
+        schema:
+          $ref: '#/definitions/backup.restorePayload'
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      summary: Triggers a system restore using provided backup file
+      tags:
+      - backup
   /roles:
     get:
       description: |-
@@ -4465,6 +6558,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List roles
       tags:
@@ -4485,6 +6579,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Retrieve Portainer settings
       tags:
@@ -4515,35 +6610,9 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update Portainer settings
-      tags:
-      - settings
-  /settings/ldap/check:
-    put:
-      consumes:
-      - application/json
-      description: |-
-        Test LDAP connectivity using LDAP details
-        **Access policy**: administrator
-      operationId: SettingsLDAPCheck
-      parameters:
-      - description: details
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/settings.settingsLDAPCheckPayload'
-      responses:
-        "204":
-          description: Success
-        "400":
-          description: Invalid request
-        "500":
-          description: Server error
-      security:
-      - jwt: []
-      summary: Test LDAP connectivity
       tags:
       - settings
   /settings/public:
@@ -4551,6 +6620,7 @@ paths:
       description: |-
         Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.
         **Access policy**: public
+      operationId: SettingsPublic
       produces:
       - application/json
       responses:
@@ -4563,17 +6633,75 @@ paths:
       summary: Retrieve Portainer public settings
       tags:
       - settings
+  /ssl:
+    get:
+      description: |-
+        Retrieve the ssl settings.
+        **Access policy**: administrator
+      operationId: SSLInspect
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.SSLSettings'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect the ssl settings
+      tags:
+      - ssl
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Update the ssl settings.
+        **Access policy**: administrator
+      operationId: SSLUpdate
+      parameters:
+      - description: SSL Settings
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ssl.sslUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access settings
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update the ssl settings
+      tags:
+      - ssl
   /stacks:
     get:
       description: |-
         List all stacks based on the current user authorizations.
         Will return all stacks if using an administrator account otherwise it
         will only return the list of stacks the user have access to.
-        **Access policy**: restricted
+        **Access policy**: authenticated
       operationId: StackList
       parameters:
-      - description: Filters to process on the stack list. Encoded as JSON (a map[string]string).
-          For example, {
+      - description: 'Filters to process on the stack list. Encoded as JSON (a map[string]string).
+          For example, {''SwarmID'': ''jpofkc0i9uo9wtx1zesuk649w''} will only return
+          stacks that are part of the specified Swarm cluster. Available filters:
+          EndpointID, SwarmID.'
         in: query
         name: filters
         type: string
@@ -4591,6 +6719,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List stacks
       tags:
@@ -4598,17 +6727,18 @@ paths:
     post:
       consumes:
       - application/json
-      - ' multipart/form-data'
+      - multipart/form-data
       description: |-
-        Deploy a new stack into a Docker environment specified via the endpoint identifier.
-        **Access policy**: restricted
+        Deploy a new stack into a Docker environment(endpoint) specified via the environment(endpoint) identifier.
+        **Access policy**: authenticated
       operationId: StackCreate
       parameters:
-      - description: 'Stack deployment type. Possible values: 1 (Swarm stack) or 2
-          (Compose stack).'
+      - description: 'Stack deployment type. Possible values: 1 (Swarm stack), 2 (Compose
+          stack) or 3 (Kubernetes stack).'
         enum:
         - 1
         - 2
+        - 3
         in: query
         name: type
         required: true
@@ -4622,7 +6752,8 @@ paths:
         name: method
         required: true
         type: string
-      - description: Identifier of the endpoint that will be used to deploy the stack
+      - description: Identifier of the environment(endpoint) that will be used to
+          deploy the stack
         in: query
         name: endpointId
         required: true
@@ -4647,6 +6778,21 @@ paths:
         name: body_compose_repository
         schema:
           $ref: '#/definitions/stacks.composeStackFromGitRepositoryPayload'
+      - description: Required when using method=string and type=3
+        in: body
+        name: body_kubernetes_string
+        schema:
+          $ref: '#/definitions/stacks.kubernetesStringDeploymentPayload'
+      - description: Required when using method=repository and type=3
+        in: body
+        name: body_kubernetes_repository
+        schema:
+          $ref: '#/definitions/stacks.kubernetesGitDeploymentPayload'
+      - description: Required when using method=file and type=3
+        in: body
+        name: body_kubernetes_url
+        schema:
+          $ref: '#/definitions/stacks.kubernetesManifestURLDeploymentPayload'
       - description: Name of the stack. required when method is file
         in: formData
         name: Name
@@ -4656,7 +6802,7 @@ paths:
         in: formData
         name: SwarmID
         type: string
-      - description: 'Environment variables passed during deployment, represented
+      - description: 'Environment(Endpoint) variables passed during deployment, represented
           as a JSON array [{''name'': ''name'', ''value'': ''value''}]. Optional,
           used when method equals file and type equals 1.'
         in: formData
@@ -4678,6 +6824,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Deploy a new stack
       tags:
@@ -4699,8 +6846,8 @@ paths:
         in: query
         name: external
         type: boolean
-      - description: Endpoint identifier used to remove an external stack (required
-          when external is set to true)
+      - description: Environment(Endpoint) identifier used to remove an external stack
+          (required when external is set to true)
         in: query
         name: endpointId
         type: integer
@@ -4712,10 +6859,11 @@ paths:
         "403":
           description: Permission denied
         "404":
-          description: ' not found'
+          description: Not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Remove a stack
       tags:
@@ -4747,6 +6895,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspect a stack
       tags:
@@ -4755,8 +6904,8 @@ paths:
       consumes:
       - application/json
       description: |-
-        Update a stack.
-        **Access policy**: restricted
+        Update a stack, only for file based stacks.
+        **Access policy**: authenticated
       operationId: StackUpdate
       parameters:
       - description: Stack identifier
@@ -4765,8 +6914,8 @@ paths:
         required: true
         type: integer
       - description: Stacks created before version 1.18.0 might not have an associated
-          endpoint identifier. Use this optional parameter to set the endpoint identifier
-          used by the stack.
+          environment(endpoint) identifier. Use this optional parameter to set the
+          environment(endpoint) identifier used by the stack.
         in: query
         name: endpointId
         type: integer
@@ -4788,12 +6937,61 @@ paths:
         "403":
           description: Permission denied
         "404":
-          description: ' not found'
+          description: Not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update a stack
+      tags:
+      - stacks
+  /stacks/{id}/associate:
+    put:
+      description: '**Access policy**: administrator'
+      operationId: StackAssociate
+      parameters:
+      - description: Stack identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Stacks created before version 1.18.0 might not have an associated
+          environment(endpoint) identifier. Use this optional parameter to set the
+          environment(endpoint) identifier used by the stack.
+        in: query
+        name: endpointId
+        required: true
+        type: integer
+      - description: Swarm identifier
+        in: query
+        name: swarmId
+        required: true
+        type: integer
+      - description: Indicates whether the stack is orphaned
+        in: query
+        name: orphanedRunning
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Stack'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Stack not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Associate an orphaned stack to a new environment(endpoint)
       tags:
       - stacks
   /stacks/{id}/file:
@@ -4824,15 +7022,110 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Retrieve the content of the Stack file for the specified stack
+      tags:
+      - stacks
+  /stacks/{id}/git:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Update the Git settings in a stack, e.g., RepositoryReferenceName and AutoUpdate
+        **Access policy**: authenticated
+      operationId: StackUpdateGit
+      parameters:
+      - description: Stack identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Stacks created before version 1.18.0 might not have an associated
+          environment(endpoint) identifier. Use this optional parameter to set the
+          environment(endpoint) identifier used by the stack.
+        in: query
+        name: endpointId
+        type: integer
+      - description: Git configs for pull and redeploy a stack
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/stacks.stackGitUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Stack'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update a stack's Git configs
+      tags:
+      - stacks
+  /stacks/{id}/git/redeploy:
+    put:
+      consumes:
+      - application/json
+      description: |-
+        Pull and redeploy a stack via Git
+        **Access policy**: authenticated
+      operationId: StackGitRedeploy
+      parameters:
+      - description: Stack identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Stacks created before version 1.18.0 might not have an associated
+          environment(endpoint) identifier. Use this optional parameter to set the
+          environment(endpoint) identifier used by the stack.
+        in: query
+        name: endpointId
+        type: integer
+      - description: Git configs for pull and redeploy a stack
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/stacks.stackGitRedployPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.Stack'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Redeploy a stack
       tags:
       - stacks
   /stacks/{id}/migrate:
     post:
       description: |-
-        Migrate a stack from an endpoint to another endpoint. It will re-create the stack inside the target endpoint before removing the original stack.
-        **Access policy**: restricted
+        Migrate a stack from an environment(endpoint) to another environment(endpoint). It will re-create the stack inside the target environment(endpoint) before removing the original stack.
+        **Access policy**: authenticated
       operationId: StackMigrate
       parameters:
       - description: Stack identifier
@@ -4841,8 +7134,8 @@ paths:
         required: true
         type: integer
       - description: Stacks created before version 1.18.0 might not have an associated
-          endpoint identifier. Use this optional parameter to set the endpoint identifier
-          used by the stack.
+          environment(endpoint) identifier. Use this optional parameter to set the
+          environment(endpoint) identifier used by the stack.
         in: query
         name: endpointId
         type: integer
@@ -4868,15 +7161,16 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
-      summary: Migrate a stack to another endpoint
+      summary: Migrate a stack to another environment(endpoint)
       tags:
       - stacks
   /stacks/{id}/start:
     post:
       description: |-
         Starts a stopped Stack.
-        **Access policy**: restricted
+        **Access policy**: authenticated
       operationId: StackStart
       parameters:
       - description: Stack identifier
@@ -4894,10 +7188,11 @@ paths:
         "403":
           description: Permission denied
         "404":
-          description: ' not found'
+          description: Not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Starts a stopped Stack
       tags:
@@ -4906,7 +7201,7 @@ paths:
     post:
       description: |-
         Stops a stopped Stack.
-        **Access policy**: restricted
+        **Access policy**: authenticated
       operationId: StackStop
       parameters:
       - description: Stack identifier
@@ -4924,12 +7219,35 @@ paths:
         "403":
           description: Permission denied
         "404":
-          description: ' not found'
+          description: Not found
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Stops a stopped Stack
+      tags:
+      - stacks
+  /stacks/webhooks/{webhookID}:
+    post:
+      description: '**Access policy**: public'
+      operationId: WebhookInvoke
+      parameters:
+      - description: Stack identifier
+        in: path
+        name: webhookID
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "409":
+          description: Conflict
+        "500":
+          description: Server error
+      summary: Webhook for triggering stack updates from git
       tags:
       - stacks
   /status:
@@ -4962,6 +7280,7 @@ paths:
           schema:
             $ref: '#/definitions/status.inspectVersionResponse'
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Check for portainer updates
       tags:
@@ -4970,7 +7289,7 @@ paths:
     get:
       description: |-
         List tags.
-        **Access policy**: administrator
+        **Access policy**: authenticated
       operationId: TagList
       produces:
       - application/json
@@ -4984,11 +7303,14 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List tags
       tags:
       - tags
     post:
+      consumes:
+      - application/json
       description: |-
         Create a new tag.
         **Access policy**: administrator
@@ -5012,14 +7334,13 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create a new tag
       tags:
       - tags
   /tags/{id}:
     delete:
-      consumes:
-      - application/json
       description: |-
         Remove a tag.
         **Access policy**: administrator
@@ -5030,8 +7351,6 @@ paths:
         name: id
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "204":
           description: Success
@@ -5044,6 +7363,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Remove a tag
       tags:
@@ -5077,6 +7397,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create a new team
       tags:
@@ -5119,15 +7440,16 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update a team
       tags:
-      - ""
+      - teams
   /team_memberships:
     get:
       description: |-
         List team memberships. Access is only available to administrators and team leaders.
-        **Access policy**: admin
+        **Access policy**: administrator
       operationId: TeamMembershipList
       produces:
       - application/json
@@ -5145,6 +7467,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List team memberships
       tags:
@@ -5154,7 +7477,7 @@ paths:
       - application/json
       description: |-
         Create a new team memberships. Access is only available to administrators leaders of the associated team.
-        **Access policy**: admin
+        **Access policy**: administrator
       operationId: TeamMembershipCreate
       parameters:
       - description: Team membership details
@@ -5181,6 +7504,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create a new team membership
       tags:
@@ -5189,7 +7513,7 @@ paths:
     delete:
       description: |-
         Remove a team membership. Access is only available to administrators leaders of the associated team.
-        **Access policy**: restricted
+        **Access policy**: administrator
       operationId: TeamMembershipDelete
       parameters:
       - description: TeamMembership identifier
@@ -5209,6 +7533,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Remove a team membership
       tags:
@@ -5218,7 +7543,7 @@ paths:
       - application/json
       description: |-
         Update a team membership. Access is only available to administrators leaders of the associated team.
-        **Access policy**: restricted
+        **Access policy**: administrator
       operationId: TeamMembershipUpdate
       parameters:
       - description: Team membership identifier
@@ -5248,6 +7573,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update a team membership
       tags:
@@ -5270,6 +7596,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List teams
       tags:
@@ -5280,6 +7607,12 @@ paths:
         Remove a team.
         **Access policy**: administrator
       operationId: TeamDelete
+      parameters:
+      - description: Team Id
+        in: path
+        name: id
+        required: true
+        type: string
       responses:
         "204":
           description: Success
@@ -5292,6 +7625,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Remove a team
       tags:
@@ -5299,7 +7633,7 @@ paths:
     get:
       description: |-
         Retrieve details about a team. Access is only available for administrator and leaders of that team.
-        **Access policy**: restricted
+        **Access policy**: administrator
       operationId: TeamInspect
       parameters:
       - description: Team identifier
@@ -5325,6 +7659,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspect a team
       tags:
@@ -5335,6 +7670,12 @@ paths:
         List team memberships. Access is only available to administrators and team leaders.
         **Access policy**: restricted
       operationId: TeamMemberships
+      parameters:
+      - description: Team Id
+        in: path
+        name: id
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -5351,6 +7692,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List team memberships
       tags:
@@ -5359,7 +7701,7 @@ paths:
     get:
       description: |-
         List available templates.
-        **Access policy**: restricted
+        **Access policy**: authenticated
       operationId: TemplateList
       produces:
       - application/json
@@ -5371,6 +7713,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List available templates
       tags:
@@ -5381,7 +7724,7 @@ paths:
       - application/json
       description: |-
         Get a template's file
-        **Access policy**: restricted
+        **Access policy**: authenticated
       operationId: TemplateFile
       parameters:
       - description: File details
@@ -5402,16 +7745,89 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Get a template's file
       tags:
       - templates
+  /templates/helm:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: HelmRepoSearch
+      parameters:
+      - description: Helm repository URL
+        in: query
+        name: repo
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Search Helm Charts
+      tags:
+      - helm
+  /templates/helm/{command}:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**: authenticated'
+      operationId: HelmShow
+      parameters:
+      - description: Helm repository URL
+        in: query
+        name: repo
+        required: true
+        type: string
+      - description: Chart name
+        in: query
+        name: chart
+        required: true
+        type: string
+      - description: chart/values/readme
+        in: path
+        name: command
+        required: true
+        type: string
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+        "404":
+          description: Environment(Endpoint) or ServiceAccount not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Show Helm Chart Information
+      tags:
+      - helm
   /upload/tls/{certificate}:
     post:
       consumes:
       - multipart/form-data
       description: |-
-        Use this endpoint to upload TLS files.
+        Use this environment(endpoint) to upload TLS files.
         **Access policy**: administrator
       operationId: UploadTLS
       parameters:
@@ -5445,6 +7861,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Upload TLS files
       tags:
@@ -5454,6 +7871,7 @@ paths:
       description: |-
         List Portainer users.
         Non-administrator users will only be able to list other non-administrator user accounts.
+        User passwords are filtered out, and should never be accessible.
         **Access policy**: restricted
       operationId: UserList
       produces:
@@ -5470,6 +7888,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List users
       tags:
@@ -5506,14 +7925,13 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create a new user
       tags:
       - users
   /users/{id}:
     delete:
-      consumes:
-      - application/json
       description: |-
         Remove a user.
         **Access policy**: administrator
@@ -5538,6 +7956,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Remove a user
       tags:
@@ -5545,7 +7964,8 @@ paths:
     get:
       description: |-
         Retrieve details about a user.
-        **Access policy**: administrator
+        User passwords are filtered out, and should never be accessible.
+        **Access policy**: authenticated
       operationId: UserInspect
       parameters:
       - description: User identifier
@@ -5569,6 +7989,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspect a user
       tags:
@@ -5610,6 +8031,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update a user
       tags:
@@ -5618,7 +8040,7 @@ paths:
     get:
       description: |-
         Inspect a user memberships.
-        **Access policy**: authenticated
+        **Access policy**: restricted
       operationId: UserMembershipsInspect
       parameters:
       - description: User identifier
@@ -5640,6 +8062,7 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Inspect a user memberships
       tags:
@@ -5678,8 +8101,122 @@ paths:
         "500":
           description: Server error
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Update password for a user
+      tags:
+      - users
+  /users/{id}/tokens:
+    get:
+      description: |-
+        Gets all API keys for a user.
+        Only the calling user or admin can retrieve api-keys.
+        **Access policy**: authenticated
+      operationId: UserGetAPIKeys
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portainer.APIKey'
+            type: array
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: User not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get all API keys for a user
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Generates an API key for a user.
+        Only the calling user can generate a token for themselves.
+        **Access policy**: restricted
+      operationId: UserGenerateAPIKey
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.userAccessTokenCreatePayload'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/users.accessTokenResponse'
+        "400":
+          description: Invalid request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Permission denied
+        "404":
+          description: User not found
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Generate an API key for a user
+      tags:
+      - users
+  /users/{id}/tokens/{keyID}:
+    delete:
+      description: |-
+        Remove an api-key associated to a user..
+        Only the calling user or admin can remove api-key.
+        **Access policy**: authenticated
+      operationId: UserRemoveAPIKey
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Api Key identifier
+        in: path
+        name: keyID
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove an api-key associated to a user
       tags:
       - users
   /users/admin/check:
@@ -5726,18 +8263,13 @@ paths:
           description: Server error
       summary: Initialize administrator account
       tags:
-      - ""
+      - users
   /webhooks:
     get:
       consumes:
       - application/json
+      description: '**Access policy**: authenticated'
       parameters:
-      - description: Webhook data
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/webhooks.webhookCreatePayload'
       - in: query
         name: EndpointID
         type: integer
@@ -5758,6 +8290,7 @@ paths:
         "500":
           description: ""
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: List webhooks
       tags:
@@ -5765,6 +8298,7 @@ paths:
     post:
       consumes:
       - application/json
+      description: '**Access policy**: authenticated'
       parameters:
       - description: Webhook data
         in: body
@@ -5786,22 +8320,20 @@ paths:
         "500":
           description: ""
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Create a webhook
       tags:
       - webhooks
   /webhooks/{id}:
     delete:
-      consumes:
-      - application/json
+      description: '**Access policy**: authenticated'
       parameters:
       - description: Webhook id
         in: path
         name: id
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "202":
           description: Webhook deleted
@@ -5810,23 +8342,52 @@ paths:
         "500":
           description: ""
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Delete a webhook
       tags:
       - webhooks
-  /webhooks/{token}:
-    post:
+    put:
       consumes:
       - application/json
-      description: Acts on a passed in token UUID to restart the docker service
+      description: '**Access policy**: authenticated'
+      parameters:
+      - description: Webhook data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/webhooks.webhookUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/portainer.Webhook'
+        "400":
+          description: ""
+        "409":
+          description: ""
+        "500":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update a webhook
+      tags:
+      - webhooks
+  /webhooks/{token}:
+    post:
+      description: |-
+        Acts on a passed in token UUID to restart the docker service
+        **Access policy**: public
       parameters:
       - description: Webhook token
         in: path
         name: token
         required: true
         type: string
-      produces:
-      - application/json
       responses:
         "202":
           description: Webhook executed
@@ -5842,12 +8403,13 @@ paths:
       consumes:
       - application/json
       description: |-
-        If the nodeName query parameter is present, the request will be proxied to the underlying agent endpoint.
+        If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).
         If the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and
         an AttachStart operation HTTP request will be created and hijacked.
-        Authentication and access is controlled via the mandatory token query parameter.
+        **Access policy**: authenticated
       parameters:
-      - description: endpoint ID of the endpoint where the resource is located
+      - description: environment(endpoint) ID of the environment(endpoint) where the
+          resource is located
         in: query
         name: endpointId
         required: true
@@ -5856,7 +8418,7 @@ paths:
         in: query
         name: nodeName
         type: string
-      - description: JWT token used for authentication against this endpoint
+      - description: JWT token used for authentication against this environment(endpoint)
         in: query
         name: token
         required: true
@@ -5875,6 +8437,7 @@ paths:
         "500":
           description: ""
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Attach a websocket
       tags:
@@ -5884,12 +8447,12 @@ paths:
       consumes:
       - application/json
       description: |-
-        If the nodeName query parameter is present, the request will be proxied to the underlying agent endpoint.
+        If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).
         If the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and
         an ExecStart operation HTTP request will be created and hijacked.
-        Authentication and access is controlled via the mandatory token query parameter.
       parameters:
-      - description: endpoint ID of the endpoint where the resource is located
+      - description: environment(endpoint) ID of the environment(endpoint) where the
+          resource is located
         in: query
         name: endpointId
         required: true
@@ -5898,7 +8461,7 @@ paths:
         in: query
         name: nodeName
         type: string
-      - description: JWT token used for authentication against this endpoint
+      - description: JWT token used for authentication against this environment(endpoint)
         in: query
         name: token
         required: true
@@ -5915,8 +8478,45 @@ paths:
         "500":
           description: ""
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Execute a websocket
+      tags:
+      - websocket
+  /websocket/kubernetes-shell:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        The request will be upgraded to the websocket protocol. The request will proxy input from the client to the pod via long-lived websocket connection.
+        **Access policy**: authenticated
+      parameters:
+      - description: environment(endpoint) ID of the environment(endpoint) where the
+          resource is located
+        in: query
+        name: endpointId
+        required: true
+        type: integer
+      - description: JWT token used for authentication against this environment(endpoint)
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Execute a websocket on kubectl shell pod
       tags:
       - websocket
   /websocket/pod:
@@ -5925,9 +8525,10 @@ paths:
       - application/json
       description: |-
         The request will be upgraded to the websocket protocol.
-        Authentication and access is controlled via the mandatory token query parameter.
+        **Access policy**: authenticated
       parameters:
-      - description: endpoint ID of the endpoint where the resource is located
+      - description: environment(endpoint) ID of the environment(endpoint) where the
+          resource is located
         in: query
         name: endpointId
         required: true
@@ -5952,7 +8553,7 @@ paths:
         name: command
         required: true
         type: string
-      - description: JWT token used for authentication against this endpoint
+      - description: JWT token used for authentication against this environment(endpoint)
         in: query
         name: token
         required: true
@@ -5971,6 +8572,7 @@ paths:
         "500":
           description: ""
       security:
+      - ApiKeyAuth: []
       - jwt: []
       summary: Execute a websocket on pod
       tags:
@@ -5979,6 +8581,10 @@ schemes:
 - http
 - https
 securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
   jwt:
     in: header
     name: Authorization
@@ -5989,8 +8595,6 @@ tags:
   name: auth
 - description: Manage Custom Templates
   name: custom_templates
-- description: Manage how Portainer connects to the DockerHub
-  name: dockerhub
 - description: Manage Edge Groups
   name: edge_groups
 - description: Manage Edge Jobs
@@ -5999,12 +8603,14 @@ tags:
   name: edge_stacks
 - description: Manage Edge Templates
   name: edge_templates
-- description: Manage Edge related endpoint settings
+- description: Manage Edge related environment(endpoint) settings
   name: edge
-- description: Manage Docker environments
+- description: Manage Docker environments(endpoints)
   name: endpoints
-- description: Manage endpoint groups
+- description: Manage environment(endpoint) groups
   name: endpoint_groups
+- description: Manage Kubernetes cluster
+  name: kubernetes
 - description: Fetch the message of the day
   name: motd
 - description: Manage Docker registries
@@ -6017,8 +8623,6 @@ tags:
   name: settings
 - description: Information about the Portainer instance
   name: status
-- description: Manage Docker stacks
-  name: stacks
 - description: Manage users
   name: users
 - description: Manage tags
@@ -6031,6 +8635,8 @@ tags:
   name: templates
 - description: Manage stacks
   name: stacks
+- description: Manage ssl settings
+  name: ssl
 - description: Upload files
   name: upload
 - description: Manage webhooks

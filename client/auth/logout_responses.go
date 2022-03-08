@@ -26,6 +26,12 @@ func (o *LogoutReader) ReadResponse(response runtime.ClientResponse, consumer ru
 			return nil, err
 		}
 		return result, nil
+	case 500:
+		result := NewLogoutInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -38,7 +44,7 @@ func NewLogoutNoContent() *LogoutNoContent {
 
 /* LogoutNoContent describes a response with status code 204, with default header values.
 
-LogoutNoContent logout no content
+Success
 */
 type LogoutNoContent struct {
 }
@@ -48,6 +54,27 @@ func (o *LogoutNoContent) Error() string {
 }
 
 func (o *LogoutNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewLogoutInternalServerError creates a LogoutInternalServerError with default headers values
+func NewLogoutInternalServerError() *LogoutInternalServerError {
+	return &LogoutInternalServerError{}
+}
+
+/* LogoutInternalServerError describes a response with status code 500, with default header values.
+
+Server error
+*/
+type LogoutInternalServerError struct {
+}
+
+func (o *LogoutInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /auth/logout][%d] logoutInternalServerError ", 500)
+}
+
+func (o *LogoutInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

@@ -32,9 +32,9 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	AuthenticateUser(params *AuthenticateUserParams, opts ...ClientOption) (*AuthenticateUserOK, error)
 
-	AuthenticateOauth(params *AuthenticateOauthParams, opts ...ClientOption) (*AuthenticateOauthOK, error)
-
 	Logout(params *LogoutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogoutNoContent, error)
+
+	ValidateOAuth(params *ValidateOAuthParams, opts ...ClientOption) (*ValidateOAuthOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -42,7 +42,8 @@ type ClientService interface {
 /*
   AuthenticateUser authenticates
 
-  Use this endpoint to authenticate against Portainer using a username and password.
+  **Access policy**: public
+Use this environment(endpoint) to authenticate against Portainer using a username and password.
 */
 func (a *Client) AuthenticateUser(params *AuthenticateUserParams, opts ...ClientOption) (*AuthenticateUserOK, error) {
 	// TODO: Validate the params before sending
@@ -80,45 +81,9 @@ func (a *Client) AuthenticateUser(params *AuthenticateUserParams, opts ...Client
 }
 
 /*
-  AuthenticateOauth authenticates with o auth
-*/
-func (a *Client) AuthenticateOauth(params *AuthenticateOauthParams, opts ...ClientOption) (*AuthenticateOauthOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewAuthenticateOauthParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "authenticate_oauth",
-		Method:             "POST",
-		PathPattern:        "/auth/oauth/validate",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &AuthenticateOauthReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*AuthenticateOauthOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for authenticate_oauth: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
   Logout logouts
+
+  **Access policy**: authenticated
 */
 func (a *Client) Logout(params *LogoutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogoutNoContent, error) {
 	// TODO: Validate the params before sending
@@ -126,7 +91,7 @@ func (a *Client) Logout(params *LogoutParams, authInfo runtime.ClientAuthInfoWri
 		params = NewLogoutParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "logout",
+		ID:                 "Logout",
 		Method:             "POST",
 		PathPattern:        "/auth/logout",
 		ProducesMediaTypes: []string{"application/json"},
@@ -152,7 +117,47 @@ func (a *Client) Logout(params *LogoutParams, authInfo runtime.ClientAuthInfoWri
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for logout: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for Logout: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  ValidateOAuth authenticates with o auth
+
+  **Access policy**: public
+*/
+func (a *Client) ValidateOAuth(params *ValidateOAuthParams, opts ...ClientOption) (*ValidateOAuthOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewValidateOAuthParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ValidateOAuth",
+		Method:             "POST",
+		PathPattern:        "/auth/oauth/validate",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ValidateOAuthReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ValidateOAuthOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ValidateOAuth: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

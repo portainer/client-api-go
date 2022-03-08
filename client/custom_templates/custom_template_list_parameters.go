@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewCustomTemplateListParams creates a new CustomTemplateListParams object,
@@ -58,6 +59,13 @@ func NewCustomTemplateListParamsWithHTTPClient(client *http.Client) *CustomTempl
    Typically these are written to a http.Request.
 */
 type CustomTemplateListParams struct {
+
+	/* Type.
+
+	   Template types
+	*/
+	Type []int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -111,6 +119,17 @@ func (o *CustomTemplateListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithType adds the typeVar to the custom template list params
+func (o *CustomTemplateListParams) WithType(typeVar []int64) *CustomTemplateListParams {
+	o.SetType(typeVar)
+	return o
+}
+
+// SetType adds the type to the custom template list params
+func (o *CustomTemplateListParams) SetType(typeVar []int64) {
+	o.Type = typeVar
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *CustomTemplateListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -119,8 +138,36 @@ func (o *CustomTemplateListParams) WriteToRequest(r runtime.ClientRequest, reg s
 	}
 	var res []error
 
+	if o.Type != nil {
+
+		// binding items for type
+		joinedType := o.bindParamType(reg)
+
+		// query array param type
+		if err := r.SetQueryParam("type", joinedType...); err != nil {
+			return err
+		}
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamCustomTemplateList binds the parameter type
+func (o *CustomTemplateListParams) bindParamType(formats strfmt.Registry) []string {
+	typeIR := o.Type
+
+	var typeIC []string
+	for _, typeIIR := range typeIR { // explode []int64
+
+		typeIIV := swag.FormatInt64(typeIIR) // int64 as string
+		typeIC = append(typeIC, typeIIV)
+	}
+
+	// items.CollectionFormat: ""
+	typeIS := swag.JoinByFormat(typeIC, "")
+
+	return typeIS
 }

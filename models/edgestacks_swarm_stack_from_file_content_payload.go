@@ -7,9 +7,12 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // EdgestacksSwarmStackFromFileContentPayload edgestacks swarm stack from file content payload
@@ -17,18 +20,99 @@ import (
 // swagger:model edgestacks.swarmStackFromFileContentPayload
 type EdgestacksSwarmStackFromFileContentPayload struct {
 
-	// edge groups
+	// Deployment type to deploy this stack
+	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
+	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+	// kubernetes deploytype is enabled only for kubernetes environments(endpoints)
+	// Example: 0
+	// Enum: [0 1]
+	DeploymentType int64 `json:"deploymentType,omitempty"`
+
+	// List of identifiers of EdgeGroups
+	// Example: [1]
 	EdgeGroups []int64 `json:"edgeGroups"`
 
-	// name
-	Name string `json:"name,omitempty"`
+	// Name of the stack
+	// Example: myStack
+	// Required: true
+	Name *string `json:"name"`
 
-	// stack file content
-	StackFileContent string `json:"stackFileContent,omitempty"`
+	// Content of the Stack file
+	// Example: version: 3\n services:\n web:\n image:nginx
+	// Required: true
+	StackFileContent *string `json:"stackFileContent"`
 }
 
 // Validate validates this edgestacks swarm stack from file content payload
 func (m *EdgestacksSwarmStackFromFileContentPayload) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateDeploymentType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStackFileContent(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+var edgestacksSwarmStackFromFileContentPayloadTypeDeploymentTypePropEnum []interface{}
+
+func init() {
+	var res []int64
+	if err := json.Unmarshal([]byte(`[0,1]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		edgestacksSwarmStackFromFileContentPayloadTypeDeploymentTypePropEnum = append(edgestacksSwarmStackFromFileContentPayloadTypeDeploymentTypePropEnum, v)
+	}
+}
+
+// prop value enum
+func (m *EdgestacksSwarmStackFromFileContentPayload) validateDeploymentTypeEnum(path, location string, value int64) error {
+	if err := validate.EnumCase(path, location, value, edgestacksSwarmStackFromFileContentPayloadTypeDeploymentTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *EdgestacksSwarmStackFromFileContentPayload) validateDeploymentType(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeploymentType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EdgestacksSwarmStackFromFileContentPayload) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EdgestacksSwarmStackFromFileContentPayload) validateStackFileContent(formats strfmt.Registry) error {
+
+	if err := validate.Required("stackFileContent", "body", m.StackFileContent); err != nil {
+		return err
+	}
+
 	return nil
 }
 

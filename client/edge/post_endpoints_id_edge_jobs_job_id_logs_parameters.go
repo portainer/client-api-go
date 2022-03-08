@@ -61,7 +61,7 @@ type PostEndpointsIDEdgeJobsJobIDLogsParams struct {
 
 	/* ID.
 
-	   Endpoint Id
+	   environment(endpoint) Id
 	*/
 	ID string
 

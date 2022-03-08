@@ -47,7 +47,7 @@ func NewEndpointGroupListOK() *EndpointGroupListOK {
 
 /* EndpointGroupListOK describes a response with status code 200, with default header values.
 
-Endpoint group
+Environment(Endpoint) group
 */
 type EndpointGroupListOK struct {
 	Payload []*models.PortainerEndpointGroup

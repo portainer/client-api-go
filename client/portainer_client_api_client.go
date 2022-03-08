@@ -11,8 +11,8 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/portainer/client-api/client/auth"
+	"github.com/portainer/client-api/client/backup"
 	"github.com/portainer/client-api/client/custom_templates"
-	"github.com/portainer/client-api/client/dockerhub"
 	"github.com/portainer/client-api/client/edge"
 	"github.com/portainer/client-api/client/edge_groups"
 	"github.com/portainer/client-api/client/edge_jobs"
@@ -20,12 +20,16 @@ import (
 	"github.com/portainer/client-api/client/edge_templates"
 	"github.com/portainer/client-api/client/endpoint_groups"
 	"github.com/portainer/client-api/client/endpoints"
+	"github.com/portainer/client-api/client/helm"
+	"github.com/portainer/client-api/client/intel"
+	"github.com/portainer/client-api/client/kubernetes"
+	"github.com/portainer/client-api/client/ldap"
 	"github.com/portainer/client-api/client/motd"
-	"github.com/portainer/client-api/client/operations"
 	"github.com/portainer/client-api/client/registries"
 	"github.com/portainer/client-api/client/resource_controls"
 	"github.com/portainer/client-api/client/roles"
 	"github.com/portainer/client-api/client/settings"
+	"github.com/portainer/client-api/client/ssl"
 	"github.com/portainer/client-api/client/stacks"
 	"github.com/portainer/client-api/client/status"
 	"github.com/portainer/client-api/client/tags"
@@ -81,8 +85,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli := new(PortainerClientAPI)
 	cli.Transport = transport
 	cli.Auth = auth.New(transport, formats)
+	cli.Backup = backup.New(transport, formats)
 	cli.CustomTemplates = custom_templates.New(transport, formats)
-	cli.Dockerhub = dockerhub.New(transport, formats)
 	cli.Edge = edge.New(transport, formats)
 	cli.EdgeGroups = edge_groups.New(transport, formats)
 	cli.EdgeJobs = edge_jobs.New(transport, formats)
@@ -90,12 +94,16 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.EdgeTemplates = edge_templates.New(transport, formats)
 	cli.EndpointGroups = endpoint_groups.New(transport, formats)
 	cli.Endpoints = endpoints.New(transport, formats)
+	cli.Helm = helm.New(transport, formats)
+	cli.Intel = intel.New(transport, formats)
+	cli.Kubernetes = kubernetes.New(transport, formats)
+	cli.Ldap = ldap.New(transport, formats)
 	cli.Motd = motd.New(transport, formats)
-	cli.Operations = operations.New(transport, formats)
 	cli.Registries = registries.New(transport, formats)
 	cli.ResourceControls = resource_controls.New(transport, formats)
 	cli.Roles = roles.New(transport, formats)
 	cli.Settings = settings.New(transport, formats)
+	cli.Ssl = ssl.New(transport, formats)
 	cli.Stacks = stacks.New(transport, formats)
 	cli.Status = status.New(transport, formats)
 	cli.Tags = tags.New(transport, formats)
@@ -152,9 +160,9 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type PortainerClientAPI struct {
 	Auth auth.ClientService
 
-	CustomTemplates custom_templates.ClientService
+	Backup backup.ClientService
 
-	Dockerhub dockerhub.ClientService
+	CustomTemplates custom_templates.ClientService
 
 	Edge edge.ClientService
 
@@ -170,9 +178,15 @@ type PortainerClientAPI struct {
 
 	Endpoints endpoints.ClientService
 
-	Motd motd.ClientService
+	Helm helm.ClientService
 
-	Operations operations.ClientService
+	Intel intel.ClientService
+
+	Kubernetes kubernetes.ClientService
+
+	Ldap ldap.ClientService
+
+	Motd motd.ClientService
 
 	Registries registries.ClientService
 
@@ -181,6 +195,8 @@ type PortainerClientAPI struct {
 	Roles roles.ClientService
 
 	Settings settings.ClientService
+
+	Ssl ssl.ClientService
 
 	Stacks stacks.ClientService
 
@@ -209,8 +225,8 @@ type PortainerClientAPI struct {
 func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Auth.SetTransport(transport)
+	c.Backup.SetTransport(transport)
 	c.CustomTemplates.SetTransport(transport)
-	c.Dockerhub.SetTransport(transport)
 	c.Edge.SetTransport(transport)
 	c.EdgeGroups.SetTransport(transport)
 	c.EdgeJobs.SetTransport(transport)
@@ -218,12 +234,16 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.EdgeTemplates.SetTransport(transport)
 	c.EndpointGroups.SetTransport(transport)
 	c.Endpoints.SetTransport(transport)
+	c.Helm.SetTransport(transport)
+	c.Intel.SetTransport(transport)
+	c.Kubernetes.SetTransport(transport)
+	c.Ldap.SetTransport(transport)
 	c.Motd.SetTransport(transport)
-	c.Operations.SetTransport(transport)
 	c.Registries.SetTransport(transport)
 	c.ResourceControls.SetTransport(transport)
 	c.Roles.SetTransport(transport)
 	c.Settings.SetTransport(transport)
+	c.Ssl.SetTransport(transport)
 	c.Stacks.SetTransport(transport)
 	c.Status.SetTransport(transport)
 	c.Tags.SetTransport(transport)

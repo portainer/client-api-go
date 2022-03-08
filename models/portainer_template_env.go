@@ -31,7 +31,7 @@ type PortainerTemplateEnv struct {
 	// Example: Root password
 	Label string `json:"label,omitempty"`
 
-	// name of the environment variable
+	// name of the environment(endpoint) variable
 	// Example: MYSQL_ROOT_PASSWORD
 	Name string `json:"name,omitempty"`
 

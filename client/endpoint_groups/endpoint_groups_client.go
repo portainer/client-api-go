@@ -48,9 +48,9 @@ type ClientService interface {
 }
 
 /*
-  EndpointGroupAddEndpoint adds an endpoint to an endpoint group
+  EndpointGroupAddEndpoint adds an environment endpoint to an environment endpoint group
 
-  Add an endpoint to an endpoint group
+  Add an environment(endpoint) to an environment(endpoint) group
 **Access policy**: administrator
 */
 func (a *Client) EndpointGroupAddEndpoint(params *EndpointGroupAddEndpointParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointGroupAddEndpointNoContent, error) {
@@ -90,9 +90,9 @@ func (a *Client) EndpointGroupAddEndpoint(params *EndpointGroupAddEndpointParams
 }
 
 /*
-  EndpointGroupDelete removes an endpoint group
+  EndpointGroupDelete removes an environment endpoint group
 
-  Remove an endpoint group.
+  Remove an environment(endpoint) group.
 **Access policy**: administrator
 */
 func (a *Client) EndpointGroupDelete(params *EndpointGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointGroupDeleteNoContent, error) {
@@ -132,7 +132,7 @@ func (a *Client) EndpointGroupDelete(params *EndpointGroupDeleteParams, authInfo
 }
 
 /*
-  EndpointGroupDeleteEndpoint removes endpoint from an endpoint group
+  EndpointGroupDeleteEndpoint removes environment endpoint from an environment endpoint group
 
   **Access policy**: administrator
 */
@@ -173,11 +173,11 @@ func (a *Client) EndpointGroupDeleteEndpoint(params *EndpointGroupDeleteEndpoint
 }
 
 /*
-  EndpointGroupList lists endpoint groups
+  EndpointGroupList lists environment endpoint groups
 
-  List all endpoint groups based on the current user authorizations. Will
-return all endpoint groups if using an administrator account otherwise it will
-only return authorized endpoint groups.
+  List all environment(endpoint) groups based on the current user authorizations. Will
+return all environment(endpoint) groups if using an administrator account otherwise it will
+only return authorized environment(endpoint) groups.
 **Access policy**: restricted
 */
 func (a *Client) EndpointGroupList(params *EndpointGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointGroupListOK, error) {
@@ -217,9 +217,9 @@ func (a *Client) EndpointGroupList(params *EndpointGroupListParams, authInfo run
 }
 
 /*
-  EndpointGroupUpdate updates an endpoint group
+  EndpointGroupUpdate updates an environment endpoint group
 
-  Update an endpoint group.
+  Update an environment(endpoint) group.
 **Access policy**: administrator
 */
 func (a *Client) EndpointGroupUpdate(params *EndpointGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointGroupUpdateOK, error) {
@@ -230,7 +230,7 @@ func (a *Client) EndpointGroupUpdate(params *EndpointGroupUpdateParams, authInfo
 	op := &runtime.ClientOperation{
 		ID:                 "EndpointGroupUpdate",
 		Method:             "PUT",
-		PathPattern:        "/endpoint_groups/:id",
+		PathPattern:        "/endpoint_groups/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -259,9 +259,9 @@ func (a *Client) EndpointGroupUpdate(params *EndpointGroupUpdateParams, authInfo
 }
 
 /*
-  GetEndpointGroupsID inspects an endpoint group
+  GetEndpointGroupsID inspects an environment endpoint group
 
-  Retrieve details abont an endpoint group.
+  Retrieve details abont an environment(endpoint) group.
 **Access policy**: administrator
 */
 func (a *Client) GetEndpointGroupsID(params *GetEndpointGroupsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEndpointGroupsIDOK, error) {
@@ -272,7 +272,7 @@ func (a *Client) GetEndpointGroupsID(params *GetEndpointGroupsIDParams, authInfo
 	op := &runtime.ClientOperation{
 		ID:                 "GetEndpointGroupsID",
 		Method:             "GET",
-		PathPattern:        "/endpoint_groups/:id",
+		PathPattern:        "/endpoint_groups/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -301,9 +301,9 @@ func (a *Client) GetEndpointGroupsID(params *GetEndpointGroupsIDParams, authInfo
 }
 
 /*
-  PostEndpointGroups creates an endpoint group
+  PostEndpointGroups creates an environment endpoint group
 
-  Create a new endpoint group.
+  Create a new environment(endpoint) group.
 **Access policy**: administrator
 */
 func (a *Client) PostEndpointGroups(params *PostEndpointGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEndpointGroupsOK, error) {

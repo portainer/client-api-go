@@ -70,7 +70,7 @@ type StackUpdateParams struct {
 
 	/* EndpointID.
 
-	   Stacks created before version 1.18.0 might not have an associated endpoint identifier. Use this optional parameter to set the endpoint identifier used by the stack.
+	   Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier. Use this optional parameter to set the environment(endpoint) identifier used by the stack.
 	*/
 	EndpointID *int64
 

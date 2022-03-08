@@ -72,7 +72,7 @@ type StackUpdateGitOK struct {
 }
 
 func (o *StackUpdateGitOK) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git][%d] stackUpdateGitOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitOK  %+v", 200, o.Payload)
 }
 func (o *StackUpdateGitOK) GetPayload() *models.PortainerStack {
 	return o.Payload
@@ -103,7 +103,7 @@ type StackUpdateGitBadRequest struct {
 }
 
 func (o *StackUpdateGitBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git][%d] stackUpdateGitBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitBadRequest ", 400)
 }
 
 func (o *StackUpdateGitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -124,7 +124,7 @@ type StackUpdateGitForbidden struct {
 }
 
 func (o *StackUpdateGitForbidden) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git][%d] stackUpdateGitForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitForbidden ", 403)
 }
 
 func (o *StackUpdateGitForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -145,7 +145,7 @@ type StackUpdateGitNotFound struct {
 }
 
 func (o *StackUpdateGitNotFound) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git][%d] stackUpdateGitNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitNotFound ", 404)
 }
 
 func (o *StackUpdateGitNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -166,7 +166,7 @@ type StackUpdateGitInternalServerError struct {
 }
 
 func (o *StackUpdateGitInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git][%d] stackUpdateGitInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitInternalServerError ", 500)
 }
 
 func (o *StackUpdateGitInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

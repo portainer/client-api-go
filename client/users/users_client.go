@@ -32,15 +32,23 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	UserAdminCheck(params *UserAdminCheckParams, opts ...ClientOption) (*UserAdminCheckNoContent, error)
 
+	UserAdminInit(params *UserAdminInitParams, opts ...ClientOption) (*UserAdminInitOK, error)
+
 	UserCreate(params *UserCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserCreateOK, error)
 
 	UserDelete(params *UserDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserDeleteNoContent, error)
+
+	UserGenerateAPIKey(params *UserGenerateAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGenerateAPIKeyCreated, error)
+
+	UserGetAPIKeys(params *UserGetAPIKeysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetAPIKeysOK, error)
 
 	UserInspect(params *UserInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserInspectOK, error)
 
 	UserList(params *UserListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserListOK, error)
 
 	UserMembershipsInspect(params *UserMembershipsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserMembershipsInspectOK, error)
+
+	UserRemoveAPIKey(params *UserRemoveAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserRemoveAPIKeyNoContent, error)
 
 	UserUpdate(params *UserUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdateOK, error)
 
@@ -87,6 +95,47 @@ func (a *Client) UserAdminCheck(params *UserAdminCheckParams, opts ...ClientOpti
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UserAdminCheck: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  UserAdminInit initializes administrator account
+
+  Initialize the 'admin' user account.
+**Access policy**: public
+*/
+func (a *Client) UserAdminInit(params *UserAdminInitParams, opts ...ClientOption) (*UserAdminInitOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserAdminInitParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserAdminInit",
+		Method:             "POST",
+		PathPattern:        "/users/admin/init",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserAdminInitReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserAdminInitOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserAdminInit: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -177,10 +226,97 @@ func (a *Client) UserDelete(params *UserDeleteParams, authInfo runtime.ClientAut
 }
 
 /*
+  UserGenerateAPIKey generates an API key for a user
+
+  Generates an API key for a user.
+Only the calling user can generate a token for themselves.
+**Access policy**: restricted
+*/
+func (a *Client) UserGenerateAPIKey(params *UserGenerateAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGenerateAPIKeyCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserGenerateAPIKeyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserGenerateAPIKey",
+		Method:             "POST",
+		PathPattern:        "/users/{id}/tokens",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserGenerateAPIKeyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserGenerateAPIKeyCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserGenerateAPIKey: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  UserGetAPIKeys gets all API keys for a user
+
+  Gets all API keys for a user.
+Only the calling user or admin can retrieve api-keys.
+**Access policy**: authenticated
+*/
+func (a *Client) UserGetAPIKeys(params *UserGetAPIKeysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetAPIKeysOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserGetAPIKeysParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserGetAPIKeys",
+		Method:             "GET",
+		PathPattern:        "/users/{id}/tokens",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserGetAPIKeysReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserGetAPIKeysOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserGetAPIKeys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
   UserInspect inspects a user
 
   Retrieve details about a user.
-**Access policy**: administrator
+User passwords are filtered out, and should never be accessible.
+**Access policy**: authenticated
 */
 func (a *Client) UserInspect(params *UserInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserInspectOK, error) {
 	// TODO: Validate the params before sending
@@ -223,6 +359,7 @@ func (a *Client) UserInspect(params *UserInspectParams, authInfo runtime.ClientA
 
   List Portainer users.
 Non-administrator users will only be able to list other non-administrator user accounts.
+User passwords are filtered out, and should never be accessible.
 **Access policy**: restricted
 */
 func (a *Client) UserList(params *UserListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserListOK, error) {
@@ -265,7 +402,7 @@ func (a *Client) UserList(params *UserListParams, authInfo runtime.ClientAuthInf
   UserMembershipsInspect inspects a user memberships
 
   Inspect a user memberships.
-**Access policy**: authenticated
+**Access policy**: restricted
 */
 func (a *Client) UserMembershipsInspect(params *UserMembershipsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserMembershipsInspectOK, error) {
 	// TODO: Validate the params before sending
@@ -300,6 +437,49 @@ func (a *Client) UserMembershipsInspect(params *UserMembershipsInspectParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UserMembershipsInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  UserRemoveAPIKey removes an api key associated to a user
+
+  Remove an api-key associated to a user..
+Only the calling user or admin can remove api-key.
+**Access policy**: authenticated
+*/
+func (a *Client) UserRemoveAPIKey(params *UserRemoveAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserRemoveAPIKeyNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserRemoveAPIKeyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserRemoveAPIKey",
+		Method:             "DELETE",
+		PathPattern:        "/users/{id}/tokens/{keyID}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserRemoveAPIKeyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserRemoveAPIKeyNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserRemoveAPIKey: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -34,6 +34,8 @@ type ClientService interface {
 
 	GetWebsocketExec(params *GetWebsocketExecParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketExecOK, error)
 
+	GetWebsocketKubernetesShell(params *GetWebsocketKubernetesShellParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketKubernetesShellOK, error)
+
 	GetWebsocketPod(params *GetWebsocketPodParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketPodOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -42,10 +44,10 @@ type ClientService interface {
 /*
   GetWebsocketAttach attaches a websocket
 
-  If the nodeName query parameter is present, the request will be proxied to the underlying agent endpoint.
+  If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).
 If the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and
 an AttachStart operation HTTP request will be created and hijacked.
-Authentication and access is controlled via the mandatory token query parameter.
+**Access policy**: authenticated
 */
 func (a *Client) GetWebsocketAttach(params *GetWebsocketAttachParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketAttachOK, error) {
 	// TODO: Validate the params before sending
@@ -86,10 +88,9 @@ func (a *Client) GetWebsocketAttach(params *GetWebsocketAttachParams, authInfo r
 /*
   GetWebsocketExec executes a websocket
 
-  If the nodeName query parameter is present, the request will be proxied to the underlying agent endpoint.
+  If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).
 If the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and
 an ExecStart operation HTTP request will be created and hijacked.
-Authentication and access is controlled via the mandatory token query parameter.
 */
 func (a *Client) GetWebsocketExec(params *GetWebsocketExecParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketExecOK, error) {
 	// TODO: Validate the params before sending
@@ -128,10 +129,52 @@ func (a *Client) GetWebsocketExec(params *GetWebsocketExecParams, authInfo runti
 }
 
 /*
+  GetWebsocketKubernetesShell executes a websocket on kubectl shell pod
+
+  The request will be upgraded to the websocket protocol. The request will proxy input from the client to the pod via long-lived websocket connection.
+**Access policy**: authenticated
+*/
+func (a *Client) GetWebsocketKubernetesShell(params *GetWebsocketKubernetesShellParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketKubernetesShellOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetWebsocketKubernetesShellParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetWebsocketKubernetesShell",
+		Method:             "GET",
+		PathPattern:        "/websocket/kubernetes-shell",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetWebsocketKubernetesShellReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetWebsocketKubernetesShellOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetWebsocketKubernetesShell: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
   GetWebsocketPod executes a websocket on pod
 
   The request will be upgraded to the websocket protocol.
-Authentication and access is controlled via the mandatory token query parameter.
+**Access policy**: authenticated
 */
 func (a *Client) GetWebsocketPod(params *GetWebsocketPodParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketPodOK, error) {
 	// TODO: Validate the params before sending

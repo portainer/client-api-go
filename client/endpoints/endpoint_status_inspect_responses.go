@@ -118,7 +118,7 @@ func NewEndpointStatusInspectForbidden() *EndpointStatusInspectForbidden {
 
 /* EndpointStatusInspectForbidden describes a response with status code 403, with default header values.
 
-Permission denied to access endpoint
+Permission denied to access environment(endpoint)
 */
 type EndpointStatusInspectForbidden struct {
 }
@@ -139,7 +139,7 @@ func NewEndpointStatusInspectNotFound() *EndpointStatusInspectNotFound {
 
 /* EndpointStatusInspectNotFound describes a response with status code 404, with default header values.
 
-Endpoint not found
+Environment(Endpoint) not found
 */
 type EndpointStatusInspectNotFound struct {
 }

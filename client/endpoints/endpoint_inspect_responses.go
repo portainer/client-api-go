@@ -112,7 +112,7 @@ func NewEndpointInspectNotFound() *EndpointInspectNotFound {
 
 /* EndpointInspectNotFound describes a response with status code 404, with default header values.
 
-Endpoint not found
+Environment(Endpoint) not found
 */
 type EndpointInspectNotFound struct {
 }

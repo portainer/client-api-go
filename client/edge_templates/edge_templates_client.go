@@ -30,28 +30,30 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetEdgeTemplates(params *GetEdgeTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeTemplatesOK, error)
+	EdgeTemplateList(params *EdgeTemplateListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeTemplateListOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  GetEdgeTemplates fetches the list of edge templates
+  EdgeTemplateList fetches the list of edge templates
+
+  **Access policy**: administrator
 */
-func (a *Client) GetEdgeTemplates(params *GetEdgeTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEdgeTemplatesOK, error) {
+func (a *Client) EdgeTemplateList(params *EdgeTemplateListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeTemplateListOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetEdgeTemplatesParams()
+		params = NewEdgeTemplateListParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetEdgeTemplates",
+		ID:                 "EdgeTemplateList",
 		Method:             "GET",
 		PathPattern:        "/edge_templates",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &GetEdgeTemplatesReader{formats: a.formats},
+		Reader:             &EdgeTemplateListReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -64,13 +66,13 @@ func (a *Client) GetEdgeTemplates(params *GetEdgeTemplatesParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetEdgeTemplatesOK)
+	success, ok := result.(*EdgeTemplateListOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetEdgeTemplates: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for EdgeTemplateList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

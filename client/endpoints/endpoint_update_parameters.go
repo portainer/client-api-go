@@ -64,13 +64,13 @@ type EndpointUpdateParams struct {
 
 	/* Body.
 
-	   Endpoint details
+	   Environment(Endpoint) details
 	*/
 	Body *models.EndpointsEndpointUpdatePayload
 
 	/* ID.
 
-	   Endpoint identifier
+	   Environment(Endpoint) identifier
 	*/
 	ID int64
 

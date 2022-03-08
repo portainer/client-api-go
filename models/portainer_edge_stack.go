@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -38,7 +39,7 @@ type PortainerEdgeStack struct {
 	// project path
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
-	// prune
+	// Deprecated
 	Prune bool `json:"Prune,omitempty"`
 
 	// status
@@ -46,6 +47,17 @@ type PortainerEdgeStack struct {
 
 	// version
 	Version int64 `json:"Version,omitempty"`
+
+	// Deployment type to deploy this stack
+	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
+	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+	// kubernetes deploytype is enabled only for kubernetes environments(endpoints)
+	// Example: 0
+	// Enum: [0 1]
+	DeploymentType int64 `json:"deploymentType,omitempty"`
+
+	// manifest path
+	ManifestPath string `json:"manifestPath,omitempty"`
 }
 
 // Validate validates this portainer edge stack
@@ -53,6 +65,10 @@ func (m *PortainerEdgeStack) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDeploymentType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -83,6 +99,39 @@ func (m *PortainerEdgeStack) validateStatus(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+var portainerEdgeStackTypeDeploymentTypePropEnum []interface{}
+
+func init() {
+	var res []int64
+	if err := json.Unmarshal([]byte(`[0,1]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		portainerEdgeStackTypeDeploymentTypePropEnum = append(portainerEdgeStackTypeDeploymentTypePropEnum, v)
+	}
+}
+
+// prop value enum
+func (m *PortainerEdgeStack) validateDeploymentTypeEnum(path, location string, value int64) error {
+	if err := validate.EnumCase(path, location, value, portainerEdgeStackTypeDeploymentTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PortainerEdgeStack) validateDeploymentType(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeploymentType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
+		return err
 	}
 
 	return nil

@@ -24,6 +24,9 @@ type PortainerWebhook struct {
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
+	// registry Id
+	RegistryID int64 `json:"RegistryId,omitempty"`
+
 	// resource Id
 	ResourceID string `json:"ResourceId,omitempty"`
 

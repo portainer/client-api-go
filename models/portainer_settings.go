@@ -19,27 +19,25 @@ import (
 // swagger:model portainer.Settings
 type PortainerSettings struct {
 
-	// Whether non-administrator should be able to use bind mounts when creating containers
-	// Example: false
+	// allow bind mounts for regular users
 	AllowBindMountsForRegularUsers bool `json:"AllowBindMountsForRegularUsers,omitempty"`
 
-	// Whether non-administrator should be able to use container capabilities
+	// allow container capabilities for regular users
 	AllowContainerCapabilitiesForRegularUsers bool `json:"AllowContainerCapabilitiesForRegularUsers,omitempty"`
 
-	// Whether non-administrator should be able to use device mapping
+	// allow device mapping for regular users
 	AllowDeviceMappingForRegularUsers bool `json:"AllowDeviceMappingForRegularUsers,omitempty"`
 
-	// Whether non-administrator should be able to use the host pid
+	// allow host namespace for regular users
 	AllowHostNamespaceForRegularUsers bool `json:"AllowHostNamespaceForRegularUsers,omitempty"`
 
-	// Whether non-administrator should be able to use privileged mode when creating containers
-	// Example: false
+	// allow privileged mode for regular users
 	AllowPrivilegedModeForRegularUsers bool `json:"AllowPrivilegedModeForRegularUsers,omitempty"`
 
-	// Whether non-administrator should be able to manage stacks
+	// allow stack management for regular users
 	AllowStackManagementForRegularUsers bool `json:"AllowStackManagementForRegularUsers,omitempty"`
 
-	// Whether non-administrator should be able to browse volumes
+	// allow volume browser for regular users
 	AllowVolumeBrowserForRegularUsers bool `json:"AllowVolumeBrowserForRegularUsers,omitempty"`
 
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
@@ -49,6 +47,10 @@ type PortainerSettings struct {
 	// A list of label name & value that will be used to hide containers when querying containers
 	BlackListedLabels []*PortainerPair `json:"BlackListedLabels"`
 
+	// DisableTrustOnFirstConnect makes Portainer require explicit user trust of the edge agent before accepting the connection
+	// Example: false
+	DisableTrustOnFirstConnect bool `json:"DisableTrustOnFirstConnect,omitempty"`
+
 	// The default check in interval for edge agent (in seconds)
 	// Example: 5
 	EdgeAgentCheckinInterval int64 `json:"EdgeAgentCheckinInterval,omitempty"`
@@ -56,12 +58,31 @@ type PortainerSettings struct {
 	// Whether edge compute features are enabled
 	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
 
-	// Whether host management features are enabled
+	// Deprecated fields v26
 	EnableHostManagementFeatures bool `json:"EnableHostManagementFeatures,omitempty"`
 
 	// Whether telemetry is enabled
 	// Example: false
 	EnableTelemetry bool `json:"EnableTelemetry,omitempty"`
+
+	// EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
+	// Example: false
+	EnforceEdgeID bool `json:"EnforceEdgeID,omitempty"`
+
+	// feature flag settings
+	FeatureFlagSettings map[string]bool `json:"FeatureFlagSettings,omitempty"`
+
+	// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
+	// Example: https://charts.bitnami.com/bitnami
+	HelmRepositoryURL string `json:"HelmRepositoryURL,omitempty"`
+
+	// The expiry of a Kubeconfig
+	// Example: 24h
+	KubeconfigExpiry string `json:"KubeconfigExpiry,omitempty"`
+
+	// KubectlImage, defaults to portainer/kubectl-shell
+	// Example: portainer/kubectl-shell
+	KubectlShellImage string `json:"KubectlShellImage,omitempty"`
 
 	// l d a p settings
 	LDAPSettings *PortainerLDAPSettings `json:"LDAPSettings,omitempty"`
@@ -73,7 +94,7 @@ type PortainerSettings struct {
 	// o auth settings
 	OAuthSettings *PortainerOAuthSettings `json:"OAuthSettings,omitempty"`
 
-	// The interval in which endpoint snapshots are created
+	// The interval in which environment(endpoint) snapshots are created
 	// Example: 5m
 	SnapshotInterval string `json:"SnapshotInterval,omitempty"`
 
@@ -90,6 +111,12 @@ type PortainerSettings struct {
 
 	// display external contributors
 	DisplayExternalContributors bool `json:"displayExternalContributors,omitempty"`
+
+	// fdo configuration
+	FdoConfiguration *PortainerFDOConfiguration `json:"fdoConfiguration,omitempty"`
+
+	// open a m t configuration
+	OpenAMTConfiguration *PortainerOpenAMTConfiguration `json:"openAMTConfiguration,omitempty"`
 }
 
 // Validate validates this portainer settings
@@ -105,6 +132,14 @@ func (m *PortainerSettings) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOAuthSettings(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFdoConfiguration(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOpenAMTConfiguration(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -178,6 +213,44 @@ func (m *PortainerSettings) validateOAuthSettings(formats strfmt.Registry) error
 	return nil
 }
 
+func (m *PortainerSettings) validateFdoConfiguration(formats strfmt.Registry) error {
+	if swag.IsZero(m.FdoConfiguration) { // not required
+		return nil
+	}
+
+	if m.FdoConfiguration != nil {
+		if err := m.FdoConfiguration.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("fdoConfiguration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("fdoConfiguration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainerSettings) validateOpenAMTConfiguration(formats strfmt.Registry) error {
+	if swag.IsZero(m.OpenAMTConfiguration) { // not required
+		return nil
+	}
+
+	if m.OpenAMTConfiguration != nil {
+		if err := m.OpenAMTConfiguration.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("openAMTConfiguration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("openAMTConfiguration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this portainer settings based on the context it is used
 func (m *PortainerSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -191,6 +264,14 @@ func (m *PortainerSettings) ContextValidate(ctx context.Context, formats strfmt.
 	}
 
 	if err := m.contextValidateOAuthSettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFdoConfiguration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOpenAMTConfiguration(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -244,6 +325,38 @@ func (m *PortainerSettings) contextValidateOAuthSettings(ctx context.Context, fo
 				return ve.ValidateName("OAuthSettings")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("OAuthSettings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainerSettings) contextValidateFdoConfiguration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.FdoConfiguration != nil {
+		if err := m.FdoConfiguration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("fdoConfiguration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("fdoConfiguration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainerSettings) contextValidateOpenAMTConfiguration(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.OpenAMTConfiguration != nil {
+		if err := m.OpenAMTConfiguration.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("openAMTConfiguration")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("openAMTConfiguration")
 			}
 			return err
 		}

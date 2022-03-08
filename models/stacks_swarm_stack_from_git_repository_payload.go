@@ -20,12 +20,23 @@ import (
 // swagger:model stacks.swarmStackFromGitRepositoryPayload
 type StacksSwarmStackFromGitRepositoryPayload struct {
 
+	// Applicable when deploying with multiple stack files
+	// Example: ["[nz.compose.yml"," uat.compose.yml]"]
+	AdditionalFiles []string `json:"additionalFiles"`
+
+	// Optional auto update configuration
+	AutoUpdate *PortainerStackAutoUpdate `json:"autoUpdate,omitempty"`
+
 	// Path to the Stack file inside the Git repository
 	// Example: docker-compose.yml
-	ComposeFilePathInRepository *string `json:"composeFilePathInRepository,omitempty"`
+	ComposeFile *string `json:"composeFile,omitempty"`
 
-	// A list of environment variables used during stack deployment
+	// A list of environment(endpoint) variables used during stack deployment
 	Env []*PortainerPair `json:"env"`
+
+	// Whether the stack is from a app template
+	// Example: false
+	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
 
 	// Name of the stack
 	// Example: myStack
@@ -63,6 +74,10 @@ type StacksSwarmStackFromGitRepositoryPayload struct {
 func (m *StacksSwarmStackFromGitRepositoryPayload) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAutoUpdate(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEnv(formats); err != nil {
 		res = append(res, err)
 	}
@@ -82,6 +97,25 @@ func (m *StacksSwarmStackFromGitRepositoryPayload) Validate(formats strfmt.Regis
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *StacksSwarmStackFromGitRepositoryPayload) validateAutoUpdate(formats strfmt.Registry) error {
+	if swag.IsZero(m.AutoUpdate) { // not required
+		return nil
+	}
+
+	if m.AutoUpdate != nil {
+		if err := m.AutoUpdate.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("autoUpdate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("autoUpdate")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -142,6 +176,10 @@ func (m *StacksSwarmStackFromGitRepositoryPayload) validateSwarmID(formats strfm
 func (m *StacksSwarmStackFromGitRepositoryPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAutoUpdate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEnv(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -149,6 +187,22 @@ func (m *StacksSwarmStackFromGitRepositoryPayload) ContextValidate(ctx context.C
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *StacksSwarmStackFromGitRepositoryPayload) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AutoUpdate != nil {
+		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("autoUpdate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("autoUpdate")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

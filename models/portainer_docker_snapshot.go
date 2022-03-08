@@ -30,6 +30,9 @@ type PortainerDockerSnapshot struct {
 	// image count
 	ImageCount int64 `json:"ImageCount,omitempty"`
 
+	// node count
+	NodeCount int64 `json:"NodeCount,omitempty"`
+
 	// running container count
 	RunningContainerCount int64 `json:"RunningContainerCount,omitempty"`
 

@@ -41,7 +41,7 @@ type ClientService interface {
   TemplateFile gets a template s file
 
   Get a template's file
-**Access policy**: restricted
+**Access policy**: authenticated
 */
 func (a *Client) TemplateFile(params *TemplateFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TemplateFileOK, error) {
 	// TODO: Validate the params before sending
@@ -83,7 +83,7 @@ func (a *Client) TemplateFile(params *TemplateFileParams, authInfo runtime.Clien
   TemplateList lists available templates
 
   List available templates.
-**Access policy**: restricted
+**Access policy**: authenticated
 */
 func (a *Client) TemplateList(params *TemplateListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TemplateListOK, error) {
 	// TODO: Validate the params before sending

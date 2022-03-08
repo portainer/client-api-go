@@ -41,8 +41,8 @@ type EndpointsEndpointUpdatePayload struct {
 	// Associated Kubernetes data
 	Kubernetes *PortainerKubernetesData `json:"kubernetes,omitempty"`
 
-	// Name that will be used to identify this endpoint
-	// Example: my-endpoint
+	// Name that will be used to identify this environment(endpoint)
+	// Example: my-environment
 	Name string `json:"name,omitempty"`
 
 	// URL or IP address where exposed containers will be reachable.\
@@ -50,18 +50,18 @@ type EndpointsEndpointUpdatePayload struct {
 	// Example: docker.mydomain.tld:2375
 	PublicURL string `json:"publicURL,omitempty"`
 
-	// The status of the endpoint (1 - up, 2 - down)
+	// The status of the environment(endpoint) (1 - up, 2 - down)
 	// Example: 1
 	Status int64 `json:"status,omitempty"`
 
-	// List of tag identifiers to which this endpoint is associated
+	// List of tag identifiers to which this environment(endpoint) is associated
 	// Example: [1,2]
 	TagIDs []int64 `json:"tagIDs"`
 
 	// team access policies
 	TeamAccessPolicies PortainerTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
 
-	// Require TLS to connect against this endpoint
+	// Require TLS to connect against this environment(endpoint)
 	// Example: true
 	TLS bool `json:"tls,omitempty"`
 
@@ -79,6 +79,9 @@ type EndpointsEndpointUpdatePayload struct {
 
 	// user access policies
 	UserAccessPolicies PortainerUserAccessPolicies `json:"userAccessPolicies,omitempty"`
+
+	// Whether the device has been trusted or not by the user
+	UserTrusted bool `json:"userTrusted,omitempty"`
 }
 
 // Validate validates this endpoints endpoint update payload

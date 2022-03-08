@@ -47,7 +47,7 @@ type ClientService interface {
   TeamMembershipCreate creates a new team membership
 
   Create a new team memberships. Access is only available to administrators leaders of the associated team.
-**Access policy**: admin
+**Access policy**: administrator
 */
 func (a *Client) TeamMembershipCreate(params *TeamMembershipCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipCreateOK, *TeamMembershipCreateNoContent, error) {
 	// TODO: Validate the params before sending
@@ -90,7 +90,7 @@ func (a *Client) TeamMembershipCreate(params *TeamMembershipCreateParams, authIn
   TeamMembershipDelete removes a team membership
 
   Remove a team membership. Access is only available to administrators leaders of the associated team.
-**Access policy**: restricted
+**Access policy**: administrator
 */
 func (a *Client) TeamMembershipDelete(params *TeamMembershipDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -132,7 +132,7 @@ func (a *Client) TeamMembershipDelete(params *TeamMembershipDeleteParams, authIn
   TeamMembershipList lists team memberships
 
   List team memberships. Access is only available to administrators and team leaders.
-**Access policy**: admin
+**Access policy**: administrator
 */
 func (a *Client) TeamMembershipList(params *TeamMembershipListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipListOK, error) {
 	// TODO: Validate the params before sending
@@ -174,7 +174,7 @@ func (a *Client) TeamMembershipList(params *TeamMembershipListParams, authInfo r
   TeamMembershipUpdate updates a team membership
 
   Update a team membership. Access is only available to administrators leaders of the associated team.
-**Access policy**: restricted
+**Access policy**: administrator
 */
 func (a *Client) TeamMembershipUpdate(params *TeamMembershipUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipUpdateOK, error) {
 	// TODO: Validate the params before sending

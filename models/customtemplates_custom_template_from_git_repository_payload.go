@@ -39,10 +39,10 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 
 	// Platform associated to the template.
 	// Valid values are: 1 - 'linux', 2 - 'windows'
+	// Required for Docker stacks
 	// Example: 1
-	// Required: true
 	// Enum: [1 2]
-	Platform *int64 `json:"platform"`
+	Platform int64 `json:"platform,omitempty"`
 
 	// Use basic authentication to clone the Git repository
 	// Example: true
@@ -137,13 +137,12 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validatePlatform
 }
 
 func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validatePlatform(formats strfmt.Registry) error {
-
-	if err := validate.Required("platform", "body", m.Platform); err != nil {
-		return err
+	if swag.IsZero(m.Platform) { // not required
+		return nil
 	}
 
 	// value enum
-	if err := m.validatePlatformEnum("platform", "body", *m.Platform); err != nil {
+	if err := m.validatePlatformEnum("platform", "body", m.Platform); err != nil {
 		return err
 	}
 

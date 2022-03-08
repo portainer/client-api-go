@@ -62,7 +62,7 @@ type StackDeleteParams struct {
 
 	/* EndpointID.
 
-	   Endpoint identifier used to remove an external stack (required when external is set to true)
+	   Environment(Endpoint) identifier used to remove an external stack (required when external is set to true)
 	*/
 	EndpointID *int64
 
