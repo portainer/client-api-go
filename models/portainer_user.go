@@ -33,6 +33,10 @@ type PortainerUser struct {
 	// Example: 1
 	Role int64 `json:"Role,omitempty"`
 
+	// token issue at
+	// Example: 1
+	TokenIssueAt int64 `json:"TokenIssueAt,omitempty"`
+
 	// username
 	// Example: bob
 	Username string `json:"Username,omitempty"`

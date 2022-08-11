@@ -143,8 +143,7 @@ func (a *Client) UserAdminInit(params *UserAdminInitParams, opts ...ClientOption
   UserCreate creates a new user
 
   Create a new Portainer user.
-Only team leaders and administrators can create users.
-Only administrators can create an administrator user account.
+Only administrators can create users.
 **Access policy**: restricted
 */
 func (a *Client) UserCreate(params *UserCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserCreateOK, error) {

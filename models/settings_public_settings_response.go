@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -44,6 +45,17 @@ type SettingsPublicSettingsResponse struct {
 	// Example: https://gitlab.com/oauth/logout
 	OAuthLogoutURI string `json:"OAuthLogoutURI,omitempty"`
 
+	// The minimum required length for a password of any user when using internal auth mode
+	// Example: 1
+	RequiredPasswordLength int64 `json:"RequiredPasswordLength,omitempty"`
+
+	// Whether team sync is enabled
+	// Example: true
+	TeamSync bool `json:"TeamSync,omitempty"`
+
+	// edge
+	Edge *SettingsPublicSettingsResponseEdge `json:"edge,omitempty"`
+
 	// The expiry of a Kubeconfig
 	// Example: 24h
 	KubeconfigExpiry *string `json:"kubeconfigExpiry,omitempty"`
@@ -51,11 +63,64 @@ type SettingsPublicSettingsResponse struct {
 
 // Validate validates this settings public settings response
 func (m *SettingsPublicSettingsResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateEdge(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this settings public settings response based on context it is used
+func (m *SettingsPublicSettingsResponse) validateEdge(formats strfmt.Registry) error {
+	if swag.IsZero(m.Edge) { // not required
+		return nil
+	}
+
+	if m.Edge != nil {
+		if err := m.Edge.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this settings public settings response based on the context it is used
 func (m *SettingsPublicSettingsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateEdge(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SettingsPublicSettingsResponse) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Edge != nil {
+		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -70,6 +135,59 @@ func (m *SettingsPublicSettingsResponse) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *SettingsPublicSettingsResponse) UnmarshalBinary(b []byte) error {
 	var res SettingsPublicSettingsResponse
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// SettingsPublicSettingsResponseEdge settings public settings response edge
+//
+// swagger:model SettingsPublicSettingsResponseEdge
+type SettingsPublicSettingsResponseEdge struct {
+
+	// The command list interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	CommandInterval int64 `json:"CommandInterval,omitempty"`
+
+	// The ping interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	PingInterval int64 `json:"PingInterval,omitempty"`
+
+	// The snapshot interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
+
+	// Whether the device has been started in edge async mode
+	AsyncMode bool `json:"asyncMode,omitempty"`
+
+	// The check in interval for edge agent (in seconds) - used in non async mode [seconds]
+	// Example: 60
+	CheckinInterval int64 `json:"checkinInterval,omitempty"`
+}
+
+// Validate validates this settings public settings response edge
+func (m *SettingsPublicSettingsResponseEdge) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this settings public settings response edge based on context it is used
+func (m *SettingsPublicSettingsResponseEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SettingsPublicSettingsResponseEdge) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SettingsPublicSettingsResponseEdge) UnmarshalBinary(b []byte) error {
+	var res SettingsPublicSettingsResponseEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -19,7 +18,7 @@ import (
 type PortainerDockerSnapshot struct {
 
 	// docker snapshot raw
-	DockerSnapshotRaw *PortainerDockerSnapshotRaw `json:"DockerSnapshotRaw,omitempty"`
+	DockerSnapshotRaw PortainerDockerSnapshotRaw `json:"DockerSnapshotRaw,omitempty"`
 
 	// docker version
 	DockerVersion string `json:"DockerVersion,omitempty"`
@@ -66,64 +65,11 @@ type PortainerDockerSnapshot struct {
 
 // Validate validates this portainer docker snapshot
 func (m *PortainerDockerSnapshot) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateDockerSnapshotRaw(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *PortainerDockerSnapshot) validateDockerSnapshotRaw(formats strfmt.Registry) error {
-	if swag.IsZero(m.DockerSnapshotRaw) { // not required
-		return nil
-	}
-
-	if m.DockerSnapshotRaw != nil {
-		if err := m.DockerSnapshotRaw.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("DockerSnapshotRaw")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("DockerSnapshotRaw")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this portainer docker snapshot based on the context it is used
+// ContextValidate validates this portainer docker snapshot based on context it is used
 func (m *PortainerDockerSnapshot) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateDockerSnapshotRaw(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PortainerDockerSnapshot) contextValidateDockerSnapshotRaw(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.DockerSnapshotRaw != nil {
-		if err := m.DockerSnapshotRaw.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("DockerSnapshotRaw")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("DockerSnapshotRaw")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

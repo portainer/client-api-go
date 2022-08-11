@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -40,11 +41,12 @@ type ResourcecontrolsResourceControlCreatePayload struct {
 	// Example: [56,7]
 	Teams []int64 `json:"teams"`
 
-	// Type of Docker resource. Valid values are: container, volume\
-	// service, secret, config or stack
-	// Example: container
+	// Type of Resource. Valid values are: 1 - container, 2 - service
+	// 3 - volume, 4 - network, 5 - secret, 6 - stack, 7 - config, 8 - custom template, 9 - azure-container-group
+	// Example: 1
 	// Required: true
-	Type *string `json:"type"`
+	// Enum: [1 2 3 4 5 6 7 8 9]
+	Type *int64 `json:"type"`
 
 	// List of user identifiers with access to the associated resource
 	// Example: [1,4]
@@ -78,9 +80,34 @@ func (m *ResourcecontrolsResourceControlCreatePayload) validateResourceID(format
 	return nil
 }
 
+var resourcecontrolsResourceControlCreatePayloadTypeTypePropEnum []interface{}
+
+func init() {
+	var res []int64
+	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7,8,9]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		resourcecontrolsResourceControlCreatePayloadTypeTypePropEnum = append(resourcecontrolsResourceControlCreatePayloadTypeTypePropEnum, v)
+	}
+}
+
+// prop value enum
+func (m *ResourcecontrolsResourceControlCreatePayload) validateTypeEnum(path, location string, value int64) error {
+	if err := validate.EnumCase(path, location, value, resourcecontrolsResourceControlCreatePayloadTypeTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (m *ResourcecontrolsResourceControlCreatePayload) validateType(formats strfmt.Registry) error {
 
 	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

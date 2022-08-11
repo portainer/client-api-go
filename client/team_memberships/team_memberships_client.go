@@ -173,8 +173,8 @@ func (a *Client) TeamMembershipList(params *TeamMembershipListParams, authInfo r
 /*
   TeamMembershipUpdate updates a team membership
 
-  Update a team membership. Access is only available to administrators leaders of the associated team.
-**Access policy**: administrator
+  Update a team membership. Access is only available to administrators or leaders of the associated team.
+**Access policy**: administrator or leaders of the associated team
 */
 func (a *Client) TeamMembershipUpdate(params *TeamMembershipUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipUpdateOK, error) {
 	// TODO: Validate the params before sending

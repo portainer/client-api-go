@@ -19,16 +19,15 @@ import (
 // swagger:model settings.settingsUpdatePayload
 type SettingsSettingsUpdatePayload struct {
 
+	// EdgePortainerURL is the URL that is exposed to edge agents
+	EdgePortainerURL string `json:"EdgePortainerURL,omitempty"`
+
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
 	AuthenticationMethod int64 `json:"authenticationMethod,omitempty"`
 
 	// A list of label name & value that will be used to hide containers when querying containers
 	BlackListedLabels []*PortainerPair `json:"blackListedLabels"`
-
-	// DisableTrustOnFirstConnect makes Portainer require explicit user trust of the edge agent before accepting the connection
-	// Example: false
-	DisableTrustOnFirstConnect bool `json:"disableTrustOnFirstConnect,omitempty"`
 
 	// The default check in interval for edge agent (in seconds)
 	// Example: 5
@@ -49,6 +48,9 @@ type SettingsSettingsUpdatePayload struct {
 	// Helm repository URL
 	// Example: https://charts.bitnami.com/bitnami
 	HelmRepositoryURL string `json:"helmRepositoryURL,omitempty"`
+
+	// internal auth settings
+	InternalAuthSettings *PortainerInternalAuthSettings `json:"internalAuthSettings,omitempty"`
 
 	// The expiry of a Kubeconfig
 	// Example: 24h
@@ -76,6 +78,10 @@ type SettingsSettingsUpdatePayload struct {
 	// Example: https://raw.githubusercontent.com/portainer/templates/master/templates.json
 	TemplatesURL string `json:"templatesURL,omitempty"`
 
+	// TrustOnFirstConnect makes Portainer accepting edge agent connection by default
+	// Example: false
+	TrustOnFirstConnect bool `json:"trustOnFirstConnect,omitempty"`
+
 	// The duration of a user session
 	// Example: 5m
 	UserSessionTimeout string `json:"userSessionTimeout,omitempty"`
@@ -86,6 +92,10 @@ func (m *SettingsSettingsUpdatePayload) Validate(formats strfmt.Registry) error 
 	var res []error
 
 	if err := m.validateBlackListedLabels(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInternalAuthSettings(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -124,6 +134,25 @@ func (m *SettingsSettingsUpdatePayload) validateBlackListedLabels(formats strfmt
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *SettingsSettingsUpdatePayload) validateInternalAuthSettings(formats strfmt.Registry) error {
+	if swag.IsZero(m.InternalAuthSettings) { // not required
+		return nil
+	}
+
+	if m.InternalAuthSettings != nil {
+		if err := m.InternalAuthSettings.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("internalAuthSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("internalAuthSettings")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -175,6 +204,10 @@ func (m *SettingsSettingsUpdatePayload) ContextValidate(ctx context.Context, for
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInternalAuthSettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLdapsettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -204,6 +237,22 @@ func (m *SettingsSettingsUpdatePayload) contextValidateBlackListedLabels(ctx con
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *SettingsSettingsUpdatePayload) contextValidateInternalAuthSettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InternalAuthSettings != nil {
+		if err := m.InternalAuthSettings.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("internalAuthSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("internalAuthSettings")
+			}
+			return err
+		}
 	}
 
 	return nil

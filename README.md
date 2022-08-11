@@ -13,7 +13,7 @@ Follow the steps below to generate Client APIs based on our `swagger.yaml` in Go
 
 ```sh
 go mod init github.com/portainer/client-api
-swagger generate client -f swagger.yaml -A portainer-client-api --principal portainer --skip-validation
+swagger generate client -f swagger.yaml -A portainer-client-api --principal portainer
 go get -u ./...
 ```
 
