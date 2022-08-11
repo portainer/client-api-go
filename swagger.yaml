@@ -82,6 +82,11 @@ definitions:
         - 3
         example: 1
         type: integer
+      variables:
+        description: Definitions of variables in the stack file
+        items:
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
+        type: array
     required:
     - description
     - fileContent
@@ -150,6 +155,11 @@ definitions:
         - 2
         example: 1
         type: integer
+      variables:
+        description: Definitions of variables in the stack file
+        items:
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
+        type: array
     required:
     - description
     - repositoryURL
@@ -195,6 +205,11 @@ definitions:
         - 3
         example: 1
         type: integer
+      variables:
+        description: Definitions of variables in the stack file
+        items:
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
+        type: array
     required:
     - description
     - fileContent
@@ -205,6 +220,20 @@ definitions:
     properties:
       fileContent:
         type: string
+    type: object
+  demo.EnvironmentDetails:
+    properties:
+      enabled:
+        type: boolean
+      environments:
+        items:
+          type: integer
+        type: array
+      users:
+        items:
+          example: 1
+          type: integer
+        type: array
     type: object
   edgegroups.decoratedEdgeGroup:
     properties:
@@ -500,6 +529,67 @@ definitions:
       stackFileContent:
         type: string
     type: object
+  endpointedge.edgeJobResponse:
+    properties:
+      CollectLogs:
+        description: Whether to collect logs
+        example: true
+        type: boolean
+      CronExpression:
+        description: A cron expression to schedule this job
+        example: '* * * * *'
+        type: string
+      Id:
+        description: EdgeJob Identifier
+        example: 2
+        type: integer
+      Script:
+        description: Script to run
+        example: echo hello
+        type: string
+      Version:
+        description: Version of this EdgeJob
+        example: 2
+        type: integer
+    type: object
+  endpointedge.endpointEdgeStatusInspectResponse:
+    properties:
+      checkin:
+        description: The current value of CheckinInterval
+        example: 5
+        type: integer
+      credentials:
+        type: string
+      port:
+        description: The tunnel port
+        example: 8732
+        type: integer
+      schedules:
+        description: List of requests for jobs to run on the environment(endpoint)
+        items:
+          $ref: '#/definitions/endpointedge.edgeJobResponse'
+        type: array
+      stacks:
+        description: List of stacks to be deployed on the environments(endpoints)
+        items:
+          $ref: '#/definitions/endpointedge.stackStatusResponse'
+        type: array
+      status:
+        description: Status represents the environment(endpoint) status
+        example: REQUIRED
+        type: string
+    type: object
+  endpointedge.stackStatusResponse:
+    properties:
+      id:
+        description: EdgeStack Identifier
+        example: 1
+        type: integer
+      version:
+        description: Version of this stack
+        example: 3
+        type: integer
+    type: object
   endpointgroups.endpointGroupCreatePayload:
     properties:
       associatedEndpoints:
@@ -568,27 +658,9 @@ definitions:
         description: Remaiming images to pull
         type: integer
     type: object
-  endpoints.edgeJobResponse:
+  endpoints.endpointCreateGlobalKeyResponse:
     properties:
-      CollectLogs:
-        description: Whether to collect logs
-        example: true
-        type: boolean
-      CronExpression:
-        description: A cron expression to schedule this job
-        example: '* * * * *'
-        type: string
-      Id:
-        description: EdgeJob Identifier
-        example: 2
-        type: integer
-      Script:
-        description: Script to run
-        example: echo hello
-        type: string
-      Version:
-        description: Version of this EdgeJob
-        example: 2
+      endpointID:
         type: integer
     type: object
   endpoints.endpointSettingsUpdatePayload:
@@ -631,33 +703,6 @@ definitions:
         description: Whether host management features are enabled
         example: true
         type: boolean
-    type: object
-  endpoints.endpointStatusInspectResponse:
-    properties:
-      checkin:
-        description: The current value of CheckinInterval
-        example: 5
-        type: integer
-      credentials:
-        type: string
-      port:
-        description: The tunnel port
-        example: 8732
-        type: integer
-      schedules:
-        description: List of requests for jobs to run on the environment(endpoint)
-        items:
-          $ref: '#/definitions/endpoints.edgeJobResponse'
-        type: array
-      stacks:
-        description: List of stacks to be deployed on the environments(endpoints)
-        items:
-          $ref: '#/definitions/endpoints.stackStatusResponse'
-        type: array
-      status:
-        description: Status represents the environment(endpoint) status
-        example: REQUIRED
-        type: string
     type: object
   endpoints.endpointUpdatePayload:
     properties:
@@ -729,9 +774,6 @@ definitions:
         type: string
       userAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
-      userTrusted:
-        description: Whether the device has been trusted or not by the user
-        type: boolean
     type: object
   endpoints.registryAccessPayload:
     properties:
@@ -743,17 +785,6 @@ definitions:
         $ref: '#/definitions/portainer.TeamAccessPolicies'
       userAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
-    type: object
-  endpoints.stackStatusResponse:
-    properties:
-      id:
-        description: EdgeStack Identifier
-        example: 1
-        type: integer
-      version:
-        description: Version of this stack
-        example: 3
-        type: integer
     type: object
   fdo.deviceConfigurePayload:
     properties:
@@ -993,6 +1024,25 @@ definitions:
         description: Type of created stack (1 - swarm, 2 - compose)
         example: 1
         type: integer
+      variables:
+        items:
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
+        type: array
+    type: object
+  portainer.CustomTemplateVariableDefinition:
+    properties:
+      defaultValue:
+        example: default value
+        type: string
+      description:
+        example: Description
+        type: string
+      label:
+        example: My Variable
+        type: string
+      name:
+        example: MY_VAR
+        type: string
     type: object
   portainer.DockerSnapshot:
     properties:
@@ -1028,13 +1078,6 @@ definitions:
         type: integer
     type: object
   portainer.DockerSnapshotRaw:
-    properties:
-      Containers: {}
-      Images: {}
-      Info: {}
-      Networks: {}
-      Version: {}
-      Volumes: {}
     type: object
   portainer.EcrData:
     properties:
@@ -1181,10 +1224,6 @@ definitions:
       EdgeKey:
         description: The key which is used to map the agent to Portainer
         type: string
-      Extensions:
-        items:
-          $ref: '#/definitions/portainer.EndpointExtension'
-        type: array
       GroupId:
         description: Environment(Endpoint) group identifier
         example: 1
@@ -1255,11 +1294,35 @@ definitions:
       UserAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
         description: List of user identifiers authorized to connect to this environment(endpoint)
+      edge:
+        properties:
+          CommandInterval:
+            description: The command list interval for edge agent - used in edge async
+              mode [seconds]
+            example: 60
+            type: integer
+          PingInterval:
+            description: The ping interval for edge agent - used in edge async mode
+              [seconds]
+            example: 60
+            type: integer
+          SnapshotInterval:
+            description: The snapshot interval for edge agent - used in edge async
+              mode [seconds]
+            example: 60
+            type: integer
+          asyncMode:
+            description: Whether the device has been started in edge async mode
+            type: boolean
+        type: object
       isEdgeDevice:
         description: IsEdgeDevice marks if the environment was created as an EdgeDevice
         type: boolean
       lastCheckInDate:
         description: LastCheckInDate mark last check-in date on checkin
+        type: integer
+      queryDate:
+        description: QueryDate of each query with the endpoints list
         type: integer
       securitySettings:
         $ref: '#/definitions/portainer.EndpointSecuritySettings'
@@ -1271,13 +1334,6 @@ definitions:
   portainer.EndpointAuthorizations:
     additionalProperties:
       $ref: '#/definitions/portainer.Authorizations'
-    type: object
-  portainer.EndpointExtension:
-    properties:
-      Type:
-        type: integer
-      URL:
-        type: string
     type: object
   portainer.EndpointGroup:
     properties:
@@ -1401,6 +1457,11 @@ definitions:
       UserId:
         description: User identifier
         example: 1
+        type: integer
+    type: object
+  portainer.InternalAuthSettings:
+    properties:
+      requiredPasswordLength:
         type: integer
     type: object
   portainer.K8sNodeLimits:
@@ -1824,6 +1885,9 @@ definitions:
     type: object
   portainer.Settings:
     properties:
+      AgentSecret:
+        description: Container environment parameter AGENT_SECRET
+        type: string
       AllowBindMountsForRegularUsers:
         type: boolean
       AllowContainerCapabilitiesForRegularUsers:
@@ -1849,15 +1913,13 @@ definitions:
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
-      DisableTrustOnFirstConnect:
-        description: DisableTrustOnFirstConnect makes Portainer require explicit user
-          trust of the edge agent before accepting the connection
-        example: false
-        type: boolean
       EdgeAgentCheckinInterval:
         description: The default check in interval for edge agent (in seconds)
         example: 5
         type: integer
+      EdgePortainerUrl:
+        description: EdgePortainerURL is the URL that is exposed to edge agents
+        type: string
       EnableEdgeComputeFeatures:
         description: Whether edge compute features are enabled
         type: boolean
@@ -1881,6 +1943,8 @@ definitions:
         description: Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
         example: https://charts.bitnami.com/bitnami
         type: string
+      InternalAuthSettings:
+        $ref: '#/definitions/portainer.InternalAuthSettings'
       KubeconfigExpiry:
         description: The expiry of a Kubeconfig
         example: 24h
@@ -1908,6 +1972,11 @@ definitions:
           to App Templates
         example: https://raw.githubusercontent.com/portainer/templates/master/templates.json
         type: string
+      TrustOnFirstConnect:
+        description: TrustOnFirstConnect makes Portainer accepting edge agent connection
+          by default
+        example: false
+        type: boolean
       UserSessionTimeout:
         description: The duration of a user session
         example: 5m
@@ -1917,6 +1986,27 @@ definitions:
         type: boolean
       displayExternalContributors:
         type: boolean
+      edge:
+        properties:
+          CommandInterval:
+            description: The command list interval for edge agent - used in edge async
+              mode (in seconds)
+            example: 5
+            type: integer
+          PingInterval:
+            description: The ping interval for edge agent - used in edge async mode
+              (in seconds)
+            example: 5
+            type: integer
+          SnapshotInterval:
+            description: The snapshot interval for edge agent - used in edge async
+              mode (in seconds)
+            example: 5
+            type: integer
+          asyncMode:
+            description: EdgeAsyncMode enables edge async mode by default
+            type: boolean
+        type: object
       fdoConfiguration:
         $ref: '#/definitions/portainer.FDOConfiguration'
       openAMTConfiguration:
@@ -2018,17 +2108,6 @@ definitions:
       webhook:
         description: A UUID generated from client
         example: 05de31a2-79fa-4644-9c12-faa67e5c49f0
-        type: string
-    type: object
-  portainer.Status:
-    properties:
-      Version:
-        description: Portainer API version
-        example: 2.0.0
-        type: string
-      instanceID:
-        description: Server Instance ID
-        example: 299ab403-70a8-4c05-92f7-bf7a994d50df
         type: string
     type: object
   portainer.TLSConfiguration:
@@ -2326,6 +2405,9 @@ definitions:
           Deprecated in DBVersion == 25
       Role:
         description: User role (1 for administrator account and 2 for regular account)
+        example: 1
+        type: integer
+      TokenIssueAt:
         example: 1
         type: integer
       Username:
@@ -2810,10 +2892,20 @@ definitions:
         type: array
       type:
         description: |-
-          Type of Docker resource. Valid values are: container, volume\
-          service, secret, config or stack
-        example: container
-        type: string
+          Type of Resource. Valid values are: 1 - container, 2 - service
+          3 - volume, 4 - network, 5 - secret, 6 - stack, 7 - config, 8 - custom template, 9 - azure-container-group
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        example: 1
+        type: integer
       users:
         description: List of user identifiers with access to the associated resource
         example:
@@ -2885,6 +2977,41 @@ definitions:
         description: The URL used for oauth logout
         example: https://gitlab.com/oauth/logout
         type: string
+      RequiredPasswordLength:
+        description: The minimum required length for a password of any user when using
+          internal auth mode
+        example: 1
+        type: integer
+      TeamSync:
+        description: Whether team sync is enabled
+        example: true
+        type: boolean
+      edge:
+        properties:
+          CommandInterval:
+            description: The command list interval for edge agent - used in edge async
+              mode [seconds]
+            example: 60
+            type: integer
+          PingInterval:
+            description: The ping interval for edge agent - used in edge async mode
+              [seconds]
+            example: 60
+            type: integer
+          SnapshotInterval:
+            description: The snapshot interval for edge agent - used in edge async
+              mode [seconds]
+            example: 60
+            type: integer
+          asyncMode:
+            description: Whether the device has been started in edge async mode
+            type: boolean
+          checkinInterval:
+            description: The check in interval for edge agent (in seconds) - used
+              in non async mode [seconds]
+            example: 60
+            type: integer
+        type: object
       kubeconfigExpiry:
         default: "0"
         description: The expiry of a Kubeconfig
@@ -2893,6 +3020,9 @@ definitions:
     type: object
   settings.settingsUpdatePayload:
     properties:
+      EdgePortainerURL:
+        description: EdgePortainerURL is the URL that is exposed to edge agents
+        type: string
       authenticationMethod:
         description: 'Active authentication method for the Portainer instance. Valid
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
@@ -2904,11 +3034,6 @@ definitions:
         items:
           $ref: '#/definitions/portainer.Pair'
         type: array
-      disableTrustOnFirstConnect:
-        description: DisableTrustOnFirstConnect makes Portainer require explicit user
-          trust of the edge agent before accepting the connection
-        example: false
-        type: boolean
       edgeAgentCheckinInterval:
         description: The default check in interval for edge agent (in seconds)
         example: 5
@@ -2930,6 +3055,8 @@ definitions:
         description: Helm repository URL
         example: https://charts.bitnami.com/bitnami
         type: string
+      internalAuthSettings:
+        $ref: '#/definitions/portainer.InternalAuthSettings'
       kubeconfigExpiry:
         default: "0"
         description: The expiry of a Kubeconfig
@@ -2958,6 +3085,11 @@ definitions:
           to App Templates
         example: https://raw.githubusercontent.com/portainer/templates/master/templates.json
         type: string
+      trustOnFirstConnect:
+        description: TrustOnFirstConnect makes Portainer accepting edge agent connection
+          by default
+        example: false
+        type: boolean
       userSessionTimeout:
         description: The duration of a user session
         example: 5m
@@ -3055,55 +3187,6 @@ definitions:
     required:
     - name
     - repositoryURL
-    type: object
-  stacks.kubernetesGitDeploymentPayload:
-    properties:
-      additionalFiles:
-        items:
-          type: string
-        type: array
-      autoUpdate:
-        $ref: '#/definitions/portainer.StackAutoUpdate'
-      composeFormat:
-        type: boolean
-      manifestFile:
-        type: string
-      namespace:
-        type: string
-      repositoryAuthentication:
-        type: boolean
-      repositoryPassword:
-        type: string
-      repositoryReferenceName:
-        type: string
-      repositoryURL:
-        type: string
-      repositoryUsername:
-        type: string
-      stackName:
-        type: string
-    type: object
-  stacks.kubernetesManifestURLDeploymentPayload:
-    properties:
-      composeFormat:
-        type: boolean
-      manifestURL:
-        type: string
-      namespace:
-        type: string
-      stackName:
-        type: string
-    type: object
-  stacks.kubernetesStringDeploymentPayload:
-    properties:
-      composeFormat:
-        type: boolean
-      namespace:
-        type: string
-      stackFileContent:
-        type: string
-      stackName:
-        type: string
     type: object
   stacks.stackFileResponse:
     properties:
@@ -3293,6 +3376,19 @@ definitions:
         example: false
         type: boolean
     type: object
+  status.status:
+    properties:
+      Version:
+        description: Portainer API version
+        example: 2.0.0
+        type: string
+      demoEnvironment:
+        $ref: '#/definitions/demo.EnvironmentDetails'
+      instanceID:
+        description: Server Instance ID
+        example: 299ab403-70a8-4c05-92f7-bf7a994d50df
+        type: string
+    type: object
   tags.tagCreatePayload:
     properties:
       name:
@@ -3354,6 +3450,15 @@ definitions:
         description: Name
         example: developers
         type: string
+      teamLeaders:
+        description: TeamLeaders
+        example:
+        - 3
+        - 5
+        items:
+          example: 1
+          type: integer
+        type: array
     required:
     - name
     type: object
@@ -3553,12 +3658,23 @@ info:
 
     To do so, you can use the `/endpoints/{id}/docker` Portainer API environment(endpoint) (which is not documented below due to Swagger limitations). This environment(endpoint) has a restricted access policy so you still need to be authenticated to be able to query this environment(endpoint). Any query on this environment(endpoint) will be proxied to the Docker API of the associated environment(endpoint) (requests and responses objects are the same as documented in the Docker API).
 
+    # Private Registry
+
+    Using private registry, you will need to pass a based64 encoded JSON string ‘{"registryId":\<registryID value\>}’ inside the Request Header. The parameter name is "X-Registry-Auth".
+    \<registryID value\> - The registry ID where the repository was created.
+
+    Example:
+
+    ```
+    eyJyZWdpc3RyeUlkIjoxfQ==
+    ```
+
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   license:
     name: zlib
     url: https://github.com/portainer/portainer/blob/develop/LICENSE
   title: PortainerCE API
-  version: 2.11.1
+  version: 2.14.2
 paths:
   /auth:
     post:
@@ -4574,6 +4690,34 @@ paths:
       summary: Update an EdgeStack status
       tags:
       - edge_stacks
+  /edge_stacks/{id}/status/{endpoint_id}:
+    delete:
+      description: Authorized only if the request is done by an Edge Environment(Endpoint)
+      operationId: EdgeStackStatusDelete
+      parameters:
+      - description: EdgeStack Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/portainer.EdgeStack'
+        "400":
+          description: ""
+        "403":
+          description: ""
+        "404":
+          description: ""
+        "500":
+          description: ""
+      summary: Delete an EdgeStack status
+      tags:
+      - edge_stacks
   /edge_templates:
     get:
       consumes:
@@ -4813,7 +4957,7 @@ paths:
     get:
       description: |-
         List all environments(endpoints) based on the current user authorizations. Will
-        return all environments(endpoints) if using an administrator account otherwise it will
+        return all environments(endpoints) if using an administrator or team leader account otherwise it will
         only return authorized environments(endpoints).
         **Access policy**: restricted
       operationId: EndpointList
@@ -4858,6 +5002,15 @@ paths:
           type: integer
         name: endpointIds
         type: array
+      - description: will return only these edge environments, none will return only
+          regular edge environments
+        in: query
+        name: edgeDeviceFilter
+        type: string
+      - description: will return only environments(endpoints) with this name
+        in: query
+        name: name
+        type: string
       produces:
       - application/json
       responses:
@@ -5089,10 +5242,8 @@ paths:
       produces:
       - application/json
       responses:
-        "200":
+        "204":
           description: Success
-          schema:
-            $ref: '#/definitions/portainer.Endpoint'
         "400":
           description: Invalid request
         "404":
@@ -5206,10 +5357,12 @@ paths:
       - edge
       - endpoints
       - edge_stacks
-  /endpoints/{id}/extensions:
-    post:
-      deprecated: true
-      operationId: endpointExtensionAdd
+  /endpoints/{id}/edge/status:
+    get:
+      description: |-
+        environment(endpoint) for edge agent to check status of environment(endpoint)
+        **Access policy**: restricted only to Edge environments(endpoints)
+      operationId: EndpointEdgeStatusInspect
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
@@ -5217,28 +5370,22 @@ paths:
         required: true
         type: integer
       responses:
-        "204":
+        "200":
           description: Success
-      tags:
-      - endpoints
-  /endpoints/{id}/extensions/{extensionType}:
-    delete:
-      deprecated: true
-      operationId: endpointExtensionRemove
-      parameters:
-      - description: Environment(Endpoint) identifier
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Extension Type
-        in: path
-        name: extensionType
-        required: true
-        type: string
-      responses:
-        "204":
-          description: Success
+          schema:
+            $ref: '#/definitions/endpointedge.endpointEdgeStatusInspectResponse'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied to access environment(endpoint)
+        "404":
+          description: Environment(Endpoint) not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get environment(endpoint) status
       tags:
       - endpoints
   /endpoints/{id}/kubernetes/helm:
@@ -5467,41 +5614,6 @@ paths:
       tags:
       - endpoints
   /endpoints/{id}/registries/{registryId}:
-    get:
-      description: '**Access policy**: authenticated'
-      operationId: endpointRegistryInspect
-      parameters:
-      - description: identifier
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Registry identifier
-        in: path
-        name: registryId
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: '#/definitions/portainer.Registry'
-        "400":
-          description: Invalid request
-        "403":
-          description: Permission denied
-        "404":
-          description: Registry not found
-        "500":
-          description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: get registry for environment
-      tags:
-      - endpoints
     put:
       consumes:
       - application/json
@@ -5609,35 +5721,19 @@ paths:
       summary: Snapshots an environment(endpoint)
       tags:
       - endpoints
-  /endpoints/{id}/status:
-    get:
-      description: |-
-        Environment(Endpoint) for edge agent to check status of environment(endpoint)
-        **Access policy**: restricted only to Edge environments(endpoints)
-      operationId: EndpointStatusInspect
-      parameters:
-      - description: Environment(Endpoint) identifier
-        in: path
-        name: id
-        required: true
-        type: integer
+  /endpoints/global-key:
+    post:
+      operationId: EndpointCreateGlobalKey
       responses:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/endpoints.endpointStatusInspectResponse'
+            $ref: '#/definitions/endpoints.endpointCreateGlobalKeyResponse'
         "400":
           description: Invalid request
-        "403":
-          description: Permission denied to access environment(endpoint)
-        "404":
-          description: Environment(Endpoint) not found
         "500":
           description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Get environment(endpoint) status
+      summary: Create or retrieve the endpoint for an EdgeID
       tags:
       - endpoints
   /endpoints/snapshot:
@@ -6733,12 +6829,11 @@ paths:
         **Access policy**: authenticated
       operationId: StackCreate
       parameters:
-      - description: 'Stack deployment type. Possible values: 1 (Swarm stack), 2 (Compose
-          stack) or 3 (Kubernetes stack).'
+      - description: 'Stack deployment type. Possible values: 1 (Swarm stack) or 2
+          (Compose stack).'
         enum:
         - 1
         - 2
-        - 3
         in: query
         name: type
         required: true
@@ -6778,21 +6873,6 @@ paths:
         name: body_compose_repository
         schema:
           $ref: '#/definitions/stacks.composeStackFromGitRepositoryPayload'
-      - description: Required when using method=string and type=3
-        in: body
-        name: body_kubernetes_string
-        schema:
-          $ref: '#/definitions/stacks.kubernetesStringDeploymentPayload'
-      - description: Required when using method=repository and type=3
-        in: body
-        name: body_kubernetes_repository
-        schema:
-          $ref: '#/definitions/stacks.kubernetesGitDeploymentPayload'
-      - description: Required when using method=file and type=3
-        in: body
-        name: body_kubernetes_url
-        schema:
-          $ref: '#/definitions/stacks.kubernetesManifestURLDeploymentPayload'
       - description: Name of the stack. required when method is file
         in: formData
         name: Name
@@ -7262,7 +7342,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portainer.Status'
+            $ref: '#/definitions/status.status'
       summary: Check Portainer status
       tags:
       - status
@@ -7542,8 +7622,8 @@ paths:
       consumes:
       - application/json
       description: |-
-        Update a team membership. Access is only available to administrators leaders of the associated team.
-        **Access policy**: administrator
+        Update a team membership. Access is only available to administrators or leaders of the associated team.
+        **Access policy**: administrator or leaders of the associated team
       operationId: TeamMembershipUpdate
       parameters:
       - description: Team membership identifier
@@ -7898,8 +7978,7 @@ paths:
       - application/json
       description: |-
         Create a new Portainer user.
-        Only team leaders and administrators can create users.
-        Only administrators can create an administrator user account.
+        Only administrators can create users.
         **Access policy**: restricted
       operationId: UserCreate
       parameters:

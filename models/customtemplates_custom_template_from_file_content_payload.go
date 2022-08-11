@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -54,6 +55,9 @@ type CustomtemplatesCustomTemplateFromFileContentPayload struct {
 	// Required: true
 	// Enum: [1 2 3]
 	Type *int64 `json:"type"`
+
+	// Definitions of variables in the stack file
+	Variables []*PortainerCustomTemplateVariableDefinition `json:"variables"`
 }
 
 // Validate validates this customtemplates custom template from file content payload
@@ -77,6 +81,10 @@ func (m *CustomtemplatesCustomTemplateFromFileContentPayload) Validate(formats s
 	}
 
 	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVariables(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -180,8 +188,63 @@ func (m *CustomtemplatesCustomTemplateFromFileContentPayload) validateType(forma
 	return nil
 }
 
-// ContextValidate validates this customtemplates custom template from file content payload based on context it is used
+func (m *CustomtemplatesCustomTemplateFromFileContentPayload) validateVariables(formats strfmt.Registry) error {
+	if swag.IsZero(m.Variables) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Variables); i++ {
+		if swag.IsZero(m.Variables[i]) { // not required
+			continue
+		}
+
+		if m.Variables[i] != nil {
+			if err := m.Variables[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variables" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variables" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this customtemplates custom template from file content payload based on the context it is used
 func (m *CustomtemplatesCustomTemplateFromFileContentPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateVariables(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *CustomtemplatesCustomTemplateFromFileContentPayload) contextValidateVariables(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Variables); i++ {
+
+		if m.Variables[i] != nil {
+			if err := m.Variables[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("variables" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("variables" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

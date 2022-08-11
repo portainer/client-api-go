@@ -44,19 +44,19 @@ func NewStatusInspectOK() *StatusInspectOK {
 Success
 */
 type StatusInspectOK struct {
-	Payload *models.PortainerStatus
+	Payload *models.StatusStatus
 }
 
 func (o *StatusInspectOK) Error() string {
 	return fmt.Sprintf("[GET /status][%d] statusInspectOK  %+v", 200, o.Payload)
 }
-func (o *StatusInspectOK) GetPayload() *models.PortainerStatus {
+func (o *StatusInspectOK) GetPayload() *models.StatusStatus {
 	return o.Payload
 }
 
 func (o *StatusInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerStatus)
+	o.Payload = new(models.StatusStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -79,9 +79,6 @@ type EndpointsEndpointUpdatePayload struct {
 
 	// user access policies
 	UserAccessPolicies PortainerUserAccessPolicies `json:"userAccessPolicies,omitempty"`
-
-	// Whether the device has been trusted or not by the user
-	UserTrusted bool `json:"userTrusted,omitempty"`
 }
 
 // Validate validates this endpoints endpoint update payload

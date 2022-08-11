@@ -19,6 +19,9 @@ import (
 // swagger:model portainer.Settings
 type PortainerSettings struct {
 
+	// Container environment parameter AGENT_SECRET
+	AgentSecret string `json:"AgentSecret,omitempty"`
+
 	// allow bind mounts for regular users
 	AllowBindMountsForRegularUsers bool `json:"AllowBindMountsForRegularUsers,omitempty"`
 
@@ -47,13 +50,12 @@ type PortainerSettings struct {
 	// A list of label name & value that will be used to hide containers when querying containers
 	BlackListedLabels []*PortainerPair `json:"BlackListedLabels"`
 
-	// DisableTrustOnFirstConnect makes Portainer require explicit user trust of the edge agent before accepting the connection
-	// Example: false
-	DisableTrustOnFirstConnect bool `json:"DisableTrustOnFirstConnect,omitempty"`
-
 	// The default check in interval for edge agent (in seconds)
 	// Example: 5
 	EdgeAgentCheckinInterval int64 `json:"EdgeAgentCheckinInterval,omitempty"`
+
+	// EdgePortainerURL is the URL that is exposed to edge agents
+	EdgePortainerURL string `json:"EdgePortainerUrl,omitempty"`
 
 	// Whether edge compute features are enabled
 	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
@@ -75,6 +77,9 @@ type PortainerSettings struct {
 	// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
 	// Example: https://charts.bitnami.com/bitnami
 	HelmRepositoryURL string `json:"HelmRepositoryURL,omitempty"`
+
+	// internal auth settings
+	InternalAuthSettings *PortainerInternalAuthSettings `json:"InternalAuthSettings,omitempty"`
 
 	// The expiry of a Kubeconfig
 	// Example: 24h
@@ -102,6 +107,10 @@ type PortainerSettings struct {
 	// Example: https://raw.githubusercontent.com/portainer/templates/master/templates.json
 	TemplatesURL string `json:"TemplatesURL,omitempty"`
 
+	// TrustOnFirstConnect makes Portainer accepting edge agent connection by default
+	// Example: false
+	TrustOnFirstConnect bool `json:"TrustOnFirstConnect,omitempty"`
+
 	// The duration of a user session
 	// Example: 5m
 	UserSessionTimeout string `json:"UserSessionTimeout,omitempty"`
@@ -111,6 +120,9 @@ type PortainerSettings struct {
 
 	// display external contributors
 	DisplayExternalContributors bool `json:"displayExternalContributors,omitempty"`
+
+	// edge
+	Edge *PortainerSettingsEdge `json:"edge,omitempty"`
 
 	// fdo configuration
 	FdoConfiguration *PortainerFDOConfiguration `json:"fdoConfiguration,omitempty"`
@@ -127,11 +139,19 @@ func (m *PortainerSettings) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateInternalAuthSettings(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLDAPSettings(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateOAuthSettings(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEdge(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -175,6 +195,25 @@ func (m *PortainerSettings) validateBlackListedLabels(formats strfmt.Registry) e
 	return nil
 }
 
+func (m *PortainerSettings) validateInternalAuthSettings(formats strfmt.Registry) error {
+	if swag.IsZero(m.InternalAuthSettings) { // not required
+		return nil
+	}
+
+	if m.InternalAuthSettings != nil {
+		if err := m.InternalAuthSettings.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("InternalAuthSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("InternalAuthSettings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainerSettings) validateLDAPSettings(formats strfmt.Registry) error {
 	if swag.IsZero(m.LDAPSettings) { // not required
 		return nil
@@ -205,6 +244,25 @@ func (m *PortainerSettings) validateOAuthSettings(formats strfmt.Registry) error
 				return ve.ValidateName("OAuthSettings")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("OAuthSettings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainerSettings) validateEdge(formats strfmt.Registry) error {
+	if swag.IsZero(m.Edge) { // not required
+		return nil
+	}
+
+	if m.Edge != nil {
+		if err := m.Edge.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
 			}
 			return err
 		}
@@ -259,11 +317,19 @@ func (m *PortainerSettings) ContextValidate(ctx context.Context, formats strfmt.
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateInternalAuthSettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateLDAPSettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateOAuthSettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateEdge(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -301,6 +367,22 @@ func (m *PortainerSettings) contextValidateBlackListedLabels(ctx context.Context
 	return nil
 }
 
+func (m *PortainerSettings) contextValidateInternalAuthSettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.InternalAuthSettings != nil {
+		if err := m.InternalAuthSettings.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("InternalAuthSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("InternalAuthSettings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainerSettings) contextValidateLDAPSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LDAPSettings != nil {
@@ -325,6 +407,22 @@ func (m *PortainerSettings) contextValidateOAuthSettings(ctx context.Context, fo
 				return ve.ValidateName("OAuthSettings")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("OAuthSettings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainerSettings) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Edge != nil {
+		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
 			}
 			return err
 		}
@@ -376,6 +474,55 @@ func (m *PortainerSettings) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *PortainerSettings) UnmarshalBinary(b []byte) error {
 	var res PortainerSettings
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// PortainerSettingsEdge portainer settings edge
+//
+// swagger:model PortainerSettingsEdge
+type PortainerSettingsEdge struct {
+
+	// The command list interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	CommandInterval int64 `json:"CommandInterval,omitempty"`
+
+	// The ping interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	PingInterval int64 `json:"PingInterval,omitempty"`
+
+	// The snapshot interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
+
+	// EdgeAsyncMode enables edge async mode by default
+	AsyncMode bool `json:"asyncMode,omitempty"`
+}
+
+// Validate validates this portainer settings edge
+func (m *PortainerSettingsEdge) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this portainer settings edge based on context it is used
+func (m *PortainerSettingsEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PortainerSettingsEdge) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PortainerSettingsEdge) UnmarshalBinary(b []byte) error {
+	var res PortainerSettingsEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

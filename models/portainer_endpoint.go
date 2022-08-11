@@ -46,9 +46,6 @@ type PortainerEndpoint struct {
 	// The key which is used to map the agent to Portainer
 	EdgeKey string `json:"EdgeKey,omitempty"`
 
-	// extensions
-	Extensions []*PortainerEndpointExtension `json:"Extensions"`
-
 	// Environment(Endpoint) group identifier
 	// Example: 1
 	GroupID int64 `json:"GroupId,omitempty"`
@@ -111,11 +108,17 @@ type PortainerEndpoint struct {
 	// List of user identifiers authorized to connect to this environment(endpoint)
 	UserAccessPolicies PortainerUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
 
+	// edge
+	Edge *PortainerEndpointEdge `json:"edge,omitempty"`
+
 	// IsEdgeDevice marks if the environment was created as an EdgeDevice
 	IsEdgeDevice bool `json:"isEdgeDevice,omitempty"`
 
 	// LastCheckInDate mark last check-in date on checkin
 	LastCheckInDate int64 `json:"lastCheckInDate,omitempty"`
+
+	// QueryDate of each query with the endpoints list
+	QueryDate int64 `json:"queryDate,omitempty"`
 
 	// Environment(Endpoint) specific security settings
 	SecuritySettings *PortainerEndpointSecuritySettings `json:"securitySettings,omitempty"`
@@ -129,10 +132,6 @@ func (m *PortainerEndpoint) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAzureCredentials(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateExtensions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -153,6 +152,10 @@ func (m *PortainerEndpoint) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateUserAccessPolicies(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEdge(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -180,32 +183,6 @@ func (m *PortainerEndpoint) validateAzureCredentials(formats strfmt.Registry) er
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *PortainerEndpoint) validateExtensions(formats strfmt.Registry) error {
-	if swag.IsZero(m.Extensions) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Extensions); i++ {
-		if swag.IsZero(m.Extensions[i]) { // not required
-			continue
-		}
-
-		if m.Extensions[i] != nil {
-			if err := m.Extensions[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("Extensions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("Extensions" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
@@ -313,6 +290,25 @@ func (m *PortainerEndpoint) validateUserAccessPolicies(formats strfmt.Registry) 
 	return nil
 }
 
+func (m *PortainerEndpoint) validateEdge(formats strfmt.Registry) error {
+	if swag.IsZero(m.Edge) { // not required
+		return nil
+	}
+
+	if m.Edge != nil {
+		if err := m.Edge.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainerEndpoint) validateSecuritySettings(formats strfmt.Registry) error {
 	if swag.IsZero(m.SecuritySettings) { // not required
 		return nil
@@ -340,10 +336,6 @@ func (m *PortainerEndpoint) ContextValidate(ctx context.Context, formats strfmt.
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateExtensions(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateKubernetes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -361,6 +353,10 @@ func (m *PortainerEndpoint) ContextValidate(ctx context.Context, formats strfmt.
 	}
 
 	if err := m.contextValidateUserAccessPolicies(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateEdge(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -385,26 +381,6 @@ func (m *PortainerEndpoint) contextValidateAzureCredentials(ctx context.Context,
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *PortainerEndpoint) contextValidateExtensions(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Extensions); i++ {
-
-		if m.Extensions[i] != nil {
-			if err := m.Extensions[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("Extensions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("Extensions" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
@@ -490,6 +466,22 @@ func (m *PortainerEndpoint) contextValidateUserAccessPolicies(ctx context.Contex
 	return nil
 }
 
+func (m *PortainerEndpoint) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Edge != nil {
+		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainerEndpoint) contextValidateSecuritySettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SecuritySettings != nil {
@@ -517,6 +509,55 @@ func (m *PortainerEndpoint) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *PortainerEndpoint) UnmarshalBinary(b []byte) error {
 	var res PortainerEndpoint
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// PortainerEndpointEdge portainer endpoint edge
+//
+// swagger:model PortainerEndpointEdge
+type PortainerEndpointEdge struct {
+
+	// The command list interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	CommandInterval int64 `json:"CommandInterval,omitempty"`
+
+	// The ping interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	PingInterval int64 `json:"PingInterval,omitempty"`
+
+	// The snapshot interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
+
+	// Whether the device has been started in edge async mode
+	AsyncMode bool `json:"asyncMode,omitempty"`
+}
+
+// Validate validates this portainer endpoint edge
+func (m *PortainerEndpointEdge) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this portainer endpoint edge based on context it is used
+func (m *PortainerEndpointEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PortainerEndpointEdge) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PortainerEndpointEdge) UnmarshalBinary(b []byte) error {
+	var res PortainerEndpointEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

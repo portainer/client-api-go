@@ -60,6 +60,12 @@ func NewEndpointListParamsWithHTTPClient(client *http.Client) *EndpointListParam
 */
 type EndpointListParams struct {
 
+	/* EdgeDeviceFilter.
+
+	   will return only these edge environments, none will return only regular edge environments
+	*/
+	EdgeDeviceFilter *string
+
 	/* EndpointIds.
 
 	   will return only these environments(endpoints)
@@ -77,6 +83,12 @@ type EndpointListParams struct {
 	   Limit results to this value
 	*/
 	Limit *int64
+
+	/* Name.
+
+	   will return only environments(endpoints) with this name
+	*/
+	Name *string
 
 	/* Search.
 
@@ -161,6 +173,17 @@ func (o *EndpointListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEdgeDeviceFilter adds the edgeDeviceFilter to the endpoint list params
+func (o *EndpointListParams) WithEdgeDeviceFilter(edgeDeviceFilter *string) *EndpointListParams {
+	o.SetEdgeDeviceFilter(edgeDeviceFilter)
+	return o
+}
+
+// SetEdgeDeviceFilter adds the edgeDeviceFilter to the endpoint list params
+func (o *EndpointListParams) SetEdgeDeviceFilter(edgeDeviceFilter *string) {
+	o.EdgeDeviceFilter = edgeDeviceFilter
+}
+
 // WithEndpointIds adds the endpointIds to the endpoint list params
 func (o *EndpointListParams) WithEndpointIds(endpointIds []int64) *EndpointListParams {
 	o.SetEndpointIds(endpointIds)
@@ -192,6 +215,17 @@ func (o *EndpointListParams) WithLimit(limit *int64) *EndpointListParams {
 // SetLimit adds the limit to the endpoint list params
 func (o *EndpointListParams) SetLimit(limit *int64) {
 	o.Limit = limit
+}
+
+// WithName adds the name to the endpoint list params
+func (o *EndpointListParams) WithName(name *string) *EndpointListParams {
+	o.SetName(name)
+	return o
+}
+
+// SetName adds the name to the endpoint list params
+func (o *EndpointListParams) SetName(name *string) {
+	o.Name = name
 }
 
 // WithSearch adds the search to the endpoint list params
@@ -257,6 +291,23 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	}
 	var res []error
 
+	if o.EdgeDeviceFilter != nil {
+
+		// query param edgeDeviceFilter
+		var qrEdgeDeviceFilter string
+
+		if o.EdgeDeviceFilter != nil {
+			qrEdgeDeviceFilter = *o.EdgeDeviceFilter
+		}
+		qEdgeDeviceFilter := qrEdgeDeviceFilter
+		if qEdgeDeviceFilter != "" {
+
+			if err := r.SetQueryParam("edgeDeviceFilter", qEdgeDeviceFilter); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.EndpointIds != nil {
 
 		// binding items for endpointIds
@@ -297,6 +348,23 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qLimit != "" {
 
 			if err := r.SetQueryParam("limit", qLimit); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Name != nil {
+
+		// query param name
+		var qrName string
+
+		if o.Name != nil {
+			qrName = *o.Name
+		}
+		qName := qrName
+		if qName != "" {
+
+			if err := r.SetQueryParam("name", qName); err != nil {
 				return err
 			}
 		}

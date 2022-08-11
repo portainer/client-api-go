@@ -30,11 +30,15 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteOK, error)
+	EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteNoContent, error)
 
 	EndpointCreate(params *EndpointCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointCreateOK, error)
 
+	EndpointCreateGlobalKey(params *EndpointCreateGlobalKeyParams, opts ...ClientOption) (*EndpointCreateGlobalKeyOK, error)
+
 	EndpointDelete(params *EndpointDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteNoContent, error)
+
+	EndpointEdgeStatusInspect(params *EndpointEdgeStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointEdgeStatusInspectOK, error)
 
 	EndpointInspect(params *EndpointInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointInspectOK, error)
 
@@ -46,21 +50,13 @@ type ClientService interface {
 
 	EndpointSnapshots(params *EndpointSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointSnapshotsNoContent, error)
 
-	EndpointStatusInspect(params *EndpointStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointStatusInspectOK, error)
-
 	EndpointUpdate(params *EndpointUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointUpdateOK, error)
 
 	EndpointDockerhubStatus(params *EndpointDockerhubStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDockerhubStatusOK, error)
 
-	EndpointExtensionAdd(params *EndpointExtensionAddParams, opts ...ClientOption) (*EndpointExtensionAddNoContent, error)
-
-	EndpointExtensionRemove(params *EndpointExtensionRemoveParams, opts ...ClientOption) (*EndpointExtensionRemoveNoContent, error)
-
 	EndpointRegistriesList(params *EndpointRegistriesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistriesListOK, error)
 
 	EndpointRegistryAccess(params *EndpointRegistryAccessParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistryAccessNoContent, error)
-
-	EndpointRegistryInspect(params *EndpointRegistryInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistryInspectOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -71,7 +67,7 @@ type ClientService interface {
   De-association an edge environment(endpoint).
 **Access policy**: administrator
 */
-func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteOK, error) {
+func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewEndpointAssociationDeleteParams()
@@ -97,7 +93,7 @@ func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeletePara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EndpointAssociationDeleteOK)
+	success, ok := result.(*EndpointAssociationDeleteNoContent)
 	if ok {
 		return success, nil
 	}
@@ -150,6 +146,44 @@ func (a *Client) EndpointCreate(params *EndpointCreateParams, authInfo runtime.C
 }
 
 /*
+  EndpointCreateGlobalKey creates or retrieve the endpoint for an edge ID
+*/
+func (a *Client) EndpointCreateGlobalKey(params *EndpointCreateGlobalKeyParams, opts ...ClientOption) (*EndpointCreateGlobalKeyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEndpointCreateGlobalKeyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EndpointCreateGlobalKey",
+		Method:             "POST",
+		PathPattern:        "/endpoints/global-key",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EndpointCreateGlobalKeyReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EndpointCreateGlobalKeyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EndpointCreateGlobalKey: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
   EndpointDelete removes an environment endpoint
 
   Remove an environment(endpoint).
@@ -188,6 +222,48 @@ func (a *Client) EndpointDelete(params *EndpointDeleteParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for EndpointDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+  EndpointEdgeStatusInspect gets environment endpoint status
+
+  environment(endpoint) for edge agent to check status of environment(endpoint)
+**Access policy**: restricted only to Edge environments(endpoints)
+*/
+func (a *Client) EndpointEdgeStatusInspect(params *EndpointEdgeStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointEdgeStatusInspectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEndpointEdgeStatusInspectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EndpointEdgeStatusInspect",
+		Method:             "GET",
+		PathPattern:        "/endpoints/{id}/edge/status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EndpointEdgeStatusInspectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EndpointEdgeStatusInspectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EndpointEdgeStatusInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -237,7 +313,7 @@ func (a *Client) EndpointInspect(params *EndpointInspectParams, authInfo runtime
   EndpointList lists environments endpoints
 
   List all environments(endpoints) based on the current user authorizations. Will
-return all environments(endpoints) if using an administrator account otherwise it will
+return all environments(endpoints) if using an administrator or team leader account otherwise it will
 only return authorized environments(endpoints).
 **Access policy**: restricted
 */
@@ -404,48 +480,6 @@ func (a *Client) EndpointSnapshots(params *EndpointSnapshotsParams, authInfo run
 }
 
 /*
-  EndpointStatusInspect gets environment endpoint status
-
-  Environment(Endpoint) for edge agent to check status of environment(endpoint)
-**Access policy**: restricted only to Edge environments(endpoints)
-*/
-func (a *Client) EndpointStatusInspect(params *EndpointStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointStatusInspectOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEndpointStatusInspectParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EndpointStatusInspect",
-		Method:             "GET",
-		PathPattern:        "/endpoints/{id}/status",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EndpointStatusInspectReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EndpointStatusInspectOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EndpointStatusInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
   EndpointUpdate updates an environment endpoint
 
   Update an environment(endpoint).
@@ -530,82 +564,6 @@ func (a *Client) EndpointDockerhubStatus(params *EndpointDockerhubStatusParams, 
 }
 
 /*
-  EndpointExtensionAdd endpoint extension add API
-*/
-func (a *Client) EndpointExtensionAdd(params *EndpointExtensionAddParams, opts ...ClientOption) (*EndpointExtensionAddNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEndpointExtensionAddParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "endpointExtensionAdd",
-		Method:             "POST",
-		PathPattern:        "/endpoints/{id}/extensions",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EndpointExtensionAddReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EndpointExtensionAddNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for endpointExtensionAdd: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EndpointExtensionRemove endpoint extension remove API
-*/
-func (a *Client) EndpointExtensionRemove(params *EndpointExtensionRemoveParams, opts ...ClientOption) (*EndpointExtensionRemoveNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEndpointExtensionRemoveParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "endpointExtensionRemove",
-		Method:             "DELETE",
-		PathPattern:        "/endpoints/{id}/extensions/{extensionType}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EndpointExtensionRemoveReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EndpointExtensionRemoveNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for endpointExtensionRemove: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
   EndpointRegistriesList lists registries on environment
 
   List all registries based on the current user authorizations in current environment.
@@ -685,47 +643,6 @@ func (a *Client) EndpointRegistryAccess(params *EndpointRegistryAccessParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for endpointRegistryAccess: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-  EndpointRegistryInspect gets registry for environment
-
-  **Access policy**: authenticated
-*/
-func (a *Client) EndpointRegistryInspect(params *EndpointRegistryInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistryInspectOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEndpointRegistryInspectParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "endpointRegistryInspect",
-		Method:             "GET",
-		PathPattern:        "/endpoints/{id}/registries/{registryId}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EndpointRegistryInspectReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EndpointRegistryInspectOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for endpointRegistryInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -23,6 +23,10 @@ type TeamsTeamCreatePayload struct {
 	// Example: developers
 	// Required: true
 	Name *string `json:"name"`
+
+	// TeamLeaders
+	// Example: [3,5]
+	TeamLeaders []int64 `json:"teamLeaders"`
 }
 
 // Validate validates this teams team create payload
