@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // HelmUserRepositoryCreateReader is a Reader for the HelmUserRepositoryCreate structure.
@@ -57,24 +57,55 @@ func NewHelmUserRepositoryCreateOK() *HelmUserRepositoryCreateOK {
 	return &HelmUserRepositoryCreateOK{}
 }
 
-/* HelmUserRepositoryCreateOK describes a response with status code 200, with default header values.
+/*
+HelmUserRepositoryCreateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type HelmUserRepositoryCreateOK struct {
-	Payload *models.PortainerHelmUserRepository
+	Payload *models.PortainereeHelmUserRepository
+}
+
+// IsSuccess returns true when this helm user repository create o k response has a 2xx status code
+func (o *HelmUserRepositoryCreateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this helm user repository create o k response has a 3xx status code
+func (o *HelmUserRepositoryCreateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm user repository create o k response has a 4xx status code
+func (o *HelmUserRepositoryCreateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm user repository create o k response has a 5xx status code
+func (o *HelmUserRepositoryCreateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm user repository create o k response a status code equal to that given
+func (o *HelmUserRepositoryCreateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *HelmUserRepositoryCreateOK) Error() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateOK  %+v", 200, o.Payload)
 }
-func (o *HelmUserRepositoryCreateOK) GetPayload() *models.PortainerHelmUserRepository {
+
+func (o *HelmUserRepositoryCreateOK) String() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateOK  %+v", 200, o.Payload)
+}
+
+func (o *HelmUserRepositoryCreateOK) GetPayload() *models.PortainereeHelmUserRepository {
 	return o.Payload
 }
 
 func (o *HelmUserRepositoryCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerHelmUserRepository)
+	o.Payload = new(models.PortainereeHelmUserRepository)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewHelmUserRepositoryCreateBadRequest() *HelmUserRepositoryCreateBadRequest
 	return &HelmUserRepositoryCreateBadRequest{}
 }
 
-/* HelmUserRepositoryCreateBadRequest describes a response with status code 400, with default header values.
+/*
+HelmUserRepositoryCreateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type HelmUserRepositoryCreateBadRequest struct {
 }
 
+// IsSuccess returns true when this helm user repository create bad request response has a 2xx status code
+func (o *HelmUserRepositoryCreateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm user repository create bad request response has a 3xx status code
+func (o *HelmUserRepositoryCreateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm user repository create bad request response has a 4xx status code
+func (o *HelmUserRepositoryCreateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm user repository create bad request response has a 5xx status code
+func (o *HelmUserRepositoryCreateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm user repository create bad request response a status code equal to that given
+func (o *HelmUserRepositoryCreateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *HelmUserRepositoryCreateBadRequest) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateBadRequest ", 400)
+}
+
+func (o *HelmUserRepositoryCreateBadRequest) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewHelmUserRepositoryCreateForbidden() *HelmUserRepositoryCreateForbidden {
 	return &HelmUserRepositoryCreateForbidden{}
 }
 
-/* HelmUserRepositoryCreateForbidden describes a response with status code 403, with default header values.
+/*
+HelmUserRepositoryCreateForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type HelmUserRepositoryCreateForbidden struct {
 }
 
+// IsSuccess returns true when this helm user repository create forbidden response has a 2xx status code
+func (o *HelmUserRepositoryCreateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm user repository create forbidden response has a 3xx status code
+func (o *HelmUserRepositoryCreateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm user repository create forbidden response has a 4xx status code
+func (o *HelmUserRepositoryCreateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm user repository create forbidden response has a 5xx status code
+func (o *HelmUserRepositoryCreateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm user repository create forbidden response a status code equal to that given
+func (o *HelmUserRepositoryCreateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *HelmUserRepositoryCreateForbidden) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateForbidden ", 403)
+}
+
+func (o *HelmUserRepositoryCreateForbidden) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateForbidden ", 403)
 }
 
@@ -131,14 +222,44 @@ func NewHelmUserRepositoryCreateInternalServerError() *HelmUserRepositoryCreateI
 	return &HelmUserRepositoryCreateInternalServerError{}
 }
 
-/* HelmUserRepositoryCreateInternalServerError describes a response with status code 500, with default header values.
+/*
+HelmUserRepositoryCreateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type HelmUserRepositoryCreateInternalServerError struct {
 }
 
+// IsSuccess returns true when this helm user repository create internal server error response has a 2xx status code
+func (o *HelmUserRepositoryCreateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm user repository create internal server error response has a 3xx status code
+func (o *HelmUserRepositoryCreateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm user repository create internal server error response has a 4xx status code
+func (o *HelmUserRepositoryCreateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm user repository create internal server error response has a 5xx status code
+func (o *HelmUserRepositoryCreateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this helm user repository create internal server error response a status code equal to that given
+func (o *HelmUserRepositoryCreateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *HelmUserRepositoryCreateInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateInternalServerError ", 500)
+}
+
+func (o *HelmUserRepositoryCreateInternalServerError) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateInternalServerError ", 500)
 }
 

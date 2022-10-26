@@ -54,14 +54,44 @@ func NewFdoConfigureNoContent() *FdoConfigureNoContent {
 	return &FdoConfigureNoContent{}
 }
 
-/* FdoConfigureNoContent describes a response with status code 204, with default header values.
+/*
+FdoConfigureNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type FdoConfigureNoContent struct {
 }
 
+// IsSuccess returns true when this fdo configure no content response has a 2xx status code
+func (o *FdoConfigureNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this fdo configure no content response has a 3xx status code
+func (o *FdoConfigureNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo configure no content response has a 4xx status code
+func (o *FdoConfigureNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fdo configure no content response has a 5xx status code
+func (o *FdoConfigureNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo configure no content response a status code equal to that given
+func (o *FdoConfigureNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *FdoConfigureNoContent) Error() string {
+	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureNoContent ", 204)
+}
+
+func (o *FdoConfigureNoContent) String() string {
 	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewFdoConfigureBadRequest() *FdoConfigureBadRequest {
 	return &FdoConfigureBadRequest{}
 }
 
-/* FdoConfigureBadRequest describes a response with status code 400, with default header values.
+/*
+FdoConfigureBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type FdoConfigureBadRequest struct {
 }
 
+// IsSuccess returns true when this fdo configure bad request response has a 2xx status code
+func (o *FdoConfigureBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo configure bad request response has a 3xx status code
+func (o *FdoConfigureBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo configure bad request response has a 4xx status code
+func (o *FdoConfigureBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this fdo configure bad request response has a 5xx status code
+func (o *FdoConfigureBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo configure bad request response a status code equal to that given
+func (o *FdoConfigureBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *FdoConfigureBadRequest) Error() string {
+	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureBadRequest ", 400)
+}
+
+func (o *FdoConfigureBadRequest) String() string {
 	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewFdoConfigureForbidden() *FdoConfigureForbidden {
 	return &FdoConfigureForbidden{}
 }
 
-/* FdoConfigureForbidden describes a response with status code 403, with default header values.
+/*
+FdoConfigureForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type FdoConfigureForbidden struct {
 }
 
+// IsSuccess returns true when this fdo configure forbidden response has a 2xx status code
+func (o *FdoConfigureForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo configure forbidden response has a 3xx status code
+func (o *FdoConfigureForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo configure forbidden response has a 4xx status code
+func (o *FdoConfigureForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this fdo configure forbidden response has a 5xx status code
+func (o *FdoConfigureForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo configure forbidden response a status code equal to that given
+func (o *FdoConfigureForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *FdoConfigureForbidden) Error() string {
+	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureForbidden ", 403)
+}
+
+func (o *FdoConfigureForbidden) String() string {
 	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewFdoConfigureInternalServerError() *FdoConfigureInternalServerError {
 	return &FdoConfigureInternalServerError{}
 }
 
-/* FdoConfigureInternalServerError describes a response with status code 500, with default header values.
+/*
+FdoConfigureInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type FdoConfigureInternalServerError struct {
 }
 
+// IsSuccess returns true when this fdo configure internal server error response has a 2xx status code
+func (o *FdoConfigureInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo configure internal server error response has a 3xx status code
+func (o *FdoConfigureInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo configure internal server error response has a 4xx status code
+func (o *FdoConfigureInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fdo configure internal server error response has a 5xx status code
+func (o *FdoConfigureInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this fdo configure internal server error response a status code equal to that given
+func (o *FdoConfigureInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *FdoConfigureInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureInternalServerError ", 500)
+}
+
+func (o *FdoConfigureInternalServerError) String() string {
 	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureInternalServerError ", 500)
 }
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // StackAssociateReader is a Reader for the StackAssociate structure.
@@ -63,24 +63,55 @@ func NewStackAssociateOK() *StackAssociateOK {
 	return &StackAssociateOK{}
 }
 
-/* StackAssociateOK describes a response with status code 200, with default header values.
+/*
+StackAssociateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type StackAssociateOK struct {
-	Payload *models.PortainerStack
+	Payload *models.PortainereeStack
+}
+
+// IsSuccess returns true when this stack associate o k response has a 2xx status code
+func (o *StackAssociateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stack associate o k response has a 3xx status code
+func (o *StackAssociateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack associate o k response has a 4xx status code
+func (o *StackAssociateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack associate o k response has a 5xx status code
+func (o *StackAssociateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack associate o k response a status code equal to that given
+func (o *StackAssociateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *StackAssociateOK) Error() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateOK  %+v", 200, o.Payload)
 }
-func (o *StackAssociateOK) GetPayload() *models.PortainerStack {
+
+func (o *StackAssociateOK) String() string {
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateOK  %+v", 200, o.Payload)
+}
+
+func (o *StackAssociateOK) GetPayload() *models.PortainereeStack {
 	return o.Payload
 }
 
 func (o *StackAssociateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerStack)
+	o.Payload = new(models.PortainereeStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -95,14 +126,44 @@ func NewStackAssociateBadRequest() *StackAssociateBadRequest {
 	return &StackAssociateBadRequest{}
 }
 
-/* StackAssociateBadRequest describes a response with status code 400, with default header values.
+/*
+StackAssociateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type StackAssociateBadRequest struct {
 }
 
+// IsSuccess returns true when this stack associate bad request response has a 2xx status code
+func (o *StackAssociateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack associate bad request response has a 3xx status code
+func (o *StackAssociateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack associate bad request response has a 4xx status code
+func (o *StackAssociateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack associate bad request response has a 5xx status code
+func (o *StackAssociateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack associate bad request response a status code equal to that given
+func (o *StackAssociateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *StackAssociateBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateBadRequest ", 400)
+}
+
+func (o *StackAssociateBadRequest) String() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateBadRequest ", 400)
 }
 
@@ -116,14 +177,44 @@ func NewStackAssociateForbidden() *StackAssociateForbidden {
 	return &StackAssociateForbidden{}
 }
 
-/* StackAssociateForbidden describes a response with status code 403, with default header values.
+/*
+StackAssociateForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type StackAssociateForbidden struct {
 }
 
+// IsSuccess returns true when this stack associate forbidden response has a 2xx status code
+func (o *StackAssociateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack associate forbidden response has a 3xx status code
+func (o *StackAssociateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack associate forbidden response has a 4xx status code
+func (o *StackAssociateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack associate forbidden response has a 5xx status code
+func (o *StackAssociateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack associate forbidden response a status code equal to that given
+func (o *StackAssociateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *StackAssociateForbidden) Error() string {
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateForbidden ", 403)
+}
+
+func (o *StackAssociateForbidden) String() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateForbidden ", 403)
 }
 
@@ -137,14 +228,44 @@ func NewStackAssociateNotFound() *StackAssociateNotFound {
 	return &StackAssociateNotFound{}
 }
 
-/* StackAssociateNotFound describes a response with status code 404, with default header values.
+/*
+StackAssociateNotFound describes a response with status code 404, with default header values.
 
 Stack not found
 */
 type StackAssociateNotFound struct {
 }
 
+// IsSuccess returns true when this stack associate not found response has a 2xx status code
+func (o *StackAssociateNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack associate not found response has a 3xx status code
+func (o *StackAssociateNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack associate not found response has a 4xx status code
+func (o *StackAssociateNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack associate not found response has a 5xx status code
+func (o *StackAssociateNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack associate not found response a status code equal to that given
+func (o *StackAssociateNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *StackAssociateNotFound) Error() string {
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateNotFound ", 404)
+}
+
+func (o *StackAssociateNotFound) String() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateNotFound ", 404)
 }
 
@@ -158,14 +279,44 @@ func NewStackAssociateInternalServerError() *StackAssociateInternalServerError {
 	return &StackAssociateInternalServerError{}
 }
 
-/* StackAssociateInternalServerError describes a response with status code 500, with default header values.
+/*
+StackAssociateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type StackAssociateInternalServerError struct {
 }
 
+// IsSuccess returns true when this stack associate internal server error response has a 2xx status code
+func (o *StackAssociateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack associate internal server error response has a 3xx status code
+func (o *StackAssociateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack associate internal server error response has a 4xx status code
+func (o *StackAssociateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack associate internal server error response has a 5xx status code
+func (o *StackAssociateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stack associate internal server error response a status code equal to that given
+func (o *StackAssociateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StackAssociateInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateInternalServerError ", 500)
+}
+
+func (o *StackAssociateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateInternalServerError ", 500)
 }
 

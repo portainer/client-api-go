@@ -48,9 +48,10 @@ type ClientService interface {
 }
 
 /*
-  EndpointGroupAddEndpoint adds an environment endpoint to an environment endpoint group
+	EndpointGroupAddEndpoint adds an environment endpoint to an environment endpoint group
 
-  Add an environment(endpoint) to an environment(endpoint) group
+	Add an environment(endpoint) to an environment(endpoint) group
+
 **Access policy**: administrator
 */
 func (a *Client) EndpointGroupAddEndpoint(params *EndpointGroupAddEndpointParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointGroupAddEndpointNoContent, error) {
@@ -90,9 +91,10 @@ func (a *Client) EndpointGroupAddEndpoint(params *EndpointGroupAddEndpointParams
 }
 
 /*
-  EndpointGroupDelete removes an environment endpoint group
+	EndpointGroupDelete removes an environment endpoint group
 
-  Remove an environment(endpoint) group.
+	Remove an environment(endpoint) group.
+
 **Access policy**: administrator
 */
 func (a *Client) EndpointGroupDelete(params *EndpointGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointGroupDeleteNoContent, error) {
@@ -132,9 +134,9 @@ func (a *Client) EndpointGroupDelete(params *EndpointGroupDeleteParams, authInfo
 }
 
 /*
-  EndpointGroupDeleteEndpoint removes environment endpoint from an environment endpoint group
+EndpointGroupDeleteEndpoint removes environment endpoint from an environment endpoint group
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EndpointGroupDeleteEndpoint(params *EndpointGroupDeleteEndpointParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointGroupDeleteEndpointNoContent, error) {
 	// TODO: Validate the params before sending
@@ -173,9 +175,10 @@ func (a *Client) EndpointGroupDeleteEndpoint(params *EndpointGroupDeleteEndpoint
 }
 
 /*
-  EndpointGroupList lists environment endpoint groups
+	EndpointGroupList lists environment endpoint groups
 
-  List all environment(endpoint) groups based on the current user authorizations. Will
+	List all environment(endpoint) groups based on the current user authorizations. Will
+
 return all environment(endpoint) groups if using an administrator account otherwise it will
 only return authorized environment(endpoint) groups.
 **Access policy**: restricted
@@ -217,9 +220,10 @@ func (a *Client) EndpointGroupList(params *EndpointGroupListParams, authInfo run
 }
 
 /*
-  EndpointGroupUpdate updates an environment endpoint group
+	EndpointGroupUpdate updates an environment endpoint group
 
-  Update an environment(endpoint) group.
+	Update an environment(endpoint) group.
+
 **Access policy**: administrator
 */
 func (a *Client) EndpointGroupUpdate(params *EndpointGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointGroupUpdateOK, error) {
@@ -259,9 +263,10 @@ func (a *Client) EndpointGroupUpdate(params *EndpointGroupUpdateParams, authInfo
 }
 
 /*
-  GetEndpointGroupsID inspects an environment endpoint group
+	GetEndpointGroupsID inspects an environment endpoint group
 
-  Retrieve details abont an environment(endpoint) group.
+	Retrieve details abont an environment(endpoint) group.
+
 **Access policy**: administrator
 */
 func (a *Client) GetEndpointGroupsID(params *GetEndpointGroupsIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEndpointGroupsIDOK, error) {
@@ -301,9 +306,10 @@ func (a *Client) GetEndpointGroupsID(params *GetEndpointGroupsIDParams, authInfo
 }
 
 /*
-  PostEndpointGroups creates an environment endpoint group
+	PostEndpointGroups creates an environment endpoint group
 
-  Create a new environment(endpoint) group.
+	Create a new environment(endpoint) group.
+
 **Access policy**: administrator
 */
 func (a *Client) PostEndpointGroups(params *PostEndpointGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEndpointGroupsOK, error) {

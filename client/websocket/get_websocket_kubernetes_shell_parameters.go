@@ -53,10 +53,12 @@ func NewGetWebsocketKubernetesShellParamsWithHTTPClient(client *http.Client) *Ge
 	}
 }
 
-/* GetWebsocketKubernetesShellParams contains all the parameters to send to the API endpoint
-   for the get websocket kubernetes shell operation.
+/*
+GetWebsocketKubernetesShellParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get websocket kubernetes shell operation.
+
+	Typically these are written to a http.Request.
 */
 type GetWebsocketKubernetesShellParams struct {
 

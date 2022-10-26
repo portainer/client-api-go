@@ -52,10 +52,12 @@ func NewEdgeJobInspectParamsWithHTTPClient(client *http.Client) *EdgeJobInspectP
 	}
 }
 
-/* EdgeJobInspectParams contains all the parameters to send to the API endpoint
-   for the edge job inspect operation.
+/*
+EdgeJobInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge job inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeJobInspectParams struct {
 

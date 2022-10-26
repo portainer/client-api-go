@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // StackMigrateReader is a Reader for the StackMigrate structure.
@@ -63,24 +63,55 @@ func NewStackMigrateOK() *StackMigrateOK {
 	return &StackMigrateOK{}
 }
 
-/* StackMigrateOK describes a response with status code 200, with default header values.
+/*
+StackMigrateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type StackMigrateOK struct {
-	Payload *models.PortainerStack
+	Payload *models.PortainereeStack
+}
+
+// IsSuccess returns true when this stack migrate o k response has a 2xx status code
+func (o *StackMigrateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stack migrate o k response has a 3xx status code
+func (o *StackMigrateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack migrate o k response has a 4xx status code
+func (o *StackMigrateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack migrate o k response has a 5xx status code
+func (o *StackMigrateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack migrate o k response a status code equal to that given
+func (o *StackMigrateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *StackMigrateOK) Error() string {
 	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateOK  %+v", 200, o.Payload)
 }
-func (o *StackMigrateOK) GetPayload() *models.PortainerStack {
+
+func (o *StackMigrateOK) String() string {
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateOK  %+v", 200, o.Payload)
+}
+
+func (o *StackMigrateOK) GetPayload() *models.PortainereeStack {
 	return o.Payload
 }
 
 func (o *StackMigrateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerStack)
+	o.Payload = new(models.PortainereeStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -95,14 +126,44 @@ func NewStackMigrateBadRequest() *StackMigrateBadRequest {
 	return &StackMigrateBadRequest{}
 }
 
-/* StackMigrateBadRequest describes a response with status code 400, with default header values.
+/*
+StackMigrateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type StackMigrateBadRequest struct {
 }
 
+// IsSuccess returns true when this stack migrate bad request response has a 2xx status code
+func (o *StackMigrateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack migrate bad request response has a 3xx status code
+func (o *StackMigrateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack migrate bad request response has a 4xx status code
+func (o *StackMigrateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack migrate bad request response has a 5xx status code
+func (o *StackMigrateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack migrate bad request response a status code equal to that given
+func (o *StackMigrateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *StackMigrateBadRequest) Error() string {
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateBadRequest ", 400)
+}
+
+func (o *StackMigrateBadRequest) String() string {
 	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateBadRequest ", 400)
 }
 
@@ -116,14 +177,44 @@ func NewStackMigrateForbidden() *StackMigrateForbidden {
 	return &StackMigrateForbidden{}
 }
 
-/* StackMigrateForbidden describes a response with status code 403, with default header values.
+/*
+StackMigrateForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type StackMigrateForbidden struct {
 }
 
+// IsSuccess returns true when this stack migrate forbidden response has a 2xx status code
+func (o *StackMigrateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack migrate forbidden response has a 3xx status code
+func (o *StackMigrateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack migrate forbidden response has a 4xx status code
+func (o *StackMigrateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack migrate forbidden response has a 5xx status code
+func (o *StackMigrateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack migrate forbidden response a status code equal to that given
+func (o *StackMigrateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *StackMigrateForbidden) Error() string {
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateForbidden ", 403)
+}
+
+func (o *StackMigrateForbidden) String() string {
 	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateForbidden ", 403)
 }
 
@@ -137,14 +228,44 @@ func NewStackMigrateNotFound() *StackMigrateNotFound {
 	return &StackMigrateNotFound{}
 }
 
-/* StackMigrateNotFound describes a response with status code 404, with default header values.
+/*
+StackMigrateNotFound describes a response with status code 404, with default header values.
 
 Stack not found
 */
 type StackMigrateNotFound struct {
 }
 
+// IsSuccess returns true when this stack migrate not found response has a 2xx status code
+func (o *StackMigrateNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack migrate not found response has a 3xx status code
+func (o *StackMigrateNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack migrate not found response has a 4xx status code
+func (o *StackMigrateNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack migrate not found response has a 5xx status code
+func (o *StackMigrateNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack migrate not found response a status code equal to that given
+func (o *StackMigrateNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *StackMigrateNotFound) Error() string {
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateNotFound ", 404)
+}
+
+func (o *StackMigrateNotFound) String() string {
 	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateNotFound ", 404)
 }
 
@@ -158,14 +279,44 @@ func NewStackMigrateInternalServerError() *StackMigrateInternalServerError {
 	return &StackMigrateInternalServerError{}
 }
 
-/* StackMigrateInternalServerError describes a response with status code 500, with default header values.
+/*
+StackMigrateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type StackMigrateInternalServerError struct {
 }
 
+// IsSuccess returns true when this stack migrate internal server error response has a 2xx status code
+func (o *StackMigrateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack migrate internal server error response has a 3xx status code
+func (o *StackMigrateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack migrate internal server error response has a 4xx status code
+func (o *StackMigrateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack migrate internal server error response has a 5xx status code
+func (o *StackMigrateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stack migrate internal server error response a status code equal to that given
+func (o *StackMigrateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StackMigrateInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateInternalServerError ", 500)
+}
+
+func (o *StackMigrateInternalServerError) String() string {
 	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateInternalServerError ", 500)
 }
 

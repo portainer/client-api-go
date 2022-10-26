@@ -53,10 +53,12 @@ func NewGetKubernetesNodesLimitsParamsWithHTTPClient(client *http.Client) *GetKu
 	}
 }
 
-/* GetKubernetesNodesLimitsParams contains all the parameters to send to the API endpoint
-   for the get kubernetes nodes limits operation.
+/*
+GetKubernetesNodesLimitsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get kubernetes nodes limits operation.
+
+	Typically these are written to a http.Request.
 */
 type GetKubernetesNodesLimitsParams struct {
 

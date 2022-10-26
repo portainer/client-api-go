@@ -52,10 +52,12 @@ func NewEdgeStackStatusUpdateParamsWithHTTPClient(client *http.Client) *EdgeStac
 	}
 }
 
-/* EdgeStackStatusUpdateParams contains all the parameters to send to the API endpoint
-   for the edge stack status update operation.
+/*
+EdgeStackStatusUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge stack status update operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeStackStatusUpdateParams struct {
 

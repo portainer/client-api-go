@@ -52,10 +52,12 @@ func NewSettingsInspectParamsWithHTTPClient(client *http.Client) *SettingsInspec
 	}
 }
 
-/* SettingsInspectParams contains all the parameters to send to the API endpoint
-   for the settings inspect operation.
+/*
+SettingsInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the settings inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type SettingsInspectParams struct {
 	timeout    time.Duration

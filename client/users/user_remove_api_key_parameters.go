@@ -53,10 +53,12 @@ func NewUserRemoveAPIKeyParamsWithHTTPClient(client *http.Client) *UserRemoveAPI
 	}
 }
 
-/* UserRemoveAPIKeyParams contains all the parameters to send to the API endpoint
-   for the user remove API key operation.
+/*
+UserRemoveAPIKeyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user remove API key operation.
+
+	Typically these are written to a http.Request.
 */
 type UserRemoveAPIKeyParams struct {
 

@@ -25,14 +25,14 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	AdditionalFiles []string `json:"additionalFiles"`
 
 	// Optional auto update configuration
-	AutoUpdate *PortainerStackAutoUpdate `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
 
 	// Path to the Stack file inside the Git repository
 	// Example: docker-compose.yml
 	ComposeFile *string `json:"composeFile,omitempty"`
 
 	// A list of environment(endpoint) variables used during stack deployment
-	Env []*PortainerPair `json:"env"`
+	Env []*PortainereePair `json:"env"`
 
 	// Whether the stack is from a app template
 	// Example: false

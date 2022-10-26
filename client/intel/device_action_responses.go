@@ -54,14 +54,44 @@ func NewDeviceActionNoContent() *DeviceActionNoContent {
 	return &DeviceActionNoContent{}
 }
 
-/* DeviceActionNoContent describes a response with status code 204, with default header values.
+/*
+DeviceActionNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type DeviceActionNoContent struct {
 }
 
+// IsSuccess returns true when this device action no content response has a 2xx status code
+func (o *DeviceActionNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this device action no content response has a 3xx status code
+func (o *DeviceActionNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this device action no content response has a 4xx status code
+func (o *DeviceActionNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this device action no content response has a 5xx status code
+func (o *DeviceActionNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this device action no content response a status code equal to that given
+func (o *DeviceActionNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DeviceActionNoContent) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionNoContent ", 204)
+}
+
+func (o *DeviceActionNoContent) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewDeviceActionBadRequest() *DeviceActionBadRequest {
 	return &DeviceActionBadRequest{}
 }
 
-/* DeviceActionBadRequest describes a response with status code 400, with default header values.
+/*
+DeviceActionBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type DeviceActionBadRequest struct {
 }
 
+// IsSuccess returns true when this device action bad request response has a 2xx status code
+func (o *DeviceActionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this device action bad request response has a 3xx status code
+func (o *DeviceActionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this device action bad request response has a 4xx status code
+func (o *DeviceActionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this device action bad request response has a 5xx status code
+func (o *DeviceActionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this device action bad request response a status code equal to that given
+func (o *DeviceActionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *DeviceActionBadRequest) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionBadRequest ", 400)
+}
+
+func (o *DeviceActionBadRequest) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewDeviceActionForbidden() *DeviceActionForbidden {
 	return &DeviceActionForbidden{}
 }
 
-/* DeviceActionForbidden describes a response with status code 403, with default header values.
+/*
+DeviceActionForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type DeviceActionForbidden struct {
 }
 
+// IsSuccess returns true when this device action forbidden response has a 2xx status code
+func (o *DeviceActionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this device action forbidden response has a 3xx status code
+func (o *DeviceActionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this device action forbidden response has a 4xx status code
+func (o *DeviceActionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this device action forbidden response has a 5xx status code
+func (o *DeviceActionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this device action forbidden response a status code equal to that given
+func (o *DeviceActionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *DeviceActionForbidden) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionForbidden ", 403)
+}
+
+func (o *DeviceActionForbidden) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewDeviceActionInternalServerError() *DeviceActionInternalServerError {
 	return &DeviceActionInternalServerError{}
 }
 
-/* DeviceActionInternalServerError describes a response with status code 500, with default header values.
+/*
+DeviceActionInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type DeviceActionInternalServerError struct {
 }
 
+// IsSuccess returns true when this device action internal server error response has a 2xx status code
+func (o *DeviceActionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this device action internal server error response has a 3xx status code
+func (o *DeviceActionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this device action internal server error response has a 4xx status code
+func (o *DeviceActionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this device action internal server error response has a 5xx status code
+func (o *DeviceActionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this device action internal server error response a status code equal to that given
+func (o *DeviceActionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeviceActionInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionInternalServerError ", 500)
+}
+
+func (o *DeviceActionInternalServerError) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionInternalServerError ", 500)
 }
 

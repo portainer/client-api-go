@@ -12,7 +12,7 @@ TBC
 Follow the steps below to generate Client APIs based on our `swagger.yaml` in Golang:
 
 ```sh
-go mod init github.com/portainer/client-api
+go mod init github.com/portainer/client-api-go
 swagger generate client -f swagger.yaml -A portainer-client-api --principal portainer
 go get -u ./...
 ```

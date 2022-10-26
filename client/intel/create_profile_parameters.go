@@ -52,10 +52,12 @@ func NewCreateProfileParamsWithHTTPClient(client *http.Client) *CreateProfilePar
 	}
 }
 
-/* CreateProfileParams contains all the parameters to send to the API endpoint
-   for the create profile operation.
+/*
+CreateProfileParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create profile operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateProfileParams struct {
 	timeout    time.Duration

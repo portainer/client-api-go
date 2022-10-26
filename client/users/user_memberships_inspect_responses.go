@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // UserMembershipsInspectReader is a Reader for the UserMembershipsInspect structure.
@@ -57,24 +57,55 @@ func NewUserMembershipsInspectOK() *UserMembershipsInspectOK {
 	return &UserMembershipsInspectOK{}
 }
 
-/* UserMembershipsInspectOK describes a response with status code 200, with default header values.
+/*
+UserMembershipsInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UserMembershipsInspectOK struct {
-	Payload *models.PortainerTeamMembership
+	Payload *models.PortainereeTeamMembership
+}
+
+// IsSuccess returns true when this user memberships inspect o k response has a 2xx status code
+func (o *UserMembershipsInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user memberships inspect o k response has a 3xx status code
+func (o *UserMembershipsInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user memberships inspect o k response has a 4xx status code
+func (o *UserMembershipsInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user memberships inspect o k response has a 5xx status code
+func (o *UserMembershipsInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user memberships inspect o k response a status code equal to that given
+func (o *UserMembershipsInspectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UserMembershipsInspectOK) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectOK  %+v", 200, o.Payload)
 }
-func (o *UserMembershipsInspectOK) GetPayload() *models.PortainerTeamMembership {
+
+func (o *UserMembershipsInspectOK) String() string {
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectOK  %+v", 200, o.Payload)
+}
+
+func (o *UserMembershipsInspectOK) GetPayload() *models.PortainereeTeamMembership {
 	return o.Payload
 }
 
 func (o *UserMembershipsInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerTeamMembership)
+	o.Payload = new(models.PortainereeTeamMembership)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewUserMembershipsInspectBadRequest() *UserMembershipsInspectBadRequest {
 	return &UserMembershipsInspectBadRequest{}
 }
 
-/* UserMembershipsInspectBadRequest describes a response with status code 400, with default header values.
+/*
+UserMembershipsInspectBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type UserMembershipsInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this user memberships inspect bad request response has a 2xx status code
+func (o *UserMembershipsInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user memberships inspect bad request response has a 3xx status code
+func (o *UserMembershipsInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user memberships inspect bad request response has a 4xx status code
+func (o *UserMembershipsInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user memberships inspect bad request response has a 5xx status code
+func (o *UserMembershipsInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user memberships inspect bad request response a status code equal to that given
+func (o *UserMembershipsInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UserMembershipsInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectBadRequest ", 400)
+}
+
+func (o *UserMembershipsInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewUserMembershipsInspectForbidden() *UserMembershipsInspectForbidden {
 	return &UserMembershipsInspectForbidden{}
 }
 
-/* UserMembershipsInspectForbidden describes a response with status code 403, with default header values.
+/*
+UserMembershipsInspectForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type UserMembershipsInspectForbidden struct {
 }
 
+// IsSuccess returns true when this user memberships inspect forbidden response has a 2xx status code
+func (o *UserMembershipsInspectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user memberships inspect forbidden response has a 3xx status code
+func (o *UserMembershipsInspectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user memberships inspect forbidden response has a 4xx status code
+func (o *UserMembershipsInspectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user memberships inspect forbidden response has a 5xx status code
+func (o *UserMembershipsInspectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user memberships inspect forbidden response a status code equal to that given
+func (o *UserMembershipsInspectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UserMembershipsInspectForbidden) Error() string {
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectForbidden ", 403)
+}
+
+func (o *UserMembershipsInspectForbidden) String() string {
 	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectForbidden ", 403)
 }
 
@@ -131,14 +222,44 @@ func NewUserMembershipsInspectInternalServerError() *UserMembershipsInspectInter
 	return &UserMembershipsInspectInternalServerError{}
 }
 
-/* UserMembershipsInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+UserMembershipsInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type UserMembershipsInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this user memberships inspect internal server error response has a 2xx status code
+func (o *UserMembershipsInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user memberships inspect internal server error response has a 3xx status code
+func (o *UserMembershipsInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user memberships inspect internal server error response has a 4xx status code
+func (o *UserMembershipsInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user memberships inspect internal server error response has a 5xx status code
+func (o *UserMembershipsInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this user memberships inspect internal server error response a status code equal to that given
+func (o *UserMembershipsInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UserMembershipsInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectInternalServerError ", 500)
+}
+
+func (o *UserMembershipsInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectInternalServerError ", 500)
 }
 

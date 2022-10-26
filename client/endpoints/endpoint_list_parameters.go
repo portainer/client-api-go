@@ -53,18 +53,32 @@ func NewEndpointListParamsWithHTTPClient(client *http.Client) *EndpointListParam
 	}
 }
 
-/* EndpointListParams contains all the parameters to send to the API endpoint
-   for the endpoint list operation.
+/*
+EndpointListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint list operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointListParams struct {
 
-	/* EdgeDeviceFilter.
+	/* AgentVersions.
 
-	   will return only these edge environments, none will return only regular edge environments
+	   will return only environments with on of these agent versions
 	*/
-	EdgeDeviceFilter *string
+	AgentVersions []string
+
+	/* EdgeDevice.
+
+	   if exists true show only edge devices, false show only regular edge endpoints. if missing, will show both types (relevant only for edge endpoints)
+	*/
+	EdgeDevice *bool
+
+	/* EdgeDeviceUntrusted.
+
+	   if true, show only untrusted endpoints, if false show only trusted (relevant only for edge devices, and if edgeDevice is true)
+	*/
+	EdgeDeviceUntrusted *bool
 
 	/* EndpointIds.
 
@@ -72,11 +86,11 @@ type EndpointListParams struct {
 	*/
 	EndpointIds []int64
 
-	/* GroupID.
+	/* GroupIds.
 
-	   List environments(endpoints) of this group
+	   List environments(endpoints) of these groups
 	*/
-	GroupID *int64
+	GroupIds []int64
 
 	/* Limit.
 
@@ -90,17 +104,41 @@ type EndpointListParams struct {
 	*/
 	Name *string
 
+	/* Order.
+
+	   Order sorted results by desc/asc
+	*/
+	Order *int64
+
+	/* Provisioned.
+
+	   If true, will return environment(endpoint) that were provisioned
+	*/
+	Provisioned *bool
+
 	/* Search.
 
 	   Search query
 	*/
 	Search *string
 
+	/* Sort.
+
+	   Sort results by this value
+	*/
+	Sort *int64
+
 	/* Start.
 
 	   Start searching from
 	*/
 	Start *int64
+
+	/* Status.
+
+	   List environments(endpoints) by this status
+	*/
+	Status []int64
 
 	/* TagIds.
 
@@ -173,15 +211,37 @@ func (o *EndpointListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithEdgeDeviceFilter adds the edgeDeviceFilter to the endpoint list params
-func (o *EndpointListParams) WithEdgeDeviceFilter(edgeDeviceFilter *string) *EndpointListParams {
-	o.SetEdgeDeviceFilter(edgeDeviceFilter)
+// WithAgentVersions adds the agentVersions to the endpoint list params
+func (o *EndpointListParams) WithAgentVersions(agentVersions []string) *EndpointListParams {
+	o.SetAgentVersions(agentVersions)
 	return o
 }
 
-// SetEdgeDeviceFilter adds the edgeDeviceFilter to the endpoint list params
-func (o *EndpointListParams) SetEdgeDeviceFilter(edgeDeviceFilter *string) {
-	o.EdgeDeviceFilter = edgeDeviceFilter
+// SetAgentVersions adds the agentVersions to the endpoint list params
+func (o *EndpointListParams) SetAgentVersions(agentVersions []string) {
+	o.AgentVersions = agentVersions
+}
+
+// WithEdgeDevice adds the edgeDevice to the endpoint list params
+func (o *EndpointListParams) WithEdgeDevice(edgeDevice *bool) *EndpointListParams {
+	o.SetEdgeDevice(edgeDevice)
+	return o
+}
+
+// SetEdgeDevice adds the edgeDevice to the endpoint list params
+func (o *EndpointListParams) SetEdgeDevice(edgeDevice *bool) {
+	o.EdgeDevice = edgeDevice
+}
+
+// WithEdgeDeviceUntrusted adds the edgeDeviceUntrusted to the endpoint list params
+func (o *EndpointListParams) WithEdgeDeviceUntrusted(edgeDeviceUntrusted *bool) *EndpointListParams {
+	o.SetEdgeDeviceUntrusted(edgeDeviceUntrusted)
+	return o
+}
+
+// SetEdgeDeviceUntrusted adds the edgeDeviceUntrusted to the endpoint list params
+func (o *EndpointListParams) SetEdgeDeviceUntrusted(edgeDeviceUntrusted *bool) {
+	o.EdgeDeviceUntrusted = edgeDeviceUntrusted
 }
 
 // WithEndpointIds adds the endpointIds to the endpoint list params
@@ -195,15 +255,15 @@ func (o *EndpointListParams) SetEndpointIds(endpointIds []int64) {
 	o.EndpointIds = endpointIds
 }
 
-// WithGroupID adds the groupID to the endpoint list params
-func (o *EndpointListParams) WithGroupID(groupID *int64) *EndpointListParams {
-	o.SetGroupID(groupID)
+// WithGroupIds adds the groupIds to the endpoint list params
+func (o *EndpointListParams) WithGroupIds(groupIds []int64) *EndpointListParams {
+	o.SetGroupIds(groupIds)
 	return o
 }
 
-// SetGroupID adds the groupId to the endpoint list params
-func (o *EndpointListParams) SetGroupID(groupID *int64) {
-	o.GroupID = groupID
+// SetGroupIds adds the groupIds to the endpoint list params
+func (o *EndpointListParams) SetGroupIds(groupIds []int64) {
+	o.GroupIds = groupIds
 }
 
 // WithLimit adds the limit to the endpoint list params
@@ -228,6 +288,28 @@ func (o *EndpointListParams) SetName(name *string) {
 	o.Name = name
 }
 
+// WithOrder adds the order to the endpoint list params
+func (o *EndpointListParams) WithOrder(order *int64) *EndpointListParams {
+	o.SetOrder(order)
+	return o
+}
+
+// SetOrder adds the order to the endpoint list params
+func (o *EndpointListParams) SetOrder(order *int64) {
+	o.Order = order
+}
+
+// WithProvisioned adds the provisioned to the endpoint list params
+func (o *EndpointListParams) WithProvisioned(provisioned *bool) *EndpointListParams {
+	o.SetProvisioned(provisioned)
+	return o
+}
+
+// SetProvisioned adds the provisioned to the endpoint list params
+func (o *EndpointListParams) SetProvisioned(provisioned *bool) {
+	o.Provisioned = provisioned
+}
+
 // WithSearch adds the search to the endpoint list params
 func (o *EndpointListParams) WithSearch(search *string) *EndpointListParams {
 	o.SetSearch(search)
@@ -239,6 +321,17 @@ func (o *EndpointListParams) SetSearch(search *string) {
 	o.Search = search
 }
 
+// WithSort adds the sort to the endpoint list params
+func (o *EndpointListParams) WithSort(sort *int64) *EndpointListParams {
+	o.SetSort(sort)
+	return o
+}
+
+// SetSort adds the sort to the endpoint list params
+func (o *EndpointListParams) SetSort(sort *int64) {
+	o.Sort = sort
+}
+
 // WithStart adds the start to the endpoint list params
 func (o *EndpointListParams) WithStart(start *int64) *EndpointListParams {
 	o.SetStart(start)
@@ -248,6 +341,17 @@ func (o *EndpointListParams) WithStart(start *int64) *EndpointListParams {
 // SetStart adds the start to the endpoint list params
 func (o *EndpointListParams) SetStart(start *int64) {
 	o.Start = start
+}
+
+// WithStatus adds the status to the endpoint list params
+func (o *EndpointListParams) WithStatus(status []int64) *EndpointListParams {
+	o.SetStatus(status)
+	return o
+}
+
+// SetStatus adds the status to the endpoint list params
+func (o *EndpointListParams) SetStatus(status []int64) {
+	o.Status = status
 }
 
 // WithTagIds adds the tagIds to the endpoint list params
@@ -291,18 +395,46 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	}
 	var res []error
 
-	if o.EdgeDeviceFilter != nil {
+	if o.AgentVersions != nil {
 
-		// query param edgeDeviceFilter
-		var qrEdgeDeviceFilter string
+		// binding items for agentVersions
+		joinedAgentVersions := o.bindParamAgentVersions(reg)
 
-		if o.EdgeDeviceFilter != nil {
-			qrEdgeDeviceFilter = *o.EdgeDeviceFilter
+		// query array param agentVersions
+		if err := r.SetQueryParam("agentVersions", joinedAgentVersions...); err != nil {
+			return err
 		}
-		qEdgeDeviceFilter := qrEdgeDeviceFilter
-		if qEdgeDeviceFilter != "" {
+	}
 
-			if err := r.SetQueryParam("edgeDeviceFilter", qEdgeDeviceFilter); err != nil {
+	if o.EdgeDevice != nil {
+
+		// query param edgeDevice
+		var qrEdgeDevice bool
+
+		if o.EdgeDevice != nil {
+			qrEdgeDevice = *o.EdgeDevice
+		}
+		qEdgeDevice := swag.FormatBool(qrEdgeDevice)
+		if qEdgeDevice != "" {
+
+			if err := r.SetQueryParam("edgeDevice", qEdgeDevice); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.EdgeDeviceUntrusted != nil {
+
+		// query param edgeDeviceUntrusted
+		var qrEdgeDeviceUntrusted bool
+
+		if o.EdgeDeviceUntrusted != nil {
+			qrEdgeDeviceUntrusted = *o.EdgeDeviceUntrusted
+		}
+		qEdgeDeviceUntrusted := swag.FormatBool(qrEdgeDeviceUntrusted)
+		if qEdgeDeviceUntrusted != "" {
+
+			if err := r.SetQueryParam("edgeDeviceUntrusted", qEdgeDeviceUntrusted); err != nil {
 				return err
 			}
 		}
@@ -319,20 +451,14 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.GroupID != nil {
+	if o.GroupIds != nil {
 
-		// query param groupId
-		var qrGroupID int64
+		// binding items for groupIds
+		joinedGroupIds := o.bindParamGroupIds(reg)
 
-		if o.GroupID != nil {
-			qrGroupID = *o.GroupID
-		}
-		qGroupID := swag.FormatInt64(qrGroupID)
-		if qGroupID != "" {
-
-			if err := r.SetQueryParam("groupId", qGroupID); err != nil {
-				return err
-			}
+		// query array param groupIds
+		if err := r.SetQueryParam("groupIds", joinedGroupIds...); err != nil {
+			return err
 		}
 	}
 
@@ -370,6 +496,40 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
+	if o.Order != nil {
+
+		// query param order
+		var qrOrder int64
+
+		if o.Order != nil {
+			qrOrder = *o.Order
+		}
+		qOrder := swag.FormatInt64(qrOrder)
+		if qOrder != "" {
+
+			if err := r.SetQueryParam("order", qOrder); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Provisioned != nil {
+
+		// query param provisioned
+		var qrProvisioned bool
+
+		if o.Provisioned != nil {
+			qrProvisioned = *o.Provisioned
+		}
+		qProvisioned := swag.FormatBool(qrProvisioned)
+		if qProvisioned != "" {
+
+			if err := r.SetQueryParam("provisioned", qProvisioned); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.Search != nil {
 
 		// query param search
@@ -382,6 +542,23 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qSearch != "" {
 
 			if err := r.SetQueryParam("search", qSearch); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Sort != nil {
+
+		// query param sort
+		var qrSort int64
+
+		if o.Sort != nil {
+			qrSort = *o.Sort
+		}
+		qSort := swag.FormatInt64(qrSort)
+		if qSort != "" {
+
+			if err := r.SetQueryParam("sort", qSort); err != nil {
 				return err
 			}
 		}
@@ -401,6 +578,17 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 			if err := r.SetQueryParam("start", qStart); err != nil {
 				return err
 			}
+		}
+	}
+
+	if o.Status != nil {
+
+		// binding items for status
+		joinedStatus := o.bindParamStatus(reg)
+
+		// query array param status
+		if err := r.SetQueryParam("status", joinedStatus...); err != nil {
+			return err
 		}
 	}
 
@@ -449,6 +637,23 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	return nil
 }
 
+// bindParamEndpointList binds the parameter agentVersions
+func (o *EndpointListParams) bindParamAgentVersions(formats strfmt.Registry) []string {
+	agentVersionsIR := o.AgentVersions
+
+	var agentVersionsIC []string
+	for _, agentVersionsIIR := range agentVersionsIR { // explode []string
+
+		agentVersionsIIV := agentVersionsIIR // string as string
+		agentVersionsIC = append(agentVersionsIC, agentVersionsIIV)
+	}
+
+	// items.CollectionFormat: ""
+	agentVersionsIS := swag.JoinByFormat(agentVersionsIC, "")
+
+	return agentVersionsIS
+}
+
 // bindParamEndpointList binds the parameter endpointIds
 func (o *EndpointListParams) bindParamEndpointIds(formats strfmt.Registry) []string {
 	endpointIdsIR := o.EndpointIds
@@ -464,6 +669,40 @@ func (o *EndpointListParams) bindParamEndpointIds(formats strfmt.Registry) []str
 	endpointIdsIS := swag.JoinByFormat(endpointIdsIC, "")
 
 	return endpointIdsIS
+}
+
+// bindParamEndpointList binds the parameter groupIds
+func (o *EndpointListParams) bindParamGroupIds(formats strfmt.Registry) []string {
+	groupIdsIR := o.GroupIds
+
+	var groupIdsIC []string
+	for _, groupIdsIIR := range groupIdsIR { // explode []int64
+
+		groupIdsIIV := swag.FormatInt64(groupIdsIIR) // int64 as string
+		groupIdsIC = append(groupIdsIC, groupIdsIIV)
+	}
+
+	// items.CollectionFormat: ""
+	groupIdsIS := swag.JoinByFormat(groupIdsIC, "")
+
+	return groupIdsIS
+}
+
+// bindParamEndpointList binds the parameter status
+func (o *EndpointListParams) bindParamStatus(formats strfmt.Registry) []string {
+	statusIR := o.Status
+
+	var statusIC []string
+	for _, statusIIR := range statusIR { // explode []int64
+
+		statusIIV := swag.FormatInt64(statusIIR) // int64 as string
+		statusIC = append(statusIC, statusIIV)
+	}
+
+	// items.CollectionFormat: ""
+	statusIS := swag.JoinByFormat(statusIC, "")
+
+	return statusIS
 }
 
 // bindParamEndpointList binds the parameter tagIds

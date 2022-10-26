@@ -36,9 +36,10 @@ type ClientService interface {
 }
 
 /*
-  UploadTLS uploads TLS files
+	UploadTLS uploads TLS files
 
-  Use this environment(endpoint) to upload TLS files.
+	Use this environment(endpoint) to upload TLS files.
+
 **Access policy**: administrator
 */
 func (a *Client) UploadTLS(params *UploadTLSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UploadTLSNoContent, error) {

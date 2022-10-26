@@ -52,10 +52,12 @@ func NewHelmShowParamsWithHTTPClient(client *http.Client) *HelmShowParams {
 	}
 }
 
-/* HelmShowParams contains all the parameters to send to the API endpoint
-   for the helm show operation.
+/*
+HelmShowParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the helm show operation.
+
+	Typically these are written to a http.Request.
 */
 type HelmShowParams struct {
 

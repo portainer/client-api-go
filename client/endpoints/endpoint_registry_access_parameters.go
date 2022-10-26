@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewEndpointRegistryAccessParams creates a new EndpointRegistryAccessParams object,
@@ -55,10 +55,12 @@ func NewEndpointRegistryAccessParamsWithHTTPClient(client *http.Client) *Endpoin
 	}
 }
 
-/* EndpointRegistryAccessParams contains all the parameters to send to the API endpoint
-   for the endpoint registry access operation.
+/*
+EndpointRegistryAccessParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint registry access operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointRegistryAccessParams struct {
 

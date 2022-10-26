@@ -53,10 +53,12 @@ func NewEndpointDockerhubStatusParamsWithHTTPClient(client *http.Client) *Endpoi
 	}
 }
 
-/* EndpointDockerhubStatusParams contains all the parameters to send to the API endpoint
-   for the endpoint dockerhub status operation.
+/*
+EndpointDockerhubStatusParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint dockerhub status operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointDockerhubStatusParams struct {
 

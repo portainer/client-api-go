@@ -55,7 +55,8 @@ func NewHelmShowOK() *HelmShowOK {
 	return &HelmShowOK{}
 }
 
-/* HelmShowOK describes a response with status code 200, with default header values.
+/*
+HelmShowOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -63,9 +64,39 @@ type HelmShowOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this helm show o k response has a 2xx status code
+func (o *HelmShowOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this helm show o k response has a 3xx status code
+func (o *HelmShowOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm show o k response has a 4xx status code
+func (o *HelmShowOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm show o k response has a 5xx status code
+func (o *HelmShowOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm show o k response a status code equal to that given
+func (o *HelmShowOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *HelmShowOK) Error() string {
 	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowOK  %+v", 200, o.Payload)
 }
+
+func (o *HelmShowOK) String() string {
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowOK  %+v", 200, o.Payload)
+}
+
 func (o *HelmShowOK) GetPayload() string {
 	return o.Payload
 }
@@ -85,14 +116,44 @@ func NewHelmShowUnauthorized() *HelmShowUnauthorized {
 	return &HelmShowUnauthorized{}
 }
 
-/* HelmShowUnauthorized describes a response with status code 401, with default header values.
+/*
+HelmShowUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type HelmShowUnauthorized struct {
 }
 
+// IsSuccess returns true when this helm show unauthorized response has a 2xx status code
+func (o *HelmShowUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm show unauthorized response has a 3xx status code
+func (o *HelmShowUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm show unauthorized response has a 4xx status code
+func (o *HelmShowUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm show unauthorized response has a 5xx status code
+func (o *HelmShowUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm show unauthorized response a status code equal to that given
+func (o *HelmShowUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *HelmShowUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowUnauthorized ", 401)
+}
+
+func (o *HelmShowUnauthorized) String() string {
 	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowUnauthorized ", 401)
 }
 
@@ -106,14 +167,44 @@ func NewHelmShowNotFound() *HelmShowNotFound {
 	return &HelmShowNotFound{}
 }
 
-/* HelmShowNotFound describes a response with status code 404, with default header values.
+/*
+HelmShowNotFound describes a response with status code 404, with default header values.
 
 Environment(Endpoint) or ServiceAccount not found
 */
 type HelmShowNotFound struct {
 }
 
+// IsSuccess returns true when this helm show not found response has a 2xx status code
+func (o *HelmShowNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm show not found response has a 3xx status code
+func (o *HelmShowNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm show not found response has a 4xx status code
+func (o *HelmShowNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm show not found response has a 5xx status code
+func (o *HelmShowNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm show not found response a status code equal to that given
+func (o *HelmShowNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *HelmShowNotFound) Error() string {
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowNotFound ", 404)
+}
+
+func (o *HelmShowNotFound) String() string {
 	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowNotFound ", 404)
 }
 
@@ -127,14 +218,44 @@ func NewHelmShowInternalServerError() *HelmShowInternalServerError {
 	return &HelmShowInternalServerError{}
 }
 
-/* HelmShowInternalServerError describes a response with status code 500, with default header values.
+/*
+HelmShowInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type HelmShowInternalServerError struct {
 }
 
+// IsSuccess returns true when this helm show internal server error response has a 2xx status code
+func (o *HelmShowInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm show internal server error response has a 3xx status code
+func (o *HelmShowInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm show internal server error response has a 4xx status code
+func (o *HelmShowInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm show internal server error response has a 5xx status code
+func (o *HelmShowInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this helm show internal server error response a status code equal to that given
+func (o *HelmShowInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *HelmShowInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowInternalServerError ", 500)
+}
+
+func (o *HelmShowInternalServerError) String() string {
 	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowInternalServerError ", 500)
 }
 

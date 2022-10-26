@@ -60,14 +60,44 @@ func NewGetWebsocketPodOK() *GetWebsocketPodOK {
 	return &GetWebsocketPodOK{}
 }
 
-/* GetWebsocketPodOK describes a response with status code 200, with default header values.
+/*
+GetWebsocketPodOK describes a response with status code 200, with default header values.
 
-GetWebsocketPodOK get websocket pod o k
+OK
 */
 type GetWebsocketPodOK struct {
 }
 
+// IsSuccess returns true when this get websocket pod o k response has a 2xx status code
+func (o *GetWebsocketPodOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get websocket pod o k response has a 3xx status code
+func (o *GetWebsocketPodOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket pod o k response has a 4xx status code
+func (o *GetWebsocketPodOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get websocket pod o k response has a 5xx status code
+func (o *GetWebsocketPodOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get websocket pod o k response a status code equal to that given
+func (o *GetWebsocketPodOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetWebsocketPodOK) Error() string {
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodOK ", 200)
+}
+
+func (o *GetWebsocketPodOK) String() string {
 	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodOK ", 200)
 }
 
@@ -81,14 +111,44 @@ func NewGetWebsocketPodBadRequest() *GetWebsocketPodBadRequest {
 	return &GetWebsocketPodBadRequest{}
 }
 
-/* GetWebsocketPodBadRequest describes a response with status code 400, with default header values.
+/*
+GetWebsocketPodBadRequest describes a response with status code 400, with default header values.
 
-GetWebsocketPodBadRequest get websocket pod bad request
+Bad Request
 */
 type GetWebsocketPodBadRequest struct {
 }
 
+// IsSuccess returns true when this get websocket pod bad request response has a 2xx status code
+func (o *GetWebsocketPodBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get websocket pod bad request response has a 3xx status code
+func (o *GetWebsocketPodBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket pod bad request response has a 4xx status code
+func (o *GetWebsocketPodBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get websocket pod bad request response has a 5xx status code
+func (o *GetWebsocketPodBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get websocket pod bad request response a status code equal to that given
+func (o *GetWebsocketPodBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetWebsocketPodBadRequest) Error() string {
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodBadRequest ", 400)
+}
+
+func (o *GetWebsocketPodBadRequest) String() string {
 	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewGetWebsocketPodForbidden() *GetWebsocketPodForbidden {
 	return &GetWebsocketPodForbidden{}
 }
 
-/* GetWebsocketPodForbidden describes a response with status code 403, with default header values.
+/*
+GetWebsocketPodForbidden describes a response with status code 403, with default header values.
 
-GetWebsocketPodForbidden get websocket pod forbidden
+Forbidden
 */
 type GetWebsocketPodForbidden struct {
 }
 
+// IsSuccess returns true when this get websocket pod forbidden response has a 2xx status code
+func (o *GetWebsocketPodForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get websocket pod forbidden response has a 3xx status code
+func (o *GetWebsocketPodForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket pod forbidden response has a 4xx status code
+func (o *GetWebsocketPodForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get websocket pod forbidden response has a 5xx status code
+func (o *GetWebsocketPodForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get websocket pod forbidden response a status code equal to that given
+func (o *GetWebsocketPodForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetWebsocketPodForbidden) Error() string {
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodForbidden ", 403)
+}
+
+func (o *GetWebsocketPodForbidden) String() string {
 	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewGetWebsocketPodNotFound() *GetWebsocketPodNotFound {
 	return &GetWebsocketPodNotFound{}
 }
 
-/* GetWebsocketPodNotFound describes a response with status code 404, with default header values.
+/*
+GetWebsocketPodNotFound describes a response with status code 404, with default header values.
 
-GetWebsocketPodNotFound get websocket pod not found
+Not Found
 */
 type GetWebsocketPodNotFound struct {
 }
 
+// IsSuccess returns true when this get websocket pod not found response has a 2xx status code
+func (o *GetWebsocketPodNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get websocket pod not found response has a 3xx status code
+func (o *GetWebsocketPodNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket pod not found response has a 4xx status code
+func (o *GetWebsocketPodNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get websocket pod not found response has a 5xx status code
+func (o *GetWebsocketPodNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get websocket pod not found response a status code equal to that given
+func (o *GetWebsocketPodNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetWebsocketPodNotFound) Error() string {
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodNotFound ", 404)
+}
+
+func (o *GetWebsocketPodNotFound) String() string {
 	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewGetWebsocketPodInternalServerError() *GetWebsocketPodInternalServerError
 	return &GetWebsocketPodInternalServerError{}
 }
 
-/* GetWebsocketPodInternalServerError describes a response with status code 500, with default header values.
+/*
+GetWebsocketPodInternalServerError describes a response with status code 500, with default header values.
 
-GetWebsocketPodInternalServerError get websocket pod internal server error
+Internal Server Error
 */
 type GetWebsocketPodInternalServerError struct {
 }
 
+// IsSuccess returns true when this get websocket pod internal server error response has a 2xx status code
+func (o *GetWebsocketPodInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get websocket pod internal server error response has a 3xx status code
+func (o *GetWebsocketPodInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket pod internal server error response has a 4xx status code
+func (o *GetWebsocketPodInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get websocket pod internal server error response has a 5xx status code
+func (o *GetWebsocketPodInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get websocket pod internal server error response a status code equal to that given
+func (o *GetWebsocketPodInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetWebsocketPodInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodInternalServerError ", 500)
+}
+
+func (o *GetWebsocketPodInternalServerError) String() string {
 	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodInternalServerError ", 500)
 }
 

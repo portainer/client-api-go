@@ -54,14 +54,44 @@ func NewEndpointGroupAddEndpointNoContent() *EndpointGroupAddEndpointNoContent {
 	return &EndpointGroupAddEndpointNoContent{}
 }
 
-/* EndpointGroupAddEndpointNoContent describes a response with status code 204, with default header values.
+/*
+EndpointGroupAddEndpointNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type EndpointGroupAddEndpointNoContent struct {
 }
 
+// IsSuccess returns true when this endpoint group add endpoint no content response has a 2xx status code
+func (o *EndpointGroupAddEndpointNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this endpoint group add endpoint no content response has a 3xx status code
+func (o *EndpointGroupAddEndpointNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint group add endpoint no content response has a 4xx status code
+func (o *EndpointGroupAddEndpointNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint group add endpoint no content response has a 5xx status code
+func (o *EndpointGroupAddEndpointNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint group add endpoint no content response a status code equal to that given
+func (o *EndpointGroupAddEndpointNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EndpointGroupAddEndpointNoContent) Error() string {
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNoContent ", 204)
+}
+
+func (o *EndpointGroupAddEndpointNoContent) String() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewEndpointGroupAddEndpointBadRequest() *EndpointGroupAddEndpointBadRequest
 	return &EndpointGroupAddEndpointBadRequest{}
 }
 
-/* EndpointGroupAddEndpointBadRequest describes a response with status code 400, with default header values.
+/*
+EndpointGroupAddEndpointBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type EndpointGroupAddEndpointBadRequest struct {
 }
 
+// IsSuccess returns true when this endpoint group add endpoint bad request response has a 2xx status code
+func (o *EndpointGroupAddEndpointBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint group add endpoint bad request response has a 3xx status code
+func (o *EndpointGroupAddEndpointBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint group add endpoint bad request response has a 4xx status code
+func (o *EndpointGroupAddEndpointBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint group add endpoint bad request response has a 5xx status code
+func (o *EndpointGroupAddEndpointBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint group add endpoint bad request response a status code equal to that given
+func (o *EndpointGroupAddEndpointBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EndpointGroupAddEndpointBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointBadRequest ", 400)
+}
+
+func (o *EndpointGroupAddEndpointBadRequest) String() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewEndpointGroupAddEndpointNotFound() *EndpointGroupAddEndpointNotFound {
 	return &EndpointGroupAddEndpointNotFound{}
 }
 
-/* EndpointGroupAddEndpointNotFound describes a response with status code 404, with default header values.
+/*
+EndpointGroupAddEndpointNotFound describes a response with status code 404, with default header values.
 
 EndpointGroup not found
 */
 type EndpointGroupAddEndpointNotFound struct {
 }
 
+// IsSuccess returns true when this endpoint group add endpoint not found response has a 2xx status code
+func (o *EndpointGroupAddEndpointNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint group add endpoint not found response has a 3xx status code
+func (o *EndpointGroupAddEndpointNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint group add endpoint not found response has a 4xx status code
+func (o *EndpointGroupAddEndpointNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint group add endpoint not found response has a 5xx status code
+func (o *EndpointGroupAddEndpointNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint group add endpoint not found response a status code equal to that given
+func (o *EndpointGroupAddEndpointNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *EndpointGroupAddEndpointNotFound) Error() string {
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNotFound ", 404)
+}
+
+func (o *EndpointGroupAddEndpointNotFound) String() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNotFound ", 404)
 }
 
@@ -117,14 +207,44 @@ func NewEndpointGroupAddEndpointInternalServerError() *EndpointGroupAddEndpointI
 	return &EndpointGroupAddEndpointInternalServerError{}
 }
 
-/* EndpointGroupAddEndpointInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointGroupAddEndpointInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type EndpointGroupAddEndpointInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint group add endpoint internal server error response has a 2xx status code
+func (o *EndpointGroupAddEndpointInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint group add endpoint internal server error response has a 3xx status code
+func (o *EndpointGroupAddEndpointInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint group add endpoint internal server error response has a 4xx status code
+func (o *EndpointGroupAddEndpointInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint group add endpoint internal server error response has a 5xx status code
+func (o *EndpointGroupAddEndpointInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint group add endpoint internal server error response a status code equal to that given
+func (o *EndpointGroupAddEndpointInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointGroupAddEndpointInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointInternalServerError ", 500)
+}
+
+func (o *EndpointGroupAddEndpointInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointInternalServerError ", 500)
 }
 

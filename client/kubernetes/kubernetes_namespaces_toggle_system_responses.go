@@ -32,6 +32,12 @@ func (o *KubernetesNamespacesToggleSystemReader) ReadResponse(response runtime.C
 			return nil, err
 		}
 		return nil, result
+	case 403:
+		result := NewKubernetesNamespacesToggleSystemForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 404:
 		result := NewKubernetesNamespacesToggleSystemNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -54,14 +60,44 @@ func NewKubernetesNamespacesToggleSystemOK() *KubernetesNamespacesToggleSystemOK
 	return &KubernetesNamespacesToggleSystemOK{}
 }
 
-/* KubernetesNamespacesToggleSystemOK describes a response with status code 200, with default header values.
+/*
+KubernetesNamespacesToggleSystemOK describes a response with status code 200, with default header values.
 
 Success
 */
 type KubernetesNamespacesToggleSystemOK struct {
 }
 
+// IsSuccess returns true when this kubernetes namespaces toggle system o k response has a 2xx status code
+func (o *KubernetesNamespacesToggleSystemOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this kubernetes namespaces toggle system o k response has a 3xx status code
+func (o *KubernetesNamespacesToggleSystemOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this kubernetes namespaces toggle system o k response has a 4xx status code
+func (o *KubernetesNamespacesToggleSystemOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this kubernetes namespaces toggle system o k response has a 5xx status code
+func (o *KubernetesNamespacesToggleSystemOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this kubernetes namespaces toggle system o k response a status code equal to that given
+func (o *KubernetesNamespacesToggleSystemOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *KubernetesNamespacesToggleSystemOK) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemOK ", 200)
+}
+
+func (o *KubernetesNamespacesToggleSystemOK) String() string {
 	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemOK ", 200)
 }
 
@@ -75,18 +111,99 @@ func NewKubernetesNamespacesToggleSystemBadRequest() *KubernetesNamespacesToggle
 	return &KubernetesNamespacesToggleSystemBadRequest{}
 }
 
-/* KubernetesNamespacesToggleSystemBadRequest describes a response with status code 400, with default header values.
+/*
+KubernetesNamespacesToggleSystemBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type KubernetesNamespacesToggleSystemBadRequest struct {
 }
 
+// IsSuccess returns true when this kubernetes namespaces toggle system bad request response has a 2xx status code
+func (o *KubernetesNamespacesToggleSystemBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this kubernetes namespaces toggle system bad request response has a 3xx status code
+func (o *KubernetesNamespacesToggleSystemBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this kubernetes namespaces toggle system bad request response has a 4xx status code
+func (o *KubernetesNamespacesToggleSystemBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this kubernetes namespaces toggle system bad request response has a 5xx status code
+func (o *KubernetesNamespacesToggleSystemBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this kubernetes namespaces toggle system bad request response a status code equal to that given
+func (o *KubernetesNamespacesToggleSystemBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *KubernetesNamespacesToggleSystemBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemBadRequest ", 400)
 }
 
+func (o *KubernetesNamespacesToggleSystemBadRequest) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemBadRequest ", 400)
+}
+
 func (o *KubernetesNamespacesToggleSystemBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewKubernetesNamespacesToggleSystemForbidden creates a KubernetesNamespacesToggleSystemForbidden with default headers values
+func NewKubernetesNamespacesToggleSystemForbidden() *KubernetesNamespacesToggleSystemForbidden {
+	return &KubernetesNamespacesToggleSystemForbidden{}
+}
+
+/*
+KubernetesNamespacesToggleSystemForbidden describes a response with status code 403, with default header values.
+
+Permission denied
+*/
+type KubernetesNamespacesToggleSystemForbidden struct {
+}
+
+// IsSuccess returns true when this kubernetes namespaces toggle system forbidden response has a 2xx status code
+func (o *KubernetesNamespacesToggleSystemForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this kubernetes namespaces toggle system forbidden response has a 3xx status code
+func (o *KubernetesNamespacesToggleSystemForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this kubernetes namespaces toggle system forbidden response has a 4xx status code
+func (o *KubernetesNamespacesToggleSystemForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this kubernetes namespaces toggle system forbidden response has a 5xx status code
+func (o *KubernetesNamespacesToggleSystemForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this kubernetes namespaces toggle system forbidden response a status code equal to that given
+func (o *KubernetesNamespacesToggleSystemForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+func (o *KubernetesNamespacesToggleSystemForbidden) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemForbidden ", 403)
+}
+
+func (o *KubernetesNamespacesToggleSystemForbidden) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemForbidden ", 403)
+}
+
+func (o *KubernetesNamespacesToggleSystemForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -96,14 +213,44 @@ func NewKubernetesNamespacesToggleSystemNotFound() *KubernetesNamespacesToggleSy
 	return &KubernetesNamespacesToggleSystemNotFound{}
 }
 
-/* KubernetesNamespacesToggleSystemNotFound describes a response with status code 404, with default header values.
+/*
+KubernetesNamespacesToggleSystemNotFound describes a response with status code 404, with default header values.
 
 Environment(Endpoint) not found
 */
 type KubernetesNamespacesToggleSystemNotFound struct {
 }
 
+// IsSuccess returns true when this kubernetes namespaces toggle system not found response has a 2xx status code
+func (o *KubernetesNamespacesToggleSystemNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this kubernetes namespaces toggle system not found response has a 3xx status code
+func (o *KubernetesNamespacesToggleSystemNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this kubernetes namespaces toggle system not found response has a 4xx status code
+func (o *KubernetesNamespacesToggleSystemNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this kubernetes namespaces toggle system not found response has a 5xx status code
+func (o *KubernetesNamespacesToggleSystemNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this kubernetes namespaces toggle system not found response a status code equal to that given
+func (o *KubernetesNamespacesToggleSystemNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *KubernetesNamespacesToggleSystemNotFound) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemNotFound ", 404)
+}
+
+func (o *KubernetesNamespacesToggleSystemNotFound) String() string {
 	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemNotFound ", 404)
 }
 
@@ -117,14 +264,44 @@ func NewKubernetesNamespacesToggleSystemInternalServerError() *KubernetesNamespa
 	return &KubernetesNamespacesToggleSystemInternalServerError{}
 }
 
-/* KubernetesNamespacesToggleSystemInternalServerError describes a response with status code 500, with default header values.
+/*
+KubernetesNamespacesToggleSystemInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type KubernetesNamespacesToggleSystemInternalServerError struct {
 }
 
+// IsSuccess returns true when this kubernetes namespaces toggle system internal server error response has a 2xx status code
+func (o *KubernetesNamespacesToggleSystemInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this kubernetes namespaces toggle system internal server error response has a 3xx status code
+func (o *KubernetesNamespacesToggleSystemInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this kubernetes namespaces toggle system internal server error response has a 4xx status code
+func (o *KubernetesNamespacesToggleSystemInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this kubernetes namespaces toggle system internal server error response has a 5xx status code
+func (o *KubernetesNamespacesToggleSystemInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this kubernetes namespaces toggle system internal server error response a status code equal to that given
+func (o *KubernetesNamespacesToggleSystemInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *KubernetesNamespacesToggleSystemInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemInternalServerError ", 500)
+}
+
+func (o *KubernetesNamespacesToggleSystemInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemInternalServerError ", 500)
 }
 

@@ -30,10 +30,10 @@ type RegistriesRegistryCreatePayload struct {
 	BaseURL string `json:"baseURL,omitempty"`
 
 	// ECR specific details, required when type = 7
-	Ecr *PortainerEcrData `json:"ecr,omitempty"`
+	Ecr *PortainereeEcrData `json:"ecr,omitempty"`
 
 	// Gitlab specific details, required when type = 4
-	Gitlab *PortainerGitlabRegistryData `json:"gitlab,omitempty"`
+	Gitlab *PortainereeGitlabRegistryData `json:"gitlab,omitempty"`
 
 	// Name that will be used to identify this registry
 	// Example: my-registry
@@ -45,7 +45,7 @@ type RegistriesRegistryCreatePayload struct {
 	Password string `json:"password,omitempty"`
 
 	// Quay specific details, required when type = 1
-	Quay *PortainerQuayRegistryData `json:"quay,omitempty"`
+	Quay *PortainereeQuayRegistryData `json:"quay,omitempty"`
 
 	// Registry Type. Valid values are:
 	// 	1 (Quay.io),

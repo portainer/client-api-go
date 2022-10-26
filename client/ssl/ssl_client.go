@@ -38,9 +38,10 @@ type ClientService interface {
 }
 
 /*
-  SSLInspect inspects the ssl settings
+	SSLInspect inspects the ssl settings
 
-  Retrieve the ssl settings.
+	Retrieve the ssl settings.
+
 **Access policy**: administrator
 */
 func (a *Client) SSLInspect(params *SSLInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSLInspectOK, error) {
@@ -80,9 +81,10 @@ func (a *Client) SSLInspect(params *SSLInspectParams, authInfo runtime.ClientAut
 }
 
 /*
-  SSLUpdate updates the ssl settings
+	SSLUpdate updates the ssl settings
 
-  Update the ssl settings.
+	Update the ssl settings.
+
 **Access policy**: administrator
 */
 func (a *Client) SSLUpdate(params *SSLUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSLUpdateNoContent, error) {

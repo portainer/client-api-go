@@ -53,10 +53,12 @@ func NewStackStopParamsWithHTTPClient(client *http.Client) *StackStopParams {
 	}
 }
 
-/* StackStopParams contains all the parameters to send to the API endpoint
-   for the stack stop operation.
+/*
+StackStopParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stack stop operation.
+
+	Typically these are written to a http.Request.
 */
 type StackStopParams struct {
 

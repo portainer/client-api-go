@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewDeviceActionParams creates a new DeviceActionParams object,
@@ -54,10 +54,12 @@ func NewDeviceActionParamsWithHTTPClient(client *http.Client) *DeviceActionParam
 	}
 }
 
-/* DeviceActionParams contains all the parameters to send to the API endpoint
-   for the device action operation.
+/*
+DeviceActionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the device action operation.
+
+	Typically these are written to a http.Request.
 */
 type DeviceActionParams struct {
 

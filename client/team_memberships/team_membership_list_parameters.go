@@ -52,10 +52,12 @@ func NewTeamMembershipListParamsWithHTTPClient(client *http.Client) *TeamMembers
 	}
 }
 
-/* TeamMembershipListParams contains all the parameters to send to the API endpoint
-   for the team membership list operation.
+/*
+TeamMembershipListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the team membership list operation.
+
+	Typically these are written to a http.Request.
 */
 type TeamMembershipListParams struct {
 	timeout    time.Duration

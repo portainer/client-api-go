@@ -48,14 +48,44 @@ func NewDeleteWebhooksIDAccepted() *DeleteWebhooksIDAccepted {
 	return &DeleteWebhooksIDAccepted{}
 }
 
-/* DeleteWebhooksIDAccepted describes a response with status code 202, with default header values.
+/*
+DeleteWebhooksIDAccepted describes a response with status code 202, with default header values.
 
 Webhook deleted
 */
 type DeleteWebhooksIDAccepted struct {
 }
 
+// IsSuccess returns true when this delete webhooks Id accepted response has a 2xx status code
+func (o *DeleteWebhooksIDAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete webhooks Id accepted response has a 3xx status code
+func (o *DeleteWebhooksIDAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhooks Id accepted response has a 4xx status code
+func (o *DeleteWebhooksIDAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete webhooks Id accepted response has a 5xx status code
+func (o *DeleteWebhooksIDAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete webhooks Id accepted response a status code equal to that given
+func (o *DeleteWebhooksIDAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
 func (o *DeleteWebhooksIDAccepted) Error() string {
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdAccepted ", 202)
+}
+
+func (o *DeleteWebhooksIDAccepted) String() string {
 	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdAccepted ", 202)
 }
 
@@ -69,14 +99,44 @@ func NewDeleteWebhooksIDBadRequest() *DeleteWebhooksIDBadRequest {
 	return &DeleteWebhooksIDBadRequest{}
 }
 
-/* DeleteWebhooksIDBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteWebhooksIDBadRequest describes a response with status code 400, with default header values.
 
-DeleteWebhooksIDBadRequest delete webhooks Id bad request
+Bad Request
 */
 type DeleteWebhooksIDBadRequest struct {
 }
 
+// IsSuccess returns true when this delete webhooks Id bad request response has a 2xx status code
+func (o *DeleteWebhooksIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete webhooks Id bad request response has a 3xx status code
+func (o *DeleteWebhooksIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhooks Id bad request response has a 4xx status code
+func (o *DeleteWebhooksIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete webhooks Id bad request response has a 5xx status code
+func (o *DeleteWebhooksIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete webhooks Id bad request response a status code equal to that given
+func (o *DeleteWebhooksIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *DeleteWebhooksIDBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdBadRequest ", 400)
+}
+
+func (o *DeleteWebhooksIDBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewDeleteWebhooksIDInternalServerError() *DeleteWebhooksIDInternalServerErr
 	return &DeleteWebhooksIDInternalServerError{}
 }
 
-/* DeleteWebhooksIDInternalServerError describes a response with status code 500, with default header values.
+/*
+DeleteWebhooksIDInternalServerError describes a response with status code 500, with default header values.
 
-DeleteWebhooksIDInternalServerError delete webhooks Id internal server error
+Internal Server Error
 */
 type DeleteWebhooksIDInternalServerError struct {
 }
 
+// IsSuccess returns true when this delete webhooks Id internal server error response has a 2xx status code
+func (o *DeleteWebhooksIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete webhooks Id internal server error response has a 3xx status code
+func (o *DeleteWebhooksIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhooks Id internal server error response has a 4xx status code
+func (o *DeleteWebhooksIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete webhooks Id internal server error response has a 5xx status code
+func (o *DeleteWebhooksIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete webhooks Id internal server error response a status code equal to that given
+func (o *DeleteWebhooksIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeleteWebhooksIDInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdInternalServerError ", 500)
+}
+
+func (o *DeleteWebhooksIDInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdInternalServerError ", 500)
 }
 

@@ -52,10 +52,12 @@ func NewFdoProfileInspectParamsWithHTTPClient(client *http.Client) *FdoProfileIn
 	}
 }
 
-/* FdoProfileInspectParams contains all the parameters to send to the API endpoint
-   for the fdo profile inspect operation.
+/*
+FdoProfileInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fdo profile inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type FdoProfileInspectParams struct {
 	timeout    time.Duration

@@ -60,14 +60,44 @@ func NewHelmDeleteNoContent() *HelmDeleteNoContent {
 	return &HelmDeleteNoContent{}
 }
 
-/* HelmDeleteNoContent describes a response with status code 204, with default header values.
+/*
+HelmDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type HelmDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this helm delete no content response has a 2xx status code
+func (o *HelmDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this helm delete no content response has a 3xx status code
+func (o *HelmDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm delete no content response has a 4xx status code
+func (o *HelmDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm delete no content response has a 5xx status code
+func (o *HelmDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm delete no content response a status code equal to that given
+func (o *HelmDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *HelmDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNoContent ", 204)
+}
+
+func (o *HelmDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewHelmDeleteBadRequest() *HelmDeleteBadRequest {
 	return &HelmDeleteBadRequest{}
 }
 
-/* HelmDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+HelmDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid environment(endpoint) id or bad request
 */
 type HelmDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this helm delete bad request response has a 2xx status code
+func (o *HelmDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm delete bad request response has a 3xx status code
+func (o *HelmDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm delete bad request response has a 4xx status code
+func (o *HelmDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm delete bad request response has a 5xx status code
+func (o *HelmDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm delete bad request response a status code equal to that given
+func (o *HelmDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *HelmDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteBadRequest ", 400)
+}
+
+func (o *HelmDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewHelmDeleteUnauthorized() *HelmDeleteUnauthorized {
 	return &HelmDeleteUnauthorized{}
 }
 
-/* HelmDeleteUnauthorized describes a response with status code 401, with default header values.
+/*
+HelmDeleteUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type HelmDeleteUnauthorized struct {
 }
 
+// IsSuccess returns true when this helm delete unauthorized response has a 2xx status code
+func (o *HelmDeleteUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm delete unauthorized response has a 3xx status code
+func (o *HelmDeleteUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm delete unauthorized response has a 4xx status code
+func (o *HelmDeleteUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm delete unauthorized response has a 5xx status code
+func (o *HelmDeleteUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm delete unauthorized response a status code equal to that given
+func (o *HelmDeleteUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *HelmDeleteUnauthorized) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteUnauthorized ", 401)
+}
+
+func (o *HelmDeleteUnauthorized) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteUnauthorized ", 401)
 }
 
@@ -123,14 +213,44 @@ func NewHelmDeleteNotFound() *HelmDeleteNotFound {
 	return &HelmDeleteNotFound{}
 }
 
-/* HelmDeleteNotFound describes a response with status code 404, with default header values.
+/*
+HelmDeleteNotFound describes a response with status code 404, with default header values.
 
 Environment(Endpoint) or ServiceAccount not found
 */
 type HelmDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this helm delete not found response has a 2xx status code
+func (o *HelmDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm delete not found response has a 3xx status code
+func (o *HelmDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm delete not found response has a 4xx status code
+func (o *HelmDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm delete not found response has a 5xx status code
+func (o *HelmDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm delete not found response a status code equal to that given
+func (o *HelmDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *HelmDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNotFound ", 404)
+}
+
+func (o *HelmDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewHelmDeleteInternalServerError() *HelmDeleteInternalServerError {
 	return &HelmDeleteInternalServerError{}
 }
 
-/* HelmDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+HelmDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error or helm error
 */
 type HelmDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this helm delete internal server error response has a 2xx status code
+func (o *HelmDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm delete internal server error response has a 3xx status code
+func (o *HelmDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm delete internal server error response has a 4xx status code
+func (o *HelmDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm delete internal server error response has a 5xx status code
+func (o *HelmDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this helm delete internal server error response a status code equal to that given
+func (o *HelmDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *HelmDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteInternalServerError ", 500)
+}
+
+func (o *HelmDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteInternalServerError ", 500)
 }
 

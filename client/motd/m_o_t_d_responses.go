@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // MOTDReader is a Reader for the MOTD structure.
@@ -39,7 +39,8 @@ func NewMOTDOK() *MOTDOK {
 	return &MOTDOK{}
 }
 
-/* MOTDOK describes a response with status code 200, with default header values.
+/*
+MOTDOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -47,9 +48,39 @@ type MOTDOK struct {
 	Payload *models.MotdMotdResponse
 }
 
+// IsSuccess returns true when this m o t d o k response has a 2xx status code
+func (o *MOTDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this m o t d o k response has a 3xx status code
+func (o *MOTDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this m o t d o k response has a 4xx status code
+func (o *MOTDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this m o t d o k response has a 5xx status code
+func (o *MOTDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this m o t d o k response a status code equal to that given
+func (o *MOTDOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *MOTDOK) Error() string {
 	return fmt.Sprintf("[GET /motd][%d] mOTDOK  %+v", 200, o.Payload)
 }
+
+func (o *MOTDOK) String() string {
+	return fmt.Sprintf("[GET /motd][%d] mOTDOK  %+v", 200, o.Payload)
+}
+
 func (o *MOTDOK) GetPayload() *models.MotdMotdResponse {
 	return o.Payload
 }

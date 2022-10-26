@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewKubernetesNamespacesToggleSystemParams creates a new KubernetesNamespacesToggleSystemParams object,
@@ -55,10 +55,12 @@ func NewKubernetesNamespacesToggleSystemParamsWithHTTPClient(client *http.Client
 	}
 }
 
-/* KubernetesNamespacesToggleSystemParams contains all the parameters to send to the API endpoint
-   for the kubernetes namespaces toggle system operation.
+/*
+KubernetesNamespacesToggleSystemParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the kubernetes namespaces toggle system operation.
+
+	Typically these are written to a http.Request.
 */
 type KubernetesNamespacesToggleSystemParams struct {
 

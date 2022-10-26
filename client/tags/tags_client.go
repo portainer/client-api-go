@@ -40,9 +40,10 @@ type ClientService interface {
 }
 
 /*
-  TagCreate creates a new tag
+	TagCreate creates a new tag
 
-  Create a new tag.
+	Create a new tag.
+
 **Access policy**: administrator
 */
 func (a *Client) TagCreate(params *TagCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TagCreateOK, error) {
@@ -82,9 +83,10 @@ func (a *Client) TagCreate(params *TagCreateParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  TagDelete removes a tag
+	TagDelete removes a tag
 
-  Remove a tag.
+	Remove a tag.
+
 **Access policy**: administrator
 */
 func (a *Client) TagDelete(params *TagDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TagDeleteNoContent, error) {
@@ -124,9 +126,10 @@ func (a *Client) TagDelete(params *TagDeleteParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  TagList lists tags
+	TagList lists tags
 
-  List tags.
+	List tags.
+
 **Access policy**: authenticated
 */
 func (a *Client) TagList(params *TagListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TagListOK, error) {

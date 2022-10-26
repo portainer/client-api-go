@@ -52,10 +52,12 @@ func NewEdgeStackListParamsWithHTTPClient(client *http.Client) *EdgeStackListPar
 	}
 }
 
-/* EdgeStackListParams contains all the parameters to send to the API endpoint
-   for the edge stack list operation.
+/*
+EdgeStackListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge stack list operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeStackListParams struct {
 	timeout    time.Duration

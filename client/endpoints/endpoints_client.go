@@ -30,7 +30,7 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteNoContent, error)
+	EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteOK, error)
 
 	EndpointCreate(params *EndpointCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointCreateOK, error)
 
@@ -54,20 +54,31 @@ type ClientService interface {
 
 	EndpointDockerhubStatus(params *EndpointDockerhubStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDockerhubStatusOK, error)
 
+	EndpointEdgeAsync(params *EndpointEdgeAsyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointEdgeAsyncOK, error)
+
+	EndpointForceUpdateService(params *EndpointForceUpdateServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointForceUpdateServiceOK, error)
+
+	EndpointPoolsAccessUpdate(params *EndpointPoolsAccessUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointPoolsAccessUpdateNoContent, error)
+
 	EndpointRegistriesList(params *EndpointRegistriesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistriesListOK, error)
 
 	EndpointRegistryAccess(params *EndpointRegistryAccessParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistryAccessNoContent, error)
+
+	SnapshotContainerInspect(params *SnapshotContainerInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SnapshotContainerInspectOK, error)
+
+	SnapshotContainersList(params *SnapshotContainersListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SnapshotContainersListOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  EndpointAssociationDelete des association an edge environment endpoint
+	EndpointAssociationDelete des association an edge environment endpoint
 
-  De-association an edge environment(endpoint).
+	De-association an edge environment(endpoint).
+
 **Access policy**: administrator
 */
-func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteNoContent, error) {
+func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewEndpointAssociationDeleteParams()
@@ -93,7 +104,7 @@ func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeletePara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EndpointAssociationDeleteNoContent)
+	success, ok := result.(*EndpointAssociationDeleteOK)
 	if ok {
 		return success, nil
 	}
@@ -104,9 +115,10 @@ func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeletePara
 }
 
 /*
-  EndpointCreate creates a new environment endpoint
+	EndpointCreate creates a new environment endpoint
 
-  Create a new environment(endpoint) that will be used to manage an environment(endpoint).
+	Create a new environment(endpoint) that will be used to manage an environment(endpoint).
+
 **Access policy**: administrator
 */
 func (a *Client) EndpointCreate(params *EndpointCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointCreateOK, error) {
@@ -146,7 +158,7 @@ func (a *Client) EndpointCreate(params *EndpointCreateParams, authInfo runtime.C
 }
 
 /*
-  EndpointCreateGlobalKey creates or retrieve the endpoint for an edge ID
+EndpointCreateGlobalKey creates or retrieve the endpoint for an edge ID
 */
 func (a *Client) EndpointCreateGlobalKey(params *EndpointCreateGlobalKeyParams, opts ...ClientOption) (*EndpointCreateGlobalKeyOK, error) {
 	// TODO: Validate the params before sending
@@ -184,9 +196,10 @@ func (a *Client) EndpointCreateGlobalKey(params *EndpointCreateGlobalKeyParams, 
 }
 
 /*
-  EndpointDelete removes an environment endpoint
+	EndpointDelete removes an environment endpoint
 
-  Remove an environment(endpoint).
+	Remove an environment(endpoint).
+
 **Access policy**: administrator
 */
 func (a *Client) EndpointDelete(params *EndpointDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteNoContent, error) {
@@ -226,9 +239,10 @@ func (a *Client) EndpointDelete(params *EndpointDeleteParams, authInfo runtime.C
 }
 
 /*
-  EndpointEdgeStatusInspect gets environment endpoint status
+	EndpointEdgeStatusInspect gets environment endpoint status
 
-  environment(endpoint) for edge agent to check status of environment(endpoint)
+	environment(endpoint) for edge agent to check status of environment(endpoint)
+
 **Access policy**: restricted only to Edge environments(endpoints)
 */
 func (a *Client) EndpointEdgeStatusInspect(params *EndpointEdgeStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointEdgeStatusInspectOK, error) {
@@ -268,9 +282,10 @@ func (a *Client) EndpointEdgeStatusInspect(params *EndpointEdgeStatusInspectPara
 }
 
 /*
-  EndpointInspect inspects an environment endpoint
+	EndpointInspect inspects an environment endpoint
 
-  Retrieve details about an environment(endpoint).
+	Retrieve details about an environment(endpoint).
+
 **Access policy**: restricted
 */
 func (a *Client) EndpointInspect(params *EndpointInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointInspectOK, error) {
@@ -310,9 +325,10 @@ func (a *Client) EndpointInspect(params *EndpointInspectParams, authInfo runtime
 }
 
 /*
-  EndpointList lists environments endpoints
+	EndpointList lists environments endpoints
 
-  List all environments(endpoints) based on the current user authorizations. Will
+	List all environments(endpoints) based on the current user authorizations. Will
+
 return all environments(endpoints) if using an administrator or team leader account otherwise it will
 only return authorized environments(endpoints).
 **Access policy**: restricted
@@ -354,9 +370,10 @@ func (a *Client) EndpointList(params *EndpointListParams, authInfo runtime.Clien
 }
 
 /*
-  EndpointSettingsUpdate updates settings for an environment endpoint
+	EndpointSettingsUpdate updates settings for an environment endpoint
 
-  Update settings for an environment(endpoint).
+	Update settings for an environment(endpoint).
+
 **Access policy**: authenticated
 */
 func (a *Client) EndpointSettingsUpdate(params *EndpointSettingsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointSettingsUpdateOK, error) {
@@ -396,9 +413,10 @@ func (a *Client) EndpointSettingsUpdate(params *EndpointSettingsUpdateParams, au
 }
 
 /*
-  EndpointSnapshot snapshots an environment endpoint
+	EndpointSnapshot snapshots an environment endpoint
 
-  Snapshots an environment(endpoint)
+	Snapshots an environment(endpoint)
+
 **Access policy**: administrator
 */
 func (a *Client) EndpointSnapshot(params *EndpointSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointSnapshotNoContent, error) {
@@ -438,9 +456,10 @@ func (a *Client) EndpointSnapshot(params *EndpointSnapshotParams, authInfo runti
 }
 
 /*
-  EndpointSnapshots snapshots all environments endpoints
+	EndpointSnapshots snapshots all environment endpoint
 
-  Snapshot all environments(endpoints)
+	Snapshot all environments(endpoints)
+
 **Access policy**: administrator
 */
 func (a *Client) EndpointSnapshots(params *EndpointSnapshotsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointSnapshotsNoContent, error) {
@@ -480,9 +499,10 @@ func (a *Client) EndpointSnapshots(params *EndpointSnapshotsParams, authInfo run
 }
 
 /*
-  EndpointUpdate updates an environment endpoint
+	EndpointUpdate updates an environment endpoint
 
-  Update an environment(endpoint).
+	Update an environment(endpoint).
+
 **Access policy**: authenticated
 */
 func (a *Client) EndpointUpdate(params *EndpointUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointUpdateOK, error) {
@@ -522,9 +542,10 @@ func (a *Client) EndpointUpdate(params *EndpointUpdateParams, authInfo runtime.C
 }
 
 /*
-  EndpointDockerhubStatus fetches docker pull limits
+	EndpointDockerhubStatus fetches docker pull limits
 
-  get docker pull limits for a docker hub registry in the environment
+	get docker pull limits for a docker hub registry in the environment
+
 **Access policy**:
 */
 func (a *Client) EndpointDockerhubStatus(params *EndpointDockerhubStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDockerhubStatusOK, error) {
@@ -564,9 +585,139 @@ func (a *Client) EndpointDockerhubStatus(params *EndpointDockerhubStatusParams, 
 }
 
 /*
-  EndpointRegistriesList lists registries on environment
+	EndpointEdgeAsync gets environment endpoint status
 
-  List all registries based on the current user authorizations in current environment.
+	Environment(Endpoint) for edge agent to check status of environment(endpoint)
+
+**Access policy**: restricted only to Edge environments(endpoints)
+*/
+func (a *Client) EndpointEdgeAsync(params *EndpointEdgeAsyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointEdgeAsyncOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEndpointEdgeAsyncParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "endpointEdgeAsync",
+		Method:             "POST",
+		PathPattern:        "/endpoints/edge/async",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EndpointEdgeAsyncReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EndpointEdgeAsyncOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for endpointEdgeAsync: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	EndpointForceUpdateService forces update a docker service
+
+	force update a docker service
+
+**Access policy**: authenticated
+*/
+func (a *Client) EndpointForceUpdateService(params *EndpointForceUpdateServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointForceUpdateServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEndpointForceUpdateServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "endpointForceUpdateService",
+		Method:             "PUT",
+		PathPattern:        "/endpoints/{id}/forceupdateservice",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EndpointForceUpdateServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EndpointForceUpdateServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for endpointForceUpdateService: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	EndpointPoolsAccessUpdate updates resource pool access
+
+	update the access on the resource pool in the current environment
+
+**Access policy**: restricted
+*/
+func (a *Client) EndpointPoolsAccessUpdate(params *EndpointPoolsAccessUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointPoolsAccessUpdateNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEndpointPoolsAccessUpdateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "endpointPoolsAccessUpdate",
+		Method:             "PUT",
+		PathPattern:        "/endpoints/{id}/pools/{rpn}/access",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EndpointPoolsAccessUpdateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EndpointPoolsAccessUpdateNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for endpointPoolsAccessUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	EndpointRegistriesList lists registries on environment
+
+	List all registries based on the current user authorizations in current environment.
+
 **Access policy**: authenticated
 */
 func (a *Client) EndpointRegistriesList(params *EndpointRegistriesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistriesListOK, error) {
@@ -606,9 +757,9 @@ func (a *Client) EndpointRegistriesList(params *EndpointRegistriesListParams, au
 }
 
 /*
-  EndpointRegistryAccess updates registry access for environment
+EndpointRegistryAccess updates registry access for environment
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) EndpointRegistryAccess(params *EndpointRegistryAccessParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistryAccessNoContent, error) {
 	// TODO: Validate the params before sending
@@ -643,6 +794,88 @@ func (a *Client) EndpointRegistryAccess(params *EndpointRegistryAccessParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for endpointRegistryAccess: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+SnapshotContainerInspect fetches container from a snapshot
+
+**Access policy**:
+*/
+func (a *Client) SnapshotContainerInspect(params *SnapshotContainerInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SnapshotContainerInspectOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSnapshotContainerInspectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "snapshotContainerInspect",
+		Method:             "GET",
+		PathPattern:        "/docker/{environmentId}/snapshot/container/{containerId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &SnapshotContainerInspectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SnapshotContainerInspectOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for snapshotContainerInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+SnapshotContainersList fetches containers list from a snapshot
+
+**Access policy**:
+*/
+func (a *Client) SnapshotContainersList(params *SnapshotContainersListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SnapshotContainersListOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSnapshotContainersListParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "snapshotContainersList",
+		Method:             "GET",
+		PathPattern:        "/docker/{environmentId}/snapshot/containers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &SnapshotContainersListReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SnapshotContainersListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for snapshotContainersList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

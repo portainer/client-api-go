@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewStackMigrateParams creates a new StackMigrateParams object,
@@ -55,10 +55,12 @@ func NewStackMigrateParamsWithHTTPClient(client *http.Client) *StackMigrateParam
 	}
 }
 
-/* StackMigrateParams contains all the parameters to send to the API endpoint
-   for the stack migrate operation.
+/*
+StackMigrateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stack migrate operation.
+
+	Typically these are written to a http.Request.
 */
 type StackMigrateParams struct {
 

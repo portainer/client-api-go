@@ -53,10 +53,12 @@ func NewOpenAMTActivateParamsWithHTTPClient(client *http.Client) *OpenAMTActivat
 	}
 }
 
-/* OpenAMTActivateParams contains all the parameters to send to the API endpoint
-   for the open a m t activate operation.
+/*
+OpenAMTActivateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the open a m t activate operation.
+
+	Typically these are written to a http.Request.
 */
 type OpenAMTActivateParams struct {
 

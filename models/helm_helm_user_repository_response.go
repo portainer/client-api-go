@@ -23,7 +23,7 @@ type HelmHelmUserRepositoryResponse struct {
 	GlobalRepository string `json:"GlobalRepository,omitempty"`
 
 	// user repositories
-	UserRepositories []*PortainerHelmUserRepository `json:"UserRepositories"`
+	UserRepositories []*PortainereeHelmUserRepository `json:"UserRepositories"`
 }
 
 // Validate validates this helm helm user repository response

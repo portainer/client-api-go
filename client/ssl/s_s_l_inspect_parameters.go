@@ -52,10 +52,12 @@ func NewSSLInspectParamsWithHTTPClient(client *http.Client) *SSLInspectParams {
 	}
 }
 
-/* SSLInspectParams contains all the parameters to send to the API endpoint
-   for the s s l inspect operation.
+/*
+SSLInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the s s l inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type SSLInspectParams struct {
 	timeout    time.Duration

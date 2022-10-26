@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewLDAPCheckParams creates a new LDAPCheckParams object,
@@ -54,10 +54,12 @@ func NewLDAPCheckParamsWithHTTPClient(client *http.Client) *LDAPCheckParams {
 	}
 }
 
-/* LDAPCheckParams contains all the parameters to send to the API endpoint
-   for the l d a p check operation.
+/*
+LDAPCheckParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the l d a p check operation.
+
+	Typically these are written to a http.Request.
 */
 type LDAPCheckParams struct {
 

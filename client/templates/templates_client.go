@@ -38,9 +38,10 @@ type ClientService interface {
 }
 
 /*
-  TemplateFile gets a template s file
+	TemplateFile gets a template s file
 
-  Get a template's file
+	Get a template's file
+
 **Access policy**: authenticated
 */
 func (a *Client) TemplateFile(params *TemplateFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TemplateFileOK, error) {
@@ -80,9 +81,10 @@ func (a *Client) TemplateFile(params *TemplateFileParams, authInfo runtime.Clien
 }
 
 /*
-  TemplateList lists available templates
+	TemplateList lists available templates
 
-  List available templates.
+	List available templates.
+
 **Access policy**: authenticated
 */
 func (a *Client) TemplateList(params *TemplateListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TemplateListOK, error) {

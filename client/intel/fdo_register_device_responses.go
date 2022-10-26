@@ -54,14 +54,44 @@ func NewFdoRegisterDeviceOK() *FdoRegisterDeviceOK {
 	return &FdoRegisterDeviceOK{}
 }
 
-/* FdoRegisterDeviceOK describes a response with status code 200, with default header values.
+/*
+FdoRegisterDeviceOK describes a response with status code 200, with default header values.
 
 Success
 */
 type FdoRegisterDeviceOK struct {
 }
 
+// IsSuccess returns true when this fdo register device o k response has a 2xx status code
+func (o *FdoRegisterDeviceOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this fdo register device o k response has a 3xx status code
+func (o *FdoRegisterDeviceOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo register device o k response has a 4xx status code
+func (o *FdoRegisterDeviceOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fdo register device o k response has a 5xx status code
+func (o *FdoRegisterDeviceOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo register device o k response a status code equal to that given
+func (o *FdoRegisterDeviceOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *FdoRegisterDeviceOK) Error() string {
+	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceOK ", 200)
+}
+
+func (o *FdoRegisterDeviceOK) String() string {
 	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceOK ", 200)
 }
 
@@ -75,14 +105,44 @@ func NewFdoRegisterDeviceBadRequest() *FdoRegisterDeviceBadRequest {
 	return &FdoRegisterDeviceBadRequest{}
 }
 
-/* FdoRegisterDeviceBadRequest describes a response with status code 400, with default header values.
+/*
+FdoRegisterDeviceBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type FdoRegisterDeviceBadRequest struct {
 }
 
+// IsSuccess returns true when this fdo register device bad request response has a 2xx status code
+func (o *FdoRegisterDeviceBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo register device bad request response has a 3xx status code
+func (o *FdoRegisterDeviceBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo register device bad request response has a 4xx status code
+func (o *FdoRegisterDeviceBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this fdo register device bad request response has a 5xx status code
+func (o *FdoRegisterDeviceBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo register device bad request response a status code equal to that given
+func (o *FdoRegisterDeviceBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *FdoRegisterDeviceBadRequest) Error() string {
+	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceBadRequest ", 400)
+}
+
+func (o *FdoRegisterDeviceBadRequest) String() string {
 	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewFdoRegisterDeviceForbidden() *FdoRegisterDeviceForbidden {
 	return &FdoRegisterDeviceForbidden{}
 }
 
-/* FdoRegisterDeviceForbidden describes a response with status code 403, with default header values.
+/*
+FdoRegisterDeviceForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type FdoRegisterDeviceForbidden struct {
 }
 
+// IsSuccess returns true when this fdo register device forbidden response has a 2xx status code
+func (o *FdoRegisterDeviceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo register device forbidden response has a 3xx status code
+func (o *FdoRegisterDeviceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo register device forbidden response has a 4xx status code
+func (o *FdoRegisterDeviceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this fdo register device forbidden response has a 5xx status code
+func (o *FdoRegisterDeviceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo register device forbidden response a status code equal to that given
+func (o *FdoRegisterDeviceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *FdoRegisterDeviceForbidden) Error() string {
+	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceForbidden ", 403)
+}
+
+func (o *FdoRegisterDeviceForbidden) String() string {
 	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewFdoRegisterDeviceInternalServerError() *FdoRegisterDeviceInternalServerE
 	return &FdoRegisterDeviceInternalServerError{}
 }
 
-/* FdoRegisterDeviceInternalServerError describes a response with status code 500, with default header values.
+/*
+FdoRegisterDeviceInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type FdoRegisterDeviceInternalServerError struct {
 }
 
+// IsSuccess returns true when this fdo register device internal server error response has a 2xx status code
+func (o *FdoRegisterDeviceInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo register device internal server error response has a 3xx status code
+func (o *FdoRegisterDeviceInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo register device internal server error response has a 4xx status code
+func (o *FdoRegisterDeviceInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fdo register device internal server error response has a 5xx status code
+func (o *FdoRegisterDeviceInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this fdo register device internal server error response a status code equal to that given
+func (o *FdoRegisterDeviceInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *FdoRegisterDeviceInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceInternalServerError ", 500)
+}
+
+func (o *FdoRegisterDeviceInternalServerError) String() string {
 	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceInternalServerError ", 500)
 }
 

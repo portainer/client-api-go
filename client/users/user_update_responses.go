@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // UserUpdateReader is a Reader for the UserUpdate structure.
@@ -69,24 +69,55 @@ func NewUserUpdateOK() *UserUpdateOK {
 	return &UserUpdateOK{}
 }
 
-/* UserUpdateOK describes a response with status code 200, with default header values.
+/*
+UserUpdateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UserUpdateOK struct {
-	Payload *models.PortainerUser
+	Payload *models.PortainereeUser
+}
+
+// IsSuccess returns true when this user update o k response has a 2xx status code
+func (o *UserUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user update o k response has a 3xx status code
+func (o *UserUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update o k response has a 4xx status code
+func (o *UserUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user update o k response has a 5xx status code
+func (o *UserUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update o k response a status code equal to that given
+func (o *UserUpdateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UserUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateOK  %+v", 200, o.Payload)
 }
-func (o *UserUpdateOK) GetPayload() *models.PortainerUser {
+
+func (o *UserUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateOK  %+v", 200, o.Payload)
+}
+
+func (o *UserUpdateOK) GetPayload() *models.PortainereeUser {
 	return o.Payload
 }
 
 func (o *UserUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerUser)
+	o.Payload = new(models.PortainereeUser)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -101,14 +132,44 @@ func NewUserUpdateBadRequest() *UserUpdateBadRequest {
 	return &UserUpdateBadRequest{}
 }
 
-/* UserUpdateBadRequest describes a response with status code 400, with default header values.
+/*
+UserUpdateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type UserUpdateBadRequest struct {
 }
 
+// IsSuccess returns true when this user update bad request response has a 2xx status code
+func (o *UserUpdateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update bad request response has a 3xx status code
+func (o *UserUpdateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update bad request response has a 4xx status code
+func (o *UserUpdateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user update bad request response has a 5xx status code
+func (o *UserUpdateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update bad request response a status code equal to that given
+func (o *UserUpdateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UserUpdateBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateBadRequest ", 400)
+}
+
+func (o *UserUpdateBadRequest) String() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateBadRequest ", 400)
 }
 
@@ -122,14 +183,44 @@ func NewUserUpdateForbidden() *UserUpdateForbidden {
 	return &UserUpdateForbidden{}
 }
 
-/* UserUpdateForbidden describes a response with status code 403, with default header values.
+/*
+UserUpdateForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type UserUpdateForbidden struct {
 }
 
+// IsSuccess returns true when this user update forbidden response has a 2xx status code
+func (o *UserUpdateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update forbidden response has a 3xx status code
+func (o *UserUpdateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update forbidden response has a 4xx status code
+func (o *UserUpdateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user update forbidden response has a 5xx status code
+func (o *UserUpdateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update forbidden response a status code equal to that given
+func (o *UserUpdateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UserUpdateForbidden) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateForbidden ", 403)
+}
+
+func (o *UserUpdateForbidden) String() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateForbidden ", 403)
 }
 
@@ -143,14 +234,44 @@ func NewUserUpdateNotFound() *UserUpdateNotFound {
 	return &UserUpdateNotFound{}
 }
 
-/* UserUpdateNotFound describes a response with status code 404, with default header values.
+/*
+UserUpdateNotFound describes a response with status code 404, with default header values.
 
 User not found
 */
 type UserUpdateNotFound struct {
 }
 
+// IsSuccess returns true when this user update not found response has a 2xx status code
+func (o *UserUpdateNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update not found response has a 3xx status code
+func (o *UserUpdateNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update not found response has a 4xx status code
+func (o *UserUpdateNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user update not found response has a 5xx status code
+func (o *UserUpdateNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update not found response a status code equal to that given
+func (o *UserUpdateNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UserUpdateNotFound) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateNotFound ", 404)
+}
+
+func (o *UserUpdateNotFound) String() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateNotFound ", 404)
 }
 
@@ -164,14 +285,44 @@ func NewUserUpdateConflict() *UserUpdateConflict {
 	return &UserUpdateConflict{}
 }
 
-/* UserUpdateConflict describes a response with status code 409, with default header values.
+/*
+UserUpdateConflict describes a response with status code 409, with default header values.
 
 Username already exist
 */
 type UserUpdateConflict struct {
 }
 
+// IsSuccess returns true when this user update conflict response has a 2xx status code
+func (o *UserUpdateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update conflict response has a 3xx status code
+func (o *UserUpdateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update conflict response has a 4xx status code
+func (o *UserUpdateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user update conflict response has a 5xx status code
+func (o *UserUpdateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update conflict response a status code equal to that given
+func (o *UserUpdateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *UserUpdateConflict) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateConflict ", 409)
+}
+
+func (o *UserUpdateConflict) String() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateConflict ", 409)
 }
 
@@ -185,14 +336,44 @@ func NewUserUpdateInternalServerError() *UserUpdateInternalServerError {
 	return &UserUpdateInternalServerError{}
 }
 
-/* UserUpdateInternalServerError describes a response with status code 500, with default header values.
+/*
+UserUpdateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type UserUpdateInternalServerError struct {
 }
 
+// IsSuccess returns true when this user update internal server error response has a 2xx status code
+func (o *UserUpdateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update internal server error response has a 3xx status code
+func (o *UserUpdateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update internal server error response has a 4xx status code
+func (o *UserUpdateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user update internal server error response has a 5xx status code
+func (o *UserUpdateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this user update internal server error response a status code equal to that given
+func (o *UserUpdateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UserUpdateInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateInternalServerError ", 500)
+}
+
+func (o *UserUpdateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateInternalServerError ", 500)
 }
 

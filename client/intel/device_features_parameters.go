@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewDeviceFeaturesParams creates a new DeviceFeaturesParams object,
@@ -54,10 +54,12 @@ func NewDeviceFeaturesParamsWithHTTPClient(client *http.Client) *DeviceFeaturesP
 	}
 }
 
-/* DeviceFeaturesParams contains all the parameters to send to the API endpoint
-   for the device features operation.
+/*
+DeviceFeaturesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the device features operation.
+
+	Typically these are written to a http.Request.
 */
 type DeviceFeaturesParams struct {
 

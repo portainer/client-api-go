@@ -52,10 +52,12 @@ func NewFdoRegisterDeviceParamsWithHTTPClient(client *http.Client) *FdoRegisterD
 	}
 }
 
-/* FdoRegisterDeviceParams contains all the parameters to send to the API endpoint
-   for the fdo register device operation.
+/*
+FdoRegisterDeviceParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fdo register device operation.
+
+	Typically these are written to a http.Request.
 */
 type FdoRegisterDeviceParams struct {
 	timeout    time.Duration

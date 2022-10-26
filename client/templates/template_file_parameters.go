@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewTemplateFileParams creates a new TemplateFileParams object,
@@ -54,10 +54,12 @@ func NewTemplateFileParamsWithHTTPClient(client *http.Client) *TemplateFileParam
 	}
 }
 
-/* TemplateFileParams contains all the parameters to send to the API endpoint
-   for the template file operation.
+/*
+TemplateFileParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the template file operation.
+
+	Typically these are written to a http.Request.
 */
 type TemplateFileParams struct {
 

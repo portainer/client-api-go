@@ -53,10 +53,12 @@ func NewStackFileInspectParamsWithHTTPClient(client *http.Client) *StackFileInsp
 	}
 }
 
-/* StackFileInspectParams contains all the parameters to send to the API endpoint
-   for the stack file inspect operation.
+/*
+StackFileInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stack file inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type StackFileInspectParams struct {
 

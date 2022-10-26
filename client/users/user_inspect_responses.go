@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // UserInspectReader is a Reader for the UserInspect structure.
@@ -63,24 +63,55 @@ func NewUserInspectOK() *UserInspectOK {
 	return &UserInspectOK{}
 }
 
-/* UserInspectOK describes a response with status code 200, with default header values.
+/*
+UserInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UserInspectOK struct {
-	Payload *models.PortainerUser
+	Payload *models.PortainereeUser
+}
+
+// IsSuccess returns true when this user inspect o k response has a 2xx status code
+func (o *UserInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user inspect o k response has a 3xx status code
+func (o *UserInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user inspect o k response has a 4xx status code
+func (o *UserInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user inspect o k response has a 5xx status code
+func (o *UserInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user inspect o k response a status code equal to that given
+func (o *UserInspectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UserInspectOK) Error() string {
 	return fmt.Sprintf("[GET /users/{id}][%d] userInspectOK  %+v", 200, o.Payload)
 }
-func (o *UserInspectOK) GetPayload() *models.PortainerUser {
+
+func (o *UserInspectOK) String() string {
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectOK  %+v", 200, o.Payload)
+}
+
+func (o *UserInspectOK) GetPayload() *models.PortainereeUser {
 	return o.Payload
 }
 
 func (o *UserInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerUser)
+	o.Payload = new(models.PortainereeUser)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -95,14 +126,44 @@ func NewUserInspectBadRequest() *UserInspectBadRequest {
 	return &UserInspectBadRequest{}
 }
 
-/* UserInspectBadRequest describes a response with status code 400, with default header values.
+/*
+UserInspectBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type UserInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this user inspect bad request response has a 2xx status code
+func (o *UserInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user inspect bad request response has a 3xx status code
+func (o *UserInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user inspect bad request response has a 4xx status code
+func (o *UserInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user inspect bad request response has a 5xx status code
+func (o *UserInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user inspect bad request response a status code equal to that given
+func (o *UserInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UserInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectBadRequest ", 400)
+}
+
+func (o *UserInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /users/{id}][%d] userInspectBadRequest ", 400)
 }
 
@@ -116,14 +177,44 @@ func NewUserInspectForbidden() *UserInspectForbidden {
 	return &UserInspectForbidden{}
 }
 
-/* UserInspectForbidden describes a response with status code 403, with default header values.
+/*
+UserInspectForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type UserInspectForbidden struct {
 }
 
+// IsSuccess returns true when this user inspect forbidden response has a 2xx status code
+func (o *UserInspectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user inspect forbidden response has a 3xx status code
+func (o *UserInspectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user inspect forbidden response has a 4xx status code
+func (o *UserInspectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user inspect forbidden response has a 5xx status code
+func (o *UserInspectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user inspect forbidden response a status code equal to that given
+func (o *UserInspectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UserInspectForbidden) Error() string {
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectForbidden ", 403)
+}
+
+func (o *UserInspectForbidden) String() string {
 	return fmt.Sprintf("[GET /users/{id}][%d] userInspectForbidden ", 403)
 }
 
@@ -137,14 +228,44 @@ func NewUserInspectNotFound() *UserInspectNotFound {
 	return &UserInspectNotFound{}
 }
 
-/* UserInspectNotFound describes a response with status code 404, with default header values.
+/*
+UserInspectNotFound describes a response with status code 404, with default header values.
 
 User not found
 */
 type UserInspectNotFound struct {
 }
 
+// IsSuccess returns true when this user inspect not found response has a 2xx status code
+func (o *UserInspectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user inspect not found response has a 3xx status code
+func (o *UserInspectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user inspect not found response has a 4xx status code
+func (o *UserInspectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user inspect not found response has a 5xx status code
+func (o *UserInspectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user inspect not found response a status code equal to that given
+func (o *UserInspectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UserInspectNotFound) Error() string {
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectNotFound ", 404)
+}
+
+func (o *UserInspectNotFound) String() string {
 	return fmt.Sprintf("[GET /users/{id}][%d] userInspectNotFound ", 404)
 }
 
@@ -158,14 +279,44 @@ func NewUserInspectInternalServerError() *UserInspectInternalServerError {
 	return &UserInspectInternalServerError{}
 }
 
-/* UserInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+UserInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type UserInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this user inspect internal server error response has a 2xx status code
+func (o *UserInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user inspect internal server error response has a 3xx status code
+func (o *UserInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user inspect internal server error response has a 4xx status code
+func (o *UserInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user inspect internal server error response has a 5xx status code
+func (o *UserInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this user inspect internal server error response a status code equal to that given
+func (o *UserInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UserInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectInternalServerError ", 500)
+}
+
+func (o *UserInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /users/{id}][%d] userInspectInternalServerError ", 500)
 }
 

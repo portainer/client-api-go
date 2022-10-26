@@ -53,10 +53,12 @@ func NewEdgeGroupInspectParamsWithHTTPClient(client *http.Client) *EdgeGroupInsp
 	}
 }
 
-/* EdgeGroupInspectParams contains all the parameters to send to the API endpoint
-   for the edge group inspect operation.
+/*
+EdgeGroupInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge group inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeGroupInspectParams struct {
 

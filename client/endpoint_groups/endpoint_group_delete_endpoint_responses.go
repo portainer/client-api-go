@@ -54,14 +54,44 @@ func NewEndpointGroupDeleteEndpointNoContent() *EndpointGroupDeleteEndpointNoCon
 	return &EndpointGroupDeleteEndpointNoContent{}
 }
 
-/* EndpointGroupDeleteEndpointNoContent describes a response with status code 204, with default header values.
+/*
+EndpointGroupDeleteEndpointNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type EndpointGroupDeleteEndpointNoContent struct {
 }
 
+// IsSuccess returns true when this endpoint group delete endpoint no content response has a 2xx status code
+func (o *EndpointGroupDeleteEndpointNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this endpoint group delete endpoint no content response has a 3xx status code
+func (o *EndpointGroupDeleteEndpointNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint group delete endpoint no content response has a 4xx status code
+func (o *EndpointGroupDeleteEndpointNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint group delete endpoint no content response has a 5xx status code
+func (o *EndpointGroupDeleteEndpointNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint group delete endpoint no content response a status code equal to that given
+func (o *EndpointGroupDeleteEndpointNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EndpointGroupDeleteEndpointNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNoContent ", 204)
+}
+
+func (o *EndpointGroupDeleteEndpointNoContent) String() string {
 	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewEndpointGroupDeleteEndpointBadRequest() *EndpointGroupDeleteEndpointBadR
 	return &EndpointGroupDeleteEndpointBadRequest{}
 }
 
-/* EndpointGroupDeleteEndpointBadRequest describes a response with status code 400, with default header values.
+/*
+EndpointGroupDeleteEndpointBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type EndpointGroupDeleteEndpointBadRequest struct {
 }
 
+// IsSuccess returns true when this endpoint group delete endpoint bad request response has a 2xx status code
+func (o *EndpointGroupDeleteEndpointBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint group delete endpoint bad request response has a 3xx status code
+func (o *EndpointGroupDeleteEndpointBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint group delete endpoint bad request response has a 4xx status code
+func (o *EndpointGroupDeleteEndpointBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint group delete endpoint bad request response has a 5xx status code
+func (o *EndpointGroupDeleteEndpointBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint group delete endpoint bad request response a status code equal to that given
+func (o *EndpointGroupDeleteEndpointBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EndpointGroupDeleteEndpointBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointBadRequest ", 400)
+}
+
+func (o *EndpointGroupDeleteEndpointBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewEndpointGroupDeleteEndpointNotFound() *EndpointGroupDeleteEndpointNotFou
 	return &EndpointGroupDeleteEndpointNotFound{}
 }
 
-/* EndpointGroupDeleteEndpointNotFound describes a response with status code 404, with default header values.
+/*
+EndpointGroupDeleteEndpointNotFound describes a response with status code 404, with default header values.
 
 EndpointGroup not found
 */
 type EndpointGroupDeleteEndpointNotFound struct {
 }
 
+// IsSuccess returns true when this endpoint group delete endpoint not found response has a 2xx status code
+func (o *EndpointGroupDeleteEndpointNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint group delete endpoint not found response has a 3xx status code
+func (o *EndpointGroupDeleteEndpointNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint group delete endpoint not found response has a 4xx status code
+func (o *EndpointGroupDeleteEndpointNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint group delete endpoint not found response has a 5xx status code
+func (o *EndpointGroupDeleteEndpointNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint group delete endpoint not found response a status code equal to that given
+func (o *EndpointGroupDeleteEndpointNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *EndpointGroupDeleteEndpointNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNotFound ", 404)
+}
+
+func (o *EndpointGroupDeleteEndpointNotFound) String() string {
 	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNotFound ", 404)
 }
 
@@ -117,14 +207,44 @@ func NewEndpointGroupDeleteEndpointInternalServerError() *EndpointGroupDeleteEnd
 	return &EndpointGroupDeleteEndpointInternalServerError{}
 }
 
-/* EndpointGroupDeleteEndpointInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointGroupDeleteEndpointInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type EndpointGroupDeleteEndpointInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint group delete endpoint internal server error response has a 2xx status code
+func (o *EndpointGroupDeleteEndpointInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint group delete endpoint internal server error response has a 3xx status code
+func (o *EndpointGroupDeleteEndpointInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint group delete endpoint internal server error response has a 4xx status code
+func (o *EndpointGroupDeleteEndpointInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint group delete endpoint internal server error response has a 5xx status code
+func (o *EndpointGroupDeleteEndpointInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint group delete endpoint internal server error response a status code equal to that given
+func (o *EndpointGroupDeleteEndpointInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointGroupDeleteEndpointInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointInternalServerError ", 500)
+}
+
+func (o *EndpointGroupDeleteEndpointInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointInternalServerError ", 500)
 }
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // HelmInstallReader is a Reader for the HelmInstall structure.
@@ -57,7 +57,8 @@ func NewHelmInstallCreated() *HelmInstallCreated {
 	return &HelmInstallCreated{}
 }
 
-/* HelmInstallCreated describes a response with status code 201, with default header values.
+/*
+HelmInstallCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -65,9 +66,39 @@ type HelmInstallCreated struct {
 	Payload *models.ReleaseRelease
 }
 
+// IsSuccess returns true when this helm install created response has a 2xx status code
+func (o *HelmInstallCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this helm install created response has a 3xx status code
+func (o *HelmInstallCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm install created response has a 4xx status code
+func (o *HelmInstallCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm install created response has a 5xx status code
+func (o *HelmInstallCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm install created response a status code equal to that given
+func (o *HelmInstallCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *HelmInstallCreated) Error() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallCreated  %+v", 201, o.Payload)
 }
+
+func (o *HelmInstallCreated) String() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallCreated  %+v", 201, o.Payload)
+}
+
 func (o *HelmInstallCreated) GetPayload() *models.ReleaseRelease {
 	return o.Payload
 }
@@ -89,14 +120,44 @@ func NewHelmInstallUnauthorized() *HelmInstallUnauthorized {
 	return &HelmInstallUnauthorized{}
 }
 
-/* HelmInstallUnauthorized describes a response with status code 401, with default header values.
+/*
+HelmInstallUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type HelmInstallUnauthorized struct {
 }
 
+// IsSuccess returns true when this helm install unauthorized response has a 2xx status code
+func (o *HelmInstallUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm install unauthorized response has a 3xx status code
+func (o *HelmInstallUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm install unauthorized response has a 4xx status code
+func (o *HelmInstallUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm install unauthorized response has a 5xx status code
+func (o *HelmInstallUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm install unauthorized response a status code equal to that given
+func (o *HelmInstallUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *HelmInstallUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallUnauthorized ", 401)
+}
+
+func (o *HelmInstallUnauthorized) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallUnauthorized ", 401)
 }
 
@@ -110,14 +171,44 @@ func NewHelmInstallNotFound() *HelmInstallNotFound {
 	return &HelmInstallNotFound{}
 }
 
-/* HelmInstallNotFound describes a response with status code 404, with default header values.
+/*
+HelmInstallNotFound describes a response with status code 404, with default header values.
 
 Environment(Endpoint) or ServiceAccount not found
 */
 type HelmInstallNotFound struct {
 }
 
+// IsSuccess returns true when this helm install not found response has a 2xx status code
+func (o *HelmInstallNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm install not found response has a 3xx status code
+func (o *HelmInstallNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm install not found response has a 4xx status code
+func (o *HelmInstallNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm install not found response has a 5xx status code
+func (o *HelmInstallNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm install not found response a status code equal to that given
+func (o *HelmInstallNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *HelmInstallNotFound) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallNotFound ", 404)
+}
+
+func (o *HelmInstallNotFound) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallNotFound ", 404)
 }
 
@@ -131,14 +222,44 @@ func NewHelmInstallInternalServerError() *HelmInstallInternalServerError {
 	return &HelmInstallInternalServerError{}
 }
 
-/* HelmInstallInternalServerError describes a response with status code 500, with default header values.
+/*
+HelmInstallInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type HelmInstallInternalServerError struct {
 }
 
+// IsSuccess returns true when this helm install internal server error response has a 2xx status code
+func (o *HelmInstallInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm install internal server error response has a 3xx status code
+func (o *HelmInstallInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm install internal server error response has a 4xx status code
+func (o *HelmInstallInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm install internal server error response has a 5xx status code
+func (o *HelmInstallInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this helm install internal server error response a status code equal to that given
+func (o *HelmInstallInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *HelmInstallInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallInternalServerError ", 500)
+}
+
+func (o *HelmInstallInternalServerError) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallInternalServerError ", 500)
 }
 

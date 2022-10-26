@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewEdgeStackUpdateParams creates a new EdgeStackUpdateParams object,
@@ -54,10 +54,12 @@ func NewEdgeStackUpdateParamsWithHTTPClient(client *http.Client) *EdgeStackUpdat
 	}
 }
 
-/* EdgeStackUpdateParams contains all the parameters to send to the API endpoint
-   for the edge stack update operation.
+/*
+EdgeStackUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge stack update operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeStackUpdateParams struct {
 

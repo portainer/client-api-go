@@ -40,9 +40,10 @@ type ClientService interface {
 }
 
 /*
-  AuthenticateUser authenticates
+	AuthenticateUser authenticates
 
-  **Access policy**: public
+	**Access policy**: public
+
 Use this environment(endpoint) to authenticate against Portainer using a username and password.
 */
 func (a *Client) AuthenticateUser(params *AuthenticateUserParams, opts ...ClientOption) (*AuthenticateUserOK, error) {
@@ -81,9 +82,9 @@ func (a *Client) AuthenticateUser(params *AuthenticateUserParams, opts ...Client
 }
 
 /*
-  Logout logouts
+Logout logouts
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) Logout(params *LogoutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogoutNoContent, error) {
 	// TODO: Validate the params before sending
@@ -122,9 +123,9 @@ func (a *Client) Logout(params *LogoutParams, authInfo runtime.ClientAuthInfoWri
 }
 
 /*
-  ValidateOAuth authenticates with o auth
+ValidateOAuth authenticates with o auth
 
-  **Access policy**: public
+**Access policy**: public
 */
 func (a *Client) ValidateOAuth(params *ValidateOAuthParams, opts ...ClientOption) (*ValidateOAuthOK, error) {
 	// TODO: Validate the params before sending

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // UserGetAPIKeysReader is a Reader for the UserGetAPIKeys structure.
@@ -63,18 +63,49 @@ func NewUserGetAPIKeysOK() *UserGetAPIKeysOK {
 	return &UserGetAPIKeysOK{}
 }
 
-/* UserGetAPIKeysOK describes a response with status code 200, with default header values.
+/*
+UserGetAPIKeysOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UserGetAPIKeysOK struct {
-	Payload []*models.PortainerAPIKey
+	Payload []*models.PortainereeAPIKey
+}
+
+// IsSuccess returns true when this user get Api keys o k response has a 2xx status code
+func (o *UserGetAPIKeysOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user get Api keys o k response has a 3xx status code
+func (o *UserGetAPIKeysOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user get Api keys o k response has a 4xx status code
+func (o *UserGetAPIKeysOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user get Api keys o k response has a 5xx status code
+func (o *UserGetAPIKeysOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user get Api keys o k response a status code equal to that given
+func (o *UserGetAPIKeysOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UserGetAPIKeysOK) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysOK  %+v", 200, o.Payload)
 }
-func (o *UserGetAPIKeysOK) GetPayload() []*models.PortainerAPIKey {
+
+func (o *UserGetAPIKeysOK) String() string {
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysOK  %+v", 200, o.Payload)
+}
+
+func (o *UserGetAPIKeysOK) GetPayload() []*models.PortainereeAPIKey {
 	return o.Payload
 }
 
@@ -93,14 +124,44 @@ func NewUserGetAPIKeysBadRequest() *UserGetAPIKeysBadRequest {
 	return &UserGetAPIKeysBadRequest{}
 }
 
-/* UserGetAPIKeysBadRequest describes a response with status code 400, with default header values.
+/*
+UserGetAPIKeysBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type UserGetAPIKeysBadRequest struct {
 }
 
+// IsSuccess returns true when this user get Api keys bad request response has a 2xx status code
+func (o *UserGetAPIKeysBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user get Api keys bad request response has a 3xx status code
+func (o *UserGetAPIKeysBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user get Api keys bad request response has a 4xx status code
+func (o *UserGetAPIKeysBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user get Api keys bad request response has a 5xx status code
+func (o *UserGetAPIKeysBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user get Api keys bad request response a status code equal to that given
+func (o *UserGetAPIKeysBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UserGetAPIKeysBadRequest) Error() string {
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysBadRequest ", 400)
+}
+
+func (o *UserGetAPIKeysBadRequest) String() string {
 	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysBadRequest ", 400)
 }
 
@@ -114,14 +175,44 @@ func NewUserGetAPIKeysForbidden() *UserGetAPIKeysForbidden {
 	return &UserGetAPIKeysForbidden{}
 }
 
-/* UserGetAPIKeysForbidden describes a response with status code 403, with default header values.
+/*
+UserGetAPIKeysForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type UserGetAPIKeysForbidden struct {
 }
 
+// IsSuccess returns true when this user get Api keys forbidden response has a 2xx status code
+func (o *UserGetAPIKeysForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user get Api keys forbidden response has a 3xx status code
+func (o *UserGetAPIKeysForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user get Api keys forbidden response has a 4xx status code
+func (o *UserGetAPIKeysForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user get Api keys forbidden response has a 5xx status code
+func (o *UserGetAPIKeysForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user get Api keys forbidden response a status code equal to that given
+func (o *UserGetAPIKeysForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UserGetAPIKeysForbidden) Error() string {
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysForbidden ", 403)
+}
+
+func (o *UserGetAPIKeysForbidden) String() string {
 	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysForbidden ", 403)
 }
 
@@ -135,14 +226,44 @@ func NewUserGetAPIKeysNotFound() *UserGetAPIKeysNotFound {
 	return &UserGetAPIKeysNotFound{}
 }
 
-/* UserGetAPIKeysNotFound describes a response with status code 404, with default header values.
+/*
+UserGetAPIKeysNotFound describes a response with status code 404, with default header values.
 
 User not found
 */
 type UserGetAPIKeysNotFound struct {
 }
 
+// IsSuccess returns true when this user get Api keys not found response has a 2xx status code
+func (o *UserGetAPIKeysNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user get Api keys not found response has a 3xx status code
+func (o *UserGetAPIKeysNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user get Api keys not found response has a 4xx status code
+func (o *UserGetAPIKeysNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user get Api keys not found response has a 5xx status code
+func (o *UserGetAPIKeysNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user get Api keys not found response a status code equal to that given
+func (o *UserGetAPIKeysNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UserGetAPIKeysNotFound) Error() string {
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysNotFound ", 404)
+}
+
+func (o *UserGetAPIKeysNotFound) String() string {
 	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysNotFound ", 404)
 }
 
@@ -156,14 +277,44 @@ func NewUserGetAPIKeysInternalServerError() *UserGetAPIKeysInternalServerError {
 	return &UserGetAPIKeysInternalServerError{}
 }
 
-/* UserGetAPIKeysInternalServerError describes a response with status code 500, with default header values.
+/*
+UserGetAPIKeysInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type UserGetAPIKeysInternalServerError struct {
 }
 
+// IsSuccess returns true when this user get Api keys internal server error response has a 2xx status code
+func (o *UserGetAPIKeysInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user get Api keys internal server error response has a 3xx status code
+func (o *UserGetAPIKeysInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user get Api keys internal server error response has a 4xx status code
+func (o *UserGetAPIKeysInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user get Api keys internal server error response has a 5xx status code
+func (o *UserGetAPIKeysInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this user get Api keys internal server error response a status code equal to that given
+func (o *UserGetAPIKeysInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UserGetAPIKeysInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysInternalServerError ", 500)
+}
+
+func (o *UserGetAPIKeysInternalServerError) String() string {
 	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysInternalServerError ", 500)
 }
 

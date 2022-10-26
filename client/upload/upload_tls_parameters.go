@@ -52,10 +52,12 @@ func NewUploadTLSParamsWithHTTPClient(client *http.Client) *UploadTLSParams {
 	}
 }
 
-/* UploadTLSParams contains all the parameters to send to the API endpoint
-   for the upload TLS operation.
+/*
+UploadTLSParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the upload TLS operation.
+
+	Typically these are written to a http.Request.
 */
 type UploadTLSParams struct {
 

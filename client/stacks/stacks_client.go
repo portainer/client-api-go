@@ -60,9 +60,9 @@ type ClientService interface {
 }
 
 /*
-  StackAssociate associates an orphaned stack to a new environment endpoint
+StackAssociate associates an orphaned stack to a new environment endpoint
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) StackAssociate(params *StackAssociateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackAssociateOK, error) {
 	// TODO: Validate the params before sending
@@ -101,9 +101,10 @@ func (a *Client) StackAssociate(params *StackAssociateParams, authInfo runtime.C
 }
 
 /*
-  StackCreate deploys a new stack
+	StackCreate deploys a new stack
 
-  Deploy a new stack into a Docker environment(endpoint) specified via the environment(endpoint) identifier.
+	Deploy a new stack into a Docker environment(endpoint) specified via the environment(endpoint) identifier.
+
 **Access policy**: authenticated
 */
 func (a *Client) StackCreate(params *StackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateOK, error) {
@@ -143,9 +144,10 @@ func (a *Client) StackCreate(params *StackCreateParams, authInfo runtime.ClientA
 }
 
 /*
-  StackDelete removes a stack
+	StackDelete removes a stack
 
-  Remove a stack.
+	Remove a stack.
+
 **Access policy**: restricted
 */
 func (a *Client) StackDelete(params *StackDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackDeleteNoContent, error) {
@@ -185,9 +187,10 @@ func (a *Client) StackDelete(params *StackDeleteParams, authInfo runtime.ClientA
 }
 
 /*
-  StackFileInspect retrieves the content of the stack file for the specified stack
+	StackFileInspect retrieves the content of the stack file for the specified stack
 
-  Get Stack file content.
+	Get Stack file content.
+
 **Access policy**: restricted
 */
 func (a *Client) StackFileInspect(params *StackFileInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackFileInspectOK, error) {
@@ -227,9 +230,10 @@ func (a *Client) StackFileInspect(params *StackFileInspectParams, authInfo runti
 }
 
 /*
-  StackGitRedeploy redeploys a stack
+	StackGitRedeploy redeploys a stack
 
-  Pull and redeploy a stack via Git
+	Pull and redeploy a stack via Git
+
 **Access policy**: authenticated
 */
 func (a *Client) StackGitRedeploy(params *StackGitRedeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackGitRedeployOK, error) {
@@ -269,9 +273,10 @@ func (a *Client) StackGitRedeploy(params *StackGitRedeployParams, authInfo runti
 }
 
 /*
-  StackInspect inspects a stack
+	StackInspect inspects a stack
 
-  Retrieve details about a stack.
+	Retrieve details about a stack.
+
 **Access policy**: restricted
 */
 func (a *Client) StackInspect(params *StackInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackInspectOK, error) {
@@ -311,9 +316,10 @@ func (a *Client) StackInspect(params *StackInspectParams, authInfo runtime.Clien
 }
 
 /*
-  StackList lists stacks
+	StackList lists stacks
 
-  List all stacks based on the current user authorizations.
+	List all stacks based on the current user authorizations.
+
 Will return all stacks if using an administrator account otherwise it
 will only return the list of stacks the user have access to.
 **Access policy**: authenticated
@@ -356,9 +362,10 @@ func (a *Client) StackList(params *StackListParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  StackMigrate migrates a stack to another environment endpoint
+	StackMigrate migrates a stack to another environment endpoint
 
-  Migrate a stack from an environment(endpoint) to another environment(endpoint). It will re-create the stack inside the target environment(endpoint) before removing the original stack.
+	Migrate a stack from an environment(endpoint) to another environment(endpoint). It will re-create the stack inside the target environment(endpoint) before removing the original stack.
+
 **Access policy**: authenticated
 */
 func (a *Client) StackMigrate(params *StackMigrateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackMigrateOK, error) {
@@ -398,9 +405,10 @@ func (a *Client) StackMigrate(params *StackMigrateParams, authInfo runtime.Clien
 }
 
 /*
-  StackStart starts a stopped stack
+	StackStart starts a stopped stack
 
-  Starts a stopped Stack.
+	Starts a stopped Stack.
+
 **Access policy**: authenticated
 */
 func (a *Client) StackStart(params *StackStartParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackStartOK, error) {
@@ -440,9 +448,10 @@ func (a *Client) StackStart(params *StackStartParams, authInfo runtime.ClientAut
 }
 
 /*
-  StackStop stops a stopped stack
+	StackStop stops a stopped stack
 
-  Stops a stopped Stack.
+	Stops a stopped Stack.
+
 **Access policy**: authenticated
 */
 func (a *Client) StackStop(params *StackStopParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackStopOK, error) {
@@ -482,9 +491,10 @@ func (a *Client) StackStop(params *StackStopParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  StackUpdate updates a stack
+	StackUpdate updates a stack
 
-  Update a stack, only for file based stacks.
+	Update a stack, only for file based stacks.
+
 **Access policy**: authenticated
 */
 func (a *Client) StackUpdate(params *StackUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackUpdateOK, error) {
@@ -524,9 +534,10 @@ func (a *Client) StackUpdate(params *StackUpdateParams, authInfo runtime.ClientA
 }
 
 /*
-  StackUpdateGit updates a stack s git configs
+	StackUpdateGit updates a stack s git configs
 
-  Update the Git settings in a stack, e.g., RepositoryReferenceName and AutoUpdate
+	Update the Git settings in a stack, e.g., RepositoryReferenceName and AutoUpdate
+
 **Access policy**: authenticated
 */
 func (a *Client) StackUpdateGit(params *StackUpdateGitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackUpdateGitOK, error) {
@@ -566,9 +577,9 @@ func (a *Client) StackUpdateGit(params *StackUpdateGitParams, authInfo runtime.C
 }
 
 /*
-  WebhookInvoke webhooks for triggering stack updates from git
+WebhookInvoke webhooks for triggering stack updates from git
 
-  **Access policy**: public
+**Access policy**: public
 */
 func (a *Client) WebhookInvoke(params *WebhookInvokeParams, opts ...ClientOption) (*WebhookInvokeOK, error) {
 	// TODO: Validate the params before sending

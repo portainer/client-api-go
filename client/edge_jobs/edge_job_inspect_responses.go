@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EdgeJobInspectReader is a Reader for the EdgeJobInspect structure.
@@ -57,24 +57,55 @@ func NewEdgeJobInspectOK() *EdgeJobInspectOK {
 	return &EdgeJobInspectOK{}
 }
 
-/* EdgeJobInspectOK describes a response with status code 200, with default header values.
+/*
+EdgeJobInspectOK describes a response with status code 200, with default header values.
 
 OK
 */
 type EdgeJobInspectOK struct {
-	Payload *models.PortainerEdgeJob
+	Payload *models.PortainereeEdgeJob
+}
+
+// IsSuccess returns true when this edge job inspect o k response has a 2xx status code
+func (o *EdgeJobInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge job inspect o k response has a 3xx status code
+func (o *EdgeJobInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job inspect o k response has a 4xx status code
+func (o *EdgeJobInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job inspect o k response has a 5xx status code
+func (o *EdgeJobInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job inspect o k response a status code equal to that given
+func (o *EdgeJobInspectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *EdgeJobInspectOK) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectOK  %+v", 200, o.Payload)
 }
-func (o *EdgeJobInspectOK) GetPayload() *models.PortainerEdgeJob {
+
+func (o *EdgeJobInspectOK) String() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectOK  %+v", 200, o.Payload)
+}
+
+func (o *EdgeJobInspectOK) GetPayload() *models.PortainereeEdgeJob {
 	return o.Payload
 }
 
 func (o *EdgeJobInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerEdgeJob)
+	o.Payload = new(models.PortainereeEdgeJob)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewEdgeJobInspectBadRequest() *EdgeJobInspectBadRequest {
 	return &EdgeJobInspectBadRequest{}
 }
 
-/* EdgeJobInspectBadRequest describes a response with status code 400, with default header values.
+/*
+EdgeJobInspectBadRequest describes a response with status code 400, with default header values.
 
-EdgeJobInspectBadRequest edge job inspect bad request
+Bad Request
 */
 type EdgeJobInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this edge job inspect bad request response has a 2xx status code
+func (o *EdgeJobInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job inspect bad request response has a 3xx status code
+func (o *EdgeJobInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job inspect bad request response has a 4xx status code
+func (o *EdgeJobInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge job inspect bad request response has a 5xx status code
+func (o *EdgeJobInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job inspect bad request response a status code equal to that given
+func (o *EdgeJobInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EdgeJobInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectBadRequest ", 400)
+}
+
+func (o *EdgeJobInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewEdgeJobInspectInternalServerError() *EdgeJobInspectInternalServerError {
 	return &EdgeJobInspectInternalServerError{}
 }
 
-/* EdgeJobInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeJobInspectInternalServerError describes a response with status code 500, with default header values.
 
-EdgeJobInspectInternalServerError edge job inspect internal server error
+Internal Server Error
 */
 type EdgeJobInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge job inspect internal server error response has a 2xx status code
+func (o *EdgeJobInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job inspect internal server error response has a 3xx status code
+func (o *EdgeJobInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job inspect internal server error response has a 4xx status code
+func (o *EdgeJobInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job inspect internal server error response has a 5xx status code
+func (o *EdgeJobInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job inspect internal server error response a status code equal to that given
+func (o *EdgeJobInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeJobInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectInternalServerError ", 500)
+}
+
+func (o *EdgeJobInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectInternalServerError ", 500)
 }
 
@@ -131,14 +222,44 @@ func NewEdgeJobInspectServiceUnavailable() *EdgeJobInspectServiceUnavailable {
 	return &EdgeJobInspectServiceUnavailable{}
 }
 
-/* EdgeJobInspectServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeJobInspectServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeJobInspectServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge job inspect service unavailable response has a 2xx status code
+func (o *EdgeJobInspectServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job inspect service unavailable response has a 3xx status code
+func (o *EdgeJobInspectServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job inspect service unavailable response has a 4xx status code
+func (o *EdgeJobInspectServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job inspect service unavailable response has a 5xx status code
+func (o *EdgeJobInspectServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job inspect service unavailable response a status code equal to that given
+func (o *EdgeJobInspectServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeJobInspectServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectServiceUnavailable ", 503)
+}
+
+func (o *EdgeJobInspectServiceUnavailable) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectServiceUnavailable ", 503)
 }
 

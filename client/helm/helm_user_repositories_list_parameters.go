@@ -53,16 +53,18 @@ func NewHelmUserRepositoriesListParamsWithHTTPClient(client *http.Client) *HelmU
 	}
 }
 
-/* HelmUserRepositoriesListParams contains all the parameters to send to the API endpoint
-   for the helm user repositories list operation.
+/*
+HelmUserRepositoriesListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the helm user repositories list operation.
+
+	Typically these are written to a http.Request.
 */
 type HelmUserRepositoriesListParams struct {
 
 	/* ID.
 
-	   User identifier
+	   Environment(Endpoint) identifier
 	*/
 	ID int64
 

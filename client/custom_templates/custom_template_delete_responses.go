@@ -60,14 +60,44 @@ func NewCustomTemplateDeleteNoContent() *CustomTemplateDeleteNoContent {
 	return &CustomTemplateDeleteNoContent{}
 }
 
-/* CustomTemplateDeleteNoContent describes a response with status code 204, with default header values.
+/*
+CustomTemplateDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type CustomTemplateDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this custom template delete no content response has a 2xx status code
+func (o *CustomTemplateDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this custom template delete no content response has a 3xx status code
+func (o *CustomTemplateDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template delete no content response has a 4xx status code
+func (o *CustomTemplateDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this custom template delete no content response has a 5xx status code
+func (o *CustomTemplateDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template delete no content response a status code equal to that given
+func (o *CustomTemplateDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *CustomTemplateDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNoContent ", 204)
+}
+
+func (o *CustomTemplateDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewCustomTemplateDeleteBadRequest() *CustomTemplateDeleteBadRequest {
 	return &CustomTemplateDeleteBadRequest{}
 }
 
-/* CustomTemplateDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+CustomTemplateDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type CustomTemplateDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this custom template delete bad request response has a 2xx status code
+func (o *CustomTemplateDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template delete bad request response has a 3xx status code
+func (o *CustomTemplateDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template delete bad request response has a 4xx status code
+func (o *CustomTemplateDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this custom template delete bad request response has a 5xx status code
+func (o *CustomTemplateDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template delete bad request response a status code equal to that given
+func (o *CustomTemplateDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CustomTemplateDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteBadRequest ", 400)
+}
+
+func (o *CustomTemplateDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewCustomTemplateDeleteForbidden() *CustomTemplateDeleteForbidden {
 	return &CustomTemplateDeleteForbidden{}
 }
 
-/* CustomTemplateDeleteForbidden describes a response with status code 403, with default header values.
+/*
+CustomTemplateDeleteForbidden describes a response with status code 403, with default header values.
 
 Access denied to resource
 */
 type CustomTemplateDeleteForbidden struct {
 }
 
+// IsSuccess returns true when this custom template delete forbidden response has a 2xx status code
+func (o *CustomTemplateDeleteForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template delete forbidden response has a 3xx status code
+func (o *CustomTemplateDeleteForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template delete forbidden response has a 4xx status code
+func (o *CustomTemplateDeleteForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this custom template delete forbidden response has a 5xx status code
+func (o *CustomTemplateDeleteForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template delete forbidden response a status code equal to that given
+func (o *CustomTemplateDeleteForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *CustomTemplateDeleteForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteForbidden ", 403)
+}
+
+func (o *CustomTemplateDeleteForbidden) String() string {
 	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewCustomTemplateDeleteNotFound() *CustomTemplateDeleteNotFound {
 	return &CustomTemplateDeleteNotFound{}
 }
 
-/* CustomTemplateDeleteNotFound describes a response with status code 404, with default header values.
+/*
+CustomTemplateDeleteNotFound describes a response with status code 404, with default header values.
 
 Template not found
 */
 type CustomTemplateDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this custom template delete not found response has a 2xx status code
+func (o *CustomTemplateDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template delete not found response has a 3xx status code
+func (o *CustomTemplateDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template delete not found response has a 4xx status code
+func (o *CustomTemplateDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this custom template delete not found response has a 5xx status code
+func (o *CustomTemplateDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template delete not found response a status code equal to that given
+func (o *CustomTemplateDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *CustomTemplateDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNotFound ", 404)
+}
+
+func (o *CustomTemplateDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewCustomTemplateDeleteInternalServerError() *CustomTemplateDeleteInternalS
 	return &CustomTemplateDeleteInternalServerError{}
 }
 
-/* CustomTemplateDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+CustomTemplateDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type CustomTemplateDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this custom template delete internal server error response has a 2xx status code
+func (o *CustomTemplateDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template delete internal server error response has a 3xx status code
+func (o *CustomTemplateDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template delete internal server error response has a 4xx status code
+func (o *CustomTemplateDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this custom template delete internal server error response has a 5xx status code
+func (o *CustomTemplateDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this custom template delete internal server error response a status code equal to that given
+func (o *CustomTemplateDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CustomTemplateDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteInternalServerError ", 500)
+}
+
+func (o *CustomTemplateDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteInternalServerError ", 500)
 }
 

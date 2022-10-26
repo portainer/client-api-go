@@ -36,9 +36,9 @@ type ClientService interface {
 }
 
 /*
-  MOTD fetches the message of the day
+MOTD fetches the message of the day
 
-  **Access policy**: restricted
+**Access policy**: restricted
 */
 func (a *Client) MOTD(params *MOTDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MOTDOK, error) {
 	// TODO: Validate the params before sending

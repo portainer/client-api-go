@@ -54,9 +54,9 @@ type ClientService interface {
 }
 
 /*
-  EdgeJobCreate creates an edge job
+EdgeJobCreate creates an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobCreate(params *EdgeJobCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -95,9 +95,9 @@ func (a *Client) EdgeJobCreate(params *EdgeJobCreateParams, authInfo runtime.Cli
 }
 
 /*
-  EdgeJobDelete deletes an edge job
+EdgeJobDelete deletes an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobDelete(params *EdgeJobDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -136,9 +136,9 @@ func (a *Client) EdgeJobDelete(params *EdgeJobDeleteParams, authInfo runtime.Cli
 }
 
 /*
-  EdgeJobFile fetches a file of an edge job
+EdgeJobFile fetches a file of an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobFile(params *EdgeJobFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobFileOK, error) {
 	// TODO: Validate the params before sending
@@ -177,9 +177,9 @@ func (a *Client) EdgeJobFile(params *EdgeJobFileParams, authInfo runtime.ClientA
 }
 
 /*
-  EdgeJobInspect inspects an edge job
+EdgeJobInspect inspects an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobInspect(params *EdgeJobInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobInspectOK, error) {
 	// TODO: Validate the params before sending
@@ -218,9 +218,9 @@ func (a *Client) EdgeJobInspect(params *EdgeJobInspectParams, authInfo runtime.C
 }
 
 /*
-  EdgeJobList fetches edge jobs list
+EdgeJobList fetches edge jobs list
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobList(params *EdgeJobListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobListOK, error) {
 	// TODO: Validate the params before sending
@@ -259,9 +259,9 @@ func (a *Client) EdgeJobList(params *EdgeJobListParams, authInfo runtime.ClientA
 }
 
 /*
-  EdgeJobTaskLogsInspect fetches the log for a specifc task on an edge job
+EdgeJobTaskLogsInspect fetches the log for a specifc task on an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobTaskLogsInspect(params *EdgeJobTaskLogsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTaskLogsInspectOK, error) {
 	// TODO: Validate the params before sending
@@ -300,9 +300,9 @@ func (a *Client) EdgeJobTaskLogsInspect(params *EdgeJobTaskLogsInspectParams, au
 }
 
 /*
-  EdgeJobTasksClear clears the log for a specifc task on an edge job
+EdgeJobTasksClear clears the log for a specifc task on an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobTasksClear(params *EdgeJobTasksClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksClearNoContent, error) {
 	// TODO: Validate the params before sending
@@ -341,9 +341,9 @@ func (a *Client) EdgeJobTasksClear(params *EdgeJobTasksClearParams, authInfo run
 }
 
 /*
-  EdgeJobTasksCollect collects the log for a specifc task on an edge job
+EdgeJobTasksCollect collects the log for a specifc task on an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobTasksCollect(params *EdgeJobTasksCollectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksCollectNoContent, error) {
 	// TODO: Validate the params before sending
@@ -382,9 +382,9 @@ func (a *Client) EdgeJobTasksCollect(params *EdgeJobTasksCollectParams, authInfo
 }
 
 /*
-  EdgeJobTasksList fetches the list of tasks on an edge job
+EdgeJobTasksList fetches the list of tasks on an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobTasksList(params *EdgeJobTasksListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobTasksListOK, error) {
 	// TODO: Validate the params before sending
@@ -423,9 +423,9 @@ func (a *Client) EdgeJobTasksList(params *EdgeJobTasksListParams, authInfo runti
 }
 
 /*
-  EdgeJobUpdate updates an edge job
+EdgeJobUpdate updates an edge job
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeJobUpdate(params *EdgeJobUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobUpdateOK, error) {
 	// TODO: Validate the params before sending

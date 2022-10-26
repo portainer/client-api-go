@@ -60,14 +60,44 @@ func NewEndpointRegistryAccessNoContent() *EndpointRegistryAccessNoContent {
 	return &EndpointRegistryAccessNoContent{}
 }
 
-/* EndpointRegistryAccessNoContent describes a response with status code 204, with default header values.
+/*
+EndpointRegistryAccessNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type EndpointRegistryAccessNoContent struct {
 }
 
+// IsSuccess returns true when this endpoint registry access no content response has a 2xx status code
+func (o *EndpointRegistryAccessNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this endpoint registry access no content response has a 3xx status code
+func (o *EndpointRegistryAccessNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint registry access no content response has a 4xx status code
+func (o *EndpointRegistryAccessNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint registry access no content response has a 5xx status code
+func (o *EndpointRegistryAccessNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint registry access no content response a status code equal to that given
+func (o *EndpointRegistryAccessNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EndpointRegistryAccessNoContent) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNoContent ", 204)
+}
+
+func (o *EndpointRegistryAccessNoContent) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewEndpointRegistryAccessBadRequest() *EndpointRegistryAccessBadRequest {
 	return &EndpointRegistryAccessBadRequest{}
 }
 
-/* EndpointRegistryAccessBadRequest describes a response with status code 400, with default header values.
+/*
+EndpointRegistryAccessBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type EndpointRegistryAccessBadRequest struct {
 }
 
+// IsSuccess returns true when this endpoint registry access bad request response has a 2xx status code
+func (o *EndpointRegistryAccessBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint registry access bad request response has a 3xx status code
+func (o *EndpointRegistryAccessBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint registry access bad request response has a 4xx status code
+func (o *EndpointRegistryAccessBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint registry access bad request response has a 5xx status code
+func (o *EndpointRegistryAccessBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint registry access bad request response a status code equal to that given
+func (o *EndpointRegistryAccessBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EndpointRegistryAccessBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessBadRequest ", 400)
+}
+
+func (o *EndpointRegistryAccessBadRequest) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewEndpointRegistryAccessForbidden() *EndpointRegistryAccessForbidden {
 	return &EndpointRegistryAccessForbidden{}
 }
 
-/* EndpointRegistryAccessForbidden describes a response with status code 403, with default header values.
+/*
+EndpointRegistryAccessForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type EndpointRegistryAccessForbidden struct {
 }
 
+// IsSuccess returns true when this endpoint registry access forbidden response has a 2xx status code
+func (o *EndpointRegistryAccessForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint registry access forbidden response has a 3xx status code
+func (o *EndpointRegistryAccessForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint registry access forbidden response has a 4xx status code
+func (o *EndpointRegistryAccessForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint registry access forbidden response has a 5xx status code
+func (o *EndpointRegistryAccessForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint registry access forbidden response a status code equal to that given
+func (o *EndpointRegistryAccessForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *EndpointRegistryAccessForbidden) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessForbidden ", 403)
+}
+
+func (o *EndpointRegistryAccessForbidden) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewEndpointRegistryAccessNotFound() *EndpointRegistryAccessNotFound {
 	return &EndpointRegistryAccessNotFound{}
 }
 
-/* EndpointRegistryAccessNotFound describes a response with status code 404, with default header values.
+/*
+EndpointRegistryAccessNotFound describes a response with status code 404, with default header values.
 
 Endpoint not found
 */
 type EndpointRegistryAccessNotFound struct {
 }
 
+// IsSuccess returns true when this endpoint registry access not found response has a 2xx status code
+func (o *EndpointRegistryAccessNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint registry access not found response has a 3xx status code
+func (o *EndpointRegistryAccessNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint registry access not found response has a 4xx status code
+func (o *EndpointRegistryAccessNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint registry access not found response has a 5xx status code
+func (o *EndpointRegistryAccessNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint registry access not found response a status code equal to that given
+func (o *EndpointRegistryAccessNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *EndpointRegistryAccessNotFound) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNotFound ", 404)
+}
+
+func (o *EndpointRegistryAccessNotFound) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewEndpointRegistryAccessInternalServerError() *EndpointRegistryAccessInter
 	return &EndpointRegistryAccessInternalServerError{}
 }
 
-/* EndpointRegistryAccessInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointRegistryAccessInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type EndpointRegistryAccessInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint registry access internal server error response has a 2xx status code
+func (o *EndpointRegistryAccessInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint registry access internal server error response has a 3xx status code
+func (o *EndpointRegistryAccessInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint registry access internal server error response has a 4xx status code
+func (o *EndpointRegistryAccessInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint registry access internal server error response has a 5xx status code
+func (o *EndpointRegistryAccessInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint registry access internal server error response a status code equal to that given
+func (o *EndpointRegistryAccessInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointRegistryAccessInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessInternalServerError ", 500)
+}
+
+func (o *EndpointRegistryAccessInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessInternalServerError ", 500)
 }
 

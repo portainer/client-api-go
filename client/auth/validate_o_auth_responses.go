@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // ValidateOAuthReader is a Reader for the ValidateOAuth structure.
@@ -57,7 +57,8 @@ func NewValidateOAuthOK() *ValidateOAuthOK {
 	return &ValidateOAuthOK{}
 }
 
-/* ValidateOAuthOK describes a response with status code 200, with default header values.
+/*
+ValidateOAuthOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -65,9 +66,39 @@ type ValidateOAuthOK struct {
 	Payload *models.AuthAuthenticateResponse
 }
 
+// IsSuccess returns true when this validate o auth o k response has a 2xx status code
+func (o *ValidateOAuthOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this validate o auth o k response has a 3xx status code
+func (o *ValidateOAuthOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this validate o auth o k response has a 4xx status code
+func (o *ValidateOAuthOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this validate o auth o k response has a 5xx status code
+func (o *ValidateOAuthOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this validate o auth o k response a status code equal to that given
+func (o *ValidateOAuthOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ValidateOAuthOK) Error() string {
 	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthOK  %+v", 200, o.Payload)
 }
+
+func (o *ValidateOAuthOK) String() string {
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthOK  %+v", 200, o.Payload)
+}
+
 func (o *ValidateOAuthOK) GetPayload() *models.AuthAuthenticateResponse {
 	return o.Payload
 }
@@ -89,14 +120,44 @@ func NewValidateOAuthBadRequest() *ValidateOAuthBadRequest {
 	return &ValidateOAuthBadRequest{}
 }
 
-/* ValidateOAuthBadRequest describes a response with status code 400, with default header values.
+/*
+ValidateOAuthBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type ValidateOAuthBadRequest struct {
 }
 
+// IsSuccess returns true when this validate o auth bad request response has a 2xx status code
+func (o *ValidateOAuthBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this validate o auth bad request response has a 3xx status code
+func (o *ValidateOAuthBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this validate o auth bad request response has a 4xx status code
+func (o *ValidateOAuthBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this validate o auth bad request response has a 5xx status code
+func (o *ValidateOAuthBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this validate o auth bad request response a status code equal to that given
+func (o *ValidateOAuthBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ValidateOAuthBadRequest) Error() string {
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthBadRequest ", 400)
+}
+
+func (o *ValidateOAuthBadRequest) String() string {
 	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewValidateOAuthUnprocessableEntity() *ValidateOAuthUnprocessableEntity {
 	return &ValidateOAuthUnprocessableEntity{}
 }
 
-/* ValidateOAuthUnprocessableEntity describes a response with status code 422, with default header values.
+/*
+ValidateOAuthUnprocessableEntity describes a response with status code 422, with default header values.
 
 Invalid Credentials
 */
 type ValidateOAuthUnprocessableEntity struct {
 }
 
+// IsSuccess returns true when this validate o auth unprocessable entity response has a 2xx status code
+func (o *ValidateOAuthUnprocessableEntity) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this validate o auth unprocessable entity response has a 3xx status code
+func (o *ValidateOAuthUnprocessableEntity) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this validate o auth unprocessable entity response has a 4xx status code
+func (o *ValidateOAuthUnprocessableEntity) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this validate o auth unprocessable entity response has a 5xx status code
+func (o *ValidateOAuthUnprocessableEntity) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this validate o auth unprocessable entity response a status code equal to that given
+func (o *ValidateOAuthUnprocessableEntity) IsCode(code int) bool {
+	return code == 422
+}
+
 func (o *ValidateOAuthUnprocessableEntity) Error() string {
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthUnprocessableEntity ", 422)
+}
+
+func (o *ValidateOAuthUnprocessableEntity) String() string {
 	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthUnprocessableEntity ", 422)
 }
 
@@ -131,14 +222,44 @@ func NewValidateOAuthInternalServerError() *ValidateOAuthInternalServerError {
 	return &ValidateOAuthInternalServerError{}
 }
 
-/* ValidateOAuthInternalServerError describes a response with status code 500, with default header values.
+/*
+ValidateOAuthInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type ValidateOAuthInternalServerError struct {
 }
 
+// IsSuccess returns true when this validate o auth internal server error response has a 2xx status code
+func (o *ValidateOAuthInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this validate o auth internal server error response has a 3xx status code
+func (o *ValidateOAuthInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this validate o auth internal server error response has a 4xx status code
+func (o *ValidateOAuthInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this validate o auth internal server error response has a 5xx status code
+func (o *ValidateOAuthInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this validate o auth internal server error response a status code equal to that given
+func (o *ValidateOAuthInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ValidateOAuthInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthInternalServerError ", 500)
+}
+
+func (o *ValidateOAuthInternalServerError) String() string {
 	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthInternalServerError ", 500)
 }
 

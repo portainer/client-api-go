@@ -48,14 +48,44 @@ func NewEdgeGroupDeleteNoContent() *EdgeGroupDeleteNoContent {
 	return &EdgeGroupDeleteNoContent{}
 }
 
-/* EdgeGroupDeleteNoContent describes a response with status code 204, with default header values.
+/*
+EdgeGroupDeleteNoContent describes a response with status code 204, with default header values.
 
-EdgeGroupDeleteNoContent edge group delete no content
+No Content
 */
 type EdgeGroupDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this edge group delete no content response has a 2xx status code
+func (o *EdgeGroupDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge group delete no content response has a 3xx status code
+func (o *EdgeGroupDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge group delete no content response has a 4xx status code
+func (o *EdgeGroupDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge group delete no content response has a 5xx status code
+func (o *EdgeGroupDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge group delete no content response a status code equal to that given
+func (o *EdgeGroupDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EdgeGroupDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteNoContent ", 204)
+}
+
+func (o *EdgeGroupDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteNoContent ", 204)
 }
 
@@ -69,14 +99,44 @@ func NewEdgeGroupDeleteInternalServerError() *EdgeGroupDeleteInternalServerError
 	return &EdgeGroupDeleteInternalServerError{}
 }
 
-/* EdgeGroupDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeGroupDeleteInternalServerError describes a response with status code 500, with default header values.
 
-EdgeGroupDeleteInternalServerError edge group delete internal server error
+Internal Server Error
 */
 type EdgeGroupDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge group delete internal server error response has a 2xx status code
+func (o *EdgeGroupDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge group delete internal server error response has a 3xx status code
+func (o *EdgeGroupDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge group delete internal server error response has a 4xx status code
+func (o *EdgeGroupDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge group delete internal server error response has a 5xx status code
+func (o *EdgeGroupDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge group delete internal server error response a status code equal to that given
+func (o *EdgeGroupDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeGroupDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteInternalServerError ", 500)
+}
+
+func (o *EdgeGroupDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteInternalServerError ", 500)
 }
 
@@ -90,14 +150,44 @@ func NewEdgeGroupDeleteServiceUnavailable() *EdgeGroupDeleteServiceUnavailable {
 	return &EdgeGroupDeleteServiceUnavailable{}
 }
 
-/* EdgeGroupDeleteServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeGroupDeleteServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeGroupDeleteServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge group delete service unavailable response has a 2xx status code
+func (o *EdgeGroupDeleteServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge group delete service unavailable response has a 3xx status code
+func (o *EdgeGroupDeleteServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge group delete service unavailable response has a 4xx status code
+func (o *EdgeGroupDeleteServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge group delete service unavailable response has a 5xx status code
+func (o *EdgeGroupDeleteServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge group delete service unavailable response a status code equal to that given
+func (o *EdgeGroupDeleteServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeGroupDeleteServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteServiceUnavailable ", 503)
+}
+
+func (o *EdgeGroupDeleteServiceUnavailable) String() string {
 	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteServiceUnavailable ", 503)
 }
 

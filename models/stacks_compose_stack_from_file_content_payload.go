@@ -21,7 +21,7 @@ import (
 type StacksComposeStackFromFileContentPayload struct {
 
 	// A list of environment(endpoint) variables used during stack deployment
-	Env []*PortainerPair `json:"env"`
+	Env []*PortainereePair `json:"env"`
 
 	// Whether the stack is from a app template
 	// Example: false
@@ -36,6 +36,10 @@ type StacksComposeStackFromFileContentPayload struct {
 	// Example: version: 3\n services:\n web:\n image:nginx
 	// Required: true
 	StackFileContent *string `json:"stackFileContent"`
+
+	// A UUID to identify a webhook. The stack will be force updated and pull the latest image when the webhook was invoked.
+	// Example: c11fdf23-183e-428a-9bb6-16db01032174
+	Webhook string `json:"webhook,omitempty"`
 }
 
 // Validate validates this stacks compose stack from file content payload

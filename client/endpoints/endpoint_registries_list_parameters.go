@@ -53,10 +53,12 @@ func NewEndpointRegistriesListParamsWithHTTPClient(client *http.Client) *Endpoin
 	}
 }
 
-/* EndpointRegistriesListParams contains all the parameters to send to the API endpoint
-   for the endpoint registries list operation.
+/*
+EndpointRegistriesListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint registries list operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointRegistriesListParams struct {
 

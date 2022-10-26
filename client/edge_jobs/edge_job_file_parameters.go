@@ -52,10 +52,12 @@ func NewEdgeJobFileParamsWithHTTPClient(client *http.Client) *EdgeJobFileParams 
 	}
 }
 
-/* EdgeJobFileParams contains all the parameters to send to the API endpoint
-   for the edge job file operation.
+/*
+EdgeJobFileParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge job file operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeJobFileParams struct {
 

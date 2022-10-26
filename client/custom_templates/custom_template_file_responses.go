@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // CustomTemplateFileReader is a Reader for the CustomTemplateFile structure.
@@ -57,7 +57,8 @@ func NewCustomTemplateFileOK() *CustomTemplateFileOK {
 	return &CustomTemplateFileOK{}
 }
 
-/* CustomTemplateFileOK describes a response with status code 200, with default header values.
+/*
+CustomTemplateFileOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -65,9 +66,39 @@ type CustomTemplateFileOK struct {
 	Payload *models.CustomtemplatesFileResponse
 }
 
+// IsSuccess returns true when this custom template file o k response has a 2xx status code
+func (o *CustomTemplateFileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this custom template file o k response has a 3xx status code
+func (o *CustomTemplateFileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template file o k response has a 4xx status code
+func (o *CustomTemplateFileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this custom template file o k response has a 5xx status code
+func (o *CustomTemplateFileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template file o k response a status code equal to that given
+func (o *CustomTemplateFileOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CustomTemplateFileOK) Error() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileOK  %+v", 200, o.Payload)
 }
+
+func (o *CustomTemplateFileOK) String() string {
+	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileOK  %+v", 200, o.Payload)
+}
+
 func (o *CustomTemplateFileOK) GetPayload() *models.CustomtemplatesFileResponse {
 	return o.Payload
 }
@@ -89,14 +120,44 @@ func NewCustomTemplateFileBadRequest() *CustomTemplateFileBadRequest {
 	return &CustomTemplateFileBadRequest{}
 }
 
-/* CustomTemplateFileBadRequest describes a response with status code 400, with default header values.
+/*
+CustomTemplateFileBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type CustomTemplateFileBadRequest struct {
 }
 
+// IsSuccess returns true when this custom template file bad request response has a 2xx status code
+func (o *CustomTemplateFileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template file bad request response has a 3xx status code
+func (o *CustomTemplateFileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template file bad request response has a 4xx status code
+func (o *CustomTemplateFileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this custom template file bad request response has a 5xx status code
+func (o *CustomTemplateFileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template file bad request response a status code equal to that given
+func (o *CustomTemplateFileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CustomTemplateFileBadRequest) Error() string {
+	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileBadRequest ", 400)
+}
+
+func (o *CustomTemplateFileBadRequest) String() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewCustomTemplateFileNotFound() *CustomTemplateFileNotFound {
 	return &CustomTemplateFileNotFound{}
 }
 
-/* CustomTemplateFileNotFound describes a response with status code 404, with default header values.
+/*
+CustomTemplateFileNotFound describes a response with status code 404, with default header values.
 
 Custom template not found
 */
 type CustomTemplateFileNotFound struct {
 }
 
+// IsSuccess returns true when this custom template file not found response has a 2xx status code
+func (o *CustomTemplateFileNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template file not found response has a 3xx status code
+func (o *CustomTemplateFileNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template file not found response has a 4xx status code
+func (o *CustomTemplateFileNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this custom template file not found response has a 5xx status code
+func (o *CustomTemplateFileNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template file not found response a status code equal to that given
+func (o *CustomTemplateFileNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *CustomTemplateFileNotFound) Error() string {
+	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileNotFound ", 404)
+}
+
+func (o *CustomTemplateFileNotFound) String() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileNotFound ", 404)
 }
 
@@ -131,14 +222,44 @@ func NewCustomTemplateFileInternalServerError() *CustomTemplateFileInternalServe
 	return &CustomTemplateFileInternalServerError{}
 }
 
-/* CustomTemplateFileInternalServerError describes a response with status code 500, with default header values.
+/*
+CustomTemplateFileInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type CustomTemplateFileInternalServerError struct {
 }
 
+// IsSuccess returns true when this custom template file internal server error response has a 2xx status code
+func (o *CustomTemplateFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template file internal server error response has a 3xx status code
+func (o *CustomTemplateFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template file internal server error response has a 4xx status code
+func (o *CustomTemplateFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this custom template file internal server error response has a 5xx status code
+func (o *CustomTemplateFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this custom template file internal server error response a status code equal to that given
+func (o *CustomTemplateFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CustomTemplateFileInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileInternalServerError ", 500)
+}
+
+func (o *CustomTemplateFileInternalServerError) String() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileInternalServerError ", 500)
 }
 

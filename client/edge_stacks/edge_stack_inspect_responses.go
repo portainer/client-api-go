@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EdgeStackInspectReader is a Reader for the EdgeStackInspect structure.
@@ -57,24 +57,55 @@ func NewEdgeStackInspectOK() *EdgeStackInspectOK {
 	return &EdgeStackInspectOK{}
 }
 
-/* EdgeStackInspectOK describes a response with status code 200, with default header values.
+/*
+EdgeStackInspectOK describes a response with status code 200, with default header values.
 
 OK
 */
 type EdgeStackInspectOK struct {
-	Payload *models.PortainerEdgeStack
+	Payload *models.PortainereeEdgeStack
+}
+
+// IsSuccess returns true when this edge stack inspect o k response has a 2xx status code
+func (o *EdgeStackInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge stack inspect o k response has a 3xx status code
+func (o *EdgeStackInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack inspect o k response has a 4xx status code
+func (o *EdgeStackInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack inspect o k response has a 5xx status code
+func (o *EdgeStackInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge stack inspect o k response a status code equal to that given
+func (o *EdgeStackInspectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *EdgeStackInspectOK) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectOK  %+v", 200, o.Payload)
 }
-func (o *EdgeStackInspectOK) GetPayload() *models.PortainerEdgeStack {
+
+func (o *EdgeStackInspectOK) String() string {
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectOK  %+v", 200, o.Payload)
+}
+
+func (o *EdgeStackInspectOK) GetPayload() *models.PortainereeEdgeStack {
 	return o.Payload
 }
 
 func (o *EdgeStackInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerEdgeStack)
+	o.Payload = new(models.PortainereeEdgeStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewEdgeStackInspectBadRequest() *EdgeStackInspectBadRequest {
 	return &EdgeStackInspectBadRequest{}
 }
 
-/* EdgeStackInspectBadRequest describes a response with status code 400, with default header values.
+/*
+EdgeStackInspectBadRequest describes a response with status code 400, with default header values.
 
-EdgeStackInspectBadRequest edge stack inspect bad request
+Bad Request
 */
 type EdgeStackInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this edge stack inspect bad request response has a 2xx status code
+func (o *EdgeStackInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack inspect bad request response has a 3xx status code
+func (o *EdgeStackInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack inspect bad request response has a 4xx status code
+func (o *EdgeStackInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge stack inspect bad request response has a 5xx status code
+func (o *EdgeStackInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge stack inspect bad request response a status code equal to that given
+func (o *EdgeStackInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EdgeStackInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectBadRequest ", 400)
+}
+
+func (o *EdgeStackInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewEdgeStackInspectInternalServerError() *EdgeStackInspectInternalServerErr
 	return &EdgeStackInspectInternalServerError{}
 }
 
-/* EdgeStackInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeStackInspectInternalServerError describes a response with status code 500, with default header values.
 
-EdgeStackInspectInternalServerError edge stack inspect internal server error
+Internal Server Error
 */
 type EdgeStackInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge stack inspect internal server error response has a 2xx status code
+func (o *EdgeStackInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack inspect internal server error response has a 3xx status code
+func (o *EdgeStackInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack inspect internal server error response has a 4xx status code
+func (o *EdgeStackInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack inspect internal server error response has a 5xx status code
+func (o *EdgeStackInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge stack inspect internal server error response a status code equal to that given
+func (o *EdgeStackInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeStackInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectInternalServerError ", 500)
+}
+
+func (o *EdgeStackInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectInternalServerError ", 500)
 }
 
@@ -131,14 +222,44 @@ func NewEdgeStackInspectServiceUnavailable() *EdgeStackInspectServiceUnavailable
 	return &EdgeStackInspectServiceUnavailable{}
 }
 
-/* EdgeStackInspectServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeStackInspectServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeStackInspectServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge stack inspect service unavailable response has a 2xx status code
+func (o *EdgeStackInspectServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack inspect service unavailable response has a 3xx status code
+func (o *EdgeStackInspectServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack inspect service unavailable response has a 4xx status code
+func (o *EdgeStackInspectServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack inspect service unavailable response has a 5xx status code
+func (o *EdgeStackInspectServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge stack inspect service unavailable response a status code equal to that given
+func (o *EdgeStackInspectServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeStackInspectServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectServiceUnavailable ", 503)
+}
+
+func (o *EdgeStackInspectServiceUnavailable) String() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectServiceUnavailable ", 503)
 }
 

@@ -66,14 +66,44 @@ func NewGetKubernetesConfigOK() *GetKubernetesConfigOK {
 	return &GetKubernetesConfigOK{}
 }
 
-/* GetKubernetesConfigOK describes a response with status code 200, with default header values.
+/*
+GetKubernetesConfigOK describes a response with status code 200, with default header values.
 
 Success
 */
 type GetKubernetesConfigOK struct {
 }
 
+// IsSuccess returns true when this get kubernetes config o k response has a 2xx status code
+func (o *GetKubernetesConfigOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get kubernetes config o k response has a 3xx status code
+func (o *GetKubernetesConfigOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes config o k response has a 4xx status code
+func (o *GetKubernetesConfigOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get kubernetes config o k response has a 5xx status code
+func (o *GetKubernetesConfigOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes config o k response a status code equal to that given
+func (o *GetKubernetesConfigOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetKubernetesConfigOK) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigOK ", 200)
+}
+
+func (o *GetKubernetesConfigOK) String() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigOK ", 200)
 }
 
@@ -87,14 +117,44 @@ func NewGetKubernetesConfigBadRequest() *GetKubernetesConfigBadRequest {
 	return &GetKubernetesConfigBadRequest{}
 }
 
-/* GetKubernetesConfigBadRequest describes a response with status code 400, with default header values.
+/*
+GetKubernetesConfigBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type GetKubernetesConfigBadRequest struct {
 }
 
+// IsSuccess returns true when this get kubernetes config bad request response has a 2xx status code
+func (o *GetKubernetesConfigBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes config bad request response has a 3xx status code
+func (o *GetKubernetesConfigBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes config bad request response has a 4xx status code
+func (o *GetKubernetesConfigBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes config bad request response has a 5xx status code
+func (o *GetKubernetesConfigBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes config bad request response a status code equal to that given
+func (o *GetKubernetesConfigBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetKubernetesConfigBadRequest) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigBadRequest ", 400)
+}
+
+func (o *GetKubernetesConfigBadRequest) String() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigBadRequest ", 400)
 }
 
@@ -108,14 +168,44 @@ func NewGetKubernetesConfigUnauthorized() *GetKubernetesConfigUnauthorized {
 	return &GetKubernetesConfigUnauthorized{}
 }
 
-/* GetKubernetesConfigUnauthorized describes a response with status code 401, with default header values.
+/*
+GetKubernetesConfigUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetKubernetesConfigUnauthorized struct {
 }
 
+// IsSuccess returns true when this get kubernetes config unauthorized response has a 2xx status code
+func (o *GetKubernetesConfigUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes config unauthorized response has a 3xx status code
+func (o *GetKubernetesConfigUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes config unauthorized response has a 4xx status code
+func (o *GetKubernetesConfigUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes config unauthorized response has a 5xx status code
+func (o *GetKubernetesConfigUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes config unauthorized response a status code equal to that given
+func (o *GetKubernetesConfigUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetKubernetesConfigUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigUnauthorized ", 401)
+}
+
+func (o *GetKubernetesConfigUnauthorized) String() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigUnauthorized ", 401)
 }
 
@@ -129,14 +219,44 @@ func NewGetKubernetesConfigForbidden() *GetKubernetesConfigForbidden {
 	return &GetKubernetesConfigForbidden{}
 }
 
-/* GetKubernetesConfigForbidden describes a response with status code 403, with default header values.
+/*
+GetKubernetesConfigForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type GetKubernetesConfigForbidden struct {
 }
 
+// IsSuccess returns true when this get kubernetes config forbidden response has a 2xx status code
+func (o *GetKubernetesConfigForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes config forbidden response has a 3xx status code
+func (o *GetKubernetesConfigForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes config forbidden response has a 4xx status code
+func (o *GetKubernetesConfigForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes config forbidden response has a 5xx status code
+func (o *GetKubernetesConfigForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes config forbidden response a status code equal to that given
+func (o *GetKubernetesConfigForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetKubernetesConfigForbidden) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigForbidden ", 403)
+}
+
+func (o *GetKubernetesConfigForbidden) String() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigForbidden ", 403)
 }
 
@@ -150,14 +270,44 @@ func NewGetKubernetesConfigNotFound() *GetKubernetesConfigNotFound {
 	return &GetKubernetesConfigNotFound{}
 }
 
-/* GetKubernetesConfigNotFound describes a response with status code 404, with default header values.
+/*
+GetKubernetesConfigNotFound describes a response with status code 404, with default header values.
 
 Environment(Endpoint) or ServiceAccount not found
 */
 type GetKubernetesConfigNotFound struct {
 }
 
+// IsSuccess returns true when this get kubernetes config not found response has a 2xx status code
+func (o *GetKubernetesConfigNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes config not found response has a 3xx status code
+func (o *GetKubernetesConfigNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes config not found response has a 4xx status code
+func (o *GetKubernetesConfigNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes config not found response has a 5xx status code
+func (o *GetKubernetesConfigNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes config not found response a status code equal to that given
+func (o *GetKubernetesConfigNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetKubernetesConfigNotFound) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigNotFound ", 404)
+}
+
+func (o *GetKubernetesConfigNotFound) String() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigNotFound ", 404)
 }
 
@@ -171,14 +321,44 @@ func NewGetKubernetesConfigInternalServerError() *GetKubernetesConfigInternalSer
 	return &GetKubernetesConfigInternalServerError{}
 }
 
-/* GetKubernetesConfigInternalServerError describes a response with status code 500, with default header values.
+/*
+GetKubernetesConfigInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type GetKubernetesConfigInternalServerError struct {
 }
 
+// IsSuccess returns true when this get kubernetes config internal server error response has a 2xx status code
+func (o *GetKubernetesConfigInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes config internal server error response has a 3xx status code
+func (o *GetKubernetesConfigInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes config internal server error response has a 4xx status code
+func (o *GetKubernetesConfigInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get kubernetes config internal server error response has a 5xx status code
+func (o *GetKubernetesConfigInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get kubernetes config internal server error response a status code equal to that given
+func (o *GetKubernetesConfigInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetKubernetesConfigInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigInternalServerError ", 500)
+}
+
+func (o *GetKubernetesConfigInternalServerError) String() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigInternalServerError ", 500)
 }
 

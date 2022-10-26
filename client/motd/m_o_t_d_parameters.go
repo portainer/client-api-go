@@ -52,10 +52,12 @@ func NewMOTDParamsWithHTTPClient(client *http.Client) *MOTDParams {
 	}
 }
 
-/* MOTDParams contains all the parameters to send to the API endpoint
-   for the m o t d operation.
+/*
+MOTDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the m o t d operation.
+
+	Typically these are written to a http.Request.
 */
 type MOTDParams struct {
 	timeout    time.Duration

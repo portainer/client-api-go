@@ -52,10 +52,12 @@ func NewEdgeJobListParamsWithHTTPClient(client *http.Client) *EdgeJobListParams 
 	}
 }
 
-/* EdgeJobListParams contains all the parameters to send to the API endpoint
-   for the edge job list operation.
+/*
+EdgeJobListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge job list operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeJobListParams struct {
 	timeout    time.Duration

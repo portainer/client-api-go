@@ -53,10 +53,12 @@ func NewCustomTemplateFileParamsWithHTTPClient(client *http.Client) *CustomTempl
 	}
 }
 
-/* CustomTemplateFileParams contains all the parameters to send to the API endpoint
-   for the custom template file operation.
+/*
+CustomTemplateFileParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the custom template file operation.
+
+	Typically these are written to a http.Request.
 */
 type CustomTemplateFileParams struct {
 

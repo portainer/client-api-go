@@ -36,9 +36,9 @@ type ClientService interface {
 }
 
 /*
-  EdgeTemplateList fetches the list of edge templates
+EdgeTemplateList fetches the list of edge templates
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeTemplateList(params *EdgeTemplateListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeTemplateListOK, error) {
 	// TODO: Validate the params before sending

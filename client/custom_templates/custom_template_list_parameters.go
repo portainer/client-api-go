@@ -53,10 +53,12 @@ func NewCustomTemplateListParamsWithHTTPClient(client *http.Client) *CustomTempl
 	}
 }
 
-/* CustomTemplateListParams contains all the parameters to send to the API endpoint
-   for the custom template list operation.
+/*
+CustomTemplateListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the custom template list operation.
+
+	Typically these are written to a http.Request.
 */
 type CustomTemplateListParams struct {
 

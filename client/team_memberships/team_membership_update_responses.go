@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // TeamMembershipUpdateReader is a Reader for the TeamMembershipUpdate structure.
@@ -63,24 +63,55 @@ func NewTeamMembershipUpdateOK() *TeamMembershipUpdateOK {
 	return &TeamMembershipUpdateOK{}
 }
 
-/* TeamMembershipUpdateOK describes a response with status code 200, with default header values.
+/*
+TeamMembershipUpdateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type TeamMembershipUpdateOK struct {
-	Payload *models.PortainerTeamMembership
+	Payload *models.PortainereeTeamMembership
+}
+
+// IsSuccess returns true when this team membership update o k response has a 2xx status code
+func (o *TeamMembershipUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this team membership update o k response has a 3xx status code
+func (o *TeamMembershipUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership update o k response has a 4xx status code
+func (o *TeamMembershipUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team membership update o k response has a 5xx status code
+func (o *TeamMembershipUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership update o k response a status code equal to that given
+func (o *TeamMembershipUpdateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *TeamMembershipUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateOK  %+v", 200, o.Payload)
 }
-func (o *TeamMembershipUpdateOK) GetPayload() *models.PortainerTeamMembership {
+
+func (o *TeamMembershipUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateOK  %+v", 200, o.Payload)
+}
+
+func (o *TeamMembershipUpdateOK) GetPayload() *models.PortainereeTeamMembership {
 	return o.Payload
 }
 
 func (o *TeamMembershipUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerTeamMembership)
+	o.Payload = new(models.PortainereeTeamMembership)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -95,14 +126,44 @@ func NewTeamMembershipUpdateBadRequest() *TeamMembershipUpdateBadRequest {
 	return &TeamMembershipUpdateBadRequest{}
 }
 
-/* TeamMembershipUpdateBadRequest describes a response with status code 400, with default header values.
+/*
+TeamMembershipUpdateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type TeamMembershipUpdateBadRequest struct {
 }
 
+// IsSuccess returns true when this team membership update bad request response has a 2xx status code
+func (o *TeamMembershipUpdateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership update bad request response has a 3xx status code
+func (o *TeamMembershipUpdateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership update bad request response has a 4xx status code
+func (o *TeamMembershipUpdateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team membership update bad request response has a 5xx status code
+func (o *TeamMembershipUpdateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership update bad request response a status code equal to that given
+func (o *TeamMembershipUpdateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *TeamMembershipUpdateBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateBadRequest ", 400)
+}
+
+func (o *TeamMembershipUpdateBadRequest) String() string {
 	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateBadRequest ", 400)
 }
 
@@ -116,14 +177,44 @@ func NewTeamMembershipUpdateForbidden() *TeamMembershipUpdateForbidden {
 	return &TeamMembershipUpdateForbidden{}
 }
 
-/* TeamMembershipUpdateForbidden describes a response with status code 403, with default header values.
+/*
+TeamMembershipUpdateForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type TeamMembershipUpdateForbidden struct {
 }
 
+// IsSuccess returns true when this team membership update forbidden response has a 2xx status code
+func (o *TeamMembershipUpdateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership update forbidden response has a 3xx status code
+func (o *TeamMembershipUpdateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership update forbidden response has a 4xx status code
+func (o *TeamMembershipUpdateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team membership update forbidden response has a 5xx status code
+func (o *TeamMembershipUpdateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership update forbidden response a status code equal to that given
+func (o *TeamMembershipUpdateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *TeamMembershipUpdateForbidden) Error() string {
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateForbidden ", 403)
+}
+
+func (o *TeamMembershipUpdateForbidden) String() string {
 	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateForbidden ", 403)
 }
 
@@ -137,14 +228,44 @@ func NewTeamMembershipUpdateNotFound() *TeamMembershipUpdateNotFound {
 	return &TeamMembershipUpdateNotFound{}
 }
 
-/* TeamMembershipUpdateNotFound describes a response with status code 404, with default header values.
+/*
+TeamMembershipUpdateNotFound describes a response with status code 404, with default header values.
 
 TeamMembership not found
 */
 type TeamMembershipUpdateNotFound struct {
 }
 
+// IsSuccess returns true when this team membership update not found response has a 2xx status code
+func (o *TeamMembershipUpdateNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership update not found response has a 3xx status code
+func (o *TeamMembershipUpdateNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership update not found response has a 4xx status code
+func (o *TeamMembershipUpdateNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team membership update not found response has a 5xx status code
+func (o *TeamMembershipUpdateNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership update not found response a status code equal to that given
+func (o *TeamMembershipUpdateNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *TeamMembershipUpdateNotFound) Error() string {
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateNotFound ", 404)
+}
+
+func (o *TeamMembershipUpdateNotFound) String() string {
 	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateNotFound ", 404)
 }
 
@@ -158,14 +279,44 @@ func NewTeamMembershipUpdateInternalServerError() *TeamMembershipUpdateInternalS
 	return &TeamMembershipUpdateInternalServerError{}
 }
 
-/* TeamMembershipUpdateInternalServerError describes a response with status code 500, with default header values.
+/*
+TeamMembershipUpdateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TeamMembershipUpdateInternalServerError struct {
 }
 
+// IsSuccess returns true when this team membership update internal server error response has a 2xx status code
+func (o *TeamMembershipUpdateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership update internal server error response has a 3xx status code
+func (o *TeamMembershipUpdateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership update internal server error response has a 4xx status code
+func (o *TeamMembershipUpdateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team membership update internal server error response has a 5xx status code
+func (o *TeamMembershipUpdateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this team membership update internal server error response a status code equal to that given
+func (o *TeamMembershipUpdateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TeamMembershipUpdateInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateInternalServerError ", 500)
+}
+
+func (o *TeamMembershipUpdateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateInternalServerError ", 500)
 }
 

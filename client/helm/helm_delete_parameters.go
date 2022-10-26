@@ -53,10 +53,12 @@ func NewHelmDeleteParamsWithHTTPClient(client *http.Client) *HelmDeleteParams {
 	}
 }
 
-/* HelmDeleteParams contains all the parameters to send to the API endpoint
-   for the helm delete operation.
+/*
+HelmDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the helm delete operation.
+
+	Typically these are written to a http.Request.
 */
 type HelmDeleteParams struct {
 

@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewStackGitRedeployParams creates a new StackGitRedeployParams object,
@@ -55,10 +55,12 @@ func NewStackGitRedeployParamsWithHTTPClient(client *http.Client) *StackGitRedep
 	}
 }
 
-/* StackGitRedeployParams contains all the parameters to send to the API endpoint
-   for the stack git redeploy operation.
+/*
+StackGitRedeployParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stack git redeploy operation.
+
+	Typically these are written to a http.Request.
 */
 type StackGitRedeployParams struct {
 

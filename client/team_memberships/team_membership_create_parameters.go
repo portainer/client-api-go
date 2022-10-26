@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewTeamMembershipCreateParams creates a new TeamMembershipCreateParams object,
@@ -54,10 +54,12 @@ func NewTeamMembershipCreateParamsWithHTTPClient(client *http.Client) *TeamMembe
 	}
 }
 
-/* TeamMembershipCreateParams contains all the parameters to send to the API endpoint
-   for the team membership create operation.
+/*
+TeamMembershipCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the team membership create operation.
+
+	Typically these are written to a http.Request.
 */
 type TeamMembershipCreateParams struct {
 

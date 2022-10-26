@@ -53,10 +53,12 @@ func NewGetWebhooksParamsWithHTTPClient(client *http.Client) *GetWebhooksParams 
 	}
 }
 
-/* GetWebhooksParams contains all the parameters to send to the API endpoint
-   for the get webhooks operation.
+/*
+GetWebhooksParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get webhooks operation.
+
+	Typically these are written to a http.Request.
 */
 type GetWebhooksParams struct {
 

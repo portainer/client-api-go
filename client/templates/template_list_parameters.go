@@ -52,10 +52,12 @@ func NewTemplateListParamsWithHTTPClient(client *http.Client) *TemplateListParam
 	}
 }
 
-/* TemplateListParams contains all the parameters to send to the API endpoint
-   for the template list operation.
+/*
+TemplateListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the template list operation.
+
+	Typically these are written to a http.Request.
 */
 type TemplateListParams struct {
 	timeout    time.Duration

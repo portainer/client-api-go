@@ -54,14 +54,44 @@ func NewOpenAMTConfigureNoContent() *OpenAMTConfigureNoContent {
 	return &OpenAMTConfigureNoContent{}
 }
 
-/* OpenAMTConfigureNoContent describes a response with status code 204, with default header values.
+/*
+OpenAMTConfigureNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type OpenAMTConfigureNoContent struct {
 }
 
+// IsSuccess returns true when this open a m t configure no content response has a 2xx status code
+func (o *OpenAMTConfigureNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this open a m t configure no content response has a 3xx status code
+func (o *OpenAMTConfigureNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t configure no content response has a 4xx status code
+func (o *OpenAMTConfigureNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this open a m t configure no content response has a 5xx status code
+func (o *OpenAMTConfigureNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t configure no content response a status code equal to that given
+func (o *OpenAMTConfigureNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *OpenAMTConfigureNoContent) Error() string {
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureNoContent ", 204)
+}
+
+func (o *OpenAMTConfigureNoContent) String() string {
 	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewOpenAMTConfigureBadRequest() *OpenAMTConfigureBadRequest {
 	return &OpenAMTConfigureBadRequest{}
 }
 
-/* OpenAMTConfigureBadRequest describes a response with status code 400, with default header values.
+/*
+OpenAMTConfigureBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type OpenAMTConfigureBadRequest struct {
 }
 
+// IsSuccess returns true when this open a m t configure bad request response has a 2xx status code
+func (o *OpenAMTConfigureBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t configure bad request response has a 3xx status code
+func (o *OpenAMTConfigureBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t configure bad request response has a 4xx status code
+func (o *OpenAMTConfigureBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this open a m t configure bad request response has a 5xx status code
+func (o *OpenAMTConfigureBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t configure bad request response a status code equal to that given
+func (o *OpenAMTConfigureBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *OpenAMTConfigureBadRequest) Error() string {
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureBadRequest ", 400)
+}
+
+func (o *OpenAMTConfigureBadRequest) String() string {
 	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewOpenAMTConfigureForbidden() *OpenAMTConfigureForbidden {
 	return &OpenAMTConfigureForbidden{}
 }
 
-/* OpenAMTConfigureForbidden describes a response with status code 403, with default header values.
+/*
+OpenAMTConfigureForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type OpenAMTConfigureForbidden struct {
 }
 
+// IsSuccess returns true when this open a m t configure forbidden response has a 2xx status code
+func (o *OpenAMTConfigureForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t configure forbidden response has a 3xx status code
+func (o *OpenAMTConfigureForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t configure forbidden response has a 4xx status code
+func (o *OpenAMTConfigureForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this open a m t configure forbidden response has a 5xx status code
+func (o *OpenAMTConfigureForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t configure forbidden response a status code equal to that given
+func (o *OpenAMTConfigureForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *OpenAMTConfigureForbidden) Error() string {
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureForbidden ", 403)
+}
+
+func (o *OpenAMTConfigureForbidden) String() string {
 	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewOpenAMTConfigureInternalServerError() *OpenAMTConfigureInternalServerErr
 	return &OpenAMTConfigureInternalServerError{}
 }
 
-/* OpenAMTConfigureInternalServerError describes a response with status code 500, with default header values.
+/*
+OpenAMTConfigureInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type OpenAMTConfigureInternalServerError struct {
 }
 
+// IsSuccess returns true when this open a m t configure internal server error response has a 2xx status code
+func (o *OpenAMTConfigureInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t configure internal server error response has a 3xx status code
+func (o *OpenAMTConfigureInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t configure internal server error response has a 4xx status code
+func (o *OpenAMTConfigureInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this open a m t configure internal server error response has a 5xx status code
+func (o *OpenAMTConfigureInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this open a m t configure internal server error response a status code equal to that given
+func (o *OpenAMTConfigureInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *OpenAMTConfigureInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureInternalServerError ", 500)
+}
+
+func (o *OpenAMTConfigureInternalServerError) String() string {
 	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureInternalServerError ", 500)
 }
 

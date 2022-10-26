@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // TeamInspectReader is a Reader for the TeamInspect structure.
@@ -69,24 +69,55 @@ func NewTeamInspectOK() *TeamInspectOK {
 	return &TeamInspectOK{}
 }
 
-/* TeamInspectOK describes a response with status code 200, with default header values.
+/*
+TeamInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type TeamInspectOK struct {
-	Payload *models.PortainerTeam
+	Payload *models.PortainereeTeam
+}
+
+// IsSuccess returns true when this team inspect o k response has a 2xx status code
+func (o *TeamInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this team inspect o k response has a 3xx status code
+func (o *TeamInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team inspect o k response has a 4xx status code
+func (o *TeamInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team inspect o k response has a 5xx status code
+func (o *TeamInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team inspect o k response a status code equal to that given
+func (o *TeamInspectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *TeamInspectOK) Error() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectOK  %+v", 200, o.Payload)
 }
-func (o *TeamInspectOK) GetPayload() *models.PortainerTeam {
+
+func (o *TeamInspectOK) String() string {
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectOK  %+v", 200, o.Payload)
+}
+
+func (o *TeamInspectOK) GetPayload() *models.PortainereeTeam {
 	return o.Payload
 }
 
 func (o *TeamInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerTeam)
+	o.Payload = new(models.PortainereeTeam)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -101,14 +132,44 @@ func NewTeamInspectNoContent() *TeamInspectNoContent {
 	return &TeamInspectNoContent{}
 }
 
-/* TeamInspectNoContent describes a response with status code 204, with default header values.
+/*
+TeamInspectNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type TeamInspectNoContent struct {
 }
 
+// IsSuccess returns true when this team inspect no content response has a 2xx status code
+func (o *TeamInspectNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this team inspect no content response has a 3xx status code
+func (o *TeamInspectNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team inspect no content response has a 4xx status code
+func (o *TeamInspectNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team inspect no content response has a 5xx status code
+func (o *TeamInspectNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team inspect no content response a status code equal to that given
+func (o *TeamInspectNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *TeamInspectNoContent) Error() string {
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent ", 204)
+}
+
+func (o *TeamInspectNoContent) String() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent ", 204)
 }
 
@@ -122,14 +183,44 @@ func NewTeamInspectBadRequest() *TeamInspectBadRequest {
 	return &TeamInspectBadRequest{}
 }
 
-/* TeamInspectBadRequest describes a response with status code 400, with default header values.
+/*
+TeamInspectBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type TeamInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this team inspect bad request response has a 2xx status code
+func (o *TeamInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team inspect bad request response has a 3xx status code
+func (o *TeamInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team inspect bad request response has a 4xx status code
+func (o *TeamInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team inspect bad request response has a 5xx status code
+func (o *TeamInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team inspect bad request response a status code equal to that given
+func (o *TeamInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *TeamInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectBadRequest ", 400)
+}
+
+func (o *TeamInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectBadRequest ", 400)
 }
 
@@ -143,14 +234,44 @@ func NewTeamInspectForbidden() *TeamInspectForbidden {
 	return &TeamInspectForbidden{}
 }
 
-/* TeamInspectForbidden describes a response with status code 403, with default header values.
+/*
+TeamInspectForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type TeamInspectForbidden struct {
 }
 
+// IsSuccess returns true when this team inspect forbidden response has a 2xx status code
+func (o *TeamInspectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team inspect forbidden response has a 3xx status code
+func (o *TeamInspectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team inspect forbidden response has a 4xx status code
+func (o *TeamInspectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team inspect forbidden response has a 5xx status code
+func (o *TeamInspectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team inspect forbidden response a status code equal to that given
+func (o *TeamInspectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *TeamInspectForbidden) Error() string {
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectForbidden ", 403)
+}
+
+func (o *TeamInspectForbidden) String() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectForbidden ", 403)
 }
 
@@ -164,14 +285,44 @@ func NewTeamInspectNotFound() *TeamInspectNotFound {
 	return &TeamInspectNotFound{}
 }
 
-/* TeamInspectNotFound describes a response with status code 404, with default header values.
+/*
+TeamInspectNotFound describes a response with status code 404, with default header values.
 
 Team not found
 */
 type TeamInspectNotFound struct {
 }
 
+// IsSuccess returns true when this team inspect not found response has a 2xx status code
+func (o *TeamInspectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team inspect not found response has a 3xx status code
+func (o *TeamInspectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team inspect not found response has a 4xx status code
+func (o *TeamInspectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team inspect not found response has a 5xx status code
+func (o *TeamInspectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team inspect not found response a status code equal to that given
+func (o *TeamInspectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *TeamInspectNotFound) Error() string {
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNotFound ", 404)
+}
+
+func (o *TeamInspectNotFound) String() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNotFound ", 404)
 }
 
@@ -185,14 +336,44 @@ func NewTeamInspectInternalServerError() *TeamInspectInternalServerError {
 	return &TeamInspectInternalServerError{}
 }
 
-/* TeamInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+TeamInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TeamInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this team inspect internal server error response has a 2xx status code
+func (o *TeamInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team inspect internal server error response has a 3xx status code
+func (o *TeamInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team inspect internal server error response has a 4xx status code
+func (o *TeamInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team inspect internal server error response has a 5xx status code
+func (o *TeamInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this team inspect internal server error response a status code equal to that given
+func (o *TeamInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TeamInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectInternalServerError ", 500)
+}
+
+func (o *TeamInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectInternalServerError ", 500)
 }
 

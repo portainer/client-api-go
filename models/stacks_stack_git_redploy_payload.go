@@ -20,7 +20,15 @@ import (
 type StacksStackGitRedployPayload struct {
 
 	// env
-	Env []*PortainerPair `json:"env"`
+	Env []*PortainereePair `json:"env"`
+
+	// prune
+	// Example: false
+	Prune bool `json:"prune,omitempty"`
+
+	// Force a pulling to current image with the original tag though the image is already the latest
+	// Example: false
+	PullImage bool `json:"pullImage,omitempty"`
 
 	// repository authentication
 	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`

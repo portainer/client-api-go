@@ -52,10 +52,12 @@ func NewEndpointSnapshotsParamsWithHTTPClient(client *http.Client) *EndpointSnap
 	}
 }
 
-/* EndpointSnapshotsParams contains all the parameters to send to the API endpoint
-   for the endpoint snapshots operation.
+/*
+EndpointSnapshotsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint snapshots operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointSnapshotsParams struct {
 	timeout    time.Duration

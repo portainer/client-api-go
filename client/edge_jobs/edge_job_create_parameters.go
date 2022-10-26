@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewEdgeJobCreateParams creates a new EdgeJobCreateParams object,
@@ -54,10 +54,12 @@ func NewEdgeJobCreateParamsWithHTTPClient(client *http.Client) *EdgeJobCreatePar
 	}
 }
 
-/* EdgeJobCreateParams contains all the parameters to send to the API endpoint
-   for the edge job create operation.
+/*
+EdgeJobCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge job create operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeJobCreateParams struct {
 

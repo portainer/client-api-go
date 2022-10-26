@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // StackListReader is a Reader for the StackList structure.
@@ -57,18 +57,49 @@ func NewStackListOK() *StackListOK {
 	return &StackListOK{}
 }
 
-/* StackListOK describes a response with status code 200, with default header values.
+/*
+StackListOK describes a response with status code 200, with default header values.
 
 Success
 */
 type StackListOK struct {
-	Payload []*models.PortainerStack
+	Payload []*models.PortainereeStack
+}
+
+// IsSuccess returns true when this stack list o k response has a 2xx status code
+func (o *StackListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stack list o k response has a 3xx status code
+func (o *StackListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack list o k response has a 4xx status code
+func (o *StackListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack list o k response has a 5xx status code
+func (o *StackListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack list o k response a status code equal to that given
+func (o *StackListOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *StackListOK) Error() string {
 	return fmt.Sprintf("[GET /stacks][%d] stackListOK  %+v", 200, o.Payload)
 }
-func (o *StackListOK) GetPayload() []*models.PortainerStack {
+
+func (o *StackListOK) String() string {
+	return fmt.Sprintf("[GET /stacks][%d] stackListOK  %+v", 200, o.Payload)
+}
+
+func (o *StackListOK) GetPayload() []*models.PortainereeStack {
 	return o.Payload
 }
 
@@ -87,14 +118,44 @@ func NewStackListNoContent() *StackListNoContent {
 	return &StackListNoContent{}
 }
 
-/* StackListNoContent describes a response with status code 204, with default header values.
+/*
+StackListNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type StackListNoContent struct {
 }
 
+// IsSuccess returns true when this stack list no content response has a 2xx status code
+func (o *StackListNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stack list no content response has a 3xx status code
+func (o *StackListNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack list no content response has a 4xx status code
+func (o *StackListNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack list no content response has a 5xx status code
+func (o *StackListNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack list no content response a status code equal to that given
+func (o *StackListNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *StackListNoContent) Error() string {
+	return fmt.Sprintf("[GET /stacks][%d] stackListNoContent ", 204)
+}
+
+func (o *StackListNoContent) String() string {
 	return fmt.Sprintf("[GET /stacks][%d] stackListNoContent ", 204)
 }
 
@@ -108,14 +169,44 @@ func NewStackListBadRequest() *StackListBadRequest {
 	return &StackListBadRequest{}
 }
 
-/* StackListBadRequest describes a response with status code 400, with default header values.
+/*
+StackListBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type StackListBadRequest struct {
 }
 
+// IsSuccess returns true when this stack list bad request response has a 2xx status code
+func (o *StackListBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack list bad request response has a 3xx status code
+func (o *StackListBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack list bad request response has a 4xx status code
+func (o *StackListBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack list bad request response has a 5xx status code
+func (o *StackListBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack list bad request response a status code equal to that given
+func (o *StackListBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *StackListBadRequest) Error() string {
+	return fmt.Sprintf("[GET /stacks][%d] stackListBadRequest ", 400)
+}
+
+func (o *StackListBadRequest) String() string {
 	return fmt.Sprintf("[GET /stacks][%d] stackListBadRequest ", 400)
 }
 
@@ -129,14 +220,44 @@ func NewStackListInternalServerError() *StackListInternalServerError {
 	return &StackListInternalServerError{}
 }
 
-/* StackListInternalServerError describes a response with status code 500, with default header values.
+/*
+StackListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type StackListInternalServerError struct {
 }
 
+// IsSuccess returns true when this stack list internal server error response has a 2xx status code
+func (o *StackListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack list internal server error response has a 3xx status code
+func (o *StackListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack list internal server error response has a 4xx status code
+func (o *StackListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack list internal server error response has a 5xx status code
+func (o *StackListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stack list internal server error response a status code equal to that given
+func (o *StackListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StackListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /stacks][%d] stackListInternalServerError ", 500)
+}
+
+func (o *StackListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /stacks][%d] stackListInternalServerError ", 500)
 }
 

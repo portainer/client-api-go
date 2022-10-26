@@ -52,10 +52,12 @@ func NewDuplicateParamsWithHTTPClient(client *http.Client) *DuplicateParams {
 	}
 }
 
-/* DuplicateParams contains all the parameters to send to the API endpoint
-   for the duplicate operation.
+/*
+DuplicateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the duplicate operation.
+
+	Typically these are written to a http.Request.
 */
 type DuplicateParams struct {
 	timeout    time.Duration

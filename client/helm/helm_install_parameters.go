@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewHelmInstallParams creates a new HelmInstallParams object,
@@ -55,10 +55,12 @@ func NewHelmInstallParamsWithHTTPClient(client *http.Client) *HelmInstallParams 
 	}
 }
 
-/* HelmInstallParams contains all the parameters to send to the API endpoint
-   for the helm install operation.
+/*
+HelmInstallParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the helm install operation.
+
+	Typically these are written to a http.Request.
 */
 type HelmInstallParams struct {
 

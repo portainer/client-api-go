@@ -48,14 +48,44 @@ func NewBackupOK() *BackupOK {
 	return &BackupOK{}
 }
 
-/* BackupOK describes a response with status code 200, with default header values.
+/*
+BackupOK describes a response with status code 200, with default header values.
 
 Success
 */
 type BackupOK struct {
 }
 
+// IsSuccess returns true when this backup o k response has a 2xx status code
+func (o *BackupOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this backup o k response has a 3xx status code
+func (o *BackupOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this backup o k response has a 4xx status code
+func (o *BackupOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this backup o k response has a 5xx status code
+func (o *BackupOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this backup o k response a status code equal to that given
+func (o *BackupOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *BackupOK) Error() string {
+	return fmt.Sprintf("[POST /backup][%d] backupOK ", 200)
+}
+
+func (o *BackupOK) String() string {
 	return fmt.Sprintf("[POST /backup][%d] backupOK ", 200)
 }
 
@@ -69,14 +99,44 @@ func NewBackupBadRequest() *BackupBadRequest {
 	return &BackupBadRequest{}
 }
 
-/* BackupBadRequest describes a response with status code 400, with default header values.
+/*
+BackupBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type BackupBadRequest struct {
 }
 
+// IsSuccess returns true when this backup bad request response has a 2xx status code
+func (o *BackupBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this backup bad request response has a 3xx status code
+func (o *BackupBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this backup bad request response has a 4xx status code
+func (o *BackupBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this backup bad request response has a 5xx status code
+func (o *BackupBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this backup bad request response a status code equal to that given
+func (o *BackupBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *BackupBadRequest) Error() string {
+	return fmt.Sprintf("[POST /backup][%d] backupBadRequest ", 400)
+}
+
+func (o *BackupBadRequest) String() string {
 	return fmt.Sprintf("[POST /backup][%d] backupBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewBackupInternalServerError() *BackupInternalServerError {
 	return &BackupInternalServerError{}
 }
 
-/* BackupInternalServerError describes a response with status code 500, with default header values.
+/*
+BackupInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type BackupInternalServerError struct {
 }
 
+// IsSuccess returns true when this backup internal server error response has a 2xx status code
+func (o *BackupInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this backup internal server error response has a 3xx status code
+func (o *BackupInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this backup internal server error response has a 4xx status code
+func (o *BackupInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this backup internal server error response has a 5xx status code
+func (o *BackupInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this backup internal server error response a status code equal to that given
+func (o *BackupInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *BackupInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /backup][%d] backupInternalServerError ", 500)
+}
+
+func (o *BackupInternalServerError) String() string {
 	return fmt.Sprintf("[POST /backup][%d] backupInternalServerError ", 500)
 }
 

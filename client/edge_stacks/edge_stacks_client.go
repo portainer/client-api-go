@@ -40,6 +40,12 @@ type ClientService interface {
 
 	EdgeStackList(params *EdgeStackListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackListOK, error)
 
+	EdgeStackLogsCollect(params *EdgeStackLogsCollectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsCollectNoContent, error)
+
+	EdgeStackLogsDelete(params *EdgeStackLogsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsDeleteNoContent, error)
+
+	EdgeStackLogsStatusGet(params *EdgeStackLogsStatusGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsStatusGetOK, error)
+
 	EdgeStackStatusDelete(params *EdgeStackStatusDeleteParams, opts ...ClientOption) (*EdgeStackStatusDeleteOK, error)
 
 	EdgeStackStatusUpdate(params *EdgeStackStatusUpdateParams, opts ...ClientOption) (*EdgeStackStatusUpdateOK, error)
@@ -50,9 +56,9 @@ type ClientService interface {
 }
 
 /*
-  EdgeStackCreate creates an edge stack
+EdgeStackCreate creates an edge stack
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeStackCreate(params *EdgeStackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -91,9 +97,9 @@ func (a *Client) EdgeStackCreate(params *EdgeStackCreateParams, authInfo runtime
 }
 
 /*
-  EdgeStackDelete deletes an edge stack
+EdgeStackDelete deletes an edge stack
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeStackDelete(params *EdgeStackDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -132,9 +138,9 @@ func (a *Client) EdgeStackDelete(params *EdgeStackDeleteParams, authInfo runtime
 }
 
 /*
-  EdgeStackFile fetches the stack file for an edge stack
+EdgeStackFile fetches the stack file for an edge stack
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeStackFile(params *EdgeStackFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackFileOK, error) {
 	// TODO: Validate the params before sending
@@ -173,9 +179,9 @@ func (a *Client) EdgeStackFile(params *EdgeStackFileParams, authInfo runtime.Cli
 }
 
 /*
-  EdgeStackInspect inspects an edge stack
+EdgeStackInspect inspects an edge stack
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeStackInspect(params *EdgeStackInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackInspectOK, error) {
 	// TODO: Validate the params before sending
@@ -214,9 +220,9 @@ func (a *Client) EdgeStackInspect(params *EdgeStackInspectParams, authInfo runti
 }
 
 /*
-  EdgeStackList fetches the list of edge stacks
+EdgeStackList fetches the list of edge stacks
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeStackList(params *EdgeStackListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackListOK, error) {
 	// TODO: Validate the params before sending
@@ -255,9 +261,132 @@ func (a *Client) EdgeStackList(params *EdgeStackListParams, authInfo runtime.Cli
 }
 
 /*
-  EdgeStackStatusDelete deletes an edge stack status
+EdgeStackLogsCollect schedules the collection of logs for a given endpoint and edge stack
 
-  Authorized only if the request is done by an Edge Environment(Endpoint)
+**Access policy**: administrator
+*/
+func (a *Client) EdgeStackLogsCollect(params *EdgeStackLogsCollectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsCollectNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEdgeStackLogsCollectParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EdgeStackLogsCollect",
+		Method:             "PUT",
+		PathPattern:        "/edge_stacks/{id}/logs/{endpoint_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EdgeStackLogsCollectReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EdgeStackLogsCollectNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EdgeStackLogsCollect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+EdgeStackLogsDelete deletes the available logs for a given edge stack and endpoint
+
+**Access policy**: administrator
+*/
+func (a *Client) EdgeStackLogsDelete(params *EdgeStackLogsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsDeleteNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEdgeStackLogsDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EdgeStackLogsDelete",
+		Method:             "DELETE",
+		PathPattern:        "/edge_stacks/{id}/logs/{endpoint_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EdgeStackLogsDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EdgeStackLogsDeleteNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EdgeStackLogsDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+EdgeStackLogsStatusGet gets the status of the log collection for a given edgestack and environment
+
+**Access policy**: administrator
+*/
+func (a *Client) EdgeStackLogsStatusGet(params *EdgeStackLogsStatusGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsStatusGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEdgeStackLogsStatusGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EdgeStackLogsStatusGet",
+		Method:             "GET",
+		PathPattern:        "/edge_stacks/{id}/logs/{endpoint_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EdgeStackLogsStatusGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EdgeStackLogsStatusGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EdgeStackLogsStatusGet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+EdgeStackStatusDelete deletes an edge stack status
+
+Authorized only if the request is done by an Edge Environment(Endpoint)
 */
 func (a *Client) EdgeStackStatusDelete(params *EdgeStackStatusDeleteParams, opts ...ClientOption) (*EdgeStackStatusDeleteOK, error) {
 	// TODO: Validate the params before sending
@@ -295,9 +424,9 @@ func (a *Client) EdgeStackStatusDelete(params *EdgeStackStatusDeleteParams, opts
 }
 
 /*
-  EdgeStackStatusUpdate updates an edge stack status
+EdgeStackStatusUpdate updates an edge stack status
 
-  Authorized only if the request is done by an Edge Environment(Endpoint)
+Authorized only if the request is done by an Edge Environment(Endpoint)
 */
 func (a *Client) EdgeStackStatusUpdate(params *EdgeStackStatusUpdateParams, opts ...ClientOption) (*EdgeStackStatusUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -335,9 +464,9 @@ func (a *Client) EdgeStackStatusUpdate(params *EdgeStackStatusUpdateParams, opts
 }
 
 /*
-  EdgeStackUpdate updates an edge stack
+EdgeStackUpdate updates an edge stack
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeStackUpdate(params *EdgeStackUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackUpdateOK, error) {
 	// TODO: Validate the params before sending

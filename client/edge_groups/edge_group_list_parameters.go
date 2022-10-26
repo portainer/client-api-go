@@ -52,10 +52,12 @@ func NewEdgeGroupListParamsWithHTTPClient(client *http.Client) *EdgeGroupListPar
 	}
 }
 
-/* EdgeGroupListParams contains all the parameters to send to the API endpoint
-   for the edge group list operation.
+/*
+EdgeGroupListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge group list operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeGroupListParams struct {
 	timeout    time.Duration

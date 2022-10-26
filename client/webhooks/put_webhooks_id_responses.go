@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // PutWebhooksIDReader is a Reader for the PutWebhooksID structure.
@@ -57,24 +57,55 @@ func NewPutWebhooksIDOK() *PutWebhooksIDOK {
 	return &PutWebhooksIDOK{}
 }
 
-/* PutWebhooksIDOK describes a response with status code 200, with default header values.
+/*
+PutWebhooksIDOK describes a response with status code 200, with default header values.
 
 OK
 */
 type PutWebhooksIDOK struct {
-	Payload *models.PortainerWebhook
+	Payload *models.PortainereeWebhook
+}
+
+// IsSuccess returns true when this put webhooks Id o k response has a 2xx status code
+func (o *PutWebhooksIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this put webhooks Id o k response has a 3xx status code
+func (o *PutWebhooksIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this put webhooks Id o k response has a 4xx status code
+func (o *PutWebhooksIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this put webhooks Id o k response has a 5xx status code
+func (o *PutWebhooksIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this put webhooks Id o k response a status code equal to that given
+func (o *PutWebhooksIDOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *PutWebhooksIDOK) Error() string {
 	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdOK  %+v", 200, o.Payload)
 }
-func (o *PutWebhooksIDOK) GetPayload() *models.PortainerWebhook {
+
+func (o *PutWebhooksIDOK) String() string {
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdOK  %+v", 200, o.Payload)
+}
+
+func (o *PutWebhooksIDOK) GetPayload() *models.PortainereeWebhook {
 	return o.Payload
 }
 
 func (o *PutWebhooksIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerWebhook)
+	o.Payload = new(models.PortainereeWebhook)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewPutWebhooksIDBadRequest() *PutWebhooksIDBadRequest {
 	return &PutWebhooksIDBadRequest{}
 }
 
-/* PutWebhooksIDBadRequest describes a response with status code 400, with default header values.
+/*
+PutWebhooksIDBadRequest describes a response with status code 400, with default header values.
 
-PutWebhooksIDBadRequest put webhooks Id bad request
+Bad Request
 */
 type PutWebhooksIDBadRequest struct {
 }
 
+// IsSuccess returns true when this put webhooks Id bad request response has a 2xx status code
+func (o *PutWebhooksIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this put webhooks Id bad request response has a 3xx status code
+func (o *PutWebhooksIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this put webhooks Id bad request response has a 4xx status code
+func (o *PutWebhooksIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this put webhooks Id bad request response has a 5xx status code
+func (o *PutWebhooksIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this put webhooks Id bad request response a status code equal to that given
+func (o *PutWebhooksIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *PutWebhooksIDBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdBadRequest ", 400)
+}
+
+func (o *PutWebhooksIDBadRequest) String() string {
 	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewPutWebhooksIDConflict() *PutWebhooksIDConflict {
 	return &PutWebhooksIDConflict{}
 }
 
-/* PutWebhooksIDConflict describes a response with status code 409, with default header values.
+/*
+PutWebhooksIDConflict describes a response with status code 409, with default header values.
 
-PutWebhooksIDConflict put webhooks Id conflict
+Conflict
 */
 type PutWebhooksIDConflict struct {
 }
 
+// IsSuccess returns true when this put webhooks Id conflict response has a 2xx status code
+func (o *PutWebhooksIDConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this put webhooks Id conflict response has a 3xx status code
+func (o *PutWebhooksIDConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this put webhooks Id conflict response has a 4xx status code
+func (o *PutWebhooksIDConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this put webhooks Id conflict response has a 5xx status code
+func (o *PutWebhooksIDConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this put webhooks Id conflict response a status code equal to that given
+func (o *PutWebhooksIDConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *PutWebhooksIDConflict) Error() string {
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdConflict ", 409)
+}
+
+func (o *PutWebhooksIDConflict) String() string {
 	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdConflict ", 409)
 }
 
@@ -131,14 +222,44 @@ func NewPutWebhooksIDInternalServerError() *PutWebhooksIDInternalServerError {
 	return &PutWebhooksIDInternalServerError{}
 }
 
-/* PutWebhooksIDInternalServerError describes a response with status code 500, with default header values.
+/*
+PutWebhooksIDInternalServerError describes a response with status code 500, with default header values.
 
-PutWebhooksIDInternalServerError put webhooks Id internal server error
+Internal Server Error
 */
 type PutWebhooksIDInternalServerError struct {
 }
 
+// IsSuccess returns true when this put webhooks Id internal server error response has a 2xx status code
+func (o *PutWebhooksIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this put webhooks Id internal server error response has a 3xx status code
+func (o *PutWebhooksIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this put webhooks Id internal server error response has a 4xx status code
+func (o *PutWebhooksIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this put webhooks Id internal server error response has a 5xx status code
+func (o *PutWebhooksIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this put webhooks Id internal server error response a status code equal to that given
+func (o *PutWebhooksIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *PutWebhooksIDInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdInternalServerError ", 500)
+}
+
+func (o *PutWebhooksIDInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdInternalServerError ", 500)
 }
 

@@ -48,14 +48,44 @@ func NewDuplicateOK() *DuplicateOK {
 	return &DuplicateOK{}
 }
 
-/* DuplicateOK describes a response with status code 200, with default header values.
+/*
+DuplicateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type DuplicateOK struct {
 }
 
+// IsSuccess returns true when this duplicate o k response has a 2xx status code
+func (o *DuplicateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this duplicate o k response has a 3xx status code
+func (o *DuplicateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this duplicate o k response has a 4xx status code
+func (o *DuplicateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this duplicate o k response has a 5xx status code
+func (o *DuplicateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this duplicate o k response a status code equal to that given
+func (o *DuplicateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DuplicateOK) Error() string {
+	return fmt.Sprintf("[POST /fdo/profiles/{id}/duplicate][%d] duplicateOK ", 200)
+}
+
+func (o *DuplicateOK) String() string {
 	return fmt.Sprintf("[POST /fdo/profiles/{id}/duplicate][%d] duplicateOK ", 200)
 }
 
@@ -69,14 +99,44 @@ func NewDuplicateBadRequest() *DuplicateBadRequest {
 	return &DuplicateBadRequest{}
 }
 
-/* DuplicateBadRequest describes a response with status code 400, with default header values.
+/*
+DuplicateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type DuplicateBadRequest struct {
 }
 
+// IsSuccess returns true when this duplicate bad request response has a 2xx status code
+func (o *DuplicateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this duplicate bad request response has a 3xx status code
+func (o *DuplicateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this duplicate bad request response has a 4xx status code
+func (o *DuplicateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this duplicate bad request response has a 5xx status code
+func (o *DuplicateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this duplicate bad request response a status code equal to that given
+func (o *DuplicateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *DuplicateBadRequest) Error() string {
+	return fmt.Sprintf("[POST /fdo/profiles/{id}/duplicate][%d] duplicateBadRequest ", 400)
+}
+
+func (o *DuplicateBadRequest) String() string {
 	return fmt.Sprintf("[POST /fdo/profiles/{id}/duplicate][%d] duplicateBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewDuplicateInternalServerError() *DuplicateInternalServerError {
 	return &DuplicateInternalServerError{}
 }
 
-/* DuplicateInternalServerError describes a response with status code 500, with default header values.
+/*
+DuplicateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type DuplicateInternalServerError struct {
 }
 
+// IsSuccess returns true when this duplicate internal server error response has a 2xx status code
+func (o *DuplicateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this duplicate internal server error response has a 3xx status code
+func (o *DuplicateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this duplicate internal server error response has a 4xx status code
+func (o *DuplicateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this duplicate internal server error response has a 5xx status code
+func (o *DuplicateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this duplicate internal server error response a status code equal to that given
+func (o *DuplicateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DuplicateInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /fdo/profiles/{id}/duplicate][%d] duplicateInternalServerError ", 500)
+}
+
+func (o *DuplicateInternalServerError) String() string {
 	return fmt.Sprintf("[POST /fdo/profiles/{id}/duplicate][%d] duplicateInternalServerError ", 500)
 }
 

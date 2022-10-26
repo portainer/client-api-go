@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewPostWebhooksParams creates a new PostWebhooksParams object,
@@ -54,10 +54,12 @@ func NewPostWebhooksParamsWithHTTPClient(client *http.Client) *PostWebhooksParam
 	}
 }
 
-/* PostWebhooksParams contains all the parameters to send to the API endpoint
-   for the post webhooks operation.
+/*
+PostWebhooksParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the post webhooks operation.
+
+	Typically these are written to a http.Request.
 */
 type PostWebhooksParams struct {
 

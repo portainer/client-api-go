@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EdgeTemplateListReader is a Reader for the EdgeTemplateList structure.
@@ -45,18 +45,49 @@ func NewEdgeTemplateListOK() *EdgeTemplateListOK {
 	return &EdgeTemplateListOK{}
 }
 
-/* EdgeTemplateListOK describes a response with status code 200, with default header values.
+/*
+EdgeTemplateListOK describes a response with status code 200, with default header values.
 
 OK
 */
 type EdgeTemplateListOK struct {
-	Payload []*models.PortainerTemplate
+	Payload []*models.PortainereeTemplate
+}
+
+// IsSuccess returns true when this edge template list o k response has a 2xx status code
+func (o *EdgeTemplateListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge template list o k response has a 3xx status code
+func (o *EdgeTemplateListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge template list o k response has a 4xx status code
+func (o *EdgeTemplateListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge template list o k response has a 5xx status code
+func (o *EdgeTemplateListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge template list o k response a status code equal to that given
+func (o *EdgeTemplateListOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *EdgeTemplateListOK) Error() string {
 	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListOK  %+v", 200, o.Payload)
 }
-func (o *EdgeTemplateListOK) GetPayload() []*models.PortainerTemplate {
+
+func (o *EdgeTemplateListOK) String() string {
+	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListOK  %+v", 200, o.Payload)
+}
+
+func (o *EdgeTemplateListOK) GetPayload() []*models.PortainereeTemplate {
 	return o.Payload
 }
 
@@ -75,14 +106,44 @@ func NewEdgeTemplateListInternalServerError() *EdgeTemplateListInternalServerErr
 	return &EdgeTemplateListInternalServerError{}
 }
 
-/* EdgeTemplateListInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeTemplateListInternalServerError describes a response with status code 500, with default header values.
 
-EdgeTemplateListInternalServerError edge template list internal server error
+Internal Server Error
 */
 type EdgeTemplateListInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge template list internal server error response has a 2xx status code
+func (o *EdgeTemplateListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge template list internal server error response has a 3xx status code
+func (o *EdgeTemplateListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge template list internal server error response has a 4xx status code
+func (o *EdgeTemplateListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge template list internal server error response has a 5xx status code
+func (o *EdgeTemplateListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge template list internal server error response a status code equal to that given
+func (o *EdgeTemplateListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeTemplateListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListInternalServerError ", 500)
+}
+
+func (o *EdgeTemplateListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListInternalServerError ", 500)
 }
 

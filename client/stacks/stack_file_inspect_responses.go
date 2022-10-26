@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // StackFileInspectReader is a Reader for the StackFileInspect structure.
@@ -63,7 +63,8 @@ func NewStackFileInspectOK() *StackFileInspectOK {
 	return &StackFileInspectOK{}
 }
 
-/* StackFileInspectOK describes a response with status code 200, with default header values.
+/*
+StackFileInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -71,9 +72,39 @@ type StackFileInspectOK struct {
 	Payload *models.StacksStackFileResponse
 }
 
+// IsSuccess returns true when this stack file inspect o k response has a 2xx status code
+func (o *StackFileInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stack file inspect o k response has a 3xx status code
+func (o *StackFileInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack file inspect o k response has a 4xx status code
+func (o *StackFileInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack file inspect o k response has a 5xx status code
+func (o *StackFileInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack file inspect o k response a status code equal to that given
+func (o *StackFileInspectOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *StackFileInspectOK) Error() string {
 	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectOK  %+v", 200, o.Payload)
 }
+
+func (o *StackFileInspectOK) String() string {
+	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectOK  %+v", 200, o.Payload)
+}
+
 func (o *StackFileInspectOK) GetPayload() *models.StacksStackFileResponse {
 	return o.Payload
 }
@@ -95,14 +126,44 @@ func NewStackFileInspectBadRequest() *StackFileInspectBadRequest {
 	return &StackFileInspectBadRequest{}
 }
 
-/* StackFileInspectBadRequest describes a response with status code 400, with default header values.
+/*
+StackFileInspectBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type StackFileInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this stack file inspect bad request response has a 2xx status code
+func (o *StackFileInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack file inspect bad request response has a 3xx status code
+func (o *StackFileInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack file inspect bad request response has a 4xx status code
+func (o *StackFileInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack file inspect bad request response has a 5xx status code
+func (o *StackFileInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack file inspect bad request response a status code equal to that given
+func (o *StackFileInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *StackFileInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectBadRequest ", 400)
+}
+
+func (o *StackFileInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectBadRequest ", 400)
 }
 
@@ -116,14 +177,44 @@ func NewStackFileInspectForbidden() *StackFileInspectForbidden {
 	return &StackFileInspectForbidden{}
 }
 
-/* StackFileInspectForbidden describes a response with status code 403, with default header values.
+/*
+StackFileInspectForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type StackFileInspectForbidden struct {
 }
 
+// IsSuccess returns true when this stack file inspect forbidden response has a 2xx status code
+func (o *StackFileInspectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack file inspect forbidden response has a 3xx status code
+func (o *StackFileInspectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack file inspect forbidden response has a 4xx status code
+func (o *StackFileInspectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack file inspect forbidden response has a 5xx status code
+func (o *StackFileInspectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack file inspect forbidden response a status code equal to that given
+func (o *StackFileInspectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *StackFileInspectForbidden) Error() string {
+	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectForbidden ", 403)
+}
+
+func (o *StackFileInspectForbidden) String() string {
 	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectForbidden ", 403)
 }
 
@@ -137,14 +228,44 @@ func NewStackFileInspectNotFound() *StackFileInspectNotFound {
 	return &StackFileInspectNotFound{}
 }
 
-/* StackFileInspectNotFound describes a response with status code 404, with default header values.
+/*
+StackFileInspectNotFound describes a response with status code 404, with default header values.
 
 Stack not found
 */
 type StackFileInspectNotFound struct {
 }
 
+// IsSuccess returns true when this stack file inspect not found response has a 2xx status code
+func (o *StackFileInspectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack file inspect not found response has a 3xx status code
+func (o *StackFileInspectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack file inspect not found response has a 4xx status code
+func (o *StackFileInspectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack file inspect not found response has a 5xx status code
+func (o *StackFileInspectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack file inspect not found response a status code equal to that given
+func (o *StackFileInspectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *StackFileInspectNotFound) Error() string {
+	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectNotFound ", 404)
+}
+
+func (o *StackFileInspectNotFound) String() string {
 	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectNotFound ", 404)
 }
 
@@ -158,14 +279,44 @@ func NewStackFileInspectInternalServerError() *StackFileInspectInternalServerErr
 	return &StackFileInspectInternalServerError{}
 }
 
-/* StackFileInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+StackFileInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type StackFileInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this stack file inspect internal server error response has a 2xx status code
+func (o *StackFileInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack file inspect internal server error response has a 3xx status code
+func (o *StackFileInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack file inspect internal server error response has a 4xx status code
+func (o *StackFileInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack file inspect internal server error response has a 5xx status code
+func (o *StackFileInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stack file inspect internal server error response a status code equal to that given
+func (o *StackFileInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StackFileInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectInternalServerError ", 500)
+}
+
+func (o *StackFileInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectInternalServerError ", 500)
 }
 

@@ -53,10 +53,12 @@ func NewRegistryInspectParamsWithHTTPClient(client *http.Client) *RegistryInspec
 	}
 }
 
-/* RegistryInspectParams contains all the parameters to send to the API endpoint
-   for the registry inspect operation.
+/*
+RegistryInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the registry inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type RegistryInspectParams struct {
 

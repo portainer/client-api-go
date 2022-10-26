@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EgeGroupUpdateReader is a Reader for the EgeGroupUpdate structure.
@@ -51,24 +51,55 @@ func NewEgeGroupUpdateOK() *EgeGroupUpdateOK {
 	return &EgeGroupUpdateOK{}
 }
 
-/* EgeGroupUpdateOK describes a response with status code 200, with default header values.
+/*
+EgeGroupUpdateOK describes a response with status code 200, with default header values.
 
 OK
 */
 type EgeGroupUpdateOK struct {
-	Payload *models.PortainerEdgeGroup
+	Payload *models.PortainereeEdgeGroup
+}
+
+// IsSuccess returns true when this ege group update o k response has a 2xx status code
+func (o *EgeGroupUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ege group update o k response has a 3xx status code
+func (o *EgeGroupUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ege group update o k response has a 4xx status code
+func (o *EgeGroupUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ege group update o k response has a 5xx status code
+func (o *EgeGroupUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ege group update o k response a status code equal to that given
+func (o *EgeGroupUpdateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *EgeGroupUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateOK  %+v", 200, o.Payload)
 }
-func (o *EgeGroupUpdateOK) GetPayload() *models.PortainerEdgeGroup {
+
+func (o *EgeGroupUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateOK  %+v", 200, o.Payload)
+}
+
+func (o *EgeGroupUpdateOK) GetPayload() *models.PortainereeEdgeGroup {
 	return o.Payload
 }
 
 func (o *EgeGroupUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerEdgeGroup)
+	o.Payload = new(models.PortainereeEdgeGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -83,14 +114,44 @@ func NewEgeGroupUpdateInternalServerError() *EgeGroupUpdateInternalServerError {
 	return &EgeGroupUpdateInternalServerError{}
 }
 
-/* EgeGroupUpdateInternalServerError describes a response with status code 500, with default header values.
+/*
+EgeGroupUpdateInternalServerError describes a response with status code 500, with default header values.
 
-EgeGroupUpdateInternalServerError ege group update internal server error
+Internal Server Error
 */
 type EgeGroupUpdateInternalServerError struct {
 }
 
+// IsSuccess returns true when this ege group update internal server error response has a 2xx status code
+func (o *EgeGroupUpdateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ege group update internal server error response has a 3xx status code
+func (o *EgeGroupUpdateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ege group update internal server error response has a 4xx status code
+func (o *EgeGroupUpdateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ege group update internal server error response has a 5xx status code
+func (o *EgeGroupUpdateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this ege group update internal server error response a status code equal to that given
+func (o *EgeGroupUpdateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EgeGroupUpdateInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateInternalServerError ", 500)
+}
+
+func (o *EgeGroupUpdateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateInternalServerError ", 500)
 }
 
@@ -104,14 +165,44 @@ func NewEgeGroupUpdateServiceUnavailable() *EgeGroupUpdateServiceUnavailable {
 	return &EgeGroupUpdateServiceUnavailable{}
 }
 
-/* EgeGroupUpdateServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EgeGroupUpdateServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EgeGroupUpdateServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this ege group update service unavailable response has a 2xx status code
+func (o *EgeGroupUpdateServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ege group update service unavailable response has a 3xx status code
+func (o *EgeGroupUpdateServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ege group update service unavailable response has a 4xx status code
+func (o *EgeGroupUpdateServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ege group update service unavailable response has a 5xx status code
+func (o *EgeGroupUpdateServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this ege group update service unavailable response a status code equal to that given
+func (o *EgeGroupUpdateServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EgeGroupUpdateServiceUnavailable) Error() string {
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateServiceUnavailable ", 503)
+}
+
+func (o *EgeGroupUpdateServiceUnavailable) String() string {
 	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateServiceUnavailable ", 503)
 }
 

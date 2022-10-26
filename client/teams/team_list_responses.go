@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // TeamListReader is a Reader for the TeamList structure.
@@ -45,18 +45,49 @@ func NewTeamListOK() *TeamListOK {
 	return &TeamListOK{}
 }
 
-/* TeamListOK describes a response with status code 200, with default header values.
+/*
+TeamListOK describes a response with status code 200, with default header values.
 
 Success
 */
 type TeamListOK struct {
-	Payload []*models.PortainerTeam
+	Payload []*models.PortainereeTeam
+}
+
+// IsSuccess returns true when this team list o k response has a 2xx status code
+func (o *TeamListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this team list o k response has a 3xx status code
+func (o *TeamListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team list o k response has a 4xx status code
+func (o *TeamListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team list o k response has a 5xx status code
+func (o *TeamListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team list o k response a status code equal to that given
+func (o *TeamListOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *TeamListOK) Error() string {
 	return fmt.Sprintf("[GET /teams][%d] teamListOK  %+v", 200, o.Payload)
 }
-func (o *TeamListOK) GetPayload() []*models.PortainerTeam {
+
+func (o *TeamListOK) String() string {
+	return fmt.Sprintf("[GET /teams][%d] teamListOK  %+v", 200, o.Payload)
+}
+
+func (o *TeamListOK) GetPayload() []*models.PortainereeTeam {
 	return o.Payload
 }
 
@@ -75,14 +106,44 @@ func NewTeamListInternalServerError() *TeamListInternalServerError {
 	return &TeamListInternalServerError{}
 }
 
-/* TeamListInternalServerError describes a response with status code 500, with default header values.
+/*
+TeamListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TeamListInternalServerError struct {
 }
 
+// IsSuccess returns true when this team list internal server error response has a 2xx status code
+func (o *TeamListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team list internal server error response has a 3xx status code
+func (o *TeamListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team list internal server error response has a 4xx status code
+func (o *TeamListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team list internal server error response has a 5xx status code
+func (o *TeamListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this team list internal server error response a status code equal to that given
+func (o *TeamListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TeamListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /teams][%d] teamListInternalServerError ", 500)
+}
+
+func (o *TeamListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /teams][%d] teamListInternalServerError ", 500)
 }
 

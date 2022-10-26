@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // TemplateListReader is a Reader for the TemplateList structure.
@@ -45,7 +45,8 @@ func NewTemplateListOK() *TemplateListOK {
 	return &TemplateListOK{}
 }
 
-/* TemplateListOK describes a response with status code 200, with default header values.
+/*
+TemplateListOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -53,9 +54,39 @@ type TemplateListOK struct {
 	Payload *models.TemplatesListResponse
 }
 
+// IsSuccess returns true when this template list o k response has a 2xx status code
+func (o *TemplateListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this template list o k response has a 3xx status code
+func (o *TemplateListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this template list o k response has a 4xx status code
+func (o *TemplateListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this template list o k response has a 5xx status code
+func (o *TemplateListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this template list o k response a status code equal to that given
+func (o *TemplateListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TemplateListOK) Error() string {
 	return fmt.Sprintf("[GET /templates][%d] templateListOK  %+v", 200, o.Payload)
 }
+
+func (o *TemplateListOK) String() string {
+	return fmt.Sprintf("[GET /templates][%d] templateListOK  %+v", 200, o.Payload)
+}
+
 func (o *TemplateListOK) GetPayload() *models.TemplatesListResponse {
 	return o.Payload
 }
@@ -77,14 +108,44 @@ func NewTemplateListInternalServerError() *TemplateListInternalServerError {
 	return &TemplateListInternalServerError{}
 }
 
-/* TemplateListInternalServerError describes a response with status code 500, with default header values.
+/*
+TemplateListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TemplateListInternalServerError struct {
 }
 
+// IsSuccess returns true when this template list internal server error response has a 2xx status code
+func (o *TemplateListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this template list internal server error response has a 3xx status code
+func (o *TemplateListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this template list internal server error response has a 4xx status code
+func (o *TemplateListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this template list internal server error response has a 5xx status code
+func (o *TemplateListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this template list internal server error response a status code equal to that given
+func (o *TemplateListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TemplateListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /templates][%d] templateListInternalServerError ", 500)
+}
+
+func (o *TemplateListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /templates][%d] templateListInternalServerError ", 500)
 }
 

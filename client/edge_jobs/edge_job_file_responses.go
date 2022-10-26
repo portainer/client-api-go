@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EdgeJobFileReader is a Reader for the EdgeJobFile structure.
@@ -57,7 +57,8 @@ func NewEdgeJobFileOK() *EdgeJobFileOK {
 	return &EdgeJobFileOK{}
 }
 
-/* EdgeJobFileOK describes a response with status code 200, with default header values.
+/*
+EdgeJobFileOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -65,9 +66,39 @@ type EdgeJobFileOK struct {
 	Payload *models.EdgejobsEdgeJobFileResponse
 }
 
+// IsSuccess returns true when this edge job file o k response has a 2xx status code
+func (o *EdgeJobFileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge job file o k response has a 3xx status code
+func (o *EdgeJobFileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job file o k response has a 4xx status code
+func (o *EdgeJobFileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job file o k response has a 5xx status code
+func (o *EdgeJobFileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job file o k response a status code equal to that given
+func (o *EdgeJobFileOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *EdgeJobFileOK) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileOK  %+v", 200, o.Payload)
 }
+
+func (o *EdgeJobFileOK) String() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileOK  %+v", 200, o.Payload)
+}
+
 func (o *EdgeJobFileOK) GetPayload() *models.EdgejobsEdgeJobFileResponse {
 	return o.Payload
 }
@@ -89,14 +120,44 @@ func NewEdgeJobFileBadRequest() *EdgeJobFileBadRequest {
 	return &EdgeJobFileBadRequest{}
 }
 
-/* EdgeJobFileBadRequest describes a response with status code 400, with default header values.
+/*
+EdgeJobFileBadRequest describes a response with status code 400, with default header values.
 
-EdgeJobFileBadRequest edge job file bad request
+Bad Request
 */
 type EdgeJobFileBadRequest struct {
 }
 
+// IsSuccess returns true when this edge job file bad request response has a 2xx status code
+func (o *EdgeJobFileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job file bad request response has a 3xx status code
+func (o *EdgeJobFileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job file bad request response has a 4xx status code
+func (o *EdgeJobFileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge job file bad request response has a 5xx status code
+func (o *EdgeJobFileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job file bad request response a status code equal to that given
+func (o *EdgeJobFileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EdgeJobFileBadRequest) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileBadRequest ", 400)
+}
+
+func (o *EdgeJobFileBadRequest) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewEdgeJobFileInternalServerError() *EdgeJobFileInternalServerError {
 	return &EdgeJobFileInternalServerError{}
 }
 
-/* EdgeJobFileInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeJobFileInternalServerError describes a response with status code 500, with default header values.
 
-EdgeJobFileInternalServerError edge job file internal server error
+Internal Server Error
 */
 type EdgeJobFileInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge job file internal server error response has a 2xx status code
+func (o *EdgeJobFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job file internal server error response has a 3xx status code
+func (o *EdgeJobFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job file internal server error response has a 4xx status code
+func (o *EdgeJobFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job file internal server error response has a 5xx status code
+func (o *EdgeJobFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job file internal server error response a status code equal to that given
+func (o *EdgeJobFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeJobFileInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileInternalServerError ", 500)
+}
+
+func (o *EdgeJobFileInternalServerError) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileInternalServerError ", 500)
 }
 
@@ -131,14 +222,44 @@ func NewEdgeJobFileServiceUnavailable() *EdgeJobFileServiceUnavailable {
 	return &EdgeJobFileServiceUnavailable{}
 }
 
-/* EdgeJobFileServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeJobFileServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeJobFileServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge job file service unavailable response has a 2xx status code
+func (o *EdgeJobFileServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job file service unavailable response has a 3xx status code
+func (o *EdgeJobFileServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job file service unavailable response has a 4xx status code
+func (o *EdgeJobFileServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job file service unavailable response has a 5xx status code
+func (o *EdgeJobFileServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job file service unavailable response a status code equal to that given
+func (o *EdgeJobFileServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeJobFileServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileServiceUnavailable ", 503)
+}
+
+func (o *EdgeJobFileServiceUnavailable) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileServiceUnavailable ", 503)
 }
 

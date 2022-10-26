@@ -52,10 +52,12 @@ func NewEdgeStackStatusDeleteParamsWithHTTPClient(client *http.Client) *EdgeStac
 	}
 }
 
-/* EdgeStackStatusDeleteParams contains all the parameters to send to the API endpoint
-   for the edge stack status delete operation.
+/*
+EdgeStackStatusDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge stack status delete operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeStackStatusDeleteParams struct {
 

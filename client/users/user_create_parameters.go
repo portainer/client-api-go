@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewUserCreateParams creates a new UserCreateParams object,
@@ -54,10 +54,12 @@ func NewUserCreateParamsWithHTTPClient(client *http.Client) *UserCreateParams {
 	}
 }
 
-/* UserCreateParams contains all the parameters to send to the API endpoint
-   for the user create operation.
+/*
+UserCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user create operation.
+
+	Typically these are written to a http.Request.
 */
 type UserCreateParams struct {
 

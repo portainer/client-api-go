@@ -36,13 +36,18 @@ type ClientService interface {
 
 	GetKubernetesNodesLimits(params *GetKubernetesNodesLimitsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNodesLimitsOK, error)
 
+	GetKubernetesPodSecurityRule(params *GetKubernetesPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesPodSecurityRuleOK, error)
+
+	UpdateK8sPodSecurityRule(params *UpdateK8sPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateK8sPodSecurityRuleOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  GetKubernetesConfig generates kubeconfig file enabling client communication with k8s api server
+	GetKubernetesConfig generates kubeconfig file enabling client communication with k8s api server
 
-  Generates kubeconfig file enabling client communication with k8s api server
+	Generates kubeconfig file enabling client communication with k8s api server
+
 **Access policy**: authenticated
 */
 func (a *Client) GetKubernetesConfig(params *GetKubernetesConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesConfigOK, error) {
@@ -82,9 +87,10 @@ func (a *Client) GetKubernetesConfig(params *GetKubernetesConfigParams, authInfo
 }
 
 /*
-  KubernetesNamespacesToggleSystem toggles the system state for a namespace
+	KubernetesNamespacesToggleSystem toggles the system state for a namespace
 
-  Toggle the system state for a namespace
+	Toggle the system state for a namespace
+
 **Access policy**: administrator or environment(endpoint) admin
 */
 func (a *Client) KubernetesNamespacesToggleSystem(params *KubernetesNamespacesToggleSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*KubernetesNamespacesToggleSystemOK, error) {
@@ -124,9 +130,10 @@ func (a *Client) KubernetesNamespacesToggleSystem(params *KubernetesNamespacesTo
 }
 
 /*
-  GetKubernetesNodesLimits gets CPU and memory limits of all nodes within k8s cluster
+	GetKubernetesNodesLimits gets CPU and memory limits of all nodes within k8s cluster
 
-  Get CPU and memory limits of all nodes within k8s cluster
+	Get CPU and memory limits of all nodes within k8s cluster
+
 **Access policy**: authenticated
 */
 func (a *Client) GetKubernetesNodesLimits(params *GetKubernetesNodesLimitsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNodesLimitsOK, error) {
@@ -162,6 +169,92 @@ func (a *Client) GetKubernetesNodesLimits(params *GetKubernetesNodesLimitsParams
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getKubernetesNodesLimits: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesPodSecurityRule gets pod security rule within k8s cluster if not found the frontend will create a default
+
+	Get Pod Security Rule within k8s cluster
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesPodSecurityRule(params *GetKubernetesPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesPodSecurityRuleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesPodSecurityRuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesPodSecurityRule",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/opa",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesPodSecurityRuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesPodSecurityRuleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesPodSecurityRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UpdateK8sPodSecurityRule updates pod security rule within k8s cluster
+
+	Update Pod Security Rule within k8s cluster
+
+**Access policy**: authenticated
+*/
+func (a *Client) UpdateK8sPodSecurityRule(params *UpdateK8sPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateK8sPodSecurityRuleOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateK8sPodSecurityRuleParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateK8sPodSecurityRule",
+		Method:             "PUT",
+		PathPattern:        "/kubernetes/{endpointId}/opa",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UpdateK8sPodSecurityRuleReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateK8sPodSecurityRuleOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateK8sPodSecurityRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

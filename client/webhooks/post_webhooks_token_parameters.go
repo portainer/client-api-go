@@ -52,10 +52,12 @@ func NewPostWebhooksTokenParamsWithHTTPClient(client *http.Client) *PostWebhooks
 	}
 }
 
-/* PostWebhooksTokenParams contains all the parameters to send to the API endpoint
-   for the post webhooks token operation.
+/*
+PostWebhooksTokenParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the post webhooks token operation.
+
+	Typically these are written to a http.Request.
 */
 type PostWebhooksTokenParams struct {
 

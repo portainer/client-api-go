@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewUserGenerateAPIKeyParams creates a new UserGenerateAPIKeyParams object,
@@ -55,10 +55,12 @@ func NewUserGenerateAPIKeyParamsWithHTTPClient(client *http.Client) *UserGenerat
 	}
 }
 
-/* UserGenerateAPIKeyParams contains all the parameters to send to the API endpoint
-   for the user generate API key operation.
+/*
+UserGenerateAPIKeyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user generate API key operation.
+
+	Typically these are written to a http.Request.
 */
 type UserGenerateAPIKeyParams struct {
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // StatusInspectReader is a Reader for the StatusInspect structure.
@@ -39,7 +39,8 @@ func NewStatusInspectOK() *StatusInspectOK {
 	return &StatusInspectOK{}
 }
 
-/* StatusInspectOK describes a response with status code 200, with default header values.
+/*
+StatusInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -47,9 +48,39 @@ type StatusInspectOK struct {
 	Payload *models.StatusStatus
 }
 
+// IsSuccess returns true when this status inspect o k response has a 2xx status code
+func (o *StatusInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this status inspect o k response has a 3xx status code
+func (o *StatusInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this status inspect o k response has a 4xx status code
+func (o *StatusInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this status inspect o k response has a 5xx status code
+func (o *StatusInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this status inspect o k response a status code equal to that given
+func (o *StatusInspectOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *StatusInspectOK) Error() string {
 	return fmt.Sprintf("[GET /status][%d] statusInspectOK  %+v", 200, o.Payload)
 }
+
+func (o *StatusInspectOK) String() string {
+	return fmt.Sprintf("[GET /status][%d] statusInspectOK  %+v", 200, o.Payload)
+}
+
 func (o *StatusInspectOK) GetPayload() *models.StatusStatus {
 	return o.Payload
 }

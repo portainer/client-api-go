@@ -52,10 +52,12 @@ func NewUpdateProfileParamsWithHTTPClient(client *http.Client) *UpdateProfilePar
 	}
 }
 
-/* UpdateProfileParams contains all the parameters to send to the API endpoint
-   for the update profile operation.
+/*
+UpdateProfileParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update profile operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateProfileParams struct {
 	timeout    time.Duration

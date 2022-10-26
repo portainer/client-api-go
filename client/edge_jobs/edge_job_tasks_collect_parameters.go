@@ -52,10 +52,12 @@ func NewEdgeJobTasksCollectParamsWithHTTPClient(client *http.Client) *EdgeJobTas
 	}
 }
 
-/* EdgeJobTasksCollectParams contains all the parameters to send to the API endpoint
-   for the edge job tasks collect operation.
+/*
+EdgeJobTasksCollectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge job tasks collect operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeJobTasksCollectParams struct {
 

@@ -32,15 +32,18 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	StatusInspect(params *StatusInspectParams, opts ...ClientOption) (*StatusInspectOK, error)
 
-	StatusInspectVersion(params *StatusInspectVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusInspectVersionOK, error)
+	Version(params *VersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VersionOK, error)
+
+	StatusNodesCount(params *StatusNodesCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusNodesCountOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  StatusInspect checks portainer status
+	StatusInspect checks portainer status
 
-  Retrieve Portainer status
+	Retrieve Portainer status
+
 **Access policy**: public
 */
 func (a *Client) StatusInspect(params *StatusInspectParams, opts ...ClientOption) (*StatusInspectOK, error) {
@@ -79,25 +82,26 @@ func (a *Client) StatusInspect(params *StatusInspectParams, opts ...ClientOption
 }
 
 /*
-  StatusInspectVersion checks for portainer updates
+	Version checks for portainer updates
 
-  Check if portainer has an update available
+	Check if portainer has an update available
+
 **Access policy**: authenticated
 */
-func (a *Client) StatusInspectVersion(params *StatusInspectVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusInspectVersionOK, error) {
+func (a *Client) Version(params *VersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VersionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewStatusInspectVersionParams()
+		params = NewVersionParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "StatusInspectVersion",
+		ID:                 "Version",
 		Method:             "GET",
 		PathPattern:        "/status/version",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &StatusInspectVersionReader{formats: a.formats},
+		Reader:             &VersionReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -110,13 +114,54 @@ func (a *Client) StatusInspectVersion(params *StatusInspectVersionParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*StatusInspectVersionOK)
+	success, ok := result.(*VersionOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for StatusInspectVersion: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for Version: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StatusNodesCount retrieves the count of nodes
+
+**Access policy**: authenticated
+*/
+func (a *Client) StatusNodesCount(params *StatusNodesCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StatusNodesCountOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStatusNodesCountParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "statusNodesCount",
+		Method:             "GET",
+		PathPattern:        "/status/nodes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StatusNodesCountReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StatusNodesCountOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for statusNodesCount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
