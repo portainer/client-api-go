@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api-go/models"
+	"github.com/portainer/client-api-go/v2/models"
 )
 
 // ProvisionKaaSClusterReader is a Reader for the ProvisionKaaSCluster structure.

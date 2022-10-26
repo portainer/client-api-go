@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api-go/models"
+	"github.com/portainer/client-api-go/v2/models"
 )
 
 // NewLDAPTestLoginParams creates a new LDAPTestLoginParams object,
