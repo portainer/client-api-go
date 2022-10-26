@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api-go/models"
+	"github.com/portainer/client-api-go/v2/models"
 )
 
 // NewProvisionKaaSClusterParams creates a new ProvisionKaaSClusterParams object,
