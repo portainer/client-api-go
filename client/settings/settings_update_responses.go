@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // SettingsUpdateReader is a Reader for the SettingsUpdate structure.
@@ -51,24 +51,55 @@ func NewSettingsUpdateOK() *SettingsUpdateOK {
 	return &SettingsUpdateOK{}
 }
 
-/* SettingsUpdateOK describes a response with status code 200, with default header values.
+/*
+SettingsUpdateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type SettingsUpdateOK struct {
-	Payload *models.PortainerSettings
+	Payload *models.PortainereeSettings
+}
+
+// IsSuccess returns true when this settings update o k response has a 2xx status code
+func (o *SettingsUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this settings update o k response has a 3xx status code
+func (o *SettingsUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this settings update o k response has a 4xx status code
+func (o *SettingsUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this settings update o k response has a 5xx status code
+func (o *SettingsUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this settings update o k response a status code equal to that given
+func (o *SettingsUpdateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *SettingsUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateOK  %+v", 200, o.Payload)
 }
-func (o *SettingsUpdateOK) GetPayload() *models.PortainerSettings {
+
+func (o *SettingsUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateOK  %+v", 200, o.Payload)
+}
+
+func (o *SettingsUpdateOK) GetPayload() *models.PortainereeSettings {
 	return o.Payload
 }
 
 func (o *SettingsUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerSettings)
+	o.Payload = new(models.PortainereeSettings)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -83,14 +114,44 @@ func NewSettingsUpdateBadRequest() *SettingsUpdateBadRequest {
 	return &SettingsUpdateBadRequest{}
 }
 
-/* SettingsUpdateBadRequest describes a response with status code 400, with default header values.
+/*
+SettingsUpdateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type SettingsUpdateBadRequest struct {
 }
 
+// IsSuccess returns true when this settings update bad request response has a 2xx status code
+func (o *SettingsUpdateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this settings update bad request response has a 3xx status code
+func (o *SettingsUpdateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this settings update bad request response has a 4xx status code
+func (o *SettingsUpdateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this settings update bad request response has a 5xx status code
+func (o *SettingsUpdateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this settings update bad request response a status code equal to that given
+func (o *SettingsUpdateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *SettingsUpdateBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateBadRequest ", 400)
+}
+
+func (o *SettingsUpdateBadRequest) String() string {
 	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateBadRequest ", 400)
 }
 
@@ -104,14 +165,44 @@ func NewSettingsUpdateInternalServerError() *SettingsUpdateInternalServerError {
 	return &SettingsUpdateInternalServerError{}
 }
 
-/* SettingsUpdateInternalServerError describes a response with status code 500, with default header values.
+/*
+SettingsUpdateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type SettingsUpdateInternalServerError struct {
 }
 
+// IsSuccess returns true when this settings update internal server error response has a 2xx status code
+func (o *SettingsUpdateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this settings update internal server error response has a 3xx status code
+func (o *SettingsUpdateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this settings update internal server error response has a 4xx status code
+func (o *SettingsUpdateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this settings update internal server error response has a 5xx status code
+func (o *SettingsUpdateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this settings update internal server error response a status code equal to that given
+func (o *SettingsUpdateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *SettingsUpdateInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateInternalServerError ", 500)
+}
+
+func (o *SettingsUpdateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateInternalServerError ", 500)
 }
 

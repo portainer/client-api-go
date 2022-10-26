@@ -53,10 +53,12 @@ func NewOpenAMTDevicesParamsWithHTTPClient(client *http.Client) *OpenAMTDevicesP
 	}
 }
 
-/* OpenAMTDevicesParams contains all the parameters to send to the API endpoint
-   for the open a m t devices operation.
+/*
+OpenAMTDevicesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the open a m t devices operation.
+
+	Typically these are written to a http.Request.
 */
 type OpenAMTDevicesParams struct {
 

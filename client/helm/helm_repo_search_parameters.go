@@ -52,10 +52,12 @@ func NewHelmRepoSearchParamsWithHTTPClient(client *http.Client) *HelmRepoSearchP
 	}
 }
 
-/* HelmRepoSearchParams contains all the parameters to send to the API endpoint
-   for the helm repo search operation.
+/*
+HelmRepoSearchParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the helm repo search operation.
+
+	Typically these are written to a http.Request.
 */
 type HelmRepoSearchParams struct {
 

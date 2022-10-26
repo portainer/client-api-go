@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // AuthenticateUserReader is a Reader for the AuthenticateUser structure.
@@ -57,7 +57,8 @@ func NewAuthenticateUserOK() *AuthenticateUserOK {
 	return &AuthenticateUserOK{}
 }
 
-/* AuthenticateUserOK describes a response with status code 200, with default header values.
+/*
+AuthenticateUserOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -65,9 +66,39 @@ type AuthenticateUserOK struct {
 	Payload *models.AuthAuthenticateResponse
 }
 
+// IsSuccess returns true when this authenticate user o k response has a 2xx status code
+func (o *AuthenticateUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this authenticate user o k response has a 3xx status code
+func (o *AuthenticateUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this authenticate user o k response has a 4xx status code
+func (o *AuthenticateUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this authenticate user o k response has a 5xx status code
+func (o *AuthenticateUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this authenticate user o k response a status code equal to that given
+func (o *AuthenticateUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *AuthenticateUserOK) Error() string {
 	return fmt.Sprintf("[POST /auth][%d] authenticateUserOK  %+v", 200, o.Payload)
 }
+
+func (o *AuthenticateUserOK) String() string {
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserOK  %+v", 200, o.Payload)
+}
+
 func (o *AuthenticateUserOK) GetPayload() *models.AuthAuthenticateResponse {
 	return o.Payload
 }
@@ -89,14 +120,44 @@ func NewAuthenticateUserBadRequest() *AuthenticateUserBadRequest {
 	return &AuthenticateUserBadRequest{}
 }
 
-/* AuthenticateUserBadRequest describes a response with status code 400, with default header values.
+/*
+AuthenticateUserBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type AuthenticateUserBadRequest struct {
 }
 
+// IsSuccess returns true when this authenticate user bad request response has a 2xx status code
+func (o *AuthenticateUserBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this authenticate user bad request response has a 3xx status code
+func (o *AuthenticateUserBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this authenticate user bad request response has a 4xx status code
+func (o *AuthenticateUserBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this authenticate user bad request response has a 5xx status code
+func (o *AuthenticateUserBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this authenticate user bad request response a status code equal to that given
+func (o *AuthenticateUserBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *AuthenticateUserBadRequest) Error() string {
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserBadRequest ", 400)
+}
+
+func (o *AuthenticateUserBadRequest) String() string {
 	return fmt.Sprintf("[POST /auth][%d] authenticateUserBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewAuthenticateUserUnprocessableEntity() *AuthenticateUserUnprocessableEnti
 	return &AuthenticateUserUnprocessableEntity{}
 }
 
-/* AuthenticateUserUnprocessableEntity describes a response with status code 422, with default header values.
+/*
+AuthenticateUserUnprocessableEntity describes a response with status code 422, with default header values.
 
 Invalid Credentials
 */
 type AuthenticateUserUnprocessableEntity struct {
 }
 
+// IsSuccess returns true when this authenticate user unprocessable entity response has a 2xx status code
+func (o *AuthenticateUserUnprocessableEntity) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this authenticate user unprocessable entity response has a 3xx status code
+func (o *AuthenticateUserUnprocessableEntity) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this authenticate user unprocessable entity response has a 4xx status code
+func (o *AuthenticateUserUnprocessableEntity) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this authenticate user unprocessable entity response has a 5xx status code
+func (o *AuthenticateUserUnprocessableEntity) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this authenticate user unprocessable entity response a status code equal to that given
+func (o *AuthenticateUserUnprocessableEntity) IsCode(code int) bool {
+	return code == 422
+}
+
 func (o *AuthenticateUserUnprocessableEntity) Error() string {
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserUnprocessableEntity ", 422)
+}
+
+func (o *AuthenticateUserUnprocessableEntity) String() string {
 	return fmt.Sprintf("[POST /auth][%d] authenticateUserUnprocessableEntity ", 422)
 }
 
@@ -131,14 +222,44 @@ func NewAuthenticateUserInternalServerError() *AuthenticateUserInternalServerErr
 	return &AuthenticateUserInternalServerError{}
 }
 
-/* AuthenticateUserInternalServerError describes a response with status code 500, with default header values.
+/*
+AuthenticateUserInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type AuthenticateUserInternalServerError struct {
 }
 
+// IsSuccess returns true when this authenticate user internal server error response has a 2xx status code
+func (o *AuthenticateUserInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this authenticate user internal server error response has a 3xx status code
+func (o *AuthenticateUserInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this authenticate user internal server error response has a 4xx status code
+func (o *AuthenticateUserInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this authenticate user internal server error response has a 5xx status code
+func (o *AuthenticateUserInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this authenticate user internal server error response a status code equal to that given
+func (o *AuthenticateUserInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *AuthenticateUserInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserInternalServerError ", 500)
+}
+
+func (o *AuthenticateUserInternalServerError) String() string {
 	return fmt.Sprintf("[POST /auth][%d] authenticateUserInternalServerError ", 500)
 }
 

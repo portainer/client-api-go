@@ -52,10 +52,12 @@ func NewEdgeTemplateListParamsWithHTTPClient(client *http.Client) *EdgeTemplateL
 	}
 }
 
-/* EdgeTemplateListParams contains all the parameters to send to the API endpoint
-   for the edge template list operation.
+/*
+EdgeTemplateListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge template list operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeTemplateListParams struct {
 	timeout    time.Duration

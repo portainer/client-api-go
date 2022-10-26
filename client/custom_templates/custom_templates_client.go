@@ -46,9 +46,10 @@ type ClientService interface {
 }
 
 /*
-  CustomTemplateCreate creates a custom template
+	CustomTemplateCreate creates a custom template
 
-  Create a custom template.
+	Create a custom template.
+
 **Access policy**: authenticated
 */
 func (a *Client) CustomTemplateCreate(params *CustomTemplateCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateCreateOK, error) {
@@ -88,9 +89,10 @@ func (a *Client) CustomTemplateCreate(params *CustomTemplateCreateParams, authIn
 }
 
 /*
-  CustomTemplateDelete removes a template
+	CustomTemplateDelete removes a template
 
-  Remove a template.
+	Remove a template.
+
 **Access policy**: authenticated
 */
 func (a *Client) CustomTemplateDelete(params *CustomTemplateDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateDeleteNoContent, error) {
@@ -130,9 +132,10 @@ func (a *Client) CustomTemplateDelete(params *CustomTemplateDeleteParams, authIn
 }
 
 /*
-  CustomTemplateFile gets template stack file content
+	CustomTemplateFile gets template stack file content
 
-  Retrieve the content of the Stack file for the specified custom template
+	Retrieve the content of the Stack file for the specified custom template
+
 **Access policy**: authenticated
 */
 func (a *Client) CustomTemplateFile(params *CustomTemplateFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateFileOK, error) {
@@ -172,9 +175,10 @@ func (a *Client) CustomTemplateFile(params *CustomTemplateFileParams, authInfo r
 }
 
 /*
-  CustomTemplateInspect inspects a custom template
+	CustomTemplateInspect inspects a custom template
 
-  Retrieve details about a template.
+	Retrieve details about a template.
+
 **Access policy**: authenticated
 */
 func (a *Client) CustomTemplateInspect(params *CustomTemplateInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateInspectOK, error) {
@@ -214,9 +218,10 @@ func (a *Client) CustomTemplateInspect(params *CustomTemplateInspectParams, auth
 }
 
 /*
-  CustomTemplateList lists available custom templates
+	CustomTemplateList lists available custom templates
 
-  List available custom templates.
+	List available custom templates.
+
 **Access policy**: authenticated
 */
 func (a *Client) CustomTemplateList(params *CustomTemplateListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateListOK, error) {
@@ -256,9 +261,10 @@ func (a *Client) CustomTemplateList(params *CustomTemplateListParams, authInfo r
 }
 
 /*
-  CustomTemplateUpdate updates a template
+	CustomTemplateUpdate updates a template
 
-  Update a template.
+	Update a template.
+
 **Access policy**: authenticated
 */
 func (a *Client) CustomTemplateUpdate(params *CustomTemplateUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateUpdateOK, error) {

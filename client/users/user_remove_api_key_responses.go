@@ -60,14 +60,44 @@ func NewUserRemoveAPIKeyNoContent() *UserRemoveAPIKeyNoContent {
 	return &UserRemoveAPIKeyNoContent{}
 }
 
-/* UserRemoveAPIKeyNoContent describes a response with status code 204, with default header values.
+/*
+UserRemoveAPIKeyNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type UserRemoveAPIKeyNoContent struct {
 }
 
+// IsSuccess returns true when this user remove Api key no content response has a 2xx status code
+func (o *UserRemoveAPIKeyNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user remove Api key no content response has a 3xx status code
+func (o *UserRemoveAPIKeyNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user remove Api key no content response has a 4xx status code
+func (o *UserRemoveAPIKeyNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user remove Api key no content response has a 5xx status code
+func (o *UserRemoveAPIKeyNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user remove Api key no content response a status code equal to that given
+func (o *UserRemoveAPIKeyNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *UserRemoveAPIKeyNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNoContent ", 204)
+}
+
+func (o *UserRemoveAPIKeyNoContent) String() string {
 	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewUserRemoveAPIKeyBadRequest() *UserRemoveAPIKeyBadRequest {
 	return &UserRemoveAPIKeyBadRequest{}
 }
 
-/* UserRemoveAPIKeyBadRequest describes a response with status code 400, with default header values.
+/*
+UserRemoveAPIKeyBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type UserRemoveAPIKeyBadRequest struct {
 }
 
+// IsSuccess returns true when this user remove Api key bad request response has a 2xx status code
+func (o *UserRemoveAPIKeyBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user remove Api key bad request response has a 3xx status code
+func (o *UserRemoveAPIKeyBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user remove Api key bad request response has a 4xx status code
+func (o *UserRemoveAPIKeyBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user remove Api key bad request response has a 5xx status code
+func (o *UserRemoveAPIKeyBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user remove Api key bad request response a status code equal to that given
+func (o *UserRemoveAPIKeyBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UserRemoveAPIKeyBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyBadRequest ", 400)
+}
+
+func (o *UserRemoveAPIKeyBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewUserRemoveAPIKeyForbidden() *UserRemoveAPIKeyForbidden {
 	return &UserRemoveAPIKeyForbidden{}
 }
 
-/* UserRemoveAPIKeyForbidden describes a response with status code 403, with default header values.
+/*
+UserRemoveAPIKeyForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type UserRemoveAPIKeyForbidden struct {
 }
 
+// IsSuccess returns true when this user remove Api key forbidden response has a 2xx status code
+func (o *UserRemoveAPIKeyForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user remove Api key forbidden response has a 3xx status code
+func (o *UserRemoveAPIKeyForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user remove Api key forbidden response has a 4xx status code
+func (o *UserRemoveAPIKeyForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user remove Api key forbidden response has a 5xx status code
+func (o *UserRemoveAPIKeyForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user remove Api key forbidden response a status code equal to that given
+func (o *UserRemoveAPIKeyForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UserRemoveAPIKeyForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyForbidden ", 403)
+}
+
+func (o *UserRemoveAPIKeyForbidden) String() string {
 	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewUserRemoveAPIKeyNotFound() *UserRemoveAPIKeyNotFound {
 	return &UserRemoveAPIKeyNotFound{}
 }
 
-/* UserRemoveAPIKeyNotFound describes a response with status code 404, with default header values.
+/*
+UserRemoveAPIKeyNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type UserRemoveAPIKeyNotFound struct {
 }
 
+// IsSuccess returns true when this user remove Api key not found response has a 2xx status code
+func (o *UserRemoveAPIKeyNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user remove Api key not found response has a 3xx status code
+func (o *UserRemoveAPIKeyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user remove Api key not found response has a 4xx status code
+func (o *UserRemoveAPIKeyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user remove Api key not found response has a 5xx status code
+func (o *UserRemoveAPIKeyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user remove Api key not found response a status code equal to that given
+func (o *UserRemoveAPIKeyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UserRemoveAPIKeyNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNotFound ", 404)
+}
+
+func (o *UserRemoveAPIKeyNotFound) String() string {
 	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewUserRemoveAPIKeyInternalServerError() *UserRemoveAPIKeyInternalServerErr
 	return &UserRemoveAPIKeyInternalServerError{}
 }
 
-/* UserRemoveAPIKeyInternalServerError describes a response with status code 500, with default header values.
+/*
+UserRemoveAPIKeyInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type UserRemoveAPIKeyInternalServerError struct {
 }
 
+// IsSuccess returns true when this user remove Api key internal server error response has a 2xx status code
+func (o *UserRemoveAPIKeyInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user remove Api key internal server error response has a 3xx status code
+func (o *UserRemoveAPIKeyInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user remove Api key internal server error response has a 4xx status code
+func (o *UserRemoveAPIKeyInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user remove Api key internal server error response has a 5xx status code
+func (o *UserRemoveAPIKeyInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this user remove Api key internal server error response a status code equal to that given
+func (o *UserRemoveAPIKeyInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UserRemoveAPIKeyInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyInternalServerError ", 500)
+}
+
+func (o *UserRemoveAPIKeyInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyInternalServerError ", 500)
 }
 

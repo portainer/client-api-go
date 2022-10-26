@@ -54,14 +54,44 @@ func NewOpenAMTActivateOK() *OpenAMTActivateOK {
 	return &OpenAMTActivateOK{}
 }
 
-/* OpenAMTActivateOK describes a response with status code 200, with default header values.
+/*
+OpenAMTActivateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type OpenAMTActivateOK struct {
 }
 
+// IsSuccess returns true when this open a m t activate o k response has a 2xx status code
+func (o *OpenAMTActivateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this open a m t activate o k response has a 3xx status code
+func (o *OpenAMTActivateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t activate o k response has a 4xx status code
+func (o *OpenAMTActivateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this open a m t activate o k response has a 5xx status code
+func (o *OpenAMTActivateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t activate o k response a status code equal to that given
+func (o *OpenAMTActivateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *OpenAMTActivateOK) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateOK ", 200)
+}
+
+func (o *OpenAMTActivateOK) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateOK ", 200)
 }
 
@@ -75,14 +105,44 @@ func NewOpenAMTActivateBadRequest() *OpenAMTActivateBadRequest {
 	return &OpenAMTActivateBadRequest{}
 }
 
-/* OpenAMTActivateBadRequest describes a response with status code 400, with default header values.
+/*
+OpenAMTActivateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type OpenAMTActivateBadRequest struct {
 }
 
+// IsSuccess returns true when this open a m t activate bad request response has a 2xx status code
+func (o *OpenAMTActivateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t activate bad request response has a 3xx status code
+func (o *OpenAMTActivateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t activate bad request response has a 4xx status code
+func (o *OpenAMTActivateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this open a m t activate bad request response has a 5xx status code
+func (o *OpenAMTActivateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t activate bad request response a status code equal to that given
+func (o *OpenAMTActivateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *OpenAMTActivateBadRequest) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateBadRequest ", 400)
+}
+
+func (o *OpenAMTActivateBadRequest) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewOpenAMTActivateForbidden() *OpenAMTActivateForbidden {
 	return &OpenAMTActivateForbidden{}
 }
 
-/* OpenAMTActivateForbidden describes a response with status code 403, with default header values.
+/*
+OpenAMTActivateForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type OpenAMTActivateForbidden struct {
 }
 
+// IsSuccess returns true when this open a m t activate forbidden response has a 2xx status code
+func (o *OpenAMTActivateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t activate forbidden response has a 3xx status code
+func (o *OpenAMTActivateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t activate forbidden response has a 4xx status code
+func (o *OpenAMTActivateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this open a m t activate forbidden response has a 5xx status code
+func (o *OpenAMTActivateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t activate forbidden response a status code equal to that given
+func (o *OpenAMTActivateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *OpenAMTActivateForbidden) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateForbidden ", 403)
+}
+
+func (o *OpenAMTActivateForbidden) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewOpenAMTActivateInternalServerError() *OpenAMTActivateInternalServerError
 	return &OpenAMTActivateInternalServerError{}
 }
 
-/* OpenAMTActivateInternalServerError describes a response with status code 500, with default header values.
+/*
+OpenAMTActivateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type OpenAMTActivateInternalServerError struct {
 }
 
+// IsSuccess returns true when this open a m t activate internal server error response has a 2xx status code
+func (o *OpenAMTActivateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t activate internal server error response has a 3xx status code
+func (o *OpenAMTActivateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t activate internal server error response has a 4xx status code
+func (o *OpenAMTActivateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this open a m t activate internal server error response has a 5xx status code
+func (o *OpenAMTActivateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this open a m t activate internal server error response a status code equal to that given
+func (o *OpenAMTActivateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *OpenAMTActivateInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateInternalServerError ", 500)
+}
+
+func (o *OpenAMTActivateInternalServerError) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateInternalServerError ", 500)
 }
 

@@ -54,14 +54,44 @@ func NewEdgeJobDeleteNoContent() *EdgeJobDeleteNoContent {
 	return &EdgeJobDeleteNoContent{}
 }
 
-/* EdgeJobDeleteNoContent describes a response with status code 204, with default header values.
+/*
+EdgeJobDeleteNoContent describes a response with status code 204, with default header values.
 
-EdgeJobDeleteNoContent edge job delete no content
+No Content
 */
 type EdgeJobDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this edge job delete no content response has a 2xx status code
+func (o *EdgeJobDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge job delete no content response has a 3xx status code
+func (o *EdgeJobDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job delete no content response has a 4xx status code
+func (o *EdgeJobDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job delete no content response has a 5xx status code
+func (o *EdgeJobDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job delete no content response a status code equal to that given
+func (o *EdgeJobDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EdgeJobDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteNoContent ", 204)
+}
+
+func (o *EdgeJobDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewEdgeJobDeleteBadRequest() *EdgeJobDeleteBadRequest {
 	return &EdgeJobDeleteBadRequest{}
 }
 
-/* EdgeJobDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+EdgeJobDeleteBadRequest describes a response with status code 400, with default header values.
 
-EdgeJobDeleteBadRequest edge job delete bad request
+Bad Request
 */
 type EdgeJobDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this edge job delete bad request response has a 2xx status code
+func (o *EdgeJobDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job delete bad request response has a 3xx status code
+func (o *EdgeJobDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job delete bad request response has a 4xx status code
+func (o *EdgeJobDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge job delete bad request response has a 5xx status code
+func (o *EdgeJobDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job delete bad request response a status code equal to that given
+func (o *EdgeJobDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EdgeJobDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteBadRequest ", 400)
+}
+
+func (o *EdgeJobDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewEdgeJobDeleteInternalServerError() *EdgeJobDeleteInternalServerError {
 	return &EdgeJobDeleteInternalServerError{}
 }
 
-/* EdgeJobDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeJobDeleteInternalServerError describes a response with status code 500, with default header values.
 
-EdgeJobDeleteInternalServerError edge job delete internal server error
+Internal Server Error
 */
 type EdgeJobDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge job delete internal server error response has a 2xx status code
+func (o *EdgeJobDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job delete internal server error response has a 3xx status code
+func (o *EdgeJobDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job delete internal server error response has a 4xx status code
+func (o *EdgeJobDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job delete internal server error response has a 5xx status code
+func (o *EdgeJobDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job delete internal server error response a status code equal to that given
+func (o *EdgeJobDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeJobDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteInternalServerError ", 500)
+}
+
+func (o *EdgeJobDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteInternalServerError ", 500)
 }
 
@@ -117,14 +207,44 @@ func NewEdgeJobDeleteServiceUnavailable() *EdgeJobDeleteServiceUnavailable {
 	return &EdgeJobDeleteServiceUnavailable{}
 }
 
-/* EdgeJobDeleteServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeJobDeleteServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeJobDeleteServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge job delete service unavailable response has a 2xx status code
+func (o *EdgeJobDeleteServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job delete service unavailable response has a 3xx status code
+func (o *EdgeJobDeleteServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job delete service unavailable response has a 4xx status code
+func (o *EdgeJobDeleteServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job delete service unavailable response has a 5xx status code
+func (o *EdgeJobDeleteServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job delete service unavailable response a status code equal to that given
+func (o *EdgeJobDeleteServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeJobDeleteServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteServiceUnavailable ", 503)
+}
+
+func (o *EdgeJobDeleteServiceUnavailable) String() string {
 	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteServiceUnavailable ", 503)
 }
 

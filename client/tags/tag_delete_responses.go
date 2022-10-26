@@ -60,14 +60,44 @@ func NewTagDeleteNoContent() *TagDeleteNoContent {
 	return &TagDeleteNoContent{}
 }
 
-/* TagDeleteNoContent describes a response with status code 204, with default header values.
+/*
+TagDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type TagDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this tag delete no content response has a 2xx status code
+func (o *TagDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tag delete no content response has a 3xx status code
+func (o *TagDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tag delete no content response has a 4xx status code
+func (o *TagDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tag delete no content response has a 5xx status code
+func (o *TagDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tag delete no content response a status code equal to that given
+func (o *TagDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *TagDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNoContent ", 204)
+}
+
+func (o *TagDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewTagDeleteBadRequest() *TagDeleteBadRequest {
 	return &TagDeleteBadRequest{}
 }
 
-/* TagDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+TagDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type TagDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this tag delete bad request response has a 2xx status code
+func (o *TagDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this tag delete bad request response has a 3xx status code
+func (o *TagDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tag delete bad request response has a 4xx status code
+func (o *TagDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this tag delete bad request response has a 5xx status code
+func (o *TagDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tag delete bad request response a status code equal to that given
+func (o *TagDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *TagDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteBadRequest ", 400)
+}
+
+func (o *TagDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewTagDeleteForbidden() *TagDeleteForbidden {
 	return &TagDeleteForbidden{}
 }
 
-/* TagDeleteForbidden describes a response with status code 403, with default header values.
+/*
+TagDeleteForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type TagDeleteForbidden struct {
 }
 
+// IsSuccess returns true when this tag delete forbidden response has a 2xx status code
+func (o *TagDeleteForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this tag delete forbidden response has a 3xx status code
+func (o *TagDeleteForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tag delete forbidden response has a 4xx status code
+func (o *TagDeleteForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this tag delete forbidden response has a 5xx status code
+func (o *TagDeleteForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tag delete forbidden response a status code equal to that given
+func (o *TagDeleteForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *TagDeleteForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteForbidden ", 403)
+}
+
+func (o *TagDeleteForbidden) String() string {
 	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewTagDeleteNotFound() *TagDeleteNotFound {
 	return &TagDeleteNotFound{}
 }
 
-/* TagDeleteNotFound describes a response with status code 404, with default header values.
+/*
+TagDeleteNotFound describes a response with status code 404, with default header values.
 
 Tag not found
 */
 type TagDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this tag delete not found response has a 2xx status code
+func (o *TagDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this tag delete not found response has a 3xx status code
+func (o *TagDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tag delete not found response has a 4xx status code
+func (o *TagDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this tag delete not found response has a 5xx status code
+func (o *TagDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tag delete not found response a status code equal to that given
+func (o *TagDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *TagDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNotFound ", 404)
+}
+
+func (o *TagDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewTagDeleteInternalServerError() *TagDeleteInternalServerError {
 	return &TagDeleteInternalServerError{}
 }
 
-/* TagDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+TagDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TagDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this tag delete internal server error response has a 2xx status code
+func (o *TagDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this tag delete internal server error response has a 3xx status code
+func (o *TagDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tag delete internal server error response has a 4xx status code
+func (o *TagDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tag delete internal server error response has a 5xx status code
+func (o *TagDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this tag delete internal server error response a status code equal to that given
+func (o *TagDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TagDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteInternalServerError ", 500)
+}
+
+func (o *TagDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteInternalServerError ", 500)
 }
 

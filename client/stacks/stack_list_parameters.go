@@ -52,10 +52,12 @@ func NewStackListParamsWithHTTPClient(client *http.Client) *StackListParams {
 	}
 }
 
-/* StackListParams contains all the parameters to send to the API endpoint
-   for the stack list operation.
+/*
+StackListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stack list operation.
+
+	Typically these are written to a http.Request.
 */
 type StackListParams struct {
 

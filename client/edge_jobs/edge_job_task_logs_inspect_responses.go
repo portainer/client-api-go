@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EdgeJobTaskLogsInspectReader is a Reader for the EdgeJobTaskLogsInspect structure.
@@ -57,7 +57,8 @@ func NewEdgeJobTaskLogsInspectOK() *EdgeJobTaskLogsInspectOK {
 	return &EdgeJobTaskLogsInspectOK{}
 }
 
-/* EdgeJobTaskLogsInspectOK describes a response with status code 200, with default header values.
+/*
+EdgeJobTaskLogsInspectOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -65,9 +66,39 @@ type EdgeJobTaskLogsInspectOK struct {
 	Payload *models.EdgejobsFileResponse
 }
 
+// IsSuccess returns true when this edge job task logs inspect o k response has a 2xx status code
+func (o *EdgeJobTaskLogsInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge job task logs inspect o k response has a 3xx status code
+func (o *EdgeJobTaskLogsInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job task logs inspect o k response has a 4xx status code
+func (o *EdgeJobTaskLogsInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job task logs inspect o k response has a 5xx status code
+func (o *EdgeJobTaskLogsInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job task logs inspect o k response a status code equal to that given
+func (o *EdgeJobTaskLogsInspectOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *EdgeJobTaskLogsInspectOK) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectOK  %+v", 200, o.Payload)
 }
+
+func (o *EdgeJobTaskLogsInspectOK) String() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectOK  %+v", 200, o.Payload)
+}
+
 func (o *EdgeJobTaskLogsInspectOK) GetPayload() *models.EdgejobsFileResponse {
 	return o.Payload
 }
@@ -89,14 +120,44 @@ func NewEdgeJobTaskLogsInspectBadRequest() *EdgeJobTaskLogsInspectBadRequest {
 	return &EdgeJobTaskLogsInspectBadRequest{}
 }
 
-/* EdgeJobTaskLogsInspectBadRequest describes a response with status code 400, with default header values.
+/*
+EdgeJobTaskLogsInspectBadRequest describes a response with status code 400, with default header values.
 
-EdgeJobTaskLogsInspectBadRequest edge job task logs inspect bad request
+Bad Request
 */
 type EdgeJobTaskLogsInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this edge job task logs inspect bad request response has a 2xx status code
+func (o *EdgeJobTaskLogsInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job task logs inspect bad request response has a 3xx status code
+func (o *EdgeJobTaskLogsInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job task logs inspect bad request response has a 4xx status code
+func (o *EdgeJobTaskLogsInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge job task logs inspect bad request response has a 5xx status code
+func (o *EdgeJobTaskLogsInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job task logs inspect bad request response a status code equal to that given
+func (o *EdgeJobTaskLogsInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EdgeJobTaskLogsInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectBadRequest ", 400)
+}
+
+func (o *EdgeJobTaskLogsInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewEdgeJobTaskLogsInspectInternalServerError() *EdgeJobTaskLogsInspectInter
 	return &EdgeJobTaskLogsInspectInternalServerError{}
 }
 
-/* EdgeJobTaskLogsInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeJobTaskLogsInspectInternalServerError describes a response with status code 500, with default header values.
 
-EdgeJobTaskLogsInspectInternalServerError edge job task logs inspect internal server error
+Internal Server Error
 */
 type EdgeJobTaskLogsInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge job task logs inspect internal server error response has a 2xx status code
+func (o *EdgeJobTaskLogsInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job task logs inspect internal server error response has a 3xx status code
+func (o *EdgeJobTaskLogsInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job task logs inspect internal server error response has a 4xx status code
+func (o *EdgeJobTaskLogsInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job task logs inspect internal server error response has a 5xx status code
+func (o *EdgeJobTaskLogsInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job task logs inspect internal server error response a status code equal to that given
+func (o *EdgeJobTaskLogsInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeJobTaskLogsInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectInternalServerError ", 500)
+}
+
+func (o *EdgeJobTaskLogsInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectInternalServerError ", 500)
 }
 
@@ -131,14 +222,44 @@ func NewEdgeJobTaskLogsInspectServiceUnavailable() *EdgeJobTaskLogsInspectServic
 	return &EdgeJobTaskLogsInspectServiceUnavailable{}
 }
 
-/* EdgeJobTaskLogsInspectServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeJobTaskLogsInspectServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeJobTaskLogsInspectServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge job task logs inspect service unavailable response has a 2xx status code
+func (o *EdgeJobTaskLogsInspectServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job task logs inspect service unavailable response has a 3xx status code
+func (o *EdgeJobTaskLogsInspectServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job task logs inspect service unavailable response has a 4xx status code
+func (o *EdgeJobTaskLogsInspectServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job task logs inspect service unavailable response has a 5xx status code
+func (o *EdgeJobTaskLogsInspectServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job task logs inspect service unavailable response a status code equal to that given
+func (o *EdgeJobTaskLogsInspectServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeJobTaskLogsInspectServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectServiceUnavailable ", 503)
+}
+
+func (o *EdgeJobTaskLogsInspectServiceUnavailable) String() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectServiceUnavailable ", 503)
 }
 

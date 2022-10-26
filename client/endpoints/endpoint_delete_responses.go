@@ -54,14 +54,44 @@ func NewEndpointDeleteNoContent() *EndpointDeleteNoContent {
 	return &EndpointDeleteNoContent{}
 }
 
-/* EndpointDeleteNoContent describes a response with status code 204, with default header values.
+/*
+EndpointDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type EndpointDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this endpoint delete no content response has a 2xx status code
+func (o *EndpointDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this endpoint delete no content response has a 3xx status code
+func (o *EndpointDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint delete no content response has a 4xx status code
+func (o *EndpointDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint delete no content response has a 5xx status code
+func (o *EndpointDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint delete no content response a status code equal to that given
+func (o *EndpointDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EndpointDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNoContent ", 204)
+}
+
+func (o *EndpointDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewEndpointDeleteBadRequest() *EndpointDeleteBadRequest {
 	return &EndpointDeleteBadRequest{}
 }
 
-/* EndpointDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+EndpointDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type EndpointDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this endpoint delete bad request response has a 2xx status code
+func (o *EndpointDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint delete bad request response has a 3xx status code
+func (o *EndpointDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint delete bad request response has a 4xx status code
+func (o *EndpointDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint delete bad request response has a 5xx status code
+func (o *EndpointDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint delete bad request response a status code equal to that given
+func (o *EndpointDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EndpointDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteBadRequest ", 400)
+}
+
+func (o *EndpointDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewEndpointDeleteNotFound() *EndpointDeleteNotFound {
 	return &EndpointDeleteNotFound{}
 }
 
-/* EndpointDeleteNotFound describes a response with status code 404, with default header values.
+/*
+EndpointDeleteNotFound describes a response with status code 404, with default header values.
 
 Environment(Endpoint) not found
 */
 type EndpointDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this endpoint delete not found response has a 2xx status code
+func (o *EndpointDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint delete not found response has a 3xx status code
+func (o *EndpointDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint delete not found response has a 4xx status code
+func (o *EndpointDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint delete not found response has a 5xx status code
+func (o *EndpointDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint delete not found response a status code equal to that given
+func (o *EndpointDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *EndpointDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNotFound ", 404)
+}
+
+func (o *EndpointDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNotFound ", 404)
 }
 
@@ -117,14 +207,44 @@ func NewEndpointDeleteInternalServerError() *EndpointDeleteInternalServerError {
 	return &EndpointDeleteInternalServerError{}
 }
 
-/* EndpointDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type EndpointDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint delete internal server error response has a 2xx status code
+func (o *EndpointDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint delete internal server error response has a 3xx status code
+func (o *EndpointDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint delete internal server error response has a 4xx status code
+func (o *EndpointDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint delete internal server error response has a 5xx status code
+func (o *EndpointDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint delete internal server error response a status code equal to that given
+func (o *EndpointDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteInternalServerError ", 500)
+}
+
+func (o *EndpointDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteInternalServerError ", 500)
 }
 

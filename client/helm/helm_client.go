@@ -48,9 +48,9 @@ type ClientService interface {
 }
 
 /*
-  HelmDelete deletes helm release
+HelmDelete deletes helm release
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) HelmDelete(params *HelmDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -89,9 +89,9 @@ func (a *Client) HelmDelete(params *HelmDeleteParams, authInfo runtime.ClientAut
 }
 
 /*
-  HelmInstall installs helm chart
+HelmInstall installs helm chart
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) HelmInstall(params *HelmInstallParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmInstallCreated, error) {
 	// TODO: Validate the params before sending
@@ -130,9 +130,9 @@ func (a *Client) HelmInstall(params *HelmInstallParams, authInfo runtime.ClientA
 }
 
 /*
-  HelmList lists helm releases
+HelmList lists helm releases
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) HelmList(params *HelmListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmListOK, error) {
 	// TODO: Validate the params before sending
@@ -171,9 +171,9 @@ func (a *Client) HelmList(params *HelmListParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  HelmRepoSearch searches helm charts
+HelmRepoSearch searches helm charts
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) HelmRepoSearch(params *HelmRepoSearchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmRepoSearchOK, error) {
 	// TODO: Validate the params before sending
@@ -212,9 +212,9 @@ func (a *Client) HelmRepoSearch(params *HelmRepoSearchParams, authInfo runtime.C
 }
 
 /*
-  HelmShow shows helm chart information
+HelmShow shows helm chart information
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) HelmShow(params *HelmShowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmShowOK, error) {
 	// TODO: Validate the params before sending
@@ -253,9 +253,10 @@ func (a *Client) HelmShow(params *HelmShowParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  HelmUserRepositoriesList lists a users helm repositories
+	HelmUserRepositoriesList lists a users helm repositories
 
-  Inspect a user helm repositories.
+	Inspect a user helm repositories.
+
 **Access policy**: authenticated
 */
 func (a *Client) HelmUserRepositoriesList(params *HelmUserRepositoriesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmUserRepositoriesListOK, error) {
@@ -295,9 +296,10 @@ func (a *Client) HelmUserRepositoriesList(params *HelmUserRepositoriesListParams
 }
 
 /*
-  HelmUserRepositoryCreate creates a user helm repository
+	HelmUserRepositoryCreate creates a user helm repository
 
-  Create a user helm repository.
+	Create a user helm repository.
+
 **Access policy**: authenticated
 */
 func (a *Client) HelmUserRepositoryCreate(params *HelmUserRepositoryCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmUserRepositoryCreateOK, error) {

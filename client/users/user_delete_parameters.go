@@ -53,10 +53,12 @@ func NewUserDeleteParamsWithHTTPClient(client *http.Client) *UserDeleteParams {
 	}
 }
 
-/* UserDeleteParams contains all the parameters to send to the API endpoint
-   for the user delete operation.
+/*
+UserDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user delete operation.
+
+	Typically these are written to a http.Request.
 */
 type UserDeleteParams struct {
 

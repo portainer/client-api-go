@@ -42,13 +42,18 @@ type ClientService interface {
 
 	RegistryUpdate(params *RegistryUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryUpdateOK, error)
 
+	EcrDeleteRepository(params *EcrDeleteRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EcrDeleteRepositoryOK, error)
+
+	EcrDeleteTags(params *EcrDeleteTagsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EcrDeleteTagsNoContent, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  RegistryConfigure configures a registry
+	RegistryConfigure configures a registry
 
-  Configures a registry.
+	Configures a registry.
+
 **Access policy**: restricted
 */
 func (a *Client) RegistryConfigure(params *RegistryConfigureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryConfigureNoContent, error) {
@@ -88,9 +93,10 @@ func (a *Client) RegistryConfigure(params *RegistryConfigureParams, authInfo run
 }
 
 /*
-  RegistryCreate creates a new registry
+	RegistryCreate creates a new registry
 
-  Create a new registry.
+	Create a new registry.
+
 **Access policy**: restricted
 */
 func (a *Client) RegistryCreate(params *RegistryCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryCreateOK, error) {
@@ -130,9 +136,10 @@ func (a *Client) RegistryCreate(params *RegistryCreateParams, authInfo runtime.C
 }
 
 /*
-  RegistryDelete removes a registry
+	RegistryDelete removes a registry
 
-  Remove a registry
+	Remove a registry
+
 **Access policy**: restricted
 */
 func (a *Client) RegistryDelete(params *RegistryDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryDeleteNoContent, error) {
@@ -172,9 +179,10 @@ func (a *Client) RegistryDelete(params *RegistryDeleteParams, authInfo runtime.C
 }
 
 /*
-  RegistryInspect inspects a registry
+	RegistryInspect inspects a registry
 
-  Retrieve details about a registry.
+	Retrieve details about a registry.
+
 **Access policy**: restricted
 */
 func (a *Client) RegistryInspect(params *RegistryInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryInspectOK, error) {
@@ -214,9 +222,10 @@ func (a *Client) RegistryInspect(params *RegistryInspectParams, authInfo runtime
 }
 
 /*
-  RegistryList lists registries
+	RegistryList lists registries
 
-  List all registries based on the current user authorizations.
+	List all registries based on the current user authorizations.
+
 Will return all registries if using an administrator account otherwise it
 will only return authorized registries.
 **Access policy**: restricted
@@ -258,9 +267,10 @@ func (a *Client) RegistryList(params *RegistryListParams, authInfo runtime.Clien
 }
 
 /*
-  RegistryUpdate updates a registry
+	RegistryUpdate updates a registry
 
-  Update a registry
+	Update a registry
+
 **Access policy**: restricted
 */
 func (a *Client) RegistryUpdate(params *RegistryUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RegistryUpdateOK, error) {
@@ -296,6 +306,92 @@ func (a *Client) RegistryUpdate(params *RegistryUpdateParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for RegistryUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	EcrDeleteRepository deletes e c r repository
+
+	Delete ECR repository.
+
+**Access policy**: restricted
+*/
+func (a *Client) EcrDeleteRepository(params *EcrDeleteRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EcrDeleteRepositoryOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEcrDeleteRepositoryParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ecrDeleteRepository",
+		Method:             "DELETE",
+		PathPattern:        "/registries/{id}/ecr/repositories/{repositoryName}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EcrDeleteRepositoryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EcrDeleteRepositoryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ecrDeleteRepository: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	EcrDeleteTags deletes tags
+
+	Delete tags for a given ECR repository
+
+**Access policy**: restricted
+*/
+func (a *Client) EcrDeleteTags(params *EcrDeleteTagsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EcrDeleteTagsNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEcrDeleteTagsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ecrDeleteTags",
+		Method:             "DELETE",
+		PathPattern:        "/registries/{id}/ecr/repositories/{repositoryName}/tags",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EcrDeleteTagsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EcrDeleteTagsNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ecrDeleteTags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

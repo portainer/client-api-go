@@ -53,10 +53,12 @@ func NewCustomTemplateDeleteParamsWithHTTPClient(client *http.Client) *CustomTem
 	}
 }
 
-/* CustomTemplateDeleteParams contains all the parameters to send to the API endpoint
-   for the custom template delete operation.
+/*
+CustomTemplateDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the custom template delete operation.
+
+	Typically these are written to a http.Request.
 */
 type CustomTemplateDeleteParams struct {
 

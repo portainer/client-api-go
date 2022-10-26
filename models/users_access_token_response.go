@@ -19,7 +19,7 @@ import (
 type UsersAccessTokenResponse struct {
 
 	// api key
-	APIKey *PortainerAPIKey `json:"apiKey,omitempty"`
+	APIKey *PortainereeAPIKey `json:"apiKey,omitempty"`
 
 	// raw API key
 	RawAPIKey string `json:"rawAPIKey,omitempty"`

@@ -54,14 +54,44 @@ func NewRegistryDeleteNoContent() *RegistryDeleteNoContent {
 	return &RegistryDeleteNoContent{}
 }
 
-/* RegistryDeleteNoContent describes a response with status code 204, with default header values.
+/*
+RegistryDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type RegistryDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this registry delete no content response has a 2xx status code
+func (o *RegistryDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this registry delete no content response has a 3xx status code
+func (o *RegistryDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry delete no content response has a 4xx status code
+func (o *RegistryDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this registry delete no content response has a 5xx status code
+func (o *RegistryDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this registry delete no content response a status code equal to that given
+func (o *RegistryDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *RegistryDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNoContent ", 204)
+}
+
+func (o *RegistryDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewRegistryDeleteBadRequest() *RegistryDeleteBadRequest {
 	return &RegistryDeleteBadRequest{}
 }
 
-/* RegistryDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+RegistryDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type RegistryDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this registry delete bad request response has a 2xx status code
+func (o *RegistryDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this registry delete bad request response has a 3xx status code
+func (o *RegistryDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry delete bad request response has a 4xx status code
+func (o *RegistryDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this registry delete bad request response has a 5xx status code
+func (o *RegistryDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this registry delete bad request response a status code equal to that given
+func (o *RegistryDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *RegistryDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteBadRequest ", 400)
+}
+
+func (o *RegistryDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewRegistryDeleteNotFound() *RegistryDeleteNotFound {
 	return &RegistryDeleteNotFound{}
 }
 
-/* RegistryDeleteNotFound describes a response with status code 404, with default header values.
+/*
+RegistryDeleteNotFound describes a response with status code 404, with default header values.
 
 Registry not found
 */
 type RegistryDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this registry delete not found response has a 2xx status code
+func (o *RegistryDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this registry delete not found response has a 3xx status code
+func (o *RegistryDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry delete not found response has a 4xx status code
+func (o *RegistryDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this registry delete not found response has a 5xx status code
+func (o *RegistryDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this registry delete not found response a status code equal to that given
+func (o *RegistryDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *RegistryDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNotFound ", 404)
+}
+
+func (o *RegistryDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNotFound ", 404)
 }
 
@@ -117,14 +207,44 @@ func NewRegistryDeleteInternalServerError() *RegistryDeleteInternalServerError {
 	return &RegistryDeleteInternalServerError{}
 }
 
-/* RegistryDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+RegistryDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type RegistryDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this registry delete internal server error response has a 2xx status code
+func (o *RegistryDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this registry delete internal server error response has a 3xx status code
+func (o *RegistryDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry delete internal server error response has a 4xx status code
+func (o *RegistryDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this registry delete internal server error response has a 5xx status code
+func (o *RegistryDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this registry delete internal server error response a status code equal to that given
+func (o *RegistryDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *RegistryDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteInternalServerError ", 500)
+}
+
+func (o *RegistryDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteInternalServerError ", 500)
 }
 

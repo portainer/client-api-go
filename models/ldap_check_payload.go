@@ -19,7 +19,7 @@ import (
 type LdapCheckPayload struct {
 
 	// ldapsettings
-	Ldapsettings *PortainerLDAPSettings `json:"ldapsettings,omitempty"`
+	Ldapsettings *PortainereeLDAPSettings `json:"ldapsettings,omitempty"`
 }
 
 // Validate validates this ldap check payload

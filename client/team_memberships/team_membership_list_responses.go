@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // TeamMembershipListReader is a Reader for the TeamMembershipList structure.
@@ -57,18 +57,49 @@ func NewTeamMembershipListOK() *TeamMembershipListOK {
 	return &TeamMembershipListOK{}
 }
 
-/* TeamMembershipListOK describes a response with status code 200, with default header values.
+/*
+TeamMembershipListOK describes a response with status code 200, with default header values.
 
 Success
 */
 type TeamMembershipListOK struct {
-	Payload []*models.PortainerTeamMembership
+	Payload []*models.PortainereeTeamMembership
+}
+
+// IsSuccess returns true when this team membership list o k response has a 2xx status code
+func (o *TeamMembershipListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this team membership list o k response has a 3xx status code
+func (o *TeamMembershipListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership list o k response has a 4xx status code
+func (o *TeamMembershipListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team membership list o k response has a 5xx status code
+func (o *TeamMembershipListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership list o k response a status code equal to that given
+func (o *TeamMembershipListOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *TeamMembershipListOK) Error() string {
 	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListOK  %+v", 200, o.Payload)
 }
-func (o *TeamMembershipListOK) GetPayload() []*models.PortainerTeamMembership {
+
+func (o *TeamMembershipListOK) String() string {
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListOK  %+v", 200, o.Payload)
+}
+
+func (o *TeamMembershipListOK) GetPayload() []*models.PortainereeTeamMembership {
 	return o.Payload
 }
 
@@ -87,14 +118,44 @@ func NewTeamMembershipListBadRequest() *TeamMembershipListBadRequest {
 	return &TeamMembershipListBadRequest{}
 }
 
-/* TeamMembershipListBadRequest describes a response with status code 400, with default header values.
+/*
+TeamMembershipListBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type TeamMembershipListBadRequest struct {
 }
 
+// IsSuccess returns true when this team membership list bad request response has a 2xx status code
+func (o *TeamMembershipListBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership list bad request response has a 3xx status code
+func (o *TeamMembershipListBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership list bad request response has a 4xx status code
+func (o *TeamMembershipListBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team membership list bad request response has a 5xx status code
+func (o *TeamMembershipListBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership list bad request response a status code equal to that given
+func (o *TeamMembershipListBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *TeamMembershipListBadRequest) Error() string {
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListBadRequest ", 400)
+}
+
+func (o *TeamMembershipListBadRequest) String() string {
 	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListBadRequest ", 400)
 }
 
@@ -108,14 +169,44 @@ func NewTeamMembershipListForbidden() *TeamMembershipListForbidden {
 	return &TeamMembershipListForbidden{}
 }
 
-/* TeamMembershipListForbidden describes a response with status code 403, with default header values.
+/*
+TeamMembershipListForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type TeamMembershipListForbidden struct {
 }
 
+// IsSuccess returns true when this team membership list forbidden response has a 2xx status code
+func (o *TeamMembershipListForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership list forbidden response has a 3xx status code
+func (o *TeamMembershipListForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership list forbidden response has a 4xx status code
+func (o *TeamMembershipListForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team membership list forbidden response has a 5xx status code
+func (o *TeamMembershipListForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership list forbidden response a status code equal to that given
+func (o *TeamMembershipListForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *TeamMembershipListForbidden) Error() string {
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListForbidden ", 403)
+}
+
+func (o *TeamMembershipListForbidden) String() string {
 	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListForbidden ", 403)
 }
 
@@ -129,14 +220,44 @@ func NewTeamMembershipListInternalServerError() *TeamMembershipListInternalServe
 	return &TeamMembershipListInternalServerError{}
 }
 
-/* TeamMembershipListInternalServerError describes a response with status code 500, with default header values.
+/*
+TeamMembershipListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TeamMembershipListInternalServerError struct {
 }
 
+// IsSuccess returns true when this team membership list internal server error response has a 2xx status code
+func (o *TeamMembershipListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership list internal server error response has a 3xx status code
+func (o *TeamMembershipListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership list internal server error response has a 4xx status code
+func (o *TeamMembershipListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team membership list internal server error response has a 5xx status code
+func (o *TeamMembershipListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this team membership list internal server error response a status code equal to that given
+func (o *TeamMembershipListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TeamMembershipListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListInternalServerError ", 500)
+}
+
+func (o *TeamMembershipListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListInternalServerError ", 500)
 }
 

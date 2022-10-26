@@ -53,10 +53,12 @@ func NewGetWebsocketPodParamsWithHTTPClient(client *http.Client) *GetWebsocketPo
 	}
 }
 
-/* GetWebsocketPodParams contains all the parameters to send to the API endpoint
-   for the get websocket pod operation.
+/*
+GetWebsocketPodParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get websocket pod operation.
+
+	Typically these are written to a http.Request.
 */
 type GetWebsocketPodParams struct {
 

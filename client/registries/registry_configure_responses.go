@@ -60,14 +60,44 @@ func NewRegistryConfigureNoContent() *RegistryConfigureNoContent {
 	return &RegistryConfigureNoContent{}
 }
 
-/* RegistryConfigureNoContent describes a response with status code 204, with default header values.
+/*
+RegistryConfigureNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type RegistryConfigureNoContent struct {
 }
 
+// IsSuccess returns true when this registry configure no content response has a 2xx status code
+func (o *RegistryConfigureNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this registry configure no content response has a 3xx status code
+func (o *RegistryConfigureNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry configure no content response has a 4xx status code
+func (o *RegistryConfigureNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this registry configure no content response has a 5xx status code
+func (o *RegistryConfigureNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this registry configure no content response a status code equal to that given
+func (o *RegistryConfigureNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *RegistryConfigureNoContent) Error() string {
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNoContent ", 204)
+}
+
+func (o *RegistryConfigureNoContent) String() string {
 	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewRegistryConfigureBadRequest() *RegistryConfigureBadRequest {
 	return &RegistryConfigureBadRequest{}
 }
 
-/* RegistryConfigureBadRequest describes a response with status code 400, with default header values.
+/*
+RegistryConfigureBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type RegistryConfigureBadRequest struct {
 }
 
+// IsSuccess returns true when this registry configure bad request response has a 2xx status code
+func (o *RegistryConfigureBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this registry configure bad request response has a 3xx status code
+func (o *RegistryConfigureBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry configure bad request response has a 4xx status code
+func (o *RegistryConfigureBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this registry configure bad request response has a 5xx status code
+func (o *RegistryConfigureBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this registry configure bad request response a status code equal to that given
+func (o *RegistryConfigureBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *RegistryConfigureBadRequest) Error() string {
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureBadRequest ", 400)
+}
+
+func (o *RegistryConfigureBadRequest) String() string {
 	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewRegistryConfigureForbidden() *RegistryConfigureForbidden {
 	return &RegistryConfigureForbidden{}
 }
 
-/* RegistryConfigureForbidden describes a response with status code 403, with default header values.
+/*
+RegistryConfigureForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type RegistryConfigureForbidden struct {
 }
 
+// IsSuccess returns true when this registry configure forbidden response has a 2xx status code
+func (o *RegistryConfigureForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this registry configure forbidden response has a 3xx status code
+func (o *RegistryConfigureForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry configure forbidden response has a 4xx status code
+func (o *RegistryConfigureForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this registry configure forbidden response has a 5xx status code
+func (o *RegistryConfigureForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this registry configure forbidden response a status code equal to that given
+func (o *RegistryConfigureForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *RegistryConfigureForbidden) Error() string {
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureForbidden ", 403)
+}
+
+func (o *RegistryConfigureForbidden) String() string {
 	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewRegistryConfigureNotFound() *RegistryConfigureNotFound {
 	return &RegistryConfigureNotFound{}
 }
 
-/* RegistryConfigureNotFound describes a response with status code 404, with default header values.
+/*
+RegistryConfigureNotFound describes a response with status code 404, with default header values.
 
 Registry not found
 */
 type RegistryConfigureNotFound struct {
 }
 
+// IsSuccess returns true when this registry configure not found response has a 2xx status code
+func (o *RegistryConfigureNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this registry configure not found response has a 3xx status code
+func (o *RegistryConfigureNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry configure not found response has a 4xx status code
+func (o *RegistryConfigureNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this registry configure not found response has a 5xx status code
+func (o *RegistryConfigureNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this registry configure not found response a status code equal to that given
+func (o *RegistryConfigureNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *RegistryConfigureNotFound) Error() string {
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNotFound ", 404)
+}
+
+func (o *RegistryConfigureNotFound) String() string {
 	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewRegistryConfigureInternalServerError() *RegistryConfigureInternalServerE
 	return &RegistryConfigureInternalServerError{}
 }
 
-/* RegistryConfigureInternalServerError describes a response with status code 500, with default header values.
+/*
+RegistryConfigureInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type RegistryConfigureInternalServerError struct {
 }
 
+// IsSuccess returns true when this registry configure internal server error response has a 2xx status code
+func (o *RegistryConfigureInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this registry configure internal server error response has a 3xx status code
+func (o *RegistryConfigureInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry configure internal server error response has a 4xx status code
+func (o *RegistryConfigureInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this registry configure internal server error response has a 5xx status code
+func (o *RegistryConfigureInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this registry configure internal server error response a status code equal to that given
+func (o *RegistryConfigureInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *RegistryConfigureInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureInternalServerError ", 500)
+}
+
+func (o *RegistryConfigureInternalServerError) String() string {
 	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureInternalServerError ", 500)
 }
 

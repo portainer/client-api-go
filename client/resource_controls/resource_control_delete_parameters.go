@@ -53,10 +53,12 @@ func NewResourceControlDeleteParamsWithHTTPClient(client *http.Client) *Resource
 	}
 }
 
-/* ResourceControlDeleteParams contains all the parameters to send to the API endpoint
-   for the resource control delete operation.
+/*
+ResourceControlDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the resource control delete operation.
+
+	Typically these are written to a http.Request.
 */
 type ResourceControlDeleteParams struct {
 

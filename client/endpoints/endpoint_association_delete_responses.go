@@ -7,9 +7,12 @@ package endpoints
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/portainer/client-api-go/models"
 )
 
 // EndpointAssociationDeleteReader is a Reader for the EndpointAssociationDelete structure.
@@ -20,8 +23,8 @@ type EndpointAssociationDeleteReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *EndpointAssociationDeleteReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 204:
-		result := NewEndpointAssociationDeleteNoContent()
+	case 200:
+		result := NewEndpointAssociationDeleteOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -49,23 +52,65 @@ func (o *EndpointAssociationDeleteReader) ReadResponse(response runtime.ClientRe
 	}
 }
 
-// NewEndpointAssociationDeleteNoContent creates a EndpointAssociationDeleteNoContent with default headers values
-func NewEndpointAssociationDeleteNoContent() *EndpointAssociationDeleteNoContent {
-	return &EndpointAssociationDeleteNoContent{}
+// NewEndpointAssociationDeleteOK creates a EndpointAssociationDeleteOK with default headers values
+func NewEndpointAssociationDeleteOK() *EndpointAssociationDeleteOK {
+	return &EndpointAssociationDeleteOK{}
 }
 
-/* EndpointAssociationDeleteNoContent describes a response with status code 204, with default header values.
+/*
+EndpointAssociationDeleteOK describes a response with status code 200, with default header values.
 
 Success
 */
-type EndpointAssociationDeleteNoContent struct {
+type EndpointAssociationDeleteOK struct {
+	Payload *models.PortainereeEndpoint
 }
 
-func (o *EndpointAssociationDeleteNoContent) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNoContent ", 204)
+// IsSuccess returns true when this endpoint association delete o k response has a 2xx status code
+func (o *EndpointAssociationDeleteOK) IsSuccess() bool {
+	return true
 }
 
-func (o *EndpointAssociationDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+// IsRedirect returns true when this endpoint association delete o k response has a 3xx status code
+func (o *EndpointAssociationDeleteOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint association delete o k response has a 4xx status code
+func (o *EndpointAssociationDeleteOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint association delete o k response has a 5xx status code
+func (o *EndpointAssociationDeleteOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint association delete o k response a status code equal to that given
+func (o *EndpointAssociationDeleteOK) IsCode(code int) bool {
+	return code == 200
+}
+
+func (o *EndpointAssociationDeleteOK) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteOK  %+v", 200, o.Payload)
+}
+
+func (o *EndpointAssociationDeleteOK) String() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteOK  %+v", 200, o.Payload)
+}
+
+func (o *EndpointAssociationDeleteOK) GetPayload() *models.PortainereeEndpoint {
+	return o.Payload
+}
+
+func (o *EndpointAssociationDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.PortainereeEndpoint)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -75,14 +120,44 @@ func NewEndpointAssociationDeleteBadRequest() *EndpointAssociationDeleteBadReque
 	return &EndpointAssociationDeleteBadRequest{}
 }
 
-/* EndpointAssociationDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+EndpointAssociationDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type EndpointAssociationDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this endpoint association delete bad request response has a 2xx status code
+func (o *EndpointAssociationDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint association delete bad request response has a 3xx status code
+func (o *EndpointAssociationDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint association delete bad request response has a 4xx status code
+func (o *EndpointAssociationDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint association delete bad request response has a 5xx status code
+func (o *EndpointAssociationDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint association delete bad request response a status code equal to that given
+func (o *EndpointAssociationDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EndpointAssociationDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteBadRequest ", 400)
+}
+
+func (o *EndpointAssociationDeleteBadRequest) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteBadRequest ", 400)
 }
 
@@ -96,14 +171,44 @@ func NewEndpointAssociationDeleteNotFound() *EndpointAssociationDeleteNotFound {
 	return &EndpointAssociationDeleteNotFound{}
 }
 
-/* EndpointAssociationDeleteNotFound describes a response with status code 404, with default header values.
+/*
+EndpointAssociationDeleteNotFound describes a response with status code 404, with default header values.
 
 Environment(Endpoint) not found
 */
 type EndpointAssociationDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this endpoint association delete not found response has a 2xx status code
+func (o *EndpointAssociationDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint association delete not found response has a 3xx status code
+func (o *EndpointAssociationDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint association delete not found response has a 4xx status code
+func (o *EndpointAssociationDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint association delete not found response has a 5xx status code
+func (o *EndpointAssociationDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint association delete not found response a status code equal to that given
+func (o *EndpointAssociationDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *EndpointAssociationDeleteNotFound) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNotFound ", 404)
+}
+
+func (o *EndpointAssociationDeleteNotFound) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNotFound ", 404)
 }
 
@@ -117,14 +222,44 @@ func NewEndpointAssociationDeleteInternalServerError() *EndpointAssociationDelet
 	return &EndpointAssociationDeleteInternalServerError{}
 }
 
-/* EndpointAssociationDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointAssociationDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type EndpointAssociationDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint association delete internal server error response has a 2xx status code
+func (o *EndpointAssociationDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint association delete internal server error response has a 3xx status code
+func (o *EndpointAssociationDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint association delete internal server error response has a 4xx status code
+func (o *EndpointAssociationDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint association delete internal server error response has a 5xx status code
+func (o *EndpointAssociationDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint association delete internal server error response a status code equal to that given
+func (o *EndpointAssociationDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointAssociationDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteInternalServerError ", 500)
+}
+
+func (o *EndpointAssociationDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteInternalServerError ", 500)
 }
 

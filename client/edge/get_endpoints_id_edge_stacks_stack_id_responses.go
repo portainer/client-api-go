@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // GetEndpointsIDEdgeStacksStackIDReader is a Reader for the GetEndpointsIDEdgeStacksStackID structure.
@@ -57,7 +57,8 @@ func NewGetEndpointsIDEdgeStacksStackIDOK() *GetEndpointsIDEdgeStacksStackIDOK {
 	return &GetEndpointsIDEdgeStacksStackIDOK{}
 }
 
-/* GetEndpointsIDEdgeStacksStackIDOK describes a response with status code 200, with default header values.
+/*
+GetEndpointsIDEdgeStacksStackIDOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -65,9 +66,39 @@ type GetEndpointsIDEdgeStacksStackIDOK struct {
 	Payload *models.EndpointedgeConfigResponse
 }
 
+// IsSuccess returns true when this get endpoints Id edge stacks stack Id o k response has a 2xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get endpoints Id edge stacks stack Id o k response has a 3xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get endpoints Id edge stacks stack Id o k response has a 4xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get endpoints Id edge stacks stack Id o k response has a 5xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get endpoints Id edge stacks stack Id o k response a status code equal to that given
+func (o *GetEndpointsIDEdgeStacksStackIDOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetEndpointsIDEdgeStacksStackIDOK) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdOK  %+v", 200, o.Payload)
 }
+
+func (o *GetEndpointsIDEdgeStacksStackIDOK) String() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdOK  %+v", 200, o.Payload)
+}
+
 func (o *GetEndpointsIDEdgeStacksStackIDOK) GetPayload() *models.EndpointedgeConfigResponse {
 	return o.Payload
 }
@@ -89,14 +120,44 @@ func NewGetEndpointsIDEdgeStacksStackIDBadRequest() *GetEndpointsIDEdgeStacksSta
 	return &GetEndpointsIDEdgeStacksStackIDBadRequest{}
 }
 
-/* GetEndpointsIDEdgeStacksStackIDBadRequest describes a response with status code 400, with default header values.
+/*
+GetEndpointsIDEdgeStacksStackIDBadRequest describes a response with status code 400, with default header values.
 
-GetEndpointsIDEdgeStacksStackIDBadRequest get endpoints Id edge stacks stack Id bad request
+Bad Request
 */
 type GetEndpointsIDEdgeStacksStackIDBadRequest struct {
 }
 
+// IsSuccess returns true when this get endpoints Id edge stacks stack Id bad request response has a 2xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get endpoints Id edge stacks stack Id bad request response has a 3xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get endpoints Id edge stacks stack Id bad request response has a 4xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get endpoints Id edge stacks stack Id bad request response has a 5xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get endpoints Id edge stacks stack Id bad request response a status code equal to that given
+func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdBadRequest ", 400)
+}
+
+func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewGetEndpointsIDEdgeStacksStackIDNotFound() *GetEndpointsIDEdgeStacksStack
 	return &GetEndpointsIDEdgeStacksStackIDNotFound{}
 }
 
-/* GetEndpointsIDEdgeStacksStackIDNotFound describes a response with status code 404, with default header values.
+/*
+GetEndpointsIDEdgeStacksStackIDNotFound describes a response with status code 404, with default header values.
 
-GetEndpointsIDEdgeStacksStackIDNotFound get endpoints Id edge stacks stack Id not found
+Not Found
 */
 type GetEndpointsIDEdgeStacksStackIDNotFound struct {
 }
 
+// IsSuccess returns true when this get endpoints Id edge stacks stack Id not found response has a 2xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get endpoints Id edge stacks stack Id not found response has a 3xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get endpoints Id edge stacks stack Id not found response has a 4xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get endpoints Id edge stacks stack Id not found response has a 5xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get endpoints Id edge stacks stack Id not found response a status code equal to that given
+func (o *GetEndpointsIDEdgeStacksStackIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetEndpointsIDEdgeStacksStackIDNotFound) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdNotFound ", 404)
+}
+
+func (o *GetEndpointsIDEdgeStacksStackIDNotFound) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdNotFound ", 404)
 }
 
@@ -131,14 +222,44 @@ func NewGetEndpointsIDEdgeStacksStackIDInternalServerError() *GetEndpointsIDEdge
 	return &GetEndpointsIDEdgeStacksStackIDInternalServerError{}
 }
 
-/* GetEndpointsIDEdgeStacksStackIDInternalServerError describes a response with status code 500, with default header values.
+/*
+GetEndpointsIDEdgeStacksStackIDInternalServerError describes a response with status code 500, with default header values.
 
-GetEndpointsIDEdgeStacksStackIDInternalServerError get endpoints Id edge stacks stack Id internal server error
+Internal Server Error
 */
 type GetEndpointsIDEdgeStacksStackIDInternalServerError struct {
 }
 
+// IsSuccess returns true when this get endpoints Id edge stacks stack Id internal server error response has a 2xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get endpoints Id edge stacks stack Id internal server error response has a 3xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get endpoints Id edge stacks stack Id internal server error response has a 4xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get endpoints Id edge stacks stack Id internal server error response has a 5xx status code
+func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get endpoints Id edge stacks stack Id internal server error response a status code equal to that given
+func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdInternalServerError ", 500)
+}
+
+func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdInternalServerError ", 500)
 }
 

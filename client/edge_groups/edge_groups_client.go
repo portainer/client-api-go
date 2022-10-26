@@ -44,9 +44,9 @@ type ClientService interface {
 }
 
 /*
-  EdgeGroupCreate creates an edge group
+EdgeGroupCreate creates an edge group
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeGroupCreate(params *EdgeGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -85,9 +85,9 @@ func (a *Client) EdgeGroupCreate(params *EdgeGroupCreateParams, authInfo runtime
 }
 
 /*
-  EdgeGroupDelete deletes an edge group
+EdgeGroupDelete deletes an edge group
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeGroupDelete(params *EdgeGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -126,9 +126,9 @@ func (a *Client) EdgeGroupDelete(params *EdgeGroupDeleteParams, authInfo runtime
 }
 
 /*
-  EdgeGroupInspect inspects an edge group
+EdgeGroupInspect inspects an edge group
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeGroupInspect(params *EdgeGroupInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupInspectOK, error) {
 	// TODO: Validate the params before sending
@@ -167,9 +167,9 @@ func (a *Client) EdgeGroupInspect(params *EdgeGroupInspectParams, authInfo runti
 }
 
 /*
-  EdgeGroupList lists edge groups
+EdgeGroupList lists edge groups
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EdgeGroupList(params *EdgeGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupListOK, error) {
 	// TODO: Validate the params before sending
@@ -208,9 +208,9 @@ func (a *Client) EdgeGroupList(params *EdgeGroupListParams, authInfo runtime.Cli
 }
 
 /*
-  EgeGroupUpdate updates an edge group
+EgeGroupUpdate updates an edge group
 
-  **Access policy**: administrator
+**Access policy**: administrator
 */
 func (a *Client) EgeGroupUpdate(params *EgeGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EgeGroupUpdateOK, error) {
 	// TODO: Validate the params before sending

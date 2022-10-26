@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -30,16 +31,25 @@ type EndpointsEndpointUpdatePayload struct {
 	// Example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
 	AzureTenantID string `json:"azureTenantID,omitempty"`
 
+	// Whether automatic update time restrictions are enabled
+	ChangeWindow *PortainereeEndpointChangeWindow `json:"changeWindow,omitempty"`
+
+	// edge
+	Edge *EndpointsEndpointUpdatePayloadEdge `json:"edge,omitempty"`
+
 	// The check in interval for edge agent (in seconds)
 	// Example: 5
 	EdgeCheckinInterval int64 `json:"edgeCheckinInterval,omitempty"`
+
+	// GPUs information
+	Gpus []*PortainereePair `json:"gpus"`
 
 	// Group identifier
 	// Example: 1
 	GroupID int64 `json:"groupID,omitempty"`
 
 	// Associated Kubernetes data
-	Kubernetes *PortainerKubernetesData `json:"kubernetes,omitempty"`
+	Kubernetes *PortainereeKubernetesData `json:"kubernetes,omitempty"`
 
 	// Name that will be used to identify this environment(endpoint)
 	// Example: my-environment
@@ -59,7 +69,7 @@ type EndpointsEndpointUpdatePayload struct {
 	TagIDs []int64 `json:"tagIDs"`
 
 	// team access policies
-	TeamAccessPolicies PortainerTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
+	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
 
 	// Require TLS to connect against this environment(endpoint)
 	// Example: true
@@ -78,12 +88,24 @@ type EndpointsEndpointUpdatePayload struct {
 	URL string `json:"url,omitempty"`
 
 	// user access policies
-	UserAccessPolicies PortainerUserAccessPolicies `json:"userAccessPolicies,omitempty"`
+	UserAccessPolicies PortainereeUserAccessPolicies `json:"userAccessPolicies,omitempty"`
 }
 
 // Validate validates this endpoints endpoint update payload
 func (m *EndpointsEndpointUpdatePayload) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateChangeWindow(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEdge(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGpus(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateKubernetes(formats); err != nil {
 		res = append(res, err)
@@ -100,6 +122,70 @@ func (m *EndpointsEndpointUpdatePayload) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EndpointsEndpointUpdatePayload) validateChangeWindow(formats strfmt.Registry) error {
+	if swag.IsZero(m.ChangeWindow) { // not required
+		return nil
+	}
+
+	if m.ChangeWindow != nil {
+		if err := m.ChangeWindow.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("changeWindow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("changeWindow")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EndpointsEndpointUpdatePayload) validateEdge(formats strfmt.Registry) error {
+	if swag.IsZero(m.Edge) { // not required
+		return nil
+	}
+
+	if m.Edge != nil {
+		if err := m.Edge.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EndpointsEndpointUpdatePayload) validateGpus(formats strfmt.Registry) error {
+	if swag.IsZero(m.Gpus) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Gpus); i++ {
+		if swag.IsZero(m.Gpus[i]) { // not required
+			continue
+		}
+
+		if m.Gpus[i] != nil {
+			if err := m.Gpus[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("gpus" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -164,6 +250,18 @@ func (m *EndpointsEndpointUpdatePayload) validateUserAccessPolicies(formats strf
 func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateChangeWindow(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateEdge(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGpus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateKubernetes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -179,6 +277,58 @@ func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, fo
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EndpointsEndpointUpdatePayload) contextValidateChangeWindow(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ChangeWindow != nil {
+		if err := m.ChangeWindow.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("changeWindow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("changeWindow")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EndpointsEndpointUpdatePayload) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Edge != nil {
+		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EndpointsEndpointUpdatePayload) contextValidateGpus(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Gpus); i++ {
+
+		if m.Gpus[i] != nil {
+			if err := m.Gpus[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("gpus" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -237,6 +387,52 @@ func (m *EndpointsEndpointUpdatePayload) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *EndpointsEndpointUpdatePayload) UnmarshalBinary(b []byte) error {
 	var res EndpointsEndpointUpdatePayload
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// EndpointsEndpointUpdatePayloadEdge endpoints endpoint update payload edge
+//
+// swagger:model EndpointsEndpointUpdatePayloadEdge
+type EndpointsEndpointUpdatePayloadEdge struct {
+
+	// The command list interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	CommandInterval int64 `json:"CommandInterval,omitempty"`
+
+	// The ping interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	PingInterval int64 `json:"PingInterval,omitempty"`
+
+	// The snapshot interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
+}
+
+// Validate validates this endpoints endpoint update payload edge
+func (m *EndpointsEndpointUpdatePayloadEdge) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this endpoints endpoint update payload edge based on context it is used
+func (m *EndpointsEndpointUpdatePayloadEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *EndpointsEndpointUpdatePayloadEdge) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *EndpointsEndpointUpdatePayloadEdge) UnmarshalBinary(b []byte) error {
+	var res EndpointsEndpointUpdatePayloadEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

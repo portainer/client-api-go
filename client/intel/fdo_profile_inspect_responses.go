@@ -48,14 +48,44 @@ func NewFdoProfileInspectOK() *FdoProfileInspectOK {
 	return &FdoProfileInspectOK{}
 }
 
-/* FdoProfileInspectOK describes a response with status code 200, with default header values.
+/*
+FdoProfileInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type FdoProfileInspectOK struct {
 }
 
+// IsSuccess returns true when this fdo profile inspect o k response has a 2xx status code
+func (o *FdoProfileInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this fdo profile inspect o k response has a 3xx status code
+func (o *FdoProfileInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo profile inspect o k response has a 4xx status code
+func (o *FdoProfileInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fdo profile inspect o k response has a 5xx status code
+func (o *FdoProfileInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo profile inspect o k response a status code equal to that given
+func (o *FdoProfileInspectOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *FdoProfileInspectOK) Error() string {
+	return fmt.Sprintf("[GET /fdo/profiles/{id}][%d] fdoProfileInspectOK ", 200)
+}
+
+func (o *FdoProfileInspectOK) String() string {
 	return fmt.Sprintf("[GET /fdo/profiles/{id}][%d] fdoProfileInspectOK ", 200)
 }
 
@@ -69,14 +99,44 @@ func NewFdoProfileInspectBadRequest() *FdoProfileInspectBadRequest {
 	return &FdoProfileInspectBadRequest{}
 }
 
-/* FdoProfileInspectBadRequest describes a response with status code 400, with default header values.
+/*
+FdoProfileInspectBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type FdoProfileInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this fdo profile inspect bad request response has a 2xx status code
+func (o *FdoProfileInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo profile inspect bad request response has a 3xx status code
+func (o *FdoProfileInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo profile inspect bad request response has a 4xx status code
+func (o *FdoProfileInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this fdo profile inspect bad request response has a 5xx status code
+func (o *FdoProfileInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo profile inspect bad request response a status code equal to that given
+func (o *FdoProfileInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *FdoProfileInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /fdo/profiles/{id}][%d] fdoProfileInspectBadRequest ", 400)
+}
+
+func (o *FdoProfileInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /fdo/profiles/{id}][%d] fdoProfileInspectBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewFdoProfileInspectInternalServerError() *FdoProfileInspectInternalServerE
 	return &FdoProfileInspectInternalServerError{}
 }
 
-/* FdoProfileInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+FdoProfileInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type FdoProfileInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this fdo profile inspect internal server error response has a 2xx status code
+func (o *FdoProfileInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo profile inspect internal server error response has a 3xx status code
+func (o *FdoProfileInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo profile inspect internal server error response has a 4xx status code
+func (o *FdoProfileInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fdo profile inspect internal server error response has a 5xx status code
+func (o *FdoProfileInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this fdo profile inspect internal server error response a status code equal to that given
+func (o *FdoProfileInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *FdoProfileInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /fdo/profiles/{id}][%d] fdoProfileInspectInternalServerError ", 500)
+}
+
+func (o *FdoProfileInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /fdo/profiles/{id}][%d] fdoProfileInspectInternalServerError ", 500)
 }
 

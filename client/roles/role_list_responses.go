@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // RoleListReader is a Reader for the RoleList structure.
@@ -45,18 +45,49 @@ func NewRoleListOK() *RoleListOK {
 	return &RoleListOK{}
 }
 
-/* RoleListOK describes a response with status code 200, with default header values.
+/*
+RoleListOK describes a response with status code 200, with default header values.
 
 Success
 */
 type RoleListOK struct {
-	Payload []*models.PortainerRole
+	Payload []*models.PortainereeRole
+}
+
+// IsSuccess returns true when this role list o k response has a 2xx status code
+func (o *RoleListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this role list o k response has a 3xx status code
+func (o *RoleListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this role list o k response has a 4xx status code
+func (o *RoleListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this role list o k response has a 5xx status code
+func (o *RoleListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this role list o k response a status code equal to that given
+func (o *RoleListOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *RoleListOK) Error() string {
 	return fmt.Sprintf("[GET /roles][%d] roleListOK  %+v", 200, o.Payload)
 }
-func (o *RoleListOK) GetPayload() []*models.PortainerRole {
+
+func (o *RoleListOK) String() string {
+	return fmt.Sprintf("[GET /roles][%d] roleListOK  %+v", 200, o.Payload)
+}
+
+func (o *RoleListOK) GetPayload() []*models.PortainereeRole {
 	return o.Payload
 }
 
@@ -75,14 +106,44 @@ func NewRoleListInternalServerError() *RoleListInternalServerError {
 	return &RoleListInternalServerError{}
 }
 
-/* RoleListInternalServerError describes a response with status code 500, with default header values.
+/*
+RoleListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type RoleListInternalServerError struct {
 }
 
+// IsSuccess returns true when this role list internal server error response has a 2xx status code
+func (o *RoleListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this role list internal server error response has a 3xx status code
+func (o *RoleListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this role list internal server error response has a 4xx status code
+func (o *RoleListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this role list internal server error response has a 5xx status code
+func (o *RoleListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this role list internal server error response a status code equal to that given
+func (o *RoleListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *RoleListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /roles][%d] roleListInternalServerError ", 500)
+}
+
+func (o *RoleListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /roles][%d] roleListInternalServerError ", 500)
 }
 

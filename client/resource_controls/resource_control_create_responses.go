@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // ResourceControlCreateReader is a Reader for the ResourceControlCreate structure.
@@ -57,24 +57,55 @@ func NewResourceControlCreateOK() *ResourceControlCreateOK {
 	return &ResourceControlCreateOK{}
 }
 
-/* ResourceControlCreateOK describes a response with status code 200, with default header values.
+/*
+ResourceControlCreateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type ResourceControlCreateOK struct {
-	Payload *models.PortainerResourceControl
+	Payload *models.PortainereeResourceControl
+}
+
+// IsSuccess returns true when this resource control create o k response has a 2xx status code
+func (o *ResourceControlCreateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this resource control create o k response has a 3xx status code
+func (o *ResourceControlCreateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control create o k response has a 4xx status code
+func (o *ResourceControlCreateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this resource control create o k response has a 5xx status code
+func (o *ResourceControlCreateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control create o k response a status code equal to that given
+func (o *ResourceControlCreateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *ResourceControlCreateOK) Error() string {
 	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateOK  %+v", 200, o.Payload)
 }
-func (o *ResourceControlCreateOK) GetPayload() *models.PortainerResourceControl {
+
+func (o *ResourceControlCreateOK) String() string {
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateOK  %+v", 200, o.Payload)
+}
+
+func (o *ResourceControlCreateOK) GetPayload() *models.PortainereeResourceControl {
 	return o.Payload
 }
 
 func (o *ResourceControlCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerResourceControl)
+	o.Payload = new(models.PortainereeResourceControl)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewResourceControlCreateBadRequest() *ResourceControlCreateBadRequest {
 	return &ResourceControlCreateBadRequest{}
 }
 
-/* ResourceControlCreateBadRequest describes a response with status code 400, with default header values.
+/*
+ResourceControlCreateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type ResourceControlCreateBadRequest struct {
 }
 
+// IsSuccess returns true when this resource control create bad request response has a 2xx status code
+func (o *ResourceControlCreateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control create bad request response has a 3xx status code
+func (o *ResourceControlCreateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control create bad request response has a 4xx status code
+func (o *ResourceControlCreateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this resource control create bad request response has a 5xx status code
+func (o *ResourceControlCreateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control create bad request response a status code equal to that given
+func (o *ResourceControlCreateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ResourceControlCreateBadRequest) Error() string {
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateBadRequest ", 400)
+}
+
+func (o *ResourceControlCreateBadRequest) String() string {
 	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewResourceControlCreateConflict() *ResourceControlCreateConflict {
 	return &ResourceControlCreateConflict{}
 }
 
-/* ResourceControlCreateConflict describes a response with status code 409, with default header values.
+/*
+ResourceControlCreateConflict describes a response with status code 409, with default header values.
 
 Resource control already exists
 */
 type ResourceControlCreateConflict struct {
 }
 
+// IsSuccess returns true when this resource control create conflict response has a 2xx status code
+func (o *ResourceControlCreateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control create conflict response has a 3xx status code
+func (o *ResourceControlCreateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control create conflict response has a 4xx status code
+func (o *ResourceControlCreateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this resource control create conflict response has a 5xx status code
+func (o *ResourceControlCreateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control create conflict response a status code equal to that given
+func (o *ResourceControlCreateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *ResourceControlCreateConflict) Error() string {
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateConflict ", 409)
+}
+
+func (o *ResourceControlCreateConflict) String() string {
 	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateConflict ", 409)
 }
 
@@ -131,14 +222,44 @@ func NewResourceControlCreateInternalServerError() *ResourceControlCreateInterna
 	return &ResourceControlCreateInternalServerError{}
 }
 
-/* ResourceControlCreateInternalServerError describes a response with status code 500, with default header values.
+/*
+ResourceControlCreateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type ResourceControlCreateInternalServerError struct {
 }
 
+// IsSuccess returns true when this resource control create internal server error response has a 2xx status code
+func (o *ResourceControlCreateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control create internal server error response has a 3xx status code
+func (o *ResourceControlCreateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control create internal server error response has a 4xx status code
+func (o *ResourceControlCreateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this resource control create internal server error response has a 5xx status code
+func (o *ResourceControlCreateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this resource control create internal server error response a status code equal to that given
+func (o *ResourceControlCreateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ResourceControlCreateInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateInternalServerError ", 500)
+}
+
+func (o *ResourceControlCreateInternalServerError) String() string {
 	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateInternalServerError ", 500)
 }
 

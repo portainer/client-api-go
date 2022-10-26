@@ -53,10 +53,12 @@ func NewEndpointDeleteParamsWithHTTPClient(client *http.Client) *EndpointDeleteP
 	}
 }
 
-/* EndpointDeleteParams contains all the parameters to send to the API endpoint
-   for the endpoint delete operation.
+/*
+EndpointDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint delete operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointDeleteParams struct {
 

@@ -54,14 +54,44 @@ func NewEdgeJobTasksCollectNoContent() *EdgeJobTasksCollectNoContent {
 	return &EdgeJobTasksCollectNoContent{}
 }
 
-/* EdgeJobTasksCollectNoContent describes a response with status code 204, with default header values.
+/*
+EdgeJobTasksCollectNoContent describes a response with status code 204, with default header values.
 
-EdgeJobTasksCollectNoContent edge job tasks collect no content
+No Content
 */
 type EdgeJobTasksCollectNoContent struct {
 }
 
+// IsSuccess returns true when this edge job tasks collect no content response has a 2xx status code
+func (o *EdgeJobTasksCollectNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge job tasks collect no content response has a 3xx status code
+func (o *EdgeJobTasksCollectNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job tasks collect no content response has a 4xx status code
+func (o *EdgeJobTasksCollectNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job tasks collect no content response has a 5xx status code
+func (o *EdgeJobTasksCollectNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job tasks collect no content response a status code equal to that given
+func (o *EdgeJobTasksCollectNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EdgeJobTasksCollectNoContent) Error() string {
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectNoContent ", 204)
+}
+
+func (o *EdgeJobTasksCollectNoContent) String() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewEdgeJobTasksCollectBadRequest() *EdgeJobTasksCollectBadRequest {
 	return &EdgeJobTasksCollectBadRequest{}
 }
 
-/* EdgeJobTasksCollectBadRequest describes a response with status code 400, with default header values.
+/*
+EdgeJobTasksCollectBadRequest describes a response with status code 400, with default header values.
 
-EdgeJobTasksCollectBadRequest edge job tasks collect bad request
+Bad Request
 */
 type EdgeJobTasksCollectBadRequest struct {
 }
 
+// IsSuccess returns true when this edge job tasks collect bad request response has a 2xx status code
+func (o *EdgeJobTasksCollectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job tasks collect bad request response has a 3xx status code
+func (o *EdgeJobTasksCollectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job tasks collect bad request response has a 4xx status code
+func (o *EdgeJobTasksCollectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge job tasks collect bad request response has a 5xx status code
+func (o *EdgeJobTasksCollectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job tasks collect bad request response a status code equal to that given
+func (o *EdgeJobTasksCollectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EdgeJobTasksCollectBadRequest) Error() string {
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectBadRequest ", 400)
+}
+
+func (o *EdgeJobTasksCollectBadRequest) String() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewEdgeJobTasksCollectInternalServerError() *EdgeJobTasksCollectInternalSer
 	return &EdgeJobTasksCollectInternalServerError{}
 }
 
-/* EdgeJobTasksCollectInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeJobTasksCollectInternalServerError describes a response with status code 500, with default header values.
 
-EdgeJobTasksCollectInternalServerError edge job tasks collect internal server error
+Internal Server Error
 */
 type EdgeJobTasksCollectInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge job tasks collect internal server error response has a 2xx status code
+func (o *EdgeJobTasksCollectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job tasks collect internal server error response has a 3xx status code
+func (o *EdgeJobTasksCollectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job tasks collect internal server error response has a 4xx status code
+func (o *EdgeJobTasksCollectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job tasks collect internal server error response has a 5xx status code
+func (o *EdgeJobTasksCollectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job tasks collect internal server error response a status code equal to that given
+func (o *EdgeJobTasksCollectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeJobTasksCollectInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectInternalServerError ", 500)
+}
+
+func (o *EdgeJobTasksCollectInternalServerError) String() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectInternalServerError ", 500)
 }
 
@@ -117,14 +207,44 @@ func NewEdgeJobTasksCollectServiceUnavailable() *EdgeJobTasksCollectServiceUnava
 	return &EdgeJobTasksCollectServiceUnavailable{}
 }
 
-/* EdgeJobTasksCollectServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeJobTasksCollectServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeJobTasksCollectServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge job tasks collect service unavailable response has a 2xx status code
+func (o *EdgeJobTasksCollectServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job tasks collect service unavailable response has a 3xx status code
+func (o *EdgeJobTasksCollectServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job tasks collect service unavailable response has a 4xx status code
+func (o *EdgeJobTasksCollectServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job tasks collect service unavailable response has a 5xx status code
+func (o *EdgeJobTasksCollectServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job tasks collect service unavailable response a status code equal to that given
+func (o *EdgeJobTasksCollectServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeJobTasksCollectServiceUnavailable) Error() string {
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectServiceUnavailable ", 503)
+}
+
+func (o *EdgeJobTasksCollectServiceUnavailable) String() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectServiceUnavailable ", 503)
 }
 

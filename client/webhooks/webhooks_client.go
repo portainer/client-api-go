@@ -44,9 +44,9 @@ type ClientService interface {
 }
 
 /*
-  DeleteWebhooksID deletes a webhook
+DeleteWebhooksID deletes a webhook
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) DeleteWebhooksID(params *DeleteWebhooksIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteWebhooksIDAccepted, error) {
 	// TODO: Validate the params before sending
@@ -85,9 +85,9 @@ func (a *Client) DeleteWebhooksID(params *DeleteWebhooksIDParams, authInfo runti
 }
 
 /*
-  GetWebhooks lists webhooks
+GetWebhooks lists webhooks
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) GetWebhooks(params *GetWebhooksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebhooksOK, error) {
 	// TODO: Validate the params before sending
@@ -126,9 +126,9 @@ func (a *Client) GetWebhooks(params *GetWebhooksParams, authInfo runtime.ClientA
 }
 
 /*
-  PostWebhooks creates a webhook
+PostWebhooks creates a webhook
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) PostWebhooks(params *PostWebhooksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostWebhooksOK, error) {
 	// TODO: Validate the params before sending
@@ -167,9 +167,10 @@ func (a *Client) PostWebhooks(params *PostWebhooksParams, authInfo runtime.Clien
 }
 
 /*
-  PostWebhooksToken executes a webhook
+	PostWebhooksToken executes a webhook
 
-  Acts on a passed in token UUID to restart the docker service
+	Acts on a passed in token UUID to restart the docker service
+
 **Access policy**: public
 */
 func (a *Client) PostWebhooksToken(params *PostWebhooksTokenParams, opts ...ClientOption) (*PostWebhooksTokenAccepted, error) {
@@ -208,9 +209,9 @@ func (a *Client) PostWebhooksToken(params *PostWebhooksTokenParams, opts ...Clie
 }
 
 /*
-  PutWebhooksID updates a webhook
+PutWebhooksID updates a webhook
 
-  **Access policy**: authenticated
+**Access policy**: authenticated
 */
 func (a *Client) PutWebhooksID(params *PutWebhooksIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutWebhooksIDOK, error) {
 	// TODO: Validate the params before sending

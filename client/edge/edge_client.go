@@ -30,17 +30,63 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	GetEndpointsIDEdgeGenerateKey(params *GetEndpointsIDEdgeGenerateKeyParams, opts ...ClientOption) (*GetEndpointsIDEdgeGenerateKeyOK, error)
+
 	GetEndpointsIDEdgeStacksStackID(params *GetEndpointsIDEdgeStacksStackIDParams, opts ...ClientOption) (*GetEndpointsIDEdgeStacksStackIDOK, error)
 
 	PostEndpointsIDEdgeJobsJobIDLogs(params *PostEndpointsIDEdgeJobsJobIDLogsParams, opts ...ClientOption) (*PostEndpointsIDEdgeJobsJobIDLogsOK, error)
+
+	PostEndpointsIDEdgeTrust(params *PostEndpointsIDEdgeTrustParams, opts ...ClientOption) (*PostEndpointsIDEdgeTrustNoContent, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  GetEndpointsIDEdgeStacksStackID inspects an edge stack for an environment endpoint
+	GetEndpointsIDEdgeGenerateKey generates an edge key
 
-  **Access policy**: public
+	Generates a general edge key
+
+**Access policy**: admin
+*/
+func (a *Client) GetEndpointsIDEdgeGenerateKey(params *GetEndpointsIDEdgeGenerateKeyParams, opts ...ClientOption) (*GetEndpointsIDEdgeGenerateKeyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetEndpointsIDEdgeGenerateKeyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetEndpointsIDEdgeGenerateKey",
+		Method:             "GET",
+		PathPattern:        "/endpoints/{id}/edge/generate-key",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetEndpointsIDEdgeGenerateKeyReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetEndpointsIDEdgeGenerateKeyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetEndpointsIDEdgeGenerateKey: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetEndpointsIDEdgeStacksStackID inspects an edge stack for an environment endpoint
+
+**Access policy**: public
 */
 func (a *Client) GetEndpointsIDEdgeStacksStackID(params *GetEndpointsIDEdgeStacksStackIDParams, opts ...ClientOption) (*GetEndpointsIDEdgeStacksStackIDOK, error) {
 	// TODO: Validate the params before sending
@@ -78,9 +124,9 @@ func (a *Client) GetEndpointsIDEdgeStacksStackID(params *GetEndpointsIDEdgeStack
 }
 
 /*
-  PostEndpointsIDEdgeJobsJobIDLogs inspects an edge job log
+PostEndpointsIDEdgeJobsJobIDLogs inspects an edge job log
 
-  **Access policy**: public
+**Access policy**: public
 */
 func (a *Client) PostEndpointsIDEdgeJobsJobIDLogs(params *PostEndpointsIDEdgeJobsJobIDLogsParams, opts ...ClientOption) (*PostEndpointsIDEdgeJobsJobIDLogsOK, error) {
 	// TODO: Validate the params before sending
@@ -114,6 +160,46 @@ func (a *Client) PostEndpointsIDEdgeJobsJobIDLogs(params *PostEndpointsIDEdgeJob
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostEndpointsIDEdgeJobsJobIDLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostEndpointsIDEdgeTrust trusts an edge device
+
+**Access policy**: admin
+*/
+func (a *Client) PostEndpointsIDEdgeTrust(params *PostEndpointsIDEdgeTrustParams, opts ...ClientOption) (*PostEndpointsIDEdgeTrustNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostEndpointsIDEdgeTrustParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostEndpointsIDEdgeTrust",
+		Method:             "POST",
+		PathPattern:        "/endpoints/{id}/edge/trust",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PostEndpointsIDEdgeTrustReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostEndpointsIDEdgeTrustNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostEndpointsIDEdgeTrust: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

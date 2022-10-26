@@ -54,14 +54,44 @@ func NewCreateProfileOK() *CreateProfileOK {
 	return &CreateProfileOK{}
 }
 
-/* CreateProfileOK describes a response with status code 200, with default header values.
+/*
+CreateProfileOK describes a response with status code 200, with default header values.
 
 Success
 */
 type CreateProfileOK struct {
 }
 
+// IsSuccess returns true when this create profile o k response has a 2xx status code
+func (o *CreateProfileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create profile o k response has a 3xx status code
+func (o *CreateProfileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create profile o k response has a 4xx status code
+func (o *CreateProfileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create profile o k response has a 5xx status code
+func (o *CreateProfileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create profile o k response a status code equal to that given
+func (o *CreateProfileOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateProfileOK) Error() string {
+	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileOK ", 200)
+}
+
+func (o *CreateProfileOK) String() string {
 	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileOK ", 200)
 }
 
@@ -75,14 +105,44 @@ func NewCreateProfileBadRequest() *CreateProfileBadRequest {
 	return &CreateProfileBadRequest{}
 }
 
-/* CreateProfileBadRequest describes a response with status code 400, with default header values.
+/*
+CreateProfileBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type CreateProfileBadRequest struct {
 }
 
+// IsSuccess returns true when this create profile bad request response has a 2xx status code
+func (o *CreateProfileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create profile bad request response has a 3xx status code
+func (o *CreateProfileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create profile bad request response has a 4xx status code
+func (o *CreateProfileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create profile bad request response has a 5xx status code
+func (o *CreateProfileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create profile bad request response a status code equal to that given
+func (o *CreateProfileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CreateProfileBadRequest) Error() string {
+	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileBadRequest ", 400)
+}
+
+func (o *CreateProfileBadRequest) String() string {
 	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewCreateProfileConflict() *CreateProfileConflict {
 	return &CreateProfileConflict{}
 }
 
-/* CreateProfileConflict describes a response with status code 409, with default header values.
+/*
+CreateProfileConflict describes a response with status code 409, with default header values.
 
 Profile name already exists
 */
 type CreateProfileConflict struct {
 }
 
+// IsSuccess returns true when this create profile conflict response has a 2xx status code
+func (o *CreateProfileConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create profile conflict response has a 3xx status code
+func (o *CreateProfileConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create profile conflict response has a 4xx status code
+func (o *CreateProfileConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create profile conflict response has a 5xx status code
+func (o *CreateProfileConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create profile conflict response a status code equal to that given
+func (o *CreateProfileConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *CreateProfileConflict) Error() string {
+	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileConflict ", 409)
+}
+
+func (o *CreateProfileConflict) String() string {
 	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileConflict ", 409)
 }
 
@@ -117,14 +207,44 @@ func NewCreateProfileInternalServerError() *CreateProfileInternalServerError {
 	return &CreateProfileInternalServerError{}
 }
 
-/* CreateProfileInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateProfileInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type CreateProfileInternalServerError struct {
 }
 
+// IsSuccess returns true when this create profile internal server error response has a 2xx status code
+func (o *CreateProfileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create profile internal server error response has a 3xx status code
+func (o *CreateProfileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create profile internal server error response has a 4xx status code
+func (o *CreateProfileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create profile internal server error response has a 5xx status code
+func (o *CreateProfileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create profile internal server error response a status code equal to that given
+func (o *CreateProfileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CreateProfileInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileInternalServerError ", 500)
+}
+
+func (o *CreateProfileInternalServerError) String() string {
 	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileInternalServerError ", 500)
 }
 

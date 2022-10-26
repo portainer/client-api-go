@@ -20,10 +20,13 @@ import (
 type StacksStackGitUpdatePayload struct {
 
 	// auto update
-	AutoUpdate *PortainerStackAutoUpdate `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
 
 	// env
-	Env []*PortainerPair `json:"env"`
+	Env []*PortainereePair `json:"env"`
+
+	// prune
+	Prune bool `json:"prune,omitempty"`
 
 	// repository authentication
 	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`

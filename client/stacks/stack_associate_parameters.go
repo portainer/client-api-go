@@ -53,10 +53,12 @@ func NewStackAssociateParamsWithHTTPClient(client *http.Client) *StackAssociateP
 	}
 }
 
-/* StackAssociateParams contains all the parameters to send to the API endpoint
-   for the stack associate operation.
+/*
+StackAssociateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stack associate operation.
+
+	Typically these are written to a http.Request.
 */
 type StackAssociateParams struct {
 

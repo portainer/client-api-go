@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // CustomTemplateInspectReader is a Reader for the CustomTemplateInspect structure.
@@ -57,24 +57,55 @@ func NewCustomTemplateInspectOK() *CustomTemplateInspectOK {
 	return &CustomTemplateInspectOK{}
 }
 
-/* CustomTemplateInspectOK describes a response with status code 200, with default header values.
+/*
+CustomTemplateInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type CustomTemplateInspectOK struct {
-	Payload *models.PortainerCustomTemplate
+	Payload *models.PortainereeCustomTemplate
+}
+
+// IsSuccess returns true when this custom template inspect o k response has a 2xx status code
+func (o *CustomTemplateInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this custom template inspect o k response has a 3xx status code
+func (o *CustomTemplateInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template inspect o k response has a 4xx status code
+func (o *CustomTemplateInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this custom template inspect o k response has a 5xx status code
+func (o *CustomTemplateInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template inspect o k response a status code equal to that given
+func (o *CustomTemplateInspectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *CustomTemplateInspectOK) Error() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectOK  %+v", 200, o.Payload)
 }
-func (o *CustomTemplateInspectOK) GetPayload() *models.PortainerCustomTemplate {
+
+func (o *CustomTemplateInspectOK) String() string {
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectOK  %+v", 200, o.Payload)
+}
+
+func (o *CustomTemplateInspectOK) GetPayload() *models.PortainereeCustomTemplate {
 	return o.Payload
 }
 
 func (o *CustomTemplateInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerCustomTemplate)
+	o.Payload = new(models.PortainereeCustomTemplate)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewCustomTemplateInspectBadRequest() *CustomTemplateInspectBadRequest {
 	return &CustomTemplateInspectBadRequest{}
 }
 
-/* CustomTemplateInspectBadRequest describes a response with status code 400, with default header values.
+/*
+CustomTemplateInspectBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type CustomTemplateInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this custom template inspect bad request response has a 2xx status code
+func (o *CustomTemplateInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template inspect bad request response has a 3xx status code
+func (o *CustomTemplateInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template inspect bad request response has a 4xx status code
+func (o *CustomTemplateInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this custom template inspect bad request response has a 5xx status code
+func (o *CustomTemplateInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template inspect bad request response a status code equal to that given
+func (o *CustomTemplateInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CustomTemplateInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectBadRequest ", 400)
+}
+
+func (o *CustomTemplateInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewCustomTemplateInspectNotFound() *CustomTemplateInspectNotFound {
 	return &CustomTemplateInspectNotFound{}
 }
 
-/* CustomTemplateInspectNotFound describes a response with status code 404, with default header values.
+/*
+CustomTemplateInspectNotFound describes a response with status code 404, with default header values.
 
 Template not found
 */
 type CustomTemplateInspectNotFound struct {
 }
 
+// IsSuccess returns true when this custom template inspect not found response has a 2xx status code
+func (o *CustomTemplateInspectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template inspect not found response has a 3xx status code
+func (o *CustomTemplateInspectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template inspect not found response has a 4xx status code
+func (o *CustomTemplateInspectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this custom template inspect not found response has a 5xx status code
+func (o *CustomTemplateInspectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this custom template inspect not found response a status code equal to that given
+func (o *CustomTemplateInspectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *CustomTemplateInspectNotFound) Error() string {
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectNotFound ", 404)
+}
+
+func (o *CustomTemplateInspectNotFound) String() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectNotFound ", 404)
 }
 
@@ -131,14 +222,44 @@ func NewCustomTemplateInspectInternalServerError() *CustomTemplateInspectInterna
 	return &CustomTemplateInspectInternalServerError{}
 }
 
-/* CustomTemplateInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+CustomTemplateInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type CustomTemplateInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this custom template inspect internal server error response has a 2xx status code
+func (o *CustomTemplateInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this custom template inspect internal server error response has a 3xx status code
+func (o *CustomTemplateInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this custom template inspect internal server error response has a 4xx status code
+func (o *CustomTemplateInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this custom template inspect internal server error response has a 5xx status code
+func (o *CustomTemplateInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this custom template inspect internal server error response a status code equal to that given
+func (o *CustomTemplateInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CustomTemplateInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectInternalServerError ", 500)
+}
+
+func (o *CustomTemplateInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectInternalServerError ", 500)
 }
 

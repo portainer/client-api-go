@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // SSLInspectReader is a Reader for the SSLInspect structure.
@@ -57,24 +57,55 @@ func NewSSLInspectOK() *SSLInspectOK {
 	return &SSLInspectOK{}
 }
 
-/* SSLInspectOK describes a response with status code 200, with default header values.
+/*
+SSLInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type SSLInspectOK struct {
-	Payload *models.PortainerSSLSettings
+	Payload *models.PortainereeSSLSettings
+}
+
+// IsSuccess returns true when this s s l inspect o k response has a 2xx status code
+func (o *SSLInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this s s l inspect o k response has a 3xx status code
+func (o *SSLInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s s l inspect o k response has a 4xx status code
+func (o *SSLInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this s s l inspect o k response has a 5xx status code
+func (o *SSLInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this s s l inspect o k response a status code equal to that given
+func (o *SSLInspectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *SSLInspectOK) Error() string {
 	return fmt.Sprintf("[GET /ssl][%d] sSLInspectOK  %+v", 200, o.Payload)
 }
-func (o *SSLInspectOK) GetPayload() *models.PortainerSSLSettings {
+
+func (o *SSLInspectOK) String() string {
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectOK  %+v", 200, o.Payload)
+}
+
+func (o *SSLInspectOK) GetPayload() *models.PortainereeSSLSettings {
 	return o.Payload
 }
 
 func (o *SSLInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerSSLSettings)
+	o.Payload = new(models.PortainereeSSLSettings)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewSSLInspectBadRequest() *SSLInspectBadRequest {
 	return &SSLInspectBadRequest{}
 }
 
-/* SSLInspectBadRequest describes a response with status code 400, with default header values.
+/*
+SSLInspectBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type SSLInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this s s l inspect bad request response has a 2xx status code
+func (o *SSLInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this s s l inspect bad request response has a 3xx status code
+func (o *SSLInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s s l inspect bad request response has a 4xx status code
+func (o *SSLInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this s s l inspect bad request response has a 5xx status code
+func (o *SSLInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this s s l inspect bad request response a status code equal to that given
+func (o *SSLInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *SSLInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectBadRequest ", 400)
+}
+
+func (o *SSLInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /ssl][%d] sSLInspectBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewSSLInspectForbidden() *SSLInspectForbidden {
 	return &SSLInspectForbidden{}
 }
 
-/* SSLInspectForbidden describes a response with status code 403, with default header values.
+/*
+SSLInspectForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type SSLInspectForbidden struct {
 }
 
+// IsSuccess returns true when this s s l inspect forbidden response has a 2xx status code
+func (o *SSLInspectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this s s l inspect forbidden response has a 3xx status code
+func (o *SSLInspectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s s l inspect forbidden response has a 4xx status code
+func (o *SSLInspectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this s s l inspect forbidden response has a 5xx status code
+func (o *SSLInspectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this s s l inspect forbidden response a status code equal to that given
+func (o *SSLInspectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *SSLInspectForbidden) Error() string {
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectForbidden ", 403)
+}
+
+func (o *SSLInspectForbidden) String() string {
 	return fmt.Sprintf("[GET /ssl][%d] sSLInspectForbidden ", 403)
 }
 
@@ -131,14 +222,44 @@ func NewSSLInspectInternalServerError() *SSLInspectInternalServerError {
 	return &SSLInspectInternalServerError{}
 }
 
-/* SSLInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+SSLInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type SSLInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this s s l inspect internal server error response has a 2xx status code
+func (o *SSLInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this s s l inspect internal server error response has a 3xx status code
+func (o *SSLInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s s l inspect internal server error response has a 4xx status code
+func (o *SSLInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this s s l inspect internal server error response has a 5xx status code
+func (o *SSLInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this s s l inspect internal server error response a status code equal to that given
+func (o *SSLInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *SSLInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectInternalServerError ", 500)
+}
+
+func (o *SSLInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /ssl][%d] sSLInspectInternalServerError ", 500)
 }
 

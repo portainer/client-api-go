@@ -48,14 +48,44 @@ func NewPostWebhooksTokenAccepted() *PostWebhooksTokenAccepted {
 	return &PostWebhooksTokenAccepted{}
 }
 
-/* PostWebhooksTokenAccepted describes a response with status code 202, with default header values.
+/*
+PostWebhooksTokenAccepted describes a response with status code 202, with default header values.
 
 Webhook executed
 */
 type PostWebhooksTokenAccepted struct {
 }
 
+// IsSuccess returns true when this post webhooks token accepted response has a 2xx status code
+func (o *PostWebhooksTokenAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post webhooks token accepted response has a 3xx status code
+func (o *PostWebhooksTokenAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post webhooks token accepted response has a 4xx status code
+func (o *PostWebhooksTokenAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post webhooks token accepted response has a 5xx status code
+func (o *PostWebhooksTokenAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post webhooks token accepted response a status code equal to that given
+func (o *PostWebhooksTokenAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
 func (o *PostWebhooksTokenAccepted) Error() string {
+	return fmt.Sprintf("[POST /webhooks/{token}][%d] postWebhooksTokenAccepted ", 202)
+}
+
+func (o *PostWebhooksTokenAccepted) String() string {
 	return fmt.Sprintf("[POST /webhooks/{token}][%d] postWebhooksTokenAccepted ", 202)
 }
 
@@ -69,14 +99,44 @@ func NewPostWebhooksTokenBadRequest() *PostWebhooksTokenBadRequest {
 	return &PostWebhooksTokenBadRequest{}
 }
 
-/* PostWebhooksTokenBadRequest describes a response with status code 400, with default header values.
+/*
+PostWebhooksTokenBadRequest describes a response with status code 400, with default header values.
 
-PostWebhooksTokenBadRequest post webhooks token bad request
+Bad Request
 */
 type PostWebhooksTokenBadRequest struct {
 }
 
+// IsSuccess returns true when this post webhooks token bad request response has a 2xx status code
+func (o *PostWebhooksTokenBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post webhooks token bad request response has a 3xx status code
+func (o *PostWebhooksTokenBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post webhooks token bad request response has a 4xx status code
+func (o *PostWebhooksTokenBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post webhooks token bad request response has a 5xx status code
+func (o *PostWebhooksTokenBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post webhooks token bad request response a status code equal to that given
+func (o *PostWebhooksTokenBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *PostWebhooksTokenBadRequest) Error() string {
+	return fmt.Sprintf("[POST /webhooks/{token}][%d] postWebhooksTokenBadRequest ", 400)
+}
+
+func (o *PostWebhooksTokenBadRequest) String() string {
 	return fmt.Sprintf("[POST /webhooks/{token}][%d] postWebhooksTokenBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewPostWebhooksTokenInternalServerError() *PostWebhooksTokenInternalServerE
 	return &PostWebhooksTokenInternalServerError{}
 }
 
-/* PostWebhooksTokenInternalServerError describes a response with status code 500, with default header values.
+/*
+PostWebhooksTokenInternalServerError describes a response with status code 500, with default header values.
 
-PostWebhooksTokenInternalServerError post webhooks token internal server error
+Internal Server Error
 */
 type PostWebhooksTokenInternalServerError struct {
 }
 
+// IsSuccess returns true when this post webhooks token internal server error response has a 2xx status code
+func (o *PostWebhooksTokenInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post webhooks token internal server error response has a 3xx status code
+func (o *PostWebhooksTokenInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post webhooks token internal server error response has a 4xx status code
+func (o *PostWebhooksTokenInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post webhooks token internal server error response has a 5xx status code
+func (o *PostWebhooksTokenInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post webhooks token internal server error response a status code equal to that given
+func (o *PostWebhooksTokenInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *PostWebhooksTokenInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /webhooks/{token}][%d] postWebhooksTokenInternalServerError ", 500)
+}
+
+func (o *PostWebhooksTokenInternalServerError) String() string {
 	return fmt.Sprintf("[POST /webhooks/{token}][%d] postWebhooksTokenInternalServerError ", 500)
 }
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // TemplateFileReader is a Reader for the TemplateFile structure.
@@ -51,7 +51,8 @@ func NewTemplateFileOK() *TemplateFileOK {
 	return &TemplateFileOK{}
 }
 
-/* TemplateFileOK describes a response with status code 200, with default header values.
+/*
+TemplateFileOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -59,9 +60,39 @@ type TemplateFileOK struct {
 	Payload *models.TemplatesFileResponse
 }
 
+// IsSuccess returns true when this template file o k response has a 2xx status code
+func (o *TemplateFileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this template file o k response has a 3xx status code
+func (o *TemplateFileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this template file o k response has a 4xx status code
+func (o *TemplateFileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this template file o k response has a 5xx status code
+func (o *TemplateFileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this template file o k response a status code equal to that given
+func (o *TemplateFileOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TemplateFileOK) Error() string {
 	return fmt.Sprintf("[POST /templates/file][%d] templateFileOK  %+v", 200, o.Payload)
 }
+
+func (o *TemplateFileOK) String() string {
+	return fmt.Sprintf("[POST /templates/file][%d] templateFileOK  %+v", 200, o.Payload)
+}
+
 func (o *TemplateFileOK) GetPayload() *models.TemplatesFileResponse {
 	return o.Payload
 }
@@ -83,14 +114,44 @@ func NewTemplateFileBadRequest() *TemplateFileBadRequest {
 	return &TemplateFileBadRequest{}
 }
 
-/* TemplateFileBadRequest describes a response with status code 400, with default header values.
+/*
+TemplateFileBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type TemplateFileBadRequest struct {
 }
 
+// IsSuccess returns true when this template file bad request response has a 2xx status code
+func (o *TemplateFileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this template file bad request response has a 3xx status code
+func (o *TemplateFileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this template file bad request response has a 4xx status code
+func (o *TemplateFileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this template file bad request response has a 5xx status code
+func (o *TemplateFileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this template file bad request response a status code equal to that given
+func (o *TemplateFileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *TemplateFileBadRequest) Error() string {
+	return fmt.Sprintf("[POST /templates/file][%d] templateFileBadRequest ", 400)
+}
+
+func (o *TemplateFileBadRequest) String() string {
 	return fmt.Sprintf("[POST /templates/file][%d] templateFileBadRequest ", 400)
 }
 
@@ -104,14 +165,44 @@ func NewTemplateFileInternalServerError() *TemplateFileInternalServerError {
 	return &TemplateFileInternalServerError{}
 }
 
-/* TemplateFileInternalServerError describes a response with status code 500, with default header values.
+/*
+TemplateFileInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TemplateFileInternalServerError struct {
 }
 
+// IsSuccess returns true when this template file internal server error response has a 2xx status code
+func (o *TemplateFileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this template file internal server error response has a 3xx status code
+func (o *TemplateFileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this template file internal server error response has a 4xx status code
+func (o *TemplateFileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this template file internal server error response has a 5xx status code
+func (o *TemplateFileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this template file internal server error response a status code equal to that given
+func (o *TemplateFileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TemplateFileInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /templates/file][%d] templateFileInternalServerError ", 500)
+}
+
+func (o *TemplateFileInternalServerError) String() string {
 	return fmt.Sprintf("[POST /templates/file][%d] templateFileInternalServerError ", 500)
 }
 

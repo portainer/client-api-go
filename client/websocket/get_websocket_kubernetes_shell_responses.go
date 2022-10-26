@@ -54,14 +54,44 @@ func NewGetWebsocketKubernetesShellOK() *GetWebsocketKubernetesShellOK {
 	return &GetWebsocketKubernetesShellOK{}
 }
 
-/* GetWebsocketKubernetesShellOK describes a response with status code 200, with default header values.
+/*
+GetWebsocketKubernetesShellOK describes a response with status code 200, with default header values.
 
 Success
 */
 type GetWebsocketKubernetesShellOK struct {
 }
 
+// IsSuccess returns true when this get websocket kubernetes shell o k response has a 2xx status code
+func (o *GetWebsocketKubernetesShellOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get websocket kubernetes shell o k response has a 3xx status code
+func (o *GetWebsocketKubernetesShellOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket kubernetes shell o k response has a 4xx status code
+func (o *GetWebsocketKubernetesShellOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get websocket kubernetes shell o k response has a 5xx status code
+func (o *GetWebsocketKubernetesShellOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get websocket kubernetes shell o k response a status code equal to that given
+func (o *GetWebsocketKubernetesShellOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetWebsocketKubernetesShellOK) Error() string {
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellOK ", 200)
+}
+
+func (o *GetWebsocketKubernetesShellOK) String() string {
 	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellOK ", 200)
 }
 
@@ -75,14 +105,44 @@ func NewGetWebsocketKubernetesShellBadRequest() *GetWebsocketKubernetesShellBadR
 	return &GetWebsocketKubernetesShellBadRequest{}
 }
 
-/* GetWebsocketKubernetesShellBadRequest describes a response with status code 400, with default header values.
+/*
+GetWebsocketKubernetesShellBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type GetWebsocketKubernetesShellBadRequest struct {
 }
 
+// IsSuccess returns true when this get websocket kubernetes shell bad request response has a 2xx status code
+func (o *GetWebsocketKubernetesShellBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get websocket kubernetes shell bad request response has a 3xx status code
+func (o *GetWebsocketKubernetesShellBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket kubernetes shell bad request response has a 4xx status code
+func (o *GetWebsocketKubernetesShellBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get websocket kubernetes shell bad request response has a 5xx status code
+func (o *GetWebsocketKubernetesShellBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get websocket kubernetes shell bad request response a status code equal to that given
+func (o *GetWebsocketKubernetesShellBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetWebsocketKubernetesShellBadRequest) Error() string {
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellBadRequest ", 400)
+}
+
+func (o *GetWebsocketKubernetesShellBadRequest) String() string {
 	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewGetWebsocketKubernetesShellForbidden() *GetWebsocketKubernetesShellForbi
 	return &GetWebsocketKubernetesShellForbidden{}
 }
 
-/* GetWebsocketKubernetesShellForbidden describes a response with status code 403, with default header values.
+/*
+GetWebsocketKubernetesShellForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type GetWebsocketKubernetesShellForbidden struct {
 }
 
+// IsSuccess returns true when this get websocket kubernetes shell forbidden response has a 2xx status code
+func (o *GetWebsocketKubernetesShellForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get websocket kubernetes shell forbidden response has a 3xx status code
+func (o *GetWebsocketKubernetesShellForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket kubernetes shell forbidden response has a 4xx status code
+func (o *GetWebsocketKubernetesShellForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get websocket kubernetes shell forbidden response has a 5xx status code
+func (o *GetWebsocketKubernetesShellForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get websocket kubernetes shell forbidden response a status code equal to that given
+func (o *GetWebsocketKubernetesShellForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetWebsocketKubernetesShellForbidden) Error() string {
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellForbidden ", 403)
+}
+
+func (o *GetWebsocketKubernetesShellForbidden) String() string {
 	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewGetWebsocketKubernetesShellInternalServerError() *GetWebsocketKubernetes
 	return &GetWebsocketKubernetesShellInternalServerError{}
 }
 
-/* GetWebsocketKubernetesShellInternalServerError describes a response with status code 500, with default header values.
+/*
+GetWebsocketKubernetesShellInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type GetWebsocketKubernetesShellInternalServerError struct {
 }
 
+// IsSuccess returns true when this get websocket kubernetes shell internal server error response has a 2xx status code
+func (o *GetWebsocketKubernetesShellInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get websocket kubernetes shell internal server error response has a 3xx status code
+func (o *GetWebsocketKubernetesShellInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get websocket kubernetes shell internal server error response has a 4xx status code
+func (o *GetWebsocketKubernetesShellInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get websocket kubernetes shell internal server error response has a 5xx status code
+func (o *GetWebsocketKubernetesShellInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get websocket kubernetes shell internal server error response a status code equal to that given
+func (o *GetWebsocketKubernetesShellInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetWebsocketKubernetesShellInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellInternalServerError ", 500)
+}
+
+func (o *GetWebsocketKubernetesShellInternalServerError) String() string {
 	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellInternalServerError ", 500)
 }
 

@@ -52,10 +52,12 @@ func NewRegistryListParamsWithHTTPClient(client *http.Client) *RegistryListParam
 	}
 }
 
-/* RegistryListParams contains all the parameters to send to the API endpoint
-   for the registry list operation.
+/*
+RegistryListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the registry list operation.
+
+	Typically these are written to a http.Request.
 */
 type RegistryListParams struct {
 	timeout    time.Duration

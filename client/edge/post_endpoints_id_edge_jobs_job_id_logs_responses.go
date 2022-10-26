@@ -48,14 +48,44 @@ func NewPostEndpointsIDEdgeJobsJobIDLogsOK() *PostEndpointsIDEdgeJobsJobIDLogsOK
 	return &PostEndpointsIDEdgeJobsJobIDLogsOK{}
 }
 
-/* PostEndpointsIDEdgeJobsJobIDLogsOK describes a response with status code 200, with default header values.
+/*
+PostEndpointsIDEdgeJobsJobIDLogsOK describes a response with status code 200, with default header values.
 
-PostEndpointsIDEdgeJobsJobIDLogsOK post endpoints Id edge jobs job Id logs o k
+OK
 */
 type PostEndpointsIDEdgeJobsJobIDLogsOK struct {
 }
 
+// IsSuccess returns true when this post endpoints Id edge jobs job Id logs o k response has a 2xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post endpoints Id edge jobs job Id logs o k response has a 3xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post endpoints Id edge jobs job Id logs o k response has a 4xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post endpoints Id edge jobs job Id logs o k response has a 5xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post endpoints Id edge jobs job Id logs o k response a status code equal to that given
+func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsOK ", 200)
+}
+
+func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsOK ", 200)
 }
 
@@ -69,14 +99,44 @@ func NewPostEndpointsIDEdgeJobsJobIDLogsBadRequest() *PostEndpointsIDEdgeJobsJob
 	return &PostEndpointsIDEdgeJobsJobIDLogsBadRequest{}
 }
 
-/* PostEndpointsIDEdgeJobsJobIDLogsBadRequest describes a response with status code 400, with default header values.
+/*
+PostEndpointsIDEdgeJobsJobIDLogsBadRequest describes a response with status code 400, with default header values.
 
-PostEndpointsIDEdgeJobsJobIDLogsBadRequest post endpoints Id edge jobs job Id logs bad request
+Bad Request
 */
 type PostEndpointsIDEdgeJobsJobIDLogsBadRequest struct {
 }
 
+// IsSuccess returns true when this post endpoints Id edge jobs job Id logs bad request response has a 2xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post endpoints Id edge jobs job Id logs bad request response has a 3xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post endpoints Id edge jobs job Id logs bad request response has a 4xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post endpoints Id edge jobs job Id logs bad request response has a 5xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post endpoints Id edge jobs job Id logs bad request response a status code equal to that given
+func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsBadRequest ", 400)
+}
+
+func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewPostEndpointsIDEdgeJobsJobIDLogsInternalServerError() *PostEndpointsIDEd
 	return &PostEndpointsIDEdgeJobsJobIDLogsInternalServerError{}
 }
 
-/* PostEndpointsIDEdgeJobsJobIDLogsInternalServerError describes a response with status code 500, with default header values.
+/*
+PostEndpointsIDEdgeJobsJobIDLogsInternalServerError describes a response with status code 500, with default header values.
 
-PostEndpointsIDEdgeJobsJobIDLogsInternalServerError post endpoints Id edge jobs job Id logs internal server error
+Internal Server Error
 */
 type PostEndpointsIDEdgeJobsJobIDLogsInternalServerError struct {
 }
 
+// IsSuccess returns true when this post endpoints Id edge jobs job Id logs internal server error response has a 2xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post endpoints Id edge jobs job Id logs internal server error response has a 3xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post endpoints Id edge jobs job Id logs internal server error response has a 4xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post endpoints Id edge jobs job Id logs internal server error response has a 5xx status code
+func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post endpoints Id edge jobs job Id logs internal server error response a status code equal to that given
+func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsInternalServerError ", 500)
+}
+
+func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsInternalServerError ", 500)
 }
 

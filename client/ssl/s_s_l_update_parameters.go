@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewSSLUpdateParams creates a new SSLUpdateParams object,
@@ -54,10 +54,12 @@ func NewSSLUpdateParamsWithHTTPClient(client *http.Client) *SSLUpdateParams {
 	}
 }
 
-/* SSLUpdateParams contains all the parameters to send to the API endpoint
-   for the s s l update operation.
+/*
+SSLUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the s s l update operation.
+
+	Typically these are written to a http.Request.
 */
 type SSLUpdateParams struct {
 

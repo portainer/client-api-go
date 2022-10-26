@@ -52,10 +52,12 @@ func NewSettingsPublicParamsWithHTTPClient(client *http.Client) *SettingsPublicP
 	}
 }
 
-/* SettingsPublicParams contains all the parameters to send to the API endpoint
-   for the settings public operation.
+/*
+SettingsPublicParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the settings public operation.
+
+	Typically these are written to a http.Request.
 */
 type SettingsPublicParams struct {
 	timeout    time.Duration

@@ -54,14 +54,44 @@ func NewOpenAMTHostInfoOK() *OpenAMTHostInfoOK {
 	return &OpenAMTHostInfoOK{}
 }
 
-/* OpenAMTHostInfoOK describes a response with status code 200, with default header values.
+/*
+OpenAMTHostInfoOK describes a response with status code 200, with default header values.
 
 Success
 */
 type OpenAMTHostInfoOK struct {
 }
 
+// IsSuccess returns true when this open a m t host info o k response has a 2xx status code
+func (o *OpenAMTHostInfoOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this open a m t host info o k response has a 3xx status code
+func (o *OpenAMTHostInfoOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t host info o k response has a 4xx status code
+func (o *OpenAMTHostInfoOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this open a m t host info o k response has a 5xx status code
+func (o *OpenAMTHostInfoOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t host info o k response a status code equal to that given
+func (o *OpenAMTHostInfoOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *OpenAMTHostInfoOK) Error() string {
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoOK ", 200)
+}
+
+func (o *OpenAMTHostInfoOK) String() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoOK ", 200)
 }
 
@@ -75,14 +105,44 @@ func NewOpenAMTHostInfoBadRequest() *OpenAMTHostInfoBadRequest {
 	return &OpenAMTHostInfoBadRequest{}
 }
 
-/* OpenAMTHostInfoBadRequest describes a response with status code 400, with default header values.
+/*
+OpenAMTHostInfoBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type OpenAMTHostInfoBadRequest struct {
 }
 
+// IsSuccess returns true when this open a m t host info bad request response has a 2xx status code
+func (o *OpenAMTHostInfoBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t host info bad request response has a 3xx status code
+func (o *OpenAMTHostInfoBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t host info bad request response has a 4xx status code
+func (o *OpenAMTHostInfoBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this open a m t host info bad request response has a 5xx status code
+func (o *OpenAMTHostInfoBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t host info bad request response a status code equal to that given
+func (o *OpenAMTHostInfoBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *OpenAMTHostInfoBadRequest) Error() string {
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoBadRequest ", 400)
+}
+
+func (o *OpenAMTHostInfoBadRequest) String() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewOpenAMTHostInfoForbidden() *OpenAMTHostInfoForbidden {
 	return &OpenAMTHostInfoForbidden{}
 }
 
-/* OpenAMTHostInfoForbidden describes a response with status code 403, with default header values.
+/*
+OpenAMTHostInfoForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type OpenAMTHostInfoForbidden struct {
 }
 
+// IsSuccess returns true when this open a m t host info forbidden response has a 2xx status code
+func (o *OpenAMTHostInfoForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t host info forbidden response has a 3xx status code
+func (o *OpenAMTHostInfoForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t host info forbidden response has a 4xx status code
+func (o *OpenAMTHostInfoForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this open a m t host info forbidden response has a 5xx status code
+func (o *OpenAMTHostInfoForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t host info forbidden response a status code equal to that given
+func (o *OpenAMTHostInfoForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *OpenAMTHostInfoForbidden) Error() string {
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoForbidden ", 403)
+}
+
+func (o *OpenAMTHostInfoForbidden) String() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewOpenAMTHostInfoInternalServerError() *OpenAMTHostInfoInternalServerError
 	return &OpenAMTHostInfoInternalServerError{}
 }
 
-/* OpenAMTHostInfoInternalServerError describes a response with status code 500, with default header values.
+/*
+OpenAMTHostInfoInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type OpenAMTHostInfoInternalServerError struct {
 }
 
+// IsSuccess returns true when this open a m t host info internal server error response has a 2xx status code
+func (o *OpenAMTHostInfoInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t host info internal server error response has a 3xx status code
+func (o *OpenAMTHostInfoInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t host info internal server error response has a 4xx status code
+func (o *OpenAMTHostInfoInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this open a m t host info internal server error response has a 5xx status code
+func (o *OpenAMTHostInfoInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this open a m t host info internal server error response a status code equal to that given
+func (o *OpenAMTHostInfoInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *OpenAMTHostInfoInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoInternalServerError ", 500)
+}
+
+func (o *OpenAMTHostInfoInternalServerError) String() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoInternalServerError ", 500)
 }
 

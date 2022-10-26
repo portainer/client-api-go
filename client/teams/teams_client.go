@@ -44,9 +44,10 @@ type ClientService interface {
 }
 
 /*
-  TeamCreate creates a new team
+	TeamCreate creates a new team
 
-  Create a new team.
+	Create a new team.
+
 **Access policy**: administrator
 */
 func (a *Client) TeamCreate(params *TeamCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamCreateOK, error) {
@@ -86,9 +87,10 @@ func (a *Client) TeamCreate(params *TeamCreateParams, authInfo runtime.ClientAut
 }
 
 /*
-  TeamDelete removes a team
+	TeamDelete removes a team
 
-  Remove a team.
+	Remove a team.
+
 **Access policy**: administrator
 */
 func (a *Client) TeamDelete(params *TeamDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamDeleteNoContent, error) {
@@ -128,10 +130,11 @@ func (a *Client) TeamDelete(params *TeamDeleteParams, authInfo runtime.ClientAut
 }
 
 /*
-  TeamInspect inspects a team
+	TeamInspect inspects a team
 
-  Retrieve details about a team. Access is only available for administrator and leaders of that team.
-**Access policy**: administrator
+	Retrieve details about a team. Access is only available for administrator and leaders of that team.
+
+**Access policy**: administrator or team leader
 */
 func (a *Client) TeamInspect(params *TeamInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamInspectOK, *TeamInspectNoContent, error) {
 	// TODO: Validate the params before sending
@@ -171,9 +174,10 @@ func (a *Client) TeamInspect(params *TeamInspectParams, authInfo runtime.ClientA
 }
 
 /*
-  TeamList lists teams
+	TeamList lists teams
 
-  List teams. For non-administrator users, will only list the teams they are member of.
+	List teams. For non-administrator users, will only list the teams they are member of.
+
 **Access policy**: restricted
 */
 func (a *Client) TeamList(params *TeamListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamListOK, error) {
@@ -213,9 +217,10 @@ func (a *Client) TeamList(params *TeamListParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  TeamUpdate updates a team
+	TeamUpdate updates a team
 
-  Update a team.
+	Update a team.
+
 **Access policy**: administrator
 */
 func (a *Client) TeamUpdate(params *TeamUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamUpdateOK, *TeamUpdateNoContent, error) {

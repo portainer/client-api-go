@@ -52,16 +52,18 @@ func NewPostEndpointsIDEdgeJobsJobIDLogsParamsWithHTTPClient(client *http.Client
 	}
 }
 
-/* PostEndpointsIDEdgeJobsJobIDLogsParams contains all the parameters to send to the API endpoint
-   for the post endpoints ID edge jobs job ID logs operation.
+/*
+PostEndpointsIDEdgeJobsJobIDLogsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the post endpoints ID edge jobs job ID logs operation.
+
+	Typically these are written to a http.Request.
 */
 type PostEndpointsIDEdgeJobsJobIDLogsParams struct {
 
 	/* ID.
 
-	   environment(endpoint) Id
+	   Environment(Endpoint) Id
 	*/
 	ID string
 

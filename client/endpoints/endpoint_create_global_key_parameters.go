@@ -52,10 +52,12 @@ func NewEndpointCreateGlobalKeyParamsWithHTTPClient(client *http.Client) *Endpoi
 	}
 }
 
-/* EndpointCreateGlobalKeyParams contains all the parameters to send to the API endpoint
-   for the endpoint create global key operation.
+/*
+EndpointCreateGlobalKeyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint create global key operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointCreateGlobalKeyParams struct {
 	timeout    time.Duration

@@ -53,10 +53,12 @@ func NewUserGetAPIKeysParamsWithHTTPClient(client *http.Client) *UserGetAPIKeysP
 	}
 }
 
-/* UserGetAPIKeysParams contains all the parameters to send to the API endpoint
-   for the user get API keys operation.
+/*
+UserGetAPIKeysParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user get API keys operation.
+
+	Typically these are written to a http.Request.
 */
 type UserGetAPIKeysParams struct {
 

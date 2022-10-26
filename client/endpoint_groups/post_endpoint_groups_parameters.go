@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewPostEndpointGroupsParams creates a new PostEndpointGroupsParams object,
@@ -54,10 +54,12 @@ func NewPostEndpointGroupsParamsWithHTTPClient(client *http.Client) *PostEndpoin
 	}
 }
 
-/* PostEndpointGroupsParams contains all the parameters to send to the API endpoint
-   for the post endpoint groups operation.
+/*
+PostEndpointGroupsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the post endpoint groups operation.
+
+	Typically these are written to a http.Request.
 */
 type PostEndpointGroupsParams struct {
 

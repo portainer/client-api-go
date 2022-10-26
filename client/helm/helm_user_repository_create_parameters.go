@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewHelmUserRepositoryCreateParams creates a new HelmUserRepositoryCreateParams object,
@@ -55,10 +55,12 @@ func NewHelmUserRepositoryCreateParamsWithHTTPClient(client *http.Client) *HelmU
 	}
 }
 
-/* HelmUserRepositoryCreateParams contains all the parameters to send to the API endpoint
-   for the helm user repository create operation.
+/*
+HelmUserRepositoryCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the helm user repository create operation.
+
+	Typically these are written to a http.Request.
 */
 type HelmUserRepositoryCreateParams struct {
 

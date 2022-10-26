@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewUserUpdateParams creates a new UserUpdateParams object,
@@ -55,10 +55,12 @@ func NewUserUpdateParamsWithHTTPClient(client *http.Client) *UserUpdateParams {
 	}
 }
 
-/* UserUpdateParams contains all the parameters to send to the API endpoint
-   for the user update operation.
+/*
+UserUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user update operation.
+
+	Typically these are written to a http.Request.
 */
 type UserUpdateParams struct {
 

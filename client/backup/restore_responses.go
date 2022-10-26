@@ -48,14 +48,44 @@ func NewRestoreOK() *RestoreOK {
 	return &RestoreOK{}
 }
 
-/* RestoreOK describes a response with status code 200, with default header values.
+/*
+RestoreOK describes a response with status code 200, with default header values.
 
 Success
 */
 type RestoreOK struct {
 }
 
+// IsSuccess returns true when this restore o k response has a 2xx status code
+func (o *RestoreOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this restore o k response has a 3xx status code
+func (o *RestoreOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this restore o k response has a 4xx status code
+func (o *RestoreOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this restore o k response has a 5xx status code
+func (o *RestoreOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this restore o k response a status code equal to that given
+func (o *RestoreOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *RestoreOK) Error() string {
+	return fmt.Sprintf("[POST /restore][%d] restoreOK ", 200)
+}
+
+func (o *RestoreOK) String() string {
 	return fmt.Sprintf("[POST /restore][%d] restoreOK ", 200)
 }
 
@@ -69,14 +99,44 @@ func NewRestoreBadRequest() *RestoreBadRequest {
 	return &RestoreBadRequest{}
 }
 
-/* RestoreBadRequest describes a response with status code 400, with default header values.
+/*
+RestoreBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type RestoreBadRequest struct {
 }
 
+// IsSuccess returns true when this restore bad request response has a 2xx status code
+func (o *RestoreBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this restore bad request response has a 3xx status code
+func (o *RestoreBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this restore bad request response has a 4xx status code
+func (o *RestoreBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this restore bad request response has a 5xx status code
+func (o *RestoreBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this restore bad request response a status code equal to that given
+func (o *RestoreBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *RestoreBadRequest) Error() string {
+	return fmt.Sprintf("[POST /restore][%d] restoreBadRequest ", 400)
+}
+
+func (o *RestoreBadRequest) String() string {
 	return fmt.Sprintf("[POST /restore][%d] restoreBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewRestoreInternalServerError() *RestoreInternalServerError {
 	return &RestoreInternalServerError{}
 }
 
-/* RestoreInternalServerError describes a response with status code 500, with default header values.
+/*
+RestoreInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type RestoreInternalServerError struct {
 }
 
+// IsSuccess returns true when this restore internal server error response has a 2xx status code
+func (o *RestoreInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this restore internal server error response has a 3xx status code
+func (o *RestoreInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this restore internal server error response has a 4xx status code
+func (o *RestoreInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this restore internal server error response has a 5xx status code
+func (o *RestoreInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this restore internal server error response a status code equal to that given
+func (o *RestoreInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *RestoreInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /restore][%d] restoreInternalServerError ", 500)
+}
+
+func (o *RestoreInternalServerError) String() string {
 	return fmt.Sprintf("[POST /restore][%d] restoreInternalServerError ", 500)
 }
 

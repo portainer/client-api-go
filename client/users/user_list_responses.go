@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // UserListReader is a Reader for the UserList structure.
@@ -51,18 +51,49 @@ func NewUserListOK() *UserListOK {
 	return &UserListOK{}
 }
 
-/* UserListOK describes a response with status code 200, with default header values.
+/*
+UserListOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UserListOK struct {
-	Payload []*models.PortainerUser
+	Payload []*models.PortainereeUser
+}
+
+// IsSuccess returns true when this user list o k response has a 2xx status code
+func (o *UserListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user list o k response has a 3xx status code
+func (o *UserListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user list o k response has a 4xx status code
+func (o *UserListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user list o k response has a 5xx status code
+func (o *UserListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user list o k response a status code equal to that given
+func (o *UserListOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UserListOK) Error() string {
 	return fmt.Sprintf("[GET /users][%d] userListOK  %+v", 200, o.Payload)
 }
-func (o *UserListOK) GetPayload() []*models.PortainerUser {
+
+func (o *UserListOK) String() string {
+	return fmt.Sprintf("[GET /users][%d] userListOK  %+v", 200, o.Payload)
+}
+
+func (o *UserListOK) GetPayload() []*models.PortainereeUser {
 	return o.Payload
 }
 
@@ -81,14 +112,44 @@ func NewUserListBadRequest() *UserListBadRequest {
 	return &UserListBadRequest{}
 }
 
-/* UserListBadRequest describes a response with status code 400, with default header values.
+/*
+UserListBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type UserListBadRequest struct {
 }
 
+// IsSuccess returns true when this user list bad request response has a 2xx status code
+func (o *UserListBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user list bad request response has a 3xx status code
+func (o *UserListBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user list bad request response has a 4xx status code
+func (o *UserListBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user list bad request response has a 5xx status code
+func (o *UserListBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user list bad request response a status code equal to that given
+func (o *UserListBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UserListBadRequest) Error() string {
+	return fmt.Sprintf("[GET /users][%d] userListBadRequest ", 400)
+}
+
+func (o *UserListBadRequest) String() string {
 	return fmt.Sprintf("[GET /users][%d] userListBadRequest ", 400)
 }
 
@@ -102,14 +163,44 @@ func NewUserListInternalServerError() *UserListInternalServerError {
 	return &UserListInternalServerError{}
 }
 
-/* UserListInternalServerError describes a response with status code 500, with default header values.
+/*
+UserListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type UserListInternalServerError struct {
 }
 
+// IsSuccess returns true when this user list internal server error response has a 2xx status code
+func (o *UserListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user list internal server error response has a 3xx status code
+func (o *UserListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user list internal server error response has a 4xx status code
+func (o *UserListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user list internal server error response has a 5xx status code
+func (o *UserListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this user list internal server error response a status code equal to that given
+func (o *UserListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UserListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /users][%d] userListInternalServerError ", 500)
+}
+
+func (o *UserListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /users][%d] userListInternalServerError ", 500)
 }
 

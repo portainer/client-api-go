@@ -54,14 +54,44 @@ func NewSSLUpdateNoContent() *SSLUpdateNoContent {
 	return &SSLUpdateNoContent{}
 }
 
-/* SSLUpdateNoContent describes a response with status code 204, with default header values.
+/*
+SSLUpdateNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type SSLUpdateNoContent struct {
 }
 
+// IsSuccess returns true when this s s l update no content response has a 2xx status code
+func (o *SSLUpdateNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this s s l update no content response has a 3xx status code
+func (o *SSLUpdateNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s s l update no content response has a 4xx status code
+func (o *SSLUpdateNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this s s l update no content response has a 5xx status code
+func (o *SSLUpdateNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this s s l update no content response a status code equal to that given
+func (o *SSLUpdateNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *SSLUpdateNoContent) Error() string {
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateNoContent ", 204)
+}
+
+func (o *SSLUpdateNoContent) String() string {
 	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewSSLUpdateBadRequest() *SSLUpdateBadRequest {
 	return &SSLUpdateBadRequest{}
 }
 
-/* SSLUpdateBadRequest describes a response with status code 400, with default header values.
+/*
+SSLUpdateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type SSLUpdateBadRequest struct {
 }
 
+// IsSuccess returns true when this s s l update bad request response has a 2xx status code
+func (o *SSLUpdateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this s s l update bad request response has a 3xx status code
+func (o *SSLUpdateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s s l update bad request response has a 4xx status code
+func (o *SSLUpdateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this s s l update bad request response has a 5xx status code
+func (o *SSLUpdateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this s s l update bad request response a status code equal to that given
+func (o *SSLUpdateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *SSLUpdateBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateBadRequest ", 400)
+}
+
+func (o *SSLUpdateBadRequest) String() string {
 	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewSSLUpdateForbidden() *SSLUpdateForbidden {
 	return &SSLUpdateForbidden{}
 }
 
-/* SSLUpdateForbidden describes a response with status code 403, with default header values.
+/*
+SSLUpdateForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type SSLUpdateForbidden struct {
 }
 
+// IsSuccess returns true when this s s l update forbidden response has a 2xx status code
+func (o *SSLUpdateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this s s l update forbidden response has a 3xx status code
+func (o *SSLUpdateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s s l update forbidden response has a 4xx status code
+func (o *SSLUpdateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this s s l update forbidden response has a 5xx status code
+func (o *SSLUpdateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this s s l update forbidden response a status code equal to that given
+func (o *SSLUpdateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *SSLUpdateForbidden) Error() string {
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateForbidden ", 403)
+}
+
+func (o *SSLUpdateForbidden) String() string {
 	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewSSLUpdateInternalServerError() *SSLUpdateInternalServerError {
 	return &SSLUpdateInternalServerError{}
 }
 
-/* SSLUpdateInternalServerError describes a response with status code 500, with default header values.
+/*
+SSLUpdateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type SSLUpdateInternalServerError struct {
 }
 
+// IsSuccess returns true when this s s l update internal server error response has a 2xx status code
+func (o *SSLUpdateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this s s l update internal server error response has a 3xx status code
+func (o *SSLUpdateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this s s l update internal server error response has a 4xx status code
+func (o *SSLUpdateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this s s l update internal server error response has a 5xx status code
+func (o *SSLUpdateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this s s l update internal server error response a status code equal to that given
+func (o *SSLUpdateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *SSLUpdateInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateInternalServerError ", 500)
+}
+
+func (o *SSLUpdateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateInternalServerError ", 500)
 }
 

@@ -54,14 +54,44 @@ func NewWebhookInvokeOK() *WebhookInvokeOK {
 	return &WebhookInvokeOK{}
 }
 
-/* WebhookInvokeOK describes a response with status code 200, with default header values.
+/*
+WebhookInvokeOK describes a response with status code 200, with default header values.
 
 Success
 */
 type WebhookInvokeOK struct {
 }
 
+// IsSuccess returns true when this webhook invoke o k response has a 2xx status code
+func (o *WebhookInvokeOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this webhook invoke o k response has a 3xx status code
+func (o *WebhookInvokeOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this webhook invoke o k response has a 4xx status code
+func (o *WebhookInvokeOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this webhook invoke o k response has a 5xx status code
+func (o *WebhookInvokeOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this webhook invoke o k response a status code equal to that given
+func (o *WebhookInvokeOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *WebhookInvokeOK) Error() string {
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] webhookInvokeOK ", 200)
+}
+
+func (o *WebhookInvokeOK) String() string {
 	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] webhookInvokeOK ", 200)
 }
 
@@ -75,14 +105,44 @@ func NewWebhookInvokeBadRequest() *WebhookInvokeBadRequest {
 	return &WebhookInvokeBadRequest{}
 }
 
-/* WebhookInvokeBadRequest describes a response with status code 400, with default header values.
+/*
+WebhookInvokeBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type WebhookInvokeBadRequest struct {
 }
 
+// IsSuccess returns true when this webhook invoke bad request response has a 2xx status code
+func (o *WebhookInvokeBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this webhook invoke bad request response has a 3xx status code
+func (o *WebhookInvokeBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this webhook invoke bad request response has a 4xx status code
+func (o *WebhookInvokeBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this webhook invoke bad request response has a 5xx status code
+func (o *WebhookInvokeBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this webhook invoke bad request response a status code equal to that given
+func (o *WebhookInvokeBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *WebhookInvokeBadRequest) Error() string {
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] webhookInvokeBadRequest ", 400)
+}
+
+func (o *WebhookInvokeBadRequest) String() string {
 	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] webhookInvokeBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewWebhookInvokeConflict() *WebhookInvokeConflict {
 	return &WebhookInvokeConflict{}
 }
 
-/* WebhookInvokeConflict describes a response with status code 409, with default header values.
+/*
+WebhookInvokeConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
 type WebhookInvokeConflict struct {
 }
 
+// IsSuccess returns true when this webhook invoke conflict response has a 2xx status code
+func (o *WebhookInvokeConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this webhook invoke conflict response has a 3xx status code
+func (o *WebhookInvokeConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this webhook invoke conflict response has a 4xx status code
+func (o *WebhookInvokeConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this webhook invoke conflict response has a 5xx status code
+func (o *WebhookInvokeConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this webhook invoke conflict response a status code equal to that given
+func (o *WebhookInvokeConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *WebhookInvokeConflict) Error() string {
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] webhookInvokeConflict ", 409)
+}
+
+func (o *WebhookInvokeConflict) String() string {
 	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] webhookInvokeConflict ", 409)
 }
 
@@ -117,14 +207,44 @@ func NewWebhookInvokeInternalServerError() *WebhookInvokeInternalServerError {
 	return &WebhookInvokeInternalServerError{}
 }
 
-/* WebhookInvokeInternalServerError describes a response with status code 500, with default header values.
+/*
+WebhookInvokeInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type WebhookInvokeInternalServerError struct {
 }
 
+// IsSuccess returns true when this webhook invoke internal server error response has a 2xx status code
+func (o *WebhookInvokeInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this webhook invoke internal server error response has a 3xx status code
+func (o *WebhookInvokeInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this webhook invoke internal server error response has a 4xx status code
+func (o *WebhookInvokeInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this webhook invoke internal server error response has a 5xx status code
+func (o *WebhookInvokeInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this webhook invoke internal server error response a status code equal to that given
+func (o *WebhookInvokeInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *WebhookInvokeInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] webhookInvokeInternalServerError ", 500)
+}
+
+func (o *WebhookInvokeInternalServerError) String() string {
 	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] webhookInvokeInternalServerError ", 500)
 }
 

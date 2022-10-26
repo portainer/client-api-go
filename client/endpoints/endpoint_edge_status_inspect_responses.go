@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EndpointEdgeStatusInspectReader is a Reader for the EndpointEdgeStatusInspect structure.
@@ -63,7 +63,8 @@ func NewEndpointEdgeStatusInspectOK() *EndpointEdgeStatusInspectOK {
 	return &EndpointEdgeStatusInspectOK{}
 }
 
-/* EndpointEdgeStatusInspectOK describes a response with status code 200, with default header values.
+/*
+EndpointEdgeStatusInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -71,9 +72,39 @@ type EndpointEdgeStatusInspectOK struct {
 	Payload *models.EndpointedgeEndpointEdgeStatusInspectResponse
 }
 
+// IsSuccess returns true when this endpoint edge status inspect o k response has a 2xx status code
+func (o *EndpointEdgeStatusInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this endpoint edge status inspect o k response has a 3xx status code
+func (o *EndpointEdgeStatusInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint edge status inspect o k response has a 4xx status code
+func (o *EndpointEdgeStatusInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint edge status inspect o k response has a 5xx status code
+func (o *EndpointEdgeStatusInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint edge status inspect o k response a status code equal to that given
+func (o *EndpointEdgeStatusInspectOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *EndpointEdgeStatusInspectOK) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectOK  %+v", 200, o.Payload)
 }
+
+func (o *EndpointEdgeStatusInspectOK) String() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectOK  %+v", 200, o.Payload)
+}
+
 func (o *EndpointEdgeStatusInspectOK) GetPayload() *models.EndpointedgeEndpointEdgeStatusInspectResponse {
 	return o.Payload
 }
@@ -95,14 +126,44 @@ func NewEndpointEdgeStatusInspectBadRequest() *EndpointEdgeStatusInspectBadReque
 	return &EndpointEdgeStatusInspectBadRequest{}
 }
 
-/* EndpointEdgeStatusInspectBadRequest describes a response with status code 400, with default header values.
+/*
+EndpointEdgeStatusInspectBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type EndpointEdgeStatusInspectBadRequest struct {
 }
 
+// IsSuccess returns true when this endpoint edge status inspect bad request response has a 2xx status code
+func (o *EndpointEdgeStatusInspectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint edge status inspect bad request response has a 3xx status code
+func (o *EndpointEdgeStatusInspectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint edge status inspect bad request response has a 4xx status code
+func (o *EndpointEdgeStatusInspectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint edge status inspect bad request response has a 5xx status code
+func (o *EndpointEdgeStatusInspectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint edge status inspect bad request response a status code equal to that given
+func (o *EndpointEdgeStatusInspectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EndpointEdgeStatusInspectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectBadRequest ", 400)
+}
+
+func (o *EndpointEdgeStatusInspectBadRequest) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectBadRequest ", 400)
 }
 
@@ -116,14 +177,44 @@ func NewEndpointEdgeStatusInspectForbidden() *EndpointEdgeStatusInspectForbidden
 	return &EndpointEdgeStatusInspectForbidden{}
 }
 
-/* EndpointEdgeStatusInspectForbidden describes a response with status code 403, with default header values.
+/*
+EndpointEdgeStatusInspectForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access environment(endpoint)
 */
 type EndpointEdgeStatusInspectForbidden struct {
 }
 
+// IsSuccess returns true when this endpoint edge status inspect forbidden response has a 2xx status code
+func (o *EndpointEdgeStatusInspectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint edge status inspect forbidden response has a 3xx status code
+func (o *EndpointEdgeStatusInspectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint edge status inspect forbidden response has a 4xx status code
+func (o *EndpointEdgeStatusInspectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint edge status inspect forbidden response has a 5xx status code
+func (o *EndpointEdgeStatusInspectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint edge status inspect forbidden response a status code equal to that given
+func (o *EndpointEdgeStatusInspectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *EndpointEdgeStatusInspectForbidden) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectForbidden ", 403)
+}
+
+func (o *EndpointEdgeStatusInspectForbidden) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectForbidden ", 403)
 }
 
@@ -137,14 +228,44 @@ func NewEndpointEdgeStatusInspectNotFound() *EndpointEdgeStatusInspectNotFound {
 	return &EndpointEdgeStatusInspectNotFound{}
 }
 
-/* EndpointEdgeStatusInspectNotFound describes a response with status code 404, with default header values.
+/*
+EndpointEdgeStatusInspectNotFound describes a response with status code 404, with default header values.
 
 Environment(Endpoint) not found
 */
 type EndpointEdgeStatusInspectNotFound struct {
 }
 
+// IsSuccess returns true when this endpoint edge status inspect not found response has a 2xx status code
+func (o *EndpointEdgeStatusInspectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint edge status inspect not found response has a 3xx status code
+func (o *EndpointEdgeStatusInspectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint edge status inspect not found response has a 4xx status code
+func (o *EndpointEdgeStatusInspectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint edge status inspect not found response has a 5xx status code
+func (o *EndpointEdgeStatusInspectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint edge status inspect not found response a status code equal to that given
+func (o *EndpointEdgeStatusInspectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *EndpointEdgeStatusInspectNotFound) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectNotFound ", 404)
+}
+
+func (o *EndpointEdgeStatusInspectNotFound) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectNotFound ", 404)
 }
 
@@ -158,14 +279,44 @@ func NewEndpointEdgeStatusInspectInternalServerError() *EndpointEdgeStatusInspec
 	return &EndpointEdgeStatusInspectInternalServerError{}
 }
 
-/* EndpointEdgeStatusInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointEdgeStatusInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type EndpointEdgeStatusInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint edge status inspect internal server error response has a 2xx status code
+func (o *EndpointEdgeStatusInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint edge status inspect internal server error response has a 3xx status code
+func (o *EndpointEdgeStatusInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint edge status inspect internal server error response has a 4xx status code
+func (o *EndpointEdgeStatusInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint edge status inspect internal server error response has a 5xx status code
+func (o *EndpointEdgeStatusInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint edge status inspect internal server error response a status code equal to that given
+func (o *EndpointEdgeStatusInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointEdgeStatusInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectInternalServerError ", 500)
+}
+
+func (o *EndpointEdgeStatusInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectInternalServerError ", 500)
 }
 

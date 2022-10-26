@@ -66,9 +66,10 @@ type ClientService interface {
 }
 
 /*
-  DeviceAction executes out of band action on an a m t managed device
+	DeviceAction executes out of band action on an a m t managed device
 
-  Execute out of band action on an AMT managed device
+	Execute out of band action on an AMT managed device
+
 **Access policy**: administrator
 */
 func (a *Client) DeviceAction(params *DeviceActionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeviceActionNoContent, error) {
@@ -108,9 +109,10 @@ func (a *Client) DeviceAction(params *DeviceActionParams, authInfo runtime.Clien
 }
 
 /*
-  DeviceFeatures enables features on an a m t managed device
+	DeviceFeatures enables features on an a m t managed device
 
-  Enable features on an AMT managed device
+	Enable features on an AMT managed device
+
 **Access policy**: administrator
 */
 func (a *Client) DeviceFeatures(params *DeviceFeaturesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeviceFeaturesNoContent, error) {
@@ -150,9 +152,10 @@ func (a *Client) DeviceFeatures(params *DeviceFeaturesParams, authInfo runtime.C
 }
 
 /*
-  OpenAMTConfigure enables portainer s open a m t capabilities
+	OpenAMTConfigure enables portainer s open a m t capabilities
 
-  Enable Portainer's OpenAMT capabilities
+	Enable Portainer's OpenAMT capabilities
+
 **Access policy**: administrator
 */
 func (a *Client) OpenAMTConfigure(params *OpenAMTConfigureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAMTConfigureNoContent, error) {
@@ -192,9 +195,10 @@ func (a *Client) OpenAMTConfigure(params *OpenAMTConfigureParams, authInfo runti
 }
 
 /*
-  OpenAMTDevices fetches open a m t managed devices information for endpoint
+	OpenAMTDevices fetches open a m t managed devices information for endpoint
 
-  Fetch OpenAMT managed devices information for endpoint
+	Fetch OpenAMT managed devices information for endpoint
+
 **Access policy**: administrator
 */
 func (a *Client) OpenAMTDevices(params *OpenAMTDevicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAMTDevicesOK, error) {
@@ -234,9 +238,10 @@ func (a *Client) OpenAMTDevices(params *OpenAMTDevicesParams, authInfo runtime.C
 }
 
 /*
-  OpenAMTHostInfo requests open a m t info from a node
+	OpenAMTHostInfo requests open a m t info from a node
 
-  Request OpenAMT info from a node
+	Request OpenAMT info from a node
+
 **Access policy**: administrator
 */
 func (a *Client) OpenAMTHostInfo(params *OpenAMTHostInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAMTHostInfoOK, error) {
@@ -276,9 +281,10 @@ func (a *Client) OpenAMTHostInfo(params *OpenAMTHostInfoParams, authInfo runtime
 }
 
 /*
-  CreateProfile creates a new f d o profile
+	CreateProfile creates a new f d o profile
 
-  creates a new FDO Profile
+	creates a new FDO Profile
+
 **Access policy**: administrator
 */
 func (a *Client) CreateProfile(params *CreateProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProfileOK, error) {
@@ -318,9 +324,10 @@ func (a *Client) CreateProfile(params *CreateProfileParams, authInfo runtime.Cli
 }
 
 /*
-  DeleteProfile deletes a f d o profile
+	DeleteProfile deletes a f d o profile
 
-  deletes a FDO Profile
+	deletes a FDO Profile
+
 **Access policy**: administrator
 */
 func (a *Client) DeleteProfile(params *DeleteProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProfileOK, error) {
@@ -360,9 +367,10 @@ func (a *Client) DeleteProfile(params *DeleteProfileParams, authInfo runtime.Cli
 }
 
 /*
-  Duplicate duplicateds an existing f d o profile
+	Duplicate duplicateds an existing f d o profile
 
-  duplicated an existing FDO Profile
+	duplicated an existing FDO Profile
+
 **Access policy**: administrator
 */
 func (a *Client) Duplicate(params *DuplicateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DuplicateOK, error) {
@@ -402,9 +410,10 @@ func (a *Client) Duplicate(params *DuplicateParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  FdoConfigure enables portainer s f d o capabilities
+	FdoConfigure enables portainer s f d o capabilities
 
-  Enable Portainer's FDO capabilities
+	Enable Portainer's FDO capabilities
+
 **Access policy**: administrator
 */
 func (a *Client) FdoConfigure(params *FdoConfigureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoConfigureNoContent, error) {
@@ -444,9 +453,10 @@ func (a *Client) FdoConfigure(params *FdoConfigureParams, authInfo runtime.Clien
 }
 
 /*
-  FdoConfigureDevice configures an f d o device
+	FdoConfigureDevice configures an f d o device
 
-  configures an FDO device
+	configures an FDO device
+
 **Access policy**: administrator
 */
 func (a *Client) FdoConfigureDevice(params *FdoConfigureDeviceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoConfigureDeviceOK, error) {
@@ -486,9 +496,10 @@ func (a *Client) FdoConfigureDevice(params *FdoConfigureDeviceParams, authInfo r
 }
 
 /*
-  FdoListAll lists all known f d o vouchers
+	FdoListAll lists all known f d o vouchers
 
-  List all known FDO vouchers
+	List all known FDO vouchers
+
 **Access policy**: administrator
 */
 func (a *Client) FdoListAll(params *FdoListAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoListAllOK, error) {
@@ -528,9 +539,10 @@ func (a *Client) FdoListAll(params *FdoListAllParams, authInfo runtime.ClientAut
 }
 
 /*
-  FdoProfileInspect retrieves a given f d o profile information and content
+	FdoProfileInspect retrieves a given f d o profile information and content
 
-  retrieves a given FDO profile information and content
+	retrieves a given FDO profile information and content
+
 **Access policy**: administrator
 */
 func (a *Client) FdoProfileInspect(params *FdoProfileInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoProfileInspectOK, error) {
@@ -570,9 +582,10 @@ func (a *Client) FdoProfileInspect(params *FdoProfileInspectParams, authInfo run
 }
 
 /*
-  FdoProfileList retrieves all f d o profiles
+	FdoProfileList retrieves all f d o profiles
 
-  retrieves all FDO profiles
+	retrieves all FDO profiles
+
 **Access policy**: administrator
 */
 func (a *Client) FdoProfileList(params *FdoProfileListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoProfileListOK, error) {
@@ -612,9 +625,10 @@ func (a *Client) FdoProfileList(params *FdoProfileListParams, authInfo runtime.C
 }
 
 /*
-  FdoRegisterDevice registers an f d o device
+	FdoRegisterDevice registers an f d o device
 
-  register an FDO device
+	register an FDO device
+
 **Access policy**: administrator
 */
 func (a *Client) FdoRegisterDevice(params *FdoRegisterDeviceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoRegisterDeviceOK, error) {
@@ -654,9 +668,10 @@ func (a *Client) FdoRegisterDevice(params *FdoRegisterDeviceParams, authInfo run
 }
 
 /*
-  OpenAMTActivate activates open a m t device and associate to agent endpoint
+	OpenAMTActivate activates open a m t device and associate to agent endpoint
 
-  Activate OpenAMT device and associate to agent endpoint
+	Activate OpenAMT device and associate to agent endpoint
+
 **Access policy**: administrator
 */
 func (a *Client) OpenAMTActivate(params *OpenAMTActivateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAMTActivateOK, error) {
@@ -696,9 +711,10 @@ func (a *Client) OpenAMTActivate(params *OpenAMTActivateParams, authInfo runtime
 }
 
 /*
-  UpdateProfile updates an existing f d o profile
+	UpdateProfile updates an existing f d o profile
 
-  updates an existing FDO Profile
+	updates an existing FDO Profile
+
 **Access policy**: administrator
 */
 func (a *Client) UpdateProfile(params *UpdateProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProfileOK, error) {

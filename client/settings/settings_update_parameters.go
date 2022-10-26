@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewSettingsUpdateParams creates a new SettingsUpdateParams object,
@@ -54,10 +54,12 @@ func NewSettingsUpdateParamsWithHTTPClient(client *http.Client) *SettingsUpdateP
 	}
 }
 
-/* SettingsUpdateParams contains all the parameters to send to the API endpoint
-   for the settings update operation.
+/*
+SettingsUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the settings update operation.
+
+	Typically these are written to a http.Request.
 */
 type SettingsUpdateParams struct {
 

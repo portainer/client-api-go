@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EdgeJobCreateReader is a Reader for the EdgeJobCreate structure.
@@ -51,24 +51,55 @@ func NewEdgeJobCreateOK() *EdgeJobCreateOK {
 	return &EdgeJobCreateOK{}
 }
 
-/* EdgeJobCreateOK describes a response with status code 200, with default header values.
+/*
+EdgeJobCreateOK describes a response with status code 200, with default header values.
 
 OK
 */
 type EdgeJobCreateOK struct {
-	Payload *models.PortainerEdgeGroup
+	Payload *models.PortainereeEdgeGroup
+}
+
+// IsSuccess returns true when this edge job create o k response has a 2xx status code
+func (o *EdgeJobCreateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge job create o k response has a 3xx status code
+func (o *EdgeJobCreateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job create o k response has a 4xx status code
+func (o *EdgeJobCreateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job create o k response has a 5xx status code
+func (o *EdgeJobCreateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge job create o k response a status code equal to that given
+func (o *EdgeJobCreateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *EdgeJobCreateOK) Error() string {
 	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateOK  %+v", 200, o.Payload)
 }
-func (o *EdgeJobCreateOK) GetPayload() *models.PortainerEdgeGroup {
+
+func (o *EdgeJobCreateOK) String() string {
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateOK  %+v", 200, o.Payload)
+}
+
+func (o *EdgeJobCreateOK) GetPayload() *models.PortainereeEdgeGroup {
 	return o.Payload
 }
 
 func (o *EdgeJobCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerEdgeGroup)
+	o.Payload = new(models.PortainereeEdgeGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -83,14 +114,44 @@ func NewEdgeJobCreateInternalServerError() *EdgeJobCreateInternalServerError {
 	return &EdgeJobCreateInternalServerError{}
 }
 
-/* EdgeJobCreateInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeJobCreateInternalServerError describes a response with status code 500, with default header values.
 
-EdgeJobCreateInternalServerError edge job create internal server error
+Internal Server Error
 */
 type EdgeJobCreateInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge job create internal server error response has a 2xx status code
+func (o *EdgeJobCreateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job create internal server error response has a 3xx status code
+func (o *EdgeJobCreateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job create internal server error response has a 4xx status code
+func (o *EdgeJobCreateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job create internal server error response has a 5xx status code
+func (o *EdgeJobCreateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job create internal server error response a status code equal to that given
+func (o *EdgeJobCreateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeJobCreateInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateInternalServerError ", 500)
+}
+
+func (o *EdgeJobCreateInternalServerError) String() string {
 	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateInternalServerError ", 500)
 }
 
@@ -104,14 +165,44 @@ func NewEdgeJobCreateServiceUnavailable() *EdgeJobCreateServiceUnavailable {
 	return &EdgeJobCreateServiceUnavailable{}
 }
 
-/* EdgeJobCreateServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeJobCreateServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeJobCreateServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge job create service unavailable response has a 2xx status code
+func (o *EdgeJobCreateServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge job create service unavailable response has a 3xx status code
+func (o *EdgeJobCreateServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge job create service unavailable response has a 4xx status code
+func (o *EdgeJobCreateServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge job create service unavailable response has a 5xx status code
+func (o *EdgeJobCreateServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge job create service unavailable response a status code equal to that given
+func (o *EdgeJobCreateServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeJobCreateServiceUnavailable) Error() string {
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateServiceUnavailable ", 503)
+}
+
+func (o *EdgeJobCreateServiceUnavailable) String() string {
 	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateServiceUnavailable ", 503)
 }
 

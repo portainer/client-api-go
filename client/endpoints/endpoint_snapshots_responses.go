@@ -42,14 +42,44 @@ func NewEndpointSnapshotsNoContent() *EndpointSnapshotsNoContent {
 	return &EndpointSnapshotsNoContent{}
 }
 
-/* EndpointSnapshotsNoContent describes a response with status code 204, with default header values.
+/*
+EndpointSnapshotsNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type EndpointSnapshotsNoContent struct {
 }
 
+// IsSuccess returns true when this endpoint snapshots no content response has a 2xx status code
+func (o *EndpointSnapshotsNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this endpoint snapshots no content response has a 3xx status code
+func (o *EndpointSnapshotsNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint snapshots no content response has a 4xx status code
+func (o *EndpointSnapshotsNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint snapshots no content response has a 5xx status code
+func (o *EndpointSnapshotsNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint snapshots no content response a status code equal to that given
+func (o *EndpointSnapshotsNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EndpointSnapshotsNoContent) Error() string {
+	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsNoContent ", 204)
+}
+
+func (o *EndpointSnapshotsNoContent) String() string {
 	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsNoContent ", 204)
 }
 
@@ -63,14 +93,44 @@ func NewEndpointSnapshotsInternalServerError() *EndpointSnapshotsInternalServerE
 	return &EndpointSnapshotsInternalServerError{}
 }
 
-/* EndpointSnapshotsInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointSnapshotsInternalServerError describes a response with status code 500, with default header values.
 
 Server Error
 */
 type EndpointSnapshotsInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint snapshots internal server error response has a 2xx status code
+func (o *EndpointSnapshotsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint snapshots internal server error response has a 3xx status code
+func (o *EndpointSnapshotsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint snapshots internal server error response has a 4xx status code
+func (o *EndpointSnapshotsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint snapshots internal server error response has a 5xx status code
+func (o *EndpointSnapshotsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint snapshots internal server error response a status code equal to that given
+func (o *EndpointSnapshotsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointSnapshotsInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsInternalServerError ", 500)
+}
+
+func (o *EndpointSnapshotsInternalServerError) String() string {
 	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsInternalServerError ", 500)
 }
 

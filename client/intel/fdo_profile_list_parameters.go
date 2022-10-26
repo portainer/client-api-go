@@ -52,10 +52,12 @@ func NewFdoProfileListParamsWithHTTPClient(client *http.Client) *FdoProfileListP
 	}
 }
 
-/* FdoProfileListParams contains all the parameters to send to the API endpoint
-   for the fdo profile list operation.
+/*
+FdoProfileListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fdo profile list operation.
+
+	Typically these are written to a http.Request.
 */
 type FdoProfileListParams struct {
 	timeout    time.Duration

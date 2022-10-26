@@ -10,36 +10,42 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/client/auth"
-	"github.com/portainer/client-api/client/backup"
-	"github.com/portainer/client-api/client/custom_templates"
-	"github.com/portainer/client-api/client/edge"
-	"github.com/portainer/client-api/client/edge_groups"
-	"github.com/portainer/client-api/client/edge_jobs"
-	"github.com/portainer/client-api/client/edge_stacks"
-	"github.com/portainer/client-api/client/edge_templates"
-	"github.com/portainer/client-api/client/endpoint_groups"
-	"github.com/portainer/client-api/client/endpoints"
-	"github.com/portainer/client-api/client/helm"
-	"github.com/portainer/client-api/client/intel"
-	"github.com/portainer/client-api/client/kubernetes"
-	"github.com/portainer/client-api/client/ldap"
-	"github.com/portainer/client-api/client/motd"
-	"github.com/portainer/client-api/client/registries"
-	"github.com/portainer/client-api/client/resource_controls"
-	"github.com/portainer/client-api/client/roles"
-	"github.com/portainer/client-api/client/settings"
-	"github.com/portainer/client-api/client/ssl"
-	"github.com/portainer/client-api/client/stacks"
-	"github.com/portainer/client-api/client/status"
-	"github.com/portainer/client-api/client/tags"
-	"github.com/portainer/client-api/client/team_memberships"
-	"github.com/portainer/client-api/client/teams"
-	"github.com/portainer/client-api/client/templates"
-	"github.com/portainer/client-api/client/upload"
-	"github.com/portainer/client-api/client/users"
-	"github.com/portainer/client-api/client/webhooks"
-	"github.com/portainer/client-api/client/websocket"
+	"github.com/portainer/client-api-go/client/auth"
+	"github.com/portainer/client-api-go/client/backup"
+	"github.com/portainer/client-api-go/client/cloud_credentials"
+	"github.com/portainer/client-api-go/client/custom_templates"
+	"github.com/portainer/client-api-go/client/docker"
+	"github.com/portainer/client-api-go/client/edge"
+	"github.com/portainer/client-api-go/client/edge_groups"
+	"github.com/portainer/client-api-go/client/edge_jobs"
+	"github.com/portainer/client-api-go/client/edge_stacks"
+	"github.com/portainer/client-api-go/client/edge_templates"
+	"github.com/portainer/client-api-go/client/endpoint_groups"
+	"github.com/portainer/client-api-go/client/endpoints"
+	"github.com/portainer/client-api-go/client/helm"
+	"github.com/portainer/client-api-go/client/intel"
+	"github.com/portainer/client-api-go/client/kaas"
+	"github.com/portainer/client-api-go/client/kubernetes"
+	"github.com/portainer/client-api-go/client/ldap"
+	"github.com/portainer/client-api-go/client/license"
+	"github.com/portainer/client-api-go/client/motd"
+	"github.com/portainer/client-api-go/client/nomad"
+	"github.com/portainer/client-api-go/client/registries"
+	"github.com/portainer/client-api-go/client/resource_controls"
+	"github.com/portainer/client-api-go/client/roles"
+	"github.com/portainer/client-api-go/client/settings"
+	"github.com/portainer/client-api-go/client/ssl"
+	"github.com/portainer/client-api-go/client/stacks"
+	"github.com/portainer/client-api-go/client/status"
+	"github.com/portainer/client-api-go/client/tags"
+	"github.com/portainer/client-api-go/client/team_memberships"
+	"github.com/portainer/client-api-go/client/teams"
+	"github.com/portainer/client-api-go/client/templates"
+	"github.com/portainer/client-api-go/client/upload"
+	"github.com/portainer/client-api-go/client/useractivity"
+	"github.com/portainer/client-api-go/client/users"
+	"github.com/portainer/client-api-go/client/webhooks"
+	"github.com/portainer/client-api-go/client/websocket"
 )
 
 // Default portainer client API HTTP client.
@@ -86,7 +92,9 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.Transport = transport
 	cli.Auth = auth.New(transport, formats)
 	cli.Backup = backup.New(transport, formats)
+	cli.CloudCredentials = cloud_credentials.New(transport, formats)
 	cli.CustomTemplates = custom_templates.New(transport, formats)
+	cli.Docker = docker.New(transport, formats)
 	cli.Edge = edge.New(transport, formats)
 	cli.EdgeGroups = edge_groups.New(transport, formats)
 	cli.EdgeJobs = edge_jobs.New(transport, formats)
@@ -96,9 +104,12 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.Endpoints = endpoints.New(transport, formats)
 	cli.Helm = helm.New(transport, formats)
 	cli.Intel = intel.New(transport, formats)
+	cli.Kaas = kaas.New(transport, formats)
 	cli.Kubernetes = kubernetes.New(transport, formats)
 	cli.Ldap = ldap.New(transport, formats)
+	cli.License = license.New(transport, formats)
 	cli.Motd = motd.New(transport, formats)
+	cli.Nomad = nomad.New(transport, formats)
 	cli.Registries = registries.New(transport, formats)
 	cli.ResourceControls = resource_controls.New(transport, formats)
 	cli.Roles = roles.New(transport, formats)
@@ -111,6 +122,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.Teams = teams.New(transport, formats)
 	cli.Templates = templates.New(transport, formats)
 	cli.Upload = upload.New(transport, formats)
+	cli.Useractivity = useractivity.New(transport, formats)
 	cli.Users = users.New(transport, formats)
 	cli.Webhooks = webhooks.New(transport, formats)
 	cli.Websocket = websocket.New(transport, formats)
@@ -162,7 +174,11 @@ type PortainerClientAPI struct {
 
 	Backup backup.ClientService
 
+	CloudCredentials cloud_credentials.ClientService
+
 	CustomTemplates custom_templates.ClientService
+
+	Docker docker.ClientService
 
 	Edge edge.ClientService
 
@@ -182,11 +198,17 @@ type PortainerClientAPI struct {
 
 	Intel intel.ClientService
 
+	Kaas kaas.ClientService
+
 	Kubernetes kubernetes.ClientService
 
 	Ldap ldap.ClientService
 
+	License license.ClientService
+
 	Motd motd.ClientService
+
+	Nomad nomad.ClientService
 
 	Registries registries.ClientService
 
@@ -212,6 +234,8 @@ type PortainerClientAPI struct {
 
 	Upload upload.ClientService
 
+	Useractivity useractivity.ClientService
+
 	Users users.ClientService
 
 	Webhooks webhooks.ClientService
@@ -226,7 +250,9 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Auth.SetTransport(transport)
 	c.Backup.SetTransport(transport)
+	c.CloudCredentials.SetTransport(transport)
 	c.CustomTemplates.SetTransport(transport)
+	c.Docker.SetTransport(transport)
 	c.Edge.SetTransport(transport)
 	c.EdgeGroups.SetTransport(transport)
 	c.EdgeJobs.SetTransport(transport)
@@ -236,9 +262,12 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Endpoints.SetTransport(transport)
 	c.Helm.SetTransport(transport)
 	c.Intel.SetTransport(transport)
+	c.Kaas.SetTransport(transport)
 	c.Kubernetes.SetTransport(transport)
 	c.Ldap.SetTransport(transport)
+	c.License.SetTransport(transport)
 	c.Motd.SetTransport(transport)
+	c.Nomad.SetTransport(transport)
 	c.Registries.SetTransport(transport)
 	c.ResourceControls.SetTransport(transport)
 	c.Roles.SetTransport(transport)
@@ -251,6 +280,7 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Teams.SetTransport(transport)
 	c.Templates.SetTransport(transport)
 	c.Upload.SetTransport(transport)
+	c.Useractivity.SetTransport(transport)
 	c.Users.SetTransport(transport)
 	c.Webhooks.SetTransport(transport)
 	c.Websocket.SetTransport(transport)

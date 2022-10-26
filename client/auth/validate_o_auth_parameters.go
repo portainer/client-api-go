@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewValidateOAuthParams creates a new ValidateOAuthParams object,
@@ -54,10 +54,12 @@ func NewValidateOAuthParamsWithHTTPClient(client *http.Client) *ValidateOAuthPar
 	}
 }
 
-/* ValidateOAuthParams contains all the parameters to send to the API endpoint
-   for the validate o auth operation.
+/*
+ValidateOAuthParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the validate o auth operation.
+
+	Typically these are written to a http.Request.
 */
 type ValidateOAuthParams struct {
 

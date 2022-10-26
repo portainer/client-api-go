@@ -52,16 +52,18 @@ func NewGetEndpointsIDEdgeStacksStackIDParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* GetEndpointsIDEdgeStacksStackIDParams contains all the parameters to send to the API endpoint
-   for the get endpoints ID edge stacks stack ID operation.
+/*
+GetEndpointsIDEdgeStacksStackIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get endpoints ID edge stacks stack ID operation.
+
+	Typically these are written to a http.Request.
 */
 type GetEndpointsIDEdgeStacksStackIDParams struct {
 
 	/* ID.
 
-	   environment(endpoint) Id
+	   Environment(Endpoint) Id
 	*/
 	ID string
 

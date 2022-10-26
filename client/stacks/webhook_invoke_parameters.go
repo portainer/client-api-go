@@ -52,10 +52,12 @@ func NewWebhookInvokeParamsWithHTTPClient(client *http.Client) *WebhookInvokePar
 	}
 }
 
-/* WebhookInvokeParams contains all the parameters to send to the API endpoint
-   for the webhook invoke operation.
+/*
+WebhookInvokeParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the webhook invoke operation.
+
+	Typically these are written to a http.Request.
 */
 type WebhookInvokeParams struct {
 

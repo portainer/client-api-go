@@ -19,16 +19,16 @@ import (
 // swagger:model stacks.stackMigratePayload
 type StacksStackMigratePayload struct {
 
-	// Environment(Endpoint) identifier of the target environment(endpoint) where the stack will be relocated
+	// endpoint ID
 	// Example: 2
 	// Required: true
 	EndpointID *int64 `json:"endpointID"`
 
-	// If provided will rename the migrated stack
+	// name
 	// Example: new-stack
 	Name string `json:"name,omitempty"`
 
-	// Swarm cluster identifier, must match the identifier of the cluster where the stack will be relocated
+	// swarm ID
 	// Example: jpofkc0i9uo9wtx1zesuk649w
 	SwarmID string `json:"swarmID,omitempty"`
 }

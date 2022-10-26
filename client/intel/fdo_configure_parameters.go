@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewFdoConfigureParams creates a new FdoConfigureParams object,
@@ -54,10 +54,12 @@ func NewFdoConfigureParamsWithHTTPClient(client *http.Client) *FdoConfigureParam
 	}
 }
 
-/* FdoConfigureParams contains all the parameters to send to the API endpoint
-   for the fdo configure operation.
+/*
+FdoConfigureParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fdo configure operation.
+
+	Typically these are written to a http.Request.
 */
 type FdoConfigureParams struct {
 

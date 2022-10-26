@@ -53,10 +53,12 @@ func NewEdgeGroupDeleteParamsWithHTTPClient(client *http.Client) *EdgeGroupDelet
 	}
 }
 
-/* EdgeGroupDeleteParams contains all the parameters to send to the API endpoint
-   for the edge group delete operation.
+/*
+EdgeGroupDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge group delete operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeGroupDeleteParams struct {
 

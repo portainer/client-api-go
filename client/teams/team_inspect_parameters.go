@@ -53,10 +53,12 @@ func NewTeamInspectParamsWithHTTPClient(client *http.Client) *TeamInspectParams 
 	}
 }
 
-/* TeamInspectParams contains all the parameters to send to the API endpoint
-   for the team inspect operation.
+/*
+TeamInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the team inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type TeamInspectParams struct {
 

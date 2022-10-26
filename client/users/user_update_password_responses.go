@@ -60,14 +60,44 @@ func NewUserUpdatePasswordNoContent() *UserUpdatePasswordNoContent {
 	return &UserUpdatePasswordNoContent{}
 }
 
-/* UserUpdatePasswordNoContent describes a response with status code 204, with default header values.
+/*
+UserUpdatePasswordNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type UserUpdatePasswordNoContent struct {
 }
 
+// IsSuccess returns true when this user update password no content response has a 2xx status code
+func (o *UserUpdatePasswordNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user update password no content response has a 3xx status code
+func (o *UserUpdatePasswordNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update password no content response has a 4xx status code
+func (o *UserUpdatePasswordNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user update password no content response has a 5xx status code
+func (o *UserUpdatePasswordNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update password no content response a status code equal to that given
+func (o *UserUpdatePasswordNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *UserUpdatePasswordNoContent) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNoContent ", 204)
+}
+
+func (o *UserUpdatePasswordNoContent) String() string {
 	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewUserUpdatePasswordBadRequest() *UserUpdatePasswordBadRequest {
 	return &UserUpdatePasswordBadRequest{}
 }
 
-/* UserUpdatePasswordBadRequest describes a response with status code 400, with default header values.
+/*
+UserUpdatePasswordBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type UserUpdatePasswordBadRequest struct {
 }
 
+// IsSuccess returns true when this user update password bad request response has a 2xx status code
+func (o *UserUpdatePasswordBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update password bad request response has a 3xx status code
+func (o *UserUpdatePasswordBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update password bad request response has a 4xx status code
+func (o *UserUpdatePasswordBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user update password bad request response has a 5xx status code
+func (o *UserUpdatePasswordBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update password bad request response a status code equal to that given
+func (o *UserUpdatePasswordBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UserUpdatePasswordBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordBadRequest ", 400)
+}
+
+func (o *UserUpdatePasswordBadRequest) String() string {
 	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewUserUpdatePasswordForbidden() *UserUpdatePasswordForbidden {
 	return &UserUpdatePasswordForbidden{}
 }
 
-/* UserUpdatePasswordForbidden describes a response with status code 403, with default header values.
+/*
+UserUpdatePasswordForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type UserUpdatePasswordForbidden struct {
 }
 
+// IsSuccess returns true when this user update password forbidden response has a 2xx status code
+func (o *UserUpdatePasswordForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update password forbidden response has a 3xx status code
+func (o *UserUpdatePasswordForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update password forbidden response has a 4xx status code
+func (o *UserUpdatePasswordForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user update password forbidden response has a 5xx status code
+func (o *UserUpdatePasswordForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update password forbidden response a status code equal to that given
+func (o *UserUpdatePasswordForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UserUpdatePasswordForbidden) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordForbidden ", 403)
+}
+
+func (o *UserUpdatePasswordForbidden) String() string {
 	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewUserUpdatePasswordNotFound() *UserUpdatePasswordNotFound {
 	return &UserUpdatePasswordNotFound{}
 }
 
-/* UserUpdatePasswordNotFound describes a response with status code 404, with default header values.
+/*
+UserUpdatePasswordNotFound describes a response with status code 404, with default header values.
 
 User not found
 */
 type UserUpdatePasswordNotFound struct {
 }
 
+// IsSuccess returns true when this user update password not found response has a 2xx status code
+func (o *UserUpdatePasswordNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update password not found response has a 3xx status code
+func (o *UserUpdatePasswordNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update password not found response has a 4xx status code
+func (o *UserUpdatePasswordNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user update password not found response has a 5xx status code
+func (o *UserUpdatePasswordNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user update password not found response a status code equal to that given
+func (o *UserUpdatePasswordNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UserUpdatePasswordNotFound) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNotFound ", 404)
+}
+
+func (o *UserUpdatePasswordNotFound) String() string {
 	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewUserUpdatePasswordInternalServerError() *UserUpdatePasswordInternalServe
 	return &UserUpdatePasswordInternalServerError{}
 }
 
-/* UserUpdatePasswordInternalServerError describes a response with status code 500, with default header values.
+/*
+UserUpdatePasswordInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type UserUpdatePasswordInternalServerError struct {
 }
 
+// IsSuccess returns true when this user update password internal server error response has a 2xx status code
+func (o *UserUpdatePasswordInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user update password internal server error response has a 3xx status code
+func (o *UserUpdatePasswordInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user update password internal server error response has a 4xx status code
+func (o *UserUpdatePasswordInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user update password internal server error response has a 5xx status code
+func (o *UserUpdatePasswordInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this user update password internal server error response a status code equal to that given
+func (o *UserUpdatePasswordInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UserUpdatePasswordInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordInternalServerError ", 500)
+}
+
+func (o *UserUpdatePasswordInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordInternalServerError ", 500)
 }
 

@@ -19,39 +19,39 @@ import (
 // swagger:model registries.registryUpdatePayload
 type RegistriesRegistryUpdatePayload struct {
 
-	// Is authentication against this registry enabled
+	// authentication
 	// Example: false
 	// Required: true
 	Authentication *bool `json:"authentication"`
 
-	// BaseURL is used for quay registry
+	// base URL
 	// Example: registry.mydomain.tld:2375
 	BaseURL string `json:"baseURL,omitempty"`
 
-	// ECR data
-	Ecr *PortainerEcrData `json:"ecr,omitempty"`
+	// ecr
+	Ecr *PortainereeEcrData `json:"ecr,omitempty"`
 
-	// Name that will be used to identify this registry
+	// name
 	// Example: my-registry
 	// Required: true
 	Name *string `json:"name"`
 
-	// Password used to authenticate against this registry. required when Authentication is true
+	// password
 	// Example: registry_password
 	Password string `json:"password,omitempty"`
 
-	// Quay data
-	Quay *PortainerQuayRegistryData `json:"quay,omitempty"`
+	// quay
+	Quay *PortainereeQuayRegistryData `json:"quay,omitempty"`
 
-	// Registry access control
-	RegistryAccesses PortainerRegistryAccesses `json:"registryAccesses,omitempty"`
+	// registry accesses
+	RegistryAccesses PortainereeRegistryAccesses `json:"registryAccesses,omitempty"`
 
-	// URL or IP address of the Docker registry
-	// Example: registry.mydomain.tld:2375
+	// url
+	// Example: registry.mydomain.tld:2375/feed
 	// Required: true
 	URL *string `json:"url"`
 
-	// Username used to authenticate against this registry. Required when Authentication is true
+	// username
 	// Example: registry_user
 	Username string `json:"username,omitempty"`
 }

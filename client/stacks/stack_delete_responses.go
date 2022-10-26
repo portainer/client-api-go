@@ -60,14 +60,44 @@ func NewStackDeleteNoContent() *StackDeleteNoContent {
 	return &StackDeleteNoContent{}
 }
 
-/* StackDeleteNoContent describes a response with status code 204, with default header values.
+/*
+StackDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type StackDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this stack delete no content response has a 2xx status code
+func (o *StackDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stack delete no content response has a 3xx status code
+func (o *StackDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack delete no content response has a 4xx status code
+func (o *StackDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack delete no content response has a 5xx status code
+func (o *StackDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack delete no content response a status code equal to that given
+func (o *StackDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *StackDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNoContent ", 204)
+}
+
+func (o *StackDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewStackDeleteBadRequest() *StackDeleteBadRequest {
 	return &StackDeleteBadRequest{}
 }
 
-/* StackDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+StackDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type StackDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this stack delete bad request response has a 2xx status code
+func (o *StackDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack delete bad request response has a 3xx status code
+func (o *StackDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack delete bad request response has a 4xx status code
+func (o *StackDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack delete bad request response has a 5xx status code
+func (o *StackDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack delete bad request response a status code equal to that given
+func (o *StackDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *StackDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteBadRequest ", 400)
+}
+
+func (o *StackDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewStackDeleteForbidden() *StackDeleteForbidden {
 	return &StackDeleteForbidden{}
 }
 
-/* StackDeleteForbidden describes a response with status code 403, with default header values.
+/*
+StackDeleteForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type StackDeleteForbidden struct {
 }
 
+// IsSuccess returns true when this stack delete forbidden response has a 2xx status code
+func (o *StackDeleteForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack delete forbidden response has a 3xx status code
+func (o *StackDeleteForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack delete forbidden response has a 4xx status code
+func (o *StackDeleteForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack delete forbidden response has a 5xx status code
+func (o *StackDeleteForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack delete forbidden response a status code equal to that given
+func (o *StackDeleteForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *StackDeleteForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteForbidden ", 403)
+}
+
+func (o *StackDeleteForbidden) String() string {
 	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewStackDeleteNotFound() *StackDeleteNotFound {
 	return &StackDeleteNotFound{}
 }
 
-/* StackDeleteNotFound describes a response with status code 404, with default header values.
+/*
+StackDeleteNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type StackDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this stack delete not found response has a 2xx status code
+func (o *StackDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack delete not found response has a 3xx status code
+func (o *StackDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack delete not found response has a 4xx status code
+func (o *StackDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack delete not found response has a 5xx status code
+func (o *StackDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack delete not found response a status code equal to that given
+func (o *StackDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *StackDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNotFound ", 404)
+}
+
+func (o *StackDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewStackDeleteInternalServerError() *StackDeleteInternalServerError {
 	return &StackDeleteInternalServerError{}
 }
 
-/* StackDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+StackDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type StackDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this stack delete internal server error response has a 2xx status code
+func (o *StackDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack delete internal server error response has a 3xx status code
+func (o *StackDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack delete internal server error response has a 4xx status code
+func (o *StackDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stack delete internal server error response has a 5xx status code
+func (o *StackDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stack delete internal server error response a status code equal to that given
+func (o *StackDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StackDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteInternalServerError ", 500)
+}
+
+func (o *StackDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteInternalServerError ", 500)
 }
 

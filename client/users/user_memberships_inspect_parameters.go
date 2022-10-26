@@ -53,10 +53,12 @@ func NewUserMembershipsInspectParamsWithHTTPClient(client *http.Client) *UserMem
 	}
 }
 
-/* UserMembershipsInspectParams contains all the parameters to send to the API endpoint
-   for the user memberships inspect operation.
+/*
+UserMembershipsInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user memberships inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type UserMembershipsInspectParams struct {
 

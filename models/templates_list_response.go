@@ -20,7 +20,7 @@ import (
 type TemplatesListResponse struct {
 
 	// templates
-	Templates []*PortainerTemplate `json:"templates"`
+	Templates []*PortainereeTemplate `json:"templates"`
 
 	// version
 	Version string `json:"version,omitempty"`

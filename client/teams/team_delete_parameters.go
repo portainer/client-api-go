@@ -52,10 +52,12 @@ func NewTeamDeleteParamsWithHTTPClient(client *http.Client) *TeamDeleteParams {
 	}
 }
 
-/* TeamDeleteParams contains all the parameters to send to the API endpoint
-   for the team delete operation.
+/*
+TeamDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the team delete operation.
+
+	Typically these are written to a http.Request.
 */
 type TeamDeleteParams struct {
 

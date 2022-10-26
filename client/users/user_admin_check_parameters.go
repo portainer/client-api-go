@@ -52,10 +52,12 @@ func NewUserAdminCheckParamsWithHTTPClient(client *http.Client) *UserAdminCheckP
 	}
 }
 
-/* UserAdminCheckParams contains all the parameters to send to the API endpoint
-   for the user admin check operation.
+/*
+UserAdminCheckParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user admin check operation.
+
+	Typically these are written to a http.Request.
 */
 type UserAdminCheckParams struct {
 	timeout    time.Duration

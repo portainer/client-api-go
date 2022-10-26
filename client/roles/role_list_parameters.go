@@ -52,10 +52,12 @@ func NewRoleListParamsWithHTTPClient(client *http.Client) *RoleListParams {
 	}
 }
 
-/* RoleListParams contains all the parameters to send to the API endpoint
-   for the role list operation.
+/*
+RoleListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the role list operation.
+
+	Typically these are written to a http.Request.
 */
 type RoleListParams struct {
 	timeout    time.Duration

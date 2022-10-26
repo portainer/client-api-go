@@ -42,14 +42,44 @@ func NewLogoutNoContent() *LogoutNoContent {
 	return &LogoutNoContent{}
 }
 
-/* LogoutNoContent describes a response with status code 204, with default header values.
+/*
+LogoutNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type LogoutNoContent struct {
 }
 
+// IsSuccess returns true when this logout no content response has a 2xx status code
+func (o *LogoutNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this logout no content response has a 3xx status code
+func (o *LogoutNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this logout no content response has a 4xx status code
+func (o *LogoutNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this logout no content response has a 5xx status code
+func (o *LogoutNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this logout no content response a status code equal to that given
+func (o *LogoutNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *LogoutNoContent) Error() string {
+	return fmt.Sprintf("[POST /auth/logout][%d] logoutNoContent ", 204)
+}
+
+func (o *LogoutNoContent) String() string {
 	return fmt.Sprintf("[POST /auth/logout][%d] logoutNoContent ", 204)
 }
 
@@ -63,14 +93,44 @@ func NewLogoutInternalServerError() *LogoutInternalServerError {
 	return &LogoutInternalServerError{}
 }
 
-/* LogoutInternalServerError describes a response with status code 500, with default header values.
+/*
+LogoutInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type LogoutInternalServerError struct {
 }
 
+// IsSuccess returns true when this logout internal server error response has a 2xx status code
+func (o *LogoutInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this logout internal server error response has a 3xx status code
+func (o *LogoutInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this logout internal server error response has a 4xx status code
+func (o *LogoutInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this logout internal server error response has a 5xx status code
+func (o *LogoutInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this logout internal server error response a status code equal to that given
+func (o *LogoutInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *LogoutInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /auth/logout][%d] logoutInternalServerError ", 500)
+}
+
+func (o *LogoutInternalServerError) String() string {
 	return fmt.Sprintf("[POST /auth/logout][%d] logoutInternalServerError ", 500)
 }
 

@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewPutWebhooksIDParams creates a new PutWebhooksIDParams object,
@@ -54,10 +54,12 @@ func NewPutWebhooksIDParamsWithHTTPClient(client *http.Client) *PutWebhooksIDPar
 	}
 }
 
-/* PutWebhooksIDParams contains all the parameters to send to the API endpoint
-   for the put webhooks ID operation.
+/*
+PutWebhooksIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the put webhooks ID operation.
+
+	Typically these are written to a http.Request.
 */
 type PutWebhooksIDParams struct {
 

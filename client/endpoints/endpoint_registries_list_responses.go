@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EndpointRegistriesListReader is a Reader for the EndpointRegistriesList structure.
@@ -45,18 +45,49 @@ func NewEndpointRegistriesListOK() *EndpointRegistriesListOK {
 	return &EndpointRegistriesListOK{}
 }
 
-/* EndpointRegistriesListOK describes a response with status code 200, with default header values.
+/*
+EndpointRegistriesListOK describes a response with status code 200, with default header values.
 
 Success
 */
 type EndpointRegistriesListOK struct {
-	Payload []*models.PortainerRegistry
+	Payload []*models.PortainereeRegistry
+}
+
+// IsSuccess returns true when this endpoint registries list o k response has a 2xx status code
+func (o *EndpointRegistriesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this endpoint registries list o k response has a 3xx status code
+func (o *EndpointRegistriesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint registries list o k response has a 4xx status code
+func (o *EndpointRegistriesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint registries list o k response has a 5xx status code
+func (o *EndpointRegistriesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint registries list o k response a status code equal to that given
+func (o *EndpointRegistriesListOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *EndpointRegistriesListOK) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/registries][%d] endpointRegistriesListOK  %+v", 200, o.Payload)
 }
-func (o *EndpointRegistriesListOK) GetPayload() []*models.PortainerRegistry {
+
+func (o *EndpointRegistriesListOK) String() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/registries][%d] endpointRegistriesListOK  %+v", 200, o.Payload)
+}
+
+func (o *EndpointRegistriesListOK) GetPayload() []*models.PortainereeRegistry {
 	return o.Payload
 }
 
@@ -75,14 +106,44 @@ func NewEndpointRegistriesListInternalServerError() *EndpointRegistriesListInter
 	return &EndpointRegistriesListInternalServerError{}
 }
 
-/* EndpointRegistriesListInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointRegistriesListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type EndpointRegistriesListInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint registries list internal server error response has a 2xx status code
+func (o *EndpointRegistriesListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint registries list internal server error response has a 3xx status code
+func (o *EndpointRegistriesListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint registries list internal server error response has a 4xx status code
+func (o *EndpointRegistriesListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint registries list internal server error response has a 5xx status code
+func (o *EndpointRegistriesListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint registries list internal server error response a status code equal to that given
+func (o *EndpointRegistriesListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointRegistriesListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/registries][%d] endpointRegistriesListInternalServerError ", 500)
+}
+
+func (o *EndpointRegistriesListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/registries][%d] endpointRegistriesListInternalServerError ", 500)
 }
 

@@ -52,10 +52,12 @@ func NewEdgeJobDeleteParamsWithHTTPClient(client *http.Client) *EdgeJobDeletePar
 	}
 }
 
-/* EdgeJobDeleteParams contains all the parameters to send to the API endpoint
-   for the edge job delete operation.
+/*
+EdgeJobDeleteParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge job delete operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeJobDeleteParams struct {
 

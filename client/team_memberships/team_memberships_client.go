@@ -44,9 +44,10 @@ type ClientService interface {
 }
 
 /*
-  TeamMembershipCreate creates a new team membership
+	TeamMembershipCreate creates a new team membership
 
-  Create a new team memberships. Access is only available to administrators leaders of the associated team.
+	Create a new team memberships. Access is only available to administrators leaders of the associated team.
+
 **Access policy**: administrator
 */
 func (a *Client) TeamMembershipCreate(params *TeamMembershipCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipCreateOK, *TeamMembershipCreateNoContent, error) {
@@ -87,9 +88,10 @@ func (a *Client) TeamMembershipCreate(params *TeamMembershipCreateParams, authIn
 }
 
 /*
-  TeamMembershipDelete removes a team membership
+	TeamMembershipDelete removes a team membership
 
-  Remove a team membership. Access is only available to administrators leaders of the associated team.
+	Remove a team membership. Access is only available to administrators leaders of the associated team.
+
 **Access policy**: administrator
 */
 func (a *Client) TeamMembershipDelete(params *TeamMembershipDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipDeleteNoContent, error) {
@@ -129,9 +131,10 @@ func (a *Client) TeamMembershipDelete(params *TeamMembershipDeleteParams, authIn
 }
 
 /*
-  TeamMembershipList lists team memberships
+	TeamMembershipList lists team memberships
 
-  List team memberships. Access is only available to administrators and team leaders.
+	List team memberships. Access is only available to administrators and team leaders.
+
 **Access policy**: administrator
 */
 func (a *Client) TeamMembershipList(params *TeamMembershipListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipListOK, error) {
@@ -171,9 +174,10 @@ func (a *Client) TeamMembershipList(params *TeamMembershipListParams, authInfo r
 }
 
 /*
-  TeamMembershipUpdate updates a team membership
+	TeamMembershipUpdate updates a team membership
 
-  Update a team membership. Access is only available to administrators or leaders of the associated team.
+	Update a team membership. Access is only available to administrators or leaders of the associated team.
+
 **Access policy**: administrator or leaders of the associated team
 */
 func (a *Client) TeamMembershipUpdate(params *TeamMembershipUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipUpdateOK, error) {
@@ -213,9 +217,10 @@ func (a *Client) TeamMembershipUpdate(params *TeamMembershipUpdateParams, authIn
 }
 
 /*
-  TeamMemberships lists team memberships
+	TeamMemberships lists team memberships
 
-  List team memberships. Access is only available to administrators and team leaders.
+	List team memberships. Access is only available to administrators and team leaders.
+
 **Access policy**: restricted
 */
 func (a *Client) TeamMemberships(params *TeamMembershipsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipsOK, error) {

@@ -54,14 +54,44 @@ func NewEdgeStackDeleteNoContent() *EdgeStackDeleteNoContent {
 	return &EdgeStackDeleteNoContent{}
 }
 
-/* EdgeStackDeleteNoContent describes a response with status code 204, with default header values.
+/*
+EdgeStackDeleteNoContent describes a response with status code 204, with default header values.
 
-EdgeStackDeleteNoContent edge stack delete no content
+No Content
 */
 type EdgeStackDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this edge stack delete no content response has a 2xx status code
+func (o *EdgeStackDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge stack delete no content response has a 3xx status code
+func (o *EdgeStackDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack delete no content response has a 4xx status code
+func (o *EdgeStackDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack delete no content response has a 5xx status code
+func (o *EdgeStackDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge stack delete no content response a status code equal to that given
+func (o *EdgeStackDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *EdgeStackDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteNoContent ", 204)
+}
+
+func (o *EdgeStackDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewEdgeStackDeleteBadRequest() *EdgeStackDeleteBadRequest {
 	return &EdgeStackDeleteBadRequest{}
 }
 
-/* EdgeStackDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+EdgeStackDeleteBadRequest describes a response with status code 400, with default header values.
 
-EdgeStackDeleteBadRequest edge stack delete bad request
+Bad Request
 */
 type EdgeStackDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this edge stack delete bad request response has a 2xx status code
+func (o *EdgeStackDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack delete bad request response has a 3xx status code
+func (o *EdgeStackDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack delete bad request response has a 4xx status code
+func (o *EdgeStackDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge stack delete bad request response has a 5xx status code
+func (o *EdgeStackDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge stack delete bad request response a status code equal to that given
+func (o *EdgeStackDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EdgeStackDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteBadRequest ", 400)
+}
+
+func (o *EdgeStackDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewEdgeStackDeleteInternalServerError() *EdgeStackDeleteInternalServerError
 	return &EdgeStackDeleteInternalServerError{}
 }
 
-/* EdgeStackDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeStackDeleteInternalServerError describes a response with status code 500, with default header values.
 
-EdgeStackDeleteInternalServerError edge stack delete internal server error
+Internal Server Error
 */
 type EdgeStackDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge stack delete internal server error response has a 2xx status code
+func (o *EdgeStackDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack delete internal server error response has a 3xx status code
+func (o *EdgeStackDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack delete internal server error response has a 4xx status code
+func (o *EdgeStackDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack delete internal server error response has a 5xx status code
+func (o *EdgeStackDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge stack delete internal server error response a status code equal to that given
+func (o *EdgeStackDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeStackDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteInternalServerError ", 500)
+}
+
+func (o *EdgeStackDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteInternalServerError ", 500)
 }
 
@@ -117,14 +207,44 @@ func NewEdgeStackDeleteServiceUnavailable() *EdgeStackDeleteServiceUnavailable {
 	return &EdgeStackDeleteServiceUnavailable{}
 }
 
-/* EdgeStackDeleteServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeStackDeleteServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeStackDeleteServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge stack delete service unavailable response has a 2xx status code
+func (o *EdgeStackDeleteServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack delete service unavailable response has a 3xx status code
+func (o *EdgeStackDeleteServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack delete service unavailable response has a 4xx status code
+func (o *EdgeStackDeleteServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack delete service unavailable response has a 5xx status code
+func (o *EdgeStackDeleteServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge stack delete service unavailable response a status code equal to that given
+func (o *EdgeStackDeleteServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeStackDeleteServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteServiceUnavailable ", 503)
+}
+
+func (o *EdgeStackDeleteServiceUnavailable) String() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteServiceUnavailable ", 503)
 }
 

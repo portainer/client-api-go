@@ -54,14 +54,44 @@ func NewResourceControlDeleteNoContent() *ResourceControlDeleteNoContent {
 	return &ResourceControlDeleteNoContent{}
 }
 
-/* ResourceControlDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ResourceControlDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type ResourceControlDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this resource control delete no content response has a 2xx status code
+func (o *ResourceControlDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this resource control delete no content response has a 3xx status code
+func (o *ResourceControlDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control delete no content response has a 4xx status code
+func (o *ResourceControlDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this resource control delete no content response has a 5xx status code
+func (o *ResourceControlDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control delete no content response a status code equal to that given
+func (o *ResourceControlDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *ResourceControlDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNoContent ", 204)
+}
+
+func (o *ResourceControlDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewResourceControlDeleteBadRequest() *ResourceControlDeleteBadRequest {
 	return &ResourceControlDeleteBadRequest{}
 }
 
-/* ResourceControlDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+ResourceControlDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type ResourceControlDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this resource control delete bad request response has a 2xx status code
+func (o *ResourceControlDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control delete bad request response has a 3xx status code
+func (o *ResourceControlDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control delete bad request response has a 4xx status code
+func (o *ResourceControlDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this resource control delete bad request response has a 5xx status code
+func (o *ResourceControlDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control delete bad request response a status code equal to that given
+func (o *ResourceControlDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ResourceControlDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteBadRequest ", 400)
+}
+
+func (o *ResourceControlDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewResourceControlDeleteNotFound() *ResourceControlDeleteNotFound {
 	return &ResourceControlDeleteNotFound{}
 }
 
-/* ResourceControlDeleteNotFound describes a response with status code 404, with default header values.
+/*
+ResourceControlDeleteNotFound describes a response with status code 404, with default header values.
 
 Resource control not found
 */
 type ResourceControlDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this resource control delete not found response has a 2xx status code
+func (o *ResourceControlDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control delete not found response has a 3xx status code
+func (o *ResourceControlDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control delete not found response has a 4xx status code
+func (o *ResourceControlDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this resource control delete not found response has a 5xx status code
+func (o *ResourceControlDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control delete not found response a status code equal to that given
+func (o *ResourceControlDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *ResourceControlDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNotFound ", 404)
+}
+
+func (o *ResourceControlDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNotFound ", 404)
 }
 
@@ -117,14 +207,44 @@ func NewResourceControlDeleteInternalServerError() *ResourceControlDeleteInterna
 	return &ResourceControlDeleteInternalServerError{}
 }
 
-/* ResourceControlDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+ResourceControlDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type ResourceControlDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this resource control delete internal server error response has a 2xx status code
+func (o *ResourceControlDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control delete internal server error response has a 3xx status code
+func (o *ResourceControlDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control delete internal server error response has a 4xx status code
+func (o *ResourceControlDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this resource control delete internal server error response has a 5xx status code
+func (o *ResourceControlDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this resource control delete internal server error response a status code equal to that given
+func (o *ResourceControlDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ResourceControlDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteInternalServerError ", 500)
+}
+
+func (o *ResourceControlDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteInternalServerError ", 500)
 }
 

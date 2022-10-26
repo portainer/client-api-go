@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EdgeGroupListReader is a Reader for the EdgeGroupList structure.
@@ -51,7 +51,8 @@ func NewEdgeGroupListOK() *EdgeGroupListOK {
 	return &EdgeGroupListOK{}
 }
 
-/* EdgeGroupListOK describes a response with status code 200, with default header values.
+/*
+EdgeGroupListOK describes a response with status code 200, with default header values.
 
 EdgeGroups
 */
@@ -59,9 +60,39 @@ type EdgeGroupListOK struct {
 	Payload []*models.EdgegroupsDecoratedEdgeGroup
 }
 
+// IsSuccess returns true when this edge group list o k response has a 2xx status code
+func (o *EdgeGroupListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge group list o k response has a 3xx status code
+func (o *EdgeGroupListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge group list o k response has a 4xx status code
+func (o *EdgeGroupListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge group list o k response has a 5xx status code
+func (o *EdgeGroupListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge group list o k response a status code equal to that given
+func (o *EdgeGroupListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *EdgeGroupListOK) Error() string {
 	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListOK  %+v", 200, o.Payload)
 }
+
+func (o *EdgeGroupListOK) String() string {
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListOK  %+v", 200, o.Payload)
+}
+
 func (o *EdgeGroupListOK) GetPayload() []*models.EdgegroupsDecoratedEdgeGroup {
 	return o.Payload
 }
@@ -81,14 +112,44 @@ func NewEdgeGroupListInternalServerError() *EdgeGroupListInternalServerError {
 	return &EdgeGroupListInternalServerError{}
 }
 
-/* EdgeGroupListInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeGroupListInternalServerError describes a response with status code 500, with default header values.
 
-EdgeGroupListInternalServerError edge group list internal server error
+Internal Server Error
 */
 type EdgeGroupListInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge group list internal server error response has a 2xx status code
+func (o *EdgeGroupListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge group list internal server error response has a 3xx status code
+func (o *EdgeGroupListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge group list internal server error response has a 4xx status code
+func (o *EdgeGroupListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge group list internal server error response has a 5xx status code
+func (o *EdgeGroupListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge group list internal server error response a status code equal to that given
+func (o *EdgeGroupListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeGroupListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListInternalServerError ", 500)
+}
+
+func (o *EdgeGroupListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListInternalServerError ", 500)
 }
 
@@ -102,14 +163,44 @@ func NewEdgeGroupListServiceUnavailable() *EdgeGroupListServiceUnavailable {
 	return &EdgeGroupListServiceUnavailable{}
 }
 
-/* EdgeGroupListServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeGroupListServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeGroupListServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge group list service unavailable response has a 2xx status code
+func (o *EdgeGroupListServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge group list service unavailable response has a 3xx status code
+func (o *EdgeGroupListServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge group list service unavailable response has a 4xx status code
+func (o *EdgeGroupListServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge group list service unavailable response has a 5xx status code
+func (o *EdgeGroupListServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge group list service unavailable response a status code equal to that given
+func (o *EdgeGroupListServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeGroupListServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListServiceUnavailable ", 503)
+}
+
+func (o *EdgeGroupListServiceUnavailable) String() string {
 	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListServiceUnavailable ", 503)
 }
 

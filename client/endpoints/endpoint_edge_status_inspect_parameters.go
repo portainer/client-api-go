@@ -53,10 +53,12 @@ func NewEndpointEdgeStatusInspectParamsWithHTTPClient(client *http.Client) *Endp
 	}
 }
 
-/* EndpointEdgeStatusInspectParams contains all the parameters to send to the API endpoint
-   for the endpoint edge status inspect operation.
+/*
+EndpointEdgeStatusInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint edge status inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointEdgeStatusInspectParams struct {
 

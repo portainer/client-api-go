@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewCustomTemplateUpdateParams creates a new CustomTemplateUpdateParams object,
@@ -55,10 +55,12 @@ func NewCustomTemplateUpdateParamsWithHTTPClient(client *http.Client) *CustomTem
 	}
 }
 
-/* CustomTemplateUpdateParams contains all the parameters to send to the API endpoint
-   for the custom template update operation.
+/*
+CustomTemplateUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the custom template update operation.
+
+	Typically these are written to a http.Request.
 */
 type CustomTemplateUpdateParams struct {
 

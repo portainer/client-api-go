@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EdgeStackUpdateReader is a Reader for the EdgeStackUpdate structure.
@@ -57,24 +57,55 @@ func NewEdgeStackUpdateOK() *EdgeStackUpdateOK {
 	return &EdgeStackUpdateOK{}
 }
 
-/* EdgeStackUpdateOK describes a response with status code 200, with default header values.
+/*
+EdgeStackUpdateOK describes a response with status code 200, with default header values.
 
 OK
 */
 type EdgeStackUpdateOK struct {
-	Payload *models.PortainerEdgeStack
+	Payload *models.PortainereeEdgeStack
+}
+
+// IsSuccess returns true when this edge stack update o k response has a 2xx status code
+func (o *EdgeStackUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this edge stack update o k response has a 3xx status code
+func (o *EdgeStackUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack update o k response has a 4xx status code
+func (o *EdgeStackUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack update o k response has a 5xx status code
+func (o *EdgeStackUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge stack update o k response a status code equal to that given
+func (o *EdgeStackUpdateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *EdgeStackUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateOK  %+v", 200, o.Payload)
 }
-func (o *EdgeStackUpdateOK) GetPayload() *models.PortainerEdgeStack {
+
+func (o *EdgeStackUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateOK  %+v", 200, o.Payload)
+}
+
+func (o *EdgeStackUpdateOK) GetPayload() *models.PortainereeEdgeStack {
 	return o.Payload
 }
 
 func (o *EdgeStackUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerEdgeStack)
+	o.Payload = new(models.PortainereeEdgeStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewEdgeStackUpdateBadRequest() *EdgeStackUpdateBadRequest {
 	return &EdgeStackUpdateBadRequest{}
 }
 
-/* EdgeStackUpdateBadRequest describes a response with status code 400, with default header values.
+/*
+EdgeStackUpdateBadRequest describes a response with status code 400, with default header values.
 
-EdgeStackUpdateBadRequest edge stack update bad request
+Bad Request
 */
 type EdgeStackUpdateBadRequest struct {
 }
 
+// IsSuccess returns true when this edge stack update bad request response has a 2xx status code
+func (o *EdgeStackUpdateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack update bad request response has a 3xx status code
+func (o *EdgeStackUpdateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack update bad request response has a 4xx status code
+func (o *EdgeStackUpdateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge stack update bad request response has a 5xx status code
+func (o *EdgeStackUpdateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge stack update bad request response a status code equal to that given
+func (o *EdgeStackUpdateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *EdgeStackUpdateBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateBadRequest ", 400)
+}
+
+func (o *EdgeStackUpdateBadRequest) String() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewEdgeStackUpdateInternalServerError() *EdgeStackUpdateInternalServerError
 	return &EdgeStackUpdateInternalServerError{}
 }
 
-/* EdgeStackUpdateInternalServerError describes a response with status code 500, with default header values.
+/*
+EdgeStackUpdateInternalServerError describes a response with status code 500, with default header values.
 
-EdgeStackUpdateInternalServerError edge stack update internal server error
+Internal Server Error
 */
 type EdgeStackUpdateInternalServerError struct {
 }
 
+// IsSuccess returns true when this edge stack update internal server error response has a 2xx status code
+func (o *EdgeStackUpdateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack update internal server error response has a 3xx status code
+func (o *EdgeStackUpdateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack update internal server error response has a 4xx status code
+func (o *EdgeStackUpdateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack update internal server error response has a 5xx status code
+func (o *EdgeStackUpdateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge stack update internal server error response a status code equal to that given
+func (o *EdgeStackUpdateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EdgeStackUpdateInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateInternalServerError ", 500)
+}
+
+func (o *EdgeStackUpdateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateInternalServerError ", 500)
 }
 
@@ -131,14 +222,44 @@ func NewEdgeStackUpdateServiceUnavailable() *EdgeStackUpdateServiceUnavailable {
 	return &EdgeStackUpdateServiceUnavailable{}
 }
 
-/* EdgeStackUpdateServiceUnavailable describes a response with status code 503, with default header values.
+/*
+EdgeStackUpdateServiceUnavailable describes a response with status code 503, with default header values.
 
 Edge compute features are disabled
 */
 type EdgeStackUpdateServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this edge stack update service unavailable response has a 2xx status code
+func (o *EdgeStackUpdateServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack update service unavailable response has a 3xx status code
+func (o *EdgeStackUpdateServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack update service unavailable response has a 4xx status code
+func (o *EdgeStackUpdateServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this edge stack update service unavailable response has a 5xx status code
+func (o *EdgeStackUpdateServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this edge stack update service unavailable response a status code equal to that given
+func (o *EdgeStackUpdateServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
 func (o *EdgeStackUpdateServiceUnavailable) Error() string {
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateServiceUnavailable ", 503)
+}
+
+func (o *EdgeStackUpdateServiceUnavailable) String() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateServiceUnavailable ", 503)
 }
 

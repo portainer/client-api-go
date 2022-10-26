@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // HelmUserRepositoriesListReader is a Reader for the HelmUserRepositoriesList structure.
@@ -57,7 +57,8 @@ func NewHelmUserRepositoriesListOK() *HelmUserRepositoriesListOK {
 	return &HelmUserRepositoriesListOK{}
 }
 
-/* HelmUserRepositoriesListOK describes a response with status code 200, with default header values.
+/*
+HelmUserRepositoriesListOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -65,9 +66,39 @@ type HelmUserRepositoriesListOK struct {
 	Payload *models.HelmHelmUserRepositoryResponse
 }
 
+// IsSuccess returns true when this helm user repositories list o k response has a 2xx status code
+func (o *HelmUserRepositoriesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this helm user repositories list o k response has a 3xx status code
+func (o *HelmUserRepositoriesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm user repositories list o k response has a 4xx status code
+func (o *HelmUserRepositoriesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm user repositories list o k response has a 5xx status code
+func (o *HelmUserRepositoriesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm user repositories list o k response a status code equal to that given
+func (o *HelmUserRepositoriesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *HelmUserRepositoriesListOK) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListOK  %+v", 200, o.Payload)
 }
+
+func (o *HelmUserRepositoriesListOK) String() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListOK  %+v", 200, o.Payload)
+}
+
 func (o *HelmUserRepositoriesListOK) GetPayload() *models.HelmHelmUserRepositoryResponse {
 	return o.Payload
 }
@@ -89,14 +120,44 @@ func NewHelmUserRepositoriesListBadRequest() *HelmUserRepositoriesListBadRequest
 	return &HelmUserRepositoriesListBadRequest{}
 }
 
-/* HelmUserRepositoriesListBadRequest describes a response with status code 400, with default header values.
+/*
+HelmUserRepositoriesListBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type HelmUserRepositoriesListBadRequest struct {
 }
 
+// IsSuccess returns true when this helm user repositories list bad request response has a 2xx status code
+func (o *HelmUserRepositoriesListBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm user repositories list bad request response has a 3xx status code
+func (o *HelmUserRepositoriesListBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm user repositories list bad request response has a 4xx status code
+func (o *HelmUserRepositoriesListBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm user repositories list bad request response has a 5xx status code
+func (o *HelmUserRepositoriesListBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm user repositories list bad request response a status code equal to that given
+func (o *HelmUserRepositoriesListBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *HelmUserRepositoriesListBadRequest) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListBadRequest ", 400)
+}
+
+func (o *HelmUserRepositoriesListBadRequest) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewHelmUserRepositoriesListForbidden() *HelmUserRepositoriesListForbidden {
 	return &HelmUserRepositoriesListForbidden{}
 }
 
-/* HelmUserRepositoriesListForbidden describes a response with status code 403, with default header values.
+/*
+HelmUserRepositoriesListForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type HelmUserRepositoriesListForbidden struct {
 }
 
+// IsSuccess returns true when this helm user repositories list forbidden response has a 2xx status code
+func (o *HelmUserRepositoriesListForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm user repositories list forbidden response has a 3xx status code
+func (o *HelmUserRepositoriesListForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm user repositories list forbidden response has a 4xx status code
+func (o *HelmUserRepositoriesListForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm user repositories list forbidden response has a 5xx status code
+func (o *HelmUserRepositoriesListForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm user repositories list forbidden response a status code equal to that given
+func (o *HelmUserRepositoriesListForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *HelmUserRepositoriesListForbidden) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListForbidden ", 403)
+}
+
+func (o *HelmUserRepositoriesListForbidden) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListForbidden ", 403)
 }
 
@@ -131,14 +222,44 @@ func NewHelmUserRepositoriesListInternalServerError() *HelmUserRepositoriesListI
 	return &HelmUserRepositoriesListInternalServerError{}
 }
 
-/* HelmUserRepositoriesListInternalServerError describes a response with status code 500, with default header values.
+/*
+HelmUserRepositoriesListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type HelmUserRepositoriesListInternalServerError struct {
 }
 
+// IsSuccess returns true when this helm user repositories list internal server error response has a 2xx status code
+func (o *HelmUserRepositoriesListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm user repositories list internal server error response has a 3xx status code
+func (o *HelmUserRepositoriesListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm user repositories list internal server error response has a 4xx status code
+func (o *HelmUserRepositoriesListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm user repositories list internal server error response has a 5xx status code
+func (o *HelmUserRepositoriesListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this helm user repositories list internal server error response a status code equal to that given
+func (o *HelmUserRepositoriesListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *HelmUserRepositoriesListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListInternalServerError ", 500)
+}
+
+func (o *HelmUserRepositoriesListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListInternalServerError ", 500)
 }
 

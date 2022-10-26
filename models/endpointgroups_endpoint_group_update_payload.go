@@ -31,10 +31,10 @@ type EndpointgroupsEndpointGroupUpdatePayload struct {
 	TagIDs []int64 `json:"tagIDs"`
 
 	// team access policies
-	TeamAccessPolicies PortainerTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
+	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
 
 	// user access policies
-	UserAccessPolicies PortainerUserAccessPolicies `json:"userAccessPolicies,omitempty"`
+	UserAccessPolicies PortainereeUserAccessPolicies `json:"userAccessPolicies,omitempty"`
 }
 
 // Validate validates this endpointgroups endpoint group update payload

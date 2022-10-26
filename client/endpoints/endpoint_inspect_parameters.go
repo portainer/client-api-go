@@ -53,10 +53,12 @@ func NewEndpointInspectParamsWithHTTPClient(client *http.Client) *EndpointInspec
 	}
 }
 
-/* EndpointInspectParams contains all the parameters to send to the API endpoint
-   for the endpoint inspect operation.
+/*
+EndpointInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointInspectParams struct {
 

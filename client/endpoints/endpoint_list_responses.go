@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // EndpointListReader is a Reader for the EndpointList structure.
@@ -45,18 +45,49 @@ func NewEndpointListOK() *EndpointListOK {
 	return &EndpointListOK{}
 }
 
-/* EndpointListOK describes a response with status code 200, with default header values.
+/*
+EndpointListOK describes a response with status code 200, with default header values.
 
 Endpoints
 */
 type EndpointListOK struct {
-	Payload []*models.PortainerEndpoint
+	Payload []*models.PortainereeEndpoint
+}
+
+// IsSuccess returns true when this endpoint list o k response has a 2xx status code
+func (o *EndpointListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this endpoint list o k response has a 3xx status code
+func (o *EndpointListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint list o k response has a 4xx status code
+func (o *EndpointListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint list o k response has a 5xx status code
+func (o *EndpointListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint list o k response a status code equal to that given
+func (o *EndpointListOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *EndpointListOK) Error() string {
 	return fmt.Sprintf("[GET /endpoints][%d] endpointListOK  %+v", 200, o.Payload)
 }
-func (o *EndpointListOK) GetPayload() []*models.PortainerEndpoint {
+
+func (o *EndpointListOK) String() string {
+	return fmt.Sprintf("[GET /endpoints][%d] endpointListOK  %+v", 200, o.Payload)
+}
+
+func (o *EndpointListOK) GetPayload() []*models.PortainereeEndpoint {
 	return o.Payload
 }
 
@@ -75,14 +106,44 @@ func NewEndpointListInternalServerError() *EndpointListInternalServerError {
 	return &EndpointListInternalServerError{}
 }
 
-/* EndpointListInternalServerError describes a response with status code 500, with default header values.
+/*
+EndpointListInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type EndpointListInternalServerError struct {
 }
 
+// IsSuccess returns true when this endpoint list internal server error response has a 2xx status code
+func (o *EndpointListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint list internal server error response has a 3xx status code
+func (o *EndpointListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint list internal server error response has a 4xx status code
+func (o *EndpointListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this endpoint list internal server error response has a 5xx status code
+func (o *EndpointListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this endpoint list internal server error response a status code equal to that given
+func (o *EndpointListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *EndpointListInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /endpoints][%d] endpointListInternalServerError ", 500)
+}
+
+func (o *EndpointListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /endpoints][%d] endpointListInternalServerError ", 500)
 }
 

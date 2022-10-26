@@ -53,10 +53,12 @@ func NewEndpointGroupAddEndpointParamsWithHTTPClient(client *http.Client) *Endpo
 	}
 }
 
-/* EndpointGroupAddEndpointParams contains all the parameters to send to the API endpoint
-   for the endpoint group add endpoint operation.
+/*
+EndpointGroupAddEndpointParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the endpoint group add endpoint operation.
+
+	Typically these are written to a http.Request.
 */
 type EndpointGroupAddEndpointParams struct {
 

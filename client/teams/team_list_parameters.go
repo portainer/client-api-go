@@ -52,10 +52,12 @@ func NewTeamListParamsWithHTTPClient(client *http.Client) *TeamListParams {
 	}
 }
 
-/* TeamListParams contains all the parameters to send to the API endpoint
-   for the team list operation.
+/*
+TeamListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the team list operation.
+
+	Typically these are written to a http.Request.
 */
 type TeamListParams struct {
 	timeout    time.Duration

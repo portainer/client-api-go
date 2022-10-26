@@ -20,15 +20,23 @@ import (
 type StacksUpdateSwarmStackPayload struct {
 
 	// A list of environment(endpoint) variables used during stack deployment
-	Env []*PortainerPair `json:"env"`
+	Env []*PortainereePair `json:"env"`
 
 	// Prune services that are no longer referenced (only available for Swarm stacks)
 	// Example: true
 	Prune bool `json:"prune,omitempty"`
 
+	// Force a pulling to current image with the original tag though the image is already the latest
+	// Example: false
+	PullImage bool `json:"pullImage,omitempty"`
+
 	// New content of the Stack file
 	// Example: version: 3\n services:\n web:\n image:nginx
 	StackFileContent string `json:"stackFileContent,omitempty"`
+
+	// A UUID to identify a webhook. The stack will be force updated and pull the latest image when the webhook was invoked.
+	// Example: c11fdf23-183e-428a-9bb6-16db01032174
+	Webhook string `json:"webhook,omitempty"`
 }
 
 // Validate validates this stacks update swarm stack payload

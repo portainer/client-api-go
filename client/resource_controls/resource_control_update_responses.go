@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // ResourceControlUpdateReader is a Reader for the ResourceControlUpdate structure.
@@ -63,24 +63,55 @@ func NewResourceControlUpdateOK() *ResourceControlUpdateOK {
 	return &ResourceControlUpdateOK{}
 }
 
-/* ResourceControlUpdateOK describes a response with status code 200, with default header values.
+/*
+ResourceControlUpdateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type ResourceControlUpdateOK struct {
-	Payload *models.PortainerResourceControl
+	Payload *models.PortainereeResourceControl
+}
+
+// IsSuccess returns true when this resource control update o k response has a 2xx status code
+func (o *ResourceControlUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this resource control update o k response has a 3xx status code
+func (o *ResourceControlUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control update o k response has a 4xx status code
+func (o *ResourceControlUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this resource control update o k response has a 5xx status code
+func (o *ResourceControlUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control update o k response a status code equal to that given
+func (o *ResourceControlUpdateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *ResourceControlUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateOK  %+v", 200, o.Payload)
 }
-func (o *ResourceControlUpdateOK) GetPayload() *models.PortainerResourceControl {
+
+func (o *ResourceControlUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateOK  %+v", 200, o.Payload)
+}
+
+func (o *ResourceControlUpdateOK) GetPayload() *models.PortainereeResourceControl {
 	return o.Payload
 }
 
 func (o *ResourceControlUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerResourceControl)
+	o.Payload = new(models.PortainereeResourceControl)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -95,14 +126,44 @@ func NewResourceControlUpdateBadRequest() *ResourceControlUpdateBadRequest {
 	return &ResourceControlUpdateBadRequest{}
 }
 
-/* ResourceControlUpdateBadRequest describes a response with status code 400, with default header values.
+/*
+ResourceControlUpdateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type ResourceControlUpdateBadRequest struct {
 }
 
+// IsSuccess returns true when this resource control update bad request response has a 2xx status code
+func (o *ResourceControlUpdateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control update bad request response has a 3xx status code
+func (o *ResourceControlUpdateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control update bad request response has a 4xx status code
+func (o *ResourceControlUpdateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this resource control update bad request response has a 5xx status code
+func (o *ResourceControlUpdateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control update bad request response a status code equal to that given
+func (o *ResourceControlUpdateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ResourceControlUpdateBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateBadRequest ", 400)
+}
+
+func (o *ResourceControlUpdateBadRequest) String() string {
 	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateBadRequest ", 400)
 }
 
@@ -116,14 +177,44 @@ func NewResourceControlUpdateForbidden() *ResourceControlUpdateForbidden {
 	return &ResourceControlUpdateForbidden{}
 }
 
-/* ResourceControlUpdateForbidden describes a response with status code 403, with default header values.
+/*
+ResourceControlUpdateForbidden describes a response with status code 403, with default header values.
 
 Unauthorized
 */
 type ResourceControlUpdateForbidden struct {
 }
 
+// IsSuccess returns true when this resource control update forbidden response has a 2xx status code
+func (o *ResourceControlUpdateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control update forbidden response has a 3xx status code
+func (o *ResourceControlUpdateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control update forbidden response has a 4xx status code
+func (o *ResourceControlUpdateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this resource control update forbidden response has a 5xx status code
+func (o *ResourceControlUpdateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control update forbidden response a status code equal to that given
+func (o *ResourceControlUpdateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ResourceControlUpdateForbidden) Error() string {
+	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateForbidden ", 403)
+}
+
+func (o *ResourceControlUpdateForbidden) String() string {
 	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateForbidden ", 403)
 }
 
@@ -137,14 +228,44 @@ func NewResourceControlUpdateNotFound() *ResourceControlUpdateNotFound {
 	return &ResourceControlUpdateNotFound{}
 }
 
-/* ResourceControlUpdateNotFound describes a response with status code 404, with default header values.
+/*
+ResourceControlUpdateNotFound describes a response with status code 404, with default header values.
 
 Resource control not found
 */
 type ResourceControlUpdateNotFound struct {
 }
 
+// IsSuccess returns true when this resource control update not found response has a 2xx status code
+func (o *ResourceControlUpdateNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control update not found response has a 3xx status code
+func (o *ResourceControlUpdateNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control update not found response has a 4xx status code
+func (o *ResourceControlUpdateNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this resource control update not found response has a 5xx status code
+func (o *ResourceControlUpdateNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this resource control update not found response a status code equal to that given
+func (o *ResourceControlUpdateNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *ResourceControlUpdateNotFound) Error() string {
+	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateNotFound ", 404)
+}
+
+func (o *ResourceControlUpdateNotFound) String() string {
 	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateNotFound ", 404)
 }
 
@@ -158,14 +279,44 @@ func NewResourceControlUpdateInternalServerError() *ResourceControlUpdateInterna
 	return &ResourceControlUpdateInternalServerError{}
 }
 
-/* ResourceControlUpdateInternalServerError describes a response with status code 500, with default header values.
+/*
+ResourceControlUpdateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type ResourceControlUpdateInternalServerError struct {
 }
 
+// IsSuccess returns true when this resource control update internal server error response has a 2xx status code
+func (o *ResourceControlUpdateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this resource control update internal server error response has a 3xx status code
+func (o *ResourceControlUpdateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this resource control update internal server error response has a 4xx status code
+func (o *ResourceControlUpdateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this resource control update internal server error response has a 5xx status code
+func (o *ResourceControlUpdateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this resource control update internal server error response a status code equal to that given
+func (o *ResourceControlUpdateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ResourceControlUpdateInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateInternalServerError ", 500)
+}
+
+func (o *ResourceControlUpdateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateInternalServerError ", 500)
 }
 

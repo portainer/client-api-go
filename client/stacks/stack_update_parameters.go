@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewStackUpdateParams creates a new StackUpdateParams object,
@@ -55,10 +55,12 @@ func NewStackUpdateParamsWithHTTPClient(client *http.Client) *StackUpdateParams 
 	}
 }
 
-/* StackUpdateParams contains all the parameters to send to the API endpoint
-   for the stack update operation.
+/*
+StackUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stack update operation.
+
+	Typically these are written to a http.Request.
 */
 type StackUpdateParams struct {
 

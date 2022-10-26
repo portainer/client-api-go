@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // SettingsInspectReader is a Reader for the SettingsInspect structure.
@@ -45,24 +45,55 @@ func NewSettingsInspectOK() *SettingsInspectOK {
 	return &SettingsInspectOK{}
 }
 
-/* SettingsInspectOK describes a response with status code 200, with default header values.
+/*
+SettingsInspectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type SettingsInspectOK struct {
-	Payload *models.PortainerSettings
+	Payload *models.PortainereeSettings
+}
+
+// IsSuccess returns true when this settings inspect o k response has a 2xx status code
+func (o *SettingsInspectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this settings inspect o k response has a 3xx status code
+func (o *SettingsInspectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this settings inspect o k response has a 4xx status code
+func (o *SettingsInspectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this settings inspect o k response has a 5xx status code
+func (o *SettingsInspectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this settings inspect o k response a status code equal to that given
+func (o *SettingsInspectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *SettingsInspectOK) Error() string {
 	return fmt.Sprintf("[GET /settings][%d] settingsInspectOK  %+v", 200, o.Payload)
 }
-func (o *SettingsInspectOK) GetPayload() *models.PortainerSettings {
+
+func (o *SettingsInspectOK) String() string {
+	return fmt.Sprintf("[GET /settings][%d] settingsInspectOK  %+v", 200, o.Payload)
+}
+
+func (o *SettingsInspectOK) GetPayload() *models.PortainereeSettings {
 	return o.Payload
 }
 
 func (o *SettingsInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerSettings)
+	o.Payload = new(models.PortainereeSettings)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -77,14 +108,44 @@ func NewSettingsInspectInternalServerError() *SettingsInspectInternalServerError
 	return &SettingsInspectInternalServerError{}
 }
 
-/* SettingsInspectInternalServerError describes a response with status code 500, with default header values.
+/*
+SettingsInspectInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type SettingsInspectInternalServerError struct {
 }
 
+// IsSuccess returns true when this settings inspect internal server error response has a 2xx status code
+func (o *SettingsInspectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this settings inspect internal server error response has a 3xx status code
+func (o *SettingsInspectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this settings inspect internal server error response has a 4xx status code
+func (o *SettingsInspectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this settings inspect internal server error response has a 5xx status code
+func (o *SettingsInspectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this settings inspect internal server error response a status code equal to that given
+func (o *SettingsInspectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *SettingsInspectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /settings][%d] settingsInspectInternalServerError ", 500)
+}
+
+func (o *SettingsInspectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /settings][%d] settingsInspectInternalServerError ", 500)
 }
 

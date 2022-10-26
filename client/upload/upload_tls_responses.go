@@ -48,14 +48,44 @@ func NewUploadTLSNoContent() *UploadTLSNoContent {
 	return &UploadTLSNoContent{}
 }
 
-/* UploadTLSNoContent describes a response with status code 204, with default header values.
+/*
+UploadTLSNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type UploadTLSNoContent struct {
 }
 
+// IsSuccess returns true when this upload Tls no content response has a 2xx status code
+func (o *UploadTLSNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this upload Tls no content response has a 3xx status code
+func (o *UploadTLSNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload Tls no content response has a 4xx status code
+func (o *UploadTLSNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this upload Tls no content response has a 5xx status code
+func (o *UploadTLSNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload Tls no content response a status code equal to that given
+func (o *UploadTLSNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *UploadTLSNoContent) Error() string {
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsNoContent ", 204)
+}
+
+func (o *UploadTLSNoContent) String() string {
 	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsNoContent ", 204)
 }
 
@@ -69,14 +99,44 @@ func NewUploadTLSBadRequest() *UploadTLSBadRequest {
 	return &UploadTLSBadRequest{}
 }
 
-/* UploadTLSBadRequest describes a response with status code 400, with default header values.
+/*
+UploadTLSBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type UploadTLSBadRequest struct {
 }
 
+// IsSuccess returns true when this upload Tls bad request response has a 2xx status code
+func (o *UploadTLSBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload Tls bad request response has a 3xx status code
+func (o *UploadTLSBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload Tls bad request response has a 4xx status code
+func (o *UploadTLSBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this upload Tls bad request response has a 5xx status code
+func (o *UploadTLSBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this upload Tls bad request response a status code equal to that given
+func (o *UploadTLSBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UploadTLSBadRequest) Error() string {
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsBadRequest ", 400)
+}
+
+func (o *UploadTLSBadRequest) String() string {
 	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewUploadTLSInternalServerError() *UploadTLSInternalServerError {
 	return &UploadTLSInternalServerError{}
 }
 
-/* UploadTLSInternalServerError describes a response with status code 500, with default header values.
+/*
+UploadTLSInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type UploadTLSInternalServerError struct {
 }
 
+// IsSuccess returns true when this upload Tls internal server error response has a 2xx status code
+func (o *UploadTLSInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this upload Tls internal server error response has a 3xx status code
+func (o *UploadTLSInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this upload Tls internal server error response has a 4xx status code
+func (o *UploadTLSInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this upload Tls internal server error response has a 5xx status code
+func (o *UploadTLSInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this upload Tls internal server error response a status code equal to that given
+func (o *UploadTLSInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UploadTLSInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsInternalServerError ", 500)
+}
+
+func (o *UploadTLSInternalServerError) String() string {
 	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsInternalServerError ", 500)
 }
 

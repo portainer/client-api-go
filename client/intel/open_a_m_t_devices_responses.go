@@ -54,14 +54,44 @@ func NewOpenAMTDevicesOK() *OpenAMTDevicesOK {
 	return &OpenAMTDevicesOK{}
 }
 
-/* OpenAMTDevicesOK describes a response with status code 200, with default header values.
+/*
+OpenAMTDevicesOK describes a response with status code 200, with default header values.
 
 Success
 */
 type OpenAMTDevicesOK struct {
 }
 
+// IsSuccess returns true when this open a m t devices o k response has a 2xx status code
+func (o *OpenAMTDevicesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this open a m t devices o k response has a 3xx status code
+func (o *OpenAMTDevicesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t devices o k response has a 4xx status code
+func (o *OpenAMTDevicesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this open a m t devices o k response has a 5xx status code
+func (o *OpenAMTDevicesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t devices o k response a status code equal to that given
+func (o *OpenAMTDevicesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *OpenAMTDevicesOK) Error() string {
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesOK ", 200)
+}
+
+func (o *OpenAMTDevicesOK) String() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesOK ", 200)
 }
 
@@ -75,14 +105,44 @@ func NewOpenAMTDevicesBadRequest() *OpenAMTDevicesBadRequest {
 	return &OpenAMTDevicesBadRequest{}
 }
 
-/* OpenAMTDevicesBadRequest describes a response with status code 400, with default header values.
+/*
+OpenAMTDevicesBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type OpenAMTDevicesBadRequest struct {
 }
 
+// IsSuccess returns true when this open a m t devices bad request response has a 2xx status code
+func (o *OpenAMTDevicesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t devices bad request response has a 3xx status code
+func (o *OpenAMTDevicesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t devices bad request response has a 4xx status code
+func (o *OpenAMTDevicesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this open a m t devices bad request response has a 5xx status code
+func (o *OpenAMTDevicesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t devices bad request response a status code equal to that given
+func (o *OpenAMTDevicesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *OpenAMTDevicesBadRequest) Error() string {
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesBadRequest ", 400)
+}
+
+func (o *OpenAMTDevicesBadRequest) String() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewOpenAMTDevicesForbidden() *OpenAMTDevicesForbidden {
 	return &OpenAMTDevicesForbidden{}
 }
 
-/* OpenAMTDevicesForbidden describes a response with status code 403, with default header values.
+/*
+OpenAMTDevicesForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type OpenAMTDevicesForbidden struct {
 }
 
+// IsSuccess returns true when this open a m t devices forbidden response has a 2xx status code
+func (o *OpenAMTDevicesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t devices forbidden response has a 3xx status code
+func (o *OpenAMTDevicesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t devices forbidden response has a 4xx status code
+func (o *OpenAMTDevicesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this open a m t devices forbidden response has a 5xx status code
+func (o *OpenAMTDevicesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this open a m t devices forbidden response a status code equal to that given
+func (o *OpenAMTDevicesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *OpenAMTDevicesForbidden) Error() string {
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesForbidden ", 403)
+}
+
+func (o *OpenAMTDevicesForbidden) String() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewOpenAMTDevicesInternalServerError() *OpenAMTDevicesInternalServerError {
 	return &OpenAMTDevicesInternalServerError{}
 }
 
-/* OpenAMTDevicesInternalServerError describes a response with status code 500, with default header values.
+/*
+OpenAMTDevicesInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type OpenAMTDevicesInternalServerError struct {
 }
 
+// IsSuccess returns true when this open a m t devices internal server error response has a 2xx status code
+func (o *OpenAMTDevicesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this open a m t devices internal server error response has a 3xx status code
+func (o *OpenAMTDevicesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this open a m t devices internal server error response has a 4xx status code
+func (o *OpenAMTDevicesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this open a m t devices internal server error response has a 5xx status code
+func (o *OpenAMTDevicesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this open a m t devices internal server error response a status code equal to that given
+func (o *OpenAMTDevicesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *OpenAMTDevicesInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesInternalServerError ", 500)
+}
+
+func (o *OpenAMTDevicesInternalServerError) String() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesInternalServerError ", 500)
 }
 

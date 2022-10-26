@@ -52,10 +52,12 @@ func NewTeamMembershipsParamsWithHTTPClient(client *http.Client) *TeamMembership
 	}
 }
 
-/* TeamMembershipsParams contains all the parameters to send to the API endpoint
-   for the team memberships operation.
+/*
+TeamMembershipsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the team memberships operation.
+
+	Typically these are written to a http.Request.
 */
 type TeamMembershipsParams struct {
 

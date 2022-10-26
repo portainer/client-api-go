@@ -53,10 +53,12 @@ func NewCustomTemplateInspectParamsWithHTTPClient(client *http.Client) *CustomTe
 	}
 }
 
-/* CustomTemplateInspectParams contains all the parameters to send to the API endpoint
-   for the custom template inspect operation.
+/*
+CustomTemplateInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the custom template inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type CustomTemplateInspectParams struct {
 

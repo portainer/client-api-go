@@ -52,10 +52,12 @@ func NewFdoListAllParamsWithHTTPClient(client *http.Client) *FdoListAllParams {
 	}
 }
 
-/* FdoListAllParams contains all the parameters to send to the API endpoint
-   for the fdo list all operation.
+/*
+FdoListAllParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the fdo list all operation.
+
+	Typically these are written to a http.Request.
 */
 type FdoListAllParams struct {
 	timeout    time.Duration

@@ -53,10 +53,12 @@ func NewStackStartParamsWithHTTPClient(client *http.Client) *StackStartParams {
 	}
 }
 
-/* StackStartParams contains all the parameters to send to the API endpoint
-   for the stack start operation.
+/*
+StackStartParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stack start operation.
+
+	Typically these are written to a http.Request.
 */
 type StackStartParams struct {
 

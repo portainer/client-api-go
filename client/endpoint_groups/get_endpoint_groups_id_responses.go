@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // GetEndpointGroupsIDReader is a Reader for the GetEndpointGroupsID structure.
@@ -57,24 +57,55 @@ func NewGetEndpointGroupsIDOK() *GetEndpointGroupsIDOK {
 	return &GetEndpointGroupsIDOK{}
 }
 
-/* GetEndpointGroupsIDOK describes a response with status code 200, with default header values.
+/*
+GetEndpointGroupsIDOK describes a response with status code 200, with default header values.
 
 Success
 */
 type GetEndpointGroupsIDOK struct {
-	Payload *models.PortainerEndpointGroup
+	Payload *models.PortainereeEndpointGroup
+}
+
+// IsSuccess returns true when this get endpoint groups Id o k response has a 2xx status code
+func (o *GetEndpointGroupsIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get endpoint groups Id o k response has a 3xx status code
+func (o *GetEndpointGroupsIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get endpoint groups Id o k response has a 4xx status code
+func (o *GetEndpointGroupsIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get endpoint groups Id o k response has a 5xx status code
+func (o *GetEndpointGroupsIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get endpoint groups Id o k response a status code equal to that given
+func (o *GetEndpointGroupsIDOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *GetEndpointGroupsIDOK) Error() string {
 	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdOK  %+v", 200, o.Payload)
 }
-func (o *GetEndpointGroupsIDOK) GetPayload() *models.PortainerEndpointGroup {
+
+func (o *GetEndpointGroupsIDOK) String() string {
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdOK  %+v", 200, o.Payload)
+}
+
+func (o *GetEndpointGroupsIDOK) GetPayload() *models.PortainereeEndpointGroup {
 	return o.Payload
 }
 
 func (o *GetEndpointGroupsIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerEndpointGroup)
+	o.Payload = new(models.PortainereeEndpointGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewGetEndpointGroupsIDBadRequest() *GetEndpointGroupsIDBadRequest {
 	return &GetEndpointGroupsIDBadRequest{}
 }
 
-/* GetEndpointGroupsIDBadRequest describes a response with status code 400, with default header values.
+/*
+GetEndpointGroupsIDBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type GetEndpointGroupsIDBadRequest struct {
 }
 
+// IsSuccess returns true when this get endpoint groups Id bad request response has a 2xx status code
+func (o *GetEndpointGroupsIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get endpoint groups Id bad request response has a 3xx status code
+func (o *GetEndpointGroupsIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get endpoint groups Id bad request response has a 4xx status code
+func (o *GetEndpointGroupsIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get endpoint groups Id bad request response has a 5xx status code
+func (o *GetEndpointGroupsIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get endpoint groups Id bad request response a status code equal to that given
+func (o *GetEndpointGroupsIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetEndpointGroupsIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdBadRequest ", 400)
+}
+
+func (o *GetEndpointGroupsIDBadRequest) String() string {
 	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewGetEndpointGroupsIDNotFound() *GetEndpointGroupsIDNotFound {
 	return &GetEndpointGroupsIDNotFound{}
 }
 
-/* GetEndpointGroupsIDNotFound describes a response with status code 404, with default header values.
+/*
+GetEndpointGroupsIDNotFound describes a response with status code 404, with default header values.
 
 EndpointGroup not found
 */
 type GetEndpointGroupsIDNotFound struct {
 }
 
+// IsSuccess returns true when this get endpoint groups Id not found response has a 2xx status code
+func (o *GetEndpointGroupsIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get endpoint groups Id not found response has a 3xx status code
+func (o *GetEndpointGroupsIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get endpoint groups Id not found response has a 4xx status code
+func (o *GetEndpointGroupsIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get endpoint groups Id not found response has a 5xx status code
+func (o *GetEndpointGroupsIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get endpoint groups Id not found response a status code equal to that given
+func (o *GetEndpointGroupsIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetEndpointGroupsIDNotFound) Error() string {
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdNotFound ", 404)
+}
+
+func (o *GetEndpointGroupsIDNotFound) String() string {
 	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdNotFound ", 404)
 }
 
@@ -131,14 +222,44 @@ func NewGetEndpointGroupsIDInternalServerError() *GetEndpointGroupsIDInternalSer
 	return &GetEndpointGroupsIDInternalServerError{}
 }
 
-/* GetEndpointGroupsIDInternalServerError describes a response with status code 500, with default header values.
+/*
+GetEndpointGroupsIDInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type GetEndpointGroupsIDInternalServerError struct {
 }
 
+// IsSuccess returns true when this get endpoint groups Id internal server error response has a 2xx status code
+func (o *GetEndpointGroupsIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get endpoint groups Id internal server error response has a 3xx status code
+func (o *GetEndpointGroupsIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get endpoint groups Id internal server error response has a 4xx status code
+func (o *GetEndpointGroupsIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get endpoint groups Id internal server error response has a 5xx status code
+func (o *GetEndpointGroupsIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get endpoint groups Id internal server error response a status code equal to that given
+func (o *GetEndpointGroupsIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetEndpointGroupsIDInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdInternalServerError ", 500)
+}
+
+func (o *GetEndpointGroupsIDInternalServerError) String() string {
 	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdInternalServerError ", 500)
 }
 

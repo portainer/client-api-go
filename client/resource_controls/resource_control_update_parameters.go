@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewResourceControlUpdateParams creates a new ResourceControlUpdateParams object,
@@ -55,10 +55,12 @@ func NewResourceControlUpdateParamsWithHTTPClient(client *http.Client) *Resource
 	}
 }
 
-/* ResourceControlUpdateParams contains all the parameters to send to the API endpoint
-   for the resource control update operation.
+/*
+ResourceControlUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the resource control update operation.
+
+	Typically these are written to a http.Request.
 */
 type ResourceControlUpdateParams struct {
 

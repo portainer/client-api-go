@@ -42,9 +42,10 @@ type ClientService interface {
 }
 
 /*
-  GetWebsocketAttach attaches a websocket
+	GetWebsocketAttach attaches a websocket
 
-  If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).
+	If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).
+
 If the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and
 an AttachStart operation HTTP request will be created and hijacked.
 **Access policy**: authenticated
@@ -86,9 +87,10 @@ func (a *Client) GetWebsocketAttach(params *GetWebsocketAttachParams, authInfo r
 }
 
 /*
-  GetWebsocketExec executes a websocket
+	GetWebsocketExec executes a websocket
 
-  If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).
+	If the nodeName query parameter is present, the request will be proxied to the underlying agent environment(endpoint).
+
 If the nodeName query parameter is not specified, the request will be upgraded to the websocket protocol and
 an ExecStart operation HTTP request will be created and hijacked.
 */
@@ -129,9 +131,10 @@ func (a *Client) GetWebsocketExec(params *GetWebsocketExecParams, authInfo runti
 }
 
 /*
-  GetWebsocketKubernetesShell executes a websocket on kubectl shell pod
+	GetWebsocketKubernetesShell executes a websocket on kubectl shell pod
 
-  The request will be upgraded to the websocket protocol. The request will proxy input from the client to the pod via long-lived websocket connection.
+	The request will be upgraded to the websocket protocol. The request will proxy input from the client to the pod via long-lived websocket connection.
+
 **Access policy**: authenticated
 */
 func (a *Client) GetWebsocketKubernetesShell(params *GetWebsocketKubernetesShellParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketKubernetesShellOK, error) {
@@ -171,9 +174,10 @@ func (a *Client) GetWebsocketKubernetesShell(params *GetWebsocketKubernetesShell
 }
 
 /*
-  GetWebsocketPod executes a websocket on pod
+	GetWebsocketPod executes a websocket on pod
 
-  The request will be upgraded to the websocket protocol.
+	The request will be upgraded to the websocket protocol.
+
 **Access policy**: authenticated
 */
 func (a *Client) GetWebsocketPod(params *GetWebsocketPodParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetWebsocketPodOK, error) {

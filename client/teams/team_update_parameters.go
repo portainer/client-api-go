@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewTeamUpdateParams creates a new TeamUpdateParams object,
@@ -55,10 +55,12 @@ func NewTeamUpdateParamsWithHTTPClient(client *http.Client) *TeamUpdateParams {
 	}
 }
 
-/* TeamUpdateParams contains all the parameters to send to the API endpoint
-   for the team update operation.
+/*
+TeamUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the team update operation.
+
+	Typically these are written to a http.Request.
 */
 type TeamUpdateParams struct {
 

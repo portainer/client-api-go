@@ -48,6 +48,8 @@ type ClientService interface {
 
 	UserMembershipsInspect(params *UserMembershipsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserMembershipsInspectOK, error)
 
+	UserNamespaces(params *UserNamespacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserNamespacesOK, error)
+
 	UserRemoveAPIKey(params *UserRemoveAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserRemoveAPIKeyNoContent, error)
 
 	UserUpdate(params *UserUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdateOK, error)
@@ -58,9 +60,10 @@ type ClientService interface {
 }
 
 /*
-  UserAdminCheck checks administrator account existence
+	UserAdminCheck checks administrator account existence
 
-  Check if an administrator account exists in the database.
+	Check if an administrator account exists in the database.
+
 **Access policy**: public
 */
 func (a *Client) UserAdminCheck(params *UserAdminCheckParams, opts ...ClientOption) (*UserAdminCheckNoContent, error) {
@@ -99,9 +102,10 @@ func (a *Client) UserAdminCheck(params *UserAdminCheckParams, opts ...ClientOpti
 }
 
 /*
-  UserAdminInit initializes administrator account
+	UserAdminInit initializes administrator account
 
-  Initialize the 'admin' user account.
+	Initialize the 'admin' user account.
+
 **Access policy**: public
 */
 func (a *Client) UserAdminInit(params *UserAdminInitParams, opts ...ClientOption) (*UserAdminInitOK, error) {
@@ -140,9 +144,10 @@ func (a *Client) UserAdminInit(params *UserAdminInitParams, opts ...ClientOption
 }
 
 /*
-  UserCreate creates a new user
+	UserCreate creates a new user
 
-  Create a new Portainer user.
+	Create a new Portainer user.
+
 Only administrators can create users.
 **Access policy**: restricted
 */
@@ -183,9 +188,10 @@ func (a *Client) UserCreate(params *UserCreateParams, authInfo runtime.ClientAut
 }
 
 /*
-  UserDelete removes a user
+	UserDelete removes a user
 
-  Remove a user.
+	Remove a user.
+
 **Access policy**: administrator
 */
 func (a *Client) UserDelete(params *UserDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserDeleteNoContent, error) {
@@ -225,9 +231,10 @@ func (a *Client) UserDelete(params *UserDeleteParams, authInfo runtime.ClientAut
 }
 
 /*
-  UserGenerateAPIKey generates an API key for a user
+	UserGenerateAPIKey generates an API key for a user
 
-  Generates an API key for a user.
+	Generates an API key for a user.
+
 Only the calling user can generate a token for themselves.
 **Access policy**: restricted
 */
@@ -268,9 +275,10 @@ func (a *Client) UserGenerateAPIKey(params *UserGenerateAPIKeyParams, authInfo r
 }
 
 /*
-  UserGetAPIKeys gets all API keys for a user
+	UserGetAPIKeys gets all API keys for a user
 
-  Gets all API keys for a user.
+	Gets all API keys for a user.
+
 Only the calling user or admin can retrieve api-keys.
 **Access policy**: authenticated
 */
@@ -311,9 +319,10 @@ func (a *Client) UserGetAPIKeys(params *UserGetAPIKeysParams, authInfo runtime.C
 }
 
 /*
-  UserInspect inspects a user
+	UserInspect inspects a user
 
-  Retrieve details about a user.
+	Retrieve details about a user.
+
 User passwords are filtered out, and should never be accessible.
 **Access policy**: authenticated
 */
@@ -354,9 +363,10 @@ func (a *Client) UserInspect(params *UserInspectParams, authInfo runtime.ClientA
 }
 
 /*
-  UserList lists users
+	UserList lists users
 
-  List Portainer users.
+	List Portainer users.
+
 Non-administrator users will only be able to list other non-administrator user accounts.
 User passwords are filtered out, and should never be accessible.
 **Access policy**: restricted
@@ -398,9 +408,10 @@ func (a *Client) UserList(params *UserListParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  UserMembershipsInspect inspects a user memberships
+	UserMembershipsInspect inspects a user memberships
 
-  Inspect a user memberships.
+	Inspect a user memberships.
+
 **Access policy**: restricted
 */
 func (a *Client) UserMembershipsInspect(params *UserMembershipsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserMembershipsInspectOK, error) {
@@ -440,9 +451,53 @@ func (a *Client) UserMembershipsInspect(params *UserMembershipsInspectParams, au
 }
 
 /*
-  UserRemoveAPIKey removes an api key associated to a user
+	UserNamespaces retrieves all k8s namespaces for an user
 
-  Remove an api-key associated to a user..
+	Retrieves user's role authorizations of all namespaces in all k8s environments(endpoints)
+
+**Access policy**: restricted
+*/
+func (a *Client) UserNamespaces(params *UserNamespacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserNamespacesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserNamespacesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserNamespaces",
+		Method:             "GET",
+		PathPattern:        "/users/{id}/namespaces",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserNamespacesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserNamespacesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserNamespaces: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UserRemoveAPIKey removes an api key associated to a user
+
+	Remove an api-key associated to a user..
+
 Only the calling user or admin can remove api-key.
 **Access policy**: authenticated
 */
@@ -483,9 +538,10 @@ func (a *Client) UserRemoveAPIKey(params *UserRemoveAPIKeyParams, authInfo runti
 }
 
 /*
-  UserUpdate updates a user
+	UserUpdate updates a user
 
-  Update user details. A regular user account can only update his details.
+	Update user details. A regular user account can only update his details.
+
 **Access policy**: authenticated
 */
 func (a *Client) UserUpdate(params *UserUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdateOK, error) {
@@ -525,9 +581,10 @@ func (a *Client) UserUpdate(params *UserUpdateParams, authInfo runtime.ClientAut
 }
 
 /*
-  UserUpdatePassword updates password for a user
+	UserUpdatePassword updates password for a user
 
-  Update password for the specified user.
+	Update password for the specified user.
+
 **Access policy**: authenticated
 */
 func (a *Client) UserUpdatePassword(params *UserUpdatePasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdatePasswordNoContent, error) {

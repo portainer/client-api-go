@@ -48,14 +48,44 @@ func NewDeleteProfileOK() *DeleteProfileOK {
 	return &DeleteProfileOK{}
 }
 
-/* DeleteProfileOK describes a response with status code 200, with default header values.
+/*
+DeleteProfileOK describes a response with status code 200, with default header values.
 
 Success
 */
 type DeleteProfileOK struct {
 }
 
+// IsSuccess returns true when this delete profile o k response has a 2xx status code
+func (o *DeleteProfileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete profile o k response has a 3xx status code
+func (o *DeleteProfileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete profile o k response has a 4xx status code
+func (o *DeleteProfileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete profile o k response has a 5xx status code
+func (o *DeleteProfileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete profile o k response a status code equal to that given
+func (o *DeleteProfileOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeleteProfileOK) Error() string {
+	return fmt.Sprintf("[DELETE /fdo/profiles/{id}][%d] deleteProfileOK ", 200)
+}
+
+func (o *DeleteProfileOK) String() string {
 	return fmt.Sprintf("[DELETE /fdo/profiles/{id}][%d] deleteProfileOK ", 200)
 }
 
@@ -69,14 +99,44 @@ func NewDeleteProfileBadRequest() *DeleteProfileBadRequest {
 	return &DeleteProfileBadRequest{}
 }
 
-/* DeleteProfileBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteProfileBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type DeleteProfileBadRequest struct {
 }
 
+// IsSuccess returns true when this delete profile bad request response has a 2xx status code
+func (o *DeleteProfileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete profile bad request response has a 3xx status code
+func (o *DeleteProfileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete profile bad request response has a 4xx status code
+func (o *DeleteProfileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete profile bad request response has a 5xx status code
+func (o *DeleteProfileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete profile bad request response a status code equal to that given
+func (o *DeleteProfileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *DeleteProfileBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /fdo/profiles/{id}][%d] deleteProfileBadRequest ", 400)
+}
+
+func (o *DeleteProfileBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /fdo/profiles/{id}][%d] deleteProfileBadRequest ", 400)
 }
 
@@ -90,14 +150,44 @@ func NewDeleteProfileInternalServerError() *DeleteProfileInternalServerError {
 	return &DeleteProfileInternalServerError{}
 }
 
-/* DeleteProfileInternalServerError describes a response with status code 500, with default header values.
+/*
+DeleteProfileInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type DeleteProfileInternalServerError struct {
 }
 
+// IsSuccess returns true when this delete profile internal server error response has a 2xx status code
+func (o *DeleteProfileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete profile internal server error response has a 3xx status code
+func (o *DeleteProfileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete profile internal server error response has a 4xx status code
+func (o *DeleteProfileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete profile internal server error response has a 5xx status code
+func (o *DeleteProfileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete profile internal server error response a status code equal to that given
+func (o *DeleteProfileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeleteProfileInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /fdo/profiles/{id}][%d] deleteProfileInternalServerError ", 500)
+}
+
+func (o *DeleteProfileInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /fdo/profiles/{id}][%d] deleteProfileInternalServerError ", 500)
 }
 

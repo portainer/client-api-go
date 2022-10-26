@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // SettingsPublicReader is a Reader for the SettingsPublic structure.
@@ -45,7 +45,8 @@ func NewSettingsPublicOK() *SettingsPublicOK {
 	return &SettingsPublicOK{}
 }
 
-/* SettingsPublicOK describes a response with status code 200, with default header values.
+/*
+SettingsPublicOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -53,9 +54,39 @@ type SettingsPublicOK struct {
 	Payload *models.SettingsPublicSettingsResponse
 }
 
+// IsSuccess returns true when this settings public o k response has a 2xx status code
+func (o *SettingsPublicOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this settings public o k response has a 3xx status code
+func (o *SettingsPublicOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this settings public o k response has a 4xx status code
+func (o *SettingsPublicOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this settings public o k response has a 5xx status code
+func (o *SettingsPublicOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this settings public o k response a status code equal to that given
+func (o *SettingsPublicOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *SettingsPublicOK) Error() string {
 	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicOK  %+v", 200, o.Payload)
 }
+
+func (o *SettingsPublicOK) String() string {
+	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicOK  %+v", 200, o.Payload)
+}
+
 func (o *SettingsPublicOK) GetPayload() *models.SettingsPublicSettingsResponse {
 	return o.Payload
 }
@@ -77,14 +108,44 @@ func NewSettingsPublicInternalServerError() *SettingsPublicInternalServerError {
 	return &SettingsPublicInternalServerError{}
 }
 
-/* SettingsPublicInternalServerError describes a response with status code 500, with default header values.
+/*
+SettingsPublicInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type SettingsPublicInternalServerError struct {
 }
 
+// IsSuccess returns true when this settings public internal server error response has a 2xx status code
+func (o *SettingsPublicInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this settings public internal server error response has a 3xx status code
+func (o *SettingsPublicInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this settings public internal server error response has a 4xx status code
+func (o *SettingsPublicInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this settings public internal server error response has a 5xx status code
+func (o *SettingsPublicInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this settings public internal server error response a status code equal to that given
+func (o *SettingsPublicInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *SettingsPublicInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicInternalServerError ", 500)
+}
+
+func (o *SettingsPublicInternalServerError) String() string {
 	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicInternalServerError ", 500)
 }
 

@@ -42,14 +42,44 @@ func NewUserAdminCheckNoContent() *UserAdminCheckNoContent {
 	return &UserAdminCheckNoContent{}
 }
 
-/* UserAdminCheckNoContent describes a response with status code 204, with default header values.
+/*
+UserAdminCheckNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type UserAdminCheckNoContent struct {
 }
 
+// IsSuccess returns true when this user admin check no content response has a 2xx status code
+func (o *UserAdminCheckNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user admin check no content response has a 3xx status code
+func (o *UserAdminCheckNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user admin check no content response has a 4xx status code
+func (o *UserAdminCheckNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user admin check no content response has a 5xx status code
+func (o *UserAdminCheckNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user admin check no content response a status code equal to that given
+func (o *UserAdminCheckNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *UserAdminCheckNoContent) Error() string {
+	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNoContent ", 204)
+}
+
+func (o *UserAdminCheckNoContent) String() string {
 	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNoContent ", 204)
 }
 
@@ -63,14 +93,44 @@ func NewUserAdminCheckNotFound() *UserAdminCheckNotFound {
 	return &UserAdminCheckNotFound{}
 }
 
-/* UserAdminCheckNotFound describes a response with status code 404, with default header values.
+/*
+UserAdminCheckNotFound describes a response with status code 404, with default header values.
 
 User not found
 */
 type UserAdminCheckNotFound struct {
 }
 
+// IsSuccess returns true when this user admin check not found response has a 2xx status code
+func (o *UserAdminCheckNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user admin check not found response has a 3xx status code
+func (o *UserAdminCheckNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user admin check not found response has a 4xx status code
+func (o *UserAdminCheckNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user admin check not found response has a 5xx status code
+func (o *UserAdminCheckNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user admin check not found response a status code equal to that given
+func (o *UserAdminCheckNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UserAdminCheckNotFound) Error() string {
+	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNotFound ", 404)
+}
+
+func (o *UserAdminCheckNotFound) String() string {
 	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNotFound ", 404)
 }
 

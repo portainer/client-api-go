@@ -52,10 +52,12 @@ func NewStatusInspectParamsWithHTTPClient(client *http.Client) *StatusInspectPar
 	}
 }
 
-/* StatusInspectParams contains all the parameters to send to the API endpoint
-   for the status inspect operation.
+/*
+StatusInspectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the status inspect operation.
+
+	Typically these are written to a http.Request.
 */
 type StatusInspectParams struct {
 	timeout    time.Duration

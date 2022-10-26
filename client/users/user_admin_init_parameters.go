@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewUserAdminInitParams creates a new UserAdminInitParams object,
@@ -54,10 +54,12 @@ func NewUserAdminInitParamsWithHTTPClient(client *http.Client) *UserAdminInitPar
 	}
 }
 
-/* UserAdminInitParams contains all the parameters to send to the API endpoint
-   for the user admin init operation.
+/*
+UserAdminInitParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the user admin init operation.
+
+	Typically these are written to a http.Request.
 */
 type UserAdminInitParams struct {
 

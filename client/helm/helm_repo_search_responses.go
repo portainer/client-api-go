@@ -61,7 +61,8 @@ func NewHelmRepoSearchOK() *HelmRepoSearchOK {
 	return &HelmRepoSearchOK{}
 }
 
-/* HelmRepoSearchOK describes a response with status code 200, with default header values.
+/*
+HelmRepoSearchOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -69,9 +70,39 @@ type HelmRepoSearchOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this helm repo search o k response has a 2xx status code
+func (o *HelmRepoSearchOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this helm repo search o k response has a 3xx status code
+func (o *HelmRepoSearchOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm repo search o k response has a 4xx status code
+func (o *HelmRepoSearchOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm repo search o k response has a 5xx status code
+func (o *HelmRepoSearchOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm repo search o k response a status code equal to that given
+func (o *HelmRepoSearchOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *HelmRepoSearchOK) Error() string {
 	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchOK  %+v", 200, o.Payload)
 }
+
+func (o *HelmRepoSearchOK) String() string {
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchOK  %+v", 200, o.Payload)
+}
+
 func (o *HelmRepoSearchOK) GetPayload() string {
 	return o.Payload
 }
@@ -91,14 +122,44 @@ func NewHelmRepoSearchBadRequest() *HelmRepoSearchBadRequest {
 	return &HelmRepoSearchBadRequest{}
 }
 
-/* HelmRepoSearchBadRequest describes a response with status code 400, with default header values.
+/*
+HelmRepoSearchBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type HelmRepoSearchBadRequest struct {
 }
 
+// IsSuccess returns true when this helm repo search bad request response has a 2xx status code
+func (o *HelmRepoSearchBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm repo search bad request response has a 3xx status code
+func (o *HelmRepoSearchBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm repo search bad request response has a 4xx status code
+func (o *HelmRepoSearchBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm repo search bad request response has a 5xx status code
+func (o *HelmRepoSearchBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm repo search bad request response a status code equal to that given
+func (o *HelmRepoSearchBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *HelmRepoSearchBadRequest) Error() string {
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchBadRequest ", 400)
+}
+
+func (o *HelmRepoSearchBadRequest) String() string {
 	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchBadRequest ", 400)
 }
 
@@ -112,14 +173,44 @@ func NewHelmRepoSearchUnauthorized() *HelmRepoSearchUnauthorized {
 	return &HelmRepoSearchUnauthorized{}
 }
 
-/* HelmRepoSearchUnauthorized describes a response with status code 401, with default header values.
+/*
+HelmRepoSearchUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type HelmRepoSearchUnauthorized struct {
 }
 
+// IsSuccess returns true when this helm repo search unauthorized response has a 2xx status code
+func (o *HelmRepoSearchUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm repo search unauthorized response has a 3xx status code
+func (o *HelmRepoSearchUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm repo search unauthorized response has a 4xx status code
+func (o *HelmRepoSearchUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm repo search unauthorized response has a 5xx status code
+func (o *HelmRepoSearchUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm repo search unauthorized response a status code equal to that given
+func (o *HelmRepoSearchUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *HelmRepoSearchUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchUnauthorized ", 401)
+}
+
+func (o *HelmRepoSearchUnauthorized) String() string {
 	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchUnauthorized ", 401)
 }
 
@@ -133,14 +224,44 @@ func NewHelmRepoSearchNotFound() *HelmRepoSearchNotFound {
 	return &HelmRepoSearchNotFound{}
 }
 
-/* HelmRepoSearchNotFound describes a response with status code 404, with default header values.
+/*
+HelmRepoSearchNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type HelmRepoSearchNotFound struct {
 }
 
+// IsSuccess returns true when this helm repo search not found response has a 2xx status code
+func (o *HelmRepoSearchNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm repo search not found response has a 3xx status code
+func (o *HelmRepoSearchNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm repo search not found response has a 4xx status code
+func (o *HelmRepoSearchNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this helm repo search not found response has a 5xx status code
+func (o *HelmRepoSearchNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this helm repo search not found response a status code equal to that given
+func (o *HelmRepoSearchNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *HelmRepoSearchNotFound) Error() string {
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchNotFound ", 404)
+}
+
+func (o *HelmRepoSearchNotFound) String() string {
 	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchNotFound ", 404)
 }
 
@@ -154,14 +275,44 @@ func NewHelmRepoSearchInternalServerError() *HelmRepoSearchInternalServerError {
 	return &HelmRepoSearchInternalServerError{}
 }
 
-/* HelmRepoSearchInternalServerError describes a response with status code 500, with default header values.
+/*
+HelmRepoSearchInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type HelmRepoSearchInternalServerError struct {
 }
 
+// IsSuccess returns true when this helm repo search internal server error response has a 2xx status code
+func (o *HelmRepoSearchInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this helm repo search internal server error response has a 3xx status code
+func (o *HelmRepoSearchInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this helm repo search internal server error response has a 4xx status code
+func (o *HelmRepoSearchInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this helm repo search internal server error response has a 5xx status code
+func (o *HelmRepoSearchInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this helm repo search internal server error response a status code equal to that given
+func (o *HelmRepoSearchInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *HelmRepoSearchInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchInternalServerError ", 500)
+}
+
+func (o *HelmRepoSearchInternalServerError) String() string {
 	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchInternalServerError ", 500)
 }
 

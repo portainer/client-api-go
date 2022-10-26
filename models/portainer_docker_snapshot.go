@@ -23,6 +23,12 @@ type PortainerDockerSnapshot struct {
 	// docker version
 	DockerVersion string `json:"DockerVersion,omitempty"`
 
+	// gpu use all
+	GpuUseAll bool `json:"GpuUseAll,omitempty"`
+
+	// gpu use list
+	GpuUseList []string `json:"GpuUseList"`
+
 	// healthy container count
 	HealthyContainerCount int64 `json:"HealthyContainerCount,omitempty"`
 

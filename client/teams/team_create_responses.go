@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // TeamCreateReader is a Reader for the TeamCreate structure.
@@ -57,24 +57,55 @@ func NewTeamCreateOK() *TeamCreateOK {
 	return &TeamCreateOK{}
 }
 
-/* TeamCreateOK describes a response with status code 200, with default header values.
+/*
+TeamCreateOK describes a response with status code 200, with default header values.
 
 Success
 */
 type TeamCreateOK struct {
-	Payload *models.PortainerTeam
+	Payload *models.PortainereeTeam
+}
+
+// IsSuccess returns true when this team create o k response has a 2xx status code
+func (o *TeamCreateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this team create o k response has a 3xx status code
+func (o *TeamCreateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team create o k response has a 4xx status code
+func (o *TeamCreateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team create o k response has a 5xx status code
+func (o *TeamCreateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team create o k response a status code equal to that given
+func (o *TeamCreateOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *TeamCreateOK) Error() string {
 	return fmt.Sprintf("[POST /team][%d] teamCreateOK  %+v", 200, o.Payload)
 }
-func (o *TeamCreateOK) GetPayload() *models.PortainerTeam {
+
+func (o *TeamCreateOK) String() string {
+	return fmt.Sprintf("[POST /team][%d] teamCreateOK  %+v", 200, o.Payload)
+}
+
+func (o *TeamCreateOK) GetPayload() *models.PortainereeTeam {
 	return o.Payload
 }
 
 func (o *TeamCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainerTeam)
+	o.Payload = new(models.PortainereeTeam)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -89,14 +120,44 @@ func NewTeamCreateBadRequest() *TeamCreateBadRequest {
 	return &TeamCreateBadRequest{}
 }
 
-/* TeamCreateBadRequest describes a response with status code 400, with default header values.
+/*
+TeamCreateBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type TeamCreateBadRequest struct {
 }
 
+// IsSuccess returns true when this team create bad request response has a 2xx status code
+func (o *TeamCreateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team create bad request response has a 3xx status code
+func (o *TeamCreateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team create bad request response has a 4xx status code
+func (o *TeamCreateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team create bad request response has a 5xx status code
+func (o *TeamCreateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team create bad request response a status code equal to that given
+func (o *TeamCreateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *TeamCreateBadRequest) Error() string {
+	return fmt.Sprintf("[POST /team][%d] teamCreateBadRequest ", 400)
+}
+
+func (o *TeamCreateBadRequest) String() string {
 	return fmt.Sprintf("[POST /team][%d] teamCreateBadRequest ", 400)
 }
 
@@ -110,14 +171,44 @@ func NewTeamCreateConflict() *TeamCreateConflict {
 	return &TeamCreateConflict{}
 }
 
-/* TeamCreateConflict describes a response with status code 409, with default header values.
+/*
+TeamCreateConflict describes a response with status code 409, with default header values.
 
 Team already exists
 */
 type TeamCreateConflict struct {
 }
 
+// IsSuccess returns true when this team create conflict response has a 2xx status code
+func (o *TeamCreateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team create conflict response has a 3xx status code
+func (o *TeamCreateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team create conflict response has a 4xx status code
+func (o *TeamCreateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team create conflict response has a 5xx status code
+func (o *TeamCreateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team create conflict response a status code equal to that given
+func (o *TeamCreateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *TeamCreateConflict) Error() string {
+	return fmt.Sprintf("[POST /team][%d] teamCreateConflict ", 409)
+}
+
+func (o *TeamCreateConflict) String() string {
 	return fmt.Sprintf("[POST /team][%d] teamCreateConflict ", 409)
 }
 
@@ -131,14 +222,44 @@ func NewTeamCreateInternalServerError() *TeamCreateInternalServerError {
 	return &TeamCreateInternalServerError{}
 }
 
-/* TeamCreateInternalServerError describes a response with status code 500, with default header values.
+/*
+TeamCreateInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TeamCreateInternalServerError struct {
 }
 
+// IsSuccess returns true when this team create internal server error response has a 2xx status code
+func (o *TeamCreateInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team create internal server error response has a 3xx status code
+func (o *TeamCreateInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team create internal server error response has a 4xx status code
+func (o *TeamCreateInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team create internal server error response has a 5xx status code
+func (o *TeamCreateInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this team create internal server error response a status code equal to that given
+func (o *TeamCreateInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TeamCreateInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /team][%d] teamCreateInternalServerError ", 500)
+}
+
+func (o *TeamCreateInternalServerError) String() string {
 	return fmt.Sprintf("[POST /team][%d] teamCreateInternalServerError ", 500)
 }
 

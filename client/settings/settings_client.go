@@ -40,9 +40,10 @@ type ClientService interface {
 }
 
 /*
-  SettingsInspect retrieves portainer settings
+	SettingsInspect retrieves portainer settings
 
-  Retrieve Portainer settings.
+	Retrieve Portainer settings.
+
 **Access policy**: administrator
 */
 func (a *Client) SettingsInspect(params *SettingsInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsInspectOK, error) {
@@ -82,9 +83,10 @@ func (a *Client) SettingsInspect(params *SettingsInspectParams, authInfo runtime
 }
 
 /*
-  SettingsPublic retrieves portainer public settings
+	SettingsPublic retrieves portainer public settings
 
-  Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.
+	Retrieve public settings. Returns a small set of settings that are not reserved to administrators only.
+
 **Access policy**: public
 */
 func (a *Client) SettingsPublic(params *SettingsPublicParams, opts ...ClientOption) (*SettingsPublicOK, error) {
@@ -123,9 +125,10 @@ func (a *Client) SettingsPublic(params *SettingsPublicParams, opts ...ClientOpti
 }
 
 /*
-  SettingsUpdate updates portainer settings
+	SettingsUpdate updates portainer settings
 
-  Update Portainer settings.
+	Update Portainer settings.
+
 **Access policy**: administrator
 */
 func (a *Client) SettingsUpdate(params *SettingsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsUpdateOK, error) {

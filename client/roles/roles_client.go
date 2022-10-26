@@ -36,9 +36,10 @@ type ClientService interface {
 }
 
 /*
-  RoleList lists roles
+	RoleList lists roles
 
-  List all roles available for use
+	List all roles available for use
+
 **Access policy**: administrator
 */
 func (a *Client) RoleList(params *RoleListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RoleListOK, error) {

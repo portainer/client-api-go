@@ -54,14 +54,44 @@ func NewDeviceFeaturesNoContent() *DeviceFeaturesNoContent {
 	return &DeviceFeaturesNoContent{}
 }
 
-/* DeviceFeaturesNoContent describes a response with status code 204, with default header values.
+/*
+DeviceFeaturesNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type DeviceFeaturesNoContent struct {
 }
 
+// IsSuccess returns true when this device features no content response has a 2xx status code
+func (o *DeviceFeaturesNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this device features no content response has a 3xx status code
+func (o *DeviceFeaturesNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this device features no content response has a 4xx status code
+func (o *DeviceFeaturesNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this device features no content response has a 5xx status code
+func (o *DeviceFeaturesNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this device features no content response a status code equal to that given
+func (o *DeviceFeaturesNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DeviceFeaturesNoContent) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesNoContent ", 204)
+}
+
+func (o *DeviceFeaturesNoContent) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesNoContent ", 204)
 }
 
@@ -75,14 +105,44 @@ func NewDeviceFeaturesBadRequest() *DeviceFeaturesBadRequest {
 	return &DeviceFeaturesBadRequest{}
 }
 
-/* DeviceFeaturesBadRequest describes a response with status code 400, with default header values.
+/*
+DeviceFeaturesBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type DeviceFeaturesBadRequest struct {
 }
 
+// IsSuccess returns true when this device features bad request response has a 2xx status code
+func (o *DeviceFeaturesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this device features bad request response has a 3xx status code
+func (o *DeviceFeaturesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this device features bad request response has a 4xx status code
+func (o *DeviceFeaturesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this device features bad request response has a 5xx status code
+func (o *DeviceFeaturesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this device features bad request response a status code equal to that given
+func (o *DeviceFeaturesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *DeviceFeaturesBadRequest) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesBadRequest ", 400)
+}
+
+func (o *DeviceFeaturesBadRequest) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewDeviceFeaturesForbidden() *DeviceFeaturesForbidden {
 	return &DeviceFeaturesForbidden{}
 }
 
-/* DeviceFeaturesForbidden describes a response with status code 403, with default header values.
+/*
+DeviceFeaturesForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type DeviceFeaturesForbidden struct {
 }
 
+// IsSuccess returns true when this device features forbidden response has a 2xx status code
+func (o *DeviceFeaturesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this device features forbidden response has a 3xx status code
+func (o *DeviceFeaturesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this device features forbidden response has a 4xx status code
+func (o *DeviceFeaturesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this device features forbidden response has a 5xx status code
+func (o *DeviceFeaturesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this device features forbidden response a status code equal to that given
+func (o *DeviceFeaturesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *DeviceFeaturesForbidden) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesForbidden ", 403)
+}
+
+func (o *DeviceFeaturesForbidden) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewDeviceFeaturesInternalServerError() *DeviceFeaturesInternalServerError {
 	return &DeviceFeaturesInternalServerError{}
 }
 
-/* DeviceFeaturesInternalServerError describes a response with status code 500, with default header values.
+/*
+DeviceFeaturesInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type DeviceFeaturesInternalServerError struct {
 }
 
+// IsSuccess returns true when this device features internal server error response has a 2xx status code
+func (o *DeviceFeaturesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this device features internal server error response has a 3xx status code
+func (o *DeviceFeaturesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this device features internal server error response has a 4xx status code
+func (o *DeviceFeaturesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this device features internal server error response has a 5xx status code
+func (o *DeviceFeaturesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this device features internal server error response a status code equal to that given
+func (o *DeviceFeaturesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeviceFeaturesInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesInternalServerError ", 500)
+}
+
+func (o *DeviceFeaturesInternalServerError) String() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesInternalServerError ", 500)
 }
 

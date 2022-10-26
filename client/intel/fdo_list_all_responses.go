@@ -54,14 +54,44 @@ func NewFdoListAllOK() *FdoListAllOK {
 	return &FdoListAllOK{}
 }
 
-/* FdoListAllOK describes a response with status code 200, with default header values.
+/*
+FdoListAllOK describes a response with status code 200, with default header values.
 
 Success
 */
 type FdoListAllOK struct {
 }
 
+// IsSuccess returns true when this fdo list all o k response has a 2xx status code
+func (o *FdoListAllOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this fdo list all o k response has a 3xx status code
+func (o *FdoListAllOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo list all o k response has a 4xx status code
+func (o *FdoListAllOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fdo list all o k response has a 5xx status code
+func (o *FdoListAllOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo list all o k response a status code equal to that given
+func (o *FdoListAllOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *FdoListAllOK) Error() string {
+	return fmt.Sprintf("[GET /fdo/list][%d] fdoListAllOK ", 200)
+}
+
+func (o *FdoListAllOK) String() string {
 	return fmt.Sprintf("[GET /fdo/list][%d] fdoListAllOK ", 200)
 }
 
@@ -75,14 +105,44 @@ func NewFdoListAllBadRequest() *FdoListAllBadRequest {
 	return &FdoListAllBadRequest{}
 }
 
-/* FdoListAllBadRequest describes a response with status code 400, with default header values.
+/*
+FdoListAllBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type FdoListAllBadRequest struct {
 }
 
+// IsSuccess returns true when this fdo list all bad request response has a 2xx status code
+func (o *FdoListAllBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo list all bad request response has a 3xx status code
+func (o *FdoListAllBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo list all bad request response has a 4xx status code
+func (o *FdoListAllBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this fdo list all bad request response has a 5xx status code
+func (o *FdoListAllBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo list all bad request response a status code equal to that given
+func (o *FdoListAllBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *FdoListAllBadRequest) Error() string {
+	return fmt.Sprintf("[GET /fdo/list][%d] fdoListAllBadRequest ", 400)
+}
+
+func (o *FdoListAllBadRequest) String() string {
 	return fmt.Sprintf("[GET /fdo/list][%d] fdoListAllBadRequest ", 400)
 }
 
@@ -96,14 +156,44 @@ func NewFdoListAllForbidden() *FdoListAllForbidden {
 	return &FdoListAllForbidden{}
 }
 
-/* FdoListAllForbidden describes a response with status code 403, with default header values.
+/*
+FdoListAllForbidden describes a response with status code 403, with default header values.
 
 Permission denied to access settings
 */
 type FdoListAllForbidden struct {
 }
 
+// IsSuccess returns true when this fdo list all forbidden response has a 2xx status code
+func (o *FdoListAllForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo list all forbidden response has a 3xx status code
+func (o *FdoListAllForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo list all forbidden response has a 4xx status code
+func (o *FdoListAllForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this fdo list all forbidden response has a 5xx status code
+func (o *FdoListAllForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this fdo list all forbidden response a status code equal to that given
+func (o *FdoListAllForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *FdoListAllForbidden) Error() string {
+	return fmt.Sprintf("[GET /fdo/list][%d] fdoListAllForbidden ", 403)
+}
+
+func (o *FdoListAllForbidden) String() string {
 	return fmt.Sprintf("[GET /fdo/list][%d] fdoListAllForbidden ", 403)
 }
 
@@ -117,14 +207,44 @@ func NewFdoListAllInternalServerError() *FdoListAllInternalServerError {
 	return &FdoListAllInternalServerError{}
 }
 
-/* FdoListAllInternalServerError describes a response with status code 500, with default header values.
+/*
+FdoListAllInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type FdoListAllInternalServerError struct {
 }
 
+// IsSuccess returns true when this fdo list all internal server error response has a 2xx status code
+func (o *FdoListAllInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this fdo list all internal server error response has a 3xx status code
+func (o *FdoListAllInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this fdo list all internal server error response has a 4xx status code
+func (o *FdoListAllInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this fdo list all internal server error response has a 5xx status code
+func (o *FdoListAllInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this fdo list all internal server error response a status code equal to that given
+func (o *FdoListAllInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *FdoListAllInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /fdo/list][%d] fdoListAllInternalServerError ", 500)
+}
+
+func (o *FdoListAllInternalServerError) String() string {
 	return fmt.Sprintf("[GET /fdo/list][%d] fdoListAllInternalServerError ", 500)
 }
 

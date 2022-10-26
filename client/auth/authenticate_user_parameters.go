@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewAuthenticateUserParams creates a new AuthenticateUserParams object,
@@ -54,10 +54,12 @@ func NewAuthenticateUserParamsWithHTTPClient(client *http.Client) *AuthenticateU
 	}
 }
 
-/* AuthenticateUserParams contains all the parameters to send to the API endpoint
-   for the authenticate user operation.
+/*
+AuthenticateUserParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the authenticate user operation.
+
+	Typically these are written to a http.Request.
 */
 type AuthenticateUserParams struct {
 

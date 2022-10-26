@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api/models"
+	"github.com/portainer/client-api-go/models"
 )
 
 // NewEdgeGroupCreateParams creates a new EdgeGroupCreateParams object,
@@ -54,10 +54,12 @@ func NewEdgeGroupCreateParamsWithHTTPClient(client *http.Client) *EdgeGroupCreat
 	}
 }
 
-/* EdgeGroupCreateParams contains all the parameters to send to the API endpoint
-   for the edge group create operation.
+/*
+EdgeGroupCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the edge group create operation.
+
+	Typically these are written to a http.Request.
 */
 type EdgeGroupCreateParams struct {
 

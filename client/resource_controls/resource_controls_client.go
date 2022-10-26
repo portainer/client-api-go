@@ -40,9 +40,10 @@ type ClientService interface {
 }
 
 /*
-  ResourceControlCreate creates a new resource control
+	ResourceControlCreate creates a new resource control
 
-  Create a new resource control to restrict access to a Docker resource.
+	Create a new resource control to restrict access to a Docker resource.
+
 **Access policy**: administrator
 */
 func (a *Client) ResourceControlCreate(params *ResourceControlCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlCreateOK, error) {
@@ -82,9 +83,10 @@ func (a *Client) ResourceControlCreate(params *ResourceControlCreateParams, auth
 }
 
 /*
-  ResourceControlDelete removes a resource control
+	ResourceControlDelete removes a resource control
 
-  Remove a resource control.
+	Remove a resource control.
+
 **Access policy**: administrator
 */
 func (a *Client) ResourceControlDelete(params *ResourceControlDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlDeleteNoContent, error) {
@@ -124,9 +126,10 @@ func (a *Client) ResourceControlDelete(params *ResourceControlDeleteParams, auth
 }
 
 /*
-  ResourceControlUpdate updates a resource control
+	ResourceControlUpdate updates a resource control
 
-  Update a resource control
+	Update a resource control
+
 **Access policy**: authenticated
 */
 func (a *Client) ResourceControlUpdate(params *ResourceControlUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResourceControlUpdateOK, error) {

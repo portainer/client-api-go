@@ -60,14 +60,44 @@ func NewTeamMembershipDeleteNoContent() *TeamMembershipDeleteNoContent {
 	return &TeamMembershipDeleteNoContent{}
 }
 
-/* TeamMembershipDeleteNoContent describes a response with status code 204, with default header values.
+/*
+TeamMembershipDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
 type TeamMembershipDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this team membership delete no content response has a 2xx status code
+func (o *TeamMembershipDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this team membership delete no content response has a 3xx status code
+func (o *TeamMembershipDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership delete no content response has a 4xx status code
+func (o *TeamMembershipDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team membership delete no content response has a 5xx status code
+func (o *TeamMembershipDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership delete no content response a status code equal to that given
+func (o *TeamMembershipDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *TeamMembershipDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteNoContent ", 204)
+}
+
+func (o *TeamMembershipDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteNoContent ", 204)
 }
 
@@ -81,14 +111,44 @@ func NewTeamMembershipDeleteBadRequest() *TeamMembershipDeleteBadRequest {
 	return &TeamMembershipDeleteBadRequest{}
 }
 
-/* TeamMembershipDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+TeamMembershipDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
 type TeamMembershipDeleteBadRequest struct {
 }
 
+// IsSuccess returns true when this team membership delete bad request response has a 2xx status code
+func (o *TeamMembershipDeleteBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership delete bad request response has a 3xx status code
+func (o *TeamMembershipDeleteBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership delete bad request response has a 4xx status code
+func (o *TeamMembershipDeleteBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team membership delete bad request response has a 5xx status code
+func (o *TeamMembershipDeleteBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership delete bad request response a status code equal to that given
+func (o *TeamMembershipDeleteBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *TeamMembershipDeleteBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteBadRequest ", 400)
+}
+
+func (o *TeamMembershipDeleteBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteBadRequest ", 400)
 }
 
@@ -102,14 +162,44 @@ func NewTeamMembershipDeleteForbidden() *TeamMembershipDeleteForbidden {
 	return &TeamMembershipDeleteForbidden{}
 }
 
-/* TeamMembershipDeleteForbidden describes a response with status code 403, with default header values.
+/*
+TeamMembershipDeleteForbidden describes a response with status code 403, with default header values.
 
 Permission denied
 */
 type TeamMembershipDeleteForbidden struct {
 }
 
+// IsSuccess returns true when this team membership delete forbidden response has a 2xx status code
+func (o *TeamMembershipDeleteForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership delete forbidden response has a 3xx status code
+func (o *TeamMembershipDeleteForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership delete forbidden response has a 4xx status code
+func (o *TeamMembershipDeleteForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team membership delete forbidden response has a 5xx status code
+func (o *TeamMembershipDeleteForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership delete forbidden response a status code equal to that given
+func (o *TeamMembershipDeleteForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *TeamMembershipDeleteForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteForbidden ", 403)
+}
+
+func (o *TeamMembershipDeleteForbidden) String() string {
 	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteForbidden ", 403)
 }
 
@@ -123,14 +213,44 @@ func NewTeamMembershipDeleteNotFound() *TeamMembershipDeleteNotFound {
 	return &TeamMembershipDeleteNotFound{}
 }
 
-/* TeamMembershipDeleteNotFound describes a response with status code 404, with default header values.
+/*
+TeamMembershipDeleteNotFound describes a response with status code 404, with default header values.
 
 TeamMembership not found
 */
 type TeamMembershipDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this team membership delete not found response has a 2xx status code
+func (o *TeamMembershipDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership delete not found response has a 3xx status code
+func (o *TeamMembershipDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership delete not found response has a 4xx status code
+func (o *TeamMembershipDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this team membership delete not found response has a 5xx status code
+func (o *TeamMembershipDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this team membership delete not found response a status code equal to that given
+func (o *TeamMembershipDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *TeamMembershipDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteNotFound ", 404)
+}
+
+func (o *TeamMembershipDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteNotFound ", 404)
 }
 
@@ -144,14 +264,44 @@ func NewTeamMembershipDeleteInternalServerError() *TeamMembershipDeleteInternalS
 	return &TeamMembershipDeleteInternalServerError{}
 }
 
-/* TeamMembershipDeleteInternalServerError describes a response with status code 500, with default header values.
+/*
+TeamMembershipDeleteInternalServerError describes a response with status code 500, with default header values.
 
 Server error
 */
 type TeamMembershipDeleteInternalServerError struct {
 }
 
+// IsSuccess returns true when this team membership delete internal server error response has a 2xx status code
+func (o *TeamMembershipDeleteInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this team membership delete internal server error response has a 3xx status code
+func (o *TeamMembershipDeleteInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this team membership delete internal server error response has a 4xx status code
+func (o *TeamMembershipDeleteInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this team membership delete internal server error response has a 5xx status code
+func (o *TeamMembershipDeleteInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this team membership delete internal server error response a status code equal to that given
+func (o *TeamMembershipDeleteInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TeamMembershipDeleteInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteInternalServerError ", 500)
+}
+
+func (o *TeamMembershipDeleteInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /team_memberships/{id}][%d] teamMembershipDeleteInternalServerError ", 500)
 }
 

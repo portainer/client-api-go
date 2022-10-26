@@ -21,11 +21,12 @@ import (
 type EdgestacksSwarmStackFromFileContentPayload struct {
 
 	// Deployment type to deploy this stack
-	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
+	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
 	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
 	// kubernetes deploytype is enabled only for kubernetes environments(endpoints)
+	// nomad deploytype is enabled only for nomad environments(endpoints)
 	// Example: 0
-	// Enum: [0 1]
+	// Enum: [0 1 2]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// List of identifiers of EdgeGroups
@@ -36,6 +37,9 @@ type EdgestacksSwarmStackFromFileContentPayload struct {
 	// Example: myStack
 	// Required: true
 	Name *string `json:"name"`
+
+	// List of Registries to use for this stack
+	Registries []int64 `json:"registries"`
 
 	// Content of the Stack file
 	// Example: version: 3\n services:\n web:\n image:nginx
@@ -69,7 +73,7 @@ var edgestacksSwarmStackFromFileContentPayloadTypeDeploymentTypePropEnum []inter
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[0,1]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
