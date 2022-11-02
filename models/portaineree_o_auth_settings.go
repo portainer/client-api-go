@@ -42,6 +42,9 @@ type PortainereeOAuthSettings struct {
 	// logout URI
 	LogoutURI string `json:"LogoutURI,omitempty"`
 
+	// microsoft tenant ID
+	MicrosoftTenantID string `json:"MicrosoftTenantID,omitempty"`
+
 	// o auth auto create users
 	OAuthAutoCreateUsers bool `json:"OAuthAutoCreateUsers,omitempty"`
 

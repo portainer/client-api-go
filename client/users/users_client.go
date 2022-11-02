@@ -36,11 +36,17 @@ type ClientService interface {
 
 	UserCreate(params *UserCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserCreateOK, error)
 
+	UserCreateGitCredential(params *UserCreateGitCredentialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserCreateGitCredentialCreated, error)
+
 	UserDelete(params *UserDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserDeleteNoContent, error)
 
 	UserGenerateAPIKey(params *UserGenerateAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGenerateAPIKeyCreated, error)
 
 	UserGetAPIKeys(params *UserGetAPIKeysParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetAPIKeysOK, error)
+
+	UserGetGitCredential(params *UserGetGitCredentialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetGitCredentialOK, error)
+
+	UserGetGitCredentials(params *UserGetGitCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetGitCredentialsOK, error)
 
 	UserInspect(params *UserInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserInspectOK, error)
 
@@ -52,7 +58,11 @@ type ClientService interface {
 
 	UserRemoveAPIKey(params *UserRemoveAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserRemoveAPIKeyNoContent, error)
 
+	UserRemoveGitCredential(params *UserRemoveGitCredentialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserRemoveGitCredentialNoContent, error)
+
 	UserUpdate(params *UserUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdateOK, error)
+
+	UserUpdateGitCredential(params *UserUpdateGitCredentialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdateGitCredentialNoContent, error)
 
 	UserUpdatePassword(params *UserUpdatePasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdatePasswordNoContent, error)
 
@@ -188,6 +198,50 @@ func (a *Client) UserCreate(params *UserCreateParams, authInfo runtime.ClientAut
 }
 
 /*
+	UserCreateGitCredential stores a git credential for a user
+
+	Store a Git Credential for a user.
+
+Only the calling user can store a git credential for themselves.
+**Access policy**: restricted
+*/
+func (a *Client) UserCreateGitCredential(params *UserCreateGitCredentialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserCreateGitCredentialCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserCreateGitCredentialParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserCreateGitCredential",
+		Method:             "POST",
+		PathPattern:        "/users/{id}/gitcredentials",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserCreateGitCredentialReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserCreateGitCredentialCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserCreateGitCredential: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	UserDelete removes a user
 
 	Remove a user.
@@ -315,6 +369,94 @@ func (a *Client) UserGetAPIKeys(params *UserGetAPIKeysParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UserGetAPIKeys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UserGetGitCredential gets the specific saved git credential for a user
+
+	Gets the specific saved git credential for a user.
+
+Only the calling user can retrieve git credential
+**Access policy**: authenticated
+*/
+func (a *Client) UserGetGitCredential(params *UserGetGitCredentialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetGitCredentialOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserGetGitCredentialParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserGetGitCredential",
+		Method:             "GET",
+		PathPattern:        "/users/{id}/gitcredentials/{credentialID}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserGetGitCredentialReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserGetGitCredentialOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserGetGitCredential: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UserGetGitCredentials gets all saved git credentials for a user
+
+	Gets all saved git credentials for a user.
+
+Only the calling user can retrieve git credentials
+**Access policy**: authenticated
+*/
+func (a *Client) UserGetGitCredentials(params *UserGetGitCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetGitCredentialsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserGetGitCredentialsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserGetGitCredentials",
+		Method:             "GET",
+		PathPattern:        "/users/{id}/gitcredentials",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserGetGitCredentialsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserGetGitCredentialsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserGetGitCredentials: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -538,6 +680,50 @@ func (a *Client) UserRemoveAPIKey(params *UserRemoveAPIKeyParams, authInfo runti
 }
 
 /*
+	UserRemoveGitCredential removes a git credential associated to a user
+
+	Remove a git-credential associated to a user..
+
+Only the calling user can remove git-credential
+**Access policy**: authenticated
+*/
+func (a *Client) UserRemoveGitCredential(params *UserRemoveGitCredentialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserRemoveGitCredentialNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserRemoveGitCredentialParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserRemoveGitCredential",
+		Method:             "DELETE",
+		PathPattern:        "/users/{id}/gitcredentials/{credentialID}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserRemoveGitCredentialReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserRemoveGitCredentialNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserRemoveGitCredential: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	UserUpdate updates a user
 
 	Update user details. A regular user account can only update his details.
@@ -577,6 +763,50 @@ func (a *Client) UserUpdate(params *UserUpdateParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UserUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UserUpdateGitCredential updates a git credential associated to a user
+
+	Update a git-credential associated to a user..
+
+Only the calling user can update git-credential
+**Access policy**: authenticated
+*/
+func (a *Client) UserUpdateGitCredential(params *UserUpdateGitCredentialParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdateGitCredentialNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserUpdateGitCredentialParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UserUpdateGitCredential",
+		Method:             "PUT",
+		PathPattern:        "/users/{id}/gitcredentials/{credentialID}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserUpdateGitCredentialReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserUpdateGitCredentialNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UserUpdateGitCredential: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

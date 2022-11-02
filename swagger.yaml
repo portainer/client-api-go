@@ -185,9 +185,16 @@ definitions:
         description: Use basic authentication to clone the Git repository
         example: true
         type: boolean
+      repositoryGitCredentialID:
+        description: |-
+          GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
+          is true and RepositoryUsername/RepositoryPassword are not provided
+        example: 0
+        type: integer
       repositoryPassword:
-        description: Password used in basic authentication. Required when RepositoryAuthentication
-          is true.
+        description: |-
+          Password used in basic authentication. Required when RepositoryAuthentication is true
+          and RepositoryGitCredentialID is 0
         example: myGitPassword
         type: string
       repositoryReferenceName:
@@ -199,8 +206,9 @@ definitions:
         example: https://github.com/openfaas/faas
         type: string
       repositoryUsername:
-        description: Username used in basic authentication. Required when RepositoryAuthentication
-          is true.
+        description: |-
+          Username used in basic authentication. Required when RepositoryAuthentication is true
+          and RepositoryGitCredentialID is 0
         example: myGitUsername
         type: string
       title:
@@ -279,23 +287,6 @@ definitions:
     properties:
       fileContent:
         type: string
-    type: object
-  demo.EnvironmentDetails:
-    properties:
-      enabled:
-        type: boolean
-      environments:
-        items:
-          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
-            that will be used for deployment
-          type: integer
-        type: array
-      users:
-        items:
-          description: User Identifier
-          example: 1
-          type: integer
-        type: array
     type: object
   edgegroups.decoratedEdgeGroup:
     properties:
@@ -573,6 +564,10 @@ definitions:
         description: Use basic authentication to clone the Git repository
         example: true
         type: boolean
+      repositoryGitCredentialID:
+        description: GitCredentialID used to identify the binded git credential
+        example: 0
+        type: integer
       repositoryPassword:
         description: Password used in basic authentication. Required when RepositoryAuthentication
           is true.
@@ -621,6 +616,122 @@ definitions:
       version:
         type: integer
     type: object
+  edgetypes.UpdateSchedule:
+    properties:
+      created:
+        description: Created timestamp
+        example: 1564897200
+        type: integer
+      createdBy:
+        description: Created by user id
+        example: 1
+        type: integer
+      groupIds:
+        description: EdgeGroups to be updated
+        example:
+        - 1
+        items:
+          type: integer
+        type: array
+      id:
+        description: EdgeUpdateSchedule Identifier
+        example: 1
+        type: integer
+      name:
+        description: Name of the schedule
+        example: Update Schedule
+        type: string
+      status:
+        additionalProperties:
+          $ref: '#/definitions/edgetypes.UpdateScheduleStatus'
+        description: Status of the schedule, grouped by environment id
+        type: object
+      time:
+        description: Type of the schedule
+        example: 1564897200
+        type: integer
+      type:
+        description: Type of the update (1 - update, 2 - rollback)
+        enum:
+        - 1
+        - 2
+        example: 1
+        type: integer
+    type: object
+  edgetypes.UpdateScheduleStatus:
+    properties:
+      currentVersion:
+        description: Current version of the edge agent
+        example: "1"
+        type: string
+      error:
+        description: Error message if status is failed
+        example: ""
+        type: string
+      status:
+        description: Status of the schedule (0 - pending, 1 - failed, 2 - success)
+        enum:
+        - 1
+        - 2
+        - 3
+        example: 1
+        type: integer
+      targetVersion:
+        description: Target version of the edge agent
+        example: "1"
+        type: string
+    type: object
+  edgeupdateschedules.activeSchedulePayload:
+    properties:
+      environmentIDs:
+        items:
+          type: integer
+        type: array
+    type: object
+  edgeupdateschedules.createPayload:
+    properties:
+      environments:
+        additionalProperties:
+          type: string
+        type: object
+      groupIDs:
+        items:
+          type: integer
+        type: array
+      name:
+        type: string
+      time:
+        type: integer
+      type:
+        description: Type of the update (1 - update, 2 - rollback)
+        enum:
+        - 1
+        - 2
+        example: 1
+        type: integer
+    type: object
+  edgeupdateschedules.updatePayload:
+    properties:
+      environments:
+        additionalProperties:
+          type: string
+        type: object
+      groupIDs:
+        items:
+          type: integer
+        type: array
+      name:
+        type: string
+      time:
+        type: integer
+      type:
+        description: Type of the update (1 - update, 2 - rollback)
+        enum:
+        - 1
+        - 2
+        example: 1
+        type: integer
+    type: object
   endpointedge.Credentials:
     properties:
       secret:
@@ -640,6 +751,8 @@ definitions:
         type: array
       endpointID:
         type: integer
+      needFullSnapshot:
+        type: boolean
       pingInterval:
         type: integer
       snapshotInterval:
@@ -803,6 +916,9 @@ definitions:
       changeWindow:
         $ref: '#/definitions/portaineree.EndpointChangeWindow'
         description: Whether automatic update time restrictions are enabled
+      enableImageNotification:
+        example: false
+        type: boolean
       securitySettings:
         description: Security settings updates
         properties:
@@ -1006,8 +1122,178 @@ definitions:
       ownerUsername:
         type: string
     type: object
+  github.com_portainer_portainer-ee_api_demo.EnvironmentDetails:
+    properties:
+      enabled:
+        type: boolean
+      environments:
+        items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
+          type: integer
+        type: array
+      users:
+        items:
+          description: User Identifier
+          example: 1
+          type: integer
+        type: array
+    type: object
+  github.com_portainer_portainer-ee_api_http_handler_status.BuildInfo:
+    properties:
+      buildNumber:
+        type: string
+      goVersion:
+        type: string
+      imageTag:
+        type: string
+      nodejsVersion:
+        type: string
+      webpackVersion:
+        type: string
+      yarnVersion:
+        type: string
+    type: object
+  github.com_portainer_portainer-ee_api_http_handler_status.status:
+    properties:
+      Version:
+        description: Portainer API version
+        example: 2.0.0
+        type: string
+      demoEnvironment:
+        $ref: '#/definitions/github.com_portainer_portainer-ee_api_demo.EnvironmentDetails'
+      instanceID:
+        description: Server Instance ID
+        example: 299ab403-70a8-4c05-92f7-bf7a994d50df
+        type: string
+    type: object
+  github.com_portainer_portainer-ee_api_http_handler_status.versionResponse:
+    properties:
+      LatestVersion:
+        description: The latest version available
+        example: 2.0.0
+        type: string
+      UpdateAvailable:
+        description: Whether portainer has an update available
+        example: false
+        type: boolean
+      build:
+        $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_status.BuildInfo'
+      databaseVersion:
+        type: string
+      serverVersion:
+        type: string
+    type: object
+  github.com_portainer_portainer_api_demo.EnvironmentDetails:
+    properties:
+      enabled:
+        type: boolean
+      environments:
+        items:
+          type: integer
+        type: array
+      users:
+        items:
+          description: Created by user id
+          example: 1
+          type: integer
+        type: array
+    type: object
+  github.com_portainer_portainer_api_http_handler_status.BuildInfo:
+    properties:
+      buildNumber:
+        type: string
+      goVersion:
+        type: string
+      imageTag:
+        type: string
+      nodejsVersion:
+        type: string
+      webpackVersion:
+        type: string
+      yarnVersion:
+        type: string
+    type: object
+  github.com_portainer_portainer_api_http_handler_status.status:
+    properties:
+      Version:
+        description: Portainer API version
+        example: 2.0.0
+        type: string
+      demoEnvironment:
+        $ref: '#/definitions/github.com_portainer_portainer_api_demo.EnvironmentDetails'
+      instanceID:
+        description: Server Instance ID
+        example: 299ab403-70a8-4c05-92f7-bf7a994d50df
+        type: string
+    type: object
+  github.com_portainer_portainer_api_http_handler_status.versionResponse:
+    properties:
+      LatestVersion:
+        description: The latest version available
+        example: 2.0.0
+        type: string
+      UpdateAvailable:
+        description: Whether portainer has an update available
+        example: false
+        type: boolean
+      build:
+        $ref: '#/definitions/github.com_portainer_portainer_api_http_handler_status.BuildInfo'
+      databaseVersion:
+        type: string
+      serverVersion:
+        type: string
+    type: object
+  gitops.repositoryFileSearchPayload:
+    properties:
+      gitCredentialID:
+        type: integer
+      include:
+        description: Allow to provide specific file extension as the search result.
+          If empty, the file extensions yml,yaml,hcl,json will be set by default
+        example: json,yml
+        type: string
+      keyword:
+        description: Partial or completed file name. If empty, all filenames with
+          included extensions will be returned
+        example: docker-compose
+        type: string
+      password:
+        type: string
+      reference:
+        description: Specific Git repository reference. If empty, the reference ref/heads/main
+          will be set by default
+        example: refs/heads/develop
+        type: string
+      repository:
+        type: string
+      username:
+        type: string
+    required:
+    - repository
+    type: object
+  gitops.repositoryReferenceListPayload:
+    properties:
+      gitCredentialID:
+        type: integer
+      password:
+        type: string
+      repository:
+        type: string
+      username:
+        type: string
+    required:
+    - repository
+    type: object
   gittypes.GitAuthentication:
     properties:
+      gitCredentialID:
+        description: |-
+          Git credentials identifier when the value is not 0
+          When the value is 0, Username and Password are set without using saved credential
+          This is introduced since 2.15.0
+        example: 0
+        type: integer
       password:
         type: string
       username:
@@ -1994,6 +2280,8 @@ definitions:
       EdgeKey:
         description: The key which is used to map the agent to Portainer
         type: string
+      EnableImageNotification:
+        type: boolean
       Gpus:
         items:
           $ref: '#/definitions/portaineree.Pair'
@@ -2016,6 +2304,9 @@ definitions:
       Nomad:
         $ref: '#/definitions/portaineree.NomadData'
         description: Associated Nomad data
+      PostInitMigrations:
+        $ref: '#/definitions/portaineree.EndpointPostInitMigrations'
+        description: Whether we need to run any "post init migrations".
       PublicURL:
         description: URL or IP address where exposed containers will be reachable
         example: docker.mydomain.tld:2375
@@ -2186,6 +2477,11 @@ definitions:
       UserAccessPolicies:
         $ref: '#/definitions/portaineree.UserAccessPolicies'
     type: object
+  portaineree.EndpointPostInitMigrations:
+    properties:
+      MigrateIngresses:
+        type: boolean
+    type: object
   portaineree.EndpointSecuritySettings:
     properties:
       allowBindMountsForRegularUsers:
@@ -2245,6 +2541,25 @@ definitions:
       ownerUsername:
         type: string
     type: object
+  portaineree.GitCredential:
+    properties:
+      creationDate:
+        example: 1587399600
+        type: integer
+      id:
+        example: 1
+        type: integer
+      name:
+        type: string
+      password:
+        type: string
+      userId:
+        description: User Identifier
+        example: 1
+        type: integer
+      username:
+        type: string
+    type: object
   portaineree.GitlabRegistryData:
     properties:
       InstanceURL:
@@ -2287,7 +2602,11 @@ definitions:
     type: object
   portaineree.KubernetesConfiguration:
     properties:
+      AllowNoneIngressClass:
+        type: boolean
       EnableResourceOverCommit:
+        type: boolean
+      IngressAvailabilityPerNamespace:
         type: boolean
       IngressClasses:
         items:
@@ -2317,6 +2636,12 @@ definitions:
     type: object
   portaineree.KubernetesIngressClassConfig:
     properties:
+      Blocked:
+        type: boolean
+      BlockedNamespaces:
+        items:
+          type: string
+        type: array
       Name:
         type: string
       Type:
@@ -2542,6 +2867,8 @@ definitions:
           type: integer
         type: array
       LogoutURI:
+        type: string
+      MicrosoftTenantID:
         type: string
       OAuthAutoCreateUsers:
         type: boolean
@@ -2837,6 +3164,10 @@ definitions:
       CloudApiKeys:
         $ref: '#/definitions/portaineree.CloudApiKeys'
         description: CloudAPIKeys
+      CustomLoginBanner:
+        description: The content in plaintext used to display in the login page. Will
+          hide when value is empty string
+        type: string
       EdgeAgentCheckinInterval:
         description: The default check in interval for edge agent (in seconds)
         example: 5
@@ -4115,6 +4446,11 @@ definitions:
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
         example: 1
         type: integer
+      CustomLoginBanner:
+        description: The content in plaintext used to display in the login page. Will
+          hide when value is empty string
+        example: notice or agreement
+        type: string
       EnableEdgeComputeFeatures:
         description: Whether edge compute features are enabled
         example: true
@@ -4209,6 +4545,11 @@ definitions:
         items:
           $ref: '#/definitions/portaineree.Pair'
         type: array
+      customLoginBanner:
+        description: The content in plaintext used to display in the login page. Will
+          hide when value is empty string
+        example: notice or agreement
+        type: string
       edge:
         properties:
           CommandInterval:
@@ -4367,9 +4708,16 @@ definitions:
         description: Use basic authentication to clone the Git repository
         example: true
         type: boolean
+      repositoryGitCredentialID:
+        description: |-
+          GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
+          is true and RepositoryUsername/RepositoryPassword are not provided
+        example: 0
+        type: integer
       repositoryPassword:
-        description: Password used in basic authentication. Required when RepositoryAuthentication
-          is true.
+        description: |-
+          Password used in basic authentication. Required when RepositoryAuthentication is true
+          and RepositoryGitCredentialID is 0
         example: myGitPassword
         type: string
       repositoryReferenceName:
@@ -4381,13 +4729,65 @@ definitions:
         example: https://github.com/openfaas/faas
         type: string
       repositoryUsername:
-        description: Username used in basic authentication. Required when RepositoryAuthentication
-          is true.
+        description: |-
+          Username used in basic authentication. Required when RepositoryAuthentication is true
+          and RepositoryGitCredentialID is 0
         example: myGitUsername
         type: string
     required:
     - name
     - repositoryURL
+    type: object
+  stacks.kubernetesGitDeploymentPayload:
+    properties:
+      additionalFiles:
+        items:
+          type: string
+        type: array
+      autoUpdate:
+        $ref: '#/definitions/portaineree.StackAutoUpdate'
+      composeFormat:
+        type: boolean
+      manifestFile:
+        type: string
+      namespace:
+        type: string
+      repositoryAuthentication:
+        type: boolean
+      repositoryGitCredentialID:
+        type: integer
+      repositoryPassword:
+        type: string
+      repositoryReferenceName:
+        type: string
+      repositoryURL:
+        type: string
+      repositoryUsername:
+        type: string
+      stackName:
+        type: string
+    type: object
+  stacks.kubernetesManifestURLDeploymentPayload:
+    properties:
+      composeFormat:
+        type: boolean
+      manifestURL:
+        type: string
+      namespace:
+        type: string
+      stackName:
+        type: string
+    type: object
+  stacks.kubernetesStringDeploymentPayload:
+    properties:
+      composeFormat:
+        type: boolean
+      namespace:
+        type: string
+      stackFileContent:
+        type: string
+      stackName:
+        type: string
     type: object
   stacks.stackFileResponse:
     properties:
@@ -4416,6 +4816,8 @@ definitions:
         type: boolean
       repositoryAuthentication:
         type: boolean
+      repositoryGitCredentialID:
+        type: integer
       repositoryPassword:
         type: string
       repositoryReferenceName:
@@ -4435,6 +4837,8 @@ definitions:
         type: boolean
       repositoryAuthentication:
         type: boolean
+      repositoryGitCredentialID:
+        type: integer
       repositoryPassword:
         type: string
       repositoryReferenceName:
@@ -4528,9 +4932,16 @@ definitions:
         description: Use basic authentication to clone the Git repository
         example: true
         type: boolean
+      repositoryGitCredentialID:
+        description: |-
+          GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
+          is true and RepositoryUsername/RepositoryPassword are not provided
+        example: 0
+        type: integer
       repositoryPassword:
-        description: Password used in basic authentication. Required when RepositoryAuthentication
-          is true.
+        description: |-
+          Password used in basic authentication. Required when RepositoryAuthentication is true
+          and RepositoryGitCredentialID is 0
         example: myGitPassword
         type: string
       repositoryReferenceName:
@@ -4542,8 +4953,9 @@ definitions:
         example: https://github.com/openfaas/faas
         type: string
       repositoryUsername:
-        description: Username used in basic authentication. Required when RepositoryAuthentication
-          is true.
+        description: |-
+          Username used in basic authentication. Required when RepositoryAuthentication is true
+          and RepositoryGitCredentialID is 0
         example: myGitUsername
         type: string
       swarmID:
@@ -4586,55 +4998,10 @@ definitions:
         example: c11fdf23-183e-428a-9bb6-16db01032174
         type: string
     type: object
-  status.BuildInfo:
-    properties:
-      buildNumber:
-        type: string
-      goVersion:
-        type: string
-      imageTag:
-        type: string
-      nodejsVersion:
-        type: string
-      webpackVersion:
-        type: string
-      yarnVersion:
-        type: string
-    type: object
   status.nodesCountResponse:
     properties:
       nodes:
         type: integer
-    type: object
-  status.status:
-    properties:
-      Version:
-        description: Portainer API version
-        example: 2.0.0
-        type: string
-      demoEnvironment:
-        $ref: '#/definitions/demo.EnvironmentDetails'
-      instanceID:
-        description: Server Instance ID
-        example: 299ab403-70a8-4c05-92f7-bf7a994d50df
-        type: string
-    type: object
-  status.versionResponse:
-    properties:
-      LatestVersion:
-        description: The latest version available
-        example: 2.0.0
-        type: string
-      UpdateAvailable:
-        description: Whether portainer has an update available
-        example: false
-        type: boolean
-      build:
-        $ref: '#/definitions/status.BuildInfo'
-      databaseVersion:
-        type: string
-      serverVersion:
-        type: string
     type: object
   tags.tagCreatePayload:
     properties:
@@ -4885,6 +5252,11 @@ definitions:
     - password
     - username
     type: object
+  users.gitCredentialResponse:
+    properties:
+      gitCredential:
+        $ref: '#/definitions/portaineree.GitCredential'
+    type: object
   users.namespaceMapping:
     additionalProperties:
       additionalProperties:
@@ -4917,6 +5289,20 @@ definitions:
     required:
     - password
     - role
+    - username
+    type: object
+  users.userGitCredentialCreatePayload:
+    properties:
+      name:
+        example: my-credential
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - name
+    - password
     - username
     type: object
   users.userUpdatePasswordPayload:
@@ -5044,7 +5430,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.15.1
+  version: 2.16.0
 paths:
   /auth:
     post:
@@ -5735,6 +6121,33 @@ paths:
       summary: Fetch container gpus data
       tags:
       - docker
+  /docker/{environmentId}/snapshot:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**:'
+      operationId: snapshotInspect
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: environmentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portainer.DockerSnapshotRaw'
+        "404":
+          description: Environment not found
+      security:
+      - jwt: []
+      summary: Fetch latest snapshot of environment
+      tags:
+      - endpoints
+      - docker
   /docker/{environmentId}/snapshot/container/{containerId}:
     get:
       consumes:
@@ -5747,20 +6160,13 @@ paths:
         name: environmentId
         required: true
         type: integer
-      - description: Edge stack identifier, will return only containers for this edge
-          stack
-        in: query
-        name: edgeStackId
-        type: integer
       produces:
       - application/json
       responses:
         "200":
           description: Success
           schema:
-            items:
-              $ref: '#/definitions/types.Container'
-            type: array
+            $ref: '#/definitions/types.Container'
         "404":
           description: Environment not found
       security:
@@ -6611,6 +7017,138 @@ paths:
       summary: Fetches the list of Edge Templates
       tags:
       - edge_templates
+  /edge_update_schedules:
+    get:
+      description: '**Access policy**: administrator'
+      operationId: EdgeUpdateScheduleList
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/edgetypes.UpdateSchedule'
+            type: array
+        "500":
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Fetches the list of Edge Update Schedules
+      tags:
+      - edge_update_schedules
+    post:
+      consumes:
+      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeUpdateScheduleUpdate
+      parameters:
+      - description: Schedule details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/edgeupdateschedules.updatePayload'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "500":
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Updates an Edge Update Schedule
+      tags:
+      - edge_update_schedules
+  /edge_update_schedules/{id}:
+    delete:
+      description: '**Access policy**: administrator'
+      operationId: EdgeUpdateScheduleDelete
+      responses:
+        "204":
+          description: No Content
+        "500":
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Deletes an Edge Update Schedule
+      tags:
+      - edge_update_schedules
+    get:
+      description: '**Access policy**: administrator'
+      operationId: EdgeUpdateScheduleInspect
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/edgetypes.UpdateSchedule'
+        "500":
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Returns the Edge Update Schedule with the given ID
+      tags:
+      - edge_update_schedules
+  /edge_update_schedules/active:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeUpdateScheduleActiveSchedulesList
+      parameters:
+      - description: Active schedule query
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/edgeupdateschedules.activeSchedulePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/edgetypes.UpdateSchedule'
+            type: array
+        "500":
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Fetches the list of Active Edge Update Schedules
+      tags:
+      - edge_update_schedules
+  /edge_update_schedules/agent_versions:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: EdgeUpdatePreviousVersions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Fetches the previous versions of updated agents
+      tags:
+      - edge_update_schedules
   /endpoint_groups:
     get:
       description: |-
@@ -8049,6 +8587,75 @@ paths:
       summary: register an FDO device
       tags:
       - intel
+  /gitops/repo/files/search:
+    post:
+      description: |-
+        Search the file path from the git repository based on partial or completed filename
+        **Access policy**: authenticated
+      operationId: GitOperationRepoFilesSearch
+      parameters:
+      - description: list the results without using cache
+        in: query
+        name: force
+        type: boolean
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/gitops.repositoryFileSearchPayload'
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Search the file path from a git repository files with specified extensions
+      tags:
+      - gitops
+  /gitops/repo/refs:
+    post:
+      description: |-
+        List all the refs of a git repository
+        Will return all refs of a git repository
+        **Access policy**: authenticated
+      operationId: GitOperationRepoRefs
+      parameters:
+      - description: list the results without using cache
+        in: query
+        name: force
+        type: boolean
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/gitops.repositoryReferenceListPayload'
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List the refs of a git repository
+      tags:
+      - gitops
   /kubernetes/{endpointId}/opa:
     put:
       consumes:
@@ -8426,7 +9033,6 @@ paths:
       summary: fetches the list of licenses on Portainer
       tags:
       - license
-  /licenses/attach:
     post:
       consumes:
       - application/json
@@ -9364,20 +9970,23 @@ paths:
         **Access policy**: authenticated
       operationId: StackCreate
       parameters:
-      - description: 'Stack deployment type. Possible values: 1 (Swarm stack) or 2
-          (Compose stack).'
+      - description: 'Stack deployment type. Possible values: 1 (Swarm stack), 2 (Compose
+          stack) or 3 (Kubernetes stack).'
         enum:
         - 1
         - 2
+        - 3
         in: query
         name: type
         required: true
         type: integer
-      - description: 'Stack deployment method. Possible values: file, string or repository.'
+      - description: 'Stack deployment method. Possible values: file, string, repository
+          or url.'
         enum:
         - string
         - file
         - repository
+        - url
         in: query
         name: method
         required: true
@@ -9408,6 +10017,21 @@ paths:
         name: body_compose_repository
         schema:
           $ref: '#/definitions/stacks.composeStackFromGitRepositoryPayload'
+      - description: Required when using method=string and type=3
+        in: body
+        name: body_kubernetes_string
+        schema:
+          $ref: '#/definitions/stacks.kubernetesStringDeploymentPayload'
+      - description: Required when using method=repository and type=3
+        in: body
+        name: body_kubernetes_repository
+        schema:
+          $ref: '#/definitions/stacks.kubernetesGitDeploymentPayload'
+      - description: Required when using method=url and type=3
+        in: body
+        name: body_kubernetes_url
+        schema:
+          $ref: '#/definitions/stacks.kubernetesManifestURLDeploymentPayload'
       - description: Name of the stack. required when method is file
         in: formData
         name: Name
@@ -9877,7 +10501,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/status.status'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_status.status'
       summary: Check Portainer status
       tags:
       - status
@@ -9912,7 +10536,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/status.versionResponse'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_status.versionResponse'
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -10218,6 +10842,16 @@ paths:
         List teams. For non-administrator users, will only list the teams they are member of.
         **Access policy**: restricted
       operationId: TeamList
+      parameters:
+      - description: Only list teams that the user is leader of
+        in: query
+        name: onlyLedTeams
+        type: boolean
+      - description: Identifier of the environment(endpoint) that will be used to
+          filter the authorized teams
+        in: query
+        name: environmentId
+        type: integer
       produces:
       - application/json
       responses:
@@ -10698,6 +11332,12 @@ paths:
         User passwords are filtered out, and should never be accessible.
         **Access policy**: restricted
       operationId: UserList
+      parameters:
+      - description: Identifier of the environment(endpoint) that will be used to
+          filter the authorized users
+        in: query
+        name: environmentId
+        type: integer
       produces:
       - application/json
       responses:
@@ -10857,6 +11497,189 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: Update a user
+      tags:
+      - users
+  /users/{id}/gitcredentials:
+    get:
+      description: |-
+        Gets all saved git credentials for a user.
+        Only the calling user can retrieve git credentials
+        **Access policy**: authenticated
+      operationId: UserGetGitCredentials
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portaineree.GitCredential'
+            type: array
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: User not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get all saved git credentials for a user
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Store a Git Credential for a user.
+        Only the calling user can store a git credential for themselves.
+        **Access policy**: restricted
+      operationId: UserCreateGitCredential
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.userGitCredentialCreatePayload'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/users.gitCredentialResponse'
+        "400":
+          description: Invalid request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Permission denied
+        "500":
+          description: Server error
+      security:
+      - jwt: []
+      summary: Store a Git Credential for a user
+      tags:
+      - users
+  /users/{id}/gitcredentials/{credentialID}:
+    delete:
+      description: |-
+        Remove a git-credential associated to a user..
+        Only the calling user can remove git-credential
+        **Access policy**: authenticated
+      operationId: UserRemoveGitCredential
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Git Credential identifier
+        in: path
+        name: credentialID
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove a git-credential associated to a user
+      tags:
+      - users
+    get:
+      description: |-
+        Gets the specific saved git credential for a user.
+        Only the calling user can retrieve git credential
+        **Access policy**: authenticated
+      operationId: UserGetGitCredential
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Git Credential identifier
+        in: path
+        name: credentialID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portaineree.GitCredential'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: User not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get the specific saved git credential for a user
+      tags:
+      - users
+    put:
+      description: |-
+        Update a git-credential associated to a user..
+        Only the calling user can update git-credential
+        **Access policy**: authenticated
+      operationId: UserUpdateGitCredential
+      parameters:
+      - description: User identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Git Credential identifier
+        in: path
+        name: credentialID
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Update a git-credential associated to a user
       tags:
       - users
   /users/{id}/memberships:
@@ -11467,6 +12290,8 @@ tags:
   name: endpoints
 - description: Manage environment(endpoint) groups
   name: endpoint_groups
+- description: Operate git repository
+  name: gitops
 - description: Manage Kubernetes cluster
   name: kubernetes
 - description: Fetch the message of the day

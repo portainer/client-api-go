@@ -21,6 +21,10 @@ type EndpointsEndpointSettingsUpdatePayload struct {
 	// Whether automatic update time restrictions are enabled
 	ChangeWindow *PortainereeEndpointChangeWindow `json:"changeWindow,omitempty"`
 
+	// enable image notification
+	// Example: false
+	EnableImageNotification bool `json:"enableImageNotification,omitempty"`
+
 	// security settings
 	SecuritySettings *EndpointsEndpointSettingsUpdatePayloadSecuritySettings `json:"securitySettings,omitempty"`
 }

@@ -74,11 +74,11 @@ func (o *LicensesAttachOK) IsCode(code int) bool {
 }
 
 func (o *LicensesAttachOK) Error() string {
-	return fmt.Sprintf("[POST /licenses/attach][%d] licensesAttachOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /licenses][%d] licensesAttachOK  %+v", 200, o.Payload)
 }
 
 func (o *LicensesAttachOK) String() string {
-	return fmt.Sprintf("[POST /licenses/attach][%d] licensesAttachOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /licenses][%d] licensesAttachOK  %+v", 200, o.Payload)
 }
 
 func (o *LicensesAttachOK) GetPayload() *models.LicensesAttachResponse {

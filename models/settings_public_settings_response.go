@@ -22,6 +22,10 @@ type SettingsPublicSettingsResponse struct {
 	// Example: 1
 	AuthenticationMethod int64 `json:"AuthenticationMethod,omitempty"`
 
+	// The content in plaintext used to display in the login page. Will hide when value is empty string
+	// Example: notice or agreement
+	CustomLoginBanner string `json:"CustomLoginBanner,omitempty"`
+
 	// Whether edge compute features are enabled
 	// Example: true
 	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`

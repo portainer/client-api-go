@@ -94,6 +94,24 @@ type StackCreateParams struct {
 	*/
 	BodyComposeString *models.StacksComposeStackFromFileContentPayload
 
+	/* BodyKubernetesRepository.
+
+	   Required when using method=repository and type=3
+	*/
+	BodyKubernetesRepository *models.StacksKubernetesGitDeploymentPayload
+
+	/* BodyKubernetesString.
+
+	   Required when using method=string and type=3
+	*/
+	BodyKubernetesString *models.StacksKubernetesStringDeploymentPayload
+
+	/* BodyKubernetesURL.
+
+	   Required when using method=url and type=3
+	*/
+	BodyKubernetesURL *models.StacksKubernetesManifestURLDeploymentPayload
+
 	/* BodySwarmRepository.
 
 	   Required when using method=repository and type=1
@@ -120,13 +138,13 @@ type StackCreateParams struct {
 
 	/* Method.
 
-	   Stack deployment method. Possible values: file, string or repository.
+	   Stack deployment method. Possible values: file, string, repository or url.
 	*/
 	Method string
 
 	/* Type.
 
-	   Stack deployment type. Possible values: 1 (Swarm stack) or 2 (Compose stack).
+	   Stack deployment type. Possible values: 1 (Swarm stack), 2 (Compose stack) or 3 (Kubernetes stack).
 	*/
 	Type int64
 
@@ -236,6 +254,39 @@ func (o *StackCreateParams) WithBodyComposeString(bodyComposeString *models.Stac
 // SetBodyComposeString adds the bodyComposeString to the stack create params
 func (o *StackCreateParams) SetBodyComposeString(bodyComposeString *models.StacksComposeStackFromFileContentPayload) {
 	o.BodyComposeString = bodyComposeString
+}
+
+// WithBodyKubernetesRepository adds the bodyKubernetesRepository to the stack create params
+func (o *StackCreateParams) WithBodyKubernetesRepository(bodyKubernetesRepository *models.StacksKubernetesGitDeploymentPayload) *StackCreateParams {
+	o.SetBodyKubernetesRepository(bodyKubernetesRepository)
+	return o
+}
+
+// SetBodyKubernetesRepository adds the bodyKubernetesRepository to the stack create params
+func (o *StackCreateParams) SetBodyKubernetesRepository(bodyKubernetesRepository *models.StacksKubernetesGitDeploymentPayload) {
+	o.BodyKubernetesRepository = bodyKubernetesRepository
+}
+
+// WithBodyKubernetesString adds the bodyKubernetesString to the stack create params
+func (o *StackCreateParams) WithBodyKubernetesString(bodyKubernetesString *models.StacksKubernetesStringDeploymentPayload) *StackCreateParams {
+	o.SetBodyKubernetesString(bodyKubernetesString)
+	return o
+}
+
+// SetBodyKubernetesString adds the bodyKubernetesString to the stack create params
+func (o *StackCreateParams) SetBodyKubernetesString(bodyKubernetesString *models.StacksKubernetesStringDeploymentPayload) {
+	o.BodyKubernetesString = bodyKubernetesString
+}
+
+// WithBodyKubernetesURL adds the bodyKubernetesURL to the stack create params
+func (o *StackCreateParams) WithBodyKubernetesURL(bodyKubernetesURL *models.StacksKubernetesManifestURLDeploymentPayload) *StackCreateParams {
+	o.SetBodyKubernetesURL(bodyKubernetesURL)
+	return o
+}
+
+// SetBodyKubernetesURL adds the bodyKubernetesUrl to the stack create params
+func (o *StackCreateParams) SetBodyKubernetesURL(bodyKubernetesURL *models.StacksKubernetesManifestURLDeploymentPayload) {
+	o.BodyKubernetesURL = bodyKubernetesURL
 }
 
 // WithBodySwarmRepository adds the bodySwarmRepository to the stack create params
@@ -363,6 +414,21 @@ func (o *StackCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	}
 	if o.BodyComposeString != nil {
 		if err := r.SetBodyParam(o.BodyComposeString); err != nil {
+			return err
+		}
+	}
+	if o.BodyKubernetesRepository != nil {
+		if err := r.SetBodyParam(o.BodyKubernetesRepository); err != nil {
+			return err
+		}
+	}
+	if o.BodyKubernetesString != nil {
+		if err := r.SetBodyParam(o.BodyKubernetesString); err != nil {
+			return err
+		}
+	}
+	if o.BodyKubernetesURL != nil {
+		if err := r.SetBodyParam(o.BodyKubernetesURL); err != nil {
 			return err
 		}
 	}

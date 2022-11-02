@@ -17,6 +17,12 @@ import (
 // swagger:model portaineree.KubernetesIngressClassConfig
 type PortainereeKubernetesIngressClassConfig struct {
 
+	// blocked
+	Blocked bool `json:"Blocked,omitempty"`
+
+	// blocked namespaces
+	BlockedNamespaces []string `json:"BlockedNamespaces"`
+
 	// name
 	Name string `json:"Name,omitempty"`
 

@@ -19,8 +19,14 @@ import (
 // swagger:model portaineree.KubernetesConfiguration
 type PortainereeKubernetesConfiguration struct {
 
+	// allow none ingress class
+	AllowNoneIngressClass bool `json:"AllowNoneIngressClass,omitempty"`
+
 	// enable resource over commit
 	EnableResourceOverCommit bool `json:"EnableResourceOverCommit,omitempty"`
+
+	// ingress availability per namespace
+	IngressAvailabilityPerNamespace bool `json:"IngressAvailabilityPerNamespace,omitempty"`
 
 	// ingress classes
 	IngressClasses []*PortainereeKubernetesIngressClassConfig `json:"IngressClasses"`

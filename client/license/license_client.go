@@ -54,7 +54,7 @@ func (a *Client) LicensesAttach(params *LicensesAttachParams, authInfo runtime.C
 	op := &runtime.ClientOperation{
 		ID:                 "licensesAttach",
 		Method:             "POST",
-		PathPattern:        "/licenses/attach",
+		PathPattern:        "/licenses",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
