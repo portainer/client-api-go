@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewTeamListParams creates a new TeamListParams object,
@@ -60,6 +61,19 @@ TeamListParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type TeamListParams struct {
+
+	/* EnvironmentID.
+
+	   Identifier of the environment(endpoint) that will be used to filter the authorized teams
+	*/
+	EnvironmentID *int64
+
+	/* OnlyLedTeams.
+
+	   Only list teams that the user is leader of
+	*/
+	OnlyLedTeams *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +127,28 @@ func (o *TeamListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEnvironmentID adds the environmentID to the team list params
+func (o *TeamListParams) WithEnvironmentID(environmentID *int64) *TeamListParams {
+	o.SetEnvironmentID(environmentID)
+	return o
+}
+
+// SetEnvironmentID adds the environmentId to the team list params
+func (o *TeamListParams) SetEnvironmentID(environmentID *int64) {
+	o.EnvironmentID = environmentID
+}
+
+// WithOnlyLedTeams adds the onlyLedTeams to the team list params
+func (o *TeamListParams) WithOnlyLedTeams(onlyLedTeams *bool) *TeamListParams {
+	o.SetOnlyLedTeams(onlyLedTeams)
+	return o
+}
+
+// SetOnlyLedTeams adds the onlyLedTeams to the team list params
+func (o *TeamListParams) SetOnlyLedTeams(onlyLedTeams *bool) {
+	o.OnlyLedTeams = onlyLedTeams
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *TeamListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +156,40 @@ func (o *TeamListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	if o.EnvironmentID != nil {
+
+		// query param environmentId
+		var qrEnvironmentID int64
+
+		if o.EnvironmentID != nil {
+			qrEnvironmentID = *o.EnvironmentID
+		}
+		qEnvironmentID := swag.FormatInt64(qrEnvironmentID)
+		if qEnvironmentID != "" {
+
+			if err := r.SetQueryParam("environmentId", qEnvironmentID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OnlyLedTeams != nil {
+
+		// query param onlyLedTeams
+		var qrOnlyLedTeams bool
+
+		if o.OnlyLedTeams != nil {
+			qrOnlyLedTeams = *o.OnlyLedTeams
+		}
+		qOnlyLedTeams := swag.FormatBool(qrOnlyLedTeams)
+		if qOnlyLedTeams != "" {
+
+			if err := r.SetQueryParam("onlyLedTeams", qOnlyLedTeams); err != nil {
+				return err
+			}
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

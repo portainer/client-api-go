@@ -31,6 +31,9 @@ type StacksStackGitUpdatePayload struct {
 	// repository authentication
 	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
 
+	// repository git credential ID
+	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
+
 	// repository password
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`
 

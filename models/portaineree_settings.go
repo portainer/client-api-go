@@ -53,6 +53,9 @@ type PortainereeSettings struct {
 	// CloudAPIKeys
 	CloudAPIKeys *PortainereeCloudAPIKeys `json:"CloudApiKeys,omitempty"`
 
+	// The content in plaintext used to display in the login page. Will hide when value is empty string
+	CustomLoginBanner string `json:"CustomLoginBanner,omitempty"`
+
 	// The default check in interval for edge agent (in seconds)
 	// Example: 5
 	EdgeAgentCheckinInterval int64 `json:"EdgeAgentCheckinInterval,omitempty"`

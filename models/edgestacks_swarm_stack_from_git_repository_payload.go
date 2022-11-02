@@ -49,6 +49,10 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 	// Example: true
 	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
 
+	// GitCredentialID used to identify the binded git credential
+	// Example: 0
+	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
+
 	// Password used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitPassword
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`

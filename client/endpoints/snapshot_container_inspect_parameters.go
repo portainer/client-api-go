@@ -62,12 +62,6 @@ SnapshotContainerInspectParams contains all the parameters to send to the API en
 */
 type SnapshotContainerInspectParams struct {
 
-	/* EdgeStackID.
-
-	   Edge stack identifier, will return only containers for this edge stack
-	*/
-	EdgeStackID *int64
-
 	/* EnvironmentID.
 
 	   Environment identifier
@@ -127,17 +121,6 @@ func (o *SnapshotContainerInspectParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithEdgeStackID adds the edgeStackID to the snapshot container inspect params
-func (o *SnapshotContainerInspectParams) WithEdgeStackID(edgeStackID *int64) *SnapshotContainerInspectParams {
-	o.SetEdgeStackID(edgeStackID)
-	return o
-}
-
-// SetEdgeStackID adds the edgeStackId to the snapshot container inspect params
-func (o *SnapshotContainerInspectParams) SetEdgeStackID(edgeStackID *int64) {
-	o.EdgeStackID = edgeStackID
-}
-
 // WithEnvironmentID adds the environmentID to the snapshot container inspect params
 func (o *SnapshotContainerInspectParams) WithEnvironmentID(environmentID int64) *SnapshotContainerInspectParams {
 	o.SetEnvironmentID(environmentID)
@@ -156,23 +139,6 @@ func (o *SnapshotContainerInspectParams) WriteToRequest(r runtime.ClientRequest,
 		return err
 	}
 	var res []error
-
-	if o.EdgeStackID != nil {
-
-		// query param edgeStackId
-		var qrEdgeStackID int64
-
-		if o.EdgeStackID != nil {
-			qrEdgeStackID = *o.EdgeStackID
-		}
-		qEdgeStackID := swag.FormatInt64(qrEdgeStackID)
-		if qEdgeStackID != "" {
-
-			if err := r.SetQueryParam("edgeStackId", qEdgeStackID); err != nil {
-				return err
-			}
-		}
-	}
 
 	// path param environmentId
 	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {

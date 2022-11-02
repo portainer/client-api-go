@@ -53,6 +53,9 @@ type PortainereeEndpoint struct {
 	// The key which is used to map the agent to Portainer
 	EdgeKey string `json:"EdgeKey,omitempty"`
 
+	// enable image notification
+	EnableImageNotification bool `json:"EnableImageNotification,omitempty"`
+
 	// gpus
 	Gpus []*PortainereePair `json:"Gpus"`
 
@@ -73,6 +76,9 @@ type PortainereeEndpoint struct {
 
 	// Associated Nomad data
 	Nomad *PortainereeNomadData `json:"Nomad,omitempty"`
+
+	// Whether we need to run any "post init migrations".
+	PostInitMigrations *PortainereeEndpointPostInitMigrations `json:"PostInitMigrations,omitempty"`
 
 	// URL or IP address where exposed containers will be reachable
 	// Example: docker.mydomain.tld:2375
@@ -173,6 +179,10 @@ func (m *PortainereeEndpoint) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateNomad(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePostInitMigrations(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -327,6 +337,25 @@ func (m *PortainereeEndpoint) validateNomad(formats strfmt.Registry) error {
 				return ve.ValidateName("Nomad")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Nomad")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeEndpoint) validatePostInitMigrations(formats strfmt.Registry) error {
+	if swag.IsZero(m.PostInitMigrations) { // not required
+		return nil
+	}
+
+	if m.PostInitMigrations != nil {
+		if err := m.PostInitMigrations.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PostInitMigrations")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PostInitMigrations")
 			}
 			return err
 		}
@@ -522,6 +551,10 @@ func (m *PortainereeEndpoint) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePostInitMigrations(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSnapshots(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -652,6 +685,22 @@ func (m *PortainereeEndpoint) contextValidateNomad(ctx context.Context, formats 
 				return ve.ValidateName("Nomad")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Nomad")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeEndpoint) contextValidatePostInitMigrations(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PostInitMigrations != nil {
+		if err := m.PostInitMigrations.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PostInitMigrations")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PostInitMigrations")
 			}
 			return err
 		}

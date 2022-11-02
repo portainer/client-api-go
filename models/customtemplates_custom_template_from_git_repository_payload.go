@@ -49,7 +49,13 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Example: true
 	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
 
-	// Password used in basic authentication. Required when RepositoryAuthentication is true.
+	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
+	// is true and RepositoryUsername/RepositoryPassword are not provided
+	// Example: 0
+	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
+
+	// Password used in basic authentication. Required when RepositoryAuthentication is true
+	// and RepositoryGitCredentialID is 0
 	// Example: myGitPassword
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`
 
@@ -62,7 +68,8 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Required: true
 	RepositoryURL *string `json:"repositoryURL"`
 
-	// Username used in basic authentication. Required when RepositoryAuthentication is true.
+	// Username used in basic authentication. Required when RepositoryAuthentication is true
+	// and RepositoryGitCredentialID is 0
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
 

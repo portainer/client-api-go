@@ -45,7 +45,7 @@ StatusInspectOK describes a response with status code 200, with default header v
 Success
 */
 type StatusInspectOK struct {
-	Payload *models.StatusStatus
+	Payload *models.GithubComPortainerPortainerEeAPIHTTPHandlerStatusStatus
 }
 
 // IsSuccess returns true when this status inspect o k response has a 2xx status code
@@ -81,13 +81,13 @@ func (o *StatusInspectOK) String() string {
 	return fmt.Sprintf("[GET /status][%d] statusInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *StatusInspectOK) GetPayload() *models.StatusStatus {
+func (o *StatusInspectOK) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerStatusStatus {
 	return o.Payload
 }
 
 func (o *StatusInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.StatusStatus)
+	o.Payload = new(models.GithubComPortainerPortainerEeAPIHTTPHandlerStatusStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

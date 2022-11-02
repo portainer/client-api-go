@@ -20,8 +20,10 @@ import (
 	"github.com/portainer/client-api-go/v2/client/edge_jobs"
 	"github.com/portainer/client-api-go/v2/client/edge_stacks"
 	"github.com/portainer/client-api-go/v2/client/edge_templates"
+	"github.com/portainer/client-api-go/v2/client/edge_update_schedules"
 	"github.com/portainer/client-api-go/v2/client/endpoint_groups"
 	"github.com/portainer/client-api-go/v2/client/endpoints"
+	"github.com/portainer/client-api-go/v2/client/gitops"
 	"github.com/portainer/client-api-go/v2/client/helm"
 	"github.com/portainer/client-api-go/v2/client/intel"
 	"github.com/portainer/client-api-go/v2/client/kaas"
@@ -100,8 +102,10 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.EdgeJobs = edge_jobs.New(transport, formats)
 	cli.EdgeStacks = edge_stacks.New(transport, formats)
 	cli.EdgeTemplates = edge_templates.New(transport, formats)
+	cli.EdgeUpdateSchedules = edge_update_schedules.New(transport, formats)
 	cli.EndpointGroups = endpoint_groups.New(transport, formats)
 	cli.Endpoints = endpoints.New(transport, formats)
+	cli.Gitops = gitops.New(transport, formats)
 	cli.Helm = helm.New(transport, formats)
 	cli.Intel = intel.New(transport, formats)
 	cli.Kaas = kaas.New(transport, formats)
@@ -190,9 +194,13 @@ type PortainerClientAPI struct {
 
 	EdgeTemplates edge_templates.ClientService
 
+	EdgeUpdateSchedules edge_update_schedules.ClientService
+
 	EndpointGroups endpoint_groups.ClientService
 
 	Endpoints endpoints.ClientService
+
+	Gitops gitops.ClientService
 
 	Helm helm.ClientService
 
@@ -258,8 +266,10 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.EdgeJobs.SetTransport(transport)
 	c.EdgeStacks.SetTransport(transport)
 	c.EdgeTemplates.SetTransport(transport)
+	c.EdgeUpdateSchedules.SetTransport(transport)
 	c.EndpointGroups.SetTransport(transport)
 	c.Endpoints.SetTransport(transport)
+	c.Gitops.SetTransport(transport)
 	c.Helm.SetTransport(transport)
 	c.Intel.SetTransport(transport)
 	c.Kaas.SetTransport(transport)

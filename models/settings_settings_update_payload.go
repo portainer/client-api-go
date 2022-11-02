@@ -29,6 +29,10 @@ type SettingsSettingsUpdatePayload struct {
 	// A list of label name & value that will be used to hide containers when querying containers
 	BlackListedLabels []*PortainereePair `json:"blackListedLabels"`
 
+	// The content in plaintext used to display in the login page. Will hide when value is empty string
+	// Example: notice or agreement
+	CustomLoginBanner string `json:"customLoginBanner,omitempty"`
+
 	// edge
 	Edge *SettingsSettingsUpdatePayloadEdge `json:"edge,omitempty"`
 
