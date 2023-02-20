@@ -25,6 +25,9 @@ type PortainereeEdgeJob struct {
 	// cron expression
 	CronExpression string `json:"CronExpression,omitempty"`
 
+	// edge groups
+	EdgeGroups []int64 `json:"EdgeGroups"`
+
 	// endpoints
 	Endpoints map[string]PortainereeEdgeJobEndpointMeta `json:"Endpoints,omitempty"`
 
@@ -43,6 +46,9 @@ type PortainereeEdgeJob struct {
 
 	// version
 	Version int64 `json:"Version,omitempty"`
+
+	// Field used for log collection of Endpoints belonging to EdgeGroups
+	GroupLogsCollection map[string]PortainereeEdgeJobEndpointMeta `json:"groupLogsCollection,omitempty"`
 }
 
 // Validate validates this portaineree edge job
@@ -50,6 +56,10 @@ func (m *PortainereeEdgeJob) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateEndpoints(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGroupLogsCollection(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,11 +95,41 @@ func (m *PortainereeEdgeJob) validateEndpoints(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *PortainereeEdgeJob) validateGroupLogsCollection(formats strfmt.Registry) error {
+	if swag.IsZero(m.GroupLogsCollection) { // not required
+		return nil
+	}
+
+	for k := range m.GroupLogsCollection {
+
+		if err := validate.Required("groupLogsCollection"+"."+k, "body", m.GroupLogsCollection[k]); err != nil {
+			return err
+		}
+		if val, ok := m.GroupLogsCollection[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("groupLogsCollection" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("groupLogsCollection" + "." + k)
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this portaineree edge job based on the context it is used
 func (m *PortainereeEdgeJob) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateEndpoints(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGroupLogsCollection(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -104,6 +144,21 @@ func (m *PortainereeEdgeJob) contextValidateEndpoints(ctx context.Context, forma
 	for k := range m.Endpoints {
 
 		if val, ok := m.Endpoints[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *PortainereeEdgeJob) contextValidateGroupLogsCollection(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.GroupLogsCollection {
+
+		if val, ok := m.GroupLogsCollection[k]; ok {
 			if err := val.ContextValidate(ctx, formats); err != nil {
 				return err
 			}

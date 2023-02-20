@@ -25,8 +25,8 @@ type PortainereeEdgeStack struct {
 	// Deployment type to deploy this stack
 	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
 	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-	// kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-	// nomad deploytype is enabled only for nomad environments(endpoints)
+	// kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+	// nomad deploy type is enabled only for nomad environments(endpoints)
 	DeploymentType int64 `json:"DeploymentType,omitempty"`
 
 	// edge groups
@@ -45,20 +45,39 @@ type PortainereeEdgeStack struct {
 	// name
 	Name string `json:"Name,omitempty"`
 
+	// num deployments
+	NumDeployments int64 `json:"NumDeployments,omitempty"`
+
+	// Pre Pull Image
+	PrePullImage bool `json:"PrePullImage,omitempty"`
+
 	// project path
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
 	// Deprecated
 	Prune bool `json:"Prune,omitempty"`
 
+	// Re-Pull Image
+	RePullImage bool `json:"RePullImage,omitempty"`
+
 	// registries
 	Registries []int64 `json:"Registries"`
 
 	// status
-	Status map[string]PortainereeEdgeStackStatus `json:"Status,omitempty"`
+	Status map[string]PortainerEdgeStackStatus `json:"Status,omitempty"`
 
 	// version
 	Version int64 `json:"Version,omitempty"`
+
+	// EdgeUpdateID represents the parent update ID, will be zero if this stack is not part of an update
+	EdgeUpdateID int64 `json:"edgeUpdateID,omitempty"`
+
+	// Schedule represents the schedule of the Edge stack (optional, format - 'YYYY-MM-DD HH:mm:ss')
+	// Example: 2020-11-13 14:53:00
+	ScheduledTime string `json:"scheduledTime,omitempty"`
+
+	// Uses the manifest's namespaces instead of the default one
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 }
 
 // Validate validates this portaineree edge stack

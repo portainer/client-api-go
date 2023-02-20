@@ -40,6 +40,8 @@ type ClientService interface {
 
 	PutWebhooksID(params *PutWebhooksIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutWebhooksIDOK, error)
 
+	PutWebhooksIDReassign(params *PutWebhooksIDReassignParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutWebhooksIDReassignOK, *PutWebhooksIDReassignNoContent, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -246,6 +248,48 @@ func (a *Client) PutWebhooksID(params *PutWebhooksIDParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PutWebhooksID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PutWebhooksIDReassign reassigns a webhook to another resource
+
+**Access policy**: authenticated
+*/
+func (a *Client) PutWebhooksIDReassign(params *PutWebhooksIDReassignParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutWebhooksIDReassignOK, *PutWebhooksIDReassignNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPutWebhooksIDReassignParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PutWebhooksIDReassign",
+		Method:             "PUT",
+		PathPattern:        "/webhooks/{id}/reassign",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PutWebhooksIDReassignReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, nil, err
+	}
+	switch value := result.(type) {
+	case *PutWebhooksIDReassignOK:
+		return value, nil, nil
+	case *PutWebhooksIDReassignNoContent:
+		return nil, value, nil
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for webhooks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

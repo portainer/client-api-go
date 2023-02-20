@@ -70,6 +70,10 @@ type PortainereeStack struct {
 	// Example: 1587399600
 	CreationDate int64 `json:"creationDate,omitempty"`
 
+	// Network(Swarm) or local(Standalone) filesystem path
+	// Example: /tmp
+	FilesystemPath string `json:"filesystemPath,omitempty"`
+
 	// Whether the stack is from a app template
 	// Example: false
 	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
@@ -88,6 +92,10 @@ type PortainereeStack struct {
 	// Path on disk to the repository hosting the Stack file
 	// Example: /data/compose/myStack_jpofkc0i9uo9wtx1zesuk649w
 	ProjectPath string `json:"projectPath,omitempty"`
+
+	// If stack support relative path volume
+	// Example: false
+	SupportRelativePath bool `json:"supportRelativePath,omitempty"`
 
 	// The date in unix time when stack was last updated
 	// Example: 1587399600

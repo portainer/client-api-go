@@ -22,6 +22,9 @@ type PortainereeKubernetesData struct {
 	// configuration
 	Configuration *PortainereeKubernetesConfiguration `json:"Configuration,omitempty"`
 
+	// flags
+	Flags *PortainereeKubernetesFlags `json:"Flags,omitempty"`
+
 	// snapshots
 	Snapshots []*PortainereeKubernetesSnapshot `json:"Snapshots"`
 }
@@ -31,6 +34,10 @@ func (m *PortainereeKubernetesData) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateConfiguration(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateFlags(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -55,6 +62,25 @@ func (m *PortainereeKubernetesData) validateConfiguration(formats strfmt.Registr
 				return ve.ValidateName("Configuration")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Configuration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeKubernetesData) validateFlags(formats strfmt.Registry) error {
+	if swag.IsZero(m.Flags) { // not required
+		return nil
+	}
+
+	if m.Flags != nil {
+		if err := m.Flags.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Flags")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Flags")
 			}
 			return err
 		}
@@ -97,6 +123,10 @@ func (m *PortainereeKubernetesData) ContextValidate(ctx context.Context, formats
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateFlags(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSnapshots(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -115,6 +145,22 @@ func (m *PortainereeKubernetesData) contextValidateConfiguration(ctx context.Con
 				return ve.ValidateName("Configuration")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Configuration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeKubernetesData) contextValidateFlags(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Flags != nil {
+		if err := m.Flags.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Flags")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Flags")
 			}
 			return err
 		}

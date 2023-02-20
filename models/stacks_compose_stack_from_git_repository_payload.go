@@ -34,6 +34,10 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// A list of environment(endpoint) variables used during stack deployment
 	Env []*PortainereePair `json:"env"`
 
+	// Local filesystem path
+	// Example: /tmp
+	FilesystemPath string `json:"filesystemPath,omitempty"`
+
 	// Whether the stack is from a app template
 	// Example: false
 	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
@@ -70,6 +74,10 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// and RepositoryGitCredentialID is 0
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
+
+	// Whether the stack suppors relative path volume
+	// Example: false
+	SupportRelativePath bool `json:"supportRelativePath,omitempty"`
 }
 
 // Validate validates this stacks compose stack from git repository payload

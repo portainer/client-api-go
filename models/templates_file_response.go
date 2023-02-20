@@ -18,6 +18,7 @@ import (
 type TemplatesFileResponse struct {
 
 	// The requested file content
+	// Example: version:2
 	FileContent string `json:"fileContent,omitempty"`
 }
 

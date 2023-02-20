@@ -7,12 +7,9 @@ package models
 
 import (
 	"context"
-	"encoding/json"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // EdgeupdateschedulesCreatePayload edgeupdateschedules create payload
@@ -20,68 +17,24 @@ import (
 // swagger:model edgeupdateschedules.createPayload
 type EdgeupdateschedulesCreatePayload struct {
 
-	// environments
-	Environments map[string]string `json:"environments,omitempty"`
-
 	// group i ds
 	GroupIDs []int64 `json:"groupIDs"`
 
 	// name
 	Name string `json:"name,omitempty"`
 
-	// time
-	Time int64 `json:"time,omitempty"`
+	// scheduled time
+	ScheduledTime string `json:"scheduledTime,omitempty"`
 
-	// Type of the update (1 - update, 2 - rollback)
-	// Example: 1
-	// Enum: [1 2]
+	// type
 	Type int64 `json:"type,omitempty"`
+
+	// version
+	Version string `json:"version,omitempty"`
 }
 
 // Validate validates this edgeupdateschedules create payload
 func (m *EdgeupdateschedulesCreatePayload) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-var edgeupdateschedulesCreatePayloadTypeTypePropEnum []interface{}
-
-func init() {
-	var res []int64
-	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		edgeupdateschedulesCreatePayloadTypeTypePropEnum = append(edgeupdateschedulesCreatePayloadTypeTypePropEnum, v)
-	}
-}
-
-// prop value enum
-func (m *EdgeupdateschedulesCreatePayload) validateTypeEnum(path, location string, value int64) error {
-	if err := validate.EnumCase(path, location, value, edgeupdateschedulesCreatePayloadTypeTypePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *EdgeupdateschedulesCreatePayload) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
-		return err
-	}
-
 	return nil
 }
 

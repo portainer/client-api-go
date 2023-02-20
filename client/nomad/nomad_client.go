@@ -228,7 +228,7 @@ func (a *Client) GetLeader(params *GetLeaderParams, authInfo runtime.ClientAuthI
 	op := &runtime.ClientOperation{
 		ID:                 "getLeader",
 		Method:             "GET",
-		PathPattern:        "/nomad/endpoints/{endpointID}/status",
+		PathPattern:        "/nomad/endpoints/{endpointID}/leader",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

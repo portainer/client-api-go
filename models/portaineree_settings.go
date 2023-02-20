@@ -80,6 +80,9 @@ type PortainereeSettings struct {
 	// feature flag settings
 	FeatureFlagSettings map[string]bool `json:"FeatureFlagSettings,omitempty"`
 
+	// Deployment options for encouraging git ops workflows
+	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
+
 	// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
 	// Example: https://charts.bitnami.com/bitnami
 	HelmRepositoryURL string `json:"HelmRepositoryURL,omitempty"`
@@ -104,6 +107,10 @@ type PortainereeSettings struct {
 
 	// o auth settings
 	OAuthSettings *PortainereeOAuthSettings `json:"OAuthSettings,omitempty"`
+
+	// Show the Kompose build option (discontinued in 2.18)
+	// Example: false
+	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
 
 	// The interval in which environment(endpoint) snapshots are created
 	// Example: 5m
@@ -149,6 +156,10 @@ func (m *PortainereeSettings) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCloudAPIKeys(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGlobalDeploymentOptions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -223,6 +234,25 @@ func (m *PortainereeSettings) validateCloudAPIKeys(formats strfmt.Registry) erro
 				return ve.ValidateName("CloudApiKeys")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("CloudApiKeys")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeSettings) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
+		return nil
+	}
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GlobalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GlobalDeploymentOptions")
 			}
 			return err
 		}
@@ -376,6 +406,10 @@ func (m *PortainereeSettings) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGlobalDeploymentOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInternalAuthSettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -438,6 +472,22 @@ func (m *PortainereeSettings) contextValidateCloudAPIKeys(ctx context.Context, f
 				return ve.ValidateName("CloudApiKeys")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("CloudApiKeys")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeSettings) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GlobalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GlobalDeploymentOptions")
 			}
 			return err
 		}
@@ -630,6 +680,10 @@ type PortainereeSettingsEdge struct {
 	// The snapshot interval for edge agent - used in edge async mode (in seconds)
 	// Example: 5
 	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
+
+	// The address where the tunneling server can be reached by Edge agents
+	// Example: portainer.domain.tld
+	TunnelServerAddress string `json:"TunnelServerAddress,omitempty"`
 
 	// EdgeAsyncMode enables edge async mode by default
 	AsyncMode bool `json:"asyncMode,omitempty"`

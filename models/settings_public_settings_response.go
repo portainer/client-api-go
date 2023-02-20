@@ -37,6 +37,9 @@ type SettingsPublicSettingsResponse struct {
 	// Supported feature flags
 	Features map[string]bool `json:"Features,omitempty"`
 
+	// Deployment options for encouraging deployment as code
+	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
+
 	// URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
 	// Example: https://mycompany.mydomain.tld/logo.png
 	LogoURL string `json:"LogoURL,omitempty"`
@@ -57,6 +60,10 @@ type SettingsPublicSettingsResponse struct {
 	// Example: 1
 	RequiredPasswordLength int64 `json:"RequiredPasswordLength,omitempty"`
 
+	// Show the Kompose build option (discontinued in 2.18)
+	// Example: false
+	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
+
 	// Whether team sync is enabled
 	// Example: true
 	TeamSync bool `json:"TeamSync,omitempty"`
@@ -67,6 +74,12 @@ type SettingsPublicSettingsResponse struct {
 	// edge
 	Edge *SettingsPublicSettingsResponseEdge `json:"edge,omitempty"`
 
+	// Whether AMT is enabled
+	IsAMTEnabled bool `json:"isAMTEnabled,omitempty"`
+
+	// Whether FDO is enabled
+	IsFDOEnabled bool `json:"isFDOEnabled,omitempty"`
+
 	// The expiry of a Kubeconfig
 	// Example: 24h
 	KubeconfigExpiry *string `json:"kubeconfigExpiry,omitempty"`
@@ -75,6 +88,10 @@ type SettingsPublicSettingsResponse struct {
 // Validate validates this settings public settings response
 func (m *SettingsPublicSettingsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateGlobalDeploymentOptions(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateDefaultRegistry(formats); err != nil {
 		res = append(res, err)
@@ -87,6 +104,25 @@ func (m *SettingsPublicSettingsResponse) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SettingsPublicSettingsResponse) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
+		return nil
+	}
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GlobalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GlobalDeploymentOptions")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -132,6 +168,10 @@ func (m *SettingsPublicSettingsResponse) validateEdge(formats strfmt.Registry) e
 func (m *SettingsPublicSettingsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateGlobalDeploymentOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDefaultRegistry(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -143,6 +183,22 @@ func (m *SettingsPublicSettingsResponse) ContextValidate(ctx context.Context, fo
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *SettingsPublicSettingsResponse) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GlobalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GlobalDeploymentOptions")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

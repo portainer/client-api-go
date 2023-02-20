@@ -32,6 +32,9 @@ type PortainereeEdgeAsyncCommand struct {
 	// path
 	Path string `json:"path,omitempty"`
 
+	// scheduled time
+	ScheduledTime string `json:"scheduledTime,omitempty"`
+
 	// timestamp
 	Timestamp string `json:"timestamp,omitempty"`
 

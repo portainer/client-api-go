@@ -32,6 +32,9 @@ type RegistriesRegistryCreatePayload struct {
 	// ECR specific details, required when type = 7
 	Ecr *PortainereeEcrData `json:"ecr,omitempty"`
 
+	// Github specific details, required when type = 8
+	Github *PortainereeGithubRegistryData `json:"github,omitempty"`
+
 	// Gitlab specific details, required when type = 4
 	Gitlab *PortainereeGitlabRegistryData `json:"gitlab,omitempty"`
 
@@ -55,9 +58,10 @@ type RegistriesRegistryCreatePayload struct {
 	// 	5 (ProGet registry),
 	// 	6 (DockerHub)
 	// 	7 (ECR)
+	// 	8 (Github registry)
 	// Example: 1
 	// Required: true
-	// Enum: [1 2 3 4 5 6 7]
+	// Enum: [1 2 3 4 5 6 7 8]
 	Type *int64 `json:"type"`
 
 	// URL or IP address of the Docker registry
@@ -79,6 +83,10 @@ func (m *RegistriesRegistryCreatePayload) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateEcr(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGithub(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -128,6 +136,25 @@ func (m *RegistriesRegistryCreatePayload) validateEcr(formats strfmt.Registry) e
 				return ve.ValidateName("ecr")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ecr")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *RegistriesRegistryCreatePayload) validateGithub(formats strfmt.Registry) error {
+	if swag.IsZero(m.Github) { // not required
+		return nil
+	}
+
+	if m.Github != nil {
+		if err := m.Github.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("github")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("github")
 			}
 			return err
 		}
@@ -187,7 +214,7 @@ var registriesRegistryCreatePayloadTypeTypePropEnum []interface{}
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7,8]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -234,6 +261,10 @@ func (m *RegistriesRegistryCreatePayload) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGithub(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGitlab(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -256,6 +287,22 @@ func (m *RegistriesRegistryCreatePayload) contextValidateEcr(ctx context.Context
 				return ve.ValidateName("ecr")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ecr")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *RegistriesRegistryCreatePayload) contextValidateGithub(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Github != nil {
+		if err := m.Github.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("github")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("github")
 			}
 			return err
 		}

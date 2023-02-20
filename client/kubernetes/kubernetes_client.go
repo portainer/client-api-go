@@ -34,6 +34,10 @@ type ClientService interface {
 
 	KubernetesNamespacesToggleSystem(params *KubernetesNamespacesToggleSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*KubernetesNamespacesToggleSystemOK, error)
 
+	GetKubernetesApplication(params *GetKubernetesApplicationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesApplicationOK, error)
+
+	GetKubernetesApplications(params *GetKubernetesApplicationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesApplicationsOK, error)
+
 	GetKubernetesNodesLimits(params *GetKubernetesNodesLimitsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNodesLimitsOK, error)
 
 	GetKubernetesPodSecurityRule(params *GetKubernetesPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesPodSecurityRuleOK, error)
@@ -126,6 +130,92 @@ func (a *Client) KubernetesNamespacesToggleSystem(params *KubernetesNamespacesTo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for KubernetesNamespacesToggleSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesApplication gets a kubernetes application
+
+	Gets a Kubernetes deployment, statefulset and daemonset application details
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesApplication(params *GetKubernetesApplicationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesApplicationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesApplicationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesApplication",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/applications/{kind}/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesApplicationReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesApplicationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesApplication: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesApplications gets a list of kubernetes applications
+
+	Gets a list of Kubernetes deployments, statefulsets and daemonsets
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesApplications(params *GetKubernetesApplicationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesApplicationsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesApplicationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesApplications",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/applications",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesApplicationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesApplicationsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesApplications: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

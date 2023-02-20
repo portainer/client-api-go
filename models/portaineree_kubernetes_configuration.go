@@ -37,6 +37,9 @@ type PortainereeKubernetesConfiguration struct {
 	// restrict default namespace
 	RestrictDefaultNamespace bool `json:"RestrictDefaultNamespace,omitempty"`
 
+	// restrict standard user ingress w
+	RestrictStandardUserIngressW bool `json:"RestrictStandardUserIngressW,omitempty"`
+
 	// storage classes
 	StorageClasses []*PortainereeKubernetesStorageClassConfig `json:"StorageClasses"`
 

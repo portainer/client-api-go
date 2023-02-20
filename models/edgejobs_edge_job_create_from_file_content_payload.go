@@ -20,6 +20,9 @@ type EdgejobsEdgeJobCreateFromFileContentPayload struct {
 	// cron expression
 	CronExpression string `json:"cronExpression,omitempty"`
 
+	// edge groups
+	EdgeGroups []int64 `json:"edgeGroups"`
+
 	// endpoints
 	Endpoints []int64 `json:"endpoints"`
 

@@ -19,6 +19,9 @@ import (
 // swagger:model endpoints.endpointUpdatePayload
 type EndpointsEndpointUpdatePayload struct {
 
+	// Hide manual deployment forms for an environment
+	DeploymentOptions *PortainereeDeploymentOptions `json:"DeploymentOptions,omitempty"`
+
 	// Azure application ID
 	// Example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
 	AzureApplicationID string `json:"azureApplicationID,omitempty"`
@@ -95,6 +98,10 @@ type EndpointsEndpointUpdatePayload struct {
 func (m *EndpointsEndpointUpdatePayload) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDeploymentOptions(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateChangeWindow(formats); err != nil {
 		res = append(res, err)
 	}
@@ -122,6 +129,25 @@ func (m *EndpointsEndpointUpdatePayload) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EndpointsEndpointUpdatePayload) validateDeploymentOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeploymentOptions) { // not required
+		return nil
+	}
+
+	if m.DeploymentOptions != nil {
+		if err := m.DeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DeploymentOptions")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -250,6 +276,10 @@ func (m *EndpointsEndpointUpdatePayload) validateUserAccessPolicies(formats strf
 func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateDeploymentOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateChangeWindow(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -277,6 +307,22 @@ func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, fo
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EndpointsEndpointUpdatePayload) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DeploymentOptions != nil {
+		if err := m.DeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DeploymentOptions")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

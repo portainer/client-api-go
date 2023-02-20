@@ -36,7 +36,7 @@ type PortainereeRegistryManagementConfiguration struct {
 	// TLS config
 	TLSConfig *PortainereeTLSConfiguration `json:"TLSConfig,omitempty"`
 
-	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
+	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
 	Type int64 `json:"Type,omitempty"`
 
 	// username

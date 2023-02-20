@@ -23,8 +23,8 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 	// Deployment type to deploy this stack
 	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
 	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-	// kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-	// nomad deploytype is enabled only for nomad environments(endpoints)
+	// kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+	// nomad deploy type is enabled only for nomad environments(endpoints)
 	// Example: 0
 	// Enum: [0 1 2]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
@@ -41,6 +41,10 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 	// Example: myStack
 	// Required: true
 	Name *string `json:"name"`
+
+	// Pre Pull image
+	// Example: false
+	PrePullImage bool `json:"prePullImage,omitempty"`
 
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
@@ -69,6 +73,9 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 	// Username used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
+
+	// Uses the manifest's namespaces instead of the default one
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 }
 
 // Validate validates this edgestacks swarm stack from git repository payload
