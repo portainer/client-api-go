@@ -51,7 +51,7 @@ EdgeUpdateScheduleListOK describes a response with status code 200, with default
 OK
 */
 type EdgeUpdateScheduleListOK struct {
-	Payload []*models.EdgetypesUpdateSchedule
+	Payload []*models.EdgeupdateschedulesDecoratedUpdateSchedule
 }
 
 // IsSuccess returns true when this edge update schedule list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *EdgeUpdateScheduleListOK) String() string {
 	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeUpdateScheduleListOK) GetPayload() []*models.EdgetypesUpdateSchedule {
+func (o *EdgeUpdateScheduleListOK) GetPayload() []*models.EdgeupdateschedulesDecoratedUpdateSchedule {
 	return o.Payload
 }
 

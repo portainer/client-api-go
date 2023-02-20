@@ -29,8 +29,12 @@ type PortainereeS3BackupSettings struct {
 	// Password to encrypt the backup with
 	Password string `json:"password,omitempty"`
 
-	// AWS S3 region
+	// AWS S3 region. Default to "us-east-1"
+	// Example: us-east-1
 	Region string `json:"region,omitempty"`
+
+	// S3 compatible host
+	S3CompatibleHost string `json:"s3CompatibleHost,omitempty"`
 
 	// AWS secret access key
 	SecretAccessKey string `json:"secretAccessKey,omitempty"`

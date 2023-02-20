@@ -31,6 +31,9 @@ type RegistriesRegistryUpdatePayload struct {
 	// ecr
 	Ecr *PortainereeEcrData `json:"ecr,omitempty"`
 
+	// github
+	Github *PortainereeGithubRegistryData `json:"github,omitempty"`
+
 	// name
 	// Example: my-registry
 	// Required: true
@@ -65,6 +68,10 @@ func (m *RegistriesRegistryUpdatePayload) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateEcr(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGithub(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -110,6 +117,25 @@ func (m *RegistriesRegistryUpdatePayload) validateEcr(formats strfmt.Registry) e
 				return ve.ValidateName("ecr")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ecr")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *RegistriesRegistryUpdatePayload) validateGithub(formats strfmt.Registry) error {
+	if swag.IsZero(m.Github) { // not required
+		return nil
+	}
+
+	if m.Github != nil {
+		if err := m.Github.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("github")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("github")
 			}
 			return err
 		}
@@ -182,6 +208,10 @@ func (m *RegistriesRegistryUpdatePayload) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGithub(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateQuay(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -204,6 +234,22 @@ func (m *RegistriesRegistryUpdatePayload) contextValidateEcr(ctx context.Context
 				return ve.ValidateName("ecr")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ecr")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *RegistriesRegistryUpdatePayload) contextValidateGithub(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Github != nil {
+		if err := m.Github.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("github")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("github")
 			}
 			return err
 		}

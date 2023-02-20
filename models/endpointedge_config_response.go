@@ -22,8 +22,17 @@ type EndpointedgeConfigResponse struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// Namespace to use for Kubernetes manifests, leave empty to use the namespaces defined in the manifest
+	Namespace string `json:"namespace,omitempty"`
+
+	// pre pull image
+	PrePullImage bool `json:"prePullImage,omitempty"`
+
+	// re pull image
+	RePullImage bool `json:"rePullImage,omitempty"`
+
 	// registry credentials
-	RegistryCredentials []*EndpointedgeCredentials `json:"registryCredentials"`
+	RegistryCredentials []*PortainereeEdgeRegistryCredential `json:"registryCredentials"`
 
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`

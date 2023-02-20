@@ -21,6 +21,9 @@ type EndpointsEndpointSettingsUpdatePayload struct {
 	// Whether automatic update time restrictions are enabled
 	ChangeWindow *PortainereeEndpointChangeWindow `json:"changeWindow,omitempty"`
 
+	// Hide manual deployment forms for an environment
+	DeploymentOptions *PortainereeDeploymentOptions `json:"deploymentOptions,omitempty"`
+
 	// enable image notification
 	// Example: false
 	EnableImageNotification bool `json:"enableImageNotification,omitempty"`
@@ -34,6 +37,10 @@ func (m *EndpointsEndpointSettingsUpdatePayload) Validate(formats strfmt.Registr
 	var res []error
 
 	if err := m.validateChangeWindow(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDeploymentOptions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -58,6 +65,25 @@ func (m *EndpointsEndpointSettingsUpdatePayload) validateChangeWindow(formats st
 				return ve.ValidateName("changeWindow")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("changeWindow")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EndpointsEndpointSettingsUpdatePayload) validateDeploymentOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeploymentOptions) { // not required
+		return nil
+	}
+
+	if m.DeploymentOptions != nil {
+		if err := m.DeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deploymentOptions")
 			}
 			return err
 		}
@@ -93,6 +119,10 @@ func (m *EndpointsEndpointSettingsUpdatePayload) ContextValidate(ctx context.Con
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDeploymentOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSecuritySettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -111,6 +141,22 @@ func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateChangeWindow(ctx
 				return ve.ValidateName("changeWindow")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("changeWindow")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DeploymentOptions != nil {
+		if err := m.DeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deploymentOptions")
 			}
 			return err
 		}

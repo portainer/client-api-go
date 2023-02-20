@@ -43,6 +43,9 @@ type PortainereeEndpoint struct {
 	// Example: 3.8
 	ComposeSyntaxMaxVersion string `json:"ComposeSyntaxMaxVersion,omitempty"`
 
+	// Hide manual deployment forms for an environment
+	DeploymentOptions *PortainereeDeploymentOptions `json:"DeploymentOptions,omitempty"`
+
 	// The check in interval for edge agent (in seconds)
 	// Example: 5
 	EdgeCheckinInterval int64 `json:"EdgeCheckinInterval,omitempty"`
@@ -144,6 +147,9 @@ type PortainereeEndpoint struct {
 	// LastCheckInDate mark last check-in date on checkin
 	LastCheckInDate int64 `json:"lastCheckInDate,omitempty"`
 
+	// LocalTimeZone is the local time zone of the endpoint
+	LocalTimeZone string `json:"localTimeZone,omitempty"`
+
 	// QueryDate of each query with the endpoints list
 	QueryDate int64 `json:"queryDate,omitempty"`
 
@@ -167,6 +173,10 @@ func (m *PortainereeEndpoint) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCloudProvider(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDeploymentOptions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -273,6 +283,25 @@ func (m *PortainereeEndpoint) validateCloudProvider(formats strfmt.Registry) err
 				return ve.ValidateName("CloudProvider")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("CloudProvider")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeEndpoint) validateDeploymentOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeploymentOptions) { // not required
+		return nil
+	}
+
+	if m.DeploymentOptions != nil {
+		if err := m.DeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DeploymentOptions")
 			}
 			return err
 		}
@@ -539,6 +568,10 @@ func (m *PortainereeEndpoint) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDeploymentOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGpus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -633,6 +666,22 @@ func (m *PortainereeEndpoint) contextValidateCloudProvider(ctx context.Context, 
 				return ve.ValidateName("CloudProvider")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("CloudProvider")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeEndpoint) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DeploymentOptions != nil {
+		if err := m.DeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DeploymentOptions")
 			}
 			return err
 		}

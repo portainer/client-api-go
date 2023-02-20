@@ -43,6 +43,9 @@ type PortainereeRegistry struct {
 	// ecr
 	Ecr *PortainereeEcrData `json:"Ecr,omitempty"`
 
+	// github
+	Github *PortainereeGithubRegistryData `json:"Github,omitempty"`
+
 	// gitlab
 	Gitlab *PortainereeGitlabRegistryData `json:"Gitlab,omitempty"`
 
@@ -70,8 +73,8 @@ type PortainereeRegistry struct {
 	// Deprecated in DBVersion == 31
 	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
 
-	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
-	// Enum: [1 2 3 4 5 6 7]
+	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
+	// Enum: [1 2 3 4 5 6 7 8]
 	Type int64 `json:"Type,omitempty"`
 
 	// URL or IP address of the Docker registry
@@ -92,6 +95,10 @@ func (m *PortainereeRegistry) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateEcr(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGithub(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -140,6 +147,25 @@ func (m *PortainereeRegistry) validateEcr(formats strfmt.Registry) error {
 				return ve.ValidateName("Ecr")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Ecr")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeRegistry) validateGithub(formats strfmt.Registry) error {
+	if swag.IsZero(m.Github) { // not required
+		return nil
+	}
+
+	if m.Github != nil {
+		if err := m.Github.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Github")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Github")
 			}
 			return err
 		}
@@ -247,7 +273,7 @@ var portainereeRegistryTypeTypePropEnum []interface{}
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7,8]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -303,6 +329,10 @@ func (m *PortainereeRegistry) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGithub(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGitlab(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -341,6 +371,22 @@ func (m *PortainereeRegistry) contextValidateEcr(ctx context.Context, formats st
 				return ve.ValidateName("Ecr")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Ecr")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeRegistry) contextValidateGithub(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Github != nil {
+		if err := m.Github.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Github")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Github")
 			}
 			return err
 		}

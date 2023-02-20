@@ -20,18 +20,27 @@ type EdgestacksUpdateEdgeStackPayload struct {
 	// Deployment type to deploy this stack
 	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
 	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-	// kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-	// nomad deploytype is enabled only for nomad environments(endpoints)
+	// kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+	// nomad deploy type is enabled only for nomad environments(endpoints)
 	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// edge groups
 	EdgeGroups []int64 `json:"edgeGroups"`
+
+	// pre pull image
+	PrePullImage bool `json:"prePullImage,omitempty"`
+
+	// re pull image
+	RePullImage bool `json:"rePullImage,omitempty"`
 
 	// registries
 	Registries []int64 `json:"registries"`
 
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`
+
+	// Uses the manifest's namespaces instead of the default one
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 
 	// version
 	Version int64 `json:"version,omitempty"`

@@ -42,8 +42,9 @@ type ClientService interface {
 /*
 	StatusInspect checks portainer status
 
-	Retrieve Portainer status
+	Deprecated: use the `/system/status` endpoint instead.
 
+Retrieve Portainer status
 **Access policy**: public
 */
 func (a *Client) StatusInspect(params *StatusInspectParams, opts ...ClientOption) (*StatusInspectOK, error) {
@@ -84,8 +85,9 @@ func (a *Client) StatusInspect(params *StatusInspectParams, opts ...ClientOption
 /*
 	Version checks for portainer updates
 
-	Check if portainer has an update available
+	Deprecated: use the `/system/version` endpoint instead.
 
+Check if portainer has an update available
 **Access policy**: authenticated
 */
 func (a *Client) Version(params *VersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VersionOK, error) {
@@ -125,7 +127,9 @@ func (a *Client) Version(params *VersionParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-StatusNodesCount retrieves the count of nodes
+	StatusNodesCount retrieves the count of nodes
+
+	Deprecated: use the `/system/nodes` endpoint instead.
 
 **Access policy**: authenticated
 */

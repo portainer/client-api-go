@@ -23,6 +23,9 @@ type EdgegroupsDecoratedEdgeGroup struct {
 	// endpoints
 	Endpoints []int64 `json:"Endpoints"`
 
+	// has edge group
+	HasEdgeGroup bool `json:"HasEdgeGroup,omitempty"`
+
 	// has edge stack
 	HasEdgeStack bool `json:"HasEdgeStack,omitempty"`
 

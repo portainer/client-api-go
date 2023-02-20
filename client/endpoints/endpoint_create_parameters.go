@@ -86,17 +86,35 @@ type EndpointCreateParams struct {
 	*/
 	EdgeCheckinInterval *int64
 
+	/* EdgeTunnelServerAddress.
+
+	   URL or IP address that will be used to establish a reverse tunnel
+	*/
+	EdgeTunnelServerAddress string
+
 	/* EndpointCreationType.
 
 	   Environment(Endpoint) type. Value must be one of: 1 (Local Docker environment), 2 (Agent environment), 3 (Azure environment), 4 (Edge agent environment) or 5 (Local Kubernetes Environment
 	*/
 	EndpointCreationType int64
 
+	/* Gpus.
+
+	   List of GPUs
+	*/
+	Gpus []string
+
 	/* GroupID.
 
 	   Environment(Endpoint) group identifier. If not specified will default to 1 (unassigned).
 	*/
 	GroupID *int64
+
+	/* IsEdgeDevice.
+
+	   Is Edge Device
+	*/
+	IsEdgeDevice *bool
 
 	/* Name.
 
@@ -255,6 +273,17 @@ func (o *EndpointCreateParams) SetEdgeCheckinInterval(edgeCheckinInterval *int64
 	o.EdgeCheckinInterval = edgeCheckinInterval
 }
 
+// WithEdgeTunnelServerAddress adds the edgeTunnelServerAddress to the endpoint create params
+func (o *EndpointCreateParams) WithEdgeTunnelServerAddress(edgeTunnelServerAddress string) *EndpointCreateParams {
+	o.SetEdgeTunnelServerAddress(edgeTunnelServerAddress)
+	return o
+}
+
+// SetEdgeTunnelServerAddress adds the edgeTunnelServerAddress to the endpoint create params
+func (o *EndpointCreateParams) SetEdgeTunnelServerAddress(edgeTunnelServerAddress string) {
+	o.EdgeTunnelServerAddress = edgeTunnelServerAddress
+}
+
 // WithEndpointCreationType adds the endpointCreationType to the endpoint create params
 func (o *EndpointCreateParams) WithEndpointCreationType(endpointCreationType int64) *EndpointCreateParams {
 	o.SetEndpointCreationType(endpointCreationType)
@@ -266,6 +295,17 @@ func (o *EndpointCreateParams) SetEndpointCreationType(endpointCreationType int6
 	o.EndpointCreationType = endpointCreationType
 }
 
+// WithGpus adds the gpus to the endpoint create params
+func (o *EndpointCreateParams) WithGpus(gpus []string) *EndpointCreateParams {
+	o.SetGpus(gpus)
+	return o
+}
+
+// SetGpus adds the gpus to the endpoint create params
+func (o *EndpointCreateParams) SetGpus(gpus []string) {
+	o.Gpus = gpus
+}
+
 // WithGroupID adds the groupID to the endpoint create params
 func (o *EndpointCreateParams) WithGroupID(groupID *int64) *EndpointCreateParams {
 	o.SetGroupID(groupID)
@@ -275,6 +315,17 @@ func (o *EndpointCreateParams) WithGroupID(groupID *int64) *EndpointCreateParams
 // SetGroupID adds the groupId to the endpoint create params
 func (o *EndpointCreateParams) SetGroupID(groupID *int64) {
 	o.GroupID = groupID
+}
+
+// WithIsEdgeDevice adds the isEdgeDevice to the endpoint create params
+func (o *EndpointCreateParams) WithIsEdgeDevice(isEdgeDevice *bool) *EndpointCreateParams {
+	o.SetIsEdgeDevice(isEdgeDevice)
+	return o
+}
+
+// SetIsEdgeDevice adds the isEdgeDevice to the endpoint create params
+func (o *EndpointCreateParams) SetIsEdgeDevice(isEdgeDevice *bool) {
+	o.IsEdgeDevice = isEdgeDevice
 }
 
 // WithName adds the name to the endpoint create params
@@ -455,11 +506,31 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		}
 	}
 
+	// form param EdgeTunnelServerAddress
+	frEdgeTunnelServerAddress := o.EdgeTunnelServerAddress
+	fEdgeTunnelServerAddress := frEdgeTunnelServerAddress
+	if fEdgeTunnelServerAddress != "" {
+		if err := r.SetFormParam("EdgeTunnelServerAddress", fEdgeTunnelServerAddress); err != nil {
+			return err
+		}
+	}
+
 	// form param EndpointCreationType
 	frEndpointCreationType := o.EndpointCreationType
 	fEndpointCreationType := swag.FormatInt64(frEndpointCreationType)
 	if fEndpointCreationType != "" {
 		if err := r.SetFormParam("EndpointCreationType", fEndpointCreationType); err != nil {
+			return err
+		}
+	}
+
+	if o.Gpus != nil {
+
+		// binding items for Gpus
+		joinedGpus := o.bindParamGpus(reg)
+
+		// form array param Gpus
+		if err := r.SetFormParam("Gpus", joinedGpus...); err != nil {
 			return err
 		}
 	}
@@ -474,6 +545,21 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		fGroupID := swag.FormatInt64(frGroupID)
 		if fGroupID != "" {
 			if err := r.SetFormParam("GroupID", fGroupID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.IsEdgeDevice != nil {
+
+		// form param IsEdgeDevice
+		var frIsEdgeDevice bool
+		if o.IsEdgeDevice != nil {
+			frIsEdgeDevice = *o.IsEdgeDevice
+		}
+		fIsEdgeDevice := swag.FormatBool(frIsEdgeDevice)
+		if fIsEdgeDevice != "" {
+			if err := r.SetFormParam("IsEdgeDevice", fIsEdgeDevice); err != nil {
 				return err
 			}
 		}
@@ -608,6 +694,23 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamEndpointCreate binds the parameter Gpus
+func (o *EndpointCreateParams) bindParamGpus(formats strfmt.Registry) []string {
+	gpusIR := o.Gpus
+
+	var gpusIC []string
+	for _, gpusIIR := range gpusIR { // explode []string
+
+		gpusIIV := gpusIIR // string as string
+		gpusIC = append(gpusIC, gpusIIV)
+	}
+
+	// items.CollectionFormat: ""
+	gpusIS := swag.JoinByFormat(gpusIC, "")
+
+	return gpusIS
 }
 
 // bindParamEndpointCreate binds the parameter TagIDs

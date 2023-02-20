@@ -70,7 +70,11 @@ definitions:
       password:
         type: string
       region:
-        description: AWS S3 region
+        description: AWS S3 region. Default to "us-east-1"
+        example: us-east-1
+        type: string
+      s3CompatibleHost:
+        description: S3 compatible host
         type: string
       secretAccessKey:
         description: AWS secret access key
@@ -91,7 +95,11 @@ definitions:
         description: Password to encrypt the backup with
         type: string
       region:
-        description: AWS S3 region
+        description: AWS S3 region. Default to "us-east-1"
+        example: us-east-1
+        type: string
+      s3CompatibleHost:
+        description: S3 compatible host
         type: string
       secretAccessKey:
         description: AWS secret access key
@@ -298,6 +306,8 @@ definitions:
             that will be used for deployment
           type: integer
         type: array
+      HasEdgeGroup:
+        type: boolean
       HasEdgeStack:
         type: boolean
       Id:
@@ -369,6 +379,12 @@ definitions:
     properties:
       cronExpression:
         type: string
+      edgeGroups:
+        items:
+          description: EdgeGroup Identifier
+          example: 1
+          type: integer
+        type: array
       endpoints:
         items:
           description: Environment(Endpoint) identifier. Reference the environment(endpoint)
@@ -386,6 +402,12 @@ definitions:
     properties:
       cronExpression:
         type: string
+      edgeGroups:
+        items:
+          description: EdgeGroup Identifier
+          example: 1
+          type: integer
+        type: array
       endpoints:
         items:
           description: Environment(Endpoint) identifier. Reference the environment(endpoint)
@@ -410,6 +432,12 @@ definitions:
     properties:
       cronExpression:
         type: string
+      edgeGroups:
+        items:
+          description: EdgeGroup Identifier
+          example: 1
+          type: integer
+        type: array
       endpoints:
         items:
           description: Environment(Endpoint) identifier. Reference the environment(endpoint)
@@ -449,8 +477,8 @@ definitions:
           Deployment type to deploy this stack
           Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
           for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-          nomad deploytype is enabled only for nomad environments(endpoints)
+          kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+          nomad deploy type is enabled only for nomad environments(endpoints)
         enum:
         - 0
         - 1
@@ -470,6 +498,10 @@ definitions:
         description: Name of the stack
         example: myStack
         type: string
+      prePullImage:
+        description: Pre Pull image
+        example: false
+        type: boolean
       registries:
         description: List of Registries to use for this stack
         items:
@@ -484,6 +516,9 @@ definitions:
            web:
            image:nginx
         type: string
+      useManifestNamespaces:
+        description: Uses the manifest's namespaces instead of the default one
+        type: boolean
     required:
     - name
     - stackFileContent
@@ -511,6 +546,10 @@ definitions:
         type: array
       name:
         type: string
+      prePullImage:
+        description: Pre Pull image
+        example: false
+        type: boolean
       registries:
         items:
           description: Registry Identifier
@@ -520,6 +559,9 @@ definitions:
         items:
           type: integer
         type: array
+      useManifestNamespaces:
+        description: Uses the manifest's namespaces instead of the default one
+        type: boolean
     type: object
   edgestacks.swarmStackFromGitRepositoryPayload:
     properties:
@@ -528,8 +570,8 @@ definitions:
           Deployment type to deploy this stack
           Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
           for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-          nomad deploytype is enabled only for nomad environments(endpoints)
+          kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+          nomad deploy type is enabled only for nomad environments(endpoints)
         enum:
         - 0
         - 1
@@ -554,6 +596,10 @@ definitions:
         description: Name of the stack
         example: myStack
         type: string
+      prePullImage:
+        description: Pre Pull image
+        example: false
+        type: boolean
       registries:
         description: List of Registries to use for this stack
         items:
@@ -586,6 +632,9 @@ definitions:
           is true.
         example: myGitUsername
         type: string
+      useManifestNamespaces:
+        description: Uses the manifest's namespaces instead of the default one
+        type: boolean
     required:
     - name
     - repositoryURL
@@ -597,8 +646,8 @@ definitions:
           Deployment type to deploy this stack
           Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
           for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-          nomad deploytype is enabled only for nomad environments(endpoints)
+          kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+          nomad deploy type is enabled only for nomad environments(endpoints)
         type: integer
       edgeGroups:
         items:
@@ -606,6 +655,10 @@ definitions:
           example: 1
           type: integer
         type: array
+      prePullImage:
+        type: boolean
+      rePullImage:
+        type: boolean
       registries:
         items:
           description: Registry Identifier
@@ -613,10 +666,39 @@ definitions:
         type: array
       stackFileContent:
         type: string
+      useManifestNamespaces:
+        description: Uses the manifest's namespaces instead of the default one
+        type: boolean
       version:
         type: integer
     type: object
-  edgetypes.UpdateSchedule:
+  edgeupdateschedules.activeSchedulePayload:
+    properties:
+      environmentIDs:
+        items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
+          type: integer
+        type: array
+    type: object
+  edgeupdateschedules.createPayload:
+    properties:
+      groupIDs:
+        items:
+          description: EdgeGroup Identifier
+          example: 1
+          type: integer
+        type: array
+      name:
+        type: string
+      scheduledTime:
+        type: string
+      type:
+        type: integer
+      version:
+        type: string
+    type: object
+  edgeupdateschedules.decoratedUpdateSchedule:
     properties:
       created:
         description: Created timestamp
@@ -626,13 +708,20 @@ definitions:
         description: Created by user id
         example: 1
         type: integer
-      groupIds:
-        description: EdgeGroups to be updated
-        example:
-        - 1
+      edgeGroupIds:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
+      edgeStackId:
+        description: EdgeStack Identifier
+        example: 1
+        type: integer
+      environmentsPreviousVersions:
+        additionalProperties:
+          type: string
+        type: object
       id:
         description: EdgeUpdateSchedule Identifier
         example: 1
@@ -641,15 +730,12 @@ definitions:
         description: Name of the schedule
         example: Update Schedule
         type: string
+      scheduledTime:
+        type: string
       status:
-        additionalProperties:
-          $ref: '#/definitions/edgetypes.UpdateScheduleStatus'
-        description: Status of the schedule, grouped by environment id
-        type: object
-      time:
-        description: Type of the schedule
-        example: 1564897200
         type: integer
+      statusMessage:
+        type: string
       type:
         description: Type of the update (1 - update, 2 - rollback)
         enum:
@@ -657,73 +743,22 @@ definitions:
         - 2
         example: 1
         type: integer
-    type: object
-  edgetypes.UpdateScheduleStatus:
-    properties:
-      currentVersion:
-        description: Current version of the edge agent
-        example: "1"
+      version:
+        example: 1.0.0
         type: string
-      error:
-        description: Error message if status is failed
-        example: ""
-        type: string
-      status:
-        description: Status of the schedule (0 - pending, 1 - failed, 2 - success)
-        enum:
-        - 1
-        - 2
-        - 3
-        example: 1
-        type: integer
-      targetVersion:
-        description: Target version of the edge agent
-        example: "1"
-        type: string
-    type: object
-  edgeupdateschedules.activeSchedulePayload:
-    properties:
-      environmentIDs:
-        items:
-          type: integer
-        type: array
-    type: object
-  edgeupdateschedules.createPayload:
-    properties:
-      environments:
-        additionalProperties:
-          type: string
-        type: object
-      groupIDs:
-        items:
-          type: integer
-        type: array
-      name:
-        type: string
-      time:
-        type: integer
-      type:
-        description: Type of the update (1 - update, 2 - rollback)
-        enum:
-        - 1
-        - 2
-        example: 1
-        type: integer
     type: object
   edgeupdateschedules.updatePayload:
     properties:
-      environments:
-        additionalProperties:
-          type: string
-        type: object
       groupIDs:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       name:
         type: string
-      time:
-        type: integer
+      scheduledTime:
+        type: string
       type:
         description: Type of the update (1 - update, 2 - rollback)
         enum:
@@ -731,14 +766,7 @@ definitions:
         - 2
         example: 1
         type: integer
-    type: object
-  endpointedge.Credentials:
-    properties:
-      secret:
-        type: string
-      serverURL:
-        type: string
-      username:
+      version:
         type: string
     type: object
   endpointedge.EdgeAsyncResponse:
@@ -762,9 +790,17 @@ definitions:
     properties:
       name:
         type: string
+      namespace:
+        description: Namespace to use for Kubernetes manifests, leave empty to use
+          the namespaces defined in the manifest
+        type: string
+      prePullImage:
+        type: boolean
+      rePullImage:
+        type: boolean
       registryCredentials:
         items:
-          $ref: '#/definitions/endpointedge.Credentials'
+          $ref: '#/definitions/portaineree.EdgeRegistryCredential'
         type: array
       stackFileContent:
         type: string
@@ -916,6 +952,9 @@ definitions:
       changeWindow:
         $ref: '#/definitions/portaineree.EndpointChangeWindow'
         description: Whether automatic update time restrictions are enabled
+      deploymentOptions:
+        $ref: '#/definitions/portaineree.DeploymentOptions'
+        description: Hide manual deployment forms for an environment
       enableImageNotification:
         example: false
         type: boolean
@@ -966,6 +1005,9 @@ definitions:
     type: object
   endpoints.endpointUpdatePayload:
     properties:
+      DeploymentOptions:
+        $ref: '#/definitions/portaineree.DeploymentOptions'
+        description: Hide manual deployment forms for an environment
       azureApplicationID:
         description: Azure application ID
         example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
@@ -1139,7 +1181,7 @@ definitions:
           type: integer
         type: array
     type: object
-  github.com_portainer_portainer-ee_api_http_handler_status.BuildInfo:
+  github.com_portainer_portainer-ee_api_http_handler_system.BuildInfo:
     properties:
       buildNumber:
         type: string
@@ -1154,7 +1196,12 @@ definitions:
       yarnVersion:
         type: string
     type: object
-  github.com_portainer_portainer-ee_api_http_handler_status.status:
+  github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse:
+    properties:
+      nodes:
+        type: integer
+    type: object
+  github.com_portainer_portainer-ee_api_http_handler_system.status:
     properties:
       Version:
         description: Portainer API version
@@ -1167,7 +1214,7 @@ definitions:
         example: 299ab403-70a8-4c05-92f7-bf7a994d50df
         type: string
     type: object
-  github.com_portainer_portainer-ee_api_http_handler_status.versionResponse:
+  github.com_portainer_portainer-ee_api_http_handler_system.versionResponse:
     properties:
       LatestVersion:
         description: The latest version available
@@ -1178,7 +1225,7 @@ definitions:
         example: false
         type: boolean
       build:
-        $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_status.BuildInfo'
+        $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.BuildInfo'
       databaseVersion:
         type: string
       serverVersion:
@@ -1194,12 +1241,10 @@ definitions:
         type: array
       users:
         items:
-          description: Created by user id
-          example: 1
           type: integer
         type: array
     type: object
-  github.com_portainer_portainer_api_http_handler_status.BuildInfo:
+  github.com_portainer_portainer_api_http_handler_system.BuildInfo:
     properties:
       buildNumber:
         type: string
@@ -1214,7 +1259,12 @@ definitions:
       yarnVersion:
         type: string
     type: object
-  github.com_portainer_portainer_api_http_handler_status.status:
+  github.com_portainer_portainer_api_http_handler_system.nodesCountResponse:
+    properties:
+      nodes:
+        type: integer
+    type: object
+  github.com_portainer_portainer_api_http_handler_system.status:
     properties:
       Version:
         description: Portainer API version
@@ -1227,7 +1277,7 @@ definitions:
         example: 299ab403-70a8-4c05-92f7-bf7a994d50df
         type: string
     type: object
-  github.com_portainer_portainer_api_http_handler_status.versionResponse:
+  github.com_portainer_portainer_api_http_handler_system.versionResponse:
     properties:
       LatestVersion:
         description: The latest version available
@@ -1238,7 +1288,7 @@ definitions:
         example: false
         type: boolean
       build:
-        $ref: '#/definitions/github.com_portainer_portainer_api_http_handler_status.BuildInfo'
+        $ref: '#/definitions/github.com_portainer_portainer_api_http_handler_system.BuildInfo'
       databaseVersion:
         type: string
       serverVersion:
@@ -1496,6 +1546,21 @@ definitions:
   models.CloudCredentialMap:
     additionalProperties:
       type: string
+    type: object
+  models.K8sApplication:
+    properties:
+      kind:
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      name:
+        type: string
+      namespace:
+        type: string
+      uid:
+        type: string
     type: object
   motd.motdResponse:
     properties:
@@ -1868,6 +1933,35 @@ definitions:
     type: object
   portainer.DockerSnapshotRaw:
     type: object
+  portainer.EdgeStackStatus:
+    properties:
+      Details:
+        $ref: '#/definitions/portainer.EdgeStackStatusDetails'
+      EndpointID:
+        type: integer
+      Error:
+        type: string
+      Type:
+        description: Deprecated
+        type: integer
+    type: object
+  portainer.EdgeStackStatusDetails:
+    properties:
+      acknowledged:
+        type: boolean
+      error:
+        type: boolean
+      imagesPulled:
+        type: boolean
+      ok:
+        type: boolean
+      pending:
+        type: boolean
+      remoteUpdateSuccess:
+        type: boolean
+      remove:
+        type: boolean
+    type: object
   portainer.OpenAMTConfiguration:
     properties:
       certFileContent:
@@ -2104,6 +2198,23 @@ definitions:
         example: MY_VAR
         type: string
     type: object
+  portaineree.DeploymentOptions:
+    properties:
+      hideAddWithForm:
+        description: Hide manual deploy forms in portainer
+        example: true
+        type: boolean
+      hideFileUpload:
+        description: Hide the file upload option in the remaining visible forms
+        example: false
+        type: boolean
+      hideWebEditor:
+        description: Hide the webeditor in the remaining visible forms
+        example: false
+        type: boolean
+      overrideGlobalOptions:
+        type: boolean
+    type: object
   portaineree.EcrData:
     properties:
       Region:
@@ -2121,6 +2232,8 @@ definitions:
       op:
         type: string
       path:
+        type: string
+      scheduledTime:
         type: string
       timestamp:
         type: string
@@ -2159,6 +2272,12 @@ definitions:
         type: integer
       CronExpression:
         type: string
+      EdgeGroups:
+        items:
+          description: EdgeGroup Identifier
+          example: 1
+          type: integer
+        type: array
       Endpoints:
         additionalProperties:
           $ref: '#/definitions/portaineree.EdgeJobEndpointMeta'
@@ -2175,6 +2294,11 @@ definitions:
         type: string
       Version:
         type: integer
+      groupLogsCollection:
+        additionalProperties:
+          $ref: '#/definitions/portaineree.EdgeJobEndpointMeta'
+        description: Field used for log collection of Endpoints belonging to EdgeGroups
+        type: object
     type: object
   portaineree.EdgeJobEndpointMeta:
     properties:
@@ -2182,6 +2306,15 @@ definitions:
         type: boolean
       logsStatus:
         type: integer
+    type: object
+  portaineree.EdgeRegistryCredential:
+    properties:
+      secret:
+        type: string
+      serverURL:
+        type: string
+      username:
+        type: string
     type: object
   portaineree.EdgeStack:
     properties:
@@ -2192,8 +2325,8 @@ definitions:
           Deployment type to deploy this stack
           Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
           for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-          kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-          nomad deploytype is enabled only for nomad environments(endpoints)
+          kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+          nomad deploy type is enabled only for nomad environments(endpoints)
         type: integer
       EdgeGroups:
         items:
@@ -2211,10 +2344,18 @@ definitions:
         type: string
       Name:
         type: string
+      NumDeployments:
+        type: integer
+      PrePullImage:
+        description: Pre Pull Image
+        type: boolean
       ProjectPath:
         type: string
       Prune:
         description: Deprecated
+        type: boolean
+      RePullImage:
+        description: Re-Pull Image
         type: boolean
       Registries:
         items:
@@ -2223,19 +2364,22 @@ definitions:
         type: array
       Status:
         additionalProperties:
-          $ref: '#/definitions/portaineree.EdgeStackStatus'
+          $ref: '#/definitions/portainer.EdgeStackStatus'
         type: object
       Version:
         type: integer
-    type: object
-  portaineree.EdgeStackStatus:
-    properties:
-      EndpointID:
+      edgeUpdateID:
+        description: EdgeUpdateID represents the parent update ID, will be zero if
+          this stack is not part of an update
         type: integer
-      Error:
+      scheduledTime:
+        description: Schedule represents the schedule of the Edge stack (optional,
+          format - 'YYYY-MM-DD HH:mm:ss')
+        example: "2020-11-13 14:53:00"
         type: string
-      Type:
-        type: integer
+      useManifestNamespaces:
+        description: Uses the manifest's namespaces instead of the default one
+        type: boolean
     type: object
   portaineree.Endpoint:
     properties:
@@ -2270,6 +2414,9 @@ definitions:
         description: Maximum version of docker-compose
         example: "3.8"
         type: string
+      DeploymentOptions:
+        $ref: '#/definitions/portaineree.DeploymentOptions'
+        description: Hide manual deployment forms for an environment
       EdgeCheckinInterval:
         description: The check in interval for edge agent (in seconds)
         example: 5
@@ -2402,6 +2549,9 @@ definitions:
       lastCheckInDate:
         description: LastCheckInDate mark last check-in date on checkin
         type: integer
+      localTimeZone:
+        description: LocalTimeZone is the local time zone of the endpoint
+        type: string
       queryDate:
         description: QueryDate of each query with the endpoints list
         type: integer
@@ -2547,6 +2697,7 @@ definitions:
         example: 1587399600
         type: integer
       id:
+        description: GitCredentialID used to identify the binded git credential
         example: 1
         type: integer
       name:
@@ -2560,6 +2711,13 @@ definitions:
       username:
         type: string
     type: object
+  portaineree.GithubRegistryData:
+    properties:
+      OrganisationName:
+        type: string
+      UseOrganisation:
+        type: boolean
+    type: object
   portaineree.GitlabRegistryData:
     properties:
       InstanceURL:
@@ -2568,6 +2726,25 @@ definitions:
         type: integer
       ProjectPath:
         type: string
+    type: object
+  portaineree.GlobalDeploymentOptions:
+    properties:
+      hideAddWithForm:
+        description: Hide manual deploy forms in portainer
+        example: false
+        type: boolean
+      hideFileUpload:
+        description: Hide the file upload option in the remaining visible forms
+        example: false
+        type: boolean
+      hideWebEditor:
+        description: Hide the webeditor in the remaining visible forms
+        example: false
+        type: boolean
+      perEnvOverride:
+        description: Configure this per environment or globally
+        example: false
+        type: boolean
     type: object
   portaineree.HelmUserRepository:
     properties:
@@ -2616,6 +2793,8 @@ definitions:
         type: integer
       RestrictDefaultNamespace:
         type: boolean
+      RestrictStandardUserIngressW:
+        type: boolean
       StorageClasses:
         items:
           $ref: '#/definitions/portaineree.KubernetesStorageClassConfig'
@@ -2629,10 +2808,19 @@ definitions:
     properties:
       Configuration:
         $ref: '#/definitions/portaineree.KubernetesConfiguration'
+      Flags:
+        $ref: '#/definitions/portaineree.KubernetesFlags'
       Snapshots:
         items:
           $ref: '#/definitions/portaineree.KubernetesSnapshot'
         type: array
+    type: object
+  portaineree.KubernetesFlags:
+    properties:
+      IsServerMetricsDetected:
+        type: boolean
+      IsServerStorageDetected:
+        type: boolean
     type: object
   portaineree.KubernetesIngressClassConfig:
     properties:
@@ -2934,6 +3122,8 @@ definitions:
         type: string
       Ecr:
         $ref: '#/definitions/portaineree.EcrData'
+      Github:
+        $ref: '#/definitions/portaineree.GithubRegistryData'
       Gitlab:
         $ref: '#/definitions/portaineree.GitlabRegistryData'
       Id:
@@ -2960,7 +3150,7 @@ definitions:
         description: Deprecated in DBVersion == 31
       Type:
         description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5
-          - ProGet, 6 - DockerHub, 7 - ECR)
+          - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
         enum:
         - 1
         - 2
@@ -2969,6 +3159,7 @@ definitions:
         - 5
         - 6
         - 7
+        - 8
         type: integer
       URL:
         description: URL or IP address of the Docker registry
@@ -3015,7 +3206,7 @@ definitions:
         $ref: '#/definitions/portaineree.TLSConfiguration'
       Type:
         description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5
-          - ProGet, 6 - DockerHub, 7 - ECR)
+          - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
         type: integer
       Username:
         type: string
@@ -3112,7 +3303,11 @@ definitions:
         description: Password to encrypt the backup with
         type: string
       region:
-        description: AWS S3 region
+        description: AWS S3 region. Default to "us-east-1"
+        example: us-east-1
+        type: string
+      s3CompatibleHost:
+        description: S3 compatible host
         type: string
       secretAccessKey:
         description: AWS secret access key
@@ -3194,6 +3389,9 @@ definitions:
         additionalProperties:
           type: boolean
         type: object
+      GlobalDeploymentOptions:
+        $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
+        description: Deployment options for encouraging git ops workflows
       HelmRepositoryURL:
         description: Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
         example: https://charts.bitnami.com/bitnami
@@ -3218,6 +3416,10 @@ definitions:
         type: string
       OAuthSettings:
         $ref: '#/definitions/portaineree.OAuthSettings'
+      ShowKomposeBuildOption:
+        description: Show the Kompose build option (discontinued in 2.18)
+        example: false
+        type: boolean
       SnapshotInterval:
         description: The interval in which environment(endpoint) snapshots are created
         example: 5m
@@ -3265,6 +3467,11 @@ definitions:
               mode (in seconds)
             example: 5
             type: integer
+          TunnelServerAddress:
+            description: The address where the tunneling server can be reached by
+              Edge agents
+            example: portainer.domain.tld
+            type: string
           asyncMode:
             description: EdgeAsyncMode enables edge async mode by default
             type: boolean
@@ -3332,6 +3539,10 @@ definitions:
         description: The date in unix time when stack was created
         example: 1587399600
         type: integer
+      filesystemPath:
+        description: Network(Swarm) or local(Standalone) filesystem path
+        example: /tmp
+        type: string
       fromAppTemplate:
         description: Whether the stack is from a app template
         example: false
@@ -3352,6 +3563,10 @@ definitions:
         description: Path on disk to the repository hosting the Stack file
         example: /data/compose/myStack_jpofkc0i9uo9wtx1zesuk649w
         type: string
+      supportRelativePath:
+        description: If stack support relative path volume
+        example: false
+        type: boolean
       updateDate:
         description: The date in unix time when stack was last updated
         example: 1587399600
@@ -4005,6 +4220,9 @@ definitions:
       ecr:
         $ref: '#/definitions/portaineree.EcrData'
         description: ECR specific details, required when type = 7
+      github:
+        $ref: '#/definitions/portaineree.GithubRegistryData'
+        description: Github specific details, required when type = 8
       gitlab:
         $ref: '#/definitions/portaineree.GitlabRegistryData'
         description: Gitlab specific details, required when type = 4
@@ -4023,7 +4241,7 @@ definitions:
       type:
         description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure
           container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5
-          (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)"
+          (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)\n\t8 (Github registry)"
         enum:
         - 1
         - 2
@@ -4032,6 +4250,7 @@ definitions:
         - 5
         - 6
         - 7
+        - 8
         example: 1
         type: integer
       url:
@@ -4059,6 +4278,8 @@ definitions:
         type: string
       ecr:
         $ref: '#/definitions/portaineree.EcrData'
+      github:
+        $ref: '#/definitions/portaineree.GithubRegistryData'
       name:
         example: my-registry
         type: string
@@ -4464,6 +4685,9 @@ definitions:
           type: boolean
         description: Supported feature flags
         type: object
+      GlobalDeploymentOptions:
+        $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
+        description: Deployment options for encouraging deployment as code
       LogoURL:
         description: URL to a logo that will be displayed on the login page as well
           as on top of the sidebar. Will use default Portainer logo when value is
@@ -4487,6 +4711,10 @@ definitions:
           internal auth mode
         example: 1
         type: integer
+      ShowKomposeBuildOption:
+        description: Show the Kompose build option (discontinued in 2.18)
+        example: false
+        type: boolean
       TeamSync:
         description: Whether team sync is enabled
         example: true
@@ -4523,6 +4751,12 @@ definitions:
             example: 60
             type: integer
         type: object
+      isAMTEnabled:
+        description: Whether AMT is enabled
+        type: boolean
+      isFDOEnabled:
+        description: Whether FDO is enabled
+        type: boolean
       kubeconfigExpiry:
         default: "0"
         description: The expiry of a Kubeconfig
@@ -4534,6 +4768,10 @@ definitions:
       EdgePortainerURL:
         description: EdgePortainerURL is the URL that is exposed to edge agents
         type: string
+      ShowKomposeBuildOption:
+        description: Show the Kompose build option (discontinued in 2.18)
+        example: false
+        type: boolean
       authenticationMethod:
         description: 'Active authentication method for the Portainer instance. Valid
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
@@ -4570,6 +4808,10 @@ definitions:
           asyncMode:
             description: AsyncMode enables edge agent to run in async mode by default
             type: boolean
+          tunnelServerAddress:
+            description: The address where the tunneling server can be reached by
+              Edge agents
+            type: string
         type: object
       edgeAgentCheckinInterval:
         description: The default check in interval for edge agent (in seconds)
@@ -4588,6 +4830,9 @@ definitions:
           anyone
         example: false
         type: boolean
+      globalDeploymentOptions:
+        $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
+        description: Deployment options for encouraging deployment as code
       helmRepositoryURL:
         description: Helm repository URL
         example: https://charts.bitnami.com/bitnami
@@ -4696,6 +4941,10 @@ definitions:
         items:
           $ref: '#/definitions/portaineree.Pair'
         type: array
+      filesystemPath:
+        description: Local filesystem path
+        example: /tmp
+        type: string
       fromAppTemplate:
         description: Whether the stack is from a app template
         example: false
@@ -4734,6 +4983,10 @@ definitions:
           and RepositoryGitCredentialID is 0
         example: myGitUsername
         type: string
+      supportRelativePath:
+        description: Whether the stack suppors relative path volume
+        example: false
+        type: boolean
     required:
     - name
     - repositoryURL
@@ -4920,6 +5173,10 @@ definitions:
         items:
           $ref: '#/definitions/portaineree.Pair'
         type: array
+      filesystemPath:
+        description: Network filesystem path
+        example: /tmp
+        type: string
       fromAppTemplate:
         description: Whether the stack is from a app template
         example: false
@@ -4958,6 +5215,10 @@ definitions:
           and RepositoryGitCredentialID is 0
         example: myGitUsername
         type: string
+      supportRelativePath:
+        description: Whether the stack suppors relative path volume
+        example: false
+        type: boolean
       swarmID:
         description: Swarm cluster identifier
         example: jpofkc0i9uo9wtx1zesuk649w
@@ -4998,10 +5259,16 @@ definitions:
         example: c11fdf23-183e-428a-9bb6-16db01032174
         type: string
     type: object
-  status.nodesCountResponse:
+  system.systemInfoResponse:
     properties:
-      nodes:
+      agents:
         type: integer
+      edgeAgents:
+        type: integer
+      edgeDevices:
+        type: integer
+      platform:
+        type: string
     type: object
   tags.tagCreatePayload:
     properties:
@@ -5102,6 +5369,7 @@ definitions:
     properties:
       fileContent:
         description: The requested file content
+        example: version:2
         type: string
     type: object
   templates.listResponse:
@@ -5155,6 +5423,18 @@ definitions:
       state:
         type: string
       status:
+        type: string
+    type: object
+  types.EndpointUpdateScheduleRelation:
+    properties:
+      edgeStackId:
+        description: EdgeStack Identifier
+        type: integer
+      environmentId:
+        type: integer
+      scheduleId:
+        type: integer
+      targetVersion:
         type: string
     type: object
   types.EnvironmentMetadata:
@@ -5221,6 +5501,43 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/network.EndpointSettings'
         type: object
+    type: object
+  types.UpdateSchedule:
+    properties:
+      created:
+        description: Created timestamp
+        example: 1564897200
+        type: integer
+      createdBy:
+        description: Created by user id
+        example: 1
+        type: integer
+      edgeStackId:
+        description: EdgeStack Identifier
+        example: 1
+        type: integer
+      environmentsPreviousVersions:
+        additionalProperties:
+          type: string
+        type: object
+      id:
+        description: EdgeUpdateSchedule Identifier
+        example: 1
+        type: integer
+      name:
+        description: Name of the schedule
+        example: Update Schedule
+        type: string
+      type:
+        description: Type of the update (1 - update, 2 - rollback)
+        enum:
+        - 1
+        - 2
+        example: 1
+        type: integer
+      version:
+        example: 1.0.0
+        type: string
     type: object
   useractivity.logsListResponse:
     properties:
@@ -5355,6 +5672,13 @@ definitions:
       webhookType:
         type: integer
     type: object
+  webhooks.webhookReassignPayload:
+    properties:
+      resourceID:
+        type: string
+      webhookType:
+        type: integer
+    type: object
   webhooks.webhookUpdatePayload:
     properties:
       registryID:
@@ -5430,7 +5754,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.16.0
+  version: 2.17.0
 paths:
   /auth:
     post:
@@ -6086,6 +6410,26 @@ paths:
       summary: Get Template stack file content.
       tags:
       - custom_templates
+  /docker/{environmentId}/containers/{containerID}/image_status:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**:'
+      operationId: containerImageStatus
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+      security:
+      - jwt: []
+      summary: Fetch image status for container
+      tags:
+      - docker
   /docker/{environmentId}/containers/{containerId}/gpus:
     get:
       consumes:
@@ -6119,6 +6463,26 @@ paths:
       security:
       - jwt: []
       summary: Fetch container gpus data
+      tags:
+      - docker
+  /docker/{environmentId}/services/{serviceID}/image_status:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**:'
+      operationId: ServiceImageStatus
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+      security:
+      - jwt: []
+      summary: Fetch image status for service
       tags:
       - docker
   /docker/{environmentId}/snapshot:
@@ -6206,6 +6570,26 @@ paths:
       summary: Fetch containers list from a snapshot
       tags:
       - endpoints
+      - docker
+  /docker/{environmentId}/stacks/{id}/images_status:
+    get:
+      consumes:
+      - application/json
+      description: '**Access policy**:'
+      operationId: stackImagesStatus
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+      security:
+      - jwt: []
+      summary: Fetch image status for stack
+      tags:
       - docker
   /edge_groups:
     get:
@@ -7028,7 +7412,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/edgetypes.UpdateSchedule'
+              $ref: '#/definitions/edgeupdateschedules.decoratedUpdateSchedule'
             type: array
         "500":
           description: Internal Server Error
@@ -7087,7 +7471,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/edgetypes.UpdateSchedule'
+            $ref: '#/definitions/edgeupdateschedules.decoratedUpdateSchedule'
         "500":
           description: Internal Server Error
       security:
@@ -7116,7 +7500,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/edgetypes.UpdateSchedule'
+              $ref: '#/definitions/types.EndpointUpdateScheduleRelation'
             type: array
         "500":
           description: Internal Server Error
@@ -7555,6 +7939,21 @@ paths:
         in: formData
         name: EdgeCheckinInterval
         type: integer
+      - description: URL or IP address that will be used to establish a reverse tunnel
+        in: formData
+        name: EdgeTunnelServerAddress
+        required: true
+        type: string
+      - description: Is Edge Device
+        in: formData
+        name: IsEdgeDevice
+        type: boolean
+      - description: List of GPUs
+        in: formData
+        name: Gpus
+        items:
+          type: string
+        type: array
       produces:
       - application/json
       responses:
@@ -7696,6 +8095,49 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: De-association an edge environment(endpoint)
+      tags:
+      - endpoints
+  /endpoints/{id}/docker/v2/browse/put:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      - multipart/form-data
+      description: |-
+        Upload a file under a specific path on the file system of an environment (endpoint).
+        **Access policy**: authenticated
+      operationId: EndpointBrowsePut
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Optional volume identifier to upload the file
+        in: query
+        name: volumeID
+        required: false
+        type: string
+      - description: Path to upload the file
+        in: formData
+        name: path
+        required: true
+        type: string
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Upload a file under a specific path on the file system of an environment (endpoint).
       tags:
       - endpoints
   /endpoints/{id}/dockerhub/{registryId}:
@@ -8687,6 +9129,107 @@ paths:
       summary: Update Pod Security Rule within k8s cluster
       tags:
       - kubernetes
+  /kubernetes/{id}/namespaces/{namespace}/applications:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Gets a list of Kubernetes deployments, statefulsets and daemonsets
+        **Access policy**: authenticated
+      operationId: getKubernetesApplications
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/models.K8sApplication'
+            type: array
+        "400":
+          description: Invalid request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Permission denied
+        "404":
+          description: Environment(Endpoint) or ServiceAccount not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: gets a list of Kubernetes applications
+      tags:
+      - kubernetes
+  /kubernetes/{id}/namespaces/{namespace}/applications/{kind}/{name}:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Gets a Kubernetes deployment, statefulset and daemonset application details
+        **Access policy**: authenticated
+      operationId: getKubernetesApplication
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      - description: deployment, statefulset or daemonset
+        in: path
+        name: kind
+        required: true
+        type: string
+      - description: name of the application
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: specify true to perform a rolling restart of the application
+        in: query
+        name: rollout-restart
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/models.K8sApplication'
+        "400":
+          description: Invalid request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Permission denied
+        "404":
+          description: Environment(Endpoint) or ServiceAccount not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: gets a Kubernetes application
+      tags:
+      - kubernetes
   /kubernetes/{id}/namespaces/{namespace}/system:
     put:
       consumes:
@@ -8796,6 +9339,31 @@ paths:
         will create a default
       tags:
       - kubernetes
+  /kubernetes/{id}/rbac_enabled:
+    get:
+      description: |-
+        Check if RBAC is enabled in the current Kubernetes cluster.
+        **Access policy**: administrator
+      operationId: IsRBACEnabled
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: Success
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Check if RBAC is enabled
+      tags:
+      - rbac_enabled
   /kubernetes/config:
     get:
       consumes:
@@ -9198,7 +9766,7 @@ paths:
       summary: Delete a job
       tags:
       - nomad
-  /nomad/endpoints/{endpointID}/status:
+  /nomad/endpoints/{endpointID}/leader:
     get:
       description: '**Access policy**: authenticated users'
       operationId: getLeader
@@ -10491,7 +11059,9 @@ paths:
       - stacks
   /status:
     get:
+      deprecated: true
       description: |-
+        Deprecated: use the `/system/status` endpoint instead.
         Retrieve Portainer status
         **Access policy**: public
       operationId: StatusInspect
@@ -10501,13 +11071,16 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_status.status'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.status'
       summary: Check Portainer status
       tags:
       - status
   /status/nodes:
     get:
-      description: '**Access policy**: authenticated'
+      deprecated: true
+      description: |-
+        Deprecated: use the `/system/nodes` endpoint instead.
+        **Access policy**: authenticated
       operationId: statusNodesCount
       produces:
       - application/json
@@ -10515,7 +11088,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/status.nodesCountResponse'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse'
         "500":
           description: Server error
       security:
@@ -10526,7 +11099,9 @@ paths:
       - status
   /status/version:
     get:
+      deprecated: true
       description: |-
+        Deprecated: use the `/system/version` endpoint instead.
         Check if portainer has an update available
         **Access policy**: authenticated
       operationId: Version
@@ -10536,13 +11111,102 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_status.versionResponse'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.versionResponse'
       security:
       - ApiKeyAuth: []
       - jwt: []
       summary: Check for portainer updates
       tags:
       - status
+  /system/info:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: systemInfo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/system.systemInfoResponse'
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Retrieve system info
+      tags:
+      - system
+  /system/nodes:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: systemNodesCount
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse'
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Retrieve the count of nodes
+      tags:
+      - system
+  /system/status:
+    get:
+      description: |-
+        Retrieve Portainer status
+        **Access policy**: public
+      operationId: systemStatus
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.status'
+      summary: Check Portainer status
+      tags:
+      - system
+  /system/upgrade:
+    post:
+      description: |-
+        Upgrade Portainer to BE
+        **Access policy**: administrator
+      operationId: systemUpgrade
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/github.com_portainer_portainer_api_http_handler_system.status'
+      summary: Upgrade Portainer to BE
+      tags:
+      - system
+  /system/version:
+    get:
+      description: |-
+        Check if portainer has an update available
+        **Access policy**: authenticated
+      operationId: systemVersion
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.versionResponse'
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Check for portainer updates
+      tags:
+      - system
   /tags:
     get:
       description: |-
@@ -12056,6 +12720,39 @@ paths:
       summary: Update a webhook
       tags:
       - webhooks
+  /webhooks/{id}/reassign:
+    put:
+      consumes:
+      - application/json
+      description: '**Access policy**: authenticated'
+      parameters:
+      - description: Webhook data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/webhooks.webhookReassignPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/portaineree.Webhook'
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Reassign a webhook to another resource
+      tags:
+      - webhooks
   /webhooks/{token}:
     post:
       description: |-
@@ -12304,8 +13001,6 @@ tags:
   name: roles
 - description: Manage Portainer settings
   name: settings
-- description: Information about the Portainer instance
-  name: status
 - description: Manage users
   name: users
 - description: Manage tags
@@ -12324,3 +13019,7 @@ tags:
   name: webhooks
 - description: Create exec sessions using websockets
   name: websocket
+- description: Information about the Portainer instance
+  name: status
+- description: Manage Portainer system
+  name: system

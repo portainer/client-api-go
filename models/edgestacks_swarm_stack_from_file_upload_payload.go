@@ -35,11 +35,18 @@ type EdgestacksSwarmStackFromFileUploadPayload struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// Pre Pull image
+	// Example: false
+	PrePullImage bool `json:"prePullImage,omitempty"`
+
 	// registries
 	Registries []int64 `json:"registries"`
 
 	// stack file content
 	StackFileContent []int64 `json:"stackFileContent"`
+
+	// Uses the manifest's namespaces instead of the default one
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 }
 
 // Validate validates this edgestacks swarm stack from file upload payload

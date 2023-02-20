@@ -30,9 +30,97 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	ServiceImageStatus(params *ServiceImageStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServiceImageStatusOK, error)
+
+	ContainerImageStatus(params *ContainerImageStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerImageStatusOK, error)
+
 	DockerContainerGpusInspect(params *DockerContainerGpusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DockerContainerGpusInspectOK, error)
 
+	StackImagesStatus(params *StackImagesStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackImagesStatusOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+ServiceImageStatus fetches image status for service
+
+**Access policy**:
+*/
+func (a *Client) ServiceImageStatus(params *ServiceImageStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServiceImageStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServiceImageStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "ServiceImageStatus",
+		Method:             "GET",
+		PathPattern:        "/docker/{environmentId}/services/{serviceID}/image_status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ServiceImageStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServiceImageStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ServiceImageStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ContainerImageStatus fetches image status for container
+
+**Access policy**:
+*/
+func (a *Client) ContainerImageStatus(params *ContainerImageStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerImageStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewContainerImageStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "containerImageStatus",
+		Method:             "GET",
+		PathPattern:        "/docker/{environmentId}/containers/{containerID}/image_status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ContainerImageStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ContainerImageStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for containerImageStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -73,6 +161,47 @@ func (a *Client) DockerContainerGpusInspect(params *DockerContainerGpusInspectPa
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for dockerContainerGpusInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StackImagesStatus fetches image status for stack
+
+**Access policy**:
+*/
+func (a *Client) StackImagesStatus(params *StackImagesStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackImagesStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackImagesStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "stackImagesStatus",
+		Method:             "GET",
+		PathPattern:        "/docker/{environmentId}/stacks/{id}/images_status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackImagesStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackImagesStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for stackImagesStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

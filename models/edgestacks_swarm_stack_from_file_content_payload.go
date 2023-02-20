@@ -23,8 +23,8 @@ type EdgestacksSwarmStackFromFileContentPayload struct {
 	// Deployment type to deploy this stack
 	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
 	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-	// kubernetes deploytype is enabled only for kubernetes environments(endpoints)
-	// nomad deploytype is enabled only for nomad environments(endpoints)
+	// kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+	// nomad deploy type is enabled only for nomad environments(endpoints)
 	// Example: 0
 	// Enum: [0 1 2]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
@@ -38,6 +38,10 @@ type EdgestacksSwarmStackFromFileContentPayload struct {
 	// Required: true
 	Name *string `json:"name"`
 
+	// Pre Pull image
+	// Example: false
+	PrePullImage bool `json:"prePullImage,omitempty"`
+
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
 
@@ -45,6 +49,9 @@ type EdgestacksSwarmStackFromFileContentPayload struct {
 	// Example: version: 3\n services:\n web:\n image:nginx
 	// Required: true
 	StackFileContent *string `json:"stackFileContent"`
+
+	// Uses the manifest's namespaces instead of the default one
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 }
 
 // Validate validates this edgestacks swarm stack from file content payload

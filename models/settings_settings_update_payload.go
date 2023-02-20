@@ -22,6 +22,10 @@ type SettingsSettingsUpdatePayload struct {
 	// EdgePortainerURL is the URL that is exposed to edge agents
 	EdgePortainerURL string `json:"EdgePortainerURL,omitempty"`
 
+	// Show the Kompose build option (discontinued in 2.18)
+	// Example: false
+	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
+
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
 	AuthenticationMethod int64 `json:"authenticationMethod,omitempty"`
@@ -51,6 +55,9 @@ type SettingsSettingsUpdatePayload struct {
 	// EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
 	// Example: false
 	EnforceEdgeID bool `json:"enforceEdgeID,omitempty"`
+
+	// Deployment options for encouraging deployment as code
+	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"globalDeploymentOptions,omitempty"`
 
 	// Helm repository URL
 	// Example: https://charts.bitnami.com/bitnami
@@ -103,6 +110,10 @@ func (m *SettingsSettingsUpdatePayload) Validate(formats strfmt.Registry) error 
 	}
 
 	if err := m.validateEdge(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGlobalDeploymentOptions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -161,6 +172,25 @@ func (m *SettingsSettingsUpdatePayload) validateEdge(formats strfmt.Registry) er
 				return ve.ValidateName("edge")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SettingsSettingsUpdatePayload) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
+		return nil
+	}
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("globalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("globalDeploymentOptions")
 			}
 			return err
 		}
@@ -238,6 +268,10 @@ func (m *SettingsSettingsUpdatePayload) ContextValidate(ctx context.Context, for
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGlobalDeploymentOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInternalAuthSettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -284,6 +318,22 @@ func (m *SettingsSettingsUpdatePayload) contextValidateEdge(ctx context.Context,
 				return ve.ValidateName("edge")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SettingsSettingsUpdatePayload) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("globalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("globalDeploymentOptions")
 			}
 			return err
 		}
@@ -377,6 +427,9 @@ type SettingsSettingsUpdatePayloadEdge struct {
 
 	// AsyncMode enables edge agent to run in async mode by default
 	AsyncMode bool `json:"asyncMode,omitempty"`
+
+	// The address where the tunneling server can be reached by Edge agents
+	TunnelServerAddress string `json:"tunnelServerAddress,omitempty"`
 }
 
 // Validate validates this settings settings update payload edge
