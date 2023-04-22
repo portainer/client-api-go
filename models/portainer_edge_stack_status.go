@@ -28,7 +28,9 @@ type PortainerEdgeStackStatus struct {
 	Error string `json:"Error,omitempty"`
 
 	// Deprecated
-	Type int64 `json:"Type,omitempty"`
+	Type struct {
+		PortainerEdgeStackStatusType
+	} `json:"Type,omitempty"`
 }
 
 // Validate validates this portainer edge stack status
@@ -36,6 +38,10 @@ func (m *PortainerEdgeStackStatus) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateDetails(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -64,11 +70,23 @@ func (m *PortainerEdgeStackStatus) validateDetails(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *PortainerEdgeStackStatus) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	return nil
+}
+
 // ContextValidate validate this portainer edge stack status based on the context it is used
 func (m *PortainerEdgeStackStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -90,6 +108,11 @@ func (m *PortainerEdgeStackStatus) contextValidateDetails(ctx context.Context, f
 			return err
 		}
 	}
+
+	return nil
+}
+
+func (m *PortainerEdgeStackStatus) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

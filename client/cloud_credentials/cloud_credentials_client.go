@@ -30,9 +30,11 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
+	Generate(params *GenerateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateOK, error)
 
 	Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error)
+
+	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error)
 
 	GetByID(params *GetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetByIDOK, error)
 
@@ -40,26 +42,26 @@ type ClientService interface {
 }
 
 /*
-	Create creates a cloud credential
+	Generate generates ssh keypair
 
-	Create a cloud credential
+	Generate an ssh public / private keypair
 
 **Access policy**: authenticated
 */
-func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
+func (a *Client) Generate(params *GenerateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateParams()
+		params = NewGenerateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "Create",
+		ID:                 "Generate",
 		Method:             "POST",
-		PathPattern:        "/cloudcredentials",
+		PathPattern:        "/sshkeygen",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &CreateReader{formats: a.formats},
+		Reader:             &GenerateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -72,13 +74,13 @@ func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateOK)
+	success, ok := result.(*GenerateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for Generate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -122,6 +124,49 @@ func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWri
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for Update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	Delete deletes delete a cloud credential by ID
+
+	delete delete a cloud credential by ID
+
+**Access policy**: authenticated
+*/
+func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "delete",
+		Method:             "POST",
+		PathPattern:        "/cloudcredentials",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

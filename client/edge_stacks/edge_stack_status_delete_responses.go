@@ -69,7 +69,7 @@ EdgeStackStatusDeleteOK describes a response with status code 200, with default 
 OK
 */
 type EdgeStackStatusDeleteOK struct {
-	Payload *models.PortainereeEdgeStack
+	Payload *models.PortainerEdgeStack
 }
 
 // IsSuccess returns true when this edge stack status delete o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *EdgeStackStatusDeleteOK) String() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{endpoint_id}][%d] edgeStackStatusDeleteOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeStackStatusDeleteOK) GetPayload() *models.PortainereeEdgeStack {
+func (o *EdgeStackStatusDeleteOK) GetPayload() *models.PortainerEdgeStack {
 	return o.Payload
 }
 
 func (o *EdgeStackStatusDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeStack)
+	o.Payload = new(models.PortainerEdgeStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

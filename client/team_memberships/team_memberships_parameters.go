@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewTeamMembershipsParams creates a new TeamMembershipsParams object,
@@ -65,7 +66,7 @@ type TeamMembershipsParams struct {
 
 	   Team Id
 	*/
-	ID string
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,13 +122,13 @@ func (o *TeamMembershipsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the team memberships params
-func (o *TeamMembershipsParams) WithID(id string) *TeamMembershipsParams {
+func (o *TeamMembershipsParams) WithID(id int64) *TeamMembershipsParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the team memberships params
-func (o *TeamMembershipsParams) SetID(id string) {
+func (o *TeamMembershipsParams) SetID(id int64) {
 	o.ID = id
 }
 
@@ -140,7 +141,7 @@ func (o *TeamMembershipsParams) WriteToRequest(r runtime.ClientRequest, reg strf
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 

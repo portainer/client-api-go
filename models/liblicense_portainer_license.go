@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -48,7 +49,7 @@ type LiblicensePortainerLicense struct {
 	Nodes int64 `json:"nodes,omitempty"`
 
 	// product edition
-	ProductEdition int64 `json:"productEdition,omitempty"`
+	ProductEdition LiblicenseProductEdition `json:"productEdition,omitempty"`
 
 	// reference
 	Reference string `json:"reference,omitempty"`
@@ -60,7 +61,7 @@ type LiblicensePortainerLicense struct {
 	RevokedAt int64 `json:"revokedAt,omitempty"`
 
 	// type
-	Type int64 `json:"type,omitempty"`
+	Type LiblicensePortainerLicenseType `json:"type,omitempty"`
 
 	// version
 	Version int64 `json:"version,omitempty"`
@@ -68,11 +69,99 @@ type LiblicensePortainerLicense struct {
 
 // Validate validates this liblicense portainer license
 func (m *LiblicensePortainerLicense) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateProductEdition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this liblicense portainer license based on context it is used
+func (m *LiblicensePortainerLicense) validateProductEdition(formats strfmt.Registry) error {
+	if swag.IsZero(m.ProductEdition) { // not required
+		return nil
+	}
+
+	if err := m.ProductEdition.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("productEdition")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("productEdition")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *LiblicensePortainerLicense) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this liblicense portainer license based on the context it is used
 func (m *LiblicensePortainerLicense) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateProductEdition(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *LiblicensePortainerLicense) contextValidateProductEdition(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.ProductEdition.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("productEdition")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("productEdition")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *LiblicensePortainerLicense) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.Type.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
+	}
+
 	return nil
 }
 

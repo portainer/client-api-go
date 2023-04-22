@@ -20,7 +20,9 @@ import (
 type EndpointsEndpointUpdatePayload struct {
 
 	// Hide manual deployment forms for an environment
-	DeploymentOptions *PortainereeDeploymentOptions `json:"DeploymentOptions,omitempty"`
+	DeploymentOptions struct {
+		PortainereeDeploymentOptions
+	} `json:"DeploymentOptions,omitempty"`
 
 	// Azure application ID
 	// Example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
@@ -35,7 +37,9 @@ type EndpointsEndpointUpdatePayload struct {
 	AzureTenantID string `json:"azureTenantID,omitempty"`
 
 	// Whether automatic update time restrictions are enabled
-	ChangeWindow *PortainereeEndpointChangeWindow `json:"changeWindow,omitempty"`
+	ChangeWindow struct {
+		PortainereeEndpointChangeWindow
+	} `json:"changeWindow,omitempty"`
 
 	// edge
 	Edge *EndpointsEndpointUpdatePayloadEdge `json:"edge,omitempty"`
@@ -52,7 +56,9 @@ type EndpointsEndpointUpdatePayload struct {
 	GroupID int64 `json:"groupID,omitempty"`
 
 	// Associated Kubernetes data
-	Kubernetes *PortainereeKubernetesData `json:"kubernetes,omitempty"`
+	Kubernetes struct {
+		PortainereeKubernetesData
+	} `json:"kubernetes,omitempty"`
 
 	// Name that will be used to identify this environment(endpoint)
 	// Example: my-environment
@@ -137,34 +143,12 @@ func (m *EndpointsEndpointUpdatePayload) validateDeploymentOptions(formats strfm
 		return nil
 	}
 
-	if m.DeploymentOptions != nil {
-		if err := m.DeploymentOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("DeploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("DeploymentOptions")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
 func (m *EndpointsEndpointUpdatePayload) validateChangeWindow(formats strfmt.Registry) error {
 	if swag.IsZero(m.ChangeWindow) { // not required
 		return nil
-	}
-
-	if m.ChangeWindow != nil {
-		if err := m.ChangeWindow.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("changeWindow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("changeWindow")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -218,17 +202,6 @@ func (m *EndpointsEndpointUpdatePayload) validateGpus(formats strfmt.Registry) e
 func (m *EndpointsEndpointUpdatePayload) validateKubernetes(formats strfmt.Registry) error {
 	if swag.IsZero(m.Kubernetes) { // not required
 		return nil
-	}
-
-	if m.Kubernetes != nil {
-		if err := m.Kubernetes.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("kubernetes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("kubernetes")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -312,32 +285,10 @@ func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, fo
 
 func (m *EndpointsEndpointUpdatePayload) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.DeploymentOptions != nil {
-		if err := m.DeploymentOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("DeploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("DeploymentOptions")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
 func (m *EndpointsEndpointUpdatePayload) contextValidateChangeWindow(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.ChangeWindow != nil {
-		if err := m.ChangeWindow.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("changeWindow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("changeWindow")
-			}
-			return err
-		}
-	}
 
 	return nil
 }
@@ -379,17 +330,6 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateGpus(ctx context.Context
 }
 
 func (m *EndpointsEndpointUpdatePayload) contextValidateKubernetes(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Kubernetes != nil {
-		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("kubernetes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("kubernetes")
-			}
-			return err
-		}
-	}
 
 	return nil
 }

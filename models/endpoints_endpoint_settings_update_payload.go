@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -19,14 +20,25 @@ import (
 type EndpointsEndpointSettingsUpdatePayload struct {
 
 	// Whether automatic update time restrictions are enabled
-	ChangeWindow *PortainereeEndpointChangeWindow `json:"changeWindow,omitempty"`
+	ChangeWindow struct {
+		PortainereeEndpointChangeWindow
+	} `json:"changeWindow,omitempty"`
 
 	// Hide manual deployment forms for an environment
-	DeploymentOptions *PortainereeDeploymentOptions `json:"deploymentOptions,omitempty"`
+	DeploymentOptions struct {
+		PortainereeDeploymentOptions
+	} `json:"deploymentOptions,omitempty"`
+
+	// enable g p u management
+	// Example: false
+	EnableGPUManagement bool `json:"enableGPUManagement,omitempty"`
 
 	// enable image notification
-	// Example: false
+	// Example: true
 	EnableImageNotification bool `json:"enableImageNotification,omitempty"`
+
+	// gpus
+	Gpus []*PortainereePair `json:"gpus"`
 
 	// security settings
 	SecuritySettings *EndpointsEndpointSettingsUpdatePayloadSecuritySettings `json:"securitySettings,omitempty"`
@@ -41,6 +53,10 @@ func (m *EndpointsEndpointSettingsUpdatePayload) Validate(formats strfmt.Registr
 	}
 
 	if err := m.validateDeploymentOptions(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGpus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -59,17 +75,6 @@ func (m *EndpointsEndpointSettingsUpdatePayload) validateChangeWindow(formats st
 		return nil
 	}
 
-	if m.ChangeWindow != nil {
-		if err := m.ChangeWindow.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("changeWindow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("changeWindow")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -78,15 +83,30 @@ func (m *EndpointsEndpointSettingsUpdatePayload) validateDeploymentOptions(forma
 		return nil
 	}
 
-	if m.DeploymentOptions != nil {
-		if err := m.DeploymentOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("deploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("deploymentOptions")
-			}
-			return err
+	return nil
+}
+
+func (m *EndpointsEndpointSettingsUpdatePayload) validateGpus(formats strfmt.Registry) error {
+	if swag.IsZero(m.Gpus) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Gpus); i++ {
+		if swag.IsZero(m.Gpus[i]) { // not required
+			continue
 		}
+
+		if m.Gpus[i] != nil {
+			if err := m.Gpus[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("gpus" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -123,6 +143,10 @@ func (m *EndpointsEndpointSettingsUpdatePayload) ContextValidate(ctx context.Con
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateGpus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSecuritySettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -135,31 +159,29 @@ func (m *EndpointsEndpointSettingsUpdatePayload) ContextValidate(ctx context.Con
 
 func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateChangeWindow(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.ChangeWindow != nil {
-		if err := m.ChangeWindow.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("changeWindow")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("changeWindow")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
 func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.DeploymentOptions != nil {
-		if err := m.DeploymentOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("deploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("deploymentOptions")
+	return nil
+}
+
+func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateGpus(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Gpus); i++ {
+
+		if m.Gpus[i] != nil {
+			if err := m.Gpus[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("gpus" + "." + strconv.Itoa(i))
+				}
+				return err
 			}
-			return err
 		}
+
 	}
 
 	return nil

@@ -17,7 +17,7 @@ import (
 // swagger:model types.EndpointUpdateScheduleRelation
 type TypesEndpointUpdateScheduleRelation struct {
 
-	// EdgeStack Identifier
+	// edge stack Id
 	EdgeStackID int64 `json:"edgeStackId,omitempty"`
 
 	// environment Id

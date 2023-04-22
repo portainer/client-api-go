@@ -19,7 +19,7 @@ import (
 // swagger:model providers.DefaultProvisionPayload
 type ProvidersDefaultProvisionPayload struct {
 
-	// CredentialID holds an ID of the credential used to create the cluster
+	// credential ID
 	// Example: 1
 	// Required: true
 	CredentialID *int64 `json:"credentialID"`

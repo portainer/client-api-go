@@ -15,7 +15,7 @@ import (
 
 // GithubComPortainerPortainerEeAPIHTTPHandlerSystemVersionResponse github com portainer portainer ee api http handler system version response
 //
-// swagger:model github.com_portainer_portainer-ee_api_http_handler_system.versionResponse
+// swagger:model github_com_portainer_portainer-ee_api_http_handler_system.versionResponse
 type GithubComPortainerPortainerEeAPIHTTPHandlerSystemVersionResponse struct {
 
 	// The latest version available

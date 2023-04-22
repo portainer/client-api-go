@@ -51,7 +51,7 @@ SnapshotContainersListOK describes a response with status code 200, with default
 Success
 */
 type SnapshotContainersListOK struct {
-	Payload *models.TypesContainer
+	Payload *models.PortainerDockerContainerSnapshot
 }
 
 // IsSuccess returns true when this snapshot containers list o k response has a 2xx status code
@@ -87,13 +87,13 @@ func (o *SnapshotContainersListOK) String() string {
 	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListOK  %+v", 200, o.Payload)
 }
 
-func (o *SnapshotContainersListOK) GetPayload() *models.TypesContainer {
+func (o *SnapshotContainersListOK) GetPayload() *models.PortainerDockerContainerSnapshot {
 	return o.Payload
 }
 
 func (o *SnapshotContainersListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.TypesContainer)
+	o.Payload = new(models.PortainerDockerContainerSnapshot)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

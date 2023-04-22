@@ -25,7 +25,9 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	AdditionalFiles []string `json:"additionalFiles"`
 
 	// Optional auto update configuration
-	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
+	AutoUpdate struct {
+		PortainereeAutoUpdateSettings
+	} `json:"autoUpdate,omitempty"`
 
 	// Path to the Stack file inside the Git repository
 	// Example: docker-compose.yml
@@ -75,9 +77,13 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
 
-	// Whether the stack suppors relative path volume
+	// Whether the stack supports relative path volume
 	// Example: false
 	SupportRelativePath bool `json:"supportRelativePath,omitempty"`
+
+	// TLSSkipVerify skips SSL verification when cloning the Git repository
+	// Example: false
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
 }
 
 // Validate validates this stacks compose stack from git repository payload
@@ -109,17 +115,6 @@ func (m *StacksComposeStackFromGitRepositoryPayload) Validate(formats strfmt.Reg
 func (m *StacksComposeStackFromGitRepositoryPayload) validateAutoUpdate(formats strfmt.Registry) error {
 	if swag.IsZero(m.AutoUpdate) { // not required
 		return nil
-	}
-
-	if m.AutoUpdate != nil {
-		if err := m.AutoUpdate.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("autoUpdate")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("autoUpdate")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -188,17 +183,6 @@ func (m *StacksComposeStackFromGitRepositoryPayload) ContextValidate(ctx context
 }
 
 func (m *StacksComposeStackFromGitRepositoryPayload) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.AutoUpdate != nil {
-		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("autoUpdate")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("autoUpdate")
-			}
-			return err
-		}
-	}
 
 	return nil
 }

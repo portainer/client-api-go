@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -24,16 +25,65 @@ type EdgejobsTaskContainer struct {
 	ID string `json:"Id,omitempty"`
 
 	// logs status
-	LogsStatus int64 `json:"LogsStatus,omitempty"`
+	LogsStatus PortainereeEdgeJobLogsStatus `json:"LogsStatus,omitempty"`
 }
 
 // Validate validates this edgejobs task container
 func (m *EdgejobsTaskContainer) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLogsStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this edgejobs task container based on context it is used
+func (m *EdgejobsTaskContainer) validateLogsStatus(formats strfmt.Registry) error {
+	if swag.IsZero(m.LogsStatus) { // not required
+		return nil
+	}
+
+	if err := m.LogsStatus.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("LogsStatus")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("LogsStatus")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this edgejobs task container based on the context it is used
 func (m *EdgejobsTaskContainer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLogsStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EdgejobsTaskContainer) contextValidateLogsStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.LogsStatus.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("LogsStatus")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("LogsStatus")
+		}
+		return err
+	}
+
 	return nil
 }
 

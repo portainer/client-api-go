@@ -22,7 +22,9 @@ type ReleaseRelease struct {
 	// Info provides information about a release
 	// Info *Info `json:"info,omitempty"`
 	// Chart is the chart that was released.
-	Chart *ReleaseChart `json:"chart,omitempty"`
+	Chart struct {
+		ReleaseChart
+	} `json:"chart,omitempty"`
 
 	// Config is the set of extra Values added to the chart.
 	// These values override the default values inside of the chart.
@@ -65,17 +67,6 @@ func (m *ReleaseRelease) Validate(formats strfmt.Registry) error {
 func (m *ReleaseRelease) validateChart(formats strfmt.Registry) error {
 	if swag.IsZero(m.Chart) { // not required
 		return nil
-	}
-
-	if m.Chart != nil {
-		if err := m.Chart.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("chart")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("chart")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -126,17 +117,6 @@ func (m *ReleaseRelease) ContextValidate(ctx context.Context, formats strfmt.Reg
 }
 
 func (m *ReleaseRelease) contextValidateChart(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Chart != nil {
-		if err := m.Chart.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("chart")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("chart")
-			}
-			return err
-		}
-	}
 
 	return nil
 }

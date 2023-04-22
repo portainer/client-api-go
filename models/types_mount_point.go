@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -30,7 +31,7 @@ type TypesMountPoint struct {
 	Name string `json:"name,omitempty"`
 
 	// propagation
-	Propagation string `json:"propagation,omitempty"`
+	Propagation MountPropagation `json:"propagation,omitempty"`
 
 	// rw
 	Rw bool `json:"rw,omitempty"`
@@ -39,16 +40,104 @@ type TypesMountPoint struct {
 	Source string `json:"source,omitempty"`
 
 	// type
-	Type string `json:"type,omitempty"`
+	Type MountType `json:"type,omitempty"`
 }
 
 // Validate validates this types mount point
 func (m *TypesMountPoint) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validatePropagation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this types mount point based on context it is used
+func (m *TypesMountPoint) validatePropagation(formats strfmt.Registry) error {
+	if swag.IsZero(m.Propagation) { // not required
+		return nil
+	}
+
+	if err := m.Propagation.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("propagation")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("propagation")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *TypesMountPoint) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	if err := m.Type.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this types mount point based on the context it is used
 func (m *TypesMountPoint) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePropagation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *TypesMountPoint) contextValidatePropagation(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.Propagation.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("propagation")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("propagation")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *TypesMountPoint) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.Type.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("type")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("type")
+		}
+		return err
+	}
+
 	return nil
 }
 

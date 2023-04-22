@@ -30,58 +30,13 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	SystemInfo(params *SystemInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SystemInfoOK, error)
-
 	SystemNodesCount(params *SystemNodesCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SystemNodesCountOK, error)
 
 	SystemStatus(params *SystemStatusParams, opts ...ClientOption) (*SystemStatusOK, error)
 
-	SystemUpgrade(params *SystemUpgradeParams, opts ...ClientOption) (*SystemUpgradeOK, error)
-
 	SystemVersion(params *SystemVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SystemVersionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-SystemInfo retrieves system info
-
-**Access policy**: authenticated
-*/
-func (a *Client) SystemInfo(params *SystemInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SystemInfoOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewSystemInfoParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "systemInfo",
-		Method:             "GET",
-		PathPattern:        "/system/info",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &SystemInfoReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*SystemInfoOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for systemInfo: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -164,48 +119,6 @@ func (a *Client) SystemStatus(params *SystemStatusParams, opts ...ClientOption) 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for systemStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	SystemUpgrade upgrades portainer to b e
-
-	Upgrade Portainer to BE
-
-**Access policy**: administrator
-*/
-func (a *Client) SystemUpgrade(params *SystemUpgradeParams, opts ...ClientOption) (*SystemUpgradeOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewSystemUpgradeParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "systemUpgrade",
-		Method:             "POST",
-		PathPattern:        "/system/upgrade",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &SystemUpgradeReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*SystemUpgradeOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for systemUpgrade: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

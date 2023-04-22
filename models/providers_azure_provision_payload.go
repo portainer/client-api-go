@@ -22,7 +22,7 @@ type ProvidersAzureProvisionPayload struct {
 	// availability zones
 	AvailabilityZones []string `json:"availabilityZones"`
 
-	// CredentialID holds an ID of the credential used to create the cluster
+	// credential ID
 	// Example: 1
 	// Required: true
 	CredentialID *int64 `json:"credentialID"`

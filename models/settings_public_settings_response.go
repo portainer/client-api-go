@@ -20,7 +20,9 @@ type SettingsPublicSettingsResponse struct {
 
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
-	AuthenticationMethod int64 `json:"AuthenticationMethod,omitempty"`
+	AuthenticationMethod struct {
+		PortainereeAuthenticationMethod
+	} `json:"AuthenticationMethod,omitempty"`
 
 	// The content in plaintext used to display in the login page. Will hide when value is empty string
 	// Example: notice or agreement
@@ -38,7 +40,9 @@ type SettingsPublicSettingsResponse struct {
 	Features map[string]bool `json:"Features,omitempty"`
 
 	// Deployment options for encouraging deployment as code
-	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
+	GlobalDeploymentOptions struct {
+		PortainereeGlobalDeploymentOptions
+	} `json:"GlobalDeploymentOptions,omitempty"`
 
 	// URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
 	// Example: https://mycompany.mydomain.tld/logo.png
@@ -89,6 +93,10 @@ type SettingsPublicSettingsResponse struct {
 func (m *SettingsPublicSettingsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAuthenticationMethod(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateGlobalDeploymentOptions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -107,20 +115,17 @@ func (m *SettingsPublicSettingsResponse) Validate(formats strfmt.Registry) error
 	return nil
 }
 
-func (m *SettingsPublicSettingsResponse) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
-	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
+func (m *SettingsPublicSettingsResponse) validateAuthenticationMethod(formats strfmt.Registry) error {
+	if swag.IsZero(m.AuthenticationMethod) { // not required
 		return nil
 	}
 
-	if m.GlobalDeploymentOptions != nil {
-		if err := m.GlobalDeploymentOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("GlobalDeploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("GlobalDeploymentOptions")
-			}
-			return err
-		}
+	return nil
+}
+
+func (m *SettingsPublicSettingsResponse) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
+		return nil
 	}
 
 	return nil
@@ -168,6 +173,10 @@ func (m *SettingsPublicSettingsResponse) validateEdge(formats strfmt.Registry) e
 func (m *SettingsPublicSettingsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAuthenticationMethod(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGlobalDeploymentOptions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -186,18 +195,12 @@ func (m *SettingsPublicSettingsResponse) ContextValidate(ctx context.Context, fo
 	return nil
 }
 
-func (m *SettingsPublicSettingsResponse) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+func (m *SettingsPublicSettingsResponse) contextValidateAuthenticationMethod(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.GlobalDeploymentOptions != nil {
-		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("GlobalDeploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("GlobalDeploymentOptions")
-			}
-			return err
-		}
-	}
+	return nil
+}
+
+func (m *SettingsPublicSettingsResponse) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -307,21 +310,74 @@ type SettingsPublicSettingsResponseEdge struct {
 	// Example: 60
 	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
 
-	// Whether the device has been started in edge async mode
-	AsyncMode bool `json:"asyncMode,omitempty"`
-
 	// The check in interval for edge agent (in seconds) - used in non async mode [seconds]
 	// Example: 60
 	CheckinInterval int64 `json:"checkinInterval,omitempty"`
+
+	// mtls
+	Mtls *PortainereeMTLSSettings `json:"mtls,omitempty"`
 }
 
 // Validate validates this settings public settings response edge
 func (m *SettingsPublicSettingsResponseEdge) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateMtls(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this settings public settings response edge based on context it is used
+func (m *SettingsPublicSettingsResponseEdge) validateMtls(formats strfmt.Registry) error {
+	if swag.IsZero(m.Mtls) { // not required
+		return nil
+	}
+
+	if m.Mtls != nil {
+		if err := m.Mtls.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge" + "." + "mtls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge" + "." + "mtls")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this settings public settings response edge based on the context it is used
 func (m *SettingsPublicSettingsResponseEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMtls(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SettingsPublicSettingsResponseEdge) contextValidateMtls(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Mtls != nil {
+		if err := m.Mtls.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge" + "." + "mtls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge" + "." + "mtls")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

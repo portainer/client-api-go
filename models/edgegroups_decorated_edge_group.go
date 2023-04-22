@@ -7,7 +7,9 @@ package models
 
 import (
 	"context"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -43,16 +45,73 @@ type EdgegroupsDecoratedEdgeGroup struct {
 	TagIds []int64 `json:"TagIds"`
 
 	// endpoint types
-	EndpointTypes []int64 `json:"endpointTypes"`
+	EndpointTypes []PortainereeEndpointType `json:"endpointTypes"`
 }
 
 // Validate validates this edgegroups decorated edge group
 func (m *EdgegroupsDecoratedEdgeGroup) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateEndpointTypes(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this edgegroups decorated edge group based on context it is used
+func (m *EdgegroupsDecoratedEdgeGroup) validateEndpointTypes(formats strfmt.Registry) error {
+	if swag.IsZero(m.EndpointTypes) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.EndpointTypes); i++ {
+
+		if err := m.EndpointTypes[i].Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("endpointTypes" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("endpointTypes" + "." + strconv.Itoa(i))
+			}
+			return err
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this edgegroups decorated edge group based on the context it is used
 func (m *EdgegroupsDecoratedEdgeGroup) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateEndpointTypes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EdgegroupsDecoratedEdgeGroup) contextValidateEndpointTypes(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.EndpointTypes); i++ {
+
+		if err := m.EndpointTypes[i].ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("endpointTypes" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("endpointTypes" + "." + strconv.Itoa(i))
+			}
+			return err
+		}
+
+	}
+
 	return nil
 }
 

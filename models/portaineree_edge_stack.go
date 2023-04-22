@@ -22,12 +22,8 @@ type PortainereeEdgeStack struct {
 	// creation date
 	CreationDate int64 `json:"CreationDate,omitempty"`
 
-	// Deployment type to deploy this stack
-	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
-	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-	// kubernetes deploy type is enabled only for kubernetes environments(endpoints)
-	// nomad deploy type is enabled only for nomad environments(endpoints)
-	DeploymentType int64 `json:"DeploymentType,omitempty"`
+	// deployment type
+	DeploymentType PortainereeEdgeStackDeploymentType `json:"DeploymentType,omitempty"`
 
 	// edge groups
 	EdgeGroups []int64 `json:"EdgeGroups"`
@@ -72,6 +68,10 @@ type PortainereeEdgeStack struct {
 	// EdgeUpdateID represents the parent update ID, will be zero if this stack is not part of an update
 	EdgeUpdateID int64 `json:"edgeUpdateID,omitempty"`
 
+	// Retry deploy
+	// Example: false
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
+
 	// Schedule represents the schedule of the Edge stack (optional, format - 'YYYY-MM-DD HH:mm:ss')
 	// Example: 2020-11-13 14:53:00
 	ScheduledTime string `json:"scheduledTime,omitempty"`
@@ -84,6 +84,10 @@ type PortainereeEdgeStack struct {
 func (m *PortainereeEdgeStack) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDeploymentType(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateStatus(formats); err != nil {
 		res = append(res, err)
 	}
@@ -91,6 +95,23 @@ func (m *PortainereeEdgeStack) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PortainereeEdgeStack) validateDeploymentType(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeploymentType) { // not required
+		return nil
+	}
+
+	if err := m.DeploymentType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("DeploymentType")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("DeploymentType")
+		}
+		return err
+	}
+
 	return nil
 }
 
@@ -124,6 +145,10 @@ func (m *PortainereeEdgeStack) validateStatus(formats strfmt.Registry) error {
 func (m *PortainereeEdgeStack) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateDeploymentType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -131,6 +156,20 @@ func (m *PortainereeEdgeStack) ContextValidate(ctx context.Context, formats strf
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PortainereeEdgeStack) contextValidateDeploymentType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.DeploymentType.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("DeploymentType")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("DeploymentType")
+		}
+		return err
+	}
+
 	return nil
 }
 
