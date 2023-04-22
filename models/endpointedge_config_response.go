@@ -19,6 +19,9 @@ import (
 // swagger:model endpointedge.configResponse
 type EndpointedgeConfigResponse struct {
 
+	// edge update ID
+	EdgeUpdateID int64 `json:"edgeUpdateID,omitempty"`
+
 	// name
 	Name string `json:"name,omitempty"`
 
@@ -33,6 +36,9 @@ type EndpointedgeConfigResponse struct {
 
 	// registry credentials
 	RegistryCredentials []*PortainereeEdgeRegistryCredential `json:"registryCredentials"`
+
+	// retry deploy
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
 
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`

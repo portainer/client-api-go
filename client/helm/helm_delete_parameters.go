@@ -72,7 +72,7 @@ type HelmDeleteParams struct {
 
 	   An optional namespace
 	*/
-	Namespace string
+	Namespace *string
 
 	/* Release.
 
@@ -145,13 +145,13 @@ func (o *HelmDeleteParams) SetID(id int64) {
 }
 
 // WithNamespace adds the namespace to the helm delete params
-func (o *HelmDeleteParams) WithNamespace(namespace string) *HelmDeleteParams {
+func (o *HelmDeleteParams) WithNamespace(namespace *string) *HelmDeleteParams {
 	o.SetNamespace(namespace)
 	return o
 }
 
 // SetNamespace adds the namespace to the helm delete params
-func (o *HelmDeleteParams) SetNamespace(namespace string) {
+func (o *HelmDeleteParams) SetNamespace(namespace *string) {
 	o.Namespace = namespace
 }
 
@@ -179,13 +179,20 @@ func (o *HelmDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 
-	// query param namespace
-	qrNamespace := o.Namespace
-	qNamespace := qrNamespace
-	if qNamespace != "" {
+	if o.Namespace != nil {
 
-		if err := r.SetQueryParam("namespace", qNamespace); err != nil {
-			return err
+		// query param namespace
+		var qrNamespace string
+
+		if o.Namespace != nil {
+			qrNamespace = *o.Namespace
+		}
+		qNamespace := qrNamespace
+		if qNamespace != "" {
+
+			if err := r.SetQueryParam("namespace", qNamespace); err != nil {
+				return err
+			}
 		}
 	}
 

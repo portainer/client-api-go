@@ -30,7 +30,9 @@ type PortainereeUser struct {
 
 	// User role (1 for administrator account and 2 for regular account)
 	// Example: 1
-	Role int64 `json:"Role,omitempty"`
+	Role struct {
+		PortainereeUserRole
+	} `json:"Role,omitempty"`
 
 	// token issue at
 	// Example: 1639408208
@@ -40,7 +42,10 @@ type PortainereeUser struct {
 	// Example: bob
 	Username string `json:"Username,omitempty"`
 
-	// User Theme
+	// theme settings
+	ThemeSettings *PortainereeUserThemeSettings `json:"themeSettings,omitempty"`
+
+	// Deprecated
 	// Example: dark
 	UserTheme string `json:"userTheme,omitempty"`
 }
@@ -54,6 +59,14 @@ func (m *PortainereeUser) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePortainerAuthorizations(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRole(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThemeSettings(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -101,6 +114,33 @@ func (m *PortainereeUser) validatePortainerAuthorizations(formats strfmt.Registr
 	return nil
 }
 
+func (m *PortainereeUser) validateRole(formats strfmt.Registry) error {
+	if swag.IsZero(m.Role) { // not required
+		return nil
+	}
+
+	return nil
+}
+
+func (m *PortainereeUser) validateThemeSettings(formats strfmt.Registry) error {
+	if swag.IsZero(m.ThemeSettings) { // not required
+		return nil
+	}
+
+	if m.ThemeSettings != nil {
+		if err := m.ThemeSettings.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("themeSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("themeSettings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this portaineree user based on the context it is used
 func (m *PortainereeUser) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -110,6 +150,14 @@ func (m *PortainereeUser) ContextValidate(ctx context.Context, formats strfmt.Re
 	}
 
 	if err := m.contextValidatePortainerAuthorizations(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRole(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateThemeSettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -142,6 +190,27 @@ func (m *PortainereeUser) contextValidatePortainerAuthorizations(ctx context.Con
 			return ce.ValidateName("PortainerAuthorizations")
 		}
 		return err
+	}
+
+	return nil
+}
+
+func (m *PortainereeUser) contextValidateRole(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *PortainereeUser) contextValidateThemeSettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ThemeSettings != nil {
+		if err := m.ThemeSettings.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("themeSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("themeSettings")
+			}
+			return err
+		}
 	}
 
 	return nil

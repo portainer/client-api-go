@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/portainer/client-api-go/v2/models"
 )
@@ -73,7 +74,7 @@ type EdgeJobUpdateParams struct {
 
 	   EdgeJob Id
 	*/
-	ID string
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +141,13 @@ func (o *EdgeJobUpdateParams) SetBody(body *models.EdgejobsEdgeJobUpdatePayload)
 }
 
 // WithID adds the id to the edge job update params
-func (o *EdgeJobUpdateParams) WithID(id string) *EdgeJobUpdateParams {
+func (o *EdgeJobUpdateParams) WithID(id int64) *EdgeJobUpdateParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge job update params
-func (o *EdgeJobUpdateParams) SetID(id string) {
+func (o *EdgeJobUpdateParams) SetID(id int64) {
 	o.ID = id
 }
 
@@ -164,7 +165,7 @@ func (o *EdgeJobUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	}
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 

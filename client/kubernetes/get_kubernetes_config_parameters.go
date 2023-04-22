@@ -196,8 +196,8 @@ func (o *GetKubernetesConfigParams) bindParamExcludeIds(formats strfmt.Registry)
 		excludeIdsIC = append(excludeIdsIC, excludeIdsIIV)
 	}
 
-	// items.CollectionFormat: ""
-	excludeIdsIS := swag.JoinByFormat(excludeIdsIC, "")
+	// items.CollectionFormat: "csv"
+	excludeIdsIS := swag.JoinByFormat(excludeIdsIC, "csv")
 
 	return excludeIdsIS
 }
@@ -213,8 +213,8 @@ func (o *GetKubernetesConfigParams) bindParamIds(formats strfmt.Registry) []stri
 		idsIC = append(idsIC, idsIIV)
 	}
 
-	// items.CollectionFormat: ""
-	idsIS := swag.JoinByFormat(idsIC, "")
+	// items.CollectionFormat: "csv"
+	idsIS := swag.JoinByFormat(idsIC, "csv")
 
 	return idsIS
 }

@@ -24,7 +24,7 @@ type ProvidersAmazonProvisionPayload struct {
 	// Required: true
 	AmiType *string `json:"amiType"`
 
-	// CredentialID holds an ID of the credential used to create the cluster
+	// credential ID
 	// Example: 1
 	// Required: true
 	CredentialID *int64 `json:"credentialID"`

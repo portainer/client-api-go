@@ -23,7 +23,9 @@ type PortainereeStack struct {
 	AdditionalFiles []string `json:"AdditionalFiles"`
 
 	// The auto update settings of a git stack
-	AutoUpdate *PortainereeStackAutoUpdate `json:"AutoUpdate,omitempty"`
+	AutoUpdate struct {
+		PortainereeAutoUpdateSettings
+	} `json:"AutoUpdate,omitempty"`
 
 	// Environment(Endpoint) identifier. Reference the environment(endpoint) that will be used for deployment
 	// Example: 1
@@ -45,14 +47,18 @@ type PortainereeStack struct {
 	Name string `json:"Name,omitempty"`
 
 	// The stack deployment option
-	Option *PortainereeStackOption `json:"Option,omitempty"`
+	Option struct {
+		PortainereeStackOption
+	} `json:"Option,omitempty"`
 
 	// resource control
 	ResourceControl *PortainereeResourceControl `json:"ResourceControl,omitempty"`
 
 	// Stack status (1 - active, 2 - inactive)
 	// Example: 1
-	Status int64 `json:"Status,omitempty"`
+	Status struct {
+		PortainereeStackStatus
+	} `json:"Status,omitempty"`
 
 	// Cluster identifier of the Swarm cluster where the stack is deployed
 	// Example: jpofkc0i9uo9wtx1zesuk649w
@@ -60,7 +66,9 @@ type PortainereeStack struct {
 
 	// Stack type. 1 for a Swarm stack, 2 for a Compose stack, 3 for a Kubernetes stack
 	// Example: 2
-	Type int64 `json:"Type,omitempty"`
+	Type struct {
+		PortainereeStackType
+	} `json:"Type,omitempty"`
 
 	// The username which created this stack
 	// Example: admin
@@ -79,7 +87,9 @@ type PortainereeStack struct {
 	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
 
 	// The git configuration of a git stack
-	GitConfig *GittypesRepoConfig `json:"gitConfig,omitempty"`
+	GitConfig struct {
+		GittypesRepoConfig
+	} `json:"gitConfig,omitempty"`
 
 	// IsComposeFormat indicates if the Kubernetes stack is created from a Docker Compose file
 	// Example: false
@@ -130,6 +140,14 @@ func (m *PortainereeStack) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateGitConfig(formats); err != nil {
 		res = append(res, err)
 	}
@@ -143,17 +161,6 @@ func (m *PortainereeStack) Validate(formats strfmt.Registry) error {
 func (m *PortainereeStack) validateAutoUpdate(formats strfmt.Registry) error {
 	if swag.IsZero(m.AutoUpdate) { // not required
 		return nil
-	}
-
-	if m.AutoUpdate != nil {
-		if err := m.AutoUpdate.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("AutoUpdate")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("AutoUpdate")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -190,17 +197,6 @@ func (m *PortainereeStack) validateOption(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if m.Option != nil {
-		if err := m.Option.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Option")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Option")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -223,20 +219,25 @@ func (m *PortainereeStack) validateResourceControl(formats strfmt.Registry) erro
 	return nil
 }
 
-func (m *PortainereeStack) validateGitConfig(formats strfmt.Registry) error {
-	if swag.IsZero(m.GitConfig) { // not required
+func (m *PortainereeStack) validateStatus(formats strfmt.Registry) error {
+	if swag.IsZero(m.Status) { // not required
 		return nil
 	}
 
-	if m.GitConfig != nil {
-		if err := m.GitConfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("gitConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("gitConfig")
-			}
-			return err
-		}
+	return nil
+}
+
+func (m *PortainereeStack) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	return nil
+}
+
+func (m *PortainereeStack) validateGitConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.GitConfig) { // not required
+		return nil
 	}
 
 	return nil
@@ -262,6 +263,14 @@ func (m *PortainereeStack) ContextValidate(ctx context.Context, formats strfmt.R
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGitConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -273,17 +282,6 @@ func (m *PortainereeStack) ContextValidate(ctx context.Context, formats strfmt.R
 }
 
 func (m *PortainereeStack) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.AutoUpdate != nil {
-		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("AutoUpdate")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("AutoUpdate")
-			}
-			return err
-		}
-	}
 
 	return nil
 }
@@ -310,17 +308,6 @@ func (m *PortainereeStack) contextValidateEnv(ctx context.Context, formats strfm
 
 func (m *PortainereeStack) contextValidateOption(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Option != nil {
-		if err := m.Option.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Option")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Option")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -340,18 +327,17 @@ func (m *PortainereeStack) contextValidateResourceControl(ctx context.Context, f
 	return nil
 }
 
-func (m *PortainereeStack) contextValidateGitConfig(ctx context.Context, formats strfmt.Registry) error {
+func (m *PortainereeStack) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.GitConfig != nil {
-		if err := m.GitConfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("gitConfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("gitConfig")
-			}
-			return err
-		}
-	}
+	return nil
+}
+
+func (m *PortainereeStack) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *PortainereeStack) contextValidateGitConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

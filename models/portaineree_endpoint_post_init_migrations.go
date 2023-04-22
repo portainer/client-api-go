@@ -17,6 +17,12 @@ import (
 // swagger:model portaineree.EndpointPostInitMigrations
 type PortainereeEndpointPostInitMigrations struct {
 
+	// migrate g p us
+	MigrateGPUs bool `json:"MigrateGPUs,omitempty"`
+
+	// migrate gate keeper
+	MigrateGateKeeper bool `json:"MigrateGateKeeper,omitempty"`
+
 	// migrate ingresses
 	MigrateIngresses bool `json:"MigrateIngresses,omitempty"`
 }

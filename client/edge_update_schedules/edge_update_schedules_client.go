@@ -30,6 +30,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	AgentVersions(params *AgentVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentVersionsOK, error)
+
 	EdgeUpdatePreviousVersions(params *EdgeUpdatePreviousVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdatePreviousVersionsOK, error)
 
 	EdgeUpdateScheduleActiveSchedulesList(params *EdgeUpdateScheduleActiveSchedulesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdateScheduleActiveSchedulesListOK, error)
@@ -46,9 +48,50 @@ type ClientService interface {
 }
 
 /*
-EdgeUpdatePreviousVersions fetches the previous versions of updated agents
+AgentVersions fetches the supported versions of the agent to update rollback
 
 **Access policy**: authenticated
+*/
+func (a *Client) AgentVersions(params *AgentVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AgentVersionsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAgentVersionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "AgentVersions",
+		Method:             "GET",
+		PathPattern:        "/edge_update_schedules/agent_versions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AgentVersionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AgentVersionsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for AgentVersions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+EdgeUpdatePreviousVersions fetches the previous versions of updated agents
+
+**Access policy**: administrator
 */
 func (a *Client) EdgeUpdatePreviousVersions(params *EdgeUpdatePreviousVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdatePreviousVersionsOK, error) {
 	// TODO: Validate the params before sending
@@ -58,7 +101,7 @@ func (a *Client) EdgeUpdatePreviousVersions(params *EdgeUpdatePreviousVersionsPa
 	op := &runtime.ClientOperation{
 		ID:                 "EdgeUpdatePreviousVersions",
 		Method:             "GET",
-		PathPattern:        "/edge_update_schedules/agent_versions",
+		PathPattern:        "/edge_update_schedules/previous_versions",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

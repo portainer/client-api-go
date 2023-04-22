@@ -66,13 +66,13 @@ type EdgeStackLogsCollectParams struct {
 
 	   Environment Id
 	*/
-	EndpointID string
+	EndpointID int64
 
 	/* ID.
 
 	   EdgeStack Id
 	*/
-	ID string
+	ID int64
 
 	/* Tail.
 
@@ -134,24 +134,24 @@ func (o *EdgeStackLogsCollectParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithEndpointID adds the endpointID to the edge stack logs collect params
-func (o *EdgeStackLogsCollectParams) WithEndpointID(endpointID string) *EdgeStackLogsCollectParams {
+func (o *EdgeStackLogsCollectParams) WithEndpointID(endpointID int64) *EdgeStackLogsCollectParams {
 	o.SetEndpointID(endpointID)
 	return o
 }
 
 // SetEndpointID adds the endpointId to the edge stack logs collect params
-func (o *EdgeStackLogsCollectParams) SetEndpointID(endpointID string) {
+func (o *EdgeStackLogsCollectParams) SetEndpointID(endpointID int64) {
 	o.EndpointID = endpointID
 }
 
 // WithID adds the id to the edge stack logs collect params
-func (o *EdgeStackLogsCollectParams) WithID(id string) *EdgeStackLogsCollectParams {
+func (o *EdgeStackLogsCollectParams) WithID(id int64) *EdgeStackLogsCollectParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack logs collect params
-func (o *EdgeStackLogsCollectParams) SetID(id string) {
+func (o *EdgeStackLogsCollectParams) SetID(id int64) {
 	o.ID = id
 }
 
@@ -175,12 +175,12 @@ func (o *EdgeStackLogsCollectParams) WriteToRequest(r runtime.ClientRequest, reg
 	var res []error
 
 	// path param endpoint_id
-	if err := r.SetPathParam("endpoint_id", o.EndpointID); err != nil {
+	if err := r.SetPathParam("endpoint_id", swag.FormatInt64(o.EndpointID)); err != nil {
 		return err
 	}
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 

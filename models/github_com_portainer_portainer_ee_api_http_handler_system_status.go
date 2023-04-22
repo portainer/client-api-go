@@ -15,7 +15,7 @@ import (
 
 // GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus github com portainer portainer ee api http handler system status
 //
-// swagger:model github.com_portainer_portainer-ee_api_http_handler_system.status
+// swagger:model github_com_portainer_portainer-ee_api_http_handler_system.status
 type GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus struct {
 
 	// Portainer API version

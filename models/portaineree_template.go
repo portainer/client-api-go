@@ -96,7 +96,9 @@ type PortainereeTemplate struct {
 	Registry string `json:"registry,omitempty"`
 
 	// Mandatory stack fields
-	Repository *PortainereeTemplateRepository `json:"repository,omitempty"`
+	Repository struct {
+		PortainereeTemplateRepository
+	} `json:"repository,omitempty"`
 
 	// Container restart policy
 	// Example: on-failure
@@ -112,7 +114,9 @@ type PortainereeTemplate struct {
 
 	// Template type. Valid values are: 1 (container), 2 (Swarm stack) or 3 (Compose stack)
 	// Example: 1
-	Type int64 `json:"type,omitempty"`
+	Type struct {
+		PortainereeTemplateType
+	} `json:"type,omitempty"`
 
 	// A list of volumes used during the container template deployment
 	Volumes []*PortainereeTemplateVolume `json:"volumes"`
@@ -131,6 +135,10 @@ func (m *PortainereeTemplate) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRepository(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -201,15 +209,12 @@ func (m *PortainereeTemplate) validateRepository(formats strfmt.Registry) error 
 		return nil
 	}
 
-	if m.Repository != nil {
-		if err := m.Repository.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("repository")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("repository")
-			}
-			return err
-		}
+	return nil
+}
+
+func (m *PortainereeTemplate) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
 	}
 
 	return nil
@@ -254,6 +259,10 @@ func (m *PortainereeTemplate) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidateRepository(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -309,16 +318,10 @@ func (m *PortainereeTemplate) contextValidateLabels(ctx context.Context, formats
 
 func (m *PortainereeTemplate) contextValidateRepository(ctx context.Context, formats strfmt.Registry) error {
 
-	if m.Repository != nil {
-		if err := m.Repository.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("repository")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("repository")
-			}
-			return err
-		}
-	}
+	return nil
+}
+
+func (m *PortainereeTemplate) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

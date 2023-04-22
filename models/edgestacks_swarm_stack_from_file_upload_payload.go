@@ -27,7 +27,9 @@ type EdgestacksSwarmStackFromFileUploadPayload struct {
 	// nomad deploytype is enabled only for nomad environments(endpoints)
 	// Example: 0
 	// Enum: [0 1 2]
-	DeploymentType int64 `json:"deploymentType,omitempty"`
+	DeploymentType struct {
+		PortainereeEdgeStackDeploymentType
+	} `json:"deploymentType,omitempty"`
 
 	// edge groups
 	EdgeGroups []int64 `json:"edgeGroups"`
@@ -41,6 +43,10 @@ type EdgestacksSwarmStackFromFileUploadPayload struct {
 
 	// registries
 	Registries []int64 `json:"registries"`
+
+	// Retry deploy
+	// Example: false
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
 
 	// stack file content
 	StackFileContent []int64 `json:"stackFileContent"`
@@ -66,7 +72,9 @@ func (m *EdgestacksSwarmStackFromFileUploadPayload) Validate(formats strfmt.Regi
 var edgestacksSwarmStackFromFileUploadPayloadTypeDeploymentTypePropEnum []interface{}
 
 func init() {
-	var res []int64
+	var res []struct {
+		PortainereeEdgeStackDeploymentType
+	}
 	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -76,7 +84,9 @@ func init() {
 }
 
 // prop value enum
-func (m *EdgestacksSwarmStackFromFileUploadPayload) validateDeploymentTypeEnum(path, location string, value int64) error {
+func (m *EdgestacksSwarmStackFromFileUploadPayload) validateDeploymentTypeEnum(path, location string, value *struct {
+	PortainereeEdgeStackDeploymentType
+}) error {
 	if err := validate.EnumCase(path, location, value, edgestacksSwarmStackFromFileUploadPayloadTypeDeploymentTypePropEnum, true); err != nil {
 		return err
 	}
@@ -88,16 +98,25 @@ func (m *EdgestacksSwarmStackFromFileUploadPayload) validateDeploymentType(forma
 		return nil
 	}
 
-	// value enum
-	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
-		return err
-	}
-
 	return nil
 }
 
-// ContextValidate validates this edgestacks swarm stack from file upload payload based on context it is used
+// ContextValidate validate this edgestacks swarm stack from file upload payload based on the context it is used
 func (m *EdgestacksSwarmStackFromFileUploadPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDeploymentType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EdgestacksSwarmStackFromFileUploadPayload) contextValidateDeploymentType(ctx context.Context, formats strfmt.Registry) error {
+
 	return nil
 }
 

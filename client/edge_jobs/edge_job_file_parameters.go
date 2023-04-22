@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeJobFileParams creates a new EdgeJobFileParams object,
@@ -65,7 +66,7 @@ type EdgeJobFileParams struct {
 
 	   EdgeJob Id
 	*/
-	ID string
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,13 +122,13 @@ func (o *EdgeJobFileParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the edge job file params
-func (o *EdgeJobFileParams) WithID(id string) *EdgeJobFileParams {
+func (o *EdgeJobFileParams) WithID(id int64) *EdgeJobFileParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge job file params
-func (o *EdgeJobFileParams) SetID(id string) {
+func (o *EdgeJobFileParams) SetID(id int64) {
 	o.ID = id
 }
 
@@ -140,7 +141,7 @@ func (o *EdgeJobFileParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 

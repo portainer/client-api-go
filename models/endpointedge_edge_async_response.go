@@ -20,7 +20,7 @@ import (
 type EndpointedgeEdgeAsyncResponse struct {
 
 	// command interval
-	CommandInterval int64 `json:"commandInterval,omitempty"`
+	CommandInterval TimeDuration `json:"commandInterval,omitempty"`
 
 	// commands
 	Commands []*PortainereeEdgeAsyncCommand `json:"commands"`
@@ -32,23 +32,52 @@ type EndpointedgeEdgeAsyncResponse struct {
 	NeedFullSnapshot bool `json:"needFullSnapshot,omitempty"`
 
 	// ping interval
-	PingInterval int64 `json:"pingInterval,omitempty"`
+	PingInterval TimeDuration `json:"pingInterval,omitempty"`
 
 	// snapshot interval
-	SnapshotInterval int64 `json:"snapshotInterval,omitempty"`
+	SnapshotInterval TimeDuration `json:"snapshotInterval,omitempty"`
 }
 
 // Validate validates this endpointedge edge async response
 func (m *EndpointedgeEdgeAsyncResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCommandInterval(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateCommands(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePingInterval(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSnapshotInterval(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EndpointedgeEdgeAsyncResponse) validateCommandInterval(formats strfmt.Registry) error {
+	if swag.IsZero(m.CommandInterval) { // not required
+		return nil
+	}
+
+	if err := m.CommandInterval.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("commandInterval")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("commandInterval")
+		}
+		return err
+	}
+
 	return nil
 }
 
@@ -78,17 +107,77 @@ func (m *EndpointedgeEdgeAsyncResponse) validateCommands(formats strfmt.Registry
 	return nil
 }
 
+func (m *EndpointedgeEdgeAsyncResponse) validatePingInterval(formats strfmt.Registry) error {
+	if swag.IsZero(m.PingInterval) { // not required
+		return nil
+	}
+
+	if err := m.PingInterval.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("pingInterval")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("pingInterval")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *EndpointedgeEdgeAsyncResponse) validateSnapshotInterval(formats strfmt.Registry) error {
+	if swag.IsZero(m.SnapshotInterval) { // not required
+		return nil
+	}
+
+	if err := m.SnapshotInterval.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("snapshotInterval")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("snapshotInterval")
+		}
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this endpointedge edge async response based on the context it is used
 func (m *EndpointedgeEdgeAsyncResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCommandInterval(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCommands(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePingInterval(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSnapshotInterval(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EndpointedgeEdgeAsyncResponse) contextValidateCommandInterval(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.CommandInterval.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("commandInterval")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("commandInterval")
+		}
+		return err
+	}
+
 	return nil
 }
 
@@ -107,6 +196,34 @@ func (m *EndpointedgeEdgeAsyncResponse) contextValidateCommands(ctx context.Cont
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *EndpointedgeEdgeAsyncResponse) contextValidatePingInterval(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.PingInterval.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("pingInterval")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("pingInterval")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *EndpointedgeEdgeAsyncResponse) contextValidateSnapshotInterval(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.SnapshotInterval.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("snapshotInterval")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("snapshotInterval")
+		}
+		return err
 	}
 
 	return nil

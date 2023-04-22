@@ -31,9 +31,8 @@ type UsersUserUpdatePayload struct {
 	// Enum: [1 2]
 	Role *int64 `json:"role"`
 
-	// user theme
-	// Example: dark
-	UserTheme string `json:"userTheme,omitempty"`
+	// theme
+	Theme *UsersThemePayload `json:"theme,omitempty"`
 
 	// username
 	// Example: bob
@@ -50,6 +49,10 @@ func (m *UsersUserUpdatePayload) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRole(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTheme(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -106,6 +109,25 @@ func (m *UsersUserUpdatePayload) validateRole(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *UsersUserUpdatePayload) validateTheme(formats strfmt.Registry) error {
+	if swag.IsZero(m.Theme) { // not required
+		return nil
+	}
+
+	if m.Theme != nil {
+		if err := m.Theme.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("theme")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("theme")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *UsersUserUpdatePayload) validateUsername(formats strfmt.Registry) error {
 
 	if err := validate.Required("username", "body", m.Username); err != nil {
@@ -115,8 +137,33 @@ func (m *UsersUserUpdatePayload) validateUsername(formats strfmt.Registry) error
 	return nil
 }
 
-// ContextValidate validates this users user update payload based on context it is used
+// ContextValidate validate this users user update payload based on the context it is used
 func (m *UsersUserUpdatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateTheme(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *UsersUserUpdatePayload) contextValidateTheme(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Theme != nil {
+		if err := m.Theme.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("theme")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("theme")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

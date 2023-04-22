@@ -14,7 +14,7 @@ import (
 
 // GithubComPortainerPortainerEeAPIDemoEnvironmentDetails github com portainer portainer ee api demo environment details
 //
-// swagger:model github.com_portainer_portainer-ee_api_demo.EnvironmentDetails
+// swagger:model github_com_portainer_portainer-ee_api_demo.EnvironmentDetails
 type GithubComPortainerPortainerEeAPIDemoEnvironmentDetails struct {
 
 	// enabled

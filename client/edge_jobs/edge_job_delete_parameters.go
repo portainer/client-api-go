@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeJobDeleteParams creates a new EdgeJobDeleteParams object,
@@ -65,7 +66,7 @@ type EdgeJobDeleteParams struct {
 
 	   EdgeJob Id
 	*/
-	ID string
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,13 +122,13 @@ func (o *EdgeJobDeleteParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the edge job delete params
-func (o *EdgeJobDeleteParams) WithID(id string) *EdgeJobDeleteParams {
+func (o *EdgeJobDeleteParams) WithID(id int64) *EdgeJobDeleteParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge job delete params
-func (o *EdgeJobDeleteParams) SetID(id string) {
+func (o *EdgeJobDeleteParams) SetID(id int64) {
 	o.ID = id
 }
 
@@ -140,7 +141,7 @@ func (o *EdgeJobDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 

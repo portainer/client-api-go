@@ -17,6 +17,9 @@ import (
 // swagger:model portaineree.CloudProvider
 type PortainereeCloudProvider struct {
 
+	// MicroK8S specific fields
+	Addons string `json:"Addons,omitempty"`
+
 	// Amazon specific fields
 	AmiType string `json:"AmiType,omitempty"`
 
@@ -41,6 +44,9 @@ type PortainereeCloudProvider struct {
 
 	// node count
 	NodeCount int64 `json:"NodeCount,omitempty"`
+
+	// node i ps
+	NodeIPs string `json:"NodeIPs,omitempty"`
 
 	// node volume size
 	NodeVolumeSize int64 `json:"NodeVolumeSize,omitempty"`

@@ -68,15 +68,15 @@ type EndpointListParams struct {
 	*/
 	AgentVersions []string
 
-	/* EdgeDevice.
+	/* EdgeAsync.
 
-	   if exists true show only edge devices, false show only regular edge endpoints. if missing, will show both types (relevant only for edge endpoints)
+	   if exists true show only edge async agents, false show only standard edge agents. if missing, will show both types (relevant only for edge agents)
 	*/
-	EdgeDevice *bool
+	EdgeAsync *bool
 
 	/* EdgeDeviceUntrusted.
 
-	   if true, show only untrusted endpoints, if false show only trusted (relevant only for edge devices, and if edgeDevice is true)
+	   if true, show only untrusted edge agents, if false show only trusted edge agents (relevant only for edge agents)
 	*/
 	EdgeDeviceUntrusted *bool
 
@@ -222,15 +222,15 @@ func (o *EndpointListParams) SetAgentVersions(agentVersions []string) {
 	o.AgentVersions = agentVersions
 }
 
-// WithEdgeDevice adds the edgeDevice to the endpoint list params
-func (o *EndpointListParams) WithEdgeDevice(edgeDevice *bool) *EndpointListParams {
-	o.SetEdgeDevice(edgeDevice)
+// WithEdgeAsync adds the edgeAsync to the endpoint list params
+func (o *EndpointListParams) WithEdgeAsync(edgeAsync *bool) *EndpointListParams {
+	o.SetEdgeAsync(edgeAsync)
 	return o
 }
 
-// SetEdgeDevice adds the edgeDevice to the endpoint list params
-func (o *EndpointListParams) SetEdgeDevice(edgeDevice *bool) {
-	o.EdgeDevice = edgeDevice
+// SetEdgeAsync adds the edgeAsync to the endpoint list params
+func (o *EndpointListParams) SetEdgeAsync(edgeAsync *bool) {
+	o.EdgeAsync = edgeAsync
 }
 
 // WithEdgeDeviceUntrusted adds the edgeDeviceUntrusted to the endpoint list params
@@ -406,18 +406,18 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.EdgeDevice != nil {
+	if o.EdgeAsync != nil {
 
-		// query param edgeDevice
-		var qrEdgeDevice bool
+		// query param edgeAsync
+		var qrEdgeAsync bool
 
-		if o.EdgeDevice != nil {
-			qrEdgeDevice = *o.EdgeDevice
+		if o.EdgeAsync != nil {
+			qrEdgeAsync = *o.EdgeAsync
 		}
-		qEdgeDevice := swag.FormatBool(qrEdgeDevice)
-		if qEdgeDevice != "" {
+		qEdgeAsync := swag.FormatBool(qrEdgeAsync)
+		if qEdgeAsync != "" {
 
-			if err := r.SetQueryParam("edgeDevice", qEdgeDevice); err != nil {
+			if err := r.SetQueryParam("edgeAsync", qEdgeAsync); err != nil {
 				return err
 			}
 		}
@@ -648,8 +648,8 @@ func (o *EndpointListParams) bindParamAgentVersions(formats strfmt.Registry) []s
 		agentVersionsIC = append(agentVersionsIC, agentVersionsIIV)
 	}
 
-	// items.CollectionFormat: ""
-	agentVersionsIS := swag.JoinByFormat(agentVersionsIC, "")
+	// items.CollectionFormat: "csv"
+	agentVersionsIS := swag.JoinByFormat(agentVersionsIC, "csv")
 
 	return agentVersionsIS
 }
@@ -665,8 +665,8 @@ func (o *EndpointListParams) bindParamEndpointIds(formats strfmt.Registry) []str
 		endpointIdsIC = append(endpointIdsIC, endpointIdsIIV)
 	}
 
-	// items.CollectionFormat: ""
-	endpointIdsIS := swag.JoinByFormat(endpointIdsIC, "")
+	// items.CollectionFormat: "csv"
+	endpointIdsIS := swag.JoinByFormat(endpointIdsIC, "csv")
 
 	return endpointIdsIS
 }
@@ -682,8 +682,8 @@ func (o *EndpointListParams) bindParamGroupIds(formats strfmt.Registry) []string
 		groupIdsIC = append(groupIdsIC, groupIdsIIV)
 	}
 
-	// items.CollectionFormat: ""
-	groupIdsIS := swag.JoinByFormat(groupIdsIC, "")
+	// items.CollectionFormat: "csv"
+	groupIdsIS := swag.JoinByFormat(groupIdsIC, "csv")
 
 	return groupIdsIS
 }
@@ -699,8 +699,8 @@ func (o *EndpointListParams) bindParamStatus(formats strfmt.Registry) []string {
 		statusIC = append(statusIC, statusIIV)
 	}
 
-	// items.CollectionFormat: ""
-	statusIS := swag.JoinByFormat(statusIC, "")
+	// items.CollectionFormat: "csv"
+	statusIS := swag.JoinByFormat(statusIC, "csv")
 
 	return statusIS
 }
@@ -716,8 +716,8 @@ func (o *EndpointListParams) bindParamTagIds(formats strfmt.Registry) []string {
 		tagIdsIC = append(tagIdsIC, tagIdsIIV)
 	}
 
-	// items.CollectionFormat: ""
-	tagIdsIS := swag.JoinByFormat(tagIdsIC, "")
+	// items.CollectionFormat: "csv"
+	tagIdsIS := swag.JoinByFormat(tagIdsIC, "csv")
 
 	return tagIdsIS
 }
@@ -733,8 +733,8 @@ func (o *EndpointListParams) bindParamTypes(formats strfmt.Registry) []string {
 		typesIC = append(typesIC, typesIIV)
 	}
 
-	// items.CollectionFormat: ""
-	typesIS := swag.JoinByFormat(typesIC, "")
+	// items.CollectionFormat: "csv"
+	typesIS := swag.JoinByFormat(typesIC, "csv")
 
 	return typesIS
 }

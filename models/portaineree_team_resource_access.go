@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -18,7 +19,7 @@ import (
 type PortainereeTeamResourceAccess struct {
 
 	// access level
-	AccessLevel int64 `json:"AccessLevel,omitempty"`
+	AccessLevel PortainereeResourceAccessLevel `json:"AccessLevel,omitempty"`
 
 	// team Id
 	TeamID int64 `json:"TeamId,omitempty"`
@@ -26,11 +27,60 @@ type PortainereeTeamResourceAccess struct {
 
 // Validate validates this portaineree team resource access
 func (m *PortainereeTeamResourceAccess) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAccessLevel(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this portaineree team resource access based on context it is used
+func (m *PortainereeTeamResourceAccess) validateAccessLevel(formats strfmt.Registry) error {
+	if swag.IsZero(m.AccessLevel) { // not required
+		return nil
+	}
+
+	if err := m.AccessLevel.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("AccessLevel")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("AccessLevel")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this portaineree team resource access based on the context it is used
 func (m *PortainereeTeamResourceAccess) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAccessLevel(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PortainereeTeamResourceAccess) contextValidateAccessLevel(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.AccessLevel.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("AccessLevel")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("AccessLevel")
+		}
+		return err
+	}
+
 	return nil
 }
 

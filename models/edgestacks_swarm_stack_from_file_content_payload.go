@@ -27,7 +27,9 @@ type EdgestacksSwarmStackFromFileContentPayload struct {
 	// nomad deploy type is enabled only for nomad environments(endpoints)
 	// Example: 0
 	// Enum: [0 1 2]
-	DeploymentType int64 `json:"deploymentType,omitempty"`
+	DeploymentType struct {
+		PortainereeEdgeStackDeploymentType
+	} `json:"deploymentType,omitempty"`
 
 	// List of identifiers of EdgeGroups
 	// Example: [1]
@@ -44,6 +46,10 @@ type EdgestacksSwarmStackFromFileContentPayload struct {
 
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
+
+	// Retry deploy
+	// Example: false
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
 
 	// Content of the Stack file
 	// Example: version: 3\n services:\n web:\n image:nginx
@@ -79,7 +85,9 @@ func (m *EdgestacksSwarmStackFromFileContentPayload) Validate(formats strfmt.Reg
 var edgestacksSwarmStackFromFileContentPayloadTypeDeploymentTypePropEnum []interface{}
 
 func init() {
-	var res []int64
+	var res []struct {
+		PortainereeEdgeStackDeploymentType
+	}
 	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -89,7 +97,9 @@ func init() {
 }
 
 // prop value enum
-func (m *EdgestacksSwarmStackFromFileContentPayload) validateDeploymentTypeEnum(path, location string, value int64) error {
+func (m *EdgestacksSwarmStackFromFileContentPayload) validateDeploymentTypeEnum(path, location string, value *struct {
+	PortainereeEdgeStackDeploymentType
+}) error {
 	if err := validate.EnumCase(path, location, value, edgestacksSwarmStackFromFileContentPayloadTypeDeploymentTypePropEnum, true); err != nil {
 		return err
 	}
@@ -99,11 +109,6 @@ func (m *EdgestacksSwarmStackFromFileContentPayload) validateDeploymentTypeEnum(
 func (m *EdgestacksSwarmStackFromFileContentPayload) validateDeploymentType(formats strfmt.Registry) error {
 	if swag.IsZero(m.DeploymentType) { // not required
 		return nil
-	}
-
-	// value enum
-	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
-		return err
 	}
 
 	return nil
@@ -127,8 +132,22 @@ func (m *EdgestacksSwarmStackFromFileContentPayload) validateStackFileContent(fo
 	return nil
 }
 
-// ContextValidate validates this edgestacks swarm stack from file content payload based on context it is used
+// ContextValidate validate this edgestacks swarm stack from file content payload based on the context it is used
 func (m *EdgestacksSwarmStackFromFileContentPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDeploymentType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EdgestacksSwarmStackFromFileContentPayload) contextValidateDeploymentType(ctx context.Context, formats strfmt.Registry) error {
+
 	return nil
 }
 

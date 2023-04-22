@@ -40,7 +40,9 @@ type NetworkEndpointSettings struct {
 	Ipaddress string `json:"ipaddress,omitempty"`
 
 	// Configurations
-	Ipamconfig *NetworkEndpointIPAMConfig `json:"ipamconfig,omitempty"`
+	Ipamconfig struct {
+		NetworkEndpointIPAMConfig
+	} `json:"ipamconfig,omitempty"`
 
 	// ipprefix len
 	IpprefixLen int64 `json:"ipprefixLen,omitempty"`
@@ -77,17 +79,6 @@ func (m *NetworkEndpointSettings) validateIpamconfig(formats strfmt.Registry) er
 		return nil
 	}
 
-	if m.Ipamconfig != nil {
-		if err := m.Ipamconfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("ipamconfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("ipamconfig")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -106,17 +97,6 @@ func (m *NetworkEndpointSettings) ContextValidate(ctx context.Context, formats s
 }
 
 func (m *NetworkEndpointSettings) contextValidateIpamconfig(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Ipamconfig != nil {
-		if err := m.Ipamconfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("ipamconfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("ipamconfig")
-			}
-			return err
-		}
-	}
 
 	return nil
 }

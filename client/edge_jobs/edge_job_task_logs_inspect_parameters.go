@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeJobTaskLogsInspectParams creates a new EdgeJobTaskLogsInspectParams object,
@@ -65,13 +66,13 @@ type EdgeJobTaskLogsInspectParams struct {
 
 	   EdgeJob Id
 	*/
-	ID string
+	ID int64
 
 	/* TaskID.
 
 	   Task Id
 	*/
-	TaskID string
+	TaskID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -127,24 +128,24 @@ func (o *EdgeJobTaskLogsInspectParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the edge job task logs inspect params
-func (o *EdgeJobTaskLogsInspectParams) WithID(id string) *EdgeJobTaskLogsInspectParams {
+func (o *EdgeJobTaskLogsInspectParams) WithID(id int64) *EdgeJobTaskLogsInspectParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge job task logs inspect params
-func (o *EdgeJobTaskLogsInspectParams) SetID(id string) {
+func (o *EdgeJobTaskLogsInspectParams) SetID(id int64) {
 	o.ID = id
 }
 
 // WithTaskID adds the taskID to the edge job task logs inspect params
-func (o *EdgeJobTaskLogsInspectParams) WithTaskID(taskID string) *EdgeJobTaskLogsInspectParams {
+func (o *EdgeJobTaskLogsInspectParams) WithTaskID(taskID int64) *EdgeJobTaskLogsInspectParams {
 	o.SetTaskID(taskID)
 	return o
 }
 
 // SetTaskID adds the taskId to the edge job task logs inspect params
-func (o *EdgeJobTaskLogsInspectParams) SetTaskID(taskID string) {
+func (o *EdgeJobTaskLogsInspectParams) SetTaskID(taskID int64) {
 	o.TaskID = taskID
 }
 
@@ -157,12 +158,12 @@ func (o *EdgeJobTaskLogsInspectParams) WriteToRequest(r runtime.ClientRequest, r
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 
 	// path param taskID
-	if err := r.SetPathParam("taskID", o.TaskID); err != nil {
+	if err := r.SetPathParam("taskID", swag.FormatInt64(o.TaskID)); err != nil {
 		return err
 	}
 

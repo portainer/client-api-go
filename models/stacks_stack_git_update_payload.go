@@ -20,7 +20,7 @@ import (
 type StacksStackGitUpdatePayload struct {
 
 	// auto update
-	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainereeAutoUpdateSettings `json:"autoUpdate,omitempty"`
 
 	// env
 	Env []*PortainereePair `json:"env"`

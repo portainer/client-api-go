@@ -71,11 +71,15 @@ type PortainereeRegistry struct {
 	RegistryAccesses PortainereeRegistryAccesses `json:"RegistryAccesses,omitempty"`
 
 	// Deprecated in DBVersion == 31
-	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
+	TeamAccessPolicies struct {
+		PortainereeTeamAccessPolicies
+	} `json:"TeamAccessPolicies,omitempty"`
 
 	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
 	// Enum: [1 2 3 4 5 6 7 8]
-	Type int64 `json:"Type,omitempty"`
+	Type struct {
+		PortainereeRegistryType
+	} `json:"Type,omitempty"`
 
 	// URL or IP address of the Docker registry
 	// Example: registry.mydomain.tld:2375/feed-name
@@ -83,7 +87,9 @@ type PortainereeRegistry struct {
 
 	// Deprecated fields
 	// Deprecated in DBVersion == 31
-	UserAccessPolicies PortainereeUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
+	UserAccessPolicies struct {
+		PortainereeUserAccessPolicies
+	} `json:"UserAccessPolicies,omitempty"`
 
 	// Username or AccessKeyID used to authenticate against this registry
 	// Example: registry user
@@ -255,24 +261,15 @@ func (m *PortainereeRegistry) validateTeamAccessPolicies(formats strfmt.Registry
 		return nil
 	}
 
-	if m.TeamAccessPolicies != nil {
-		if err := m.TeamAccessPolicies.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("TeamAccessPolicies")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("TeamAccessPolicies")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
 var portainereeRegistryTypeTypePropEnum []interface{}
 
 func init() {
-	var res []int64
+	var res []struct {
+		PortainereeRegistryType
+	}
 	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7,8]`), &res); err != nil {
 		panic(err)
 	}
@@ -282,7 +279,9 @@ func init() {
 }
 
 // prop value enum
-func (m *PortainereeRegistry) validateTypeEnum(path, location string, value int64) error {
+func (m *PortainereeRegistry) validateTypeEnum(path, location string, value *struct {
+	PortainereeRegistryType
+}) error {
 	if err := validate.EnumCase(path, location, value, portainereeRegistryTypeTypePropEnum, true); err != nil {
 		return err
 	}
@@ -294,28 +293,12 @@ func (m *PortainereeRegistry) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
-	// value enum
-	if err := m.validateTypeEnum("Type", "body", m.Type); err != nil {
-		return err
-	}
-
 	return nil
 }
 
 func (m *PortainereeRegistry) validateUserAccessPolicies(formats strfmt.Registry) error {
 	if swag.IsZero(m.UserAccessPolicies) { // not required
 		return nil
-	}
-
-	if m.UserAccessPolicies != nil {
-		if err := m.UserAccessPolicies.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("UserAccessPolicies")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("UserAccessPolicies")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -350,6 +333,10 @@ func (m *PortainereeRegistry) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidateTeamAccessPolicies(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -459,28 +446,15 @@ func (m *PortainereeRegistry) contextValidateRegistryAccesses(ctx context.Contex
 
 func (m *PortainereeRegistry) contextValidateTeamAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := m.TeamAccessPolicies.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("TeamAccessPolicies")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("TeamAccessPolicies")
-		}
-		return err
-	}
+	return nil
+}
+
+func (m *PortainereeRegistry) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }
 
 func (m *PortainereeRegistry) contextValidateUserAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.UserAccessPolicies.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("UserAccessPolicies")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("UserAccessPolicies")
-		}
-		return err
-	}
 
 	return nil
 }

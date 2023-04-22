@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -21,16 +22,65 @@ type WebhooksWebhookReassignPayload struct {
 	ResourceID string `json:"resourceID,omitempty"`
 
 	// webhook type
-	WebhookType int64 `json:"webhookType,omitempty"`
+	WebhookType PortainereeWebhookType `json:"webhookType,omitempty"`
 }
 
 // Validate validates this webhooks webhook reassign payload
 func (m *WebhooksWebhookReassignPayload) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateWebhookType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this webhooks webhook reassign payload based on context it is used
+func (m *WebhooksWebhookReassignPayload) validateWebhookType(formats strfmt.Registry) error {
+	if swag.IsZero(m.WebhookType) { // not required
+		return nil
+	}
+
+	if err := m.WebhookType.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("webhookType")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("webhookType")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this webhooks webhook reassign payload based on the context it is used
 func (m *WebhooksWebhookReassignPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateWebhookType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *WebhooksWebhookReassignPayload) contextValidateWebhookType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.WebhookType.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("webhookType")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("webhookType")
+		}
+		return err
+	}
+
 	return nil
 }
 
