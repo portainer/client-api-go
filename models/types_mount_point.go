@@ -34,7 +34,7 @@ type TypesMountPoint struct {
 	Propagation MountPropagation `json:"propagation,omitempty"`
 
 	// rw
-	Rw *bool `json:"rw,omitempty"`
+	Rw bool `json:"rw,omitempty"`
 
 	// source
 	Source string `json:"source,omitempty"`

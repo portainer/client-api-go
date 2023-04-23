@@ -30,11 +30,11 @@ type SettingsPublicSettingsResponse struct {
 
 	// Whether edge compute features are enabled
 	// Example: true
-	EnableEdgeComputeFeatures *bool `json:"EnableEdgeComputeFeatures,omitempty"`
+	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
 
 	// Whether telemetry is enabled
 	// Example: true
-	EnableTelemetry *bool `json:"EnableTelemetry,omitempty"`
+	EnableTelemetry bool `json:"EnableTelemetry,omitempty"`
 
 	// Supported feature flags
 	Features map[string]bool `json:"Features,omitempty"`
@@ -50,7 +50,7 @@ type SettingsPublicSettingsResponse struct {
 
 	// Whether portainer internal auth view will be hidden
 	// Example: true
-	OAuthHideInternalAuth *bool `json:"OAuthHideInternalAuth,omitempty"`
+	OAuthHideInternalAuth bool `json:"OAuthHideInternalAuth,omitempty"`
 
 	// The URL used for oauth login
 	// Example: https://gitlab.com/oauth
@@ -66,11 +66,11 @@ type SettingsPublicSettingsResponse struct {
 
 	// Show the Kompose build option (discontinued in 2.18)
 	// Example: false
-	ShowKomposeBuildOption *bool `json:"ShowKomposeBuildOption,omitempty"`
+	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
 
 	// Whether team sync is enabled
 	// Example: true
-	TeamSync *bool `json:"TeamSync,omitempty"`
+	TeamSync bool `json:"TeamSync,omitempty"`
 
 	// default registry
 	DefaultRegistry *SettingsPublicSettingsResponseDefaultRegistry `json:"defaultRegistry,omitempty"`
@@ -79,10 +79,10 @@ type SettingsPublicSettingsResponse struct {
 	Edge *SettingsPublicSettingsResponseEdge `json:"edge,omitempty"`
 
 	// Whether AMT is enabled
-	IsAMTEnabled *bool `json:"isAMTEnabled,omitempty"`
+	IsAMTEnabled bool `json:"isAMTEnabled,omitempty"`
 
 	// Whether FDO is enabled
-	IsFDOEnabled *bool `json:"isFDOEnabled,omitempty"`
+	IsFDOEnabled bool `json:"isFDOEnabled,omitempty"`
 
 	// The expiry of a Kubeconfig
 	// Example: 24h

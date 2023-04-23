@@ -18,7 +18,7 @@ import (
 type PodsecurityPodSecurityReadOnlyRootFileSystem struct {
 
 	// enabled
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
 }
 
 // Validate validates this podsecurity pod security read only root file system

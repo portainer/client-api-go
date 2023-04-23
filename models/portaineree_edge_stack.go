@@ -45,16 +45,16 @@ type PortainereeEdgeStack struct {
 	NumDeployments int64 `json:"NumDeployments,omitempty"`
 
 	// Pre Pull Image
-	PrePullImage *bool `json:"PrePullImage,omitempty"`
+	PrePullImage bool `json:"PrePullImage,omitempty"`
 
 	// project path
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
 	// Deprecated
-	Prune *bool `json:"Prune,omitempty"`
+	Prune bool `json:"Prune,omitempty"`
 
 	// Re-Pull Image
-	RePullImage *bool `json:"RePullImage,omitempty"`
+	RePullImage bool `json:"RePullImage,omitempty"`
 
 	// registries
 	Registries []int64 `json:"Registries"`
@@ -70,14 +70,14 @@ type PortainereeEdgeStack struct {
 
 	// Retry deploy
 	// Example: false
-	RetryDeploy *bool `json:"retryDeploy,omitempty"`
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
 
 	// Schedule represents the schedule of the Edge stack (optional, format - 'YYYY-MM-DD HH:mm:ss')
 	// Example: 2020-11-13 14:53:00
 	ScheduledTime string `json:"scheduledTime,omitempty"`
 
 	// Uses the manifest's namespaces instead of the default one
-	UseManifestNamespaces *bool `json:"useManifestNamespaces,omitempty"`
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 }
 
 // Validate validates this portaineree edge stack

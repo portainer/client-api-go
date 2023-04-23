@@ -25,7 +25,7 @@ type PortainereeRegistryManagementConfiguration struct {
 	AccessTokenExpiry int64 `json:"AccessTokenExpiry,omitempty"`
 
 	// authentication
-	Authentication *bool `json:"Authentication,omitempty"`
+	Authentication bool `json:"Authentication,omitempty"`
 
 	// ecr
 	Ecr *PortainereeEcrData `json:"Ecr,omitempty"`

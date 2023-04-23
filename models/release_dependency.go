@@ -24,7 +24,7 @@ type ReleaseDependency struct {
 	Condition string `json:"condition,omitempty"`
 
 	// Enabled bool determines if chart should be loaded
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
 
 	// ImportValues holds the mapping of source values to parent key to be imported. Each item can be a
 	// string or pair of child/parent sublist items.

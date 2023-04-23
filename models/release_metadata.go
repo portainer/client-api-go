@@ -36,7 +36,7 @@ type ReleaseMetadata struct {
 	Dependencies []*ReleaseDependency `json:"dependencies"`
 
 	// Whether or not this chart is deprecated
-	Deprecated *bool `json:"deprecated,omitempty"`
+	Deprecated bool `json:"deprecated,omitempty"`
 
 	// A one-sentence description of the chart
 	Description string `json:"description,omitempty"`

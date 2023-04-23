@@ -14,7 +14,7 @@ import (
 // PortainereeAuthorizations portaineree authorizations
 //
 // swagger:model portaineree.Authorizations
-type PortainereeAuthorizations map[string]*bool
+type PortainereeAuthorizations map[string]bool
 
 // Validate validates this portaineree authorizations
 func (m PortainereeAuthorizations) Validate(formats strfmt.Registry) error {

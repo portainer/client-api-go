@@ -63,10 +63,10 @@ type PortainereeEndpoint struct {
 	EdgeKey string `json:"EdgeKey,omitempty"`
 
 	// enable g p u management
-	EnableGPUManagement *bool `json:"EnableGPUManagement,omitempty"`
+	EnableGPUManagement bool `json:"EnableGPUManagement,omitempty"`
 
 	// enable image notification
-	EnableImageNotification *bool `json:"EnableImageNotification,omitempty"`
+	EnableImageNotification bool `json:"EnableImageNotification,omitempty"`
 
 	// gpus
 	Gpus []*PortainereePair `json:"Gpus"`
@@ -77,7 +77,7 @@ type PortainereeEndpoint struct {
 
 	// Heartbeat indicates the heartbeat status of an edge environment
 	// Example: true
-	Heartbeat *bool `json:"Heartbeat,omitempty"`
+	Heartbeat bool `json:"Heartbeat,omitempty"`
 
 	// Environment(Endpoint) Identifier
 	// Example: 1
@@ -124,7 +124,7 @@ type PortainereeEndpoint struct {
 
 	// Deprecated fields
 	// Deprecated in DBVersion == 4
-	TLS *bool `json:"TLS,omitempty"`
+	TLS bool `json:"TLS,omitempty"`
 
 	// TLS c a cert
 	TLSCACert string `json:"TLSCACert,omitempty"`
@@ -171,7 +171,7 @@ type PortainereeEndpoint struct {
 	Edge *PortainereeEnvironmentEdgeSettings `json:"edge,omitempty"`
 
 	// IsEdgeDevice marks if the environment was created as an EdgeDevice
-	IsEdgeDevice *bool `json:"isEdgeDevice,omitempty"`
+	IsEdgeDevice bool `json:"isEdgeDevice,omitempty"`
 
 	// LastCheckInDate mark last check-in date on checkin
 	LastCheckInDate int64 `json:"lastCheckInDate,omitempty"`
@@ -188,7 +188,7 @@ type PortainereeEndpoint struct {
 	} `json:"securitySettings,omitempty"`
 
 	// Whether the device has been trusted or not by the user
-	UserTrusted *bool `json:"userTrusted,omitempty"`
+	UserTrusted bool `json:"userTrusted,omitempty"`
 }
 
 // Validate validates this portaineree endpoint

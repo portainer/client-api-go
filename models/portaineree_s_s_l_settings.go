@@ -24,13 +24,13 @@ type PortainereeSSLSettings struct {
 	CertPath string `json:"certPath,omitempty"`
 
 	// http enabled
-	HTTPEnabled *bool `json:"httpEnabled,omitempty"`
+	HTTPEnabled bool `json:"httpEnabled,omitempty"`
 
 	// key path
 	KeyPath string `json:"keyPath,omitempty"`
 
 	// self signed
-	SelfSigned *bool `json:"selfSigned,omitempty"`
+	SelfSigned bool `json:"selfSigned,omitempty"`
 }
 
 // Validate validates this portaineree s s l settings

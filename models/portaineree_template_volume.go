@@ -27,7 +27,7 @@ type PortainereeTemplateVolume struct {
 
 	// Whether the volume used should be readonly
 	// Example: true
-	Readonly *bool `json:"readonly,omitempty"`
+	Readonly bool `json:"readonly,omitempty"`
 }
 
 // Validate validates this portaineree template volume

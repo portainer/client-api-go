@@ -18,13 +18,13 @@ import (
 type PortainereeKubernetesFlags struct {
 
 	// is server ingress class detected
-	IsServerIngressClassDetected *bool `json:"IsServerIngressClassDetected,omitempty"`
+	IsServerIngressClassDetected bool `json:"IsServerIngressClassDetected,omitempty"`
 
 	// is server metrics detected
-	IsServerMetricsDetected *bool `json:"IsServerMetricsDetected,omitempty"`
+	IsServerMetricsDetected bool `json:"IsServerMetricsDetected,omitempty"`
 
 	// is server storage detected
-	IsServerStorageDetected *bool `json:"IsServerStorageDetected,omitempty"`
+	IsServerStorageDetected bool `json:"IsServerStorageDetected,omitempty"`
 }
 
 // Validate validates this portaineree kubernetes flags

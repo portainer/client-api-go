@@ -20,16 +20,16 @@ import (
 type EdgegroupsDecoratedEdgeGroup struct {
 
 	// dynamic
-	Dynamic *bool `json:"Dynamic,omitempty"`
+	Dynamic bool `json:"Dynamic,omitempty"`
 
 	// endpoints
 	Endpoints []int64 `json:"Endpoints"`
 
 	// has edge group
-	HasEdgeGroup *bool `json:"HasEdgeGroup,omitempty"`
+	HasEdgeGroup bool `json:"HasEdgeGroup,omitempty"`
 
 	// has edge stack
-	HasEdgeStack *bool `json:"HasEdgeStack,omitempty"`
+	HasEdgeStack bool `json:"HasEdgeStack,omitempty"`
 
 	// EdgeGroup Identifier
 	// Example: 1
@@ -39,7 +39,7 @@ type EdgegroupsDecoratedEdgeGroup struct {
 	Name string `json:"Name,omitempty"`
 
 	// partial match
-	PartialMatch *bool `json:"PartialMatch,omitempty"`
+	PartialMatch bool `json:"PartialMatch,omitempty"`
 
 	// tag ids
 	TagIds []int64 `json:"TagIds"`

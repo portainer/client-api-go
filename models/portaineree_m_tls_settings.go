@@ -27,7 +27,7 @@ type PortainereeMTLSSettings struct {
 	KeyFile string `json:"KeyFile,omitempty"`
 
 	// use separate cert
-	UseSeparateCert *bool `json:"UseSeparateCert,omitempty"`
+	UseSeparateCert bool `json:"UseSeparateCert,omitempty"`
 }
 
 // Validate validates this portaineree m TLS settings

@@ -18,25 +18,25 @@ import (
 type PortainerEdgeStackStatusDetails struct {
 
 	// acknowledged
-	Acknowledged *bool `json:"acknowledged,omitempty"`
+	Acknowledged bool `json:"acknowledged,omitempty"`
 
 	// error
-	Error *bool `json:"error,omitempty"`
+	Error bool `json:"error,omitempty"`
 
 	// images pulled
-	ImagesPulled *bool `json:"imagesPulled,omitempty"`
+	ImagesPulled bool `json:"imagesPulled,omitempty"`
 
 	// ok
-	Ok *bool `json:"ok,omitempty"`
+	Ok bool `json:"ok,omitempty"`
 
 	// pending
-	Pending *bool `json:"pending,omitempty"`
+	Pending bool `json:"pending,omitempty"`
 
 	// remote update success
-	RemoteUpdateSuccess *bool `json:"remoteUpdateSuccess,omitempty"`
+	RemoteUpdateSuccess bool `json:"remoteUpdateSuccess,omitempty"`
 
 	// remove
-	Remove *bool `json:"remove,omitempty"`
+	Remove bool `json:"remove,omitempty"`
 }
 
 // Validate validates this portainer edge stack status details

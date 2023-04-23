@@ -30,7 +30,7 @@ type PortainereeEnvironmentEdgeSettings struct {
 	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
 
 	// Whether the device has been started in edge async mode
-	AsyncMode *bool `json:"asyncMode,omitempty"`
+	AsyncMode bool `json:"asyncMode,omitempty"`
 }
 
 // Validate validates this portaineree environment edge settings

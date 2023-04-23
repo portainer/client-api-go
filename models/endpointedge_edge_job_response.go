@@ -19,7 +19,7 @@ type EndpointedgeEdgeJobResponse struct {
 
 	// Whether to collect logs
 	// Example: true
-	CollectLogs *bool `json:"CollectLogs,omitempty"`
+	CollectLogs bool `json:"CollectLogs,omitempty"`
 
 	// A cron expression to schedule this job
 	// Example: * * * * *

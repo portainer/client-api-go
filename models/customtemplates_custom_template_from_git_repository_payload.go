@@ -49,7 +49,7 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 
 	// Use basic authentication to clone the Git repository
 	// Example: true
-	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
+	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
 
 	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
 	// is true and RepositoryUsername/RepositoryPassword are not provided
@@ -82,7 +82,7 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 
 	// TLSSkipVerify skips SSL verification when cloning the Git repository
 	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
 
 	// Type of created stack (1 - swarm, 2 - compose)
 	// Example: 1

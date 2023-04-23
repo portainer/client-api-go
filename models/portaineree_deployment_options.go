@@ -19,18 +19,18 @@ type PortainereeDeploymentOptions struct {
 
 	// Hide manual deploy forms in portainer
 	// Example: true
-	HideAddWithForm *bool `json:"hideAddWithForm,omitempty"`
+	HideAddWithForm bool `json:"hideAddWithForm,omitempty"`
 
 	// Hide the file upload option in the remaining visible forms
 	// Example: false
-	HideFileUpload *bool `json:"hideFileUpload,omitempty"`
+	HideFileUpload bool `json:"hideFileUpload,omitempty"`
 
 	// Hide the webeditor in the remaining visible forms
 	// Example: false
-	HideWebEditor *bool `json:"hideWebEditor,omitempty"`
+	HideWebEditor bool `json:"hideWebEditor,omitempty"`
 
 	// override global options
-	OverrideGlobalOptions *bool `json:"overrideGlobalOptions,omitempty"`
+	OverrideGlobalOptions bool `json:"overrideGlobalOptions,omitempty"`
 }
 
 // Validate validates this portaineree deployment options

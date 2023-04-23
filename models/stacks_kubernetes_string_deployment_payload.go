@@ -18,7 +18,7 @@ import (
 type StacksKubernetesStringDeploymentPayload struct {
 
 	// compose format
-	ComposeFormat *bool `json:"composeFormat,omitempty"`
+	ComposeFormat bool `json:"composeFormat,omitempty"`
 
 	// namespace
 	Namespace string `json:"namespace,omitempty"`

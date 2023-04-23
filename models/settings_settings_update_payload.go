@@ -24,7 +24,7 @@ type SettingsSettingsUpdatePayload struct {
 
 	// Show the Kompose build option (discontinued in 2.18)
 	// Example: false
-	ShowKomposeBuildOption *bool `json:"ShowKomposeBuildOption,omitempty"`
+	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
 
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
@@ -46,15 +46,15 @@ type SettingsSettingsUpdatePayload struct {
 
 	// Whether edge compute features are enabled
 	// Example: true
-	EnableEdgeComputeFeatures *bool `json:"enableEdgeComputeFeatures,omitempty"`
+	EnableEdgeComputeFeatures bool `json:"enableEdgeComputeFeatures,omitempty"`
 
 	// Whether telemetry is enabled
 	// Example: false
-	EnableTelemetry *bool `json:"enableTelemetry,omitempty"`
+	EnableTelemetry bool `json:"enableTelemetry,omitempty"`
 
 	// EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
 	// Example: false
-	EnforceEdgeID *bool `json:"enforceEdgeID,omitempty"`
+	EnforceEdgeID bool `json:"enforceEdgeID,omitempty"`
 
 	// Deployment options for encouraging deployment as code
 	GlobalDeploymentOptions struct {
@@ -96,7 +96,7 @@ type SettingsSettingsUpdatePayload struct {
 
 	// TrustOnFirstConnect makes Portainer accepting edge agent connection by default
 	// Example: false
-	TrustOnFirstConnect *bool `json:"trustOnFirstConnect,omitempty"`
+	TrustOnFirstConnect bool `json:"trustOnFirstConnect,omitempty"`
 
 	// The duration of a user session
 	// Example: 5m
@@ -406,7 +406,7 @@ type SettingsSettingsUpdatePayloadEdge struct {
 	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
 
 	// AsyncMode enables edge agent to run in async mode by default
-	AsyncMode *bool `json:"asyncMode,omitempty"`
+	AsyncMode bool `json:"asyncMode,omitempty"`
 
 	// mtls
 	Mtls *SettingsmTLSPayload `json:"mtls,omitempty"`

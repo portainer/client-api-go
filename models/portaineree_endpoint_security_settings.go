@@ -19,39 +19,39 @@ type PortainereeEndpointSecuritySettings struct {
 
 	// Whether non-administrator should be able to use bind mounts when creating containers
 	// Example: false
-	AllowBindMountsForRegularUsers *bool `json:"allowBindMountsForRegularUsers,omitempty"`
+	AllowBindMountsForRegularUsers bool `json:"allowBindMountsForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use container capabilities
 	// Example: true
-	AllowContainerCapabilitiesForRegularUsers *bool `json:"allowContainerCapabilitiesForRegularUsers,omitempty"`
+	AllowContainerCapabilitiesForRegularUsers bool `json:"allowContainerCapabilitiesForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use device mapping
 	// Example: true
-	AllowDeviceMappingForRegularUsers *bool `json:"allowDeviceMappingForRegularUsers,omitempty"`
+	AllowDeviceMappingForRegularUsers bool `json:"allowDeviceMappingForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use the host pid
 	// Example: true
-	AllowHostNamespaceForRegularUsers *bool `json:"allowHostNamespaceForRegularUsers,omitempty"`
+	AllowHostNamespaceForRegularUsers bool `json:"allowHostNamespaceForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use privileged mode when creating containers
 	// Example: false
-	AllowPrivilegedModeForRegularUsers *bool `json:"allowPrivilegedModeForRegularUsers,omitempty"`
+	AllowPrivilegedModeForRegularUsers bool `json:"allowPrivilegedModeForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to manage stacks
 	// Example: true
-	AllowStackManagementForRegularUsers *bool `json:"allowStackManagementForRegularUsers,omitempty"`
+	AllowStackManagementForRegularUsers bool `json:"allowStackManagementForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use sysctl settings
 	// Example: true
-	AllowSysctlSettingForRegularUsers *bool `json:"allowSysctlSettingForRegularUsers,omitempty"`
+	AllowSysctlSettingForRegularUsers bool `json:"allowSysctlSettingForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to browse volumes
 	// Example: true
-	AllowVolumeBrowserForRegularUsers *bool `json:"allowVolumeBrowserForRegularUsers,omitempty"`
+	AllowVolumeBrowserForRegularUsers bool `json:"allowVolumeBrowserForRegularUsers,omitempty"`
 
 	// Whether host management features are enabled
 	// Example: true
-	EnableHostManagementFeatures *bool `json:"enableHostManagementFeatures,omitempty"`
+	EnableHostManagementFeatures bool `json:"enableHostManagementFeatures,omitempty"`
 }
 
 // Validate validates this portaineree endpoint security settings

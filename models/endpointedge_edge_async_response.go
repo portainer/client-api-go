@@ -29,7 +29,7 @@ type EndpointedgeEdgeAsyncResponse struct {
 	EndpointID int64 `json:"endpointID,omitempty"`
 
 	// need full snapshot
-	NeedFullSnapshot *bool `json:"needFullSnapshot,omitempty"`
+	NeedFullSnapshot bool `json:"needFullSnapshot,omitempty"`
 
 	// ping interval
 	PingInterval TimeDuration `json:"pingInterval,omitempty"`

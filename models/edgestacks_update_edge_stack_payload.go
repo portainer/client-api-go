@@ -25,22 +25,22 @@ type EdgestacksUpdateEdgeStackPayload struct {
 	EdgeGroups []int64 `json:"edgeGroups"`
 
 	// pre pull image
-	PrePullImage *bool `json:"prePullImage,omitempty"`
+	PrePullImage bool `json:"prePullImage,omitempty"`
 
 	// re pull image
-	RePullImage *bool `json:"rePullImage,omitempty"`
+	RePullImage bool `json:"rePullImage,omitempty"`
 
 	// registries
 	Registries []int64 `json:"registries"`
 
 	// retry deploy
-	RetryDeploy *bool `json:"retryDeploy,omitempty"`
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
 
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`
 
 	// Uses the manifest's namespaces instead of the default one
-	UseManifestNamespaces *bool `json:"useManifestNamespaces,omitempty"`
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 
 	// version
 	Version int64 `json:"version,omitempty"`

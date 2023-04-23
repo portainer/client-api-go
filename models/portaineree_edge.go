@@ -35,7 +35,7 @@ type PortainereeEdge struct {
 	TunnelServerAddress string `json:"TunnelServerAddress,omitempty"`
 
 	// Deprecated 2.18
-	AsyncMode *bool `json:"asyncMode,omitempty"`
+	AsyncMode bool `json:"asyncMode,omitempty"`
 
 	// mtls
 	Mtls *PortainereeMTLSSettings `json:"mtls,omitempty"`

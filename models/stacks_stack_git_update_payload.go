@@ -26,10 +26,10 @@ type StacksStackGitUpdatePayload struct {
 	Env []*PortainereePair `json:"env"`
 
 	// prune
-	Prune *bool `json:"prune,omitempty"`
+	Prune bool `json:"prune,omitempty"`
 
 	// repository authentication
-	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
+	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
 
 	// repository git credential ID
 	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`

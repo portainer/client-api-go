@@ -18,16 +18,16 @@ import (
 type PortainerOpenAMTDeviceEnabledFeatures struct {
 
 	// ID e r
-	IDER *bool `json:"IDER,omitempty"`
+	IDER bool `json:"IDER,omitempty"`
 
 	// k VM
-	KVM *bool `json:"KVM,omitempty"`
+	KVM bool `json:"KVM,omitempty"`
 
 	// s o l
-	SOL *bool `json:"SOL,omitempty"`
+	SOL bool `json:"SOL,omitempty"`
 
 	// redirection
-	Redirection *bool `json:"redirection,omitempty"`
+	Redirection bool `json:"redirection,omitempty"`
 
 	// user consent
 	UserConsent string `json:"userConsent,omitempty"`

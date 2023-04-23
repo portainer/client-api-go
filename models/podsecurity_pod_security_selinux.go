@@ -23,7 +23,7 @@ type PodsecurityPodSecuritySelinux struct {
 	AllowedCapabilities []*PodsecurityPodSecurityAllowedCapabilities `json:"allowedCapabilities"`
 
 	// enabled
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
 }
 
 // Validate validates this podsecurity pod security selinux

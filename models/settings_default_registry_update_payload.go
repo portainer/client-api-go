@@ -19,7 +19,7 @@ type SettingsDefaultRegistryUpdatePayload struct {
 
 	// hide
 	// Example: false
-	Hide *bool `json:"Hide,omitempty"`
+	Hide bool `json:"Hide,omitempty"`
 }
 
 // Validate validates this settings default registry update payload

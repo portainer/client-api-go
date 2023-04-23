@@ -22,11 +22,11 @@ type ResourcecontrolsResourceControlCreatePayload struct {
 
 	// Permit access to resource only to admins
 	// Example: true
-	AdministratorsOnly *bool `json:"administratorsOnly,omitempty"`
+	AdministratorsOnly bool `json:"administratorsOnly,omitempty"`
 
 	// Permit access to the associated resource to any user
 	// Example: true
-	Public *bool `json:"public,omitempty"`
+	Public bool `json:"public,omitempty"`
 
 	// resource ID
 	// Example: 617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08

@@ -82,15 +82,15 @@ type EndpointsEndpointUpdatePayload struct {
 
 	// Require TLS to connect against this environment(endpoint)
 	// Example: true
-	TLS *bool `json:"tls,omitempty"`
+	TLS bool `json:"tls,omitempty"`
 
 	// Skip client verification when using TLS
 	// Example: false
-	TlsskipClientVerify *bool `json:"tlsskipClientVerify,omitempty"`
+	TlsskipClientVerify bool `json:"tlsskipClientVerify,omitempty"`
 
 	// Skip server verification when using TLS
 	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
 
 	// URL or IP address of a Docker host
 	// Example: docker.mydomain.tld:2375

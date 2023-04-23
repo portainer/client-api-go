@@ -21,7 +21,7 @@ type PodsecurityPodSecurityCapabilities struct {
 	AllowedCapabilities []string `json:"allowedCapabilities"`
 
 	// enabled
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
 
 	// required drop capabilities
 	RequiredDropCapabilities []string `json:"requiredDropCapabilities"`

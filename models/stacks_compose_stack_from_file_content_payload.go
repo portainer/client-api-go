@@ -25,7 +25,7 @@ type StacksComposeStackFromFileContentPayload struct {
 
 	// Whether the stack is from a app template
 	// Example: false
-	FromAppTemplate *bool `json:"fromAppTemplate,omitempty"`
+	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
 
 	// Name of the stack
 	// Example: myStack

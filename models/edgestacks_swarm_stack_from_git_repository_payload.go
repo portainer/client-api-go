@@ -46,14 +46,14 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 
 	// Pre Pull image
 	// Example: false
-	PrePullImage *bool `json:"prePullImage,omitempty"`
+	PrePullImage bool `json:"prePullImage,omitempty"`
 
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
 
 	// Use basic authentication to clone the Git repository
 	// Example: true
-	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
+	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
 
 	// GitCredentialID used to identify the binded git credential
 	// Example: 0
@@ -78,14 +78,14 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 
 	// Retry deploy
 	// Example: false
-	RetryDeploy *bool `json:"retryDeploy,omitempty"`
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
 
 	// TLSSkipVerify skips SSL verification when cloning the Git repository
 	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
 
 	// Uses the manifest's namespaces instead of the default one
-	UseManifestNamespaces *bool `json:"useManifestNamespaces,omitempty"`
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 }
 
 // Validate validates this edgestacks swarm stack from git repository payload

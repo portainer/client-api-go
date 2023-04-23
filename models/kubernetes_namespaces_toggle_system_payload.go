@@ -19,7 +19,7 @@ type KubernetesNamespacesToggleSystemPayload struct {
 
 	// Toggle the system state of this namespace to true or false
 	// Example: true
-	System *bool `json:"system,omitempty"`
+	System bool `json:"system,omitempty"`
 }
 
 // Validate validates this kubernetes namespaces toggle system payload

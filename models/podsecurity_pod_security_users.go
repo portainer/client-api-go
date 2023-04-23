@@ -19,7 +19,7 @@ import (
 type PodsecurityPodSecurityUsers struct {
 
 	// enabled
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
 
 	// fs groups
 	FsGroups *PodsecurityPodSecurityFsGroups `json:"fsGroups,omitempty"`
