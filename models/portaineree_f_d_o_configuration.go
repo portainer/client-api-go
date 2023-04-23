@@ -18,7 +18,7 @@ import (
 type PortainereeFDOConfiguration struct {
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 
 	// owner password
 	OwnerPassword string `json:"ownerPassword,omitempty"`

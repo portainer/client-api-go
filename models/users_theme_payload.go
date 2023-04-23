@@ -27,7 +27,7 @@ type UsersThemePayload struct {
 
 	// SubtleUpgradeButton indicates if the upgrade banner should be displayed in a subtle way
 	// Example: false
-	SubtleUpgradeButton bool `json:"subtleUpgradeButton,omitempty"`
+	SubtleUpgradeButton *bool `json:"subtleUpgradeButton,omitempty"`
 }
 
 // Validate validates this users theme payload

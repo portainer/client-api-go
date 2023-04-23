@@ -18,7 +18,7 @@ import (
 type PodsecurityPodSecurityPrivilegedContainers struct {
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 // Validate validates this podsecurity pod security privileged containers

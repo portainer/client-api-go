@@ -30,7 +30,7 @@ type OpenamtOpenAMTConfigurePayload struct {
 	DomainName string `json:"domainName,omitempty"`
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 
 	// mpspassword
 	Mpspassword string `json:"mpspassword,omitempty"`

@@ -29,16 +29,16 @@ type EndpointedgeConfigResponse struct {
 	Namespace string `json:"namespace,omitempty"`
 
 	// pre pull image
-	PrePullImage bool `json:"prePullImage,omitempty"`
+	PrePullImage *bool `json:"prePullImage,omitempty"`
 
 	// re pull image
-	RePullImage bool `json:"rePullImage,omitempty"`
+	RePullImage *bool `json:"rePullImage,omitempty"`
 
 	// registry credentials
 	RegistryCredentials []*PortainereeEdgeRegistryCredential `json:"registryCredentials"`
 
 	// retry deploy
-	RetryDeploy bool `json:"retryDeploy,omitempty"`
+	RetryDeploy *bool `json:"retryDeploy,omitempty"`
 
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`

@@ -33,7 +33,7 @@ type RegistriesRegistryConfigurePayload struct {
 
 	// Use TLS
 	// Example: true
-	TLS bool `json:"tls,omitempty"`
+	TLS *bool `json:"tls,omitempty"`
 
 	// The TLS CA certificate file
 	TlscacertFile []int64 `json:"tlscacertFile"`
@@ -46,7 +46,7 @@ type RegistriesRegistryConfigurePayload struct {
 
 	// Skip the verification of the server TLS certificate
 	// Example: false
-	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
+	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 
 	// Username used to authenticate against this registry. Required when Authentication is true
 	// Example: registry_user

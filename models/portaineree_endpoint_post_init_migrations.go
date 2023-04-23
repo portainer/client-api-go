@@ -18,13 +18,13 @@ import (
 type PortainereeEndpointPostInitMigrations struct {
 
 	// migrate g p us
-	MigrateGPUs bool `json:"MigrateGPUs,omitempty"`
+	MigrateGPUs *bool `json:"MigrateGPUs,omitempty"`
 
 	// migrate gate keeper
-	MigrateGateKeeper bool `json:"MigrateGateKeeper,omitempty"`
+	MigrateGateKeeper *bool `json:"MigrateGateKeeper,omitempty"`
 
 	// migrate ingresses
-	MigrateIngresses bool `json:"MigrateIngresses,omitempty"`
+	MigrateIngresses *bool `json:"MigrateIngresses,omitempty"`
 }
 
 // Validate validates this portaineree endpoint post init migrations

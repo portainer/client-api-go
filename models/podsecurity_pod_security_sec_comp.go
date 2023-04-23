@@ -18,7 +18,7 @@ import (
 type PodsecurityPodSecuritySecComp struct {
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 
 	// sec comp type
 	SecCompType []string `json:"secCompType"`

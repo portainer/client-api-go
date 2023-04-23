@@ -26,7 +26,7 @@ type PortainereeTemplate struct {
 
 	// Whether the template should be available to administrators only
 	// Example: true
-	AdministratorOnly bool `json:"administrator_only,omitempty"`
+	AdministratorOnly *bool `json:"administrator_only,omitempty"`
 
 	// A list of categories associated to the template
 	// Example: ["database"]
@@ -55,7 +55,7 @@ type PortainereeTemplate struct {
 	// Whether the container should be started in
 	// interactive mode (-i -t equivalent on the CLI)
 	// Example: true
-	Interactive bool `json:"interactive,omitempty"`
+	Interactive *bool `json:"interactive,omitempty"`
 
 	// Container labels
 	Labels []*PortainereePair `json:"labels"`
@@ -88,7 +88,7 @@ type PortainereeTemplate struct {
 
 	// Whether the container should be started in privileged mode
 	// Example: true
-	Privileged bool `json:"privileged,omitempty"`
+	Privileged *bool `json:"privileged,omitempty"`
 
 	// Optional container fields
 	// The URL of a registry associated to the image for a container template

@@ -18,7 +18,7 @@ import (
 type PortainereeEdgeGroup struct {
 
 	// dynamic
-	Dynamic bool `json:"Dynamic,omitempty"`
+	Dynamic *bool `json:"Dynamic,omitempty"`
 
 	// endpoints
 	Endpoints []int64 `json:"Endpoints"`
@@ -31,7 +31,7 @@ type PortainereeEdgeGroup struct {
 	Name string `json:"Name,omitempty"`
 
 	// partial match
-	PartialMatch bool `json:"PartialMatch,omitempty"`
+	PartialMatch *bool `json:"PartialMatch,omitempty"`
 
 	// tag ids
 	TagIds []int64 `json:"TagIds"`

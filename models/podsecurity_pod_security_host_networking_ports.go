@@ -18,10 +18,10 @@ import (
 type PodsecurityPodSecurityHostNetworkingPorts struct {
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 
 	// host network
-	HostNetwork bool `json:"hostNetwork,omitempty"`
+	HostNetwork *bool `json:"hostNetwork,omitempty"`
 
 	// max
 	Max int64 `json:"max,omitempty"`

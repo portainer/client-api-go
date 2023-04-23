@@ -37,7 +37,7 @@ type PortainereeTemplateEnv struct {
 
 	// If set to true, will not generate any input for this variable in the UI
 	// Example: false
-	Preset bool `json:"preset,omitempty"`
+	Preset *bool `json:"preset,omitempty"`
 
 	// A list of name/value that will be used to generate a dropdown in the UI
 	Select []*PortainereeTemplateEnvSelect `json:"select"`

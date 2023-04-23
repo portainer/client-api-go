@@ -19,7 +19,7 @@ type PortainereeEndpointChangeWindow struct {
 
 	// enabled
 	// Example: true
-	Enabled bool `json:"Enabled,omitempty"`
+	Enabled *bool `json:"Enabled,omitempty"`
 
 	// end time
 	// Example: 02:00

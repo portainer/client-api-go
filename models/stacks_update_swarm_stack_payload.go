@@ -24,11 +24,11 @@ type StacksUpdateSwarmStackPayload struct {
 
 	// Prune services that are no longer referenced (only available for Swarm stacks)
 	// Example: true
-	Prune bool `json:"prune,omitempty"`
+	Prune *bool `json:"prune,omitempty"`
 
 	// Force a pulling to current image with the original tag though the image is already the latest
 	// Example: false
-	PullImage bool `json:"pullImage,omitempty"`
+	PullImage *bool `json:"pullImage,omitempty"`
 
 	// New content of the Stack file
 	// Example: version: 3\n services:\n web:\n image:nginx

@@ -55,7 +55,7 @@ type LiblicensePortainerLicense struct {
 	Reference string `json:"reference,omitempty"`
 
 	// revoked
-	Revoked bool `json:"revoked,omitempty"`
+	Revoked *bool `json:"revoked,omitempty"`
 
 	// revoked at
 	RevokedAt int64 `json:"revokedAt,omitempty"`

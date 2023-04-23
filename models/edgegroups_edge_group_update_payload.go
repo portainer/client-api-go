@@ -18,7 +18,7 @@ import (
 type EdgegroupsEdgeGroupUpdatePayload struct {
 
 	// dynamic
-	Dynamic bool `json:"dynamic,omitempty"`
+	Dynamic *bool `json:"dynamic,omitempty"`
 
 	// endpoints
 	Endpoints []int64 `json:"endpoints"`
@@ -27,7 +27,7 @@ type EdgegroupsEdgeGroupUpdatePayload struct {
 	Name string `json:"name,omitempty"`
 
 	// partial match
-	PartialMatch bool `json:"partialMatch,omitempty"`
+	PartialMatch *bool `json:"partialMatch,omitempty"`
 
 	// tag i ds
 	TagIDs []int64 `json:"tagIDs"`

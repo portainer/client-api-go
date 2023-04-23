@@ -19,7 +19,7 @@ type PortainereeTemplateEnvSelect struct {
 
 	// Will set this choice as the default choice
 	// Example: false
-	Default bool `json:"default,omitempty"`
+	Default *bool `json:"default,omitempty"`
 
 	// Some text that will displayed as a choice
 	// Example: text value

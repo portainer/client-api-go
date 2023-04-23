@@ -19,11 +19,11 @@ type ResourcecontrolsResourceControlUpdatePayload struct {
 
 	// Permit access to resource only to admins
 	// Example: true
-	AdministratorsOnly bool `json:"administratorsOnly,omitempty"`
+	AdministratorsOnly *bool `json:"administratorsOnly,omitempty"`
 
 	// Permit access to the associated resource to any user
 	// Example: true
-	Public bool `json:"public,omitempty"`
+	Public *bool `json:"public,omitempty"`
 
 	// List of team identifiers with access to the associated resource
 	// Example: [7]

@@ -25,7 +25,7 @@ type StacksKubernetesGitDeploymentPayload struct {
 	AutoUpdate *PortainereeAutoUpdateSettings `json:"autoUpdate,omitempty"`
 
 	// compose format
-	ComposeFormat bool `json:"composeFormat,omitempty"`
+	ComposeFormat *bool `json:"composeFormat,omitempty"`
 
 	// manifest file
 	ManifestFile string `json:"manifestFile,omitempty"`
@@ -34,7 +34,7 @@ type StacksKubernetesGitDeploymentPayload struct {
 	Namespace string `json:"namespace,omitempty"`
 
 	// repository authentication
-	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
+	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
 
 	// repository git credential ID
 	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
@@ -56,7 +56,7 @@ type StacksKubernetesGitDeploymentPayload struct {
 
 	// TLSSkipVerify skips SSL verification when cloning the Git repository
 	// Example: false
-	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
+	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 }
 
 // Validate validates this stacks kubernetes git deployment payload

@@ -23,25 +23,25 @@ type PortainereeSettings struct {
 	AgentSecret string `json:"AgentSecret,omitempty"`
 
 	// allow bind mounts for regular users
-	AllowBindMountsForRegularUsers bool `json:"AllowBindMountsForRegularUsers,omitempty"`
+	AllowBindMountsForRegularUsers *bool `json:"AllowBindMountsForRegularUsers,omitempty"`
 
 	// allow container capabilities for regular users
-	AllowContainerCapabilitiesForRegularUsers bool `json:"AllowContainerCapabilitiesForRegularUsers,omitempty"`
+	AllowContainerCapabilitiesForRegularUsers *bool `json:"AllowContainerCapabilitiesForRegularUsers,omitempty"`
 
 	// allow device mapping for regular users
-	AllowDeviceMappingForRegularUsers bool `json:"AllowDeviceMappingForRegularUsers,omitempty"`
+	AllowDeviceMappingForRegularUsers *bool `json:"AllowDeviceMappingForRegularUsers,omitempty"`
 
 	// allow host namespace for regular users
-	AllowHostNamespaceForRegularUsers bool `json:"AllowHostNamespaceForRegularUsers,omitempty"`
+	AllowHostNamespaceForRegularUsers *bool `json:"AllowHostNamespaceForRegularUsers,omitempty"`
 
 	// allow privileged mode for regular users
-	AllowPrivilegedModeForRegularUsers bool `json:"AllowPrivilegedModeForRegularUsers,omitempty"`
+	AllowPrivilegedModeForRegularUsers *bool `json:"AllowPrivilegedModeForRegularUsers,omitempty"`
 
 	// allow stack management for regular users
-	AllowStackManagementForRegularUsers bool `json:"AllowStackManagementForRegularUsers,omitempty"`
+	AllowStackManagementForRegularUsers *bool `json:"AllowStackManagementForRegularUsers,omitempty"`
 
 	// allow volume browser for regular users
-	AllowVolumeBrowserForRegularUsers bool `json:"AllowVolumeBrowserForRegularUsers,omitempty"`
+	AllowVolumeBrowserForRegularUsers *bool `json:"AllowVolumeBrowserForRegularUsers,omitempty"`
 
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
@@ -71,18 +71,18 @@ type PortainereeSettings struct {
 	EdgePortainerURL string `json:"EdgePortainerUrl,omitempty"`
 
 	// Whether edge compute features are enabled
-	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
+	EnableEdgeComputeFeatures *bool `json:"EnableEdgeComputeFeatures,omitempty"`
 
 	// Deprecated fields v26
-	EnableHostManagementFeatures bool `json:"EnableHostManagementFeatures,omitempty"`
+	EnableHostManagementFeatures *bool `json:"EnableHostManagementFeatures,omitempty"`
 
 	// Whether telemetry is enabled
 	// Example: false
-	EnableTelemetry bool `json:"EnableTelemetry,omitempty"`
+	EnableTelemetry *bool `json:"EnableTelemetry,omitempty"`
 
 	// EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
 	// Example: false
-	EnforceEdgeID bool `json:"EnforceEdgeID,omitempty"`
+	EnforceEdgeID *bool `json:"EnforceEdgeID,omitempty"`
 
 	// Deployment options for encouraging git ops workflows
 	GlobalDeploymentOptions struct {
@@ -116,7 +116,7 @@ type PortainereeSettings struct {
 
 	// Show the Kompose build option (discontinued in 2.18)
 	// Example: false
-	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
+	ShowKomposeBuildOption *bool `json:"ShowKomposeBuildOption,omitempty"`
 
 	// The interval in which environment(endpoint) snapshots are created
 	// Example: 5m
@@ -128,7 +128,7 @@ type PortainereeSettings struct {
 
 	// TrustOnFirstConnect makes Portainer accepting edge agent connection by default
 	// Example: false
-	TrustOnFirstConnect bool `json:"TrustOnFirstConnect,omitempty"`
+	TrustOnFirstConnect *bool `json:"TrustOnFirstConnect,omitempty"`
 
 	// The duration of a user session
 	// Example: 5m
@@ -138,10 +138,10 @@ type PortainereeSettings struct {
 	DefaultRegistry *PortainereeSettingsDefaultRegistry `json:"defaultRegistry,omitempty"`
 
 	// Deprecated fields
-	DisplayDonationHeader bool `json:"displayDonationHeader,omitempty"`
+	DisplayDonationHeader *bool `json:"displayDonationHeader,omitempty"`
 
 	// display external contributors
-	DisplayExternalContributors bool `json:"displayExternalContributors,omitempty"`
+	DisplayExternalContributors *bool `json:"displayExternalContributors,omitempty"`
 
 	// fdo configuration
 	FdoConfiguration *PortainereeFDOConfiguration `json:"fdoConfiguration,omitempty"`

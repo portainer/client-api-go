@@ -18,7 +18,7 @@ import (
 type BackupBackupStatus struct {
 
 	// failed
-	Failed bool `json:"failed,omitempty"`
+	Failed *bool `json:"failed,omitempty"`
 
 	// timestamp u t c
 	TimestampUTC string `json:"timestampUTC,omitempty"`

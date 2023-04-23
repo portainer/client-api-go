@@ -24,7 +24,7 @@ type PortainerDockerSnapshot struct {
 	DockerVersion string `json:"DockerVersion,omitempty"`
 
 	// gpu use all
-	GpuUseAll bool `json:"GpuUseAll,omitempty"`
+	GpuUseAll *bool `json:"GpuUseAll,omitempty"`
 
 	// gpu use list
 	GpuUseList []string `json:"GpuUseList"`
@@ -51,7 +51,7 @@ type PortainerDockerSnapshot struct {
 	StoppedContainerCount int64 `json:"StoppedContainerCount,omitempty"`
 
 	// swarm
-	Swarm bool `json:"Swarm,omitempty"`
+	Swarm *bool `json:"Swarm,omitempty"`
 
 	// time
 	Time int64 `json:"Time,omitempty"`
