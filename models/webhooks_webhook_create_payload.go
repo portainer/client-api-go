@@ -20,7 +20,8 @@ type WebhooksWebhookCreatePayload struct {
 	// endpoint ID
 	EndpointID int64 `json:"endpointID,omitempty"`
 
-	// registry ID
+	// Registry Identifier
+	// Example: 1
 	RegistryID int64 `json:"registryID,omitempty"`
 
 	// resource ID

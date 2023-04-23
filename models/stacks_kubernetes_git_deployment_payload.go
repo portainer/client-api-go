@@ -22,7 +22,7 @@ type StacksKubernetesGitDeploymentPayload struct {
 	AdditionalFiles []string `json:"additionalFiles"`
 
 	// auto update
-	AutoUpdate *PortainereeAutoUpdateSettings `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
 
 	// compose format
 	ComposeFormat *bool `json:"composeFormat,omitempty"`
@@ -53,10 +53,6 @@ type StacksKubernetesGitDeploymentPayload struct {
 
 	// stack name
 	StackName string `json:"stackName,omitempty"`
-
-	// TLSSkipVerify skips SSL verification when cloning the Git repository
-	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 }
 
 // Validate validates this stacks kubernetes git deployment payload

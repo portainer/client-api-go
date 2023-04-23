@@ -24,7 +24,7 @@ type GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse struct {
 
 	// Whether portainer has an update available
 	// Example: false
-	UpdateAvailable bool `json:"UpdateAvailable,omitempty"`
+	UpdateAvailable *bool `json:"UpdateAvailable,omitempty"`
 
 	// build
 	Build *GithubComPortainerPortainerAPIHTTPHandlerSystemBuildInfo `json:"build,omitempty"`

@@ -46,9 +46,7 @@ type ResourcecontrolsResourceControlCreatePayload struct {
 	// Example: 1
 	// Required: true
 	// Enum: [1 2 3 4 5 6 7 8 9]
-	Type struct {
-		PortainereeResourceControlType
-	} `json:"type"`
+	Type *int64 `json:"type"`
 
 	// List of user identifiers with access to the associated resource
 	// Example: [1,4]
@@ -85,9 +83,7 @@ func (m *ResourcecontrolsResourceControlCreatePayload) validateResourceID(format
 var resourcecontrolsResourceControlCreatePayloadTypeTypePropEnum []interface{}
 
 func init() {
-	var res []struct {
-		PortainereeResourceControlType
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7,8,9]`), &res); err != nil {
 		panic(err)
 	}
@@ -97,9 +93,7 @@ func init() {
 }
 
 // prop value enum
-func (m *ResourcecontrolsResourceControlCreatePayload) validateTypeEnum(path, location string, value *struct {
-	PortainereeResourceControlType
-}) error {
+func (m *ResourcecontrolsResourceControlCreatePayload) validateTypeEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, resourcecontrolsResourceControlCreatePayloadTypeTypePropEnum, true); err != nil {
 		return err
 	}
@@ -108,25 +102,20 @@ func (m *ResourcecontrolsResourceControlCreatePayload) validateTypeEnum(path, lo
 
 func (m *ResourcecontrolsResourceControlCreatePayload) validateType(formats strfmt.Registry) error {
 
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
+		return err
+	}
+
 	return nil
 }
 
-// ContextValidate validate this resourcecontrols resource control create payload based on the context it is used
+// ContextValidate validates this resourcecontrols resource control create payload based on context it is used
 func (m *ResourcecontrolsResourceControlCreatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *ResourcecontrolsResourceControlCreatePayload) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 

@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewEdgeJobTasksCollectParams creates a new EdgeJobTasksCollectParams object,
@@ -66,13 +65,13 @@ type EdgeJobTasksCollectParams struct {
 
 	   EdgeJob Id
 	*/
-	ID int64
+	ID string
 
 	/* TaskID.
 
 	   Task Id
 	*/
-	TaskID int64
+	TaskID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -128,24 +127,24 @@ func (o *EdgeJobTasksCollectParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the edge job tasks collect params
-func (o *EdgeJobTasksCollectParams) WithID(id int64) *EdgeJobTasksCollectParams {
+func (o *EdgeJobTasksCollectParams) WithID(id string) *EdgeJobTasksCollectParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge job tasks collect params
-func (o *EdgeJobTasksCollectParams) SetID(id int64) {
+func (o *EdgeJobTasksCollectParams) SetID(id string) {
 	o.ID = id
 }
 
 // WithTaskID adds the taskID to the edge job tasks collect params
-func (o *EdgeJobTasksCollectParams) WithTaskID(taskID int64) *EdgeJobTasksCollectParams {
+func (o *EdgeJobTasksCollectParams) WithTaskID(taskID string) *EdgeJobTasksCollectParams {
 	o.SetTaskID(taskID)
 	return o
 }
 
 // SetTaskID adds the taskId to the edge job tasks collect params
-func (o *EdgeJobTasksCollectParams) SetTaskID(taskID int64) {
+func (o *EdgeJobTasksCollectParams) SetTaskID(taskID string) {
 	o.TaskID = taskID
 }
 
@@ -158,12 +157,12 @@ func (o *EdgeJobTasksCollectParams) WriteToRequest(r runtime.ClientRequest, reg 
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 
 	// path param taskID
-	if err := r.SetPathParam("taskID", swag.FormatInt64(o.TaskID)); err != nil {
+	if err := r.SetPathParam("taskID", o.TaskID); err != nil {
 		return err
 	}
 

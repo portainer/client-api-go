@@ -21,7 +21,7 @@ type PortainereeGitCredential struct {
 	// Example: 1587399600
 	CreationDate int64 `json:"creationDate,omitempty"`
 
-	// id
+	// GitCredentialID used to identify the binded git credential
 	// Example: 1
 	ID int64 `json:"id,omitempty"`
 
@@ -31,7 +31,7 @@ type PortainereeGitCredential struct {
 	// password
 	Password string `json:"password,omitempty"`
 
-	// user Id
+	// User Identifier
 	// Example: 1
 	UserID int64 `json:"userId,omitempty"`
 

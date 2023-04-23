@@ -28,7 +28,7 @@ type TypesUpdateSchedule struct {
 	// Example: 1
 	CreatedBy int64 `json:"createdBy,omitempty"`
 
-	// edge stack Id
+	// EdgeStack Identifier
 	// Example: 1
 	EdgeStackID int64 `json:"edgeStackId,omitempty"`
 
@@ -43,16 +43,10 @@ type TypesUpdateSchedule struct {
 	// Example: Update Schedule
 	Name string `json:"name,omitempty"`
 
-	// ID of registry
-	// Example: 1
-	RegistryID int64 `json:"registryId,omitempty"`
-
 	// Type of the update (1 - update, 2 - rollback)
 	// Example: 1
 	// Enum: [1 2]
-	Type struct {
-		TypesUpdateScheduleType
-	} `json:"type,omitempty"`
+	Type int64 `json:"type,omitempty"`
 
 	// version
 	// Example: 1.0.0
@@ -76,9 +70,7 @@ func (m *TypesUpdateSchedule) Validate(formats strfmt.Registry) error {
 var typesUpdateScheduleTypeTypePropEnum []interface{}
 
 func init() {
-	var res []struct {
-		TypesUpdateScheduleType
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -88,9 +80,7 @@ func init() {
 }
 
 // prop value enum
-func (m *TypesUpdateSchedule) validateTypeEnum(path, location string, value *struct {
-	TypesUpdateScheduleType
-}) error {
+func (m *TypesUpdateSchedule) validateTypeEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, typesUpdateScheduleTypeTypePropEnum, true); err != nil {
 		return err
 	}
@@ -102,25 +92,16 @@ func (m *TypesUpdateSchedule) validateType(formats strfmt.Registry) error {
 		return nil
 	}
 
+	// value enum
+	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
+		return err
+	}
+
 	return nil
 }
 
-// ContextValidate validate this types update schedule based on the context it is used
+// ContextValidate validates this types update schedule based on context it is used
 func (m *TypesUpdateSchedule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *TypesUpdateSchedule) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 

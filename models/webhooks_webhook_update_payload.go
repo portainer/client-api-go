@@ -17,7 +17,7 @@ import (
 // swagger:model webhooks.webhookUpdatePayload
 type WebhooksWebhookUpdatePayload struct {
 
-	// registry ID
+	// Registry Identifier
 	RegistryID int64 `json:"registryID,omitempty"`
 }
 

@@ -17,7 +17,7 @@ import (
 // swagger:model types.EnvironmentMetadata
 type TypesEnvironmentMetadata struct {
 
-	// group Id
+	// Environment(Endpoint) group identifier
 	GroupID int64 `json:"groupId,omitempty"`
 
 	// tag ids

@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewEdgeStackLogsStatusGetParams creates a new EdgeStackLogsStatusGetParams object,
@@ -66,13 +65,13 @@ type EdgeStackLogsStatusGetParams struct {
 
 	   Environment Id
 	*/
-	EndpointID int64
+	EndpointID string
 
 	/* ID.
 
 	   EdgeStack Id
 	*/
-	ID int64
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -128,24 +127,24 @@ func (o *EdgeStackLogsStatusGetParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithEndpointID adds the endpointID to the edge stack logs status get params
-func (o *EdgeStackLogsStatusGetParams) WithEndpointID(endpointID int64) *EdgeStackLogsStatusGetParams {
+func (o *EdgeStackLogsStatusGetParams) WithEndpointID(endpointID string) *EdgeStackLogsStatusGetParams {
 	o.SetEndpointID(endpointID)
 	return o
 }
 
 // SetEndpointID adds the endpointId to the edge stack logs status get params
-func (o *EdgeStackLogsStatusGetParams) SetEndpointID(endpointID int64) {
+func (o *EdgeStackLogsStatusGetParams) SetEndpointID(endpointID string) {
 	o.EndpointID = endpointID
 }
 
 // WithID adds the id to the edge stack logs status get params
-func (o *EdgeStackLogsStatusGetParams) WithID(id int64) *EdgeStackLogsStatusGetParams {
+func (o *EdgeStackLogsStatusGetParams) WithID(id string) *EdgeStackLogsStatusGetParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack logs status get params
-func (o *EdgeStackLogsStatusGetParams) SetID(id int64) {
+func (o *EdgeStackLogsStatusGetParams) SetID(id string) {
 	o.ID = id
 }
 
@@ -158,12 +157,12 @@ func (o *EdgeStackLogsStatusGetParams) WriteToRequest(r runtime.ClientRequest, r
 	var res []error
 
 	// path param endpoint_id
-	if err := r.SetPathParam("endpoint_id", swag.FormatInt64(o.EndpointID)); err != nil {
+	if err := r.SetPathParam("endpoint_id", o.EndpointID); err != nil {
 		return err
 	}
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 

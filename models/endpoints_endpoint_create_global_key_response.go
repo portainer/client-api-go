@@ -17,7 +17,7 @@ import (
 // swagger:model endpoints.endpointCreateGlobalKeyResponse
 type EndpointsEndpointCreateGlobalKeyResponse struct {
 
-	// endpoint ID
+	// Environment(Endpoint) Identifier
 	EndpointID int64 `json:"endpointID,omitempty"`
 }
 

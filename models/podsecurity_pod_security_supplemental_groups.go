@@ -23,7 +23,7 @@ type PodsecurityPodSecuritySupplementalGroups struct {
 	Idrange []*PodsecurityPodSecurityIdrange `json:"idrange"`
 
 	// type
-	Type PodsecuritySupplementalGroupsStrategyType `json:"type,omitempty"`
+	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this podsecurity pod security supplemental groups
@@ -31,10 +31,6 @@ func (m *PodsecurityPodSecuritySupplementalGroups) Validate(formats strfmt.Regis
 	var res []error
 
 	if err := m.validateIdrange(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -70,32 +66,11 @@ func (m *PodsecurityPodSecuritySupplementalGroups) validateIdrange(formats strfm
 	return nil
 }
 
-func (m *PodsecurityPodSecuritySupplementalGroups) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("type")
-		}
-		return err
-	}
-
-	return nil
-}
-
 // ContextValidate validate this podsecurity pod security supplemental groups based on the context it is used
 func (m *PodsecurityPodSecuritySupplementalGroups) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateIdrange(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -120,20 +95,6 @@ func (m *PodsecurityPodSecuritySupplementalGroups) contextValidateIdrange(ctx co
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *PodsecurityPodSecuritySupplementalGroups) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("type")
-		}
-		return err
 	}
 
 	return nil

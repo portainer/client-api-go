@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewPostEndpointsIDEdgeTrustParams creates a new PostEndpointsIDEdgeTrustParams object,
@@ -66,7 +65,7 @@ type PostEndpointsIDEdgeTrustParams struct {
 
 	   Environment(Endpoint) Id
 	*/
-	ID int64
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,13 +121,13 @@ func (o *PostEndpointsIDEdgeTrustParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the post endpoints ID edge trust params
-func (o *PostEndpointsIDEdgeTrustParams) WithID(id int64) *PostEndpointsIDEdgeTrustParams {
+func (o *PostEndpointsIDEdgeTrustParams) WithID(id string) *PostEndpointsIDEdgeTrustParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the post endpoints ID edge trust params
-func (o *PostEndpointsIDEdgeTrustParams) SetID(id int64) {
+func (o *PostEndpointsIDEdgeTrustParams) SetID(id string) {
 	o.ID = id
 }
 
@@ -141,7 +140,7 @@ func (o *PostEndpointsIDEdgeTrustParams) WriteToRequest(r runtime.ClientRequest,
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 

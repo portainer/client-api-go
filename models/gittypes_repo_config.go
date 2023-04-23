@@ -19,9 +19,7 @@ import (
 type GittypesRepoConfig struct {
 
 	// Git credentials
-	Authentication struct {
-		GittypesGitAuthentication
-	} `json:"authentication,omitempty"`
+	Authentication *GittypesGitAuthentication `json:"authentication,omitempty"`
 
 	// Path to where the config file is in this url/refName
 	// Example: docker-compose.yml
@@ -34,10 +32,6 @@ type GittypesRepoConfig struct {
 	// The reference name
 	// Example: refs/heads/branch_name
 	ReferenceName string `json:"referenceName,omitempty"`
-
-	// TLSSkipVerify skips SSL verification when cloning the Git repository
-	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 
 	// The repo url
 	// Example: https://github.com/portainer/portainer.git
@@ -63,6 +57,17 @@ func (m *GittypesRepoConfig) validateAuthentication(formats strfmt.Registry) err
 		return nil
 	}
 
+	if m.Authentication != nil {
+		if err := m.Authentication.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authentication")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authentication")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -81,6 +86,17 @@ func (m *GittypesRepoConfig) ContextValidate(ctx context.Context, formats strfmt
 }
 
 func (m *GittypesRepoConfig) contextValidateAuthentication(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Authentication != nil {
+		if err := m.Authentication.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authentication")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authentication")
+			}
+			return err
+		}
+	}
 
 	return nil
 }

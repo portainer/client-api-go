@@ -23,7 +23,7 @@ type PodsecurityPodSecurityRunAsGroup struct {
 	Idrange []*PodsecurityPodSecurityIdrange `json:"idrange"`
 
 	// type
-	Type PodsecurityRunAsGroupStrategy `json:"type,omitempty"`
+	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this podsecurity pod security run as group
@@ -31,10 +31,6 @@ func (m *PodsecurityPodSecurityRunAsGroup) Validate(formats strfmt.Registry) err
 	var res []error
 
 	if err := m.validateIdrange(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -70,32 +66,11 @@ func (m *PodsecurityPodSecurityRunAsGroup) validateIdrange(formats strfmt.Regist
 	return nil
 }
 
-func (m *PodsecurityPodSecurityRunAsGroup) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("type")
-		}
-		return err
-	}
-
-	return nil
-}
-
 // ContextValidate validate this podsecurity pod security run as group based on the context it is used
 func (m *PodsecurityPodSecurityRunAsGroup) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateIdrange(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -120,20 +95,6 @@ func (m *PodsecurityPodSecurityRunAsGroup) contextValidateIdrange(ctx context.Co
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *PodsecurityPodSecurityRunAsGroup) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("type")
-		}
-		return err
 	}
 
 	return nil

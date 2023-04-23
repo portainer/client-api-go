@@ -23,7 +23,7 @@ type ProvidersGKEProvisionPayload struct {
 	// Example: 2
 	CPU int64 `json:"cpu,omitempty"`
 
-	// credential ID
+	// CredentialID holds an ID of the credential used to create the cluster
 	// Example: 1
 	// Required: true
 	CredentialID *int64 `json:"credentialID"`

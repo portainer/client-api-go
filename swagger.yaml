@@ -129,8 +129,6 @@ definitions:
         example: This is my <b>custom</b> template
         type: string
       platform:
-        allOf:
-        - $ref: '#/definitions/portaineree.CustomTemplatePlatform'
         description: |-
           Platform associated to the template.
           Valid values are: 1 - 'linux', 2 - 'windows'
@@ -139,19 +137,19 @@ definitions:
         - 1
         - 2
         example: 1
+        type: integer
       title:
         description: Title of the template
         example: Nginx
         type: string
       type:
-        allOf:
-        - $ref: '#/definitions/portaineree.StackType'
         description: Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
         enum:
         - 1
         - 2
         - 3
         example: 1
+        type: integer
       variables:
         description: Definitions of variables in the stack file
         items:
@@ -183,8 +181,6 @@ definitions:
         example: This is my <b>custom</b> template
         type: string
       platform:
-        allOf:
-        - $ref: '#/definitions/portaineree.CustomTemplatePlatform'
         description: |-
           Platform associated to the template.
           Valid values are: 1 - 'linux', 2 - 'windows'
@@ -193,6 +189,7 @@ definitions:
         - 1
         - 2
         example: 1
+        type: integer
       repositoryAuthentication:
         description: Use basic authentication to clone the Git repository
         example: true
@@ -228,19 +225,13 @@ definitions:
         description: Title of the template
         example: Nginx
         type: string
-      tlsskipVerify:
-        description: TLSSkipVerify skips SSL verification when cloning the Git repository
-        example: false
-        type: boolean
-        x-nullable: true
       type:
-        allOf:
-        - $ref: '#/definitions/portaineree.StackType'
         description: Type of created stack (1 - swarm, 2 - compose)
         enum:
         - 1
         - 2
         example: 1
+        type: integer
       variables:
         description: Definitions of variables in the stack file
         items:
@@ -270,8 +261,6 @@ definitions:
         example: This is my <b>custom</b> template
         type: string
       platform:
-        allOf:
-        - $ref: '#/definitions/portaineree.CustomTemplatePlatform'
         description: |-
           Platform associated to the template.
           Valid values are: 1 - 'linux', 2 - 'windows'
@@ -280,19 +269,19 @@ definitions:
         - 1
         - 2
         example: 1
+        type: integer
       title:
         description: Title of the template
         example: Nginx
         type: string
       type:
-        allOf:
-        - $ref: '#/definitions/portaineree.StackType'
         description: Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
         enum:
         - 1
         - 2
         - 3
         example: 1
+        type: integer
       variables:
         description: Definitions of variables in the stack file
         items:
@@ -316,6 +305,8 @@ definitions:
         x-nullable: true
       Endpoints:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       HasEdgeGroup:
@@ -335,11 +326,17 @@ definitions:
         x-nullable: true
       TagIds:
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
       endpointTypes:
         items:
-          $ref: '#/definitions/portaineree.EndpointType'
+          description: Environment(Endpoint) environment(endpoint) type. 1 for a Docker
+            environment(endpoint), 2 for an agent on Docker environment(endpoint)
+            or 3 for an Azure environment(endpoint).
+          example: 1
+          type: integer
         type: array
     type: object
   edgegroups.edgeGroupCreatePayload:
@@ -349,6 +346,8 @@ definitions:
         x-nullable: true
       endpoints:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       name:
@@ -358,6 +357,8 @@ definitions:
         x-nullable: true
       tagIDs:
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
     type: object
@@ -368,6 +369,8 @@ definitions:
         x-nullable: true
       endpoints:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       name:
@@ -377,6 +380,8 @@ definitions:
         x-nullable: true
       tagIDs:
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
     type: object
@@ -386,10 +391,14 @@ definitions:
         type: string
       edgeGroups:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       endpoints:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       fileContent:
@@ -406,10 +415,14 @@ definitions:
         type: string
       edgeGroups:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       endpoints:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       file:
@@ -433,10 +446,14 @@ definitions:
         type: string
       edgeGroups:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       endpoints:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       fileContent:
@@ -459,7 +476,7 @@ definitions:
       Id:
         type: string
       LogsStatus:
-        $ref: '#/definitions/portaineree.EdgeJobLogsStatus'
+        type: integer
     type: object
   edgestacks.stackFileResponse:
     properties:
@@ -469,8 +486,6 @@ definitions:
   edgestacks.swarmStackFromFileContentPayload:
     properties:
       deploymentType:
-        allOf:
-        - $ref: '#/definitions/portaineree.EdgeStackDeploymentType'
         description: |-
           Deployment type to deploy this stack
           Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
@@ -482,11 +497,14 @@ definitions:
         - 1
         - 2
         example: 0
+        type: integer
       edgeGroups:
         description: List of identifiers of EdgeGroups
         example:
         - 1
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       name:
@@ -501,13 +519,9 @@ definitions:
       registries:
         description: List of Registries to use for this stack
         items:
+          description: Registry Identifier
           type: integer
         type: array
-      retryDeploy:
-        description: Retry deploy
-        example: false
-        type: boolean
-        x-nullable: true
       stackFileContent:
         description: Content of the Stack file
         example: |-
@@ -527,8 +541,6 @@ definitions:
   edgestacks.swarmStackFromFileUploadPayload:
     properties:
       deploymentType:
-        allOf:
-        - $ref: '#/definitions/portaineree.EdgeStackDeploymentType'
         description: |-
           Deployment type to deploy this stack
           Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
@@ -540,8 +552,11 @@ definitions:
         - 1
         - 2
         example: 0
+        type: integer
       edgeGroups:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       name:
@@ -553,13 +568,9 @@ definitions:
         x-nullable: true
       registries:
         items:
+          description: Registry Identifier
           type: integer
         type: array
-      retryDeploy:
-        description: Retry deploy
-        example: false
-        type: boolean
-        x-nullable: true
       stackFileContent:
         items:
           type: integer
@@ -572,8 +583,6 @@ definitions:
   edgestacks.swarmStackFromGitRepositoryPayload:
     properties:
       deploymentType:
-        allOf:
-        - $ref: '#/definitions/portaineree.EdgeStackDeploymentType'
         description: |-
           Deployment type to deploy this stack
           Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
@@ -585,11 +594,14 @@ definitions:
         - 1
         - 2
         example: 0
+        type: integer
       edgeGroups:
         description: List of identifiers of EdgeGroups
         example:
         - 1
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       filePathInRepository:
@@ -609,6 +621,7 @@ definitions:
       registries:
         description: List of Registries to use for this stack
         items:
+          description: Registry Identifier
           type: integer
         type: array
       repositoryAuthentication:
@@ -638,16 +651,6 @@ definitions:
           is true.
         example: myGitUsername
         type: string
-      retryDeploy:
-        description: Retry deploy
-        example: false
-        type: boolean
-        x-nullable: true
-      tlsskipVerify:
-        description: TLSSkipVerify skips SSL verification when cloning the Git repository
-        example: false
-        type: boolean
-        x-nullable: true
       useManifestNamespaces:
         description: Uses the manifest's namespaces instead of the default one
         type: boolean
@@ -659,9 +662,17 @@ definitions:
   edgestacks.updateEdgeStackPayload:
     properties:
       deploymentType:
-        $ref: '#/definitions/portaineree.EdgeStackDeploymentType'
+        description: |-
+          Deployment type to deploy this stack
+          Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
+          for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+          kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+          nomad deploy type is enabled only for nomad environments(endpoints)
+        type: integer
       edgeGroups:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       prePullImage:
@@ -672,11 +683,9 @@ definitions:
         x-nullable: true
       registries:
         items:
+          description: Registry Identifier
           type: integer
         type: array
-      retryDeploy:
-        type: boolean
-        x-nullable: true
       stackFileContent:
         type: string
       useManifestNamespaces:
@@ -690,6 +699,8 @@ definitions:
     properties:
       environmentIDs:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
     type: object
@@ -697,16 +708,16 @@ definitions:
     properties:
       groupIDs:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       name:
         type: string
-      registryID:
-        type: integer
       scheduledTime:
         type: string
       type:
-        $ref: '#/definitions/types.UpdateScheduleType'
+        type: integer
       version:
         type: string
     type: object
@@ -722,9 +733,12 @@ definitions:
         type: integer
       edgeGroupIds:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       edgeStackId:
+        description: EdgeStack Identifier
         example: 1
         type: integer
       environmentsPreviousVersions:
@@ -739,24 +753,19 @@ definitions:
         description: Name of the schedule
         example: Update Schedule
         type: string
-      registryId:
-        description: ID of registry
-        example: 1
-        type: integer
       scheduledTime:
         type: string
       status:
-        $ref: '#/definitions/types.UpdateScheduleStatusType'
+        type: integer
       statusMessage:
         type: string
       type:
-        allOf:
-        - $ref: '#/definitions/types.UpdateScheduleType'
         description: Type of the update (1 - update, 2 - rollback)
         enum:
         - 1
         - 2
         example: 1
+        type: integer
       version:
         example: 1.0.0
         type: string
@@ -765,23 +774,28 @@ definitions:
     properties:
       groupIDs:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       name:
         type: string
-      registryID:
-        type: integer
       scheduledTime:
         type: string
       type:
-        $ref: '#/definitions/types.UpdateScheduleType'
+        description: Type of the update (1 - update, 2 - rollback)
+        enum:
+        - 1
+        - 2
+        example: 1
+        type: integer
       version:
         type: string
     type: object
   endpointedge.EdgeAsyncResponse:
     properties:
       commandInterval:
-        $ref: '#/definitions/time.Duration'
+        type: integer
       commands:
         items:
           $ref: '#/definitions/portaineree.EdgeAsyncCommand'
@@ -792,14 +806,12 @@ definitions:
         type: boolean
         x-nullable: true
       pingInterval:
-        $ref: '#/definitions/time.Duration'
+        type: integer
       snapshotInterval:
-        $ref: '#/definitions/time.Duration'
+        type: integer
     type: object
   endpointedge.configResponse:
     properties:
-      edgeUpdateID:
-        type: integer
       name:
         type: string
       namespace:
@@ -816,9 +828,6 @@ definitions:
         items:
           $ref: '#/definitions/portaineree.EdgeRegistryCredential'
         type: array
-      retryDeploy:
-        type: boolean
-        x-nullable: true
       stackFileContent:
         type: string
     type: object
@@ -898,6 +907,8 @@ definitions:
         - 1
         - 3
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       description:
@@ -915,6 +926,8 @@ definitions:
         - 1
         - 2
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
     required:
@@ -937,6 +950,8 @@ definitions:
         - 3
         - 4
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
       teamAccessPolicies:
@@ -956,30 +971,21 @@ definitions:
   endpoints.endpointCreateGlobalKeyResponse:
     properties:
       endpointID:
+        description: Environment(Endpoint) Identifier
         type: integer
     type: object
   endpoints.endpointSettingsUpdatePayload:
     properties:
       changeWindow:
-        allOf:
-        - $ref: '#/definitions/portaineree.EndpointChangeWindow'
+        $ref: '#/definitions/portaineree.EndpointChangeWindow'
         description: Whether automatic update time restrictions are enabled
       deploymentOptions:
-        allOf:
-        - $ref: '#/definitions/portaineree.DeploymentOptions'
+        $ref: '#/definitions/portaineree.DeploymentOptions'
         description: Hide manual deployment forms for an environment
-      enableGPUManagement:
+      enableImageNotification:
         example: false
         type: boolean
         x-nullable: true
-      enableImageNotification:
-        example: true
-        type: boolean
-        x-nullable: true
-      gpus:
-        items:
-          $ref: '#/definitions/portaineree.Pair'
-        type: array
       securitySettings:
         description: Security settings updates
         properties:
@@ -1037,8 +1043,7 @@ definitions:
   endpoints.endpointUpdatePayload:
     properties:
       DeploymentOptions:
-        allOf:
-        - $ref: '#/definitions/portaineree.DeploymentOptions'
+        $ref: '#/definitions/portaineree.DeploymentOptions'
         description: Hide manual deployment forms for an environment
       azureApplicationID:
         description: Azure application ID
@@ -1053,8 +1058,7 @@ definitions:
         example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
         type: string
       changeWindow:
-        allOf:
-        - $ref: '#/definitions/portaineree.EndpointChangeWindow'
+        $ref: '#/definitions/portaineree.EndpointChangeWindow'
         description: Whether automatic update time restrictions are enabled
       edge:
         properties:
@@ -1088,8 +1092,7 @@ definitions:
         example: 1
         type: integer
       kubernetes:
-        allOf:
-        - $ref: '#/definitions/portaineree.KubernetesData'
+        $ref: '#/definitions/portaineree.KubernetesData'
         description: Associated Kubernetes data
       name:
         description: Name that will be used to identify this environment(endpoint)
@@ -1112,6 +1115,8 @@ definitions:
         - 1
         - 2
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
       teamAccessPolicies:
@@ -1201,21 +1206,25 @@ definitions:
       ownerUsername:
         type: string
     type: object
-  github_com_portainer_portainer-ee_api_demo.EnvironmentDetails:
+  github.com_portainer_portainer-ee_api_demo.EnvironmentDetails:
     properties:
       enabled:
         type: boolean
         x-nullable: true
       environments:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       users:
         items:
+          description: User Identifier
+          example: 1
           type: integer
         type: array
     type: object
-  github_com_portainer_portainer-ee_api_http_handler_system.BuildInfo:
+  github.com_portainer_portainer-ee_api_http_handler_system.BuildInfo:
     properties:
       buildNumber:
         type: string
@@ -1230,25 +1239,25 @@ definitions:
       yarnVersion:
         type: string
     type: object
-  github_com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse:
+  github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse:
     properties:
       nodes:
         type: integer
     type: object
-  github_com_portainer_portainer-ee_api_http_handler_system.status:
+  github.com_portainer_portainer-ee_api_http_handler_system.status:
     properties:
       Version:
         description: Portainer API version
         example: 2.0.0
         type: string
       demoEnvironment:
-        $ref: '#/definitions/github_com_portainer_portainer-ee_api_demo.EnvironmentDetails'
+        $ref: '#/definitions/github.com_portainer_portainer-ee_api_demo.EnvironmentDetails'
       instanceID:
         description: Server Instance ID
         example: 299ab403-70a8-4c05-92f7-bf7a994d50df
         type: string
     type: object
-  github_com_portainer_portainer-ee_api_http_handler_system.versionResponse:
+  github.com_portainer_portainer-ee_api_http_handler_system.versionResponse:
     properties:
       LatestVersion:
         description: The latest version available
@@ -1260,7 +1269,72 @@ definitions:
         type: boolean
         x-nullable: true
       build:
-        $ref: '#/definitions/github_com_portainer_portainer-ee_api_http_handler_system.BuildInfo'
+        $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.BuildInfo'
+      databaseVersion:
+        type: string
+      serverVersion:
+        type: string
+    type: object
+  github.com_portainer_portainer_api_demo.EnvironmentDetails:
+    properties:
+      enabled:
+        type: boolean
+        x-nullable: true
+      environments:
+        items:
+          type: integer
+        type: array
+      users:
+        items:
+          type: integer
+        type: array
+    type: object
+  github.com_portainer_portainer_api_http_handler_system.BuildInfo:
+    properties:
+      buildNumber:
+        type: string
+      goVersion:
+        type: string
+      imageTag:
+        type: string
+      nodejsVersion:
+        type: string
+      webpackVersion:
+        type: string
+      yarnVersion:
+        type: string
+    type: object
+  github.com_portainer_portainer_api_http_handler_system.nodesCountResponse:
+    properties:
+      nodes:
+        type: integer
+    type: object
+  github.com_portainer_portainer_api_http_handler_system.status:
+    properties:
+      Version:
+        description: Portainer API version
+        example: 2.0.0
+        type: string
+      demoEnvironment:
+        $ref: '#/definitions/github.com_portainer_portainer_api_demo.EnvironmentDetails'
+      instanceID:
+        description: Server Instance ID
+        example: 299ab403-70a8-4c05-92f7-bf7a994d50df
+        type: string
+    type: object
+  github.com_portainer_portainer_api_http_handler_system.versionResponse:
+    properties:
+      LatestVersion:
+        description: The latest version available
+        example: 2.0.0
+        type: string
+      UpdateAvailable:
+        description: Whether portainer has an update available
+        example: false
+        type: boolean
+        x-nullable: true
+      build:
+        $ref: '#/definitions/github.com_portainer_portainer_api_http_handler_system.BuildInfo'
       databaseVersion:
         type: string
       serverVersion:
@@ -1289,11 +1363,6 @@ definitions:
         type: string
       repository:
         type: string
-      tlsskipVerify:
-        description: TLSSkipVerify skips SSL verification when cloning the Git repository
-        example: false
-        type: boolean
-        x-nullable: true
       username:
         type: string
     required:
@@ -1309,11 +1378,6 @@ definitions:
         type: string
       stackID:
         type: integer
-      tlsskipVerify:
-        description: TLSSkipVerify skips SSL verification when cloning the Git repository
-        example: false
-        type: boolean
-        x-nullable: true
       username:
         type: string
     required:
@@ -1336,8 +1400,7 @@ definitions:
   gittypes.RepoConfig:
     properties:
       authentication:
-        allOf:
-        - $ref: '#/definitions/gittypes.GitAuthentication'
+        $ref: '#/definitions/gittypes.GitAuthentication'
         description: Git credentials
       configFilePath:
         description: Path to where the config file is in this url/refName
@@ -1351,11 +1414,6 @@ definitions:
         description: The reference name
         example: refs/heads/branch_name
         type: string
-      tlsskipVerify:
-        description: TLSSkipVerify skips SSL verification when cloning the Git repository
-        example: false
-        type: boolean
-        x-nullable: true
       url:
         description: The repo url
         example: https://github.com/portainer/portainer.git
@@ -1454,7 +1512,7 @@ definitions:
       nodes:
         type: integer
       productEdition:
-        $ref: '#/definitions/liblicense.ProductEdition'
+        type: integer
       reference:
         type: string
       revoked:
@@ -1463,34 +1521,10 @@ definitions:
       revokedAt:
         type: integer
       type:
-        $ref: '#/definitions/liblicense.PortainerLicenseType'
+        type: integer
       version:
         type: integer
     type: object
-  liblicense.PortainerLicenseType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    type: integer
-    x-enum-varnames:
-    - _
-    - PortainerLicenseTrial
-    - PortainerLicenseSubscription
-    - PortainerLicenseEssentials
-  liblicense.ProductEdition:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    type: integer
-    x-enum-varnames:
-    - _
-    - PortainerCE
-    - PortainerBE
-    - PortainerEE
   licenses.LicenseInfo:
     properties:
       company:
@@ -1505,7 +1539,7 @@ definitions:
         description: unix timestamp when node usage exceeded avaiable license limit
         type: integer
       type:
-        $ref: '#/definitions/liblicense.PortainerLicenseType'
+        type: integer
       valid:
         type: boolean
         x-nullable: true
@@ -1580,13 +1614,6 @@ definitions:
       uid:
         type: string
     type: object
-  models.SSHKeyPair:
-    properties:
-      private:
-        type: string
-      public:
-        type: string
-    type: object
   motd.motdResponse:
     properties:
       ContentLayout:
@@ -1604,34 +1631,6 @@ definitions:
       Title:
         type: string
     type: object
-  mount.Propagation:
-    enum:
-    - rprivate
-    - private
-    - rshared
-    - shared
-    - rslave
-    - slave
-    type: string
-    x-enum-varnames:
-    - PropagationRPrivate
-    - PropagationPrivate
-    - PropagationRShared
-    - PropagationShared
-    - PropagationRSlave
-    - PropagationSlave
-  mount.Type:
-    enum:
-    - bind
-    - volume
-    - tmpfs
-    - npipe
-    type: string
-    x-enum-varnames:
-    - TypeBind
-    - TypeVolume
-    - TypeTmpfs
-    - TypeNamedPipe
   network.EndpointIPAMConfig:
     properties:
       ipv4Address:
@@ -1664,8 +1663,7 @@ definitions:
       ipaddress:
         type: string
       ipamconfig:
-        allOf:
-        - $ref: '#/definitions/network.EndpointIPAMConfig'
+        $ref: '#/definitions/network.EndpointIPAMConfig'
         description: Configurations
       ipprefixLen:
         type: integer
@@ -1720,80 +1718,6 @@ definitions:
       mpsuser:
         type: string
     type: object
-  podsecurity.FSGroupStrategyType:
-    enum:
-    - MayRunAs
-    - MustRunAs
-    - RunAsAny
-    type: string
-    x-enum-varnames:
-    - FSGroupStrategyMayRunAs
-    - FSGroupStrategyMustRunAs
-    - FSGroupStrategyRunAsAny
-  podsecurity.FSType:
-    enum:
-    - azureFile
-    - flocker
-    - flexVolume
-    - hostPath
-    - emptyDir
-    - gcePersistentDisk
-    - awsElasticBlockStore
-    - gitRepo
-    - secret
-    - nfs
-    - iscsi
-    - glusterfs
-    - persistentVolumeClaim
-    - rbd
-    - cinder
-    - cephFS
-    - downwardAPI
-    - fc
-    - configMap
-    - vsphereVolume
-    - quobyte
-    - azureDisk
-    - photonPersistentDisk
-    - storageos
-    - projected
-    - portworxVolume
-    - scaleIO
-    - csi
-    - ephemeral
-    - '*'
-    type: string
-    x-enum-varnames:
-    - AzureFile
-    - Flocker
-    - FlexVolume
-    - HostPath
-    - EmptyDir
-    - GCEPersistentDisk
-    - AWSElasticBlockStore
-    - GitRepo
-    - Secret
-    - NFS
-    - ISCSI
-    - Glusterfs
-    - PersistentVolumeClaim
-    - RBD
-    - Cinder
-    - CephFS
-    - DownwardAPI
-    - FC
-    - ConfigMap
-    - VsphereVolume
-    - Quobyte
-    - AzureDisk
-    - PhotonPersistentDisk
-    - StorageOS
-    - Projected
-    - PortworxVolume
-    - ScaleIO
-    - CSI
-    - Ephemeral
-    - All
   podsecurity.PodSecurityAllowFlexVolumes:
     properties:
       allowedVolumes:
@@ -1878,7 +1802,7 @@ definitions:
           $ref: '#/definitions/podsecurity.PodSecurityIdrange'
         type: array
       type:
-        $ref: '#/definitions/podsecurity.FSGroupStrategyType'
+        type: string
     type: object
   podsecurity.PodSecurityHostFilesystem:
     properties:
@@ -1975,7 +1899,7 @@ definitions:
           $ref: '#/definitions/podsecurity.PodSecurityIdrange'
         type: array
       type:
-        $ref: '#/definitions/podsecurity.RunAsGroupStrategy'
+        type: string
     type: object
   podsecurity.PodSecurityRunAsUser:
     properties:
@@ -1984,7 +1908,7 @@ definitions:
           $ref: '#/definitions/podsecurity.PodSecurityIdrange'
         type: array
       type:
-        $ref: '#/definitions/podsecurity.RunAsUserStrategy'
+        type: string
     type: object
   podsecurity.PodSecuritySecComp:
     properties:
@@ -2013,7 +1937,7 @@ definitions:
           $ref: '#/definitions/podsecurity.PodSecurityIdrange'
         type: array
       type:
-        $ref: '#/definitions/podsecurity.SupplementalGroupsStrategyType'
+        type: string
     type: object
   podsecurity.PodSecurityUsers:
     properties:
@@ -2033,90 +1957,11 @@ definitions:
     properties:
       allowedTypes:
         items:
-          $ref: '#/definitions/podsecurity.FSType'
+          type: string
         type: array
       enabled:
         type: boolean
         x-nullable: true
-    type: object
-  podsecurity.RunAsGroupStrategy:
-    enum:
-    - MayRunAs
-    - MustRunAs
-    - RunAsAny
-    type: string
-    x-enum-varnames:
-    - RunAsGroupStrategyMayRunAs
-    - RunAsGroupStrategyMustRunAs
-    - RunAsGroupStrategyRunAsAny
-  podsecurity.RunAsUserStrategy:
-    enum:
-    - MustRunAs
-    - MustRunAsNonRoot
-    - RunAsAny
-    type: string
-    x-enum-varnames:
-    - RunAsUserStrategyMustRunAs
-    - RunAsUserStrategyMustRunAsNonRoot
-    - RunAsUserStrategyRunAsAny
-  podsecurity.SupplementalGroupsStrategyType:
-    enum:
-    - MayRunAs
-    - MustRunAs
-    - RunAsAny
-    type: string
-    x-enum-varnames:
-    - SupplementalGroupsStrategyMayRunAs
-    - SupplementalGroupsStrategyMustRunAs
-    - SupplementalGroupsStrategyRunAsAny
-  portainer.DockerContainerSnapshot:
-    properties:
-      Env:
-        description: EE-5240
-        items:
-          type: string
-        type: array
-      Id:
-        type: string
-      command:
-        type: string
-      created:
-        type: integer
-      hostConfig:
-        properties:
-          networkMode:
-            type: string
-        type: object
-      image:
-        type: string
-      imageID:
-        type: string
-      labels:
-        additionalProperties:
-          type: string
-        type: object
-      mounts:
-        items:
-          $ref: '#/definitions/types.MountPoint'
-        type: array
-      names:
-        items:
-          type: string
-        type: array
-      networkSettings:
-        $ref: '#/definitions/types.SummaryNetworkSettings'
-      ports:
-        items:
-          $ref: '#/definitions/types.Port'
-        type: array
-      sizeRootFs:
-        type: integer
-      sizeRw:
-        type: integer
-      state:
-        type: string
-      status:
-        type: string
     type: object
   portainer.DockerSnapshot:
     properties:
@@ -2161,53 +2006,6 @@ definitions:
     type: object
   portainer.DockerSnapshotRaw:
     type: object
-  portainer.EdgeStack:
-    properties:
-      CreationDate:
-        type: integer
-      EdgeGroups:
-        items:
-          type: integer
-        type: array
-      EntryPoint:
-        type: string
-      Id:
-        description: EdgeStack Identifier
-        example: 1
-        type: integer
-      Name:
-        type: string
-      NumDeployments:
-        type: integer
-      ProjectPath:
-        type: string
-      Prune:
-        description: Deprecated
-        type: boolean
-        x-nullable: true
-      Status:
-        additionalProperties:
-          $ref: '#/definitions/portainer.EdgeStackStatus'
-        type: object
-      Version:
-        type: integer
-      deploymentType:
-        $ref: '#/definitions/portainer.EdgeStackDeploymentType'
-      manifestPath:
-        type: string
-      useManifestNamespaces:
-        description: Uses the manifest's namespaces instead of the default one
-        type: boolean
-        x-nullable: true
-    type: object
-  portainer.EdgeStackDeploymentType:
-    enum:
-    - 0
-    - 1
-    type: integer
-    x-enum-varnames:
-    - EdgeStackDeploymentCompose
-    - EdgeStackDeploymentKubernetes
   portainer.EdgeStackStatus:
     properties:
       Details:
@@ -2217,9 +2015,8 @@ definitions:
       Error:
         type: string
       Type:
-        allOf:
-        - $ref: '#/definitions/portainer.EdgeStackStatusType'
         description: Deprecated
+        type: integer
     type: object
   portainer.EdgeStackStatusDetails:
     properties:
@@ -2245,24 +2042,6 @@ definitions:
         type: boolean
         x-nullable: true
     type: object
-  portainer.EdgeStackStatusType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    type: integer
-    x-enum-varnames:
-    - EdgeStackStatusPending
-    - EdgeStackStatusOk
-    - EdgeStackStatusError
-    - EdgeStackStatusAcknowledged
-    - EdgeStackStatusRemove
-    - EdgeStackStatusRemoteUpdateSuccess
-    - EdgeStackStatusImagesPulled
   portainer.OpenAMTConfiguration:
     properties:
       certFileContent:
@@ -2326,22 +2105,24 @@ definitions:
         description: API key identifier (7 char prefix)
         type: string
       userId:
+        description: User Identifier
         example: 1
         type: integer
     type: object
   portaineree.AccessPolicy:
     properties:
       RoleId:
-        allOf:
-        - $ref: '#/definitions/portaineree.RoleID'
         description: Role identifier. Reference the role that will be associated to
           this access policy
         example: 1
+        type: integer
     type: object
   portaineree.AuthActivityLog:
     properties:
       context:
-        $ref: '#/definitions/portaineree.AuthenticationMethod'
+        description: 'Active authentication method for the Portainer instance. Valid
+          values are: 1 for internal, 2 for LDAP, or 3 for oauth'
+        type: integer
       id:
         type: integer
       origin:
@@ -2349,63 +2130,14 @@ definitions:
       timestamp:
         type: integer
       type:
-        $ref: '#/definitions/portaineree.AuthenticationActivityType'
+        type: integer
       username:
         type: string
     type: object
-  portaineree.AuthenticationActivityType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    type: integer
-    x-enum-varnames:
-    - _
-    - AuthenticationActivitySuccess
-    - AuthenticationActivityFailure
-    - AuthenticationActivityLogOut
-  portaineree.AuthenticationMethod:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    type: integer
-    x-enum-varnames:
-    - _
-    - AuthenticationInternal
-    - AuthenticationLDAP
-    - AuthenticationOAuth
   portaineree.Authorizations:
     additionalProperties:
       type: boolean
       x-nullable: true
-    type: object
-  portaineree.AutoUpdateSettings:
-    properties:
-      forcePullImage:
-        description: Pull latest image
-        example: false
-        type: boolean
-        x-nullable: true
-      forceUpdate:
-        description: Force update ignores repo changes
-        example: false
-        type: boolean
-        x-nullable: true
-      interval:
-        description: Auto update interval
-        example: 1m30s
-        type: string
-      jobID:
-        description: Autoupdate job id
-        example: "15"
-        type: string
-      webhook:
-        description: A UUID generated from client
-        example: 05de31a2-79fa-4644-9c12-faa67e5c49f0
-        type: string
     type: object
   portaineree.AzureCredentials:
     properties:
@@ -2439,9 +2171,6 @@ definitions:
     type: object
   portaineree.CloudProvider:
     properties:
-      Addons:
-        description: MicroK8S specific fields
-        type: string
       AmiType:
         description: Amazon specific fields
         type: string
@@ -2464,8 +2193,6 @@ definitions:
         type: string
       NodeCount:
         type: integer
-      NodeIPs:
-        type: string
       NodeVolumeSize:
         type: integer
       RAM:
@@ -2515,8 +2242,6 @@ definitions:
         example: This is my <b>custom</b> template
         type: string
       Platform:
-        allOf:
-        - $ref: '#/definitions/portaineree.CustomTemplatePlatform'
         description: |-
           Platform associated to the template.
           Valid values are: 1 - 'linux', 2 - 'windows'
@@ -2524,6 +2249,7 @@ definitions:
         - 1
         - 2
         example: 1
+        type: integer
       ProjectPath:
         description: Path on disk to the repository hosting the Stack file
         example: /data/custom_template/3
@@ -2535,25 +2261,14 @@ definitions:
         example: Nginx
         type: string
       Type:
-        allOf:
-        - $ref: '#/definitions/portaineree.StackType'
         description: Type of created stack (1 - swarm, 2 - compose)
         example: 1
+        type: integer
       variables:
         items:
           $ref: '#/definitions/portaineree.CustomTemplateVariableDefinition'
         type: array
     type: object
-  portaineree.CustomTemplatePlatform:
-    enum:
-    - 0
-    - 1
-    - 2
-    type: integer
-    x-enum-varnames:
-    - _
-    - CustomTemplatePlatformLinux
-    - CustomTemplatePlatformWindows
   portaineree.CustomTemplateVariableDefinition:
     properties:
       defaultValue:
@@ -2596,35 +2311,6 @@ definitions:
         example: ap-southeast-2
         type: string
     type: object
-  portaineree.Edge:
-    properties:
-      CommandInterval:
-        description: The command list interval for edge agent - used in edge async
-          mode (in seconds)
-        example: 5
-        type: integer
-      PingInterval:
-        description: The ping interval for edge agent - used in edge async mode (in
-          seconds)
-        example: 5
-        type: integer
-      SnapshotInterval:
-        description: The snapshot interval for edge agent - used in edge async mode
-          (in seconds)
-        example: 5
-        type: integer
-      TunnelServerAddress:
-        description: The address where the tunneling server can be reached by Edge
-          agents
-        example: portainer.domain.tld
-        type: string
-      asyncMode:
-        description: Deprecated 2.18
-        type: boolean
-        x-nullable: true
-      mtls:
-        $ref: '#/definitions/portaineree.MTLSSettings'
-    type: object
   portaineree.EdgeAsyncCommand:
     properties:
       endpointID:
@@ -2635,7 +2321,7 @@ definitions:
       id:
         type: integer
       op:
-        $ref: '#/definitions/portaineree.EdgeAsyncCommandOperation'
+        type: string
       path:
         type: string
       scheduledTime:
@@ -2643,35 +2329,9 @@ definitions:
       timestamp:
         type: string
       type:
-        $ref: '#/definitions/portaineree.EdgeAsyncCommandType'
+        type: string
       value: {}
     type: object
-  portaineree.EdgeAsyncCommandOperation:
-    enum:
-    - add
-    - remove
-    - replace
-    type: string
-    x-enum-varnames:
-    - EdgeAsyncCommandOpAdd
-    - EdgeAsyncCommandOpRemove
-    - EdgeAsyncCommandOpReplace
-  portaineree.EdgeAsyncCommandType:
-    enum:
-    - edgeStack
-    - edgeJob
-    - edgeLog
-    - container
-    - image
-    - volume
-    type: string
-    x-enum-varnames:
-    - EdgeAsyncCommandTypeStack
-    - EdgeAsyncCommandTypeJob
-    - EdgeAsyncCommandTypeLog
-    - EdgeAsyncCommandTypeContainer
-    - EdgeAsyncCommandTypeImage
-    - EdgeAsyncCommandTypeVolume
   portaineree.EdgeGroup:
     properties:
       Dynamic:
@@ -2679,6 +2339,8 @@ definitions:
         x-nullable: true
       Endpoints:
         items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
           type: integer
         type: array
       Id:
@@ -2692,6 +2354,8 @@ definitions:
         x-nullable: true
       TagIds:
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
     type: object
@@ -2703,6 +2367,8 @@ definitions:
         type: string
       EdgeGroups:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       Endpoints:
@@ -2734,20 +2400,8 @@ definitions:
         type: boolean
         x-nullable: true
       logsStatus:
-        $ref: '#/definitions/portaineree.EdgeJobLogsStatus'
+        type: integer
     type: object
-  portaineree.EdgeJobLogsStatus:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    type: integer
-    x-enum-varnames:
-    - _
-    - EdgeJobLogsStatusIdle
-    - EdgeJobLogsStatusPending
-    - EdgeJobLogsStatusCollected
   portaineree.EdgeRegistryCredential:
     properties:
       secret:
@@ -2762,9 +2416,17 @@ definitions:
       CreationDate:
         type: integer
       DeploymentType:
-        $ref: '#/definitions/portaineree.EdgeStackDeploymentType'
+        description: |-
+          Deployment type to deploy this stack
+          Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
+          for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+          kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+          nomad deploy type is enabled only for nomad environments(endpoints)
+        type: integer
       EdgeGroups:
         items:
+          description: EdgeGroup Identifier
+          example: 1
           type: integer
         type: array
       EntryPoint:
@@ -2795,6 +2457,7 @@ definitions:
         x-nullable: true
       Registries:
         items:
+          description: Registry Identifier
           type: integer
         type: array
       Status:
@@ -2807,11 +2470,6 @@ definitions:
         description: EdgeUpdateID represents the parent update ID, will be zero if
           this stack is not part of an update
         type: integer
-      retryDeploy:
-        description: Retry deploy
-        example: false
-        type: boolean
-        x-nullable: true
       scheduledTime:
         description: Schedule represents the schedule of the Edge stack (optional,
           format - 'YYYY-MM-DD HH:mm:ss')
@@ -2822,16 +2480,6 @@ definitions:
         type: boolean
         x-nullable: true
     type: object
-  portaineree.EdgeStackDeploymentType:
-    enum:
-    - 0
-    - 1
-    - 2
-    type: integer
-    x-enum-varnames:
-    - EdgeStackDeploymentCompose
-    - EdgeStackDeploymentKubernetes
-    - EdgeStackDeploymentNomad
   portaineree.Endpoint:
     properties:
       AMTDeviceGUID:
@@ -2840,22 +2488,24 @@ definitions:
         type: string
       AuthorizedTeams:
         items:
+          description: Team Identifier
+          example: 1
           type: integer
         type: array
       AuthorizedUsers:
         description: Deprecated in DBVersion == 18
         items:
+          description: User Identifier
+          example: 1
           type: integer
         type: array
       AzureCredentials:
         $ref: '#/definitions/portaineree.AzureCredentials'
       ChangeWindow:
-        allOf:
-        - $ref: '#/definitions/portaineree.EndpointChangeWindow'
+        $ref: '#/definitions/portaineree.EndpointChangeWindow'
         description: Automatic update change window restriction for stacks and apps
       CloudProvider:
-        allOf:
-        - $ref: '#/definitions/portaineree.CloudProvider'
+        $ref: '#/definitions/portaineree.CloudProvider'
         description: |-
           A Kubernetes as a service cloud provider. Only included if this
           endpoint was created using KaaS provisioning.
@@ -2864,8 +2514,7 @@ definitions:
         example: "3.8"
         type: string
       DeploymentOptions:
-        allOf:
-        - $ref: '#/definitions/portaineree.DeploymentOptions'
+        $ref: '#/definitions/portaineree.DeploymentOptions'
         description: Hide manual deployment forms for an environment
       EdgeCheckinInterval:
         description: The check in interval for edge agent (in seconds)
@@ -2877,9 +2526,6 @@ definitions:
       EdgeKey:
         description: The key which is used to map the agent to Portainer
         type: string
-      EnableGPUManagement:
-        type: boolean
-        x-nullable: true
       EnableImageNotification:
         type: boolean
         x-nullable: true
@@ -2891,30 +2537,22 @@ definitions:
         description: Environment(Endpoint) group identifier
         example: 1
         type: integer
-      Heartbeat:
-        description: Heartbeat indicates the heartbeat status of an edge environment
-        example: true
-        type: boolean
-        x-nullable: true
       Id:
         description: Environment(Endpoint) Identifier
         example: 1
         type: integer
       Kubernetes:
-        allOf:
-        - $ref: '#/definitions/portaineree.KubernetesData'
+        $ref: '#/definitions/portaineree.KubernetesData'
         description: Associated Kubernetes data
       Name:
         description: Environment(Endpoint) name
         example: my-environment
         type: string
       Nomad:
-        allOf:
-        - $ref: '#/definitions/portaineree.NomadData'
+        $ref: '#/definitions/portaineree.NomadData'
         description: Associated Nomad data
       PostInitMigrations:
-        allOf:
-        - $ref: '#/definitions/portaineree.EndpointPostInitMigrations'
+        $ref: '#/definitions/portaineree.EndpointPostInitMigrations'
         description: Whether we need to run any "post init migrations".
       PublicURL:
         description: URL or IP address where exposed containers will be reachable
@@ -2926,15 +2564,13 @@ definitions:
           $ref: '#/definitions/portainer.DockerSnapshot'
         type: array
       Status:
-        allOf:
-        - $ref: '#/definitions/portaineree.EndpointStatus'
         description: |-
           The status of the environment(endpoint) (1 - up, 2 - down, 3 -
           provisioning, 4 - error)
         example: 1
+        type: integer
       StatusMessage:
-        allOf:
-        - $ref: '#/definitions/portaineree.EndpointStatusMessage'
+        $ref: '#/definitions/portaineree.EndpointStatusMessage'
         description: |-
           A message that describes the status. Should be included for Status 3
           or 4.
@@ -2956,6 +2592,8 @@ definitions:
         description: List of tag identifiers to which this environment(endpoint) is
           associated
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
       Tags:
@@ -2964,23 +2602,20 @@ definitions:
           type: string
         type: array
       TeamAccessPolicies:
-        allOf:
-        - $ref: '#/definitions/portaineree.TeamAccessPolicies'
+        $ref: '#/definitions/portaineree.TeamAccessPolicies'
         description: List of team identifiers authorized to connect to this environment(endpoint)
       Type:
-        allOf:
-        - $ref: '#/definitions/portaineree.EndpointType'
         description: Environment(Endpoint) environment(endpoint) type. 1 for a Docker
           environment(endpoint), 2 for an agent on Docker environment(endpoint) or
           3 for an Azure environment(endpoint).
         example: 1
+        type: integer
       URL:
         description: URL or IP address of the Docker host associated to this environment(endpoint)
         example: docker.mydomain.tld:2375
         type: string
       UserAccessPolicies:
-        allOf:
-        - $ref: '#/definitions/portaineree.UserAccessPolicies'
+        $ref: '#/definitions/portaineree.UserAccessPolicies'
         description: List of user identifiers authorized to connect to this environment(endpoint)
       agent:
         properties:
@@ -2989,7 +2624,27 @@ definitions:
             type: string
         type: object
       edge:
-        $ref: '#/definitions/portaineree.EnvironmentEdgeSettings'
+        properties:
+          CommandInterval:
+            description: The command list interval for edge agent - used in edge async
+              mode [seconds]
+            example: 60
+            type: integer
+          PingInterval:
+            description: The ping interval for edge agent - used in edge async mode
+              [seconds]
+            example: 60
+            type: integer
+          SnapshotInterval:
+            description: The snapshot interval for edge agent - used in edge async
+              mode [seconds]
+            example: 60
+            type: integer
+          asyncMode:
+            description: Whether the device has been started in edge async mode
+            type: boolean
+        x-nullable: true
+        type: object
       isEdgeDevice:
         description: IsEdgeDevice marks if the environment was created as an EdgeDevice
         type: boolean
@@ -3004,8 +2659,7 @@ definitions:
         description: QueryDate of each query with the endpoints list
         type: integer
       securitySettings:
-        allOf:
-        - $ref: '#/definitions/portaineree.EndpointSecuritySettings'
+        $ref: '#/definitions/portaineree.EndpointSecuritySettings'
         description: Environment(Endpoint) specific security settings
       userTrusted:
         description: Whether the device has been trusted or not by the user
@@ -3033,11 +2687,15 @@ definitions:
     properties:
       AuthorizedTeams:
         items:
+          description: Team Identifier
+          example: 1
           type: integer
         type: array
       AuthorizedUsers:
         description: Deprecated in DBVersion == 18
         items:
+          description: User Identifier
+          example: 1
           type: integer
         type: array
       Description:
@@ -3060,6 +2718,8 @@ definitions:
       TagIds:
         description: List of tags associated to this environment(endpoint) group
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
       Tags:
@@ -3074,12 +2734,6 @@ definitions:
     type: object
   portaineree.EndpointPostInitMigrations:
     properties:
-      MigrateGPUs:
-        type: boolean
-        x-nullable: true
-      MigrateGateKeeper:
-        type: boolean
-        x-nullable: true
       MigrateIngresses:
         type: boolean
         x-nullable: true
@@ -3134,71 +2788,12 @@ definitions:
         type: boolean
         x-nullable: true
     type: object
-  portaineree.EndpointStatus:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    type: integer
-    x-enum-varnames:
-    - _
-    - EndpointStatusUp
-    - EndpointStatusDown
-    - EndpointStatusProvisioning
-    - EndpointStatusError
   portaineree.EndpointStatusMessage:
     properties:
       Detail:
         type: string
       Summary:
         type: string
-    type: object
-  portaineree.EndpointType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    - 7
-    - 8
-    - 9
-    type: integer
-    x-enum-varnames:
-    - _
-    - DockerEnvironment
-    - AgentOnDockerEnvironment
-    - AzureEnvironment
-    - EdgeAgentOnDockerEnvironment
-    - KubernetesLocalEnvironment
-    - AgentOnKubernetesEnvironment
-    - EdgeAgentOnKubernetesEnvironment
-    - EdgeAgentOnNomadEnvironment
-    - KubeConfigEnvironment
-  portaineree.EnvironmentEdgeSettings:
-    properties:
-      CommandInterval:
-        description: The command list interval for edge agent - used in edge async
-          mode [seconds]
-        example: 60
-        type: integer
-      PingInterval:
-        description: The ping interval for edge agent - used in edge async mode [seconds]
-        example: 60
-        type: integer
-      SnapshotInterval:
-        description: The snapshot interval for edge agent - used in edge async mode
-          [seconds]
-        example: 60
-        type: integer
-      asyncMode:
-        description: Whether the device has been started in edge async mode
-        type: boolean
-        x-nullable: true
     type: object
   portaineree.FDOConfiguration:
     properties:
@@ -3218,6 +2813,7 @@ definitions:
         example: 1587399600
         type: integer
       id:
+        description: GitCredentialID used to identify the binded git credential
         example: 1
         type: integer
       name:
@@ -3225,6 +2821,7 @@ definitions:
       password:
         type: string
       userId:
+        description: User Identifier
         example: 1
         type: integer
       username:
@@ -3348,9 +2945,6 @@ definitions:
     type: object
   portaineree.KubernetesFlags:
     properties:
-      IsServerIngressClassDetected:
-        type: boolean
-        x-nullable: true
       IsServerMetricsDetected:
         type: boolean
         x-nullable: true
@@ -3431,16 +3025,6 @@ definitions:
         example: uid
         type: string
     type: object
-  portaineree.LDAPServerType:
-    enum:
-    - 0
-    - 1
-    - 2
-    type: integer
-    x-enum-varnames:
-    - LDAPServerCustom
-    - LDAPServerOpenLDAP
-    - LDAPServerAD
   portaineree.LDAPSettings:
     properties:
       AdminAutoPopulate:
@@ -3490,9 +3074,8 @@ definitions:
           $ref: '#/definitions/portaineree.LDAPSearchSettings'
         type: array
       ServerType:
-        allOf:
-        - $ref: '#/definitions/portaineree.LDAPServerType'
         example: 1
+        type: integer
       StartTLS:
         description: Whether LDAP connection should use StartTLS
         example: true
@@ -3518,28 +3101,6 @@ definitions:
       name:
         type: string
     type: object
-  portaineree.MTLSSettings:
-    properties:
-      CaCertFile:
-        type: string
-      CertFile:
-        type: string
-      KeyFile:
-        type: string
-      UseSeparateCert:
-        type: boolean
-        x-nullable: true
-    type: object
-  portaineree.MembershipRole:
-    enum:
-    - 0
-    - 1
-    - 2
-    type: integer
-    x-enum-varnames:
-    - _
-    - TeamLeader
-    - TeamMember
   portaineree.NomadData:
     properties:
       Snapshots:
@@ -3686,11 +3247,15 @@ definitions:
       AuthorizedTeams:
         description: Deprecated in DBVersion == 18
         items:
+          description: Team Identifier
+          example: 1
           type: integer
         type: array
       AuthorizedUsers:
         description: Deprecated in DBVersion == 18
         items:
+          description: User Identifier
+          example: 1
           type: integer
         type: array
       BaseURL:
@@ -3723,12 +3288,9 @@ definitions:
       RegistryAccesses:
         $ref: '#/definitions/portaineree.RegistryAccesses'
       TeamAccessPolicies:
-        allOf:
-        - $ref: '#/definitions/portaineree.TeamAccessPolicies'
+        $ref: '#/definitions/portaineree.TeamAccessPolicies'
         description: Deprecated in DBVersion == 31
       Type:
-        allOf:
-        - $ref: '#/definitions/portaineree.RegistryType'
         description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5
           - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
         enum:
@@ -3740,13 +3302,13 @@ definitions:
         - 6
         - 7
         - 8
+        type: integer
       URL:
         description: URL or IP address of the Docker registry
         example: registry.mydomain.tld:2375/feed-name
         type: string
       UserAccessPolicies:
-        allOf:
-        - $ref: '#/definitions/portaineree.UserAccessPolicies'
+        $ref: '#/definitions/portaineree.UserAccessPolicies'
         description: |-
           Deprecated fields
           Deprecated in DBVersion == 31
@@ -3786,44 +3348,16 @@ definitions:
       TLSConfig:
         $ref: '#/definitions/portaineree.TLSConfiguration'
       Type:
-        $ref: '#/definitions/portaineree.RegistryType'
+        description: Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5
+          - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
+        type: integer
       Username:
         type: string
     type: object
-  portaineree.RegistryType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    - 7
-    - 8
-    type: integer
-    x-enum-varnames:
-    - _
-    - QuayRegistry
-    - AzureRegistry
-    - CustomRegistry
-    - GitlabRegistry
-    - ProGetRegistry
-    - DockerHubRegistry
-    - EcrRegistry
-    - GithubRegistry
-  portaineree.ResourceAccessLevel:
-    enum:
-    - 0
-    - 1
-    type: integer
-    x-enum-varnames:
-    - _
-    - ReadWriteAccessLevel
   portaineree.ResourceControl:
     properties:
       AccessLevel:
-        $ref: '#/definitions/portaineree.ResourceAccessLevel'
+        type: integer
       AdministratorsOnly:
         description: Permit access to resource only to admins
         example: true
@@ -3864,56 +3398,29 @@ definitions:
           $ref: '#/definitions/portaineree.TeamResourceAccess'
         type: array
       Type:
-        allOf:
-        - $ref: '#/definitions/portaineree.ResourceControlType'
         description: |-
           Type of Docker resource. Valid values are: 1- container, 2 -service
           3 - volume, 4 - secret, 5 - stack, 6 - config or 7 - custom template
         example: 1
+        type: integer
       UserAccesses:
         items:
           $ref: '#/definitions/portaineree.UserResourceAccess'
         type: array
     type: object
-  portaineree.ResourceControlType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    - 7
-    - 8
-    - 9
-    type: integer
-    x-enum-varnames:
-    - _
-    - ContainerResourceControl
-    - ServiceResourceControl
-    - VolumeResourceControl
-    - NetworkResourceControl
-    - SecretResourceControl
-    - StackResourceControl
-    - ConfigResourceControl
-    - CustomTemplateResourceControl
-    - ContainerGroupResourceControl
   portaineree.Role:
     properties:
       Authorizations:
-        allOf:
-        - $ref: '#/definitions/portaineree.Authorizations'
+        $ref: '#/definitions/portaineree.Authorizations'
         description: Authorizations associated to a role
       Description:
         description: Role description
         example: Read-only access of all resources in an environment(endpoint)
         type: string
       Id:
-        allOf:
-        - $ref: '#/definitions/portaineree.RoleID'
         description: Role Identifier
         example: 1
+        type: integer
       Name:
         description: Role name
         example: HelpDesk
@@ -3927,22 +3434,6 @@ definitions:
     - Name
     - Priority
     type: object
-  portaineree.RoleID:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    type: integer
-    x-enum-varnames:
-    - _
-    - RoleIDEndpointAdmin
-    - RoleIDHelpdesk
-    - RoleIDStandardUser
-    - RoleIDReadonly
-    - RoleIDOperator
   portaineree.S3BackupSettings:
     properties:
       accessKeyID:
@@ -4010,11 +3501,10 @@ definitions:
         type: boolean
         x-nullable: true
       AuthenticationMethod:
-        allOf:
-        - $ref: '#/definitions/portaineree.AuthenticationMethod'
         description: 'Active authentication method for the Portainer instance. Valid
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
         example: 1
+        type: integer
       BlackListedLabels:
         description: A list of label name & value that will be used to hide containers
           when querying containers
@@ -4022,15 +3512,12 @@ definitions:
           $ref: '#/definitions/portaineree.Pair'
         type: array
       CloudApiKeys:
-        allOf:
-        - $ref: '#/definitions/portaineree.CloudApiKeys'
+        $ref: '#/definitions/portaineree.CloudApiKeys'
         description: CloudAPIKeys
       CustomLoginBanner:
         description: The content in plaintext used to display in the login page. Will
           hide when value is empty string
         type: string
-      Edge:
-        $ref: '#/definitions/portaineree.Edge'
       EdgeAgentCheckinInterval:
         description: The default check in interval for edge agent (in seconds)
         example: 5
@@ -4057,9 +3544,13 @@ definitions:
         example: false
         type: boolean
         x-nullable: true
+      FeatureFlagSettings:
+        additionalProperties:
+          type: boolean
+        x-nullable: true
+        type: object
       GlobalDeploymentOptions:
-        allOf:
-        - $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
+        $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
         description: Deployment options for encouraging git ops workflows
       HelmRepositoryURL:
         description: Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
@@ -4124,6 +3615,33 @@ definitions:
       displayExternalContributors:
         type: boolean
         x-nullable: true
+      edge:
+        properties:
+          CommandInterval:
+            description: The command list interval for edge agent - used in edge async
+              mode (in seconds)
+            example: 5
+            type: integer
+          PingInterval:
+            description: The ping interval for edge agent - used in edge async mode
+              (in seconds)
+            example: 5
+            type: integer
+          SnapshotInterval:
+            description: The snapshot interval for edge agent - used in edge async
+              mode (in seconds)
+            example: 5
+            type: integer
+          TunnelServerAddress:
+            description: The address where the tunneling server can be reached by
+              Edge agents
+            example: portainer.domain.tld
+            type: string
+          asyncMode:
+            description: EdgeAsyncMode enables edge async mode by default
+            type: boolean
+        x-nullable: true
+        type: object
       fdoConfiguration:
         $ref: '#/definitions/portaineree.FDOConfiguration'
       openAMTConfiguration:
@@ -4137,8 +3655,7 @@ definitions:
           type: string
         type: array
       AutoUpdate:
-        allOf:
-        - $ref: '#/definitions/portaineree.AutoUpdateSettings'
+        $ref: '#/definitions/portaineree.StackAutoUpdate'
         description: The auto update settings of a git stack
       EndpointId:
         description: Environment(Endpoint) identifier. Reference the environment(endpoint)
@@ -4163,26 +3680,23 @@ definitions:
         example: myStack
         type: string
       Option:
-        allOf:
-        - $ref: '#/definitions/portaineree.StackOption'
+        $ref: '#/definitions/portaineree.StackOption'
         description: The stack deployment option
       ResourceControl:
         $ref: '#/definitions/portaineree.ResourceControl'
       Status:
-        allOf:
-        - $ref: '#/definitions/portaineree.StackStatus'
         description: Stack status (1 - active, 2 - inactive)
         example: 1
+        type: integer
       SwarmId:
         description: Cluster identifier of the Swarm cluster where the stack is deployed
         example: jpofkc0i9uo9wtx1zesuk649w
         type: string
       Type:
-        allOf:
-        - $ref: '#/definitions/portaineree.StackType'
         description: Stack type. 1 for a Swarm stack, 2 for a Compose stack, 3 for
           a Kubernetes stack
         example: 2
+        type: integer
       createdBy:
         description: The username which created this stack
         example: admin
@@ -4201,8 +3715,7 @@ definitions:
         type: boolean
         x-nullable: true
       gitConfig:
-        allOf:
-        - $ref: '#/definitions/gittypes.RepoConfig'
+        $ref: '#/definitions/gittypes.RepoConfig'
         description: The git configuration of a git stack
       isComposeFormat:
         description: IsComposeFormat indicates if the Kubernetes stack is created
@@ -4237,6 +3750,31 @@ definitions:
         example: c11fdf23-183e-428a-9bb6-16db01032174
         type: string
     type: object
+  portaineree.StackAutoUpdate:
+    properties:
+      forcePullImage:
+        description: Pull latest image
+        example: false
+        type: boolean
+        x-nullable: true
+      forceUpdate:
+        description: Force update ignores repo changes
+        example: false
+        type: boolean
+        x-nullable: true
+      interval:
+        description: Auto update interval
+        example: 1m30s
+        type: string
+      jobID:
+        description: Autoupdate job id
+        example: "15"
+        type: string
+      webhook:
+        description: A UUID generated from client
+        example: 05de31a2-79fa-4644-9c12-faa67e5c49f0
+        type: string
+    type: object
   portaineree.StackOption:
     properties:
       prune:
@@ -4245,30 +3783,6 @@ definitions:
         type: boolean
         x-nullable: true
     type: object
-  portaineree.StackStatus:
-    enum:
-    - 0
-    - 1
-    - 2
-    type: integer
-    x-enum-varnames:
-    - _
-    - StackStatusActive
-    - StackStatusInactive
-  portaineree.StackType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    type: integer
-    x-enum-varnames:
-    - _
-    - DockerSwarmStack
-    - DockerComposeStack
-    - KubernetesStack
-    - NomadStack
   portaineree.TLSConfiguration:
     properties:
       TLS:
@@ -4339,10 +3853,9 @@ definitions:
         example: 1
         type: integer
       Role:
-        allOf:
-        - $ref: '#/definitions/portaineree.MembershipRole'
         description: Team role (1 for team leader and 2 for team member)
         example: 1
+        type: integer
       TeamID:
         description: Team identifier
         example: 1
@@ -4371,7 +3884,7 @@ definitions:
   portaineree.TeamResourceAccess:
     properties:
       AccessLevel:
-        $ref: '#/definitions/portaineree.ResourceAccessLevel'
+        type: integer
       TeamId:
         type: integer
     type: object
@@ -4475,8 +3988,7 @@ definitions:
         example: quay.io
         type: string
       repository:
-        allOf:
-        - $ref: '#/definitions/portaineree.TemplateRepository'
+        $ref: '#/definitions/portaineree.TemplateRepository'
         description: Mandatory stack fields
       restart_policy:
         description: Container restart policy
@@ -4492,11 +4004,10 @@ definitions:
         example: Nginx
         type: string
       type:
-        allOf:
-        - $ref: '#/definitions/portaineree.TemplateType'
         description: 'Template type. Valid values are: 1 (container), 2 (Swarm stack)
           or 3 (Compose stack)'
         example: 1
+        type: integer
       volumes:
         description: A list of volumes used during the container template deployment
         items:
@@ -4562,20 +4073,6 @@ definitions:
         example: https://github.com/portainer/portainer-compose
         type: string
     type: object
-  portaineree.TemplateType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    - 4
-    type: integer
-    x-enum-varnames:
-    - _
-    - ContainerTemplate
-    - SwarmStackTemplate
-    - ComposeStackTemplate
-    - EdgeStackTemplate
   portaineree.TemplateVolume:
     properties:
       bind:
@@ -4603,10 +4100,9 @@ definitions:
       PortainerAuthorizations:
         $ref: '#/definitions/portaineree.Authorizations'
       Role:
-        allOf:
-        - $ref: '#/definitions/portaineree.UserRole'
         description: User role (1 for administrator account and 2 for regular account)
         example: 1
+        type: integer
       TokenIssueAt:
         example: 1639408208
         type: integer
@@ -4644,20 +4140,11 @@ definitions:
   portaineree.UserResourceAccess:
     properties:
       AccessLevel:
-        $ref: '#/definitions/portaineree.ResourceAccessLevel'
+        type: integer
       UserId:
+        description: User identifier who created this template
         type: integer
     type: object
-  portaineree.UserRole:
-    enum:
-    - 0
-    - 1
-    - 2
-    type: integer
-    x-enum-varnames:
-    - _
-    - AdministratorRole
-    - StandardUserRole
   portaineree.UserThemeSettings:
     properties:
       color:
@@ -4678,36 +4165,31 @@ definitions:
   portaineree.Webhook:
     properties:
       EndpointId:
+        description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+          that will be used for deployment
         type: integer
       Id:
         description: Webhook Identifier
         example: 1
         type: integer
       RegistryId:
+        description: Registry Identifier
         type: integer
       ResourceId:
         type: string
       Token:
         type: string
       Type:
-        $ref: '#/definitions/portaineree.WebhookType'
+        type: integer
     type: object
-  portaineree.WebhookType:
-    enum:
-    - 0
-    - 1
-    - 2
-    type: integer
-    x-enum-varnames:
-    - _
-    - ServiceWebhook
-    - ContainerWebhook
   providers.AmazonProvisionPayload:
     properties:
       amiType:
         example: BOTTLEROCKET_x86_64
         type: string
       credentialID:
+        description: CredentialID holds an ID of the credential used to create the
+          cluster
         example: 1
         type: integer
       instanceType:
@@ -4753,6 +4235,8 @@ definitions:
           type: string
         type: array
       credentialID:
+        description: CredentialID holds an ID of the credential used to create the
+          cluster
         example: 1
         type: integer
       dnsPrefix:
@@ -4797,6 +4281,8 @@ definitions:
   providers.DefaultProvisionPayload:
     properties:
       credentialID:
+        description: CredentialID holds an ID of the credential used to create the
+          cluster
         example: 1
         type: integer
       kubernetesVersion:
@@ -4833,6 +4319,8 @@ definitions:
         example: 2
         type: integer
       credentialID:
+        description: CredentialID holds an ID of the credential used to create the
+          cluster
         example: 1
         type: integer
       hdd:
@@ -4936,16 +4424,13 @@ definitions:
         example: registry.mydomain.tld:2375
         type: string
       ecr:
-        allOf:
-        - $ref: '#/definitions/portaineree.EcrData'
+        $ref: '#/definitions/portaineree.EcrData'
         description: ECR specific details, required when type = 7
       github:
-        allOf:
-        - $ref: '#/definitions/portaineree.GithubRegistryData'
+        $ref: '#/definitions/portaineree.GithubRegistryData'
         description: Github specific details, required when type = 8
       gitlab:
-        allOf:
-        - $ref: '#/definitions/portaineree.GitlabRegistryData'
+        $ref: '#/definitions/portaineree.GitlabRegistryData'
         description: Gitlab specific details, required when type = 4
       name:
         description: Name that will be used to identify this registry
@@ -4957,12 +4442,9 @@ definitions:
         example: registry_password
         type: string
       quay:
-        allOf:
-        - $ref: '#/definitions/portaineree.QuayRegistryData'
+        $ref: '#/definitions/portaineree.QuayRegistryData'
         description: Quay specific details, required when type = 1
       type:
-        allOf:
-        - $ref: '#/definitions/portaineree.RegistryType'
         description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure
           container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5
           (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)\n\t8 (Github registry)"
@@ -4976,6 +4458,7 @@ definitions:
         - 7
         - 8
         example: 1
+        type: integer
       url:
         description: URL or IP address of the Docker registry
         example: registry.mydomain.tld:2375/feed
@@ -5035,12 +4518,10 @@ definitions:
           $ref: '#/definitions/release.File'
         type: array
       lock:
-        allOf:
-        - $ref: '#/definitions/release.Lock'
+        $ref: '#/definitions/release.Lock'
         description: Lock is the contents of Chart.lock.
       metadata:
-        allOf:
-        - $ref: '#/definitions/release.Metadata'
+        $ref: '#/definitions/release.Metadata'
         description: Metadata is the contents of the Chartfile.
       schema:
         description: Schema is an optional JSON schema for imposing structure on Values
@@ -5130,8 +4611,7 @@ definitions:
         description: Kind is the Kubernetes kind.
         type: string
       last_run:
-        allOf:
-        - $ref: '#/definitions/release.HookExecution'
+        $ref: '#/definitions/release.HookExecution'
         description: LastRun indicates the date/time this was last run.
       manifest:
         description: Manifest is the manifest contents.
@@ -5256,8 +4736,7 @@ definitions:
   release.Release:
     properties:
       chart:
-        allOf:
-        - $ref: '#/definitions/release.Chart'
+        $ref: '#/definitions/release.Chart'
         description: |-
           Info provides information about a release
           Info *Info `json:"info,omitempty"`
@@ -5334,8 +4813,6 @@ definitions:
           type: integer
         type: array
       type:
-        allOf:
-        - $ref: '#/definitions/portaineree.ResourceControlType'
         description: |-
           Type of Resource. Valid values are: 1 - container, 2 - service
           3 - volume, 4 - network, 5 - secret, 6 - stack, 7 - config, 8 - custom template, 9 - azure-container-group
@@ -5350,6 +4827,7 @@ definitions:
         - 8
         - 9
         example: 1
+        type: integer
       users:
         description: List of user identifiers with access to the associated resource
         example:
@@ -5396,26 +4874,13 @@ definitions:
         type: boolean
         x-nullable: true
     type: object
-  settings.mTLSPayload:
-    properties:
-      caCert:
-        type: string
-      cert:
-        type: string
-      key:
-        type: string
-      useSeparateCert:
-        type: boolean
-        x-nullable: true
-    type: object
   settings.publicSettingsResponse:
     properties:
       AuthenticationMethod:
-        allOf:
-        - $ref: '#/definitions/portaineree.AuthenticationMethod'
         description: 'Active authentication method for the Portainer instance. Valid
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
         example: 1
+        type: integer
       CustomLoginBanner:
         description: The content in plaintext used to display in the login page. Will
           hide when value is empty string
@@ -5438,8 +4903,7 @@ definitions:
         description: Supported feature flags
         type: object
       GlobalDeploymentOptions:
-        allOf:
-        - $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
+        $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
         description: Deployment options for encouraging deployment as code
       LogoURL:
         description: URL to a logo that will be displayed on the login page as well
@@ -5499,13 +4963,15 @@ definitions:
               mode [seconds]
             example: 60
             type: integer
+          asyncMode:
+            description: Whether the device has been started in edge async mode
+            type: boolean
+            x-nullable: true
           checkinInterval:
             description: The check in interval for edge agent (in seconds) - used
               in non async mode [seconds]
             example: 60
             type: integer
-          mtls:
-            $ref: '#/definitions/portaineree.MTLSSettings'
         type: object
       isAMTEnabled:
         description: Whether AMT is enabled
@@ -5568,8 +5034,6 @@ definitions:
             description: AsyncMode enables edge agent to run in async mode by default
             type: boolean
             x-nullable: true
-          mtls:
-            $ref: '#/definitions/settings.mTLSPayload'
           tunnelServerAddress:
             description: The address where the tunneling server can be reached by
               Edge agents
@@ -5596,8 +5060,7 @@ definitions:
         type: boolean
         x-nullable: true
       globalDeploymentOptions:
-        allOf:
-        - $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
+        $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
         description: Deployment options for encouraging deployment as code
       helmRepositoryURL:
         description: Helm repository URL
@@ -5647,10 +5110,6 @@ definitions:
   ssl.sslUpdatePayload:
     properties:
       cert:
-        description: SSL Certficates
-        type: string
-      clientCert:
-        description: SSL Client Certificates
         type: string
       httpenabled:
         type: boolean
@@ -5702,8 +5161,7 @@ definitions:
           type: string
         type: array
       autoUpdate:
-        allOf:
-        - $ref: '#/definitions/portaineree.AutoUpdateSettings'
+        $ref: '#/definitions/portaineree.StackAutoUpdate'
         description: Optional auto update configuration
       composeFile:
         default: docker-compose.yml
@@ -5760,12 +5218,7 @@ definitions:
         example: myGitUsername
         type: string
       supportRelativePath:
-        description: Whether the stack supports relative path volume
-        example: false
-        type: boolean
-        x-nullable: true
-      tlsskipVerify:
-        description: TLSSkipVerify skips SSL verification when cloning the Git repository
+        description: Whether the stack suppors relative path volume
         example: false
         type: boolean
         x-nullable: true
@@ -5780,7 +5233,7 @@ definitions:
           type: string
         type: array
       autoUpdate:
-        $ref: '#/definitions/portaineree.AutoUpdateSettings'
+        $ref: '#/definitions/portaineree.StackAutoUpdate'
       composeFormat:
         type: boolean
         x-nullable: true
@@ -5803,11 +5256,6 @@ definitions:
         type: string
       stackName:
         type: string
-      tlsskipVerify:
-        description: TLSSkipVerify skips SSL verification when cloning the Git repository
-        example: false
-        type: boolean
-        x-nullable: true
     type: object
   stacks.kubernetesManifestURLDeploymentPayload:
     properties:
@@ -5875,7 +5323,7 @@ definitions:
   stacks.stackGitUpdatePayload:
     properties:
       autoUpdate:
-        $ref: '#/definitions/portaineree.AutoUpdateSettings'
+        $ref: '#/definitions/portaineree.StackAutoUpdate'
       env:
         items:
           $ref: '#/definitions/portaineree.Pair'
@@ -5958,8 +5406,7 @@ definitions:
           type: string
         type: array
       autoUpdate:
-        allOf:
-        - $ref: '#/definitions/portaineree.AutoUpdateSettings'
+        $ref: '#/definitions/portaineree.StackAutoUpdate'
         description: Optional auto update configuration
       composeFile:
         default: docker-compose.yml
@@ -6024,11 +5471,6 @@ definitions:
         description: Swarm cluster identifier
         example: jpofkc0i9uo9wtx1zesuk649w
         type: string
-      tlsskipVerify:
-        description: TLSSkipVerify skips SSL verification when cloning the Git repository
-        example: false
-        type: boolean
-        x-nullable: true
     required:
     - name
     - repositoryURL
@@ -6065,6 +5507,17 @@ definitions:
         description: A UUID to identify a webhook. The stack will be force updated
           and pull the latest image when the webhook was invoked.
         example: c11fdf23-183e-428a-9bb6-16db01032174
+        type: string
+    type: object
+  system.systemInfoResponse:
+    properties:
+      agents:
+        type: integer
+      edgeAgents:
+        type: integer
+      edgeDevices:
+        type: integer
+      platform:
         type: string
     type: object
   tags.tagCreatePayload:
@@ -6134,6 +5587,8 @@ definitions:
         - 3
         - 5
         items:
+          description: User Identifier
+          example: 1
           type: integer
         type: array
     required:
@@ -6176,29 +5631,54 @@ definitions:
       version:
         type: string
     type: object
-  time.Duration:
-    enum:
-    - -9223372036854775808
-    - 9223372036854775807
-    - 1
-    - 1000
-    - 1000000
-    - 1000000000
-    - 60000000000
-    - 3600000000000
-    type: integer
-    x-enum-varnames:
-    - minDuration
-    - maxDuration
-    - Nanosecond
-    - Microsecond
-    - Millisecond
-    - Second
-    - Minute
-    - Hour
+  types.Container:
+    properties:
+      Id:
+        type: string
+      command:
+        type: string
+      created:
+        type: integer
+      hostConfig:
+        properties:
+          networkMode:
+            type: string
+        type: object
+      image:
+        type: string
+      imageID:
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      mounts:
+        items:
+          $ref: '#/definitions/types.MountPoint'
+        type: array
+      names:
+        items:
+          type: string
+        type: array
+      networkSettings:
+        $ref: '#/definitions/types.SummaryNetworkSettings'
+      ports:
+        items:
+          $ref: '#/definitions/types.Port'
+        type: array
+      sizeRootFs:
+        type: integer
+      sizeRw:
+        type: integer
+      state:
+        type: string
+      status:
+        type: string
+    type: object
   types.EndpointUpdateScheduleRelation:
     properties:
       edgeStackId:
+        description: EdgeStack Identifier
         type: integer
       environmentId:
         type: integer
@@ -6210,9 +5690,12 @@ definitions:
   types.EnvironmentMetadata:
     properties:
       groupId:
+        description: Environment(Endpoint) group identifier
         type: integer
       tagIds:
         items:
+          description: Tag identifier
+          example: 1
           type: integer
         type: array
     type: object
@@ -6227,14 +5710,14 @@ definitions:
       name:
         type: string
       propagation:
-        $ref: '#/definitions/mount.Propagation'
+        type: string
       rw:
         type: boolean
         x-nullable: true
       source:
         type: string
       type:
-        $ref: '#/definitions/mount.Type'
+        type: string
     type: object
   types.Port:
     properties:
@@ -6281,6 +5764,7 @@ definitions:
         example: 1
         type: integer
       edgeStackId:
+        description: EdgeStack Identifier
         example: 1
         type: integer
       environmentsPreviousVersions:
@@ -6295,44 +5779,17 @@ definitions:
         description: Name of the schedule
         example: Update Schedule
         type: string
-      registryId:
-        description: ID of registry
-        example: 1
-        type: integer
       type:
-        allOf:
-        - $ref: '#/definitions/types.UpdateScheduleType'
         description: Type of the update (1 - update, 2 - rollback)
         enum:
         - 1
         - 2
         example: 1
+        type: integer
       version:
         example: 1.0.0
         type: string
     type: object
-  types.UpdateScheduleStatusType:
-    enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    type: integer
-    x-enum-varnames:
-    - UpdateScheduleStatusPending
-    - UpdateScheduleStatusError
-    - UpdateScheduleStatusSuccess
-    - UpdateScheduleStatusSent
-  types.UpdateScheduleType:
-    enum:
-    - 0
-    - 1
-    - 2
-    type: integer
-    x-enum-varnames:
-    - _
-    - UpdateScheduleUpdate
-    - UpdateScheduleRollback
   useractivity.logsListResponse:
     properties:
       logs:
@@ -6475,6 +5932,8 @@ definitions:
       endpointID:
         type: integer
       registryID:
+        description: Registry Identifier
+        example: 1
         type: integer
       resourceID:
         type: string
@@ -6486,11 +5945,12 @@ definitions:
       resourceID:
         type: string
       webhookType:
-        $ref: '#/definitions/portaineree.WebhookType'
+        type: integer
     type: object
   webhooks.webhookUpdatePayload:
     properties:
       registryID:
+        description: Registry Identifier
         type: integer
     type: object
 info:
@@ -6562,7 +6022,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.18.1
+  version: 2.17.1
 paths:
   /auth:
     post:
@@ -6785,6 +6245,29 @@ paths:
       summary: Fetch the status of the last scheduled backup run
       tags:
       - backup
+  /cloud:
+    post:
+      description: |-
+        The information returned can be used to provision a KaaS cluster.
+        **Access policy**: administrator
+      operationId: kaasProviderInfo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+        "503":
+          description: Missing configuration
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Returns information about a Cloud provider.
+      tags:
+      - kaas
   /cloud/{provider}:
     post:
       consumes:
@@ -6842,77 +6325,6 @@ paths:
       summary: Provision a new KaaS cluster and create an environment
       tags:
       - kaas
-  /cloud/{provider}/info:
-    get:
-      description: |-
-        The information returned can be used to provision a KaaS cluster.
-        **Access policy**: administrator
-      operationId: kaasProviderInfo
-      parameters:
-      - description: If true, get the up-to-date information (instead of cached information).
-        in: query
-        name: force
-        type: boolean
-        x-nullable: true
-      - description: The shared credential ID used to fetch the cloud provider information.
-        in: query
-        name: credentialId
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success
-        "400":
-          description: Invalid request
-        "500":
-          description: Server error
-        "503":
-          description: Missing configuration
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Get information about the provisioning options for a cloud provider.
-      tags:
-      - kaas
-  /cloud/microk8s/addons:
-    get:
-      description: |-
-        The information returned can be used to query the MircoK8s cluster.
-        **Access policy**: authenticated
-      operationId: microk8sAddons
-      parameters:
-      - description: The environment ID of the cluster within Portainer.
-        in: query
-        name: environmentID
-        required: true
-        type: integer
-      - description: The credential ID to use to connect to a node in the MicroK8s
-          cluster.
-        in: query
-        name: credentialID
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success
-        "400":
-          description: Invalid request
-        "403":
-          description: Permission denied
-        "500":
-          description: Server error
-        "503":
-          description: Missing configuration
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Get a list of addons which are installed in a MicroK8s cluster.
-      tags:
-      - kaas
   /cloudcredentials:
     get:
       description: |-
@@ -6943,14 +6355,27 @@ paths:
       tags:
       - cloud_credentials
     post:
+      consumes:
+      - application/json
+      - multipart/form-data
       description: |-
-        delete delete a cloud credential by ID
+        Create a cloud credential
         **Access policy**: authenticated
-      operationId: delete
+      operationId: Create
       parameters:
-      - description: ID of the cloud credential
-        in: query
-        name: id
+      - description: cloud provider such as aws, aks, civo, digitalocean, etc.
+        in: formData
+        name: provider
+        required: true
+        type: string
+      - description: name of the credentials such as rnd-test-credential
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: credentials in json format
+        in: formData
+        name: credentials
         required: true
         type: string
       produces:
@@ -6967,7 +6392,7 @@ paths:
       security:
       - ApiKeyAuth: []
       - jwt: []
-      summary: delete delete a cloud credential by ID
+      summary: Create a cloud credential
       tags:
       - cloud_credentials
     put:
@@ -7018,8 +6443,7 @@ paths:
         **Access policy**: authenticated
       operationId: CustomTemplateList
       parameters:
-      - collectionFormat: csv
-        description: Template types
+      - description: Template types
         in: query
         items:
           enum:
@@ -7374,7 +6798,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portainer.DockerContainerSnapshot'
+            $ref: '#/definitions/types.Container'
         "404":
           description: Environment not found
       security:
@@ -7406,7 +6830,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portainer.DockerContainerSnapshot'
+            $ref: '#/definitions/types.Container'
         "404":
           description: Environment not found
       security:
@@ -7645,7 +7069,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       responses:
         "204":
           description: No Content
@@ -7669,7 +7093,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -7699,7 +7123,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: EdgeGroup data
         in: body
         name: body
@@ -7734,7 +7158,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -7763,7 +7187,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -7794,12 +7218,12 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Task Id
         in: path
         name: taskID
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -7825,12 +7249,12 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Task Id
         in: path
         name: taskID
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -7858,12 +7282,12 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Task Id
         in: path
         name: taskID
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -7963,7 +7387,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       responses:
         "204":
           description: No Content
@@ -7987,7 +7411,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -8017,7 +7441,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: EdgeStack data
         in: body
         name: body
@@ -8052,7 +7476,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -8081,12 +7505,12 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Endpoint Id
         in: path
         name: endpoint_id
         required: true
-        type: integer
+        type: string
       responses:
         "204":
           description: No Content
@@ -8108,12 +7532,12 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Environment Id
         in: path
         name: endpoint_id
         required: true
-        type: integer
+        type: string
       responses:
         "200":
           description: OK
@@ -8137,12 +7561,12 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Environment Id
         in: path
         name: endpoint_id
         required: true
-        type: integer
+        type: string
       - description: Number of lines to request for the logs
         in: query
         name: tail
@@ -8175,7 +7599,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -8203,14 +7627,14 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portainer.EdgeStack'
+            $ref: '#/definitions/portaineree.EdgeStack'
         "400":
           description: Bad Request
         "403":
@@ -8357,29 +7781,6 @@ paths:
   /edge_update_schedules/agent_versions:
     get:
       description: '**Access policy**: authenticated'
-      operationId: AgentVersions
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              type: string
-            type: array
-        "400":
-          description: Invalid request
-        "500":
-          description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Fetches the supported versions of the agent to update/rollback
-      tags:
-      - edge_update_schedules
-  /edge_update_schedules/previous_versions:
-    get:
-      description: '**Access policy**: administrator'
       operationId: EdgeUpdatePreviousVersions
       produces:
       - application/json
@@ -8641,29 +8042,25 @@ paths:
         in: query
         name: search
         type: string
-      - collectionFormat: csv
-        description: List environments(endpoints) of these groups
+      - description: List environments(endpoints) of these groups
         in: query
         items:
           type: integer
         name: groupIds
         type: array
-      - collectionFormat: csv
-        description: List environments(endpoints) by this status
+      - description: List environments(endpoints) by this status
         in: query
         items:
           type: integer
         name: status
         type: array
-      - collectionFormat: csv
-        description: List environments(endpoints) of this type
+      - description: List environments(endpoints) of this type
         in: query
         items:
           type: integer
         name: types
         type: array
-      - collectionFormat: csv
-        description: search environments(endpoints) with these tags (depends on tagsPartialMatch)
+      - description: search environments(endpoints) with these tags (depends on tagsPartialMatch)
         in: query
         items:
           type: integer
@@ -8676,8 +8073,7 @@ paths:
         name: tagsPartialMatch
         type: boolean
         x-nullable: true
-      - collectionFormat: csv
-        description: will return only these environments(endpoints)
+      - description: will return only these environments(endpoints)
         in: query
         items:
           type: integer
@@ -8688,21 +8084,21 @@ paths:
         name: provisioned
         type: boolean
         x-nullable: true
-      - collectionFormat: csv
-        description: will return only environments with on of these agent versions
+      - description: will return only environments with on of these agent versions
         in: query
         items:
           type: string
         name: agentVersions
         type: array
-      - description: if exists true show only edge async agents, false show only standard
-          edge agents. if missing, will show both types (relevant only for edge agents)
+      - description: if exists true show only edge devices, false show only regular
+          edge endpoints. if missing, will show both types (relevant only for edge
+          endpoints)
         in: query
-        name: edgeAsync
+        name: edgeDevice
         type: boolean
         x-nullable: true
-      - description: if true, show only untrusted edge agents, if false show only
-          trusted edge agents (relevant only for edge agents)
+      - description: if true, show only untrusted endpoints, if false show only trusted
+          (relevant only for edge devices, and if edgeDevice is true)
         in: query
         name: edgeDeviceUntrusted
         type: boolean
@@ -8744,15 +8140,14 @@ paths:
         type: string
       - description: 'Environment(Endpoint) type. Value must be one of: 1 (Local Docker
           environment), 2 (Agent environment), 3 (Azure environment), 4 (Edge agent
-          environment) or 5 (Local Kubernetes Environment)'
+          environment) or 5 (Local Kubernetes Environment'
         in: formData
         name: EndpointCreationType
         required: true
         type: integer
       - description: 'URL or IP address of a Docker host (example: docker.mydomain.tld:2375).
           Defaults to local if not specified (Linux: /var/run/docker.sock, Windows:
-          //./pipe/docker_engine). Cannot be empty if EndpointCreationType is set
-          to 4 (Edge agent environment)'
+          //./pipe/docker_engine)'
         in: formData
         name: URL
         type: string
@@ -8766,20 +8161,17 @@ paths:
         in: formData
         name: GroupID
         type: integer
-      - description: Require TLS to connect against this environment(endpoint). Must
-          be true if EndpointCreationType is set to 2 (Agent environment)
+      - description: Require TLS to connect against this environment(endpoint)
         in: formData
         name: TLS
         type: boolean
         x-nullable: true
-      - description: Skip server verification when using TLS. Must be true if EndpointCreationType
-          is set to 2 (Agent environment)
+      - description: Skip server verification when using TLS
         in: formData
         name: TLSSkipVerify
         type: boolean
         x-nullable: true
-      - description: Skip client verification when using TLS. Must be true if EndpointCreationType
-          is set to 2 (Agent environment)
+      - description: Skip client verification when using TLS
         in: formData
         name: TLSSkipClientVerify
         type: boolean
@@ -8811,13 +8203,12 @@ paths:
         in: formData
         name: AzureAuthenticationKey
         type: string
-      - collectionFormat: csv
-        description: List of tag identifiers to which this environment(endpoint) is
+      - description: List of tag identifiers to which this environment(endpoint) is
           associated
         in: formData
         items:
           type: integer
-        name: TagIds
+        name: TagIDs
         type: array
       - description: The check in interval for edge agent (in seconds)
         in: formData
@@ -8828,9 +8219,9 @@ paths:
         name: EdgeTunnelServerAddress
         required: true
         type: string
-      - description: Enable async mode for edge agent
+      - description: Is Edge Device
         in: formData
-        name: EdgeAsyncMode
+        name: IsEdgeDevice
         type: boolean
         x-nullable: true
       - description: List of GPUs
@@ -8985,10 +8376,12 @@ paths:
   /endpoints/{id}/docker/v2/browse/put:
     post:
       consumes:
+      - application/x-www-form-urlencoded
       - multipart/form-data
       description: |-
-        Use this environment(endpoint) to upload TLS files.
-        **Access policy**: administrator
+        Upload a file under a specific path on the file system of an environment (endpoint).
+        **Access policy**: authenticated
+      operationId: EndpointBrowsePut
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
@@ -8998,21 +8391,20 @@ paths:
       - description: Optional volume identifier to upload the file
         in: query
         name: volumeID
+        required: false
         type: string
-      - description: The destination path to upload the file to
+      - description: Path to upload the file
         in: formData
-        name: Path
+        name: path
         required: true
         type: string
-      - description: The file to upload
+      - description: File to upload
         in: formData
         name: file
         required: true
         type: file
-      produces:
-      - application/json
       responses:
-        "204":
+        "200":
           description: Success
         "400":
           description: Invalid request
@@ -9021,8 +8413,7 @@ paths:
       security:
       - ApiKeyAuth: []
       - jwt: []
-      summary: Upload a file under a specific path on the file system of an environment
-        (endpoint)
+      summary: Upload a file under a specific path on the file system of an environment (endpoint).
       tags:
       - endpoints
   /endpoints/{id}/dockerhub/{registryId}:
@@ -9100,12 +8491,12 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Job Id
         in: path
         name: jobID
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -9129,12 +8520,12 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: EdgeStack Id
         in: path
         name: stackId
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -9194,7 +8585,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -9264,14 +8655,17 @@ paths:
       - description: specify an optional namespace
         in: query
         name: namespace
+        required: true
         type: string
       - description: specify an optional filter
         in: query
         name: filter
+        required: true
         type: string
       - description: specify an optional selector
         in: query
         name: selector
+        required: true
         type: string
       produces:
       - application/json
@@ -9350,6 +8744,7 @@ paths:
       - description: An optional namespace
         in: query
         name: namespace
+        required: true
         type: string
       responses:
         "204":
@@ -10256,15 +9651,13 @@ paths:
         **Access policy**: authenticated
       operationId: GetKubernetesConfig
       parameters:
-      - collectionFormat: csv
-        description: will include only these environments(endpoints)
+      - description: will include only these environments(endpoints)
         in: query
         items:
           type: integer
         name: ids
         type: array
-      - collectionFormat: csv
-        description: will exclude these environments(endpoints)
+      - description: will exclude these environments(endpoints)
         in: query
         items:
           type: integer
@@ -11323,30 +10716,6 @@ paths:
       summary: Retrieve Portainer public settings
       tags:
       - settings
-  /sshkeygen:
-    post:
-      consumes:
-      - application/json
-      - multipart/form-data
-      description: |-
-        Generate an ssh public / private keypair
-        **Access policy**: authenticated
-      operationId: Generate
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.SSHKeyPair'
-        "500":
-          description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Generate ssh keypair
-      tags:
-      - cloud_credentials
   /ssl:
     get:
       description: |-
@@ -11982,7 +11351,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github_com_portainer_portainer-ee_api_http_handler_system.status'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.status'
       summary: Check Portainer status
       tags:
       - status
@@ -11999,7 +11368,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github_com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse'
         "500":
           description: Server error
       security:
@@ -12022,13 +11391,32 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github_com_portainer_portainer-ee_api_http_handler_system.versionResponse'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.versionResponse'
       security:
       - ApiKeyAuth: []
       - jwt: []
       summary: Check for portainer updates
       tags:
       - status
+  /system/info:
+    get:
+      description: '**Access policy**: authenticated'
+      operationId: systemInfo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/system.systemInfoResponse'
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Retrieve system info
+      tags:
+      - system
   /system/nodes:
     get:
       description: '**Access policy**: authenticated'
@@ -12039,7 +11427,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github_com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse'
         "500":
           description: Server error
       security:
@@ -12060,8 +11448,24 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github_com_portainer_portainer-ee_api_http_handler_system.status'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.status'
       summary: Check Portainer status
+      tags:
+      - system
+  /system/upgrade:
+    post:
+      description: |-
+        Upgrade Portainer to BE
+        **Access policy**: administrator
+      operationId: systemUpgrade
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/github.com_portainer_portainer_api_http_handler_system.status'
+      summary: Upgrade Portainer to BE
       tags:
       - system
   /system/version:
@@ -12076,7 +11480,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github_com_portainer_portainer-ee_api_http_handler_system.versionResponse'
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.versionResponse'
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -12421,7 +11825,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       responses:
         "204":
           description: Success
@@ -12484,7 +11888,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -13840,7 +13244,7 @@ schemes:
 securityDefinitions:
   ApiKeyAuth:
     in: header
-    name: x-api-key
+    name: Authorization
     type: apiKey
   jwt:
     in: header
@@ -13882,12 +13286,6 @@ tags:
   name: roles
 - description: Manage Portainer settings
   name: settings
-- description: Manage stacks
-  name: stacks
-- description: Information about the Portainer instance
-  name: status
-- description: Manage Portainer system
-  name: system
 - description: Manage users
   name: users
 - description: Manage tags
@@ -13898,9 +13296,15 @@ tags:
   name: team_memberships
 - description: Manage App Templates
   name: templates
+- description: Manage stacks
+  name: stacks
 - description: Upload files
   name: upload
 - description: Manage webhooks
   name: webhooks
 - description: Create exec sessions using websockets
   name: websocket
+- description: Information about the Portainer instance
+  name: status
+- description: Manage Portainer system
+  name: system

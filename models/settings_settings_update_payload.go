@@ -57,9 +57,7 @@ type SettingsSettingsUpdatePayload struct {
 	EnforceEdgeID *bool `json:"enforceEdgeID,omitempty"`
 
 	// Deployment options for encouraging deployment as code
-	GlobalDeploymentOptions struct {
-		PortainereeGlobalDeploymentOptions
-	} `json:"globalDeploymentOptions,omitempty"`
+	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"globalDeploymentOptions,omitempty"`
 
 	// Helm repository URL
 	// Example: https://charts.bitnami.com/bitnami
@@ -185,6 +183,17 @@ func (m *SettingsSettingsUpdatePayload) validateEdge(formats strfmt.Registry) er
 func (m *SettingsSettingsUpdatePayload) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
 	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
 		return nil
+	}
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("globalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("globalDeploymentOptions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -319,6 +328,17 @@ func (m *SettingsSettingsUpdatePayload) contextValidateEdge(ctx context.Context,
 
 func (m *SettingsSettingsUpdatePayload) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("globalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("globalDeploymentOptions")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -408,73 +428,17 @@ type SettingsSettingsUpdatePayloadEdge struct {
 	// AsyncMode enables edge agent to run in async mode by default
 	AsyncMode *bool `json:"asyncMode,omitempty"`
 
-	// mtls
-	Mtls *SettingsmTLSPayload `json:"mtls,omitempty"`
-
 	// The address where the tunneling server can be reached by Edge agents
 	TunnelServerAddress string `json:"tunnelServerAddress,omitempty"`
 }
 
 // Validate validates this settings settings update payload edge
 func (m *SettingsSettingsUpdatePayloadEdge) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateMtls(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *SettingsSettingsUpdatePayloadEdge) validateMtls(formats strfmt.Registry) error {
-	if swag.IsZero(m.Mtls) { // not required
-		return nil
-	}
-
-	if m.Mtls != nil {
-		if err := m.Mtls.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("edge" + "." + "mtls")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("edge" + "." + "mtls")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this settings settings update payload edge based on the context it is used
+// ContextValidate validates this settings settings update payload edge based on context it is used
 func (m *SettingsSettingsUpdatePayloadEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateMtls(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *SettingsSettingsUpdatePayloadEdge) contextValidateMtls(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Mtls != nil {
-		if err := m.Mtls.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("edge" + "." + "mtls")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("edge" + "." + "mtls")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

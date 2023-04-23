@@ -33,24 +33,18 @@ type PortainereeEndpoint struct {
 	AzureCredentials *PortainereeAzureCredentials `json:"AzureCredentials,omitempty"`
 
 	// Automatic update change window restriction for stacks and apps
-	ChangeWindow struct {
-		PortainereeEndpointChangeWindow
-	} `json:"ChangeWindow,omitempty"`
+	ChangeWindow *PortainereeEndpointChangeWindow `json:"ChangeWindow,omitempty"`
 
 	// A Kubernetes as a service cloud provider. Only included if this
 	// endpoint was created using KaaS provisioning.
-	CloudProvider struct {
-		PortainereeCloudProvider
-	} `json:"CloudProvider,omitempty"`
+	CloudProvider *PortainereeCloudProvider `json:"CloudProvider,omitempty"`
 
 	// Maximum version of docker-compose
 	// Example: 3.8
 	ComposeSyntaxMaxVersion string `json:"ComposeSyntaxMaxVersion,omitempty"`
 
 	// Hide manual deployment forms for an environment
-	DeploymentOptions struct {
-		PortainereeDeploymentOptions
-	} `json:"DeploymentOptions,omitempty"`
+	DeploymentOptions *PortainereeDeploymentOptions `json:"DeploymentOptions,omitempty"`
 
 	// The check in interval for edge agent (in seconds)
 	// Example: 5
@@ -62,9 +56,6 @@ type PortainereeEndpoint struct {
 	// The key which is used to map the agent to Portainer
 	EdgeKey string `json:"EdgeKey,omitempty"`
 
-	// enable g p u management
-	EnableGPUManagement *bool `json:"EnableGPUManagement,omitempty"`
-
 	// enable image notification
 	EnableImageNotification *bool `json:"EnableImageNotification,omitempty"`
 
@@ -75,32 +66,22 @@ type PortainereeEndpoint struct {
 	// Example: 1
 	GroupID int64 `json:"GroupId,omitempty"`
 
-	// Heartbeat indicates the heartbeat status of an edge environment
-	// Example: true
-	Heartbeat *bool `json:"Heartbeat,omitempty"`
-
 	// Environment(Endpoint) Identifier
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
 	// Associated Kubernetes data
-	Kubernetes struct {
-		PortainereeKubernetesData
-	} `json:"Kubernetes,omitempty"`
+	Kubernetes *PortainereeKubernetesData `json:"Kubernetes,omitempty"`
 
 	// Environment(Endpoint) name
 	// Example: my-environment
 	Name string `json:"Name,omitempty"`
 
 	// Associated Nomad data
-	Nomad struct {
-		PortainereeNomadData
-	} `json:"Nomad,omitempty"`
+	Nomad *PortainereeNomadData `json:"Nomad,omitempty"`
 
 	// Whether we need to run any "post init migrations".
-	PostInitMigrations struct {
-		PortainereeEndpointPostInitMigrations
-	} `json:"PostInitMigrations,omitempty"`
+	PostInitMigrations *PortainereeEndpointPostInitMigrations `json:"PostInitMigrations,omitempty"`
 
 	// URL or IP address where exposed containers will be reachable
 	// Example: docker.mydomain.tld:2375
@@ -112,15 +93,11 @@ type PortainereeEndpoint struct {
 	// The status of the environment(endpoint) (1 - up, 2 - down, 3 -
 	// provisioning, 4 - error)
 	// Example: 1
-	Status struct {
-		PortainereeEndpointStatus
-	} `json:"Status,omitempty"`
+	Status int64 `json:"Status,omitempty"`
 
 	// A message that describes the status. Should be included for Status 3
 	// or 4.
-	StatusMessage struct {
-		PortainereeEndpointStatusMessage
-	} `json:"StatusMessage,omitempty"`
+	StatusMessage *PortainereeEndpointStatusMessage `json:"StatusMessage,omitempty"`
 
 	// Deprecated fields
 	// Deprecated in DBVersion == 4
@@ -145,30 +122,24 @@ type PortainereeEndpoint struct {
 	Tags []string `json:"Tags"`
 
 	// List of team identifiers authorized to connect to this environment(endpoint)
-	TeamAccessPolicies struct {
-		PortainereeTeamAccessPolicies
-	} `json:"TeamAccessPolicies,omitempty"`
+	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
 
 	// Environment(Endpoint) environment(endpoint) type. 1 for a Docker environment(endpoint), 2 for an agent on Docker environment(endpoint) or 3 for an Azure environment(endpoint).
 	// Example: 1
-	Type struct {
-		PortainereeEndpointType
-	} `json:"Type,omitempty"`
+	Type int64 `json:"Type,omitempty"`
 
 	// URL or IP address of the Docker host associated to this environment(endpoint)
 	// Example: docker.mydomain.tld:2375
 	URL string `json:"URL,omitempty"`
 
 	// List of user identifiers authorized to connect to this environment(endpoint)
-	UserAccessPolicies struct {
-		PortainereeUserAccessPolicies
-	} `json:"UserAccessPolicies,omitempty"`
+	UserAccessPolicies PortainereeUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
 
 	// agent
 	Agent *PortainereeEndpointAgent `json:"agent,omitempty"`
 
 	// edge
-	Edge *PortainereeEnvironmentEdgeSettings `json:"edge,omitempty"`
+	Edge *PortainereeEndpointEdge `json:"edge,omitempty"`
 
 	// IsEdgeDevice marks if the environment was created as an EdgeDevice
 	IsEdgeDevice *bool `json:"isEdgeDevice,omitempty"`
@@ -183,9 +154,7 @@ type PortainereeEndpoint struct {
 	QueryDate int64 `json:"queryDate,omitempty"`
 
 	// Environment(Endpoint) specific security settings
-	SecuritySettings struct {
-		PortainereeEndpointSecuritySettings
-	} `json:"securitySettings,omitempty"`
+	SecuritySettings *PortainereeEndpointSecuritySettings `json:"securitySettings,omitempty"`
 
 	// Whether the device has been trusted or not by the user
 	UserTrusted *bool `json:"userTrusted,omitempty"`
@@ -231,10 +200,6 @@ func (m *PortainereeEndpoint) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateStatus(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateStatusMessage(formats); err != nil {
 		res = append(res, err)
 	}
@@ -244,10 +209,6 @@ func (m *PortainereeEndpoint) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTeamAccessPolicies(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -297,6 +258,17 @@ func (m *PortainereeEndpoint) validateChangeWindow(formats strfmt.Registry) erro
 		return nil
 	}
 
+	if m.ChangeWindow != nil {
+		if err := m.ChangeWindow.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ChangeWindow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ChangeWindow")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -305,12 +277,34 @@ func (m *PortainereeEndpoint) validateCloudProvider(formats strfmt.Registry) err
 		return nil
 	}
 
+	if m.CloudProvider != nil {
+		if err := m.CloudProvider.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("CloudProvider")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("CloudProvider")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
 func (m *PortainereeEndpoint) validateDeploymentOptions(formats strfmt.Registry) error {
 	if swag.IsZero(m.DeploymentOptions) { // not required
 		return nil
+	}
+
+	if m.DeploymentOptions != nil {
+		if err := m.DeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DeploymentOptions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -347,6 +341,17 @@ func (m *PortainereeEndpoint) validateKubernetes(formats strfmt.Registry) error 
 		return nil
 	}
 
+	if m.Kubernetes != nil {
+		if err := m.Kubernetes.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Kubernetes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Kubernetes")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -355,12 +360,34 @@ func (m *PortainereeEndpoint) validateNomad(formats strfmt.Registry) error {
 		return nil
 	}
 
+	if m.Nomad != nil {
+		if err := m.Nomad.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Nomad")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Nomad")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
 func (m *PortainereeEndpoint) validatePostInitMigrations(formats strfmt.Registry) error {
 	if swag.IsZero(m.PostInitMigrations) { // not required
 		return nil
+	}
+
+	if m.PostInitMigrations != nil {
+		if err := m.PostInitMigrations.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PostInitMigrations")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PostInitMigrations")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -392,17 +419,20 @@ func (m *PortainereeEndpoint) validateSnapshots(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *PortainereeEndpoint) validateStatus(formats strfmt.Registry) error {
-	if swag.IsZero(m.Status) { // not required
-		return nil
-	}
-
-	return nil
-}
-
 func (m *PortainereeEndpoint) validateStatusMessage(formats strfmt.Registry) error {
 	if swag.IsZero(m.StatusMessage) { // not required
 		return nil
+	}
+
+	if m.StatusMessage != nil {
+		if err := m.StatusMessage.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("StatusMessage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("StatusMessage")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -432,12 +462,15 @@ func (m *PortainereeEndpoint) validateTeamAccessPolicies(formats strfmt.Registry
 		return nil
 	}
 
-	return nil
-}
-
-func (m *PortainereeEndpoint) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
+	if m.TeamAccessPolicies != nil {
+		if err := m.TeamAccessPolicies.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("TeamAccessPolicies")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("TeamAccessPolicies")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -446,6 +479,17 @@ func (m *PortainereeEndpoint) validateType(formats strfmt.Registry) error {
 func (m *PortainereeEndpoint) validateUserAccessPolicies(formats strfmt.Registry) error {
 	if swag.IsZero(m.UserAccessPolicies) { // not required
 		return nil
+	}
+
+	if m.UserAccessPolicies != nil {
+		if err := m.UserAccessPolicies.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("UserAccessPolicies")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("UserAccessPolicies")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -494,6 +538,17 @@ func (m *PortainereeEndpoint) validateSecuritySettings(formats strfmt.Registry) 
 		return nil
 	}
 
+	if m.SecuritySettings != nil {
+		if err := m.SecuritySettings.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("securitySettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("securitySettings")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -537,10 +592,6 @@ func (m *PortainereeEndpoint) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateStatus(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateStatusMessage(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -550,10 +601,6 @@ func (m *PortainereeEndpoint) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidateTeamAccessPolicies(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -597,15 +644,48 @@ func (m *PortainereeEndpoint) contextValidateAzureCredentials(ctx context.Contex
 
 func (m *PortainereeEndpoint) contextValidateChangeWindow(ctx context.Context, formats strfmt.Registry) error {
 
+	if m.ChangeWindow != nil {
+		if err := m.ChangeWindow.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ChangeWindow")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ChangeWindow")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
 func (m *PortainereeEndpoint) contextValidateCloudProvider(ctx context.Context, formats strfmt.Registry) error {
 
+	if m.CloudProvider != nil {
+		if err := m.CloudProvider.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("CloudProvider")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("CloudProvider")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
 func (m *PortainereeEndpoint) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DeploymentOptions != nil {
+		if err := m.DeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DeploymentOptions")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
@@ -632,15 +712,48 @@ func (m *PortainereeEndpoint) contextValidateGpus(ctx context.Context, formats s
 
 func (m *PortainereeEndpoint) contextValidateKubernetes(ctx context.Context, formats strfmt.Registry) error {
 
+	if m.Kubernetes != nil {
+		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Kubernetes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Kubernetes")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
 func (m *PortainereeEndpoint) contextValidateNomad(ctx context.Context, formats strfmt.Registry) error {
 
+	if m.Nomad != nil {
+		if err := m.Nomad.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Nomad")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Nomad")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
 func (m *PortainereeEndpoint) contextValidatePostInitMigrations(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PostInitMigrations != nil {
+		if err := m.PostInitMigrations.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PostInitMigrations")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PostInitMigrations")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
@@ -665,12 +778,18 @@ func (m *PortainereeEndpoint) contextValidateSnapshots(ctx context.Context, form
 	return nil
 }
 
-func (m *PortainereeEndpoint) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
 func (m *PortainereeEndpoint) contextValidateStatusMessage(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StatusMessage != nil {
+		if err := m.StatusMessage.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("StatusMessage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("StatusMessage")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
@@ -693,15 +812,28 @@ func (m *PortainereeEndpoint) contextValidateTLSConfig(ctx context.Context, form
 
 func (m *PortainereeEndpoint) contextValidateTeamAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
 
-	return nil
-}
-
-func (m *PortainereeEndpoint) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+	if err := m.TeamAccessPolicies.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("TeamAccessPolicies")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("TeamAccessPolicies")
+		}
+		return err
+	}
 
 	return nil
 }
 
 func (m *PortainereeEndpoint) contextValidateUserAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.UserAccessPolicies.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("UserAccessPolicies")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("UserAccessPolicies")
+		}
+		return err
+	}
 
 	return nil
 }
@@ -739,6 +871,17 @@ func (m *PortainereeEndpoint) contextValidateEdge(ctx context.Context, formats s
 }
 
 func (m *PortainereeEndpoint) contextValidateSecuritySettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SecuritySettings != nil {
+		if err := m.SecuritySettings.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("securitySettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("securitySettings")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
@@ -792,6 +935,55 @@ func (m *PortainereeEndpointAgent) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *PortainereeEndpointAgent) UnmarshalBinary(b []byte) error {
 	var res PortainereeEndpointAgent
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// PortainereeEndpointEdge portaineree endpoint edge
+//
+// swagger:model PortainereeEndpointEdge
+type PortainereeEndpointEdge struct {
+
+	// The command list interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	CommandInterval int64 `json:"CommandInterval,omitempty"`
+
+	// The ping interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	PingInterval int64 `json:"PingInterval,omitempty"`
+
+	// The snapshot interval for edge agent - used in edge async mode [seconds]
+	// Example: 60
+	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
+
+	// Whether the device has been started in edge async mode
+	AsyncMode bool `json:"asyncMode,omitempty"`
+}
+
+// Validate validates this portaineree endpoint edge
+func (m *PortainereeEndpointEdge) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this portaineree endpoint edge based on context it is used
+func (m *PortainereeEndpointEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PortainereeEndpointEdge) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PortainereeEndpointEdge) UnmarshalBinary(b []byte) error {
+	var res PortainereeEndpointEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

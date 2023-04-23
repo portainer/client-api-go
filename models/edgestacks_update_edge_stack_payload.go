@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -18,8 +17,12 @@ import (
 // swagger:model edgestacks.updateEdgeStackPayload
 type EdgestacksUpdateEdgeStackPayload struct {
 
-	// deployment type
-	DeploymentType PortainereeEdgeStackDeploymentType `json:"deploymentType,omitempty"`
+	// Deployment type to deploy this stack
+	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
+	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
+	// kubernetes deploy type is enabled only for kubernetes environments(endpoints)
+	// nomad deploy type is enabled only for nomad environments(endpoints)
+	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// edge groups
 	EdgeGroups []int64 `json:"edgeGroups"`
@@ -33,9 +36,6 @@ type EdgestacksUpdateEdgeStackPayload struct {
 	// registries
 	Registries []int64 `json:"registries"`
 
-	// retry deploy
-	RetryDeploy *bool `json:"retryDeploy,omitempty"`
-
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`
 
@@ -48,60 +48,11 @@ type EdgestacksUpdateEdgeStackPayload struct {
 
 // Validate validates this edgestacks update edge stack payload
 func (m *EdgestacksUpdateEdgeStackPayload) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateDeploymentType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *EdgestacksUpdateEdgeStackPayload) validateDeploymentType(formats strfmt.Registry) error {
-	if swag.IsZero(m.DeploymentType) { // not required
-		return nil
-	}
-
-	if err := m.DeploymentType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("deploymentType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("deploymentType")
-		}
-		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this edgestacks update edge stack payload based on the context it is used
+// ContextValidate validates this edgestacks update edge stack payload based on context it is used
 func (m *EdgestacksUpdateEdgeStackPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateDeploymentType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *EdgestacksUpdateEdgeStackPayload) contextValidateDeploymentType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.DeploymentType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("deploymentType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("deploymentType")
-		}
-		return err
-	}
-
 	return nil
 }
 

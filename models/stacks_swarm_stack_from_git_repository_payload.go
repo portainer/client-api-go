@@ -25,9 +25,7 @@ type StacksSwarmStackFromGitRepositoryPayload struct {
 	AdditionalFiles []string `json:"additionalFiles"`
 
 	// Optional auto update configuration
-	AutoUpdate struct {
-		PortainereeAutoUpdateSettings
-	} `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
 
 	// Path to the Stack file inside the Git repository
 	// Example: docker-compose.yml
@@ -85,10 +83,6 @@ type StacksSwarmStackFromGitRepositoryPayload struct {
 	// Example: jpofkc0i9uo9wtx1zesuk649w
 	// Required: true
 	SwarmID *string `json:"swarmID"`
-
-	// TLSSkipVerify skips SSL verification when cloning the Git repository
-	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 }
 
 // Validate validates this stacks swarm stack from git repository payload
@@ -124,6 +118,17 @@ func (m *StacksSwarmStackFromGitRepositoryPayload) Validate(formats strfmt.Regis
 func (m *StacksSwarmStackFromGitRepositoryPayload) validateAutoUpdate(formats strfmt.Registry) error {
 	if swag.IsZero(m.AutoUpdate) { // not required
 		return nil
+	}
+
+	if m.AutoUpdate != nil {
+		if err := m.AutoUpdate.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("autoUpdate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("autoUpdate")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -201,6 +206,17 @@ func (m *StacksSwarmStackFromGitRepositoryPayload) ContextValidate(ctx context.C
 }
 
 func (m *StacksSwarmStackFromGitRepositoryPayload) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AutoUpdate != nil {
+		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("autoUpdate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("autoUpdate")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
