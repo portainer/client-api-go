@@ -30,7 +30,7 @@ type PortainerOpenAMTConfiguration struct {
 	DomainName string `json:"domainName,omitempty"`
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 
 	// mps password
 	MpsPassword string `json:"mpsPassword,omitempty"`

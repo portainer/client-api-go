@@ -20,7 +20,7 @@ import (
 type PortainereeTeamMemberships struct {
 
 	// admin auto populate
-	AdminAutoPopulate bool `json:"AdminAutoPopulate,omitempty"`
+	AdminAutoPopulate *bool `json:"AdminAutoPopulate,omitempty"`
 
 	// admin group claims regex list
 	AdminGroupClaimsRegexList []string `json:"AdminGroupClaimsRegexList"`

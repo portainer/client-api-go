@@ -28,7 +28,7 @@ type PortainereeRegistry struct {
 
 	// Is authentication against this registry enabled
 	// Example: true
-	Authentication bool `json:"Authentication,omitempty"`
+	Authentication *bool `json:"Authentication,omitempty"`
 
 	// Deprecated in DBVersion == 18
 	AuthorizedTeams []int64 `json:"AuthorizedTeams"`

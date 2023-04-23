@@ -19,7 +19,7 @@ type PortainereeStackOption struct {
 
 	// Prune services that are no longer referenced
 	// Example: false
-	Prune bool `json:"prune,omitempty"`
+	Prune *bool `json:"prune,omitempty"`
 }
 
 // Validate validates this portaineree stack option

@@ -19,11 +19,11 @@ type PortainereeAutoUpdateSettings struct {
 
 	// Pull latest image
 	// Example: false
-	ForcePullImage bool `json:"forcePullImage,omitempty"`
+	ForcePullImage *bool `json:"forcePullImage,omitempty"`
 
 	// Force update ignores repo changes
 	// Example: false
-	ForceUpdate bool `json:"forceUpdate,omitempty"`
+	ForceUpdate *bool `json:"forceUpdate,omitempty"`
 
 	// Auto update interval
 	// Example: 1m30s

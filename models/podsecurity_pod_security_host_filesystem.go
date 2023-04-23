@@ -23,7 +23,7 @@ type PodsecurityPodSecurityHostFilesystem struct {
 	AllowedPaths []*PodsecurityPodSecurityAllowedPaths `json:"allowedPaths"`
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 // Validate validates this podsecurity pod security host filesystem

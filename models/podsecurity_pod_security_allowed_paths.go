@@ -21,7 +21,7 @@ type PodsecurityPodSecurityAllowedPaths struct {
 	PathPrefix string `json:"pathPrefix,omitempty"`
 
 	// readonly
-	Readonly bool `json:"readonly,omitempty"`
+	Readonly *bool `json:"readonly,omitempty"`
 }
 
 // Validate validates this podsecurity pod security allowed paths

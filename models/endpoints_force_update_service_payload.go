@@ -18,7 +18,7 @@ import (
 type EndpointsForceUpdateServicePayload struct {
 
 	// PullImage if true will pull the image
-	PullImage bool `json:"pullImage,omitempty"`
+	PullImage *bool `json:"pullImage,omitempty"`
 
 	// ServiceId to update
 	ServiceID string `json:"serviceID,omitempty"`

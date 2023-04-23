@@ -34,7 +34,7 @@ type GitopsRepositoryReferenceListPayload struct {
 
 	// TLSSkipVerify skips SSL verification when cloning the Git repository
 	// Example: false
-	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
+	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 
 	// username
 	Username string `json:"username,omitempty"`

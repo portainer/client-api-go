@@ -19,7 +19,7 @@ type PortainereeTLSConfiguration struct {
 
 	// Use TLS
 	// Example: true
-	TLS bool `json:"TLS,omitempty"`
+	TLS *bool `json:"TLS,omitempty"`
 
 	// Path to the TLS CA certificate file
 	// Example: /data/tls/ca.pem
@@ -35,7 +35,7 @@ type PortainereeTLSConfiguration struct {
 
 	// Skip the verification of the server TLS certificate
 	// Example: false
-	TLSSkipVerify bool `json:"TLSSkipVerify,omitempty"`
+	TLSSkipVerify *bool `json:"TLSSkipVerify,omitempty"`
 }
 
 // Validate validates this portaineree TLS configuration

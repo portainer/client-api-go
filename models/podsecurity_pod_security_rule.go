@@ -34,7 +34,7 @@ type PodsecurityPodSecurityRule struct {
 	Capabilities *PodsecurityPodSecurityCapabilities `json:"capabilities,omitempty"`
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 
 	// end point ID
 	EndPointID int64 `json:"endPointID,omitempty"`

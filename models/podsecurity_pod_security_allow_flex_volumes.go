@@ -21,7 +21,7 @@ type PodsecurityPodSecurityAllowFlexVolumes struct {
 	AllowedVolumes []string `json:"allowedVolumes"`
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 // Validate validates this podsecurity pod security allow flex volumes

@@ -18,7 +18,7 @@ import (
 type PodsecurityPodSecurityForbiddenSysctlsList struct {
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 
 	// required drop capabilities
 	RequiredDropCapabilities []string `json:"requiredDropCapabilities"`

@@ -21,7 +21,7 @@ type PortainereeQuayRegistryData struct {
 	OrganisationName string `json:"OrganisationName,omitempty"`
 
 	// use organisation
-	UseOrganisation bool `json:"UseOrganisation,omitempty"`
+	UseOrganisation *bool `json:"UseOrganisation,omitempty"`
 }
 
 // Validate validates this portaineree quay registry data

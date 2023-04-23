@@ -37,7 +37,7 @@ type GittypesRepoConfig struct {
 
 	// TLSSkipVerify skips SSL verification when cloning the Git repository
 	// Example: false
-	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
+	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 
 	// The repo url
 	// Example: https://github.com/portainer/portainer.git
