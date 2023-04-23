@@ -42,7 +42,7 @@ type PortainerEdgeStack struct {
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
 	// Deprecated
-	Prune bool `json:"Prune,omitempty"`
+	Prune *bool `json:"Prune,omitempty"`
 
 	// status
 	Status map[string]PortainerEdgeStackStatus `json:"Status,omitempty"`
@@ -57,7 +57,7 @@ type PortainerEdgeStack struct {
 	ManifestPath string `json:"manifestPath,omitempty"`
 
 	// Uses the manifest's namespaces instead of the default one
-	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
+	UseManifestNamespaces *bool `json:"useManifestNamespaces,omitempty"`
 }
 
 // Validate validates this portainer edge stack

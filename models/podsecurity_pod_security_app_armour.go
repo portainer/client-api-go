@@ -21,7 +21,7 @@ type PodsecurityPodSecurityAppArmour struct {
 	AppArmorType []string `json:"AppArmorType"`
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 // Validate validates this podsecurity pod security app armour

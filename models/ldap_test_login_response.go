@@ -18,7 +18,7 @@ import (
 type LdapTestLoginResponse struct {
 
 	// valid
-	Valid bool `json:"valid,omitempty"`
+	Valid *bool `json:"valid,omitempty"`
 }
 
 // Validate validates this ldap test login response

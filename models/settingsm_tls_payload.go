@@ -27,7 +27,7 @@ type SettingsmTLSPayload struct {
 	Key string `json:"key,omitempty"`
 
 	// use separate cert
-	UseSeparateCert bool `json:"useSeparateCert,omitempty"`
+	UseSeparateCert *bool `json:"useSeparateCert,omitempty"`
 }
 
 // Validate validates this settings m TLS payload

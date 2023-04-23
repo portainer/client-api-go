@@ -24,7 +24,7 @@ type PortainereeResourceControl struct {
 
 	// Permit access to resource only to admins
 	// Example: true
-	AdministratorsOnly bool `json:"AdministratorsOnly,omitempty"`
+	AdministratorsOnly *bool `json:"AdministratorsOnly,omitempty"`
 
 	// ResourceControl Identifier
 	// Example: 1
@@ -36,7 +36,7 @@ type PortainereeResourceControl struct {
 
 	// Permit access to the associated resource to any user
 	// Example: true
-	Public bool `json:"Public,omitempty"`
+	Public *bool `json:"Public,omitempty"`
 
 	// Docker resource identifier on which access control will be applied.\
 	// In the case of a resource control applied to a stack, use the stack name as identifier
@@ -48,7 +48,7 @@ type PortainereeResourceControl struct {
 	SubResourceIds []string `json:"SubResourceIds"`
 
 	// system
-	System bool `json:"System,omitempty"`
+	System *bool `json:"System,omitempty"`
 
 	// team accesses
 	TeamAccesses []*PortainereeTeamResourceAccess `json:"TeamAccesses"`

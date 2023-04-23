@@ -18,7 +18,7 @@ import (
 type StacksKubernetesManifestURLDeploymentPayload struct {
 
 	// compose format
-	ComposeFormat bool `json:"composeFormat,omitempty"`
+	ComposeFormat *bool `json:"composeFormat,omitempty"`
 
 	// manifest URL
 	ManifestURL string `json:"manifestURL,omitempty"`

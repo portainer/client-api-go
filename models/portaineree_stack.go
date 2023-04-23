@@ -84,7 +84,7 @@ type PortainereeStack struct {
 
 	// Whether the stack is from a app template
 	// Example: false
-	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
+	FromAppTemplate *bool `json:"fromAppTemplate,omitempty"`
 
 	// The git configuration of a git stack
 	GitConfig struct {
@@ -93,7 +93,7 @@ type PortainereeStack struct {
 
 	// IsComposeFormat indicates if the Kubernetes stack is created from a Docker Compose file
 	// Example: false
-	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
+	IsComposeFormat *bool `json:"isComposeFormat,omitempty"`
 
 	// Kubernetes namespace if stack is a kube application
 	// Example: default
@@ -105,7 +105,7 @@ type PortainereeStack struct {
 
 	// If stack support relative path volume
 	// Example: false
-	SupportRelativePath bool `json:"supportRelativePath,omitempty"`
+	SupportRelativePath *bool `json:"supportRelativePath,omitempty"`
 
 	// The date in unix time when stack was last updated
 	// Example: 1587399600

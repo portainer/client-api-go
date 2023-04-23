@@ -36,7 +36,7 @@ definitions:
     properties:
       failed:
         type: boolean
-        nullable: true
+        x-nullable: true
       timestampUTC:
         type: string
     type: object
@@ -197,7 +197,7 @@ definitions:
         description: Use basic authentication to clone the Git repository
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryGitCredentialID:
         description: |-
           GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
@@ -232,7 +232,7 @@ definitions:
         description: TLSSkipVerify skips SSL verification when cloning the Git repository
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       type:
         allOf:
         - $ref: '#/definitions/portaineree.StackType'
@@ -313,17 +313,17 @@ definitions:
     properties:
       Dynamic:
         type: boolean
-        nullable: true
+        x-nullable: true
       Endpoints:
         items:
           type: integer
         type: array
       HasEdgeGroup:
         type: boolean
-        nullable: true
+        x-nullable: true
       HasEdgeStack:
         type: boolean
-        nullable: true
+        x-nullable: true
       Id:
         description: EdgeGroup Identifier
         example: 1
@@ -332,7 +332,7 @@ definitions:
         type: string
       PartialMatch:
         type: boolean
-        nullable: true
+        x-nullable: true
       TagIds:
         items:
           type: integer
@@ -346,7 +346,7 @@ definitions:
     properties:
       dynamic:
         type: boolean
-        nullable: true
+        x-nullable: true
       endpoints:
         items:
           type: integer
@@ -355,7 +355,7 @@ definitions:
         type: string
       partialMatch:
         type: boolean
-        nullable: true
+        x-nullable: true
       tagIDs:
         items:
           type: integer
@@ -365,7 +365,7 @@ definitions:
     properties:
       dynamic:
         type: boolean
-        nullable: true
+        x-nullable: true
       endpoints:
         items:
           type: integer
@@ -374,7 +374,7 @@ definitions:
         type: string
       partialMatch:
         type: boolean
-        nullable: true
+        x-nullable: true
       tagIDs:
         items:
           type: integer
@@ -398,7 +398,7 @@ definitions:
         type: string
       recurring:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   edgejobs.edgeJobCreateFromFilePayload:
     properties:
@@ -420,7 +420,7 @@ definitions:
         type: string
       recurring:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   edgejobs.edgeJobFileResponse:
     properties:
@@ -445,7 +445,7 @@ definitions:
         type: string
       recurring:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   edgejobs.fileResponse:
     properties:
@@ -497,7 +497,7 @@ definitions:
         description: Pre Pull image
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       registries:
         description: List of Registries to use for this stack
         items:
@@ -507,7 +507,7 @@ definitions:
         description: Retry deploy
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       stackFileContent:
         description: Content of the Stack file
         example: |-
@@ -519,7 +519,7 @@ definitions:
       useManifestNamespaces:
         description: Uses the manifest's namespaces instead of the default one
         type: boolean
-        nullable: true
+        x-nullable: true
     required:
     - name
     - stackFileContent
@@ -550,7 +550,7 @@ definitions:
         description: Pre Pull image
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       registries:
         items:
           type: integer
@@ -559,7 +559,7 @@ definitions:
         description: Retry deploy
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       stackFileContent:
         items:
           type: integer
@@ -567,7 +567,7 @@ definitions:
       useManifestNamespaces:
         description: Uses the manifest's namespaces instead of the default one
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   edgestacks.swarmStackFromGitRepositoryPayload:
     properties:
@@ -605,7 +605,7 @@ definitions:
         description: Pre Pull image
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       registries:
         description: List of Registries to use for this stack
         items:
@@ -615,7 +615,7 @@ definitions:
         description: Use basic authentication to clone the Git repository
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryGitCredentialID:
         description: GitCredentialID used to identify the binded git credential
         example: 0
@@ -642,16 +642,16 @@ definitions:
         description: Retry deploy
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       tlsskipVerify:
         description: TLSSkipVerify skips SSL verification when cloning the Git repository
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       useManifestNamespaces:
         description: Uses the manifest's namespaces instead of the default one
         type: boolean
-        nullable: true
+        x-nullable: true
     required:
     - name
     - repositoryURL
@@ -666,23 +666,23 @@ definitions:
         type: array
       prePullImage:
         type: boolean
-        nullable: true
+        x-nullable: true
       rePullImage:
         type: boolean
-        nullable: true
+        x-nullable: true
       registries:
         items:
           type: integer
         type: array
       retryDeploy:
         type: boolean
-        nullable: true
+        x-nullable: true
       stackFileContent:
         type: string
       useManifestNamespaces:
         description: Uses the manifest's namespaces instead of the default one
         type: boolean
-        nullable: true
+        x-nullable: true
       version:
         type: integer
     type: object
@@ -790,7 +790,7 @@ definitions:
         type: integer
       needFullSnapshot:
         type: boolean
-        nullable: true
+        x-nullable: true
       pingInterval:
         $ref: '#/definitions/time.Duration'
       snapshotInterval:
@@ -808,17 +808,17 @@ definitions:
         type: string
       prePullImage:
         type: boolean
-        nullable: true
+        x-nullable: true
       rePullImage:
         type: boolean
-        nullable: true
+        x-nullable: true
       registryCredentials:
         items:
           $ref: '#/definitions/portaineree.EdgeRegistryCredential'
         type: array
       retryDeploy:
         type: boolean
-        nullable: true
+        x-nullable: true
       stackFileContent:
         type: string
     type: object
@@ -828,7 +828,7 @@ definitions:
         description: Whether to collect logs
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       CronExpression:
         description: A cron expression to schedule this job
         example: '* * * * *'
@@ -971,11 +971,11 @@ definitions:
       enableGPUManagement:
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       enableImageNotification:
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       gpus:
         items:
           $ref: '#/definitions/portaineree.Pair'
@@ -988,50 +988,50 @@ definitions:
               when creating containers
             example: false
             type: boolean
-            nullable: true
+            x-nullable: true
           allowContainerCapabilitiesForRegularUsers:
             description: Whether non-administrator should be able to use container
               capabilities
             example: true
             type: boolean
-            nullable: true
+            x-nullable: true
           allowDeviceMappingForRegularUsers:
             description: Whether non-administrator should be able to use device mapping
             example: true
             type: boolean
-            nullable: true
+            x-nullable: true
           allowHostNamespaceForRegularUsers:
             description: Whether non-administrator should be able to use the host
               pid
             example: true
             type: boolean
-            nullable: true
+            x-nullable: true
           allowPrivilegedModeForRegularUsers:
             description: Whether non-administrator should be able to use privileged
               mode when creating containers
             example: false
             type: boolean
-            nullable: true
+            x-nullable: true
           allowStackManagementForRegularUsers:
             description: Whether non-administrator should be able to manage stacks
             example: true
             type: boolean
-            nullable: true
+            x-nullable: true
           allowSysctlSettingForRegularUsers:
             description: Whether non-administrator should be able to use sysctl settings
             example: true
             type: boolean
-            nullable: true
+            x-nullable: true
           allowVolumeBrowserForRegularUsers:
             description: Whether non-administrator should be able to browse volumes
             example: true
             type: boolean
-            nullable: true
+            x-nullable: true
           enableHostManagementFeatures:
             description: Whether host management features are enabled
             example: true
             type: boolean
-            nullable: true
+            x-nullable: true
         type: object
     type: object
   endpoints.endpointUpdatePayload:
@@ -1120,17 +1120,17 @@ definitions:
         description: Require TLS to connect against this environment(endpoint)
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       tlsskipClientVerify:
         description: Skip client verification when using TLS
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       tlsskipVerify:
         description: Skip server verification when using TLS
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       url:
         description: URL or IP address of a Docker host
         example: docker.mydomain.tld:2375
@@ -1143,7 +1143,7 @@ definitions:
       pullImage:
         description: PullImage if true will pull the image
         type: boolean
-        nullable: true
+        x-nullable: true
       serviceID:
         description: ServiceId to update
         type: string
@@ -1193,7 +1193,7 @@ definitions:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       ownerPassword:
         type: string
       ownerURL:
@@ -1205,7 +1205,7 @@ definitions:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       environments:
         items:
           type: integer
@@ -1258,7 +1258,7 @@ definitions:
         description: Whether portainer has an update available
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       build:
         $ref: '#/definitions/github_com_portainer_portainer-ee_api_http_handler_system.BuildInfo'
       databaseVersion:
@@ -1293,7 +1293,7 @@ definitions:
         description: TLSSkipVerify skips SSL verification when cloning the Git repository
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       username:
         type: string
     required:
@@ -1313,7 +1313,7 @@ definitions:
         description: TLSSkipVerify skips SSL verification when cloning the Git repository
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       username:
         type: string
     required:
@@ -1355,7 +1355,7 @@ definitions:
         description: TLSSkipVerify skips SSL verification when cloning the Git repository
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       url:
         description: The repo url
         example: https://github.com/portainer/portainer.git
@@ -1394,7 +1394,7 @@ definitions:
         description: Toggle the system state of this namespace to true or false
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   ldap.adminGroupsPayload:
     properties:
@@ -1424,7 +1424,7 @@ definitions:
     properties:
       valid:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   ldap.usersPayload:
     properties:
@@ -1459,7 +1459,7 @@ definitions:
         type: string
       revoked:
         type: boolean
-        nullable: true
+        x-nullable: true
       revokedAt:
         type: integer
       type:
@@ -1508,7 +1508,7 @@ definitions:
         $ref: '#/definitions/liblicense.PortainerLicenseType'
       valid:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   licenses.attachPayload:
     properties:
@@ -1712,7 +1712,7 @@ definitions:
         type: string
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       mpspassword:
         type: string
       mpsserver:
@@ -1802,19 +1802,19 @@ definitions:
         type: array
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecurityAllowPrivilegeEscalation:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecurityAllowProcMount:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       procMountType:
         type: string
     type: object
@@ -1835,7 +1835,7 @@ definitions:
         type: string
       readonly:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecurityAppArmour:
     properties:
@@ -1845,7 +1845,7 @@ definitions:
         type: array
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecurityCapabilities:
     properties:
@@ -1855,7 +1855,7 @@ definitions:
         type: array
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       requiredDropCapabilities:
         items:
           type: string
@@ -1865,7 +1865,7 @@ definitions:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       requiredDropCapabilities:
         items:
           type: string
@@ -1888,22 +1888,22 @@ definitions:
         type: array
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecurityHostNamespaces:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecurityHostNetworkingPorts:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       hostNetwork:
         type: boolean
-        nullable: true
+        x-nullable: true
       max:
         type: integer
       min:
@@ -1920,13 +1920,13 @@ definitions:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecurityReadOnlyRootFileSystem:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecurityRule:
     properties:
@@ -1942,7 +1942,7 @@ definitions:
         $ref: '#/definitions/podsecurity.PodSecurityCapabilities'
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       endPointID:
         type: integer
       forbiddenSysctlsList:
@@ -1990,7 +1990,7 @@ definitions:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       secCompType:
         items:
           type: string
@@ -2004,7 +2004,7 @@ definitions:
         type: array
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.PodSecuritySupplementalGroups:
     properties:
@@ -2019,7 +2019,7 @@ definitions:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       fsGroups:
         $ref: '#/definitions/podsecurity.PodSecurityFsGroups'
       runAsGroup:
@@ -2037,7 +2037,7 @@ definitions:
         type: array
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   podsecurity.RunAsGroupStrategy:
     enum:
@@ -2126,7 +2126,7 @@ definitions:
         type: string
       GpuUseAll:
         type: boolean
-        nullable: true
+        x-nullable: true
       GpuUseList:
         items:
           type: string
@@ -2147,7 +2147,7 @@ definitions:
         type: integer
       Swarm:
         type: boolean
-        nullable: true
+        x-nullable: true
       Time:
         type: integer
       TotalCPU:
@@ -2184,7 +2184,7 @@ definitions:
       Prune:
         description: Deprecated
         type: boolean
-        nullable: true
+        x-nullable: true
       Status:
         additionalProperties:
           $ref: '#/definitions/portainer.EdgeStackStatus'
@@ -2198,7 +2198,7 @@ definitions:
       useManifestNamespaces:
         description: Uses the manifest's namespaces instead of the default one
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portainer.EdgeStackDeploymentType:
     enum:
@@ -2225,25 +2225,25 @@ definitions:
     properties:
       acknowledged:
         type: boolean
-        nullable: true
+        x-nullable: true
       error:
         type: boolean
-        nullable: true
+        x-nullable: true
       imagesPulled:
         type: boolean
-        nullable: true
+        x-nullable: true
       ok:
         type: boolean
-        nullable: true
+        x-nullable: true
       pending:
         type: boolean
-        nullable: true
+        x-nullable: true
       remoteUpdateSuccess:
         type: boolean
-        nullable: true
+        x-nullable: true
       remove:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portainer.EdgeStackStatusType:
     enum:
@@ -2275,7 +2275,7 @@ definitions:
         type: string
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       mpsPassword:
         type: string
       mpsServer:
@@ -2290,16 +2290,16 @@ definitions:
     properties:
       IDER:
         type: boolean
-        nullable: true
+        x-nullable: true
       KVM:
         type: boolean
-        nullable: true
+        x-nullable: true
       SOL:
         type: boolean
-        nullable: true
+        x-nullable: true
       redirection:
         type: boolean
-        nullable: true
+        x-nullable: true
       userConsent:
         type: string
     type: object
@@ -2380,7 +2380,7 @@ definitions:
   portaineree.Authorizations:
     additionalProperties:
       type: boolean
-      nullable: true
+      x-nullable: true
     type: object
   portaineree.AutoUpdateSettings:
     properties:
@@ -2388,12 +2388,12 @@ definitions:
         description: Pull latest image
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       forceUpdate:
         description: Force update ignores repo changes
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       interval:
         description: Auto update interval
         example: 1m30s
@@ -2575,20 +2575,20 @@ definitions:
         description: Hide manual deploy forms in portainer
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       hideFileUpload:
         description: Hide the file upload option in the remaining visible forms
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       hideWebEditor:
         description: Hide the webeditor in the remaining visible forms
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       overrideGlobalOptions:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.EcrData:
     properties:
@@ -2621,7 +2621,7 @@ definitions:
       asyncMode:
         description: Deprecated 2.18
         type: boolean
-        nullable: true
+        x-nullable: true
       mtls:
         $ref: '#/definitions/portaineree.MTLSSettings'
     type: object
@@ -2631,7 +2631,7 @@ definitions:
         type: integer
       executed:
         type: boolean
-        nullable: true
+        x-nullable: true
       id:
         type: integer
       op:
@@ -2676,7 +2676,7 @@ definitions:
     properties:
       Dynamic:
         type: boolean
-        nullable: true
+        x-nullable: true
       Endpoints:
         items:
           type: integer
@@ -2689,7 +2689,7 @@ definitions:
         type: string
       PartialMatch:
         type: boolean
-        nullable: true
+        x-nullable: true
       TagIds:
         items:
           type: integer
@@ -2717,7 +2717,7 @@ definitions:
         type: string
       Recurring:
         type: boolean
-        nullable: true
+        x-nullable: true
       ScriptPath:
         type: string
       Version:
@@ -2732,7 +2732,7 @@ definitions:
     properties:
       collectLogs:
         type: boolean
-        nullable: true
+        x-nullable: true
       logsStatus:
         $ref: '#/definitions/portaineree.EdgeJobLogsStatus'
     type: object
@@ -2782,17 +2782,17 @@ definitions:
       PrePullImage:
         description: Pre Pull Image
         type: boolean
-        nullable: true
+        x-nullable: true
       ProjectPath:
         type: string
       Prune:
         description: Deprecated
         type: boolean
-        nullable: true
+        x-nullable: true
       RePullImage:
         description: Re-Pull Image
         type: boolean
-        nullable: true
+        x-nullable: true
       Registries:
         items:
           type: integer
@@ -2811,7 +2811,7 @@ definitions:
         description: Retry deploy
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       scheduledTime:
         description: Schedule represents the schedule of the Edge stack (optional,
           format - 'YYYY-MM-DD HH:mm:ss')
@@ -2820,7 +2820,7 @@ definitions:
       useManifestNamespaces:
         description: Uses the manifest's namespaces instead of the default one
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.EdgeStackDeploymentType:
     enum:
@@ -2879,10 +2879,10 @@ definitions:
         type: string
       EnableGPUManagement:
         type: boolean
-        nullable: true
+        x-nullable: true
       EnableImageNotification:
         type: boolean
-        nullable: true
+        x-nullable: true
       Gpus:
         items:
           $ref: '#/definitions/portaineree.Pair'
@@ -2895,7 +2895,7 @@ definitions:
         description: Heartbeat indicates the heartbeat status of an edge environment
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       Id:
         description: Environment(Endpoint) Identifier
         example: 1
@@ -2943,7 +2943,7 @@ definitions:
           Deprecated fields
           Deprecated in DBVersion == 4
         type: boolean
-        nullable: true
+        x-nullable: true
       TLSCACert:
         type: string
       TLSCert:
@@ -2993,7 +2993,7 @@ definitions:
       isEdgeDevice:
         description: IsEdgeDevice marks if the environment was created as an EdgeDevice
         type: boolean
-        nullable: true
+        x-nullable: true
       lastCheckInDate:
         description: LastCheckInDate mark last check-in date on checkin
         type: integer
@@ -3010,7 +3010,7 @@ definitions:
       userTrusted:
         description: Whether the device has been trusted or not by the user
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.EndpointAuthorizations:
     additionalProperties:
@@ -3021,7 +3021,7 @@ definitions:
       Enabled:
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       EndTime:
         example: "02:00"
         type: string
@@ -3076,13 +3076,13 @@ definitions:
     properties:
       MigrateGPUs:
         type: boolean
-        nullable: true
+        x-nullable: true
       MigrateGateKeeper:
         type: boolean
-        nullable: true
+        x-nullable: true
       MigrateIngresses:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.EndpointSecuritySettings:
     properties:
@@ -3091,48 +3091,48 @@ definitions:
           creating containers
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       allowContainerCapabilitiesForRegularUsers:
         description: Whether non-administrator should be able to use container capabilities
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       allowDeviceMappingForRegularUsers:
         description: Whether non-administrator should be able to use device mapping
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       allowHostNamespaceForRegularUsers:
         description: Whether non-administrator should be able to use the host pid
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       allowPrivilegedModeForRegularUsers:
         description: Whether non-administrator should be able to use privileged mode
           when creating containers
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       allowStackManagementForRegularUsers:
         description: Whether non-administrator should be able to manage stacks
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       allowSysctlSettingForRegularUsers:
         description: Whether non-administrator should be able to use sysctl settings
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       allowVolumeBrowserForRegularUsers:
         description: Whether non-administrator should be able to browse volumes
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       enableHostManagementFeatures:
         description: Whether host management features are enabled
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.EndpointStatus:
     enum:
@@ -3198,13 +3198,13 @@ definitions:
       asyncMode:
         description: Whether the device has been started in edge async mode
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.FDOConfiguration:
     properties:
       enabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       ownerPassword:
         type: string
       ownerURL:
@@ -3236,7 +3236,7 @@ definitions:
         type: string
       UseOrganisation:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.GitlabRegistryData:
     properties:
@@ -3253,22 +3253,22 @@ definitions:
         description: Hide manual deploy forms in portainer
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       hideFileUpload:
         description: Hide the file upload option in the remaining visible forms
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       hideWebEditor:
         description: Hide the webeditor in the remaining visible forms
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       perEnvOverride:
         description: Configure this per environment or globally
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.HelmUserRepository:
     properties:
@@ -3305,13 +3305,13 @@ definitions:
     properties:
       AllowNoneIngressClass:
         type: boolean
-        nullable: true
+        x-nullable: true
       EnableResourceOverCommit:
         type: boolean
-        nullable: true
+        x-nullable: true
       IngressAvailabilityPerNamespace:
         type: boolean
-        nullable: true
+        x-nullable: true
       IngressClasses:
         items:
           $ref: '#/definitions/portaineree.KubernetesIngressClassConfig'
@@ -3320,20 +3320,20 @@ definitions:
         type: integer
       RestrictDefaultNamespace:
         type: boolean
-        nullable: true
+        x-nullable: true
       RestrictStandardUserIngressW:
         type: boolean
-        nullable: true
+        x-nullable: true
       StorageClasses:
         items:
           $ref: '#/definitions/portaineree.KubernetesStorageClassConfig'
         type: array
       UseLoadBalancer:
         type: boolean
-        nullable: true
+        x-nullable: true
       UseServerMetrics:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.KubernetesData:
     properties:
@@ -3350,19 +3350,19 @@ definitions:
     properties:
       IsServerIngressClassDetected:
         type: boolean
-        nullable: true
+        x-nullable: true
       IsServerMetricsDetected:
         type: boolean
-        nullable: true
+        x-nullable: true
       IsServerStorageDetected:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.KubernetesIngressClassConfig:
     properties:
       Blocked:
         type: boolean
-        nullable: true
+        x-nullable: true
       BlockedNamespaces:
         items:
           type: string
@@ -3393,7 +3393,7 @@ definitions:
         type: array
       AllowVolumeExpansion:
         type: boolean
-        nullable: true
+        x-nullable: true
       Name:
         type: string
       Provisioner:
@@ -3447,7 +3447,7 @@ definitions:
         description: Whether auto admin population is switched on or not
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       AdminGroupSearchSettings:
         items:
           $ref: '#/definitions/portaineree.LDAPGroupSearchSettings'
@@ -3466,13 +3466,13 @@ definitions:
           access. When enabled, ReaderDN and Password will not be used
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       AutoCreateUsers:
         description: Automatically provision users and assign them to matching LDAP
           group names
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       GroupSearchSettings:
         items:
           $ref: '#/definitions/portaineree.LDAPGroupSearchSettings'
@@ -3497,7 +3497,7 @@ definitions:
         description: Whether LDAP connection should use StartTLS
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       TLSConfig:
         $ref: '#/definitions/portaineree.TLSConfiguration'
       URL:
@@ -3528,7 +3528,7 @@ definitions:
         type: string
       UseSeparateCert:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.MembershipRole:
     enum:
@@ -3625,7 +3625,7 @@ definitions:
         type: integer
       HideInternalAuth:
         type: boolean
-        nullable: true
+        x-nullable: true
       KubeSecretKey:
         items:
           type: integer
@@ -3636,17 +3636,17 @@ definitions:
         type: string
       OAuthAutoCreateUsers:
         type: boolean
-        nullable: true
+        x-nullable: true
       OAuthAutoMapTeamMemberships:
         type: boolean
-        nullable: true
+        x-nullable: true
       RedirectURI:
         type: string
       ResourceURI:
         type: string
       SSO:
         type: boolean
-        nullable: true
+        x-nullable: true
       Scopes:
         type: string
       TeamMemberships:
@@ -3669,7 +3669,7 @@ definitions:
         type: string
       UseOrganisation:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.Registry:
     properties:
@@ -3682,7 +3682,7 @@ definitions:
         description: Is authentication against this registry enabled
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       AuthorizedTeams:
         description: Deprecated in DBVersion == 18
         items:
@@ -3778,7 +3778,7 @@ definitions:
         type: integer
       Authentication:
         type: boolean
-        nullable: true
+        x-nullable: true
       Ecr:
         $ref: '#/definitions/portaineree.EcrData'
       Password:
@@ -3828,7 +3828,7 @@ definitions:
         description: Permit access to resource only to admins
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       Id:
         description: ResourceControl Identifier
         example: 1
@@ -3842,7 +3842,7 @@ definitions:
         description: Permit access to the associated resource to any user
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       ResourceId:
         description: |-
           Docker resource identifier on which access control will be applied.\
@@ -3858,7 +3858,7 @@ definitions:
         type: array
       System:
         type: boolean
-        nullable: true
+        x-nullable: true
       TeamAccesses:
         items:
           $ref: '#/definitions/portaineree.TeamResourceAccess'
@@ -3976,12 +3976,12 @@ definitions:
         type: string
       httpEnabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       keyPath:
         type: string
       selfSigned:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.Settings:
     properties:
@@ -3990,25 +3990,25 @@ definitions:
         type: string
       AllowBindMountsForRegularUsers:
         type: boolean
-        nullable: true
+        x-nullable: true
       AllowContainerCapabilitiesForRegularUsers:
         type: boolean
-        nullable: true
+        x-nullable: true
       AllowDeviceMappingForRegularUsers:
         type: boolean
-        nullable: true
+        x-nullable: true
       AllowHostNamespaceForRegularUsers:
         type: boolean
-        nullable: true
+        x-nullable: true
       AllowPrivilegedModeForRegularUsers:
         type: boolean
-        nullable: true
+        x-nullable: true
       AllowStackManagementForRegularUsers:
         type: boolean
-        nullable: true
+        x-nullable: true
       AllowVolumeBrowserForRegularUsers:
         type: boolean
-        nullable: true
+        x-nullable: true
       AuthenticationMethod:
         allOf:
         - $ref: '#/definitions/portaineree.AuthenticationMethod'
@@ -4041,22 +4041,22 @@ definitions:
       EnableEdgeComputeFeatures:
         description: Whether edge compute features are enabled
         type: boolean
-        nullable: true
+        x-nullable: true
       EnableHostManagementFeatures:
         description: Deprecated fields v26
         type: boolean
-        nullable: true
+        x-nullable: true
       EnableTelemetry:
         description: Whether telemetry is enabled
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       EnforceEdgeID:
         description: EnforceEdgeID makes Portainer store the Edge ID instead of accepting
           anyone
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       GlobalDeploymentOptions:
         allOf:
         - $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
@@ -4089,7 +4089,7 @@ definitions:
         description: Show the Kompose build option (discontinued in 2.18)
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       SnapshotInterval:
         description: The interval in which environment(endpoint) snapshots are created
         example: 5m
@@ -4104,7 +4104,7 @@ definitions:
           by default
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       UserSessionTimeout:
         description: The duration of a user session
         example: 5m
@@ -4115,15 +4115,15 @@ definitions:
           Hide:
             example: false
             type: boolean
-        nullable: true
+        x-nullable: true
         type: object
       displayDonationHeader:
         description: Deprecated fields
         type: boolean
-        nullable: true
+        x-nullable: true
       displayExternalContributors:
         type: boolean
-        nullable: true
+        x-nullable: true
       fdoConfiguration:
         $ref: '#/definitions/portaineree.FDOConfiguration'
       openAMTConfiguration:
@@ -4199,7 +4199,7 @@ definitions:
         description: Whether the stack is from a app template
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       gitConfig:
         allOf:
         - $ref: '#/definitions/gittypes.RepoConfig'
@@ -4209,7 +4209,7 @@ definitions:
           from a Docker Compose file
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       namespace:
         description: Kubernetes namespace if stack is a kube application
         example: default
@@ -4222,7 +4222,7 @@ definitions:
         description: If stack support relative path volume
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       updateDate:
         description: The date in unix time when stack was last updated
         example: 1587399600
@@ -4243,7 +4243,7 @@ definitions:
         description: Prune services that are no longer referenced
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.StackStatus:
     enum:
@@ -4275,7 +4275,7 @@ definitions:
         description: Use TLS
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       TLSCACert:
         description: Path to the TLS CA certificate file
         example: /data/tls/ca.pem
@@ -4292,20 +4292,20 @@ definitions:
         description: Skip the verification of the server TLS certificate
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.Tag:
     properties:
       EndpointGroups:
         additionalProperties:
           type: boolean
-        nullable: true
+        x-nullable: true
         description: A set of environment(endpoint) group ids that have this tag
         type: object
       Endpoints:
         additionalProperties:
           type: boolean
-        nullable: true
+        x-nullable: true
         description: A set of environment(endpoint) ids that have this tag
         type: object
       Name:
@@ -4356,7 +4356,7 @@ definitions:
     properties:
       AdminAutoPopulate:
         type: boolean
-        nullable: true
+        x-nullable: true
       AdminGroupClaimsRegexList:
         items:
           type: string
@@ -4387,7 +4387,7 @@ definitions:
         description: Whether the template should be available to administrators only
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       categories:
         description: A list of categories associated to the template
         example:
@@ -4425,7 +4425,7 @@ definitions:
           interactive mode (-i -t equivalent on the CLI)
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       labels:
         description: Container labels
         items:
@@ -4467,7 +4467,7 @@ definitions:
         description: Whether the container should be started in privileged mode
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       registry:
         description: |-
           Optional container fields
@@ -4526,7 +4526,7 @@ definitions:
           in the UI
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       select:
         description: A list of name/value that will be used to generate a dropdown
           in the UI
@@ -4540,7 +4540,7 @@ definitions:
         description: Will set this choice as the default choice
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       text:
         description: Some text that will displayed as a choice
         example: text value
@@ -4590,7 +4590,7 @@ definitions:
         description: Whether the volume used should be readonly
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.User:
     properties:
@@ -4673,7 +4673,7 @@ definitions:
         description: SubtleUpgradeButton indicates if the upgrade banner should be
           displayed in a subtle way
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   portaineree.Webhook:
     properties:
@@ -4882,7 +4882,7 @@ definitions:
         description: Is authentication against this registry enabled
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       password:
         description: Password used to authenticate against this registry. required
           when Authentication is true
@@ -4895,7 +4895,7 @@ definitions:
         description: Use TLS
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       tlscacertFile:
         description: The TLS CA certificate file
         items:
@@ -4915,7 +4915,7 @@ definitions:
         description: Skip the verification of the server TLS certificate
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       username:
         description: Username used to authenticate against this registry. Required
           when Authentication is true
@@ -4930,7 +4930,7 @@ definitions:
         description: Is authentication against this registry enabled
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       baseURL:
         description: BaseURL required for ProGet registry
         example: registry.mydomain.tld:2375
@@ -4996,7 +4996,7 @@ definitions:
       authentication:
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       baseURL:
         example: registry.mydomain.tld:2375
         type: string
@@ -5069,7 +5069,7 @@ definitions:
       enabled:
         description: Enabled bool determines if chart should be loaded
         type: boolean
-        nullable: true
+        x-nullable: true
       import-values:
         description: |-
           ImportValues holds the mapping of source values to parent key to be imported. Each item can be a
@@ -5211,7 +5211,7 @@ definitions:
       deprecated:
         description: Whether or not this chart is deprecated
         type: boolean
-        nullable: true
+        x-nullable: true
       description:
         description: A one-sentence description of the chart
         type: string
@@ -5309,12 +5309,12 @@ definitions:
         description: Permit access to resource only to admins
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       public:
         description: Permit access to the associated resource to any user
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       resourceID:
         example: 617c5f22bb9b023d6daab7cba43a57576f83492867bc767d1c59416b065e5f08
         type: string
@@ -5368,12 +5368,12 @@ definitions:
         description: Permit access to resource only to admins
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       public:
         description: Permit access to the associated resource to any user
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       teams:
         description: List of team identifiers with access to the associated resource
         example:
@@ -5394,7 +5394,7 @@ definitions:
       Hide:
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   settings.mTLSPayload:
     properties:
@@ -5406,7 +5406,7 @@ definitions:
         type: string
       useSeparateCert:
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   settings.publicSettingsResponse:
     properties:
@@ -5425,16 +5425,16 @@ definitions:
         description: Whether edge compute features are enabled
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       EnableTelemetry:
         description: Whether telemetry is enabled
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       Features:
         additionalProperties:
           type: boolean
-        nullable: true
+        x-nullable: true
         description: Supported feature flags
         type: object
       GlobalDeploymentOptions:
@@ -5451,7 +5451,7 @@ definitions:
         description: Whether portainer internal auth view will be hidden
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       OAuthLoginURI:
         description: The URL used for oauth login
         example: https://gitlab.com/oauth
@@ -5469,18 +5469,18 @@ definitions:
         description: Show the Kompose build option (discontinued in 2.18)
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       TeamSync:
         description: Whether team sync is enabled
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       defaultRegistry:
         properties:
           Hide:
             example: false
             type: boolean
-        nullable: true
+        x-nullable: true
         type: object
       edge:
         properties:
@@ -5510,11 +5510,11 @@ definitions:
       isAMTEnabled:
         description: Whether AMT is enabled
         type: boolean
-        nullable: true
+        x-nullable: true
       isFDOEnabled:
         description: Whether FDO is enabled
         type: boolean
-        nullable: true
+        x-nullable: true
       kubeconfigExpiry:
         default: "0"
         description: The expiry of a Kubeconfig
@@ -5530,7 +5530,7 @@ definitions:
         description: Show the Kompose build option (discontinued in 2.18)
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       authenticationMethod:
         description: 'Active authentication method for the Portainer instance. Valid
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
@@ -5567,7 +5567,7 @@ definitions:
           asyncMode:
             description: AsyncMode enables edge agent to run in async mode by default
             type: boolean
-            nullable: true
+            x-nullable: true
           mtls:
             $ref: '#/definitions/settings.mTLSPayload'
           tunnelServerAddress:
@@ -5583,18 +5583,18 @@ definitions:
         description: Whether edge compute features are enabled
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       enableTelemetry:
         description: Whether telemetry is enabled
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       enforceEdgeID:
         description: EnforceEdgeID makes Portainer store the Edge ID instead of accepting
           anyone
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       globalDeploymentOptions:
         allOf:
         - $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
@@ -5638,7 +5638,7 @@ definitions:
           by default
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       userSessionTimeout:
         description: The duration of a user session
         example: 5m
@@ -5654,7 +5654,7 @@ definitions:
         type: string
       httpenabled:
         type: boolean
-        nullable: true
+        x-nullable: true
       key:
         type: string
     type: object
@@ -5669,7 +5669,7 @@ definitions:
         description: Whether the stack is from a app template
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       name:
         description: Name of the stack
         example: myStack
@@ -5723,7 +5723,7 @@ definitions:
         description: Whether the stack is from a app template
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       name:
         description: Name of the stack
         example: myStack
@@ -5732,7 +5732,7 @@ definitions:
         description: Use basic authentication to clone the Git repository
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryGitCredentialID:
         description: |-
           GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
@@ -5763,12 +5763,12 @@ definitions:
         description: Whether the stack supports relative path volume
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       tlsskipVerify:
         description: TLSSkipVerify skips SSL verification when cloning the Git repository
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
     required:
     - name
     - repositoryURL
@@ -5783,14 +5783,14 @@ definitions:
         $ref: '#/definitions/portaineree.AutoUpdateSettings'
       composeFormat:
         type: boolean
-        nullable: true
+        x-nullable: true
       manifestFile:
         type: string
       namespace:
         type: string
       repositoryAuthentication:
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryGitCredentialID:
         type: integer
       repositoryPassword:
@@ -5807,13 +5807,13 @@ definitions:
         description: TLSSkipVerify skips SSL verification when cloning the Git repository
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   stacks.kubernetesManifestURLDeploymentPayload:
     properties:
       composeFormat:
         type: boolean
-        nullable: true
+        x-nullable: true
       manifestURL:
         type: string
       namespace:
@@ -5825,7 +5825,7 @@ definitions:
     properties:
       composeFormat:
         type: boolean
-        nullable: true
+        x-nullable: true
       namespace:
         type: string
       stackFileContent:
@@ -5853,16 +5853,16 @@ definitions:
       prune:
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       pullImage:
         description: Force a pulling to current image with the original tag though
           the image is already the latest
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryAuthentication:
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryGitCredentialID:
         type: integer
       repositoryPassword:
@@ -5882,10 +5882,10 @@ definitions:
         type: array
       prune:
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryAuthentication:
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryGitCredentialID:
         type: integer
       repositoryPassword:
@@ -5920,7 +5920,7 @@ definitions:
         description: Whether the stack is from a app template
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       name:
         description: Name of the stack
         example: myStack
@@ -5979,7 +5979,7 @@ definitions:
         description: Whether the stack is from a app template
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       name:
         description: Name of the stack
         example: myStack
@@ -5988,7 +5988,7 @@ definitions:
         description: Use basic authentication to clone the Git repository
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       repositoryGitCredentialID:
         description: |-
           GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
@@ -6019,7 +6019,7 @@ definitions:
         description: Whether the stack suppors relative path volume
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       swarmID:
         description: Swarm cluster identifier
         example: jpofkc0i9uo9wtx1zesuk649w
@@ -6028,7 +6028,7 @@ definitions:
         description: TLSSkipVerify skips SSL verification when cloning the Git repository
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
     required:
     - name
     - repositoryURL
@@ -6046,13 +6046,13 @@ definitions:
           for Swarm stacks)
         example: true
         type: boolean
-        nullable: true
+        x-nullable: true
       pullImage:
         description: Force a pulling to current image with the original tag though
           the image is already the latest
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
       stackFileContent:
         description: New content of the Stack file
         example: |-
@@ -6230,7 +6230,7 @@ definitions:
         $ref: '#/definitions/mount.Propagation'
       rw:
         type: boolean
-        nullable: true
+        x-nullable: true
       source:
         type: string
       type:
@@ -6390,7 +6390,7 @@ definitions:
           displayed in a subtle way
         example: false
         type: boolean
-        nullable: true
+        x-nullable: true
     type: object
   users.userAccessTokenCreatePayload:
     properties:
@@ -6853,7 +6853,7 @@ paths:
         in: query
         name: force
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: The shared credential ID used to fetch the cloud provider information.
         in: query
         name: credentialId
@@ -8675,7 +8675,7 @@ paths:
         in: query
         name: tagsPartialMatch
         type: boolean
-        nullable: true
+        x-nullable: true
       - collectionFormat: csv
         description: will return only these environments(endpoints)
         in: query
@@ -8687,7 +8687,7 @@ paths:
         in: query
         name: provisioned
         type: boolean
-        nullable: true
+        x-nullable: true
       - collectionFormat: csv
         description: will return only environments with on of these agent versions
         in: query
@@ -8700,13 +8700,13 @@ paths:
         in: query
         name: edgeAsync
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: if true, show only untrusted edge agents, if false show only
           trusted edge agents (relevant only for edge agents)
         in: query
         name: edgeDeviceUntrusted
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: will return only environments(endpoints) with this name
         in: query
         name: name
@@ -8771,19 +8771,19 @@ paths:
         in: formData
         name: TLS
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: Skip server verification when using TLS. Must be true if EndpointCreationType
           is set to 2 (Agent environment)
         in: formData
         name: TLSSkipVerify
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: Skip client verification when using TLS. Must be true if EndpointCreationType
           is set to 2 (Agent environment)
         in: formData
         name: TLSSkipClientVerify
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: TLS CA certificate file
         in: formData
         name: TLSCACertFile
@@ -8832,7 +8832,7 @@ paths:
         in: formData
         name: EdgeAsyncMode
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: List of GPUs
         in: formData
         name: Gpus
@@ -9921,7 +9921,7 @@ paths:
         in: query
         name: force
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: details
         in: body
         name: body
@@ -9957,7 +9957,7 @@ paths:
         in: query
         name: force
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: details
         in: body
         name: body
@@ -11562,7 +11562,7 @@ paths:
         in: query
         name: external
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: Environment(Endpoint) identifier used to remove an external stack
           (required when external is set to true)
         in: query
@@ -11690,7 +11690,7 @@ paths:
         name: orphanedRunning
         required: true
         type: boolean
-        nullable: true
+        x-nullable: true
       produces:
       - application/json
       responses:
@@ -12387,7 +12387,7 @@ paths:
         in: query
         name: onlyLedTeams
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: Identifier of the environment(endpoint) that will be used to
           filter the authorized teams
         in: query
@@ -12706,7 +12706,7 @@ paths:
         in: query
         name: sortDesc
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: Query logs by this keyword
         in: query
         name: keyword
@@ -12751,7 +12751,7 @@ paths:
         in: query
         name: sortDesc
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: Limit results
         in: query
         name: limit
@@ -12804,7 +12804,7 @@ paths:
         in: query
         name: sortDesc
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: Query logs by this keyword
         in: query
         name: keyword
@@ -12847,7 +12847,7 @@ paths:
         in: query
         name: sortDesc
         type: boolean
-        nullable: true
+        x-nullable: true
       - description: Limit results
         in: query
         name: limit

@@ -39,7 +39,7 @@ type PortainereeEdgeJob struct {
 	Name string `json:"Name,omitempty"`
 
 	// recurring
-	Recurring bool `json:"Recurring,omitempty"`
+	Recurring *bool `json:"Recurring,omitempty"`
 
 	// script path
 	ScriptPath string `json:"ScriptPath,omitempty"`

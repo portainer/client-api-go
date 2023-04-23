@@ -37,7 +37,7 @@ type LicensesLicenseInfo struct {
 	Type LiblicensePortainerLicenseType `json:"type,omitempty"`
 
 	// valid
-	Valid bool `json:"valid,omitempty"`
+	Valid *bool `json:"valid,omitempty"`
 }
 
 // Validate validates this licenses license info

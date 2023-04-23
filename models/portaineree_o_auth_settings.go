@@ -34,7 +34,7 @@ type PortainereeOAuthSettings struct {
 	DefaultTeamID int64 `json:"DefaultTeamID,omitempty"`
 
 	// hide internal auth
-	HideInternalAuth bool `json:"HideInternalAuth,omitempty"`
+	HideInternalAuth *bool `json:"HideInternalAuth,omitempty"`
 
 	// kube secret key
 	KubeSecretKey []int64 `json:"KubeSecretKey"`
@@ -46,10 +46,10 @@ type PortainereeOAuthSettings struct {
 	MicrosoftTenantID string `json:"MicrosoftTenantID,omitempty"`
 
 	// o auth auto create users
-	OAuthAutoCreateUsers bool `json:"OAuthAutoCreateUsers,omitempty"`
+	OAuthAutoCreateUsers *bool `json:"OAuthAutoCreateUsers,omitempty"`
 
 	// o auth auto map team memberships
-	OAuthAutoMapTeamMemberships bool `json:"OAuthAutoMapTeamMemberships,omitempty"`
+	OAuthAutoMapTeamMemberships *bool `json:"OAuthAutoMapTeamMemberships,omitempty"`
 
 	// redirect URI
 	RedirectURI string `json:"RedirectURI,omitempty"`
@@ -58,7 +58,7 @@ type PortainereeOAuthSettings struct {
 	ResourceURI string `json:"ResourceURI,omitempty"`
 
 	// s s o
-	SSO bool `json:"SSO,omitempty"`
+	SSO *bool `json:"SSO,omitempty"`
 
 	// scopes
 	Scopes string `json:"Scopes,omitempty"`
