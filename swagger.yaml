@@ -11570,7 +11570,7 @@ paths:
       summary: Remove a tag
       tags:
       - tags
-  /team:
+  /teams:
     post:
       consumes:
       - application/json
@@ -11604,7 +11604,7 @@ paths:
       summary: Create a new team
       tags:
       - teams
-  /team/{id}:
+  /teams/{id}:
     put:
       consumes:
       - application/json
