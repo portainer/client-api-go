@@ -92,11 +92,11 @@ func (o *TeamCreateOK) IsCode(code int) bool {
 }
 
 func (o *TeamCreateOK) Error() string {
-	return fmt.Sprintf("[POST /team][%d] teamCreateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *TeamCreateOK) String() string {
-	return fmt.Sprintf("[POST /team][%d] teamCreateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateOK  %+v", 200, o.Payload)
 }
 
 func (o *TeamCreateOK) GetPayload() *models.PortainereeTeam {
@@ -154,11 +154,11 @@ func (o *TeamCreateBadRequest) IsCode(code int) bool {
 }
 
 func (o *TeamCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /team][%d] teamCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateBadRequest ", 400)
 }
 
 func (o *TeamCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /team][%d] teamCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateBadRequest ", 400)
 }
 
 func (o *TeamCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *TeamCreateConflict) IsCode(code int) bool {
 }
 
 func (o *TeamCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /team][%d] teamCreateConflict ", 409)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateConflict ", 409)
 }
 
 func (o *TeamCreateConflict) String() string {
-	return fmt.Sprintf("[POST /team][%d] teamCreateConflict ", 409)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateConflict ", 409)
 }
 
 func (o *TeamCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -256,11 +256,11 @@ func (o *TeamCreateInternalServerError) IsCode(code int) bool {
 }
 
 func (o *TeamCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /team][%d] teamCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateInternalServerError ", 500)
 }
 
 func (o *TeamCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /team][%d] teamCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateInternalServerError ", 500)
 }
 
 func (o *TeamCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

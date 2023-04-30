@@ -11571,6 +11571,39 @@ paths:
       tags:
       - tags
   /teams:
+    get:
+      description: |-
+        List teams. For non-administrator users, will only list the teams they are member of.
+        **Access policy**: restricted
+      operationId: TeamList
+      parameters:
+      - description: Only list teams that the user is leader of
+        in: query
+        name: onlyLedTeams
+        type: boolean
+        x-nullable: true
+      - description: Identifier of the environment(endpoint) that will be used to
+          filter the authorized teams
+        in: query
+        name: environmentId
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/portaineree.Team'
+            type: array
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: List teams
+      tags:
+      - teams
     post:
       consumes:
       - application/json
@@ -11605,6 +11638,68 @@ paths:
       tags:
       - teams
   /teams/{id}:
+    delete:
+      description: |-
+        Remove a team.
+        **Access policy**: administrator
+      operationId: TeamDelete
+      parameters:
+      - description: Team Id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Team not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Remove a team
+      tags:
+      - teams
+    get:
+      description: |-
+        Retrieve details about a team. Access is only available for administrator and leaders of that team.
+        **Access policy**: administrator or team leader
+      operationId: TeamInspect
+      parameters:
+      - description: Team identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portaineree.Team'
+        "204":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: Team not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect a team
+      tags:
+      - teams
     put:
       consumes:
       - application/json
@@ -11780,103 +11875,6 @@ paths:
       summary: Update a team membership
       tags:
       - team_memberships
-  /teams:
-    get:
-      description: |-
-        List teams. For non-administrator users, will only list the teams they are member of.
-        **Access policy**: restricted
-      operationId: TeamList
-      parameters:
-      - description: Only list teams that the user is leader of
-        in: query
-        name: onlyLedTeams
-        type: boolean
-        x-nullable: true
-      - description: Identifier of the environment(endpoint) that will be used to
-          filter the authorized teams
-        in: query
-        name: environmentId
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success
-          schema:
-            items:
-              $ref: '#/definitions/portaineree.Team'
-            type: array
-        "500":
-          description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: List teams
-      tags:
-      - teams
-  /teams/{id}:
-    delete:
-      description: |-
-        Remove a team.
-        **Access policy**: administrator
-      operationId: TeamDelete
-      parameters:
-      - description: Team Id
-        in: path
-        name: id
-        required: true
-        type: string
-      responses:
-        "204":
-          description: Success
-        "400":
-          description: Invalid request
-        "403":
-          description: Permission denied
-        "404":
-          description: Team not found
-        "500":
-          description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Remove a team
-      tags:
-      - teams
-    get:
-      description: |-
-        Retrieve details about a team. Access is only available for administrator and leaders of that team.
-        **Access policy**: administrator or team leader
-      operationId: TeamInspect
-      parameters:
-      - description: Team identifier
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: '#/definitions/portaineree.Team'
-        "204":
-          description: Success
-        "400":
-          description: Invalid request
-        "403":
-          description: Permission denied
-        "404":
-          description: Team not found
-        "500":
-          description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Inspect a team
-      tags:
-      - teams
   /teams/{id}/memberships:
     get:
       description: |-

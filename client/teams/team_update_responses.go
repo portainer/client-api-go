@@ -104,11 +104,11 @@ func (o *TeamUpdateOK) IsCode(code int) bool {
 }
 
 func (o *TeamUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *TeamUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateOK  %+v", 200, o.Payload)
 }
 
 func (o *TeamUpdateOK) GetPayload() *models.PortainereeTeam {
@@ -166,11 +166,11 @@ func (o *TeamUpdateNoContent) IsCode(code int) bool {
 }
 
 func (o *TeamUpdateNoContent) Error() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateNoContent ", 204)
 }
 
 func (o *TeamUpdateNoContent) String() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateNoContent ", 204)
 }
 
 func (o *TeamUpdateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -217,11 +217,11 @@ func (o *TeamUpdateBadRequest) IsCode(code int) bool {
 }
 
 func (o *TeamUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateBadRequest ", 400)
 }
 
 func (o *TeamUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateBadRequest ", 400)
 }
 
 func (o *TeamUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -268,11 +268,11 @@ func (o *TeamUpdateForbidden) IsCode(code int) bool {
 }
 
 func (o *TeamUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateForbidden ", 403)
 }
 
 func (o *TeamUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateForbidden ", 403)
 }
 
 func (o *TeamUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -319,11 +319,11 @@ func (o *TeamUpdateNotFound) IsCode(code int) bool {
 }
 
 func (o *TeamUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateNotFound ", 404)
 }
 
 func (o *TeamUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateNotFound ", 404)
 }
 
 func (o *TeamUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -370,11 +370,11 @@ func (o *TeamUpdateInternalServerError) IsCode(code int) bool {
 }
 
 func (o *TeamUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateInternalServerError ", 500)
 }
 
 func (o *TeamUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateInternalServerError ", 500)
 }
 
 func (o *TeamUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
