@@ -31,3 +31,11 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/portainer/client-api-go/v2/models_ee => ./models_ee
+
+replace github.com/portainer/client-api-go/v2/models_ce => ./models_ce
+
+replace github.com/portainer/client-api-go/v2/client_ee => ./client_ee
+
+replace github.com/portainer/client-api-go/v2/client_ce => ./client_ce
