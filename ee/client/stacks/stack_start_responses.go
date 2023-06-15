@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api-go/v2/ee/models"
+	"github.com/portainer/client-api-go/ee/v2/models"
 )
 
 // StackStartReader is a Reader for the StackStart structure.

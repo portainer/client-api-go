@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/portainer/client-api-go/v2/ee/models"
+	"github.com/portainer/client-api-go/ee/v2/models"
 )
 
 // NewFdoConfigureDeviceParams creates a new FdoConfigureDeviceParams object,

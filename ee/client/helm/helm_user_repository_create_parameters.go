@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api-go/v2/ee/models"
+	"github.com/portainer/client-api-go/ee/v2/models"
 )
 
 // NewHelmUserRepositoryCreateParams creates a new HelmUserRepositoryCreateParams object,
