@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/portainer/client-api-go/v2/ce/models"
+	"github.com/portainer/client-api-go/ce/v2/models"
 )
 
 // NewEndpointGroupUpdateParams creates a new EndpointGroupUpdateParams object,
