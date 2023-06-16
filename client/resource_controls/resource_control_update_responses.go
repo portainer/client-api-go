@@ -69,7 +69,7 @@ ResourceControlUpdateOK describes a response with status code 200, with default 
 Success
 */
 type ResourceControlUpdateOK struct {
-	Payload *models.PortainereeResourceControl
+	Payload *models.PortainerResourceControl
 }
 
 // IsSuccess returns true when this resource control update o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *ResourceControlUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *ResourceControlUpdateOK) GetPayload() *models.PortainereeResourceControl {
+func (o *ResourceControlUpdateOK) GetPayload() *models.PortainerResourceControl {
 	return o.Payload
 }
 
 func (o *ResourceControlUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeResourceControl)
+	o.Payload = new(models.PortainerResourceControl)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

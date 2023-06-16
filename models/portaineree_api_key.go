@@ -37,7 +37,7 @@ type PortainereeAPIKey struct {
 	// API key identifier (7 char prefix)
 	Prefix string `json:"prefix,omitempty"`
 
-	// user Id
+	// User Identifier
 	// Example: 1
 	UserID int64 `json:"userId,omitempty"`
 }

@@ -57,7 +57,7 @@ func NewEdgeJobTasksClearNoContent() *EdgeJobTasksClearNoContent {
 /*
 EdgeJobTasksClearNoContent describes a response with status code 204, with default header values.
 
-No Content
+EdgeJobTasksClearNoContent edge job tasks clear no content
 */
 type EdgeJobTasksClearNoContent struct {
 }
@@ -108,7 +108,7 @@ func NewEdgeJobTasksClearBadRequest() *EdgeJobTasksClearBadRequest {
 /*
 EdgeJobTasksClearBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeJobTasksClearBadRequest edge job tasks clear bad request
 */
 type EdgeJobTasksClearBadRequest struct {
 }
@@ -159,7 +159,7 @@ func NewEdgeJobTasksClearInternalServerError() *EdgeJobTasksClearInternalServerE
 /*
 EdgeJobTasksClearInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobTasksClearInternalServerError edge job tasks clear internal server error
 */
 type EdgeJobTasksClearInternalServerError struct {
 }

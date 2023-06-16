@@ -57,7 +57,7 @@ func NewEdgeStackDeleteNoContent() *EdgeStackDeleteNoContent {
 /*
 EdgeStackDeleteNoContent describes a response with status code 204, with default header values.
 
-No Content
+EdgeStackDeleteNoContent edge stack delete no content
 */
 type EdgeStackDeleteNoContent struct {
 }
@@ -108,7 +108,7 @@ func NewEdgeStackDeleteBadRequest() *EdgeStackDeleteBadRequest {
 /*
 EdgeStackDeleteBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeStackDeleteBadRequest edge stack delete bad request
 */
 type EdgeStackDeleteBadRequest struct {
 }
@@ -159,7 +159,7 @@ func NewEdgeStackDeleteInternalServerError() *EdgeStackDeleteInternalServerError
 /*
 EdgeStackDeleteInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeStackDeleteInternalServerError edge stack delete internal server error
 */
 type EdgeStackDeleteInternalServerError struct {
 }

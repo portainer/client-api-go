@@ -18,7 +18,7 @@ import (
 type DemoEnvironmentDetails struct {
 
 	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 
 	// environments
 	Environments []int64 `json:"environments"`

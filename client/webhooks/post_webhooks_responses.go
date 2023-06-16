@@ -63,7 +63,7 @@ PostWebhooksOK describes a response with status code 200, with default header va
 OK
 */
 type PostWebhooksOK struct {
-	Payload *models.PortainereeWebhook
+	Payload *models.PortainerWebhook
 }
 
 // IsSuccess returns true when this post webhooks o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *PostWebhooksOK) String() string {
 	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksOK  %+v", 200, o.Payload)
 }
 
-func (o *PostWebhooksOK) GetPayload() *models.PortainereeWebhook {
+func (o *PostWebhooksOK) GetPayload() *models.PortainerWebhook {
 	return o.Payload
 }
 
 func (o *PostWebhooksOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeWebhook)
+	o.Payload = new(models.PortainerWebhook)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -123,7 +123,7 @@ func NewPostWebhooksBadRequest() *PostWebhooksBadRequest {
 /*
 PostWebhooksBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+PostWebhooksBadRequest post webhooks bad request
 */
 type PostWebhooksBadRequest struct {
 }
@@ -174,7 +174,7 @@ func NewPostWebhooksConflict() *PostWebhooksConflict {
 /*
 PostWebhooksConflict describes a response with status code 409, with default header values.
 
-Conflict
+PostWebhooksConflict post webhooks conflict
 */
 type PostWebhooksConflict struct {
 }
@@ -225,7 +225,7 @@ func NewPostWebhooksInternalServerError() *PostWebhooksInternalServerError {
 /*
 PostWebhooksInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+PostWebhooksInternalServerError post webhooks internal server error
 */
 type PostWebhooksInternalServerError struct {
 }

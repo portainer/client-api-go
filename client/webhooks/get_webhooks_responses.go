@@ -57,7 +57,7 @@ GetWebhooksOK describes a response with status code 200, with default header val
 OK
 */
 type GetWebhooksOK struct {
-	Payload []*models.PortainereeWebhook
+	Payload []*models.PortainerWebhook
 }
 
 // IsSuccess returns true when this get webhooks o k response has a 2xx status code
@@ -93,7 +93,7 @@ func (o *GetWebhooksOK) String() string {
 	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksOK  %+v", 200, o.Payload)
 }
 
-func (o *GetWebhooksOK) GetPayload() []*models.PortainereeWebhook {
+func (o *GetWebhooksOK) GetPayload() []*models.PortainerWebhook {
 	return o.Payload
 }
 
@@ -115,7 +115,7 @@ func NewGetWebhooksBadRequest() *GetWebhooksBadRequest {
 /*
 GetWebhooksBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+GetWebhooksBadRequest get webhooks bad request
 */
 type GetWebhooksBadRequest struct {
 }
@@ -166,7 +166,7 @@ func NewGetWebhooksInternalServerError() *GetWebhooksInternalServerError {
 /*
 GetWebhooksInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+GetWebhooksInternalServerError get webhooks internal server error
 */
 type GetWebhooksInternalServerError struct {
 }

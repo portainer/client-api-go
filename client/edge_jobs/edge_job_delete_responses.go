@@ -57,7 +57,7 @@ func NewEdgeJobDeleteNoContent() *EdgeJobDeleteNoContent {
 /*
 EdgeJobDeleteNoContent describes a response with status code 204, with default header values.
 
-No Content
+EdgeJobDeleteNoContent edge job delete no content
 */
 type EdgeJobDeleteNoContent struct {
 }
@@ -108,7 +108,7 @@ func NewEdgeJobDeleteBadRequest() *EdgeJobDeleteBadRequest {
 /*
 EdgeJobDeleteBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeJobDeleteBadRequest edge job delete bad request
 */
 type EdgeJobDeleteBadRequest struct {
 }
@@ -159,7 +159,7 @@ func NewEdgeJobDeleteInternalServerError() *EdgeJobDeleteInternalServerError {
 /*
 EdgeJobDeleteInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobDeleteInternalServerError edge job delete internal server error
 */
 type EdgeJobDeleteInternalServerError struct {
 }

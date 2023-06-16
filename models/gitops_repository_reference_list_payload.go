@@ -32,10 +32,6 @@ type GitopsRepositoryReferenceListPayload struct {
 	// stack ID
 	StackID int64 `json:"stackID,omitempty"`
 
-	// TLSSkipVerify skips SSL verification when cloning the Git repository
-	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
-
 	// username
 	Username string `json:"username,omitempty"`
 }

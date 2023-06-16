@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -18,14 +17,14 @@ import (
 // swagger:model portaineree.Webhook
 type PortainereeWebhook struct {
 
-	// endpoint Id
+	// Environment(Endpoint) identifier. Reference the environment(endpoint) that will be used for deployment
 	EndpointID int64 `json:"EndpointId,omitempty"`
 
 	// Webhook Identifier
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
-	// registry Id
+	// Registry Identifier
 	RegistryID int64 `json:"RegistryId,omitempty"`
 
 	// resource Id
@@ -35,65 +34,16 @@ type PortainereeWebhook struct {
 	Token string `json:"Token,omitempty"`
 
 	// type
-	Type PortainereeWebhookType `json:"Type,omitempty"`
+	Type int64 `json:"Type,omitempty"`
 }
 
 // Validate validates this portaineree webhook
 func (m *PortainereeWebhook) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *PortainereeWebhook) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("Type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("Type")
-		}
-		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this portaineree webhook based on the context it is used
+// ContextValidate validates this portaineree webhook based on context it is used
 func (m *PortainereeWebhook) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PortainereeWebhook) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("Type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("Type")
-		}
-		return err
-	}
-
 	return nil
 }
 

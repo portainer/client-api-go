@@ -51,7 +51,7 @@ EndpointGroupListOK describes a response with status code 200, with default head
 Environment(Endpoint) group
 */
 type EndpointGroupListOK struct {
-	Payload []*models.PortainereeEndpointGroup
+	Payload []*models.PortainerEndpointGroup
 }
 
 // IsSuccess returns true when this endpoint group list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *EndpointGroupListOK) String() string {
 	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListOK  %+v", 200, o.Payload)
 }
 
-func (o *EndpointGroupListOK) GetPayload() []*models.PortainereeEndpointGroup {
+func (o *EndpointGroupListOK) GetPayload() []*models.PortainerEndpointGroup {
 	return o.Payload
 }
 

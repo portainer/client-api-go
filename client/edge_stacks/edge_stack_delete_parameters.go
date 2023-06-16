@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewEdgeStackDeleteParams creates a new EdgeStackDeleteParams object,
@@ -66,7 +65,7 @@ type EdgeStackDeleteParams struct {
 
 	   EdgeStack Id
 	*/
-	ID int64
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,13 +121,13 @@ func (o *EdgeStackDeleteParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the edge stack delete params
-func (o *EdgeStackDeleteParams) WithID(id int64) *EdgeStackDeleteParams {
+func (o *EdgeStackDeleteParams) WithID(id string) *EdgeStackDeleteParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack delete params
-func (o *EdgeStackDeleteParams) SetID(id int64) {
+func (o *EdgeStackDeleteParams) SetID(id string) {
 	o.ID = id
 }
 
@@ -141,7 +140,7 @@ func (o *EdgeStackDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strf
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 

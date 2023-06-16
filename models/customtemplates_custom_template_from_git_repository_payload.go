@@ -43,21 +43,13 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Required for Docker stacks
 	// Example: 1
 	// Enum: [1 2]
-	Platform struct {
-		PortainereeCustomTemplatePlatform
-	} `json:"platform,omitempty"`
+	Platform int64 `json:"platform,omitempty"`
 
 	// Use basic authentication to clone the Git repository
 	// Example: true
 	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
 
-	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
-	// is true and RepositoryUsername/RepositoryPassword are not provided
-	// Example: 0
-	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
-
-	// Password used in basic authentication. Required when RepositoryAuthentication is true
-	// and RepositoryGitCredentialID is 0
+	// Password used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitPassword
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`
 
@@ -70,8 +62,7 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Required: true
 	RepositoryURL *string `json:"repositoryURL"`
 
-	// Username used in basic authentication. Required when RepositoryAuthentication is true
-	// and RepositoryGitCredentialID is 0
+	// Username used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
 
@@ -80,20 +71,14 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Required: true
 	Title *string `json:"title"`
 
-	// TLSSkipVerify skips SSL verification when cloning the Git repository
-	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
-
 	// Type of created stack (1 - swarm, 2 - compose)
 	// Example: 1
 	// Required: true
 	// Enum: [1 2]
-	Type struct {
-		PortainereeStackType
-	} `json:"type"`
+	Type *int64 `json:"type"`
 
 	// Definitions of variables in the stack file
-	Variables []*PortainereeCustomTemplateVariableDefinition `json:"variables"`
+	Variables []*PortainerCustomTemplateVariableDefinition `json:"variables"`
 }
 
 // Validate validates this customtemplates custom template from git repository payload
@@ -142,9 +127,7 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateDescript
 var customtemplatesCustomTemplateFromGitRepositoryPayloadTypePlatformPropEnum []interface{}
 
 func init() {
-	var res []struct {
-		PortainereeCustomTemplatePlatform
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -154,9 +137,7 @@ func init() {
 }
 
 // prop value enum
-func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validatePlatformEnum(path, location string, value *struct {
-	PortainereeCustomTemplatePlatform
-}) error {
+func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validatePlatformEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, customtemplatesCustomTemplateFromGitRepositoryPayloadTypePlatformPropEnum, true); err != nil {
 		return err
 	}
@@ -166,6 +147,11 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validatePlatform
 func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validatePlatform(formats strfmt.Registry) error {
 	if swag.IsZero(m.Platform) { // not required
 		return nil
+	}
+
+	// value enum
+	if err := m.validatePlatformEnum("platform", "body", m.Platform); err != nil {
+		return err
 	}
 
 	return nil
@@ -192,9 +178,7 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateTitle(fo
 var customtemplatesCustomTemplateFromGitRepositoryPayloadTypeTypePropEnum []interface{}
 
 func init() {
-	var res []struct {
-		PortainereeStackType
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -204,9 +188,7 @@ func init() {
 }
 
 // prop value enum
-func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateTypeEnum(path, location string, value *struct {
-	PortainereeStackType
-}) error {
+func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateTypeEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, customtemplatesCustomTemplateFromGitRepositoryPayloadTypeTypePropEnum, true); err != nil {
 		return err
 	}
@@ -214,6 +196,15 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateTypeEnum
 }
 
 func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -248,14 +239,6 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateVariable
 func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidatePlatform(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateVariables(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -263,16 +246,6 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) ContextValidate(
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) contextValidatePlatform(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
-func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 

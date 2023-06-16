@@ -30,19 +30,10 @@ type RegistriesRegistryCreatePayload struct {
 	BaseURL string `json:"baseURL,omitempty"`
 
 	// ECR specific details, required when type = 7
-	Ecr struct {
-		PortainereeEcrData
-	} `json:"ecr,omitempty"`
-
-	// Github specific details, required when type = 8
-	Github struct {
-		PortainereeGithubRegistryData
-	} `json:"github,omitempty"`
+	Ecr *PortainerEcrData `json:"ecr,omitempty"`
 
 	// Gitlab specific details, required when type = 4
-	Gitlab struct {
-		PortainereeGitlabRegistryData
-	} `json:"gitlab,omitempty"`
+	Gitlab *PortainerGitlabRegistryData `json:"gitlab,omitempty"`
 
 	// Name that will be used to identify this registry
 	// Example: my-registry
@@ -54,9 +45,7 @@ type RegistriesRegistryCreatePayload struct {
 	Password string `json:"password,omitempty"`
 
 	// Quay specific details, required when type = 1
-	Quay struct {
-		PortainereeQuayRegistryData
-	} `json:"quay,omitempty"`
+	Quay *PortainerQuayRegistryData `json:"quay,omitempty"`
 
 	// Registry Type. Valid values are:
 	// 	1 (Quay.io),
@@ -66,13 +55,10 @@ type RegistriesRegistryCreatePayload struct {
 	// 	5 (ProGet registry),
 	// 	6 (DockerHub)
 	// 	7 (ECR)
-	// 	8 (Github registry)
 	// Example: 1
 	// Required: true
-	// Enum: [1 2 3 4 5 6 7 8]
-	Type struct {
-		PortainereeRegistryType
-	} `json:"type"`
+	// Enum: [1 2 3 4 5 6 7]
+	Type *int64 `json:"type"`
 
 	// URL or IP address of the Docker registry
 	// Example: registry.mydomain.tld:2375/feed
@@ -93,10 +79,6 @@ func (m *RegistriesRegistryCreatePayload) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateEcr(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateGithub(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -140,12 +122,15 @@ func (m *RegistriesRegistryCreatePayload) validateEcr(formats strfmt.Registry) e
 		return nil
 	}
 
-	return nil
-}
-
-func (m *RegistriesRegistryCreatePayload) validateGithub(formats strfmt.Registry) error {
-	if swag.IsZero(m.Github) { // not required
-		return nil
+	if m.Ecr != nil {
+		if err := m.Ecr.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ecr")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ecr")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -154,6 +139,17 @@ func (m *RegistriesRegistryCreatePayload) validateGithub(formats strfmt.Registry
 func (m *RegistriesRegistryCreatePayload) validateGitlab(formats strfmt.Registry) error {
 	if swag.IsZero(m.Gitlab) { // not required
 		return nil
+	}
+
+	if m.Gitlab != nil {
+		if err := m.Gitlab.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gitlab")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gitlab")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -173,16 +169,25 @@ func (m *RegistriesRegistryCreatePayload) validateQuay(formats strfmt.Registry) 
 		return nil
 	}
 
+	if m.Quay != nil {
+		if err := m.Quay.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("quay")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("quay")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
 var registriesRegistryCreatePayloadTypeTypePropEnum []interface{}
 
 func init() {
-	var res []struct {
-		PortainereeRegistryType
-	}
-	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7,8]`), &res); err != nil {
+	var res []int64
+	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -191,9 +196,7 @@ func init() {
 }
 
 // prop value enum
-func (m *RegistriesRegistryCreatePayload) validateTypeEnum(path, location string, value *struct {
-	PortainereeRegistryType
-}) error {
+func (m *RegistriesRegistryCreatePayload) validateTypeEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, registriesRegistryCreatePayloadTypeTypePropEnum, true); err != nil {
 		return err
 	}
@@ -201,6 +204,15 @@ func (m *RegistriesRegistryCreatePayload) validateTypeEnum(path, location string
 }
 
 func (m *RegistriesRegistryCreatePayload) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -222,19 +234,11 @@ func (m *RegistriesRegistryCreatePayload) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateGithub(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateGitlab(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateQuay(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -246,25 +250,48 @@ func (m *RegistriesRegistryCreatePayload) ContextValidate(ctx context.Context, f
 
 func (m *RegistriesRegistryCreatePayload) contextValidateEcr(ctx context.Context, formats strfmt.Registry) error {
 
-	return nil
-}
-
-func (m *RegistriesRegistryCreatePayload) contextValidateGithub(ctx context.Context, formats strfmt.Registry) error {
+	if m.Ecr != nil {
+		if err := m.Ecr.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ecr")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ecr")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
 
 func (m *RegistriesRegistryCreatePayload) contextValidateGitlab(ctx context.Context, formats strfmt.Registry) error {
 
+	if m.Gitlab != nil {
+		if err := m.Gitlab.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gitlab")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gitlab")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
 func (m *RegistriesRegistryCreatePayload) contextValidateQuay(ctx context.Context, formats strfmt.Registry) error {
 
-	return nil
-}
-
-func (m *RegistriesRegistryCreatePayload) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+	if m.Quay != nil {
+		if err := m.Quay.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("quay")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("quay")
+			}
+			return err
+		}
+	}
 
 	return nil
 }

@@ -63,7 +63,7 @@ TeamCreateOK describes a response with status code 200, with default header valu
 Success
 */
 type TeamCreateOK struct {
-	Payload *models.PortainereeTeam
+	Payload *models.PortainerTeam
 }
 
 // IsSuccess returns true when this team create o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *TeamCreateOK) String() string {
 	return fmt.Sprintf("[POST /team][%d] teamCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *TeamCreateOK) GetPayload() *models.PortainereeTeam {
+func (o *TeamCreateOK) GetPayload() *models.PortainerTeam {
 	return o.Payload
 }
 
 func (o *TeamCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTeam)
+	o.Payload = new(models.PortainerTeam)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

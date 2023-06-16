@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewEdgeStackInspectParams creates a new EdgeStackInspectParams object,
@@ -66,7 +65,7 @@ type EdgeStackInspectParams struct {
 
 	   EdgeStack Id
 	*/
-	ID int64
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,13 +121,13 @@ func (o *EdgeStackInspectParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the edge stack inspect params
-func (o *EdgeStackInspectParams) WithID(id int64) *EdgeStackInspectParams {
+func (o *EdgeStackInspectParams) WithID(id string) *EdgeStackInspectParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack inspect params
-func (o *EdgeStackInspectParams) SetID(id int64) {
+func (o *EdgeStackInspectParams) SetID(id string) {
 	o.ID = id
 }
 
@@ -141,7 +140,7 @@ func (o *EdgeStackInspectParams) WriteToRequest(r runtime.ClientRequest, reg str
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 

@@ -51,7 +51,7 @@ RoleListOK describes a response with status code 200, with default header values
 Success
 */
 type RoleListOK struct {
-	Payload []*models.PortainereeRole
+	Payload []*models.PortainerRole
 }
 
 // IsSuccess returns true when this role list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *RoleListOK) String() string {
 	return fmt.Sprintf("[GET /roles][%d] roleListOK  %+v", 200, o.Payload)
 }
 
-func (o *RoleListOK) GetPayload() []*models.PortainereeRole {
+func (o *RoleListOK) GetPayload() []*models.PortainerRole {
 	return o.Payload
 }
 

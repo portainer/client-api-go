@@ -75,7 +75,7 @@ TeamUpdateOK describes a response with status code 200, with default header valu
 Success
 */
 type TeamUpdateOK struct {
-	Payload *models.PortainereeTeam
+	Payload *models.PortainerTeam
 }
 
 // IsSuccess returns true when this team update o k response has a 2xx status code
@@ -111,13 +111,13 @@ func (o *TeamUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /team/{id}][%d] teamUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *TeamUpdateOK) GetPayload() *models.PortainereeTeam {
+func (o *TeamUpdateOK) GetPayload() *models.PortainerTeam {
 	return o.Payload
 }
 
 func (o *TeamUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTeam)
+	o.Payload = new(models.PortainerTeam)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -66,7 +66,7 @@ type HelmListParams struct {
 
 	   specify an optional filter
 	*/
-	Filter *string
+	Filter string
 
 	/* ID.
 
@@ -78,13 +78,13 @@ type HelmListParams struct {
 
 	   specify an optional namespace
 	*/
-	Namespace *string
+	Namespace string
 
 	/* Selector.
 
 	   specify an optional selector
 	*/
-	Selector *string
+	Selector string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -140,13 +140,13 @@ func (o *HelmListParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithFilter adds the filter to the helm list params
-func (o *HelmListParams) WithFilter(filter *string) *HelmListParams {
+func (o *HelmListParams) WithFilter(filter string) *HelmListParams {
 	o.SetFilter(filter)
 	return o
 }
 
 // SetFilter adds the filter to the helm list params
-func (o *HelmListParams) SetFilter(filter *string) {
+func (o *HelmListParams) SetFilter(filter string) {
 	o.Filter = filter
 }
 
@@ -162,24 +162,24 @@ func (o *HelmListParams) SetID(id int64) {
 }
 
 // WithNamespace adds the namespace to the helm list params
-func (o *HelmListParams) WithNamespace(namespace *string) *HelmListParams {
+func (o *HelmListParams) WithNamespace(namespace string) *HelmListParams {
 	o.SetNamespace(namespace)
 	return o
 }
 
 // SetNamespace adds the namespace to the helm list params
-func (o *HelmListParams) SetNamespace(namespace *string) {
+func (o *HelmListParams) SetNamespace(namespace string) {
 	o.Namespace = namespace
 }
 
 // WithSelector adds the selector to the helm list params
-func (o *HelmListParams) WithSelector(selector *string) *HelmListParams {
+func (o *HelmListParams) WithSelector(selector string) *HelmListParams {
 	o.SetSelector(selector)
 	return o
 }
 
 // SetSelector adds the selector to the helm list params
-func (o *HelmListParams) SetSelector(selector *string) {
+func (o *HelmListParams) SetSelector(selector string) {
 	o.Selector = selector
 }
 
@@ -191,20 +191,13 @@ func (o *HelmListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 	}
 	var res []error
 
-	if o.Filter != nil {
+	// query param filter
+	qrFilter := o.Filter
+	qFilter := qrFilter
+	if qFilter != "" {
 
-		// query param filter
-		var qrFilter string
-
-		if o.Filter != nil {
-			qrFilter = *o.Filter
-		}
-		qFilter := qrFilter
-		if qFilter != "" {
-
-			if err := r.SetQueryParam("filter", qFilter); err != nil {
-				return err
-			}
+		if err := r.SetQueryParam("filter", qFilter); err != nil {
+			return err
 		}
 	}
 
@@ -213,37 +206,23 @@ func (o *HelmListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 
-	if o.Namespace != nil {
+	// query param namespace
+	qrNamespace := o.Namespace
+	qNamespace := qrNamespace
+	if qNamespace != "" {
 
-		// query param namespace
-		var qrNamespace string
-
-		if o.Namespace != nil {
-			qrNamespace = *o.Namespace
-		}
-		qNamespace := qrNamespace
-		if qNamespace != "" {
-
-			if err := r.SetQueryParam("namespace", qNamespace); err != nil {
-				return err
-			}
+		if err := r.SetQueryParam("namespace", qNamespace); err != nil {
+			return err
 		}
 	}
 
-	if o.Selector != nil {
+	// query param selector
+	qrSelector := o.Selector
+	qSelector := qrSelector
+	if qSelector != "" {
 
-		// query param selector
-		var qrSelector string
-
-		if o.Selector != nil {
-			qrSelector = *o.Selector
-		}
-		qSelector := qrSelector
-		if qSelector != "" {
-
-			if err := r.SetQueryParam("selector", qSelector); err != nil {
-				return err
-			}
+		if err := r.SetQueryParam("selector", qSelector); err != nil {
+			return err
 		}
 	}
 

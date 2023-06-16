@@ -63,7 +63,7 @@ TeamMembershipsOK describes a response with status code 200, with default header
 Success
 */
 type TeamMembershipsOK struct {
-	Payload []*models.PortainereeTeamMembership
+	Payload []*models.PortainerTeamMembership
 }
 
 // IsSuccess returns true when this team memberships o k response has a 2xx status code
@@ -99,7 +99,7 @@ func (o *TeamMembershipsOK) String() string {
 	return fmt.Sprintf("[GET /teams/{id}/memberships][%d] teamMembershipsOK  %+v", 200, o.Payload)
 }
 
-func (o *TeamMembershipsOK) GetPayload() []*models.PortainereeTeamMembership {
+func (o *TeamMembershipsOK) GetPayload() []*models.PortainerTeamMembership {
 	return o.Payload
 }
 

@@ -30,9 +30,7 @@ type PortainereeUser struct {
 
 	// User role (1 for administrator account and 2 for regular account)
 	// Example: 1
-	Role struct {
-		PortainereeUserRole
-	} `json:"Role,omitempty"`
+	Role int64 `json:"Role,omitempty"`
 
 	// token issue at
 	// Example: 1639408208
@@ -59,10 +57,6 @@ func (m *PortainereeUser) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePortainerAuthorizations(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateRole(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -114,14 +108,6 @@ func (m *PortainereeUser) validatePortainerAuthorizations(formats strfmt.Registr
 	return nil
 }
 
-func (m *PortainereeUser) validateRole(formats strfmt.Registry) error {
-	if swag.IsZero(m.Role) { // not required
-		return nil
-	}
-
-	return nil
-}
-
 func (m *PortainereeUser) validateThemeSettings(formats strfmt.Registry) error {
 	if swag.IsZero(m.ThemeSettings) { // not required
 		return nil
@@ -150,10 +136,6 @@ func (m *PortainereeUser) ContextValidate(ctx context.Context, formats strfmt.Re
 	}
 
 	if err := m.contextValidatePortainerAuthorizations(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateRole(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -191,11 +173,6 @@ func (m *PortainereeUser) contextValidatePortainerAuthorizations(ctx context.Con
 		}
 		return err
 	}
-
-	return nil
-}
-
-func (m *PortainereeUser) contextValidateRole(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewEdgeJobTasksListParams creates a new EdgeJobTasksListParams object,
@@ -66,7 +65,7 @@ type EdgeJobTasksListParams struct {
 
 	   EdgeJob Id
 	*/
-	ID int64
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,13 +121,13 @@ func (o *EdgeJobTasksListParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the edge job tasks list params
-func (o *EdgeJobTasksListParams) WithID(id int64) *EdgeJobTasksListParams {
+func (o *EdgeJobTasksListParams) WithID(id string) *EdgeJobTasksListParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge job tasks list params
-func (o *EdgeJobTasksListParams) SetID(id int64) {
+func (o *EdgeJobTasksListParams) SetID(id string) {
 	o.ID = id
 }
 
@@ -141,7 +140,7 @@ func (o *EdgeJobTasksListParams) WriteToRequest(r runtime.ClientRequest, reg str
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 

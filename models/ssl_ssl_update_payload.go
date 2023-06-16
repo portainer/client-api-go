@@ -17,11 +17,8 @@ import (
 // swagger:model ssl.sslUpdatePayload
 type SslSslUpdatePayload struct {
 
-	// SSL Certficates
+	// cert
 	Cert string `json:"cert,omitempty"`
-
-	// SSL Client Certificates
-	ClientCert string `json:"clientCert,omitempty"`
 
 	// httpenabled
 	Httpenabled *bool `json:"httpenabled,omitempty"`

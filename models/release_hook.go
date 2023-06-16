@@ -28,9 +28,7 @@ type ReleaseHook struct {
 	Kind string `json:"kind,omitempty"`
 
 	// LastRun indicates the date/time this was last run.
-	LastRun struct {
-		ReleaseHookExecution
-	} `json:"last_run,omitempty"`
+	LastRun *ReleaseHookExecution `json:"last_run,omitempty"`
 
 	// Manifest is the manifest contents.
 	Manifest string `json:"manifest,omitempty"`
@@ -64,6 +62,17 @@ func (m *ReleaseHook) validateLastRun(formats strfmt.Registry) error {
 		return nil
 	}
 
+	if m.LastRun != nil {
+		if err := m.LastRun.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("last_run")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("last_run")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -82,6 +91,17 @@ func (m *ReleaseHook) ContextValidate(ctx context.Context, formats strfmt.Regist
 }
 
 func (m *ReleaseHook) contextValidateLastRun(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LastRun != nil {
+		if err := m.LastRun.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("last_run")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("last_run")
+			}
+			return err
+		}
+	}
 
 	return nil
 }

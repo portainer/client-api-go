@@ -19,42 +19,39 @@ import (
 // swagger:model registries.registryUpdatePayload
 type RegistriesRegistryUpdatePayload struct {
 
-	// authentication
+	// Is authentication against this registry enabled
 	// Example: false
 	// Required: true
 	Authentication *bool `json:"authentication"`
 
-	// base URL
+	// BaseURL is used for quay registry
 	// Example: registry.mydomain.tld:2375
 	BaseURL string `json:"baseURL,omitempty"`
 
-	// ecr
-	Ecr *PortainereeEcrData `json:"ecr,omitempty"`
+	// ECR data
+	Ecr *PortainerEcrData `json:"ecr,omitempty"`
 
-	// github
-	Github *PortainereeGithubRegistryData `json:"github,omitempty"`
-
-	// name
+	// Name that will be used to identify this registry
 	// Example: my-registry
 	// Required: true
 	Name *string `json:"name"`
 
-	// password
+	// Password used to authenticate against this registry. required when Authentication is true
 	// Example: registry_password
 	Password string `json:"password,omitempty"`
 
-	// quay
-	Quay *PortainereeQuayRegistryData `json:"quay,omitempty"`
+	// Quay data
+	Quay *PortainerQuayRegistryData `json:"quay,omitempty"`
 
-	// registry accesses
-	RegistryAccesses PortainereeRegistryAccesses `json:"registryAccesses,omitempty"`
+	// Registry access control
+	RegistryAccesses PortainerRegistryAccesses `json:"registryAccesses,omitempty"`
 
-	// url
-	// Example: registry.mydomain.tld:2375/feed
+	// URL or IP address of the Docker registry
+	// Example: registry.mydomain.tld:2375
 	// Required: true
 	URL *string `json:"url"`
 
-	// username
+	// Username used to authenticate against this registry. Required when Authentication is true
 	// Example: registry_user
 	Username string `json:"username,omitempty"`
 }
@@ -68,10 +65,6 @@ func (m *RegistriesRegistryUpdatePayload) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateEcr(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateGithub(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -117,25 +110,6 @@ func (m *RegistriesRegistryUpdatePayload) validateEcr(formats strfmt.Registry) e
 				return ve.ValidateName("ecr")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ecr")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *RegistriesRegistryUpdatePayload) validateGithub(formats strfmt.Registry) error {
-	if swag.IsZero(m.Github) { // not required
-		return nil
-	}
-
-	if m.Github != nil {
-		if err := m.Github.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("github")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("github")
 			}
 			return err
 		}
@@ -208,10 +182,6 @@ func (m *RegistriesRegistryUpdatePayload) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateGithub(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateQuay(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -234,22 +204,6 @@ func (m *RegistriesRegistryUpdatePayload) contextValidateEcr(ctx context.Context
 				return ve.ValidateName("ecr")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ecr")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *RegistriesRegistryUpdatePayload) contextValidateGithub(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Github != nil {
-		if err := m.Github.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("github")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("github")
 			}
 			return err
 		}

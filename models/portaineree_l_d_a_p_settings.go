@@ -54,9 +54,7 @@ type PortainereeLDAPSettings struct {
 
 	// server type
 	// Example: 1
-	ServerType struct {
-		PortainereeLDAPServerType
-	} `json:"ServerType,omitempty"`
+	ServerType int64 `json:"ServerType,omitempty"`
 
 	// Whether LDAP connection should use StartTLS
 	// Example: true
@@ -85,10 +83,6 @@ func (m *PortainereeLDAPSettings) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSearchSettings(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateServerType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -180,14 +174,6 @@ func (m *PortainereeLDAPSettings) validateSearchSettings(formats strfmt.Registry
 	return nil
 }
 
-func (m *PortainereeLDAPSettings) validateServerType(formats strfmt.Registry) error {
-	if swag.IsZero(m.ServerType) { // not required
-		return nil
-	}
-
-	return nil
-}
-
 func (m *PortainereeLDAPSettings) validateTLSConfig(formats strfmt.Registry) error {
 	if swag.IsZero(m.TLSConfig) { // not required
 		return nil
@@ -220,10 +206,6 @@ func (m *PortainereeLDAPSettings) ContextValidate(ctx context.Context, formats s
 	}
 
 	if err := m.contextValidateSearchSettings(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateServerType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -293,11 +275,6 @@ func (m *PortainereeLDAPSettings) contextValidateSearchSettings(ctx context.Cont
 		}
 
 	}
-
-	return nil
-}
-
-func (m *PortainereeLDAPSettings) contextValidateServerType(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

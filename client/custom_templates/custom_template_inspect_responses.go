@@ -63,7 +63,7 @@ CustomTemplateInspectOK describes a response with status code 200, with default 
 Success
 */
 type CustomTemplateInspectOK struct {
-	Payload *models.PortainereeCustomTemplate
+	Payload *models.PortainerCustomTemplate
 }
 
 // IsSuccess returns true when this custom template inspect o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *CustomTemplateInspectOK) String() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *CustomTemplateInspectOK) GetPayload() *models.PortainereeCustomTemplate {
+func (o *CustomTemplateInspectOK) GetPayload() *models.PortainerCustomTemplate {
 	return o.Payload
 }
 
 func (o *CustomTemplateInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeCustomTemplate)
+	o.Payload = new(models.PortainerCustomTemplate)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

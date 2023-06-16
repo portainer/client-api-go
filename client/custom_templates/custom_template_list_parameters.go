@@ -168,8 +168,8 @@ func (o *CustomTemplateListParams) bindParamType(formats strfmt.Registry) []stri
 		typeIC = append(typeIC, typeIIV)
 	}
 
-	// items.CollectionFormat: "csv"
-	typeIS := swag.JoinByFormat(typeIC, "csv")
+	// items.CollectionFormat: ""
+	typeIS := swag.JoinByFormat(typeIC, "")
 
 	return typeIS
 }

@@ -63,7 +63,7 @@ UserMembershipsInspectOK describes a response with status code 200, with default
 Success
 */
 type UserMembershipsInspectOK struct {
-	Payload *models.PortainereeTeamMembership
+	Payload *models.PortainerTeamMembership
 }
 
 // IsSuccess returns true when this user memberships inspect o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *UserMembershipsInspectOK) String() string {
 	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *UserMembershipsInspectOK) GetPayload() *models.PortainereeTeamMembership {
+func (o *UserMembershipsInspectOK) GetPayload() *models.PortainerTeamMembership {
 	return o.Payload
 }
 
 func (o *UserMembershipsInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTeamMembership)
+	o.Payload = new(models.PortainerTeamMembership)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

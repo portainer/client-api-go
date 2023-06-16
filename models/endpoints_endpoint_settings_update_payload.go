@@ -7,9 +7,7 @@ package models
 
 import (
 	"context"
-	"strconv"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -18,213 +16,6 @@ import (
 //
 // swagger:model endpoints.endpointSettingsUpdatePayload
 type EndpointsEndpointSettingsUpdatePayload struct {
-
-	// Whether automatic update time restrictions are enabled
-	ChangeWindow struct {
-		PortainereeEndpointChangeWindow
-	} `json:"changeWindow,omitempty"`
-
-	// Hide manual deployment forms for an environment
-	DeploymentOptions struct {
-		PortainereeDeploymentOptions
-	} `json:"deploymentOptions,omitempty"`
-
-	// enable g p u management
-	// Example: false
-	EnableGPUManagement *bool `json:"enableGPUManagement,omitempty"`
-
-	// enable image notification
-	// Example: true
-	EnableImageNotification *bool `json:"enableImageNotification,omitempty"`
-
-	// gpus
-	Gpus []*PortainereePair `json:"gpus"`
-
-	// security settings
-	SecuritySettings *EndpointsEndpointSettingsUpdatePayloadSecuritySettings `json:"securitySettings,omitempty"`
-}
-
-// Validate validates this endpoints endpoint settings update payload
-func (m *EndpointsEndpointSettingsUpdatePayload) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateChangeWindow(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateDeploymentOptions(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateGpus(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSecuritySettings(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *EndpointsEndpointSettingsUpdatePayload) validateChangeWindow(formats strfmt.Registry) error {
-	if swag.IsZero(m.ChangeWindow) { // not required
-		return nil
-	}
-
-	return nil
-}
-
-func (m *EndpointsEndpointSettingsUpdatePayload) validateDeploymentOptions(formats strfmt.Registry) error {
-	if swag.IsZero(m.DeploymentOptions) { // not required
-		return nil
-	}
-
-	return nil
-}
-
-func (m *EndpointsEndpointSettingsUpdatePayload) validateGpus(formats strfmt.Registry) error {
-	if swag.IsZero(m.Gpus) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Gpus); i++ {
-		if swag.IsZero(m.Gpus[i]) { // not required
-			continue
-		}
-
-		if m.Gpus[i] != nil {
-			if err := m.Gpus[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("gpus" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (m *EndpointsEndpointSettingsUpdatePayload) validateSecuritySettings(formats strfmt.Registry) error {
-	if swag.IsZero(m.SecuritySettings) { // not required
-		return nil
-	}
-
-	if m.SecuritySettings != nil {
-		if err := m.SecuritySettings.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("securitySettings")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("securitySettings")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this endpoints endpoint settings update payload based on the context it is used
-func (m *EndpointsEndpointSettingsUpdatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateChangeWindow(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateDeploymentOptions(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateGpus(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateSecuritySettings(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateChangeWindow(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
-func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
-func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateGpus(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Gpus); i++ {
-
-		if m.Gpus[i] != nil {
-			if err := m.Gpus[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("gpus" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateSecuritySettings(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.SecuritySettings != nil {
-		if err := m.SecuritySettings.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("securitySettings")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("securitySettings")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *EndpointsEndpointSettingsUpdatePayload) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *EndpointsEndpointSettingsUpdatePayload) UnmarshalBinary(b []byte) error {
-	var res EndpointsEndpointSettingsUpdatePayload
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// EndpointsEndpointSettingsUpdatePayloadSecuritySettings Security settings updates
-//
-// swagger:model EndpointsEndpointSettingsUpdatePayloadSecuritySettings
-type EndpointsEndpointSettingsUpdatePayloadSecuritySettings struct {
 
 	// Whether non-administrator should be able to use bind mounts when creating containers
 	// Example: false
@@ -263,18 +54,18 @@ type EndpointsEndpointSettingsUpdatePayloadSecuritySettings struct {
 	EnableHostManagementFeatures *bool `json:"enableHostManagementFeatures,omitempty"`
 }
 
-// Validate validates this endpoints endpoint settings update payload security settings
-func (m *EndpointsEndpointSettingsUpdatePayloadSecuritySettings) Validate(formats strfmt.Registry) error {
+// Validate validates this endpoints endpoint settings update payload
+func (m *EndpointsEndpointSettingsUpdatePayload) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this endpoints endpoint settings update payload security settings based on context it is used
-func (m *EndpointsEndpointSettingsUpdatePayloadSecuritySettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this endpoints endpoint settings update payload based on context it is used
+func (m *EndpointsEndpointSettingsUpdatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *EndpointsEndpointSettingsUpdatePayloadSecuritySettings) MarshalBinary() ([]byte, error) {
+func (m *EndpointsEndpointSettingsUpdatePayload) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -282,8 +73,8 @@ func (m *EndpointsEndpointSettingsUpdatePayloadSecuritySettings) MarshalBinary()
 }
 
 // UnmarshalBinary interface implementation
-func (m *EndpointsEndpointSettingsUpdatePayloadSecuritySettings) UnmarshalBinary(b []byte) error {
-	var res EndpointsEndpointSettingsUpdatePayloadSecuritySettings
+func (m *EndpointsEndpointSettingsUpdatePayload) UnmarshalBinary(b []byte) error {
+	var res EndpointsEndpointSettingsUpdatePayload
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

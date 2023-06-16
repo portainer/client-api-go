@@ -8,10 +8,8 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // BackupRestorePayload backup restore payload
@@ -19,51 +17,18 @@ import (
 // swagger:model backup.restorePayload
 type BackupRestorePayload struct {
 
-	// Content of the backup
-	// Required: true
+	// file content
 	FileContent []int64 `json:"fileContent"`
 
-	// File name
-	// Required: true
-	FileName *string `json:"fileName"`
+	// file name
+	FileName string `json:"fileName,omitempty"`
 
-	// Password to decrypt the backup with
+	// password
 	Password string `json:"password,omitempty"`
 }
 
 // Validate validates this backup restore payload
 func (m *BackupRestorePayload) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateFileContent(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateFileName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *BackupRestorePayload) validateFileContent(formats strfmt.Registry) error {
-
-	if err := validate.Required("fileContent", "body", m.FileContent); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *BackupRestorePayload) validateFileName(formats strfmt.Registry) error {
-
-	if err := validate.Required("fileName", "body", m.FileName); err != nil {
-		return err
-	}
-
 	return nil
 }
 

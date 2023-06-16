@@ -17,9 +17,6 @@ import (
 // swagger:model portaineree.KubernetesFlags
 type PortainereeKubernetesFlags struct {
 
-	// is server ingress class detected
-	IsServerIngressClassDetected *bool `json:"IsServerIngressClassDetected,omitempty"`
-
 	// is server metrics detected
 	IsServerMetricsDetected *bool `json:"IsServerMetricsDetected,omitempty"`
 

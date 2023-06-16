@@ -63,7 +63,7 @@ SSLInspectOK describes a response with status code 200, with default header valu
 Success
 */
 type SSLInspectOK struct {
-	Payload *models.PortainereeSSLSettings
+	Payload *models.PortainerSSLSettings
 }
 
 // IsSuccess returns true when this s s l inspect o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *SSLInspectOK) String() string {
 	return fmt.Sprintf("[GET /ssl][%d] sSLInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *SSLInspectOK) GetPayload() *models.PortainereeSSLSettings {
+func (o *SSLInspectOK) GetPayload() *models.PortainerSSLSettings {
 	return o.Payload
 }
 
 func (o *SSLInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeSSLSettings)
+	o.Payload = new(models.PortainerSSLSettings)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

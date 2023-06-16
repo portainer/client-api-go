@@ -27,9 +27,7 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 	// nomad deploy type is enabled only for nomad environments(endpoints)
 	// Example: 0
 	// Enum: [0 1 2]
-	DeploymentType struct {
-		PortainereeEdgeStackDeploymentType
-	} `json:"deploymentType,omitempty"`
+	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// List of identifiers of EdgeGroups
 	// Example: [1]
@@ -44,20 +42,12 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// Pre Pull image
-	// Example: false
-	PrePullImage *bool `json:"prePullImage,omitempty"`
-
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
 
 	// Use basic authentication to clone the Git repository
 	// Example: true
 	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
-
-	// GitCredentialID used to identify the binded git credential
-	// Example: 0
-	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
 
 	// Password used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitPassword
@@ -75,14 +65,6 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 	// Username used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
-
-	// Retry deploy
-	// Example: false
-	RetryDeploy *bool `json:"retryDeploy,omitempty"`
-
-	// TLSSkipVerify skips SSL verification when cloning the Git repository
-	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 
 	// Uses the manifest's namespaces instead of the default one
 	UseManifestNamespaces *bool `json:"useManifestNamespaces,omitempty"`
@@ -113,9 +95,7 @@ func (m *EdgestacksSwarmStackFromGitRepositoryPayload) Validate(formats strfmt.R
 var edgestacksSwarmStackFromGitRepositoryPayloadTypeDeploymentTypePropEnum []interface{}
 
 func init() {
-	var res []struct {
-		PortainereeEdgeStackDeploymentType
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -125,9 +105,7 @@ func init() {
 }
 
 // prop value enum
-func (m *EdgestacksSwarmStackFromGitRepositoryPayload) validateDeploymentTypeEnum(path, location string, value *struct {
-	PortainereeEdgeStackDeploymentType
-}) error {
+func (m *EdgestacksSwarmStackFromGitRepositoryPayload) validateDeploymentTypeEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, edgestacksSwarmStackFromGitRepositoryPayloadTypeDeploymentTypePropEnum, true); err != nil {
 		return err
 	}
@@ -137,6 +115,11 @@ func (m *EdgestacksSwarmStackFromGitRepositoryPayload) validateDeploymentTypeEnu
 func (m *EdgestacksSwarmStackFromGitRepositoryPayload) validateDeploymentType(formats strfmt.Registry) error {
 	if swag.IsZero(m.DeploymentType) { // not required
 		return nil
+	}
+
+	// value enum
+	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
+		return err
 	}
 
 	return nil
@@ -160,22 +143,8 @@ func (m *EdgestacksSwarmStackFromGitRepositoryPayload) validateRepositoryURL(for
 	return nil
 }
 
-// ContextValidate validate this edgestacks swarm stack from git repository payload based on the context it is used
+// ContextValidate validates this edgestacks swarm stack from git repository payload based on context it is used
 func (m *EdgestacksSwarmStackFromGitRepositoryPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateDeploymentType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *EdgestacksSwarmStackFromGitRepositoryPayload) contextValidateDeploymentType(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 

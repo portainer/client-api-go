@@ -21,9 +21,7 @@ type PortainereeRole struct {
 
 	// Authorizations associated to a role
 	// Required: true
-	Authorizations struct {
-		PortainereeAuthorizations
-	} `json:"Authorizations"`
+	Authorizations PortainereeAuthorizations `json:"Authorizations"`
 
 	// Role description
 	// Example: Read-only access of all resources in an environment(endpoint)
@@ -33,9 +31,7 @@ type PortainereeRole struct {
 	// Role Identifier
 	// Example: 1
 	// Required: true
-	ID struct {
-		PortainereeRoleID
-	} `json:"Id"`
+	ID *int64 `json:"Id"`
 
 	// Role name
 	// Example: HelpDesk
@@ -79,6 +75,21 @@ func (m *PortainereeRole) Validate(formats strfmt.Registry) error {
 
 func (m *PortainereeRole) validateAuthorizations(formats strfmt.Registry) error {
 
+	if err := validate.Required("Authorizations", "body", m.Authorizations); err != nil {
+		return err
+	}
+
+	if m.Authorizations != nil {
+		if err := m.Authorizations.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Authorizations")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Authorizations")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -92,6 +103,10 @@ func (m *PortainereeRole) validateDescription(formats strfmt.Registry) error {
 }
 
 func (m *PortainereeRole) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("Id", "body", m.ID); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -122,10 +137,6 @@ func (m *PortainereeRole) ContextValidate(ctx context.Context, formats strfmt.Re
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateID(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -134,10 +145,14 @@ func (m *PortainereeRole) ContextValidate(ctx context.Context, formats strfmt.Re
 
 func (m *PortainereeRole) contextValidateAuthorizations(ctx context.Context, formats strfmt.Registry) error {
 
-	return nil
-}
-
-func (m *PortainereeRole) contextValidateID(ctx context.Context, formats strfmt.Registry) error {
+	if err := m.Authorizations.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("Authorizations")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("Authorizations")
+		}
+		return err
+	}
 
 	return nil
 }

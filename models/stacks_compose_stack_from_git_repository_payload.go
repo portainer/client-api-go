@@ -25,20 +25,14 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	AdditionalFiles []string `json:"additionalFiles"`
 
 	// Optional auto update configuration
-	AutoUpdate struct {
-		PortainereeAutoUpdateSettings
-	} `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainerStackAutoUpdate `json:"autoUpdate,omitempty"`
 
 	// Path to the Stack file inside the Git repository
 	// Example: docker-compose.yml
 	ComposeFile *string `json:"composeFile,omitempty"`
 
 	// A list of environment(endpoint) variables used during stack deployment
-	Env []*PortainereePair `json:"env"`
-
-	// Local filesystem path
-	// Example: /tmp
-	FilesystemPath string `json:"filesystemPath,omitempty"`
+	Env []*PortainerPair `json:"env"`
 
 	// Whether the stack is from a app template
 	// Example: false
@@ -53,13 +47,7 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// Example: true
 	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
 
-	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
-	// is true and RepositoryUsername/RepositoryPassword are not provided
-	// Example: 0
-	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
-
-	// Password used in basic authentication. Required when RepositoryAuthentication is true
-	// and RepositoryGitCredentialID is 0
+	// Password used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitPassword
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`
 
@@ -72,18 +60,9 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// Required: true
 	RepositoryURL *string `json:"repositoryURL"`
 
-	// Username used in basic authentication. Required when RepositoryAuthentication is true
-	// and RepositoryGitCredentialID is 0
+	// Username used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
-
-	// Whether the stack supports relative path volume
-	// Example: false
-	SupportRelativePath *bool `json:"supportRelativePath,omitempty"`
-
-	// TLSSkipVerify skips SSL verification when cloning the Git repository
-	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
 }
 
 // Validate validates this stacks compose stack from git repository payload
@@ -115,6 +94,17 @@ func (m *StacksComposeStackFromGitRepositoryPayload) Validate(formats strfmt.Reg
 func (m *StacksComposeStackFromGitRepositoryPayload) validateAutoUpdate(formats strfmt.Registry) error {
 	if swag.IsZero(m.AutoUpdate) { // not required
 		return nil
+	}
+
+	if m.AutoUpdate != nil {
+		if err := m.AutoUpdate.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("autoUpdate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("autoUpdate")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -183,6 +173,17 @@ func (m *StacksComposeStackFromGitRepositoryPayload) ContextValidate(ctx context
 }
 
 func (m *StacksComposeStackFromGitRepositoryPayload) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AutoUpdate != nil {
+		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("autoUpdate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("autoUpdate")
+			}
+			return err
+		}
+	}
 
 	return nil
 }

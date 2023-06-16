@@ -123,7 +123,7 @@ func NewEdgeJobFileBadRequest() *EdgeJobFileBadRequest {
 /*
 EdgeJobFileBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeJobFileBadRequest edge job file bad request
 */
 type EdgeJobFileBadRequest struct {
 }
@@ -174,7 +174,7 @@ func NewEdgeJobFileInternalServerError() *EdgeJobFileInternalServerError {
 /*
 EdgeJobFileInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobFileInternalServerError edge job file internal server error
 */
 type EdgeJobFileInternalServerError struct {
 }

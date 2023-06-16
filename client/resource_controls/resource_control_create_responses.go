@@ -63,7 +63,7 @@ ResourceControlCreateOK describes a response with status code 200, with default 
 Success
 */
 type ResourceControlCreateOK struct {
-	Payload *models.PortainereeResourceControl
+	Payload *models.PortainerResourceControl
 }
 
 // IsSuccess returns true when this resource control create o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *ResourceControlCreateOK) String() string {
 	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *ResourceControlCreateOK) GetPayload() *models.PortainereeResourceControl {
+func (o *ResourceControlCreateOK) GetPayload() *models.PortainerResourceControl {
 	return o.Payload
 }
 
 func (o *ResourceControlCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeResourceControl)
+	o.Payload = new(models.PortainerResourceControl)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

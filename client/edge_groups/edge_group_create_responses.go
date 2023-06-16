@@ -57,7 +57,7 @@ EdgeGroupCreateOK describes a response with status code 200, with default header
 OK
 */
 type EdgeGroupCreateOK struct {
-	Payload *models.PortainereeEdgeGroup
+	Payload *models.PortainerEdgeGroup
 }
 
 // IsSuccess returns true when this edge group create o k response has a 2xx status code
@@ -93,13 +93,13 @@ func (o *EdgeGroupCreateOK) String() string {
 	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeGroupCreateOK) GetPayload() *models.PortainereeEdgeGroup {
+func (o *EdgeGroupCreateOK) GetPayload() *models.PortainerEdgeGroup {
 	return o.Payload
 }
 
 func (o *EdgeGroupCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeGroup)
+	o.Payload = new(models.PortainerEdgeGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -117,7 +117,7 @@ func NewEdgeGroupCreateInternalServerError() *EdgeGroupCreateInternalServerError
 /*
 EdgeGroupCreateInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeGroupCreateInternalServerError edge group create internal server error
 */
 type EdgeGroupCreateInternalServerError struct {
 }

@@ -63,7 +63,7 @@ EdgeJobUpdateOK describes a response with status code 200, with default header v
 OK
 */
 type EdgeJobUpdateOK struct {
-	Payload *models.PortainereeEdgeJob
+	Payload *models.PortainerEdgeJob
 }
 
 // IsSuccess returns true when this edge job update o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *EdgeJobUpdateOK) String() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeJobUpdateOK) GetPayload() *models.PortainereeEdgeJob {
+func (o *EdgeJobUpdateOK) GetPayload() *models.PortainerEdgeJob {
 	return o.Payload
 }
 
 func (o *EdgeJobUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeJob)
+	o.Payload = new(models.PortainerEdgeJob)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -123,7 +123,7 @@ func NewEdgeJobUpdateBadRequest() *EdgeJobUpdateBadRequest {
 /*
 EdgeJobUpdateBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeJobUpdateBadRequest edge job update bad request
 */
 type EdgeJobUpdateBadRequest struct {
 }
@@ -174,7 +174,7 @@ func NewEdgeJobUpdateInternalServerError() *EdgeJobUpdateInternalServerError {
 /*
 EdgeJobUpdateInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobUpdateInternalServerError edge job update internal server error
 */
 type EdgeJobUpdateInternalServerError struct {
 }

@@ -63,7 +63,7 @@ UserAdminInitOK describes a response with status code 200, with default header v
 Success
 */
 type UserAdminInitOK struct {
-	Payload *models.PortainereeUser
+	Payload *models.PortainerUser
 }
 
 // IsSuccess returns true when this user admin init o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *UserAdminInitOK) String() string {
 	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitOK  %+v", 200, o.Payload)
 }
 
-func (o *UserAdminInitOK) GetPayload() *models.PortainereeUser {
+func (o *UserAdminInitOK) GetPayload() *models.PortainerUser {
 	return o.Payload
 }
 
 func (o *UserAdminInitOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeUser)
+	o.Payload = new(models.PortainerUser)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -57,7 +57,7 @@ EdgeJobCreateOK describes a response with status code 200, with default header v
 OK
 */
 type EdgeJobCreateOK struct {
-	Payload *models.PortainereeEdgeGroup
+	Payload *models.PortainerEdgeGroup
 }
 
 // IsSuccess returns true when this edge job create o k response has a 2xx status code
@@ -93,13 +93,13 @@ func (o *EdgeJobCreateOK) String() string {
 	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeJobCreateOK) GetPayload() *models.PortainereeEdgeGroup {
+func (o *EdgeJobCreateOK) GetPayload() *models.PortainerEdgeGroup {
 	return o.Payload
 }
 
 func (o *EdgeJobCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeGroup)
+	o.Payload = new(models.PortainerEdgeGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -117,7 +117,7 @@ func NewEdgeJobCreateInternalServerError() *EdgeJobCreateInternalServerError {
 /*
 EdgeJobCreateInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobCreateInternalServerError edge job create internal server error
 */
 type EdgeJobCreateInternalServerError struct {
 }

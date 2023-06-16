@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -22,65 +21,16 @@ type PortainereeEdgeJobEndpointMeta struct {
 	CollectLogs *bool `json:"collectLogs,omitempty"`
 
 	// logs status
-	LogsStatus PortainereeEdgeJobLogsStatus `json:"logsStatus,omitempty"`
+	LogsStatus int64 `json:"logsStatus,omitempty"`
 }
 
 // Validate validates this portaineree edge job endpoint meta
 func (m *PortainereeEdgeJobEndpointMeta) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateLogsStatus(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *PortainereeEdgeJobEndpointMeta) validateLogsStatus(formats strfmt.Registry) error {
-	if swag.IsZero(m.LogsStatus) { // not required
-		return nil
-	}
-
-	if err := m.LogsStatus.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("logsStatus")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("logsStatus")
-		}
-		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this portaineree edge job endpoint meta based on the context it is used
+// ContextValidate validates this portaineree edge job endpoint meta based on context it is used
 func (m *PortainereeEdgeJobEndpointMeta) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateLogsStatus(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *PortainereeEdgeJobEndpointMeta) contextValidateLogsStatus(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.LogsStatus.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("logsStatus")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("logsStatus")
-		}
-		return err
-	}
-
 	return nil
 }
 

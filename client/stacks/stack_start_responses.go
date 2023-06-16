@@ -69,7 +69,7 @@ StackStartOK describes a response with status code 200, with default header valu
 Success
 */
 type StackStartOK struct {
-	Payload *models.PortainereeStack
+	Payload *models.PortainerStack
 }
 
 // IsSuccess returns true when this stack start o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *StackStartOK) String() string {
 	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartOK  %+v", 200, o.Payload)
 }
 
-func (o *StackStartOK) GetPayload() *models.PortainereeStack {
+func (o *StackStartOK) GetPayload() *models.PortainerStack {
 	return o.Payload
 }
 
 func (o *StackStartOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeStack)
+	o.Payload = new(models.PortainerStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

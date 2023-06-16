@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewPostEndpointsIDEdgeJobsJobIDLogsParams creates a new PostEndpointsIDEdgeJobsJobIDLogsParams object,
@@ -64,15 +63,15 @@ type PostEndpointsIDEdgeJobsJobIDLogsParams struct {
 
 	/* ID.
 
-	   Environment(Endpoint) Id
+	   environment(endpoint) Id
 	*/
-	ID int64
+	ID string
 
 	/* JobID.
 
 	   Job Id
 	*/
-	JobID int64
+	JobID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -128,24 +127,24 @@ func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) SetHTTPClient(client *http.Clie
 }
 
 // WithID adds the id to the post endpoints ID edge jobs job ID logs params
-func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) WithID(id int64) *PostEndpointsIDEdgeJobsJobIDLogsParams {
+func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) WithID(id string) *PostEndpointsIDEdgeJobsJobIDLogsParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the post endpoints ID edge jobs job ID logs params
-func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) SetID(id int64) {
+func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) SetID(id string) {
 	o.ID = id
 }
 
 // WithJobID adds the jobID to the post endpoints ID edge jobs job ID logs params
-func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) WithJobID(jobID int64) *PostEndpointsIDEdgeJobsJobIDLogsParams {
+func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) WithJobID(jobID string) *PostEndpointsIDEdgeJobsJobIDLogsParams {
 	o.SetJobID(jobID)
 	return o
 }
 
 // SetJobID adds the jobId to the post endpoints ID edge jobs job ID logs params
-func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) SetJobID(jobID int64) {
+func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) SetJobID(jobID string) {
 	o.JobID = jobID
 }
 
@@ -158,12 +157,12 @@ func (o *PostEndpointsIDEdgeJobsJobIDLogsParams) WriteToRequest(r runtime.Client
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 
 	// path param jobID
-	if err := r.SetPathParam("jobID", swag.FormatInt64(o.JobID)); err != nil {
+	if err := r.SetPathParam("jobID", o.JobID); err != nil {
 		return err
 	}
 

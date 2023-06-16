@@ -20,10 +20,9 @@ import (
 type StacksStackGitRedployPayload struct {
 
 	// env
-	Env []*PortainereePair `json:"env"`
+	Env []*PortainerPair `json:"env"`
 
 	// prune
-	// Example: false
 	Prune *bool `json:"prune,omitempty"`
 
 	// Force a pulling to current image with the original tag though the image is already the latest
@@ -32,9 +31,6 @@ type StacksStackGitRedployPayload struct {
 
 	// repository authentication
 	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
-
-	// repository git credential ID
-	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
 
 	// repository password
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`

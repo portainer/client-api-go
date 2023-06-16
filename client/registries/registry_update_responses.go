@@ -69,7 +69,7 @@ RegistryUpdateOK describes a response with status code 200, with default header 
 Success
 */
 type RegistryUpdateOK struct {
-	Payload *models.PortainereeRegistry
+	Payload *models.PortainerRegistry
 }
 
 // IsSuccess returns true when this registry update o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *RegistryUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *RegistryUpdateOK) GetPayload() *models.PortainereeRegistry {
+func (o *RegistryUpdateOK) GetPayload() *models.PortainerRegistry {
 	return o.Payload
 }
 
 func (o *RegistryUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeRegistry)
+	o.Payload = new(models.PortainerRegistry)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

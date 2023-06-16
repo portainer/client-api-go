@@ -36,8 +36,8 @@ type PortainereeRegistryManagementConfiguration struct {
 	// TLS config
 	TLSConfig *PortainereeTLSConfiguration `json:"TLSConfig,omitempty"`
 
-	// type
-	Type PortainereeRegistryType `json:"Type,omitempty"`
+	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
+	Type int64 `json:"Type,omitempty"`
 
 	// username
 	Username string `json:"Username,omitempty"`
@@ -52,10 +52,6 @@ func (m *PortainereeRegistryManagementConfiguration) Validate(formats strfmt.Reg
 	}
 
 	if err := m.validateTLSConfig(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,23 +99,6 @@ func (m *PortainereeRegistryManagementConfiguration) validateTLSConfig(formats s
 	return nil
 }
 
-func (m *PortainereeRegistryManagementConfiguration) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("Type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("Type")
-		}
-		return err
-	}
-
-	return nil
-}
-
 // ContextValidate validate this portaineree registry management configuration based on the context it is used
 func (m *PortainereeRegistryManagementConfiguration) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -129,10 +108,6 @@ func (m *PortainereeRegistryManagementConfiguration) ContextValidate(ctx context
 	}
 
 	if err := m.contextValidateTLSConfig(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -169,20 +144,6 @@ func (m *PortainereeRegistryManagementConfiguration) contextValidateTLSConfig(ct
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *PortainereeRegistryManagementConfiguration) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("Type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("Type")
-		}
-		return err
 	}
 
 	return nil

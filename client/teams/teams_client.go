@@ -134,7 +134,7 @@ func (a *Client) TeamDelete(params *TeamDeleteParams, authInfo runtime.ClientAut
 
 	Retrieve details about a team. Access is only available for administrator and leaders of that team.
 
-**Access policy**: administrator or team leader
+**Access policy**: administrator
 */
 func (a *Client) TeamInspect(params *TeamInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamInspectOK, *TeamInspectNoContent, error) {
 	// TODO: Validate the params before sending

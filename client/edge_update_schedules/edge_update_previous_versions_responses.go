@@ -84,11 +84,11 @@ func (o *EdgeUpdatePreviousVersionsOK) IsCode(code int) bool {
 }
 
 func (o *EdgeUpdatePreviousVersionsOK) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] edgeUpdatePreviousVersionsOK  %+v", 200, o.Payload)
 }
 
 func (o *EdgeUpdatePreviousVersionsOK) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] edgeUpdatePreviousVersionsOK  %+v", 200, o.Payload)
 }
 
 func (o *EdgeUpdatePreviousVersionsOK) GetPayload() []string {
@@ -144,11 +144,11 @@ func (o *EdgeUpdatePreviousVersionsBadRequest) IsCode(code int) bool {
 }
 
 func (o *EdgeUpdatePreviousVersionsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] edgeUpdatePreviousVersionsBadRequest ", 400)
 }
 
 func (o *EdgeUpdatePreviousVersionsBadRequest) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] edgeUpdatePreviousVersionsBadRequest ", 400)
 }
 
 func (o *EdgeUpdatePreviousVersionsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -195,11 +195,11 @@ func (o *EdgeUpdatePreviousVersionsInternalServerError) IsCode(code int) bool {
 }
 
 func (o *EdgeUpdatePreviousVersionsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] edgeUpdatePreviousVersionsInternalServerError ", 500)
 }
 
 func (o *EdgeUpdatePreviousVersionsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] edgeUpdatePreviousVersionsInternalServerError ", 500)
 }
 
 func (o *EdgeUpdatePreviousVersionsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

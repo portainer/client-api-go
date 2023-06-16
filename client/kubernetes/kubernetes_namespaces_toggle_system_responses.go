@@ -32,12 +32,6 @@ func (o *KubernetesNamespacesToggleSystemReader) ReadResponse(response runtime.C
 			return nil, err
 		}
 		return nil, result
-	case 403:
-		result := NewKubernetesNamespacesToggleSystemForbidden()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return nil, result
 	case 404:
 		result := NewKubernetesNamespacesToggleSystemNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -153,57 +147,6 @@ func (o *KubernetesNamespacesToggleSystemBadRequest) String() string {
 }
 
 func (o *KubernetesNamespacesToggleSystemBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewKubernetesNamespacesToggleSystemForbidden creates a KubernetesNamespacesToggleSystemForbidden with default headers values
-func NewKubernetesNamespacesToggleSystemForbidden() *KubernetesNamespacesToggleSystemForbidden {
-	return &KubernetesNamespacesToggleSystemForbidden{}
-}
-
-/*
-KubernetesNamespacesToggleSystemForbidden describes a response with status code 403, with default header values.
-
-Permission denied
-*/
-type KubernetesNamespacesToggleSystemForbidden struct {
-}
-
-// IsSuccess returns true when this kubernetes namespaces toggle system forbidden response has a 2xx status code
-func (o *KubernetesNamespacesToggleSystemForbidden) IsSuccess() bool {
-	return false
-}
-
-// IsRedirect returns true when this kubernetes namespaces toggle system forbidden response has a 3xx status code
-func (o *KubernetesNamespacesToggleSystemForbidden) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this kubernetes namespaces toggle system forbidden response has a 4xx status code
-func (o *KubernetesNamespacesToggleSystemForbidden) IsClientError() bool {
-	return true
-}
-
-// IsServerError returns true when this kubernetes namespaces toggle system forbidden response has a 5xx status code
-func (o *KubernetesNamespacesToggleSystemForbidden) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this kubernetes namespaces toggle system forbidden response a status code equal to that given
-func (o *KubernetesNamespacesToggleSystemForbidden) IsCode(code int) bool {
-	return code == 403
-}
-
-func (o *KubernetesNamespacesToggleSystemForbidden) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemForbidden ", 403)
-}
-
-func (o *KubernetesNamespacesToggleSystemForbidden) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/system][%d] kubernetesNamespacesToggleSystemForbidden ", 403)
-}
-
-func (o *KubernetesNamespacesToggleSystemForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

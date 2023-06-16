@@ -43,9 +43,7 @@ type CustomtemplatesCustomTemplateUpdatePayload struct {
 	// Required for Docker stacks
 	// Example: 1
 	// Enum: [1 2]
-	Platform struct {
-		PortainereeCustomTemplatePlatform
-	} `json:"platform,omitempty"`
+	Platform int64 `json:"platform,omitempty"`
 
 	// Title of the template
 	// Example: Nginx
@@ -56,12 +54,10 @@ type CustomtemplatesCustomTemplateUpdatePayload struct {
 	// Example: 1
 	// Required: true
 	// Enum: [1 2 3]
-	Type struct {
-		PortainereeStackType
-	} `json:"type"`
+	Type *int64 `json:"type"`
 
 	// Definitions of variables in the stack file
-	Variables []*PortainereeCustomTemplateVariableDefinition `json:"variables"`
+	Variables []*PortainerCustomTemplateVariableDefinition `json:"variables"`
 }
 
 // Validate validates this customtemplates custom template update payload
@@ -119,9 +115,7 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) validateFileContent(formats
 var customtemplatesCustomTemplateUpdatePayloadTypePlatformPropEnum []interface{}
 
 func init() {
-	var res []struct {
-		PortainereeCustomTemplatePlatform
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -131,9 +125,7 @@ func init() {
 }
 
 // prop value enum
-func (m *CustomtemplatesCustomTemplateUpdatePayload) validatePlatformEnum(path, location string, value *struct {
-	PortainereeCustomTemplatePlatform
-}) error {
+func (m *CustomtemplatesCustomTemplateUpdatePayload) validatePlatformEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, customtemplatesCustomTemplateUpdatePayloadTypePlatformPropEnum, true); err != nil {
 		return err
 	}
@@ -143,6 +135,11 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) validatePlatformEnum(path, 
 func (m *CustomtemplatesCustomTemplateUpdatePayload) validatePlatform(formats strfmt.Registry) error {
 	if swag.IsZero(m.Platform) { // not required
 		return nil
+	}
+
+	// value enum
+	if err := m.validatePlatformEnum("platform", "body", m.Platform); err != nil {
+		return err
 	}
 
 	return nil
@@ -160,9 +157,7 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) validateTitle(formats strfm
 var customtemplatesCustomTemplateUpdatePayloadTypeTypePropEnum []interface{}
 
 func init() {
-	var res []struct {
-		PortainereeStackType
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[1,2,3]`), &res); err != nil {
 		panic(err)
 	}
@@ -172,9 +167,7 @@ func init() {
 }
 
 // prop value enum
-func (m *CustomtemplatesCustomTemplateUpdatePayload) validateTypeEnum(path, location string, value *struct {
-	PortainereeStackType
-}) error {
+func (m *CustomtemplatesCustomTemplateUpdatePayload) validateTypeEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, customtemplatesCustomTemplateUpdatePayloadTypeTypePropEnum, true); err != nil {
 		return err
 	}
@@ -182,6 +175,15 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) validateTypeEnum(path, loca
 }
 
 func (m *CustomtemplatesCustomTemplateUpdatePayload) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -216,14 +218,6 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) validateVariables(formats s
 func (m *CustomtemplatesCustomTemplateUpdatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidatePlatform(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateVariables(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -231,16 +225,6 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) ContextValidate(ctx context
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *CustomtemplatesCustomTemplateUpdatePayload) contextValidatePlatform(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
-func (m *CustomtemplatesCustomTemplateUpdatePayload) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 

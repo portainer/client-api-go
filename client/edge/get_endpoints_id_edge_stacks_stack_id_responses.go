@@ -123,7 +123,7 @@ func NewGetEndpointsIDEdgeStacksStackIDBadRequest() *GetEndpointsIDEdgeStacksSta
 /*
 GetEndpointsIDEdgeStacksStackIDBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+GetEndpointsIDEdgeStacksStackIDBadRequest get endpoints Id edge stacks stack Id bad request
 */
 type GetEndpointsIDEdgeStacksStackIDBadRequest struct {
 }
@@ -174,7 +174,7 @@ func NewGetEndpointsIDEdgeStacksStackIDNotFound() *GetEndpointsIDEdgeStacksStack
 /*
 GetEndpointsIDEdgeStacksStackIDNotFound describes a response with status code 404, with default header values.
 
-Not Found
+GetEndpointsIDEdgeStacksStackIDNotFound get endpoints Id edge stacks stack Id not found
 */
 type GetEndpointsIDEdgeStacksStackIDNotFound struct {
 }
@@ -225,7 +225,7 @@ func NewGetEndpointsIDEdgeStacksStackIDInternalServerError() *GetEndpointsIDEdge
 /*
 GetEndpointsIDEdgeStacksStackIDInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+GetEndpointsIDEdgeStacksStackIDInternalServerError get endpoints Id edge stacks stack Id internal server error
 */
 type GetEndpointsIDEdgeStacksStackIDInternalServerError struct {
 }

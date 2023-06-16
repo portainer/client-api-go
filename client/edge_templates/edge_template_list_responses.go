@@ -51,7 +51,7 @@ EdgeTemplateListOK describes a response with status code 200, with default heade
 OK
 */
 type EdgeTemplateListOK struct {
-	Payload []*models.PortainereeTemplate
+	Payload []*models.PortainerTemplate
 }
 
 // IsSuccess returns true when this edge template list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *EdgeTemplateListOK) String() string {
 	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeTemplateListOK) GetPayload() []*models.PortainereeTemplate {
+func (o *EdgeTemplateListOK) GetPayload() []*models.PortainerTemplate {
 	return o.Payload
 }
 
@@ -109,7 +109,7 @@ func NewEdgeTemplateListInternalServerError() *EdgeTemplateListInternalServerErr
 /*
 EdgeTemplateListInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeTemplateListInternalServerError edge template list internal server error
 */
 type EdgeTemplateListInternalServerError struct {
 }

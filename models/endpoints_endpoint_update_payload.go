@@ -19,11 +19,6 @@ import (
 // swagger:model endpoints.endpointUpdatePayload
 type EndpointsEndpointUpdatePayload struct {
 
-	// Hide manual deployment forms for an environment
-	DeploymentOptions struct {
-		PortainereeDeploymentOptions
-	} `json:"DeploymentOptions,omitempty"`
-
 	// Azure application ID
 	// Example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
 	AzureApplicationID string `json:"azureApplicationID,omitempty"`
@@ -36,29 +31,19 @@ type EndpointsEndpointUpdatePayload struct {
 	// Example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
 	AzureTenantID string `json:"azureTenantID,omitempty"`
 
-	// Whether automatic update time restrictions are enabled
-	ChangeWindow struct {
-		PortainereeEndpointChangeWindow
-	} `json:"changeWindow,omitempty"`
-
-	// edge
-	Edge *EndpointsEndpointUpdatePayloadEdge `json:"edge,omitempty"`
-
 	// The check in interval for edge agent (in seconds)
 	// Example: 5
 	EdgeCheckinInterval int64 `json:"edgeCheckinInterval,omitempty"`
 
 	// GPUs information
-	Gpus []*PortainereePair `json:"gpus"`
+	Gpus []*PortainerPair `json:"gpus"`
 
 	// Group identifier
 	// Example: 1
 	GroupID int64 `json:"groupID,omitempty"`
 
 	// Associated Kubernetes data
-	Kubernetes struct {
-		PortainereeKubernetesData
-	} `json:"kubernetes,omitempty"`
+	Kubernetes *PortainerKubernetesData `json:"kubernetes,omitempty"`
 
 	// Name that will be used to identify this environment(endpoint)
 	// Example: my-environment
@@ -78,7 +63,7 @@ type EndpointsEndpointUpdatePayload struct {
 	TagIDs []int64 `json:"tagIDs"`
 
 	// team access policies
-	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
+	TeamAccessPolicies PortainerTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
 
 	// Require TLS to connect against this environment(endpoint)
 	// Example: true
@@ -97,24 +82,12 @@ type EndpointsEndpointUpdatePayload struct {
 	URL string `json:"url,omitempty"`
 
 	// user access policies
-	UserAccessPolicies PortainereeUserAccessPolicies `json:"userAccessPolicies,omitempty"`
+	UserAccessPolicies PortainerUserAccessPolicies `json:"userAccessPolicies,omitempty"`
 }
 
 // Validate validates this endpoints endpoint update payload
 func (m *EndpointsEndpointUpdatePayload) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateDeploymentOptions(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateChangeWindow(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEdge(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateGpus(formats); err != nil {
 		res = append(res, err)
@@ -135,41 +108,6 @@ func (m *EndpointsEndpointUpdatePayload) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *EndpointsEndpointUpdatePayload) validateDeploymentOptions(formats strfmt.Registry) error {
-	if swag.IsZero(m.DeploymentOptions) { // not required
-		return nil
-	}
-
-	return nil
-}
-
-func (m *EndpointsEndpointUpdatePayload) validateChangeWindow(formats strfmt.Registry) error {
-	if swag.IsZero(m.ChangeWindow) { // not required
-		return nil
-	}
-
-	return nil
-}
-
-func (m *EndpointsEndpointUpdatePayload) validateEdge(formats strfmt.Registry) error {
-	if swag.IsZero(m.Edge) { // not required
-		return nil
-	}
-
-	if m.Edge != nil {
-		if err := m.Edge.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("edge")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("edge")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -202,6 +140,17 @@ func (m *EndpointsEndpointUpdatePayload) validateGpus(formats strfmt.Registry) e
 func (m *EndpointsEndpointUpdatePayload) validateKubernetes(formats strfmt.Registry) error {
 	if swag.IsZero(m.Kubernetes) { // not required
 		return nil
+	}
+
+	if m.Kubernetes != nil {
+		if err := m.Kubernetes.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("kubernetes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("kubernetes")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -249,18 +198,6 @@ func (m *EndpointsEndpointUpdatePayload) validateUserAccessPolicies(formats strf
 func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateDeploymentOptions(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateChangeWindow(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEdge(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateGpus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -280,32 +217,6 @@ func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, fo
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *EndpointsEndpointUpdatePayload) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
-func (m *EndpointsEndpointUpdatePayload) contextValidateChangeWindow(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
-func (m *EndpointsEndpointUpdatePayload) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Edge != nil {
-		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("edge")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("edge")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -330,6 +241,17 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateGpus(ctx context.Context
 }
 
 func (m *EndpointsEndpointUpdatePayload) contextValidateKubernetes(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Kubernetes != nil {
+		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("kubernetes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("kubernetes")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
@@ -373,52 +295,6 @@ func (m *EndpointsEndpointUpdatePayload) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *EndpointsEndpointUpdatePayload) UnmarshalBinary(b []byte) error {
 	var res EndpointsEndpointUpdatePayload
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// EndpointsEndpointUpdatePayloadEdge endpoints endpoint update payload edge
-//
-// swagger:model EndpointsEndpointUpdatePayloadEdge
-type EndpointsEndpointUpdatePayloadEdge struct {
-
-	// The command list interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	CommandInterval int64 `json:"CommandInterval,omitempty"`
-
-	// The ping interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	PingInterval int64 `json:"PingInterval,omitempty"`
-
-	// The snapshot interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
-}
-
-// Validate validates this endpoints endpoint update payload edge
-func (m *EndpointsEndpointUpdatePayloadEdge) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this endpoints endpoint update payload edge based on context it is used
-func (m *EndpointsEndpointUpdatePayloadEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *EndpointsEndpointUpdatePayloadEdge) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *EndpointsEndpointUpdatePayloadEdge) UnmarshalBinary(b []byte) error {
-	var res EndpointsEndpointUpdatePayloadEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

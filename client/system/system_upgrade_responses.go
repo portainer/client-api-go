@@ -45,7 +45,7 @@ SystemUpgradeOK describes a response with status code 200, with default header v
 Success
 */
 type SystemUpgradeOK struct {
-	Payload *models.GithubComPortainerPortainerAPIHTTPHandlerSystemStatus
+	Payload *models.SystemStatus
 }
 
 // IsSuccess returns true when this system upgrade o k response has a 2xx status code
@@ -81,13 +81,13 @@ func (o *SystemUpgradeOK) String() string {
 	return fmt.Sprintf("[POST /system/upgrade][%d] systemUpgradeOK  %+v", 200, o.Payload)
 }
 
-func (o *SystemUpgradeOK) GetPayload() *models.GithubComPortainerPortainerAPIHTTPHandlerSystemStatus {
+func (o *SystemUpgradeOK) GetPayload() *models.SystemStatus {
 	return o.Payload
 }
 
 func (o *SystemUpgradeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GithubComPortainerPortainerAPIHTTPHandlerSystemStatus)
+	o.Payload = new(models.SystemStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

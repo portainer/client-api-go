@@ -49,9 +49,7 @@ type PortainereeCustomTemplate struct {
 	// Valid values are: 1 - 'linux', 2 - 'windows'
 	// Example: 1
 	// Enum: [1 2]
-	Platform struct {
-		PortainereeCustomTemplatePlatform
-	} `json:"Platform,omitempty"`
+	Platform int64 `json:"Platform,omitempty"`
 
 	// Path on disk to the repository hosting the Stack file
 	// Example: /data/custom_template/3
@@ -66,9 +64,7 @@ type PortainereeCustomTemplate struct {
 
 	// Type of created stack (1 - swarm, 2 - compose)
 	// Example: 1
-	Type struct {
-		PortainereeStackType
-	} `json:"Type,omitempty"`
+	Type int64 `json:"Type,omitempty"`
 
 	// variables
 	Variables []*PortainereeCustomTemplateVariableDefinition `json:"variables"`
@@ -86,10 +82,6 @@ func (m *PortainereeCustomTemplate) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateType(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateVariables(formats); err != nil {
 		res = append(res, err)
 	}
@@ -103,9 +95,7 @@ func (m *PortainereeCustomTemplate) Validate(formats strfmt.Registry) error {
 var portainereeCustomTemplateTypePlatformPropEnum []interface{}
 
 func init() {
-	var res []struct {
-		PortainereeCustomTemplatePlatform
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -115,9 +105,7 @@ func init() {
 }
 
 // prop value enum
-func (m *PortainereeCustomTemplate) validatePlatformEnum(path, location string, value *struct {
-	PortainereeCustomTemplatePlatform
-}) error {
+func (m *PortainereeCustomTemplate) validatePlatformEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, portainereeCustomTemplateTypePlatformPropEnum, true); err != nil {
 		return err
 	}
@@ -127,6 +115,11 @@ func (m *PortainereeCustomTemplate) validatePlatformEnum(path, location string, 
 func (m *PortainereeCustomTemplate) validatePlatform(formats strfmt.Registry) error {
 	if swag.IsZero(m.Platform) { // not required
 		return nil
+	}
+
+	// value enum
+	if err := m.validatePlatformEnum("Platform", "body", m.Platform); err != nil {
+		return err
 	}
 
 	return nil
@@ -146,14 +139,6 @@ func (m *PortainereeCustomTemplate) validateResourceControl(formats strfmt.Regis
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *PortainereeCustomTemplate) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
 	}
 
 	return nil
@@ -189,15 +174,7 @@ func (m *PortainereeCustomTemplate) validateVariables(formats strfmt.Registry) e
 func (m *PortainereeCustomTemplate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidatePlatform(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateResourceControl(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -208,11 +185,6 @@ func (m *PortainereeCustomTemplate) ContextValidate(ctx context.Context, formats
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainereeCustomTemplate) contextValidatePlatform(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 
@@ -228,11 +200,6 @@ func (m *PortainereeCustomTemplate) contextValidateResourceControl(ctx context.C
 			return err
 		}
 	}
-
-	return nil
-}
-
-func (m *PortainereeCustomTemplate) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

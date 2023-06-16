@@ -63,7 +63,7 @@ EndpointInspectOK describes a response with status code 200, with default header
 Success
 */
 type EndpointInspectOK struct {
-	Payload *models.PortainereeEndpoint
+	Payload *models.PortainerEndpoint
 }
 
 // IsSuccess returns true when this endpoint inspect o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *EndpointInspectOK) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *EndpointInspectOK) GetPayload() *models.PortainereeEndpoint {
+func (o *EndpointInspectOK) GetPayload() *models.PortainerEndpoint {
 	return o.Payload
 }
 
 func (o *EndpointInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEndpoint)
+	o.Payload = new(models.PortainerEndpoint)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

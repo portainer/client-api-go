@@ -51,7 +51,7 @@ CustomTemplateListOK describes a response with status code 200, with default hea
 Success
 */
 type CustomTemplateListOK struct {
-	Payload []*models.PortainereeCustomTemplate
+	Payload []*models.PortainerCustomTemplate
 }
 
 // IsSuccess returns true when this custom template list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *CustomTemplateListOK) String() string {
 	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListOK  %+v", 200, o.Payload)
 }
 
-func (o *CustomTemplateListOK) GetPayload() []*models.PortainereeCustomTemplate {
+func (o *CustomTemplateListOK) GetPayload() []*models.PortainerCustomTemplate {
 	return o.Payload
 }
 

@@ -51,7 +51,7 @@ func NewEdgeGroupDeleteNoContent() *EdgeGroupDeleteNoContent {
 /*
 EdgeGroupDeleteNoContent describes a response with status code 204, with default header values.
 
-No Content
+EdgeGroupDeleteNoContent edge group delete no content
 */
 type EdgeGroupDeleteNoContent struct {
 }
@@ -102,7 +102,7 @@ func NewEdgeGroupDeleteInternalServerError() *EdgeGroupDeleteInternalServerError
 /*
 EdgeGroupDeleteInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeGroupDeleteInternalServerError edge group delete internal server error
 */
 type EdgeGroupDeleteInternalServerError struct {
 }

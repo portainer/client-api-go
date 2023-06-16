@@ -31,7 +31,7 @@ type EdgeupdateschedulesDecoratedUpdateSchedule struct {
 	// edge group ids
 	EdgeGroupIds []int64 `json:"edgeGroupIds"`
 
-	// edge stack Id
+	// EdgeStack Identifier
 	// Example: 1
 	EdgeStackID int64 `json:"edgeStackId,omitempty"`
 
@@ -46,15 +46,11 @@ type EdgeupdateschedulesDecoratedUpdateSchedule struct {
 	// Example: Update Schedule
 	Name string `json:"name,omitempty"`
 
-	// ID of registry
-	// Example: 1
-	RegistryID int64 `json:"registryId,omitempty"`
-
 	// scheduled time
 	ScheduledTime string `json:"scheduledTime,omitempty"`
 
 	// status
-	Status TypesUpdateScheduleStatusType `json:"status,omitempty"`
+	Status int64 `json:"status,omitempty"`
 
 	// status message
 	StatusMessage string `json:"statusMessage,omitempty"`
@@ -62,9 +58,7 @@ type EdgeupdateschedulesDecoratedUpdateSchedule struct {
 	// Type of the update (1 - update, 2 - rollback)
 	// Example: 1
 	// Enum: [1 2]
-	Type struct {
-		TypesUpdateScheduleType
-	} `json:"type,omitempty"`
+	Type int64 `json:"type,omitempty"`
 
 	// version
 	// Example: 1.0.0
@@ -74,10 +68,6 @@ type EdgeupdateschedulesDecoratedUpdateSchedule struct {
 // Validate validates this edgeupdateschedules decorated update schedule
 func (m *EdgeupdateschedulesDecoratedUpdateSchedule) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateStatus(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
@@ -89,29 +79,10 @@ func (m *EdgeupdateschedulesDecoratedUpdateSchedule) Validate(formats strfmt.Reg
 	return nil
 }
 
-func (m *EdgeupdateschedulesDecoratedUpdateSchedule) validateStatus(formats strfmt.Registry) error {
-	if swag.IsZero(m.Status) { // not required
-		return nil
-	}
-
-	if err := m.Status.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("status")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("status")
-		}
-		return err
-	}
-
-	return nil
-}
-
 var edgeupdateschedulesDecoratedUpdateScheduleTypeTypePropEnum []interface{}
 
 func init() {
-	var res []struct {
-		TypesUpdateScheduleType
-	}
+	var res []int64
 	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
 		panic(err)
 	}
@@ -121,9 +92,7 @@ func init() {
 }
 
 // prop value enum
-func (m *EdgeupdateschedulesDecoratedUpdateSchedule) validateTypeEnum(path, location string, value *struct {
-	TypesUpdateScheduleType
-}) error {
+func (m *EdgeupdateschedulesDecoratedUpdateSchedule) validateTypeEnum(path, location string, value int64) error {
 	if err := validate.EnumCase(path, location, value, edgeupdateschedulesDecoratedUpdateScheduleTypeTypePropEnum, true); err != nil {
 		return err
 	}
@@ -135,43 +104,16 @@ func (m *EdgeupdateschedulesDecoratedUpdateSchedule) validateType(formats strfmt
 		return nil
 	}
 
-	return nil
-}
-
-// ContextValidate validate this edgeupdateschedules decorated update schedule based on the context it is used
-func (m *EdgeupdateschedulesDecoratedUpdateSchedule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateStatus(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *EdgeupdateschedulesDecoratedUpdateSchedule) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.Status.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("status")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("status")
-		}
+	// value enum
+	if err := m.validateTypeEnum("type", "body", m.Type); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *EdgeupdateschedulesDecoratedUpdateSchedule) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
+// ContextValidate validates this edgeupdateschedules decorated update schedule based on context it is used
+func (m *EdgeupdateschedulesDecoratedUpdateSchedule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -63,7 +63,7 @@ func NewGetWebsocketPodOK() *GetWebsocketPodOK {
 /*
 GetWebsocketPodOK describes a response with status code 200, with default header values.
 
-OK
+GetWebsocketPodOK get websocket pod o k
 */
 type GetWebsocketPodOK struct {
 }
@@ -114,7 +114,7 @@ func NewGetWebsocketPodBadRequest() *GetWebsocketPodBadRequest {
 /*
 GetWebsocketPodBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+GetWebsocketPodBadRequest get websocket pod bad request
 */
 type GetWebsocketPodBadRequest struct {
 }
@@ -165,7 +165,7 @@ func NewGetWebsocketPodForbidden() *GetWebsocketPodForbidden {
 /*
 GetWebsocketPodForbidden describes a response with status code 403, with default header values.
 
-Forbidden
+GetWebsocketPodForbidden get websocket pod forbidden
 */
 type GetWebsocketPodForbidden struct {
 }
@@ -216,7 +216,7 @@ func NewGetWebsocketPodNotFound() *GetWebsocketPodNotFound {
 /*
 GetWebsocketPodNotFound describes a response with status code 404, with default header values.
 
-Not Found
+GetWebsocketPodNotFound get websocket pod not found
 */
 type GetWebsocketPodNotFound struct {
 }
@@ -267,7 +267,7 @@ func NewGetWebsocketPodInternalServerError() *GetWebsocketPodInternalServerError
 /*
 GetWebsocketPodInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+GetWebsocketPodInternalServerError get websocket pod internal server error
 */
 type GetWebsocketPodInternalServerError struct {
 }

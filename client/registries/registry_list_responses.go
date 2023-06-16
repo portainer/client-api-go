@@ -51,7 +51,7 @@ RegistryListOK describes a response with status code 200, with default header va
 Success
 */
 type RegistryListOK struct {
-	Payload []*models.PortainereeRegistry
+	Payload []*models.PortainerRegistry
 }
 
 // IsSuccess returns true when this registry list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *RegistryListOK) String() string {
 	return fmt.Sprintf("[GET /registries][%d] registryListOK  %+v", 200, o.Payload)
 }
 
-func (o *RegistryListOK) GetPayload() []*models.PortainereeRegistry {
+func (o *RegistryListOK) GetPayload() []*models.PortainerRegistry {
 	return o.Payload
 }
 

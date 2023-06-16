@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewEdgeStackStatusUpdateParams creates a new EdgeStackStatusUpdateParams object,
@@ -66,7 +65,7 @@ type EdgeStackStatusUpdateParams struct {
 
 	   EdgeStack Id
 	*/
-	ID int64
+	ID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,13 +121,13 @@ func (o *EdgeStackStatusUpdateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithID adds the id to the edge stack status update params
-func (o *EdgeStackStatusUpdateParams) WithID(id int64) *EdgeStackStatusUpdateParams {
+func (o *EdgeStackStatusUpdateParams) WithID(id string) *EdgeStackStatusUpdateParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack status update params
-func (o *EdgeStackStatusUpdateParams) SetID(id int64) {
+func (o *EdgeStackStatusUpdateParams) SetID(id string) {
 	o.ID = id
 }
 
@@ -141,7 +140,7 @@ func (o *EdgeStackStatusUpdateParams) WriteToRequest(r runtime.ClientRequest, re
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 

@@ -45,7 +45,7 @@ SystemStatusOK describes a response with status code 200, with default header va
 Success
 */
 type SystemStatusOK struct {
-	Payload *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus
+	Payload *models.SystemStatus
 }
 
 // IsSuccess returns true when this system status o k response has a 2xx status code
@@ -81,13 +81,13 @@ func (o *SystemStatusOK) String() string {
 	return fmt.Sprintf("[GET /system/status][%d] systemStatusOK  %+v", 200, o.Payload)
 }
 
-func (o *SystemStatusOK) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus {
+func (o *SystemStatusOK) GetPayload() *models.SystemStatus {
 	return o.Payload
 }
 
 func (o *SystemStatusOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus)
+	o.Payload = new(models.SystemStatus)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

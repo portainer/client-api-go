@@ -88,11 +88,11 @@ func (o *KaasProviderInfoOK) IsCode(code int) bool {
 }
 
 func (o *KaasProviderInfoOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] kaasProviderInfoOK ", 200)
+	return fmt.Sprintf("[POST /cloud][%d] kaasProviderInfoOK ", 200)
 }
 
 func (o *KaasProviderInfoOK) String() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] kaasProviderInfoOK ", 200)
+	return fmt.Sprintf("[POST /cloud][%d] kaasProviderInfoOK ", 200)
 }
 
 func (o *KaasProviderInfoOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -139,11 +139,11 @@ func (o *KaasProviderInfoBadRequest) IsCode(code int) bool {
 }
 
 func (o *KaasProviderInfoBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] kaasProviderInfoBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud][%d] kaasProviderInfoBadRequest ", 400)
 }
 
 func (o *KaasProviderInfoBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] kaasProviderInfoBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud][%d] kaasProviderInfoBadRequest ", 400)
 }
 
 func (o *KaasProviderInfoBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -190,11 +190,11 @@ func (o *KaasProviderInfoInternalServerError) IsCode(code int) bool {
 }
 
 func (o *KaasProviderInfoInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] kaasProviderInfoInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud][%d] kaasProviderInfoInternalServerError ", 500)
 }
 
 func (o *KaasProviderInfoInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] kaasProviderInfoInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud][%d] kaasProviderInfoInternalServerError ", 500)
 }
 
 func (o *KaasProviderInfoInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +241,11 @@ func (o *KaasProviderInfoServiceUnavailable) IsCode(code int) bool {
 }
 
 func (o *KaasProviderInfoServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] kaasProviderInfoServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud][%d] kaasProviderInfoServiceUnavailable ", 503)
 }
 
 func (o *KaasProviderInfoServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] kaasProviderInfoServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud][%d] kaasProviderInfoServiceUnavailable ", 503)
 }
 
 func (o *KaasProviderInfoServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

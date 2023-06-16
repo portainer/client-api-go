@@ -57,7 +57,7 @@ StackCreateOK describes a response with status code 200, with default header val
 OK
 */
 type StackCreateOK struct {
-	Payload *models.PortainereeStack
+	Payload *models.PortainerCustomTemplate
 }
 
 // IsSuccess returns true when this stack create o k response has a 2xx status code
@@ -93,13 +93,13 @@ func (o *StackCreateOK) String() string {
 	return fmt.Sprintf("[POST /stacks][%d] stackCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *StackCreateOK) GetPayload() *models.PortainereeStack {
+func (o *StackCreateOK) GetPayload() *models.PortainerCustomTemplate {
 	return o.Payload
 }
 
 func (o *StackCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeStack)
+	o.Payload = new(models.PortainerCustomTemplate)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

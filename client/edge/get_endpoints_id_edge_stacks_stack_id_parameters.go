@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewGetEndpointsIDEdgeStacksStackIDParams creates a new GetEndpointsIDEdgeStacksStackIDParams object,
@@ -64,15 +63,15 @@ type GetEndpointsIDEdgeStacksStackIDParams struct {
 
 	/* ID.
 
-	   Environment(Endpoint) Id
+	   environment(endpoint) Id
 	*/
-	ID int64
+	ID string
 
 	/* StackID.
 
 	   EdgeStack Id
 	*/
-	StackID int64
+	StackID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -128,24 +127,24 @@ func (o *GetEndpointsIDEdgeStacksStackIDParams) SetHTTPClient(client *http.Clien
 }
 
 // WithID adds the id to the get endpoints ID edge stacks stack ID params
-func (o *GetEndpointsIDEdgeStacksStackIDParams) WithID(id int64) *GetEndpointsIDEdgeStacksStackIDParams {
+func (o *GetEndpointsIDEdgeStacksStackIDParams) WithID(id string) *GetEndpointsIDEdgeStacksStackIDParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the get endpoints ID edge stacks stack ID params
-func (o *GetEndpointsIDEdgeStacksStackIDParams) SetID(id int64) {
+func (o *GetEndpointsIDEdgeStacksStackIDParams) SetID(id string) {
 	o.ID = id
 }
 
 // WithStackID adds the stackID to the get endpoints ID edge stacks stack ID params
-func (o *GetEndpointsIDEdgeStacksStackIDParams) WithStackID(stackID int64) *GetEndpointsIDEdgeStacksStackIDParams {
+func (o *GetEndpointsIDEdgeStacksStackIDParams) WithStackID(stackID string) *GetEndpointsIDEdgeStacksStackIDParams {
 	o.SetStackID(stackID)
 	return o
 }
 
 // SetStackID adds the stackId to the get endpoints ID edge stacks stack ID params
-func (o *GetEndpointsIDEdgeStacksStackIDParams) SetStackID(stackID int64) {
+func (o *GetEndpointsIDEdgeStacksStackIDParams) SetStackID(stackID string) {
 	o.StackID = stackID
 }
 
@@ -158,12 +157,12 @@ func (o *GetEndpointsIDEdgeStacksStackIDParams) WriteToRequest(r runtime.ClientR
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
 	}
 
 	// path param stackId
-	if err := r.SetPathParam("stackId", swag.FormatInt64(o.StackID)); err != nil {
+	if err := r.SetPathParam("stackId", o.StackID); err != nil {
 		return err
 	}
 

@@ -129,7 +129,7 @@ func NewEdgeStackStatusDeleteBadRequest() *EdgeStackStatusDeleteBadRequest {
 /*
 EdgeStackStatusDeleteBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeStackStatusDeleteBadRequest edge stack status delete bad request
 */
 type EdgeStackStatusDeleteBadRequest struct {
 }
@@ -180,7 +180,7 @@ func NewEdgeStackStatusDeleteForbidden() *EdgeStackStatusDeleteForbidden {
 /*
 EdgeStackStatusDeleteForbidden describes a response with status code 403, with default header values.
 
-Forbidden
+EdgeStackStatusDeleteForbidden edge stack status delete forbidden
 */
 type EdgeStackStatusDeleteForbidden struct {
 }
@@ -231,7 +231,7 @@ func NewEdgeStackStatusDeleteNotFound() *EdgeStackStatusDeleteNotFound {
 /*
 EdgeStackStatusDeleteNotFound describes a response with status code 404, with default header values.
 
-Not Found
+EdgeStackStatusDeleteNotFound edge stack status delete not found
 */
 type EdgeStackStatusDeleteNotFound struct {
 }
@@ -282,7 +282,7 @@ func NewEdgeStackStatusDeleteInternalServerError() *EdgeStackStatusDeleteInterna
 /*
 EdgeStackStatusDeleteInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeStackStatusDeleteInternalServerError edge stack status delete internal server error
 */
 type EdgeStackStatusDeleteInternalServerError struct {
 }

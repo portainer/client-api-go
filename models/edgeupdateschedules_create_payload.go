@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -24,14 +23,11 @@ type EdgeupdateschedulesCreatePayload struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// registry ID
-	RegistryID int64 `json:"registryID,omitempty"`
-
 	// scheduled time
 	ScheduledTime string `json:"scheduledTime,omitempty"`
 
 	// type
-	Type TypesUpdateScheduleType `json:"type,omitempty"`
+	Type int64 `json:"type,omitempty"`
 
 	// version
 	Version string `json:"version,omitempty"`
@@ -39,60 +35,11 @@ type EdgeupdateschedulesCreatePayload struct {
 
 // Validate validates this edgeupdateschedules create payload
 func (m *EdgeupdateschedulesCreatePayload) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateType(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *EdgeupdateschedulesCreatePayload) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	if err := m.Type.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("type")
-		}
-		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validate this edgeupdateschedules create payload based on the context it is used
+// ContextValidate validates this edgeupdateschedules create payload based on context it is used
 func (m *EdgeupdateschedulesCreatePayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *EdgeupdateschedulesCreatePayload) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.Type.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("type")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("type")
-		}
-		return err
-	}
-
 	return nil
 }
 

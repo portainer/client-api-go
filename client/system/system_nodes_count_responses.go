@@ -51,7 +51,7 @@ SystemNodesCountOK describes a response with status code 200, with default heade
 Success
 */
 type SystemNodesCountOK struct {
-	Payload *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemNodesCountResponse
+	Payload *models.SystemNodesCountResponse
 }
 
 // IsSuccess returns true when this system nodes count o k response has a 2xx status code
@@ -87,13 +87,13 @@ func (o *SystemNodesCountOK) String() string {
 	return fmt.Sprintf("[GET /system/nodes][%d] systemNodesCountOK  %+v", 200, o.Payload)
 }
 
-func (o *SystemNodesCountOK) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemNodesCountResponse {
+func (o *SystemNodesCountOK) GetPayload() *models.SystemNodesCountResponse {
 	return o.Payload
 }
 
 func (o *SystemNodesCountOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemNodesCountResponse)
+	o.Payload = new(models.SystemNodesCountResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

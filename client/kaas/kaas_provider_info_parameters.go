@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewKaasProviderInfoParams creates a new KaasProviderInfoParams object,
@@ -61,19 +60,6 @@ KaasProviderInfoParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type KaasProviderInfoParams struct {
-
-	/* CredentialID.
-
-	   The shared credential ID used to fetch the cloud provider information.
-	*/
-	CredentialID int64
-
-	/* Force.
-
-	   If true, get the up-to-date information (instead of cached information).
-	*/
-	Force *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -127,28 +113,6 @@ func (o *KaasProviderInfoParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithCredentialID adds the credentialID to the kaas provider info params
-func (o *KaasProviderInfoParams) WithCredentialID(credentialID int64) *KaasProviderInfoParams {
-	o.SetCredentialID(credentialID)
-	return o
-}
-
-// SetCredentialID adds the credentialId to the kaas provider info params
-func (o *KaasProviderInfoParams) SetCredentialID(credentialID int64) {
-	o.CredentialID = credentialID
-}
-
-// WithForce adds the force to the kaas provider info params
-func (o *KaasProviderInfoParams) WithForce(force *bool) *KaasProviderInfoParams {
-	o.SetForce(force)
-	return o
-}
-
-// SetForce adds the force to the kaas provider info params
-func (o *KaasProviderInfoParams) SetForce(force *bool) {
-	o.Force = force
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *KaasProviderInfoParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -156,33 +120,6 @@ func (o *KaasProviderInfoParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
-
-	// query param credentialId
-	qrCredentialID := o.CredentialID
-	qCredentialID := swag.FormatInt64(qrCredentialID)
-	if qCredentialID != "" {
-
-		if err := r.SetQueryParam("credentialId", qCredentialID); err != nil {
-			return err
-		}
-	}
-
-	if o.Force != nil {
-
-		// query param force
-		var qrForce bool
-
-		if o.Force != nil {
-			qrForce = *o.Force
-		}
-		qForce := swag.FormatBool(qrForce)
-		if qForce != "" {
-
-			if err := r.SetQueryParam("force", qForce); err != nil {
-				return err
-			}
-		}
-	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

@@ -57,7 +57,7 @@ UserListOK describes a response with status code 200, with default header values
 Success
 */
 type UserListOK struct {
-	Payload []*models.PortainereeUser
+	Payload []*models.PortainerUser
 }
 
 // IsSuccess returns true when this user list o k response has a 2xx status code
@@ -93,7 +93,7 @@ func (o *UserListOK) String() string {
 	return fmt.Sprintf("[GET /users][%d] userListOK  %+v", 200, o.Payload)
 }
 
-func (o *UserListOK) GetPayload() []*models.PortainereeUser {
+func (o *UserListOK) GetPayload() []*models.PortainerUser {
 	return o.Payload
 }
 

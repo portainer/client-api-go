@@ -45,23 +45,16 @@ type PortainereeSettings struct {
 
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
-	AuthenticationMethod struct {
-		PortainereeAuthenticationMethod
-	} `json:"AuthenticationMethod,omitempty"`
+	AuthenticationMethod int64 `json:"AuthenticationMethod,omitempty"`
 
 	// A list of label name & value that will be used to hide containers when querying containers
 	BlackListedLabels []*PortainereePair `json:"BlackListedLabels"`
 
 	// CloudAPIKeys
-	CloudAPIKeys struct {
-		PortainereeCloudAPIKeys
-	} `json:"CloudApiKeys,omitempty"`
+	CloudAPIKeys *PortainereeCloudAPIKeys `json:"CloudApiKeys,omitempty"`
 
 	// The content in plaintext used to display in the login page. Will hide when value is empty string
 	CustomLoginBanner string `json:"CustomLoginBanner,omitempty"`
-
-	// edge
-	Edge *PortainereeEdge `json:"Edge,omitempty"`
 
 	// The default check in interval for edge agent (in seconds)
 	// Example: 5
@@ -84,10 +77,11 @@ type PortainereeSettings struct {
 	// Example: false
 	EnforceEdgeID *bool `json:"EnforceEdgeID,omitempty"`
 
+	// feature flag settings
+	FeatureFlagSettings map[string]bool `json:"FeatureFlagSettings,omitempty"`
+
 	// Deployment options for encouraging git ops workflows
-	GlobalDeploymentOptions struct {
-		PortainereeGlobalDeploymentOptions
-	} `json:"GlobalDeploymentOptions,omitempty"`
+	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
 
 	// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
 	// Example: https://charts.bitnami.com/bitnami
@@ -143,6 +137,9 @@ type PortainereeSettings struct {
 	// display external contributors
 	DisplayExternalContributors *bool `json:"displayExternalContributors,omitempty"`
 
+	// edge
+	Edge *PortainereeSettingsEdge `json:"edge,omitempty"`
+
 	// fdo configuration
 	FdoConfiguration *PortainereeFDOConfiguration `json:"fdoConfiguration,omitempty"`
 
@@ -154,19 +151,11 @@ type PortainereeSettings struct {
 func (m *PortainereeSettings) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAuthenticationMethod(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateBlackListedLabels(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateCloudAPIKeys(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEdge(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -190,6 +179,10 @@ func (m *PortainereeSettings) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateEdge(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateFdoConfiguration(formats); err != nil {
 		res = append(res, err)
 	}
@@ -201,14 +194,6 @@ func (m *PortainereeSettings) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainereeSettings) validateAuthenticationMethod(formats strfmt.Registry) error {
-	if swag.IsZero(m.AuthenticationMethod) { // not required
-		return nil
-	}
-
 	return nil
 }
 
@@ -243,20 +228,12 @@ func (m *PortainereeSettings) validateCloudAPIKeys(formats strfmt.Registry) erro
 		return nil
 	}
 
-	return nil
-}
-
-func (m *PortainereeSettings) validateEdge(formats strfmt.Registry) error {
-	if swag.IsZero(m.Edge) { // not required
-		return nil
-	}
-
-	if m.Edge != nil {
-		if err := m.Edge.Validate(formats); err != nil {
+	if m.CloudAPIKeys != nil {
+		if err := m.CloudAPIKeys.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Edge")
+				return ve.ValidateName("CloudApiKeys")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Edge")
+				return ce.ValidateName("CloudApiKeys")
 			}
 			return err
 		}
@@ -268,6 +245,17 @@ func (m *PortainereeSettings) validateEdge(formats strfmt.Registry) error {
 func (m *PortainereeSettings) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
 	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
 		return nil
+	}
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GlobalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GlobalDeploymentOptions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -349,6 +337,25 @@ func (m *PortainereeSettings) validateDefaultRegistry(formats strfmt.Registry) e
 	return nil
 }
 
+func (m *PortainereeSettings) validateEdge(formats strfmt.Registry) error {
+	if swag.IsZero(m.Edge) { // not required
+		return nil
+	}
+
+	if m.Edge != nil {
+		if err := m.Edge.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainereeSettings) validateFdoConfiguration(formats strfmt.Registry) error {
 	if swag.IsZero(m.FdoConfiguration) { // not required
 		return nil
@@ -391,19 +398,11 @@ func (m *PortainereeSettings) validateOpenAMTConfiguration(formats strfmt.Regist
 func (m *PortainereeSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateAuthenticationMethod(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateBlackListedLabels(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateCloudAPIKeys(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEdge(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -427,6 +426,10 @@ func (m *PortainereeSettings) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateEdge(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateFdoConfiguration(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -438,11 +441,6 @@ func (m *PortainereeSettings) ContextValidate(ctx context.Context, formats strfm
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *PortainereeSettings) contextValidateAuthenticationMethod(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 
@@ -468,17 +466,12 @@ func (m *PortainereeSettings) contextValidateBlackListedLabels(ctx context.Conte
 
 func (m *PortainereeSettings) contextValidateCloudAPIKeys(ctx context.Context, formats strfmt.Registry) error {
 
-	return nil
-}
-
-func (m *PortainereeSettings) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Edge != nil {
-		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
+	if m.CloudAPIKeys != nil {
+		if err := m.CloudAPIKeys.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Edge")
+				return ve.ValidateName("CloudApiKeys")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Edge")
+				return ce.ValidateName("CloudApiKeys")
 			}
 			return err
 		}
@@ -488,6 +481,17 @@ func (m *PortainereeSettings) contextValidateEdge(ctx context.Context, formats s
 }
 
 func (m *PortainereeSettings) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GlobalDeploymentOptions != nil {
+		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GlobalDeploymentOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GlobalDeploymentOptions")
+			}
+			return err
+		}
+	}
 
 	return nil
 }
@@ -548,6 +552,22 @@ func (m *PortainereeSettings) contextValidateDefaultRegistry(ctx context.Context
 				return ve.ValidateName("defaultRegistry")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("defaultRegistry")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeSettings) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Edge != nil {
+		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge")
 			}
 			return err
 		}
@@ -637,6 +657,59 @@ func (m *PortainereeSettingsDefaultRegistry) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *PortainereeSettingsDefaultRegistry) UnmarshalBinary(b []byte) error {
 	var res PortainereeSettingsDefaultRegistry
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// PortainereeSettingsEdge portaineree settings edge
+//
+// swagger:model PortainereeSettingsEdge
+type PortainereeSettingsEdge struct {
+
+	// The command list interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	CommandInterval int64 `json:"CommandInterval,omitempty"`
+
+	// The ping interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	PingInterval int64 `json:"PingInterval,omitempty"`
+
+	// The snapshot interval for edge agent - used in edge async mode (in seconds)
+	// Example: 5
+	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
+
+	// The address where the tunneling server can be reached by Edge agents
+	// Example: portainer.domain.tld
+	TunnelServerAddress string `json:"TunnelServerAddress,omitempty"`
+
+	// EdgeAsyncMode enables edge async mode by default
+	AsyncMode bool `json:"asyncMode,omitempty"`
+}
+
+// Validate validates this portaineree settings edge
+func (m *PortainereeSettingsEdge) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this portaineree settings edge based on context it is used
+func (m *PortainereeSettingsEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *PortainereeSettingsEdge) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *PortainereeSettingsEdge) UnmarshalBinary(b []byte) error {
+	var res PortainereeSettingsEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
