@@ -57,7 +57,7 @@ RegistryCreateOK describes a response with status code 200, with default header 
 Success
 */
 type RegistryCreateOK struct {
-	Payload *models.PortainereeRegistry
+	Payload *models.PortainerRegistry
 }
 
 // IsSuccess returns true when this registry create o k response has a 2xx status code
@@ -93,13 +93,13 @@ func (o *RegistryCreateOK) String() string {
 	return fmt.Sprintf("[POST /registries][%d] registryCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *RegistryCreateOK) GetPayload() *models.PortainereeRegistry {
+func (o *RegistryCreateOK) GetPayload() *models.PortainerRegistry {
 	return o.Payload
 }
 
 func (o *RegistryCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeRegistry)
+	o.Payload = new(models.PortainerRegistry)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

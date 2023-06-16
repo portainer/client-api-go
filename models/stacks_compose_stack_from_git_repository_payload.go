@@ -25,18 +25,14 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	AdditionalFiles []string `json:"additionalFiles"`
 
 	// Optional auto update configuration
-	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainerStackAutoUpdate `json:"autoUpdate,omitempty"`
 
 	// Path to the Stack file inside the Git repository
 	// Example: docker-compose.yml
 	ComposeFile *string `json:"composeFile,omitempty"`
 
 	// A list of environment(endpoint) variables used during stack deployment
-	Env []*PortainereePair `json:"env"`
-
-	// Local filesystem path
-	// Example: /tmp
-	FilesystemPath string `json:"filesystemPath,omitempty"`
+	Env []*PortainerPair `json:"env"`
 
 	// Whether the stack is from a app template
 	// Example: false
@@ -51,13 +47,7 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// Example: true
 	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
 
-	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
-	// is true and RepositoryUsername/RepositoryPassword are not provided
-	// Example: 0
-	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
-
-	// Password used in basic authentication. Required when RepositoryAuthentication is true
-	// and RepositoryGitCredentialID is 0
+	// Password used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitPassword
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`
 
@@ -70,14 +60,9 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// Required: true
 	RepositoryURL *string `json:"repositoryURL"`
 
-	// Username used in basic authentication. Required when RepositoryAuthentication is true
-	// and RepositoryGitCredentialID is 0
+	// Username used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
-
-	// Whether the stack suppors relative path volume
-	// Example: false
-	SupportRelativePath *bool `json:"supportRelativePath,omitempty"`
 }
 
 // Validate validates this stacks compose stack from git repository payload

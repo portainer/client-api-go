@@ -123,7 +123,7 @@ func NewEdgeStackFileBadRequest() *EdgeStackFileBadRequest {
 /*
 EdgeStackFileBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeStackFileBadRequest edge stack file bad request
 */
 type EdgeStackFileBadRequest struct {
 }
@@ -174,7 +174,7 @@ func NewEdgeStackFileInternalServerError() *EdgeStackFileInternalServerError {
 /*
 EdgeStackFileInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeStackFileInternalServerError edge stack file internal server error
 */
 type EdgeStackFileInternalServerError struct {
 }

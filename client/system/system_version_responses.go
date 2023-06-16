@@ -45,7 +45,7 @@ SystemVersionOK describes a response with status code 200, with default header v
 Success
 */
 type SystemVersionOK struct {
-	Payload *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemVersionResponse
+	Payload *models.SystemVersionResponse
 }
 
 // IsSuccess returns true when this system version o k response has a 2xx status code
@@ -81,13 +81,13 @@ func (o *SystemVersionOK) String() string {
 	return fmt.Sprintf("[GET /system/version][%d] systemVersionOK  %+v", 200, o.Payload)
 }
 
-func (o *SystemVersionOK) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemVersionResponse {
+func (o *SystemVersionOK) GetPayload() *models.SystemVersionResponse {
 	return o.Payload
 }
 
 func (o *SystemVersionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemVersionResponse)
+	o.Payload = new(models.SystemVersionResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

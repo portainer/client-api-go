@@ -69,7 +69,7 @@ UserGetAPIKeysOK describes a response with status code 200, with default header 
 Success
 */
 type UserGetAPIKeysOK struct {
-	Payload []*models.PortainereeAPIKey
+	Payload []*models.PortainerAPIKey
 }
 
 // IsSuccess returns true when this user get Api keys o k response has a 2xx status code
@@ -105,7 +105,7 @@ func (o *UserGetAPIKeysOK) String() string {
 	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysOK  %+v", 200, o.Payload)
 }
 
-func (o *UserGetAPIKeysOK) GetPayload() []*models.PortainereeAPIKey {
+func (o *UserGetAPIKeysOK) GetPayload() []*models.PortainerAPIKey {
 	return o.Payload
 }
 

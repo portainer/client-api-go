@@ -63,7 +63,7 @@ EdgeStackListOK describes a response with status code 200, with default header v
 OK
 */
 type EdgeStackListOK struct {
-	Payload []*models.PortainereeEdgeStack
+	Payload []*models.PortainerEdgeStack
 }
 
 // IsSuccess returns true when this edge stack list o k response has a 2xx status code
@@ -99,7 +99,7 @@ func (o *EdgeStackListOK) String() string {
 	return fmt.Sprintf("[GET /edge_stacks][%d] edgeStackListOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeStackListOK) GetPayload() []*models.PortainereeEdgeStack {
+func (o *EdgeStackListOK) GetPayload() []*models.PortainerEdgeStack {
 	return o.Payload
 }
 
@@ -121,7 +121,7 @@ func NewEdgeStackListBadRequest() *EdgeStackListBadRequest {
 /*
 EdgeStackListBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeStackListBadRequest edge stack list bad request
 */
 type EdgeStackListBadRequest struct {
 }
@@ -172,7 +172,7 @@ func NewEdgeStackListInternalServerError() *EdgeStackListInternalServerError {
 /*
 EdgeStackListInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeStackListInternalServerError edge stack list internal server error
 */
 type EdgeStackListInternalServerError struct {
 }

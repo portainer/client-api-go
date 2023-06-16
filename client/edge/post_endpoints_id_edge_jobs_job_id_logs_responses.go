@@ -51,7 +51,7 @@ func NewPostEndpointsIDEdgeJobsJobIDLogsOK() *PostEndpointsIDEdgeJobsJobIDLogsOK
 /*
 PostEndpointsIDEdgeJobsJobIDLogsOK describes a response with status code 200, with default header values.
 
-OK
+PostEndpointsIDEdgeJobsJobIDLogsOK post endpoints Id edge jobs job Id logs o k
 */
 type PostEndpointsIDEdgeJobsJobIDLogsOK struct {
 }
@@ -102,7 +102,7 @@ func NewPostEndpointsIDEdgeJobsJobIDLogsBadRequest() *PostEndpointsIDEdgeJobsJob
 /*
 PostEndpointsIDEdgeJobsJobIDLogsBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+PostEndpointsIDEdgeJobsJobIDLogsBadRequest post endpoints Id edge jobs job Id logs bad request
 */
 type PostEndpointsIDEdgeJobsJobIDLogsBadRequest struct {
 }
@@ -153,7 +153,7 @@ func NewPostEndpointsIDEdgeJobsJobIDLogsInternalServerError() *PostEndpointsIDEd
 /*
 PostEndpointsIDEdgeJobsJobIDLogsInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+PostEndpointsIDEdgeJobsJobIDLogsInternalServerError post endpoints Id edge jobs job Id logs internal server error
 */
 type PostEndpointsIDEdgeJobsJobIDLogsInternalServerError struct {
 }

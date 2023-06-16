@@ -49,13 +49,7 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Example: true
 	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
 
-	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
-	// is true and RepositoryUsername/RepositoryPassword are not provided
-	// Example: 0
-	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
-
-	// Password used in basic authentication. Required when RepositoryAuthentication is true
-	// and RepositoryGitCredentialID is 0
+	// Password used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitPassword
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`
 
@@ -68,8 +62,7 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Required: true
 	RepositoryURL *string `json:"repositoryURL"`
 
-	// Username used in basic authentication. Required when RepositoryAuthentication is true
-	// and RepositoryGitCredentialID is 0
+	// Username used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
 
@@ -85,7 +78,7 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	Type *int64 `json:"type"`
 
 	// Definitions of variables in the stack file
-	Variables []*PortainereeCustomTemplateVariableDefinition `json:"variables"`
+	Variables []*PortainerCustomTemplateVariableDefinition `json:"variables"`
 }
 
 // Validate validates this customtemplates custom template from git repository payload

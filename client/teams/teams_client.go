@@ -58,7 +58,7 @@ func (a *Client) TeamCreate(params *TeamCreateParams, authInfo runtime.ClientAut
 	op := &runtime.ClientOperation{
 		ID:                 "TeamCreate",
 		Method:             "POST",
-		PathPattern:        "/teams",
+		PathPattern:        "/team",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -134,7 +134,7 @@ func (a *Client) TeamDelete(params *TeamDeleteParams, authInfo runtime.ClientAut
 
 	Retrieve details about a team. Access is only available for administrator and leaders of that team.
 
-**Access policy**: administrator or team leader
+**Access policy**: administrator
 */
 func (a *Client) TeamInspect(params *TeamInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamInspectOK, *TeamInspectNoContent, error) {
 	// TODO: Validate the params before sending
@@ -231,7 +231,7 @@ func (a *Client) TeamUpdate(params *TeamUpdateParams, authInfo runtime.ClientAut
 	op := &runtime.ClientOperation{
 		ID:                 "TeamUpdate",
 		Method:             "PUT",
-		PathPattern:        "/teams/{id}",
+		PathPattern:        "/team/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

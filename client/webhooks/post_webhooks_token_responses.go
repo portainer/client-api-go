@@ -102,7 +102,7 @@ func NewPostWebhooksTokenBadRequest() *PostWebhooksTokenBadRequest {
 /*
 PostWebhooksTokenBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+PostWebhooksTokenBadRequest post webhooks token bad request
 */
 type PostWebhooksTokenBadRequest struct {
 }
@@ -153,7 +153,7 @@ func NewPostWebhooksTokenInternalServerError() *PostWebhooksTokenInternalServerE
 /*
 PostWebhooksTokenInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+PostWebhooksTokenInternalServerError post webhooks token internal server error
 */
 type PostWebhooksTokenInternalServerError struct {
 }

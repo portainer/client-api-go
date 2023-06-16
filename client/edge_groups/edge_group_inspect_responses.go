@@ -57,7 +57,7 @@ EdgeGroupInspectOK describes a response with status code 200, with default heade
 OK
 */
 type EdgeGroupInspectOK struct {
-	Payload *models.PortainereeEdgeGroup
+	Payload *models.PortainerEdgeGroup
 }
 
 // IsSuccess returns true when this edge group inspect o k response has a 2xx status code
@@ -93,13 +93,13 @@ func (o *EdgeGroupInspectOK) String() string {
 	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeGroupInspectOK) GetPayload() *models.PortainereeEdgeGroup {
+func (o *EdgeGroupInspectOK) GetPayload() *models.PortainerEdgeGroup {
 	return o.Payload
 }
 
 func (o *EdgeGroupInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeGroup)
+	o.Payload = new(models.PortainerEdgeGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -117,7 +117,7 @@ func NewEdgeGroupInspectInternalServerError() *EdgeGroupInspectInternalServerErr
 /*
 EdgeGroupInspectInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeGroupInspectInternalServerError edge group inspect internal server error
 */
 type EdgeGroupInspectInternalServerError struct {
 }

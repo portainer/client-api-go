@@ -7,12 +7,9 @@ package endpoints
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/portainer/client-api-go/v2/models"
 )
 
 // EndpointAssociationDeleteReader is a Reader for the EndpointAssociationDelete structure.
@@ -23,8 +20,8 @@ type EndpointAssociationDeleteReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *EndpointAssociationDeleteReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewEndpointAssociationDeleteOK()
+	case 204:
+		result := NewEndpointAssociationDeleteNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -52,65 +49,53 @@ func (o *EndpointAssociationDeleteReader) ReadResponse(response runtime.ClientRe
 	}
 }
 
-// NewEndpointAssociationDeleteOK creates a EndpointAssociationDeleteOK with default headers values
-func NewEndpointAssociationDeleteOK() *EndpointAssociationDeleteOK {
-	return &EndpointAssociationDeleteOK{}
+// NewEndpointAssociationDeleteNoContent creates a EndpointAssociationDeleteNoContent with default headers values
+func NewEndpointAssociationDeleteNoContent() *EndpointAssociationDeleteNoContent {
+	return &EndpointAssociationDeleteNoContent{}
 }
 
 /*
-EndpointAssociationDeleteOK describes a response with status code 200, with default header values.
+EndpointAssociationDeleteNoContent describes a response with status code 204, with default header values.
 
 Success
 */
-type EndpointAssociationDeleteOK struct {
-	Payload *models.PortainereeEndpoint
+type EndpointAssociationDeleteNoContent struct {
 }
 
-// IsSuccess returns true when this endpoint association delete o k response has a 2xx status code
-func (o *EndpointAssociationDeleteOK) IsSuccess() bool {
+// IsSuccess returns true when this endpoint association delete no content response has a 2xx status code
+func (o *EndpointAssociationDeleteNoContent) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this endpoint association delete o k response has a 3xx status code
-func (o *EndpointAssociationDeleteOK) IsRedirect() bool {
+// IsRedirect returns true when this endpoint association delete no content response has a 3xx status code
+func (o *EndpointAssociationDeleteNoContent) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this endpoint association delete o k response has a 4xx status code
-func (o *EndpointAssociationDeleteOK) IsClientError() bool {
+// IsClientError returns true when this endpoint association delete no content response has a 4xx status code
+func (o *EndpointAssociationDeleteNoContent) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this endpoint association delete o k response has a 5xx status code
-func (o *EndpointAssociationDeleteOK) IsServerError() bool {
+// IsServerError returns true when this endpoint association delete no content response has a 5xx status code
+func (o *EndpointAssociationDeleteNoContent) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this endpoint association delete o k response a status code equal to that given
-func (o *EndpointAssociationDeleteOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this endpoint association delete no content response a status code equal to that given
+func (o *EndpointAssociationDeleteNoContent) IsCode(code int) bool {
+	return code == 204
 }
 
-func (o *EndpointAssociationDeleteOK) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteOK  %+v", 200, o.Payload)
+func (o *EndpointAssociationDeleteNoContent) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNoContent ", 204)
 }
 
-func (o *EndpointAssociationDeleteOK) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteOK  %+v", 200, o.Payload)
+func (o *EndpointAssociationDeleteNoContent) String() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNoContent ", 204)
 }
 
-func (o *EndpointAssociationDeleteOK) GetPayload() *models.PortainereeEndpoint {
-	return o.Payload
-}
-
-func (o *EndpointAssociationDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(models.PortainereeEndpoint)
-
-	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
+func (o *EndpointAssociationDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

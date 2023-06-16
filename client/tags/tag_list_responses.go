@@ -51,7 +51,7 @@ TagListOK describes a response with status code 200, with default header values.
 Success
 */
 type TagListOK struct {
-	Payload []*models.PortainereeTag
+	Payload []*models.PortainerTag
 }
 
 // IsSuccess returns true when this tag list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *TagListOK) String() string {
 	return fmt.Sprintf("[GET /tags][%d] tagListOK  %+v", 200, o.Payload)
 }
 
-func (o *TagListOK) GetPayload() []*models.PortainereeTag {
+func (o *TagListOK) GetPayload() []*models.PortainerTag {
 	return o.Payload
 }
 

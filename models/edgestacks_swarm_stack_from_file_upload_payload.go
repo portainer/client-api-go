@@ -35,10 +35,6 @@ type EdgestacksSwarmStackFromFileUploadPayload struct {
 	// name
 	Name string `json:"name,omitempty"`
 
-	// Pre Pull image
-	// Example: false
-	PrePullImage *bool `json:"prePullImage,omitempty"`
-
 	// registries
 	Registries []int64 `json:"registries"`
 

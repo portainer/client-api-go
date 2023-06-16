@@ -63,7 +63,7 @@ EndpointGroupUpdateOK describes a response with status code 200, with default he
 Success
 */
 type EndpointGroupUpdateOK struct {
-	Payload *models.PortainereeEndpointGroup
+	Payload *models.PortainerEndpointGroup
 }
 
 // IsSuccess returns true when this endpoint group update o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *EndpointGroupUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}][%d] endpointGroupUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *EndpointGroupUpdateOK) GetPayload() *models.PortainereeEndpointGroup {
+func (o *EndpointGroupUpdateOK) GetPayload() *models.PortainerEndpointGroup {
 	return o.Payload
 }
 
 func (o *EndpointGroupUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEndpointGroup)
+	o.Payload = new(models.PortainerEndpointGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

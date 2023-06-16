@@ -7,9 +7,12 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // EdgestacksUpdateEdgeStackPayload edgestacks update edge stack payload
@@ -22,19 +25,12 @@ type EdgestacksUpdateEdgeStackPayload struct {
 	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
 	// kubernetes deploy type is enabled only for kubernetes environments(endpoints)
 	// nomad deploy type is enabled only for nomad environments(endpoints)
+	// Example: 0
+	// Enum: [0 1 2]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// edge groups
 	EdgeGroups []int64 `json:"edgeGroups"`
-
-	// pre pull image
-	PrePullImage *bool `json:"prePullImage,omitempty"`
-
-	// re pull image
-	RePullImage *bool `json:"rePullImage,omitempty"`
-
-	// registries
-	Registries []int64 `json:"registries"`
 
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`
@@ -48,6 +44,48 @@ type EdgestacksUpdateEdgeStackPayload struct {
 
 // Validate validates this edgestacks update edge stack payload
 func (m *EdgestacksUpdateEdgeStackPayload) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateDeploymentType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+var edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum []interface{}
+
+func init() {
+	var res []int64
+	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum = append(edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum, v)
+	}
+}
+
+// prop value enum
+func (m *EdgestacksUpdateEdgeStackPayload) validateDeploymentTypeEnum(path, location string, value int64) error {
+	if err := validate.EnumCase(path, location, value, edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *EdgestacksUpdateEdgeStackPayload) validateDeploymentType(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeploymentType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
+		return err
+	}
+
 	return nil
 }
 

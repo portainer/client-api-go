@@ -30,7 +30,7 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteOK, error)
+	EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteNoContent, error)
 
 	EndpointBrowsePut(params *EndpointBrowsePutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointBrowsePutOK, error)
 
@@ -82,7 +82,7 @@ type ClientService interface {
 
 **Access policy**: administrator
 */
-func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteOK, error) {
+func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewEndpointAssociationDeleteParams()
@@ -108,7 +108,7 @@ func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeletePara
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EndpointAssociationDeleteOK)
+	success, ok := result.(*EndpointAssociationDeleteNoContent)
 	if ok {
 		return success, nil
 	}
@@ -503,7 +503,7 @@ func (a *Client) EndpointSnapshot(params *EndpointSnapshotParams, authInfo runti
 }
 
 /*
-	EndpointSnapshots snapshots all environment endpoint
+	EndpointSnapshots snapshots all environments endpoints
 
 	Snapshot all environments(endpoints)
 

@@ -57,7 +57,7 @@ EgeGroupUpdateOK describes a response with status code 200, with default header 
 OK
 */
 type EgeGroupUpdateOK struct {
-	Payload *models.PortainereeEdgeGroup
+	Payload *models.PortainerEdgeGroup
 }
 
 // IsSuccess returns true when this ege group update o k response has a 2xx status code
@@ -93,13 +93,13 @@ func (o *EgeGroupUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *EgeGroupUpdateOK) GetPayload() *models.PortainereeEdgeGroup {
+func (o *EgeGroupUpdateOK) GetPayload() *models.PortainerEdgeGroup {
 	return o.Payload
 }
 
 func (o *EgeGroupUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeGroup)
+	o.Payload = new(models.PortainerEdgeGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -117,7 +117,7 @@ func NewEgeGroupUpdateInternalServerError() *EgeGroupUpdateInternalServerError {
 /*
 EgeGroupUpdateInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EgeGroupUpdateInternalServerError ege group update internal server error
 */
 type EgeGroupUpdateInternalServerError struct {
 }

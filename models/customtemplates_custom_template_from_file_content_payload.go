@@ -57,7 +57,7 @@ type CustomtemplatesCustomTemplateFromFileContentPayload struct {
 	Type *int64 `json:"type"`
 
 	// Definitions of variables in the stack file
-	Variables []*PortainereeCustomTemplateVariableDefinition `json:"variables"`
+	Variables []*PortainerCustomTemplateVariableDefinition `json:"variables"`
 }
 
 // Validate validates this customtemplates custom template from file content payload

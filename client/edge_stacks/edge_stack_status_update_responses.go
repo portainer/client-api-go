@@ -69,7 +69,7 @@ EdgeStackStatusUpdateOK describes a response with status code 200, with default 
 OK
 */
 type EdgeStackStatusUpdateOK struct {
-	Payload *models.PortainereeEdgeStack
+	Payload *models.PortainerEdgeStack
 }
 
 // IsSuccess returns true when this edge stack status update o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *EdgeStackStatusUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeStackStatusUpdateOK) GetPayload() *models.PortainereeEdgeStack {
+func (o *EdgeStackStatusUpdateOK) GetPayload() *models.PortainerEdgeStack {
 	return o.Payload
 }
 
 func (o *EdgeStackStatusUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeStack)
+	o.Payload = new(models.PortainerEdgeStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -129,7 +129,7 @@ func NewEdgeStackStatusUpdateBadRequest() *EdgeStackStatusUpdateBadRequest {
 /*
 EdgeStackStatusUpdateBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeStackStatusUpdateBadRequest edge stack status update bad request
 */
 type EdgeStackStatusUpdateBadRequest struct {
 }
@@ -180,7 +180,7 @@ func NewEdgeStackStatusUpdateForbidden() *EdgeStackStatusUpdateForbidden {
 /*
 EdgeStackStatusUpdateForbidden describes a response with status code 403, with default header values.
 
-Forbidden
+EdgeStackStatusUpdateForbidden edge stack status update forbidden
 */
 type EdgeStackStatusUpdateForbidden struct {
 }
@@ -231,7 +231,7 @@ func NewEdgeStackStatusUpdateNotFound() *EdgeStackStatusUpdateNotFound {
 /*
 EdgeStackStatusUpdateNotFound describes a response with status code 404, with default header values.
 
-Not Found
+EdgeStackStatusUpdateNotFound edge stack status update not found
 */
 type EdgeStackStatusUpdateNotFound struct {
 }
@@ -282,7 +282,7 @@ func NewEdgeStackStatusUpdateInternalServerError() *EdgeStackStatusUpdateInterna
 /*
 EdgeStackStatusUpdateInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeStackStatusUpdateInternalServerError edge stack status update internal server error
 */
 type EdgeStackStatusUpdateInternalServerError struct {
 }

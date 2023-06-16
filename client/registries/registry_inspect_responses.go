@@ -69,7 +69,7 @@ RegistryInspectOK describes a response with status code 200, with default header
 Success
 */
 type RegistryInspectOK struct {
-	Payload *models.PortainereeRegistry
+	Payload *models.PortainerRegistry
 }
 
 // IsSuccess returns true when this registry inspect o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *RegistryInspectOK) String() string {
 	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *RegistryInspectOK) GetPayload() *models.PortainereeRegistry {
+func (o *RegistryInspectOK) GetPayload() *models.PortainerRegistry {
 	return o.Payload
 }
 
 func (o *RegistryInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeRegistry)
+	o.Payload = new(models.PortainerRegistry)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

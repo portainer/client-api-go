@@ -69,7 +69,7 @@ UserInspectOK describes a response with status code 200, with default header val
 Success
 */
 type UserInspectOK struct {
-	Payload *models.PortainereeUser
+	Payload *models.PortainerUser
 }
 
 // IsSuccess returns true when this user inspect o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *UserInspectOK) String() string {
 	return fmt.Sprintf("[GET /users/{id}][%d] userInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *UserInspectOK) GetPayload() *models.PortainereeUser {
+func (o *UserInspectOK) GetPayload() *models.PortainerUser {
 	return o.Payload
 }
 
 func (o *UserInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeUser)
+	o.Payload = new(models.PortainerUser)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

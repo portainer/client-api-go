@@ -51,7 +51,7 @@ EndpointListOK describes a response with status code 200, with default header va
 Endpoints
 */
 type EndpointListOK struct {
-	Payload []*models.PortainereeEndpoint
+	Payload []*models.PortainerEndpoint
 }
 
 // IsSuccess returns true when this endpoint list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *EndpointListOK) String() string {
 	return fmt.Sprintf("[GET /endpoints][%d] endpointListOK  %+v", 200, o.Payload)
 }
 
-func (o *EndpointListOK) GetPayload() []*models.PortainereeEndpoint {
+func (o *EndpointListOK) GetPayload() []*models.PortainerEndpoint {
 	return o.Payload
 }
 

@@ -22,10 +22,6 @@ type SettingsPublicSettingsResponse struct {
 	// Example: 1
 	AuthenticationMethod int64 `json:"AuthenticationMethod,omitempty"`
 
-	// The content in plaintext used to display in the login page. Will hide when value is empty string
-	// Example: notice or agreement
-	CustomLoginBanner string `json:"CustomLoginBanner,omitempty"`
-
 	// Whether edge compute features are enabled
 	// Example: true
 	EnableEdgeComputeFeatures *bool `json:"EnableEdgeComputeFeatures,omitempty"`
@@ -37,16 +33,9 @@ type SettingsPublicSettingsResponse struct {
 	// Supported feature flags
 	Features map[string]bool `json:"Features,omitempty"`
 
-	// Deployment options for encouraging deployment as code
-	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
-
 	// URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
 	// Example: https://mycompany.mydomain.tld/logo.png
 	LogoURL string `json:"LogoURL,omitempty"`
-
-	// Whether portainer internal auth view will be hidden
-	// Example: true
-	OAuthHideInternalAuth *bool `json:"OAuthHideInternalAuth,omitempty"`
 
 	// The URL used for oauth login
 	// Example: https://gitlab.com/oauth
@@ -68,9 +57,6 @@ type SettingsPublicSettingsResponse struct {
 	// Example: true
 	TeamSync *bool `json:"TeamSync,omitempty"`
 
-	// default registry
-	DefaultRegistry *SettingsPublicSettingsResponseDefaultRegistry `json:"defaultRegistry,omitempty"`
-
 	// edge
 	Edge *SettingsPublicSettingsResponseEdge `json:"edge,omitempty"`
 
@@ -89,14 +75,6 @@ type SettingsPublicSettingsResponse struct {
 func (m *SettingsPublicSettingsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateGlobalDeploymentOptions(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateDefaultRegistry(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateEdge(formats); err != nil {
 		res = append(res, err)
 	}
@@ -104,44 +82,6 @@ func (m *SettingsPublicSettingsResponse) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *SettingsPublicSettingsResponse) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
-	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
-		return nil
-	}
-
-	if m.GlobalDeploymentOptions != nil {
-		if err := m.GlobalDeploymentOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("GlobalDeploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("GlobalDeploymentOptions")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *SettingsPublicSettingsResponse) validateDefaultRegistry(formats strfmt.Registry) error {
-	if swag.IsZero(m.DefaultRegistry) { // not required
-		return nil
-	}
-
-	if m.DefaultRegistry != nil {
-		if err := m.DefaultRegistry.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("defaultRegistry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("defaultRegistry")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -168,14 +108,6 @@ func (m *SettingsPublicSettingsResponse) validateEdge(formats strfmt.Registry) e
 func (m *SettingsPublicSettingsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateGlobalDeploymentOptions(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateDefaultRegistry(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateEdge(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -183,38 +115,6 @@ func (m *SettingsPublicSettingsResponse) ContextValidate(ctx context.Context, fo
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *SettingsPublicSettingsResponse) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.GlobalDeploymentOptions != nil {
-		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("GlobalDeploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("GlobalDeploymentOptions")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *SettingsPublicSettingsResponse) contextValidateDefaultRegistry(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.DefaultRegistry != nil {
-		if err := m.DefaultRegistry.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("defaultRegistry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("defaultRegistry")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -245,44 +145,6 @@ func (m *SettingsPublicSettingsResponse) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *SettingsPublicSettingsResponse) UnmarshalBinary(b []byte) error {
 	var res SettingsPublicSettingsResponse
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// SettingsPublicSettingsResponseDefaultRegistry settings public settings response default registry
-//
-// swagger:model SettingsPublicSettingsResponseDefaultRegistry
-type SettingsPublicSettingsResponseDefaultRegistry struct {
-
-	// hide
-	// Example: false
-	Hide bool `json:"Hide,omitempty"`
-}
-
-// Validate validates this settings public settings response default registry
-func (m *SettingsPublicSettingsResponseDefaultRegistry) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this settings public settings response default registry based on context it is used
-func (m *SettingsPublicSettingsResponseDefaultRegistry) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *SettingsPublicSettingsResponseDefaultRegistry) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *SettingsPublicSettingsResponseDefaultRegistry) UnmarshalBinary(b []byte) error {
-	var res SettingsPublicSettingsResponseDefaultRegistry
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

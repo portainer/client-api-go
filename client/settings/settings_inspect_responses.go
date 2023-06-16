@@ -51,7 +51,7 @@ SettingsInspectOK describes a response with status code 200, with default header
 Success
 */
 type SettingsInspectOK struct {
-	Payload *models.PortainereeSettings
+	Payload *models.PortainerSettings
 }
 
 // IsSuccess returns true when this settings inspect o k response has a 2xx status code
@@ -87,13 +87,13 @@ func (o *SettingsInspectOK) String() string {
 	return fmt.Sprintf("[GET /settings][%d] settingsInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *SettingsInspectOK) GetPayload() *models.PortainereeSettings {
+func (o *SettingsInspectOK) GetPayload() *models.PortainerSettings {
 	return o.Payload
 }
 
 func (o *SettingsInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeSettings)
+	o.Payload = new(models.PortainerSettings)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

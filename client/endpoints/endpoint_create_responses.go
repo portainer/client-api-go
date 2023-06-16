@@ -57,7 +57,7 @@ EndpointCreateOK describes a response with status code 200, with default header 
 Success
 */
 type EndpointCreateOK struct {
-	Payload *models.PortainereeEndpoint
+	Payload *models.PortainerEndpoint
 }
 
 // IsSuccess returns true when this endpoint create o k response has a 2xx status code
@@ -93,13 +93,13 @@ func (o *EndpointCreateOK) String() string {
 	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *EndpointCreateOK) GetPayload() *models.PortainereeEndpoint {
+func (o *EndpointCreateOK) GetPayload() *models.PortainerEndpoint {
 	return o.Payload
 }
 
 func (o *EndpointCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEndpoint)
+	o.Payload = new(models.PortainerEndpoint)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

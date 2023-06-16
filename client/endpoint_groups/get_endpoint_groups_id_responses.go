@@ -63,7 +63,7 @@ GetEndpointGroupsIDOK describes a response with status code 200, with default he
 Success
 */
 type GetEndpointGroupsIDOK struct {
-	Payload *models.PortainereeEndpointGroup
+	Payload *models.PortainerEndpointGroup
 }
 
 // IsSuccess returns true when this get endpoint groups Id o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *GetEndpointGroupsIDOK) String() string {
 	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdOK  %+v", 200, o.Payload)
 }
 
-func (o *GetEndpointGroupsIDOK) GetPayload() *models.PortainereeEndpointGroup {
+func (o *GetEndpointGroupsIDOK) GetPayload() *models.PortainerEndpointGroup {
 	return o.Payload
 }
 
 func (o *GetEndpointGroupsIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEndpointGroup)
+	o.Payload = new(models.PortainerEndpointGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

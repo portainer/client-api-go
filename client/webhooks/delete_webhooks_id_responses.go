@@ -102,7 +102,7 @@ func NewDeleteWebhooksIDBadRequest() *DeleteWebhooksIDBadRequest {
 /*
 DeleteWebhooksIDBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+DeleteWebhooksIDBadRequest delete webhooks Id bad request
 */
 type DeleteWebhooksIDBadRequest struct {
 }
@@ -153,7 +153,7 @@ func NewDeleteWebhooksIDInternalServerError() *DeleteWebhooksIDInternalServerErr
 /*
 DeleteWebhooksIDInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+DeleteWebhooksIDInternalServerError delete webhooks Id internal server error
 */
 type DeleteWebhooksIDInternalServerError struct {
 }

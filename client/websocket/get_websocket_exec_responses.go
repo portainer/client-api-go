@@ -57,7 +57,7 @@ func NewGetWebsocketExecOK() *GetWebsocketExecOK {
 /*
 GetWebsocketExecOK describes a response with status code 200, with default header values.
 
-OK
+GetWebsocketExecOK get websocket exec o k
 */
 type GetWebsocketExecOK struct {
 }
@@ -108,7 +108,7 @@ func NewGetWebsocketExecBadRequest() *GetWebsocketExecBadRequest {
 /*
 GetWebsocketExecBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+GetWebsocketExecBadRequest get websocket exec bad request
 */
 type GetWebsocketExecBadRequest struct {
 }
@@ -159,7 +159,7 @@ func NewGetWebsocketExecConflict() *GetWebsocketExecConflict {
 /*
 GetWebsocketExecConflict describes a response with status code 409, with default header values.
 
-Conflict
+GetWebsocketExecConflict get websocket exec conflict
 */
 type GetWebsocketExecConflict struct {
 }
@@ -210,7 +210,7 @@ func NewGetWebsocketExecInternalServerError() *GetWebsocketExecInternalServerErr
 /*
 GetWebsocketExecInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+GetWebsocketExecInternalServerError get websocket exec internal server error
 */
 type GetWebsocketExecInternalServerError struct {
 }

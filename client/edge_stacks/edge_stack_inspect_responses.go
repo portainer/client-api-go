@@ -63,7 +63,7 @@ EdgeStackInspectOK describes a response with status code 200, with default heade
 OK
 */
 type EdgeStackInspectOK struct {
-	Payload *models.PortainereeEdgeStack
+	Payload *models.PortainerEdgeStack
 }
 
 // IsSuccess returns true when this edge stack inspect o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *EdgeStackInspectOK) String() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeStackInspectOK) GetPayload() *models.PortainereeEdgeStack {
+func (o *EdgeStackInspectOK) GetPayload() *models.PortainerEdgeStack {
 	return o.Payload
 }
 
 func (o *EdgeStackInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeStack)
+	o.Payload = new(models.PortainerEdgeStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -123,7 +123,7 @@ func NewEdgeStackInspectBadRequest() *EdgeStackInspectBadRequest {
 /*
 EdgeStackInspectBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeStackInspectBadRequest edge stack inspect bad request
 */
 type EdgeStackInspectBadRequest struct {
 }
@@ -174,7 +174,7 @@ func NewEdgeStackInspectInternalServerError() *EdgeStackInspectInternalServerErr
 /*
 EdgeStackInspectInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeStackInspectInternalServerError edge stack inspect internal server error
 */
 type EdgeStackInspectInternalServerError struct {
 }

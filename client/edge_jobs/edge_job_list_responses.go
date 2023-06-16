@@ -63,7 +63,7 @@ EdgeJobListOK describes a response with status code 200, with default header val
 OK
 */
 type EdgeJobListOK struct {
-	Payload []*models.PortainereeEdgeJob
+	Payload []*models.PortainerEdgeJob
 }
 
 // IsSuccess returns true when this edge job list o k response has a 2xx status code
@@ -99,7 +99,7 @@ func (o *EdgeJobListOK) String() string {
 	return fmt.Sprintf("[GET /edge_jobs][%d] edgeJobListOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeJobListOK) GetPayload() []*models.PortainereeEdgeJob {
+func (o *EdgeJobListOK) GetPayload() []*models.PortainerEdgeJob {
 	return o.Payload
 }
 
@@ -121,7 +121,7 @@ func NewEdgeJobListBadRequest() *EdgeJobListBadRequest {
 /*
 EdgeJobListBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeJobListBadRequest edge job list bad request
 */
 type EdgeJobListBadRequest struct {
 }
@@ -172,7 +172,7 @@ func NewEdgeJobListInternalServerError() *EdgeJobListInternalServerError {
 /*
 EdgeJobListInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobListInternalServerError edge job list internal server error
 */
 type EdgeJobListInternalServerError struct {
 }

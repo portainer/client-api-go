@@ -63,7 +63,7 @@ EdgeStackUpdateOK describes a response with status code 200, with default header
 OK
 */
 type EdgeStackUpdateOK struct {
-	Payload *models.PortainereeEdgeStack
+	Payload *models.PortainerEdgeStack
 }
 
 // IsSuccess returns true when this edge stack update o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *EdgeStackUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeStackUpdateOK) GetPayload() *models.PortainereeEdgeStack {
+func (o *EdgeStackUpdateOK) GetPayload() *models.PortainerEdgeStack {
 	return o.Payload
 }
 
 func (o *EdgeStackUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeStack)
+	o.Payload = new(models.PortainerEdgeStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -123,7 +123,7 @@ func NewEdgeStackUpdateBadRequest() *EdgeStackUpdateBadRequest {
 /*
 EdgeStackUpdateBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeStackUpdateBadRequest edge stack update bad request
 */
 type EdgeStackUpdateBadRequest struct {
 }
@@ -174,7 +174,7 @@ func NewEdgeStackUpdateInternalServerError() *EdgeStackUpdateInternalServerError
 /*
 EdgeStackUpdateInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeStackUpdateInternalServerError edge stack update internal server error
 */
 type EdgeStackUpdateInternalServerError struct {
 }

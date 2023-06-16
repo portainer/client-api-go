@@ -43,19 +43,13 @@ definitions:
   backup.restorePayload:
     properties:
       fileContent:
-        description: Content of the backup
         items:
           type: integer
         type: array
       fileName:
-        description: File name
         type: string
       password:
-        description: Password to decrypt the backup with
         type: string
-    required:
-    - fileContent
-    - fileName
     type: object
   backup.restoreS3Settings:
     properties:
@@ -153,7 +147,7 @@ definitions:
       variables:
         description: Definitions of variables in the stack file
         items:
-          $ref: '#/definitions/portaineree.CustomTemplateVariableDefinition'
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
         type: array
     required:
     - description
@@ -195,16 +189,9 @@ definitions:
         example: true
         type: boolean
         x-nullable: true
-      repositoryGitCredentialID:
-        description: |-
-          GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
-          is true and RepositoryUsername/RepositoryPassword are not provided
-        example: 0
-        type: integer
       repositoryPassword:
-        description: |-
-          Password used in basic authentication. Required when RepositoryAuthentication is true
-          and RepositoryGitCredentialID is 0
+        description: Password used in basic authentication. Required when RepositoryAuthentication
+          is true.
         example: myGitPassword
         type: string
       repositoryReferenceName:
@@ -216,9 +203,8 @@ definitions:
         example: https://github.com/openfaas/faas
         type: string
       repositoryUsername:
-        description: |-
-          Username used in basic authentication. Required when RepositoryAuthentication is true
-          and RepositoryGitCredentialID is 0
+        description: Username used in basic authentication. Required when RepositoryAuthentication
+          is true.
         example: myGitUsername
         type: string
       title:
@@ -235,7 +221,7 @@ definitions:
       variables:
         description: Definitions of variables in the stack file
         items:
-          $ref: '#/definitions/portaineree.CustomTemplateVariableDefinition'
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
         type: array
     required:
     - description
@@ -285,7 +271,7 @@ definitions:
       variables:
         description: Definitions of variables in the stack file
         items:
-          $ref: '#/definitions/portaineree.CustomTemplateVariableDefinition'
+          $ref: '#/definitions/portainer.CustomTemplateVariableDefinition'
         type: array
     required:
     - description
@@ -320,8 +306,6 @@ definitions:
         x-nullable: true
       Endpoints:
         items:
-          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
-            that will be used for deployment
           type: integer
         type: array
       HasEdgeGroup:
@@ -361,8 +345,6 @@ definitions:
         x-nullable: true
       endpoints:
         items:
-          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
-            that will be used for deployment
           type: integer
         type: array
       name:
@@ -384,8 +366,6 @@ definitions:
         x-nullable: true
       endpoints:
         items:
-          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
-            that will be used for deployment
           type: integer
         type: array
       name:
@@ -412,8 +392,6 @@ definitions:
         type: array
       endpoints:
         items:
-          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
-            that will be used for deployment
           type: integer
         type: array
       fileContent:
@@ -436,8 +414,6 @@ definitions:
         type: array
       endpoints:
         items:
-          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
-            that will be used for deployment
           type: integer
         type: array
       file:
@@ -467,8 +443,6 @@ definitions:
         type: array
       endpoints:
         items:
-          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
-            that will be used for deployment
           type: integer
         type: array
       fileContent:
@@ -526,15 +500,9 @@ definitions:
         description: Name of the stack
         example: myStack
         type: string
-      prePullImage:
-        description: Pre Pull image
-        example: false
-        type: boolean
-        x-nullable: true
       registries:
         description: List of Registries to use for this stack
         items:
-          description: Registry Identifier
           type: integer
         type: array
       stackFileContent:
@@ -576,14 +544,8 @@ definitions:
         type: array
       name:
         type: string
-      prePullImage:
-        description: Pre Pull image
-        example: false
-        type: boolean
-        x-nullable: true
       registries:
         items:
-          description: Registry Identifier
           type: integer
         type: array
       stackFileContent:
@@ -628,15 +590,9 @@ definitions:
         description: Name of the stack
         example: myStack
         type: string
-      prePullImage:
-        description: Pre Pull image
-        example: false
-        type: boolean
-        x-nullable: true
       registries:
         description: List of Registries to use for this stack
         items:
-          description: Registry Identifier
           type: integer
         type: array
       repositoryAuthentication:
@@ -644,10 +600,6 @@ definitions:
         example: true
         type: boolean
         x-nullable: true
-      repositoryGitCredentialID:
-        description: GitCredentialID used to identify the binded git credential
-        example: 0
-        type: integer
       repositoryPassword:
         description: Password used in basic authentication. Required when RepositoryAuthentication
           is true.
@@ -683,22 +635,16 @@ definitions:
           for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
           kubernetes deploy type is enabled only for kubernetes environments(endpoints)
           nomad deploy type is enabled only for nomad environments(endpoints)
+        enum:
+        - 0
+        - 1
+        - 2
+        example: 0
         type: integer
       edgeGroups:
         items:
           description: EdgeGroup Identifier
           example: 1
-          type: integer
-        type: array
-      prePullImage:
-        type: boolean
-        x-nullable: true
-      rePullImage:
-        type: boolean
-        x-nullable: true
-      registries:
-        items:
-          description: Registry Identifier
           type: integer
         type: array
       stackFileContent:
@@ -833,16 +779,6 @@ definitions:
         description: Namespace to use for Kubernetes manifests, leave empty to use
           the namespaces defined in the manifest
         type: string
-      prePullImage:
-        type: boolean
-        x-nullable: true
-      rePullImage:
-        type: boolean
-        x-nullable: true
-      registryCredentials:
-        items:
-          $ref: '#/definitions/portaineree.EdgeRegistryCredential'
-        type: array
       stackFileContent:
         type: string
     type: object
@@ -922,8 +858,6 @@ definitions:
         - 1
         - 3
         items:
-          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
-            that will be used for deployment
           type: integer
         type: array
       description:
@@ -932,7 +866,7 @@ definitions:
         type: string
       name:
         description: Environment(Endpoint) group name
-        example: my-Environment-group
+        example: my-environment-group
         type: string
       tagIDs:
         description: List of tag identifiers to which this environment(endpoint) group
@@ -970,9 +904,9 @@ definitions:
           type: integer
         type: array
       teamAccessPolicies:
-        $ref: '#/definitions/portaineree.TeamAccessPolicies'
+        $ref: '#/definitions/portainer.TeamAccessPolicies'
       userAccessPolicies:
-        $ref: '#/definitions/portaineree.UserAccessPolicies'
+        $ref: '#/definitions/portainer.UserAccessPolicies'
     type: object
   endpoints.dockerhubStatusResponse:
     properties:
@@ -986,80 +920,60 @@ definitions:
   endpoints.endpointCreateGlobalKeyResponse:
     properties:
       endpointID:
-        description: Environment(Endpoint) Identifier
         type: integer
     type: object
   endpoints.endpointSettingsUpdatePayload:
     properties:
-      changeWindow:
-        $ref: '#/definitions/portaineree.EndpointChangeWindow'
-        description: Whether automatic update time restrictions are enabled
-      deploymentOptions:
-        $ref: '#/definitions/portaineree.DeploymentOptions'
-        description: Hide manual deployment forms for an environment
-      enableImageNotification:
+      allowBindMountsForRegularUsers:
+        description: Whether non-administrator should be able to use bind mounts when
+          creating containers
         example: false
         type: boolean
         x-nullable: true
-      securitySettings:
-        description: Security settings updates
-        properties:
-          allowBindMountsForRegularUsers:
-            description: Whether non-administrator should be able to use bind mounts
-              when creating containers
-            example: false
-            type: boolean
-            x-nullable: true
-          allowContainerCapabilitiesForRegularUsers:
-            description: Whether non-administrator should be able to use container
-              capabilities
-            example: true
-            type: boolean
-            x-nullable: true
-          allowDeviceMappingForRegularUsers:
-            description: Whether non-administrator should be able to use device mapping
-            example: true
-            type: boolean
-            x-nullable: true
-          allowHostNamespaceForRegularUsers:
-            description: Whether non-administrator should be able to use the host
-              pid
-            example: true
-            type: boolean
-            x-nullable: true
-          allowPrivilegedModeForRegularUsers:
-            description: Whether non-administrator should be able to use privileged
-              mode when creating containers
-            example: false
-            type: boolean
-            x-nullable: true
-          allowStackManagementForRegularUsers:
-            description: Whether non-administrator should be able to manage stacks
-            example: true
-            type: boolean
-            x-nullable: true
-          allowSysctlSettingForRegularUsers:
-            description: Whether non-administrator should be able to use sysctl settings
-            example: true
-            type: boolean
-            x-nullable: true
-          allowVolumeBrowserForRegularUsers:
-            description: Whether non-administrator should be able to browse volumes
-            example: true
-            type: boolean
-            x-nullable: true
-          enableHostManagementFeatures:
-            description: Whether host management features are enabled
-            example: true
-            type: boolean
-            x-nullable: true
-        type: object
+      allowContainerCapabilitiesForRegularUsers:
+        description: Whether non-administrator should be able to use container capabilities
+        example: true
+        type: boolean
+        x-nullable: true
+      allowDeviceMappingForRegularUsers:
+        description: Whether non-administrator should be able to use device mapping
+        example: true
+        type: boolean
+        x-nullable: true
+      allowHostNamespaceForRegularUsers:
+        description: Whether non-administrator should be able to use the host pid
+        example: true
+        type: boolean
+        x-nullable: true
+      allowPrivilegedModeForRegularUsers:
+        description: Whether non-administrator should be able to use privileged mode
+          when creating containers
+        example: false
+        type: boolean
+        x-nullable: true
+      allowStackManagementForRegularUsers:
+        description: Whether non-administrator should be able to manage stacks
+        example: true
+        type: boolean
+        x-nullable: true
+      allowSysctlSettingForRegularUsers:
+        description: Whether non-administrator should be able to use sysctl settings
+        example: true
+        type: boolean
+        x-nullable: true
+      allowVolumeBrowserForRegularUsers:
+        description: Whether non-administrator should be able to browse volumes
+        example: true
+        type: boolean
+        x-nullable: true
+      enableHostManagementFeatures:
+        description: Whether host management features are enabled
+        example: true
+        type: boolean
+        x-nullable: true
     type: object
   endpoints.endpointUpdatePayload:
     properties:
-      DeploymentOptions:
-        $ref: '#/definitions/portaineree.DeploymentOptions'
-        description: Hide manual deployment forms for an environment
       azureApplicationID:
         description: Azure application ID
         example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
@@ -1072,27 +986,6 @@ definitions:
         description: Azure tenant ID
         example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
         type: string
-      changeWindow:
-        $ref: '#/definitions/portaineree.EndpointChangeWindow'
-        description: Whether automatic update time restrictions are enabled
-      edge:
-        properties:
-          CommandInterval:
-            description: The command list interval for edge agent - used in edge async
-              mode (in seconds)
-            example: 5
-            type: integer
-          PingInterval:
-            description: The ping interval for edge agent - used in edge async mode
-              (in seconds)
-            example: 5
-            type: integer
-          SnapshotInterval:
-            description: The snapshot interval for edge agent - used in edge async
-              mode (in seconds)
-            example: 5
-            type: integer
-        type: object
       edgeCheckinInterval:
         description: The check in interval for edge agent (in seconds)
         example: 5
@@ -1100,14 +993,14 @@ definitions:
       gpus:
         description: GPUs information
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
       groupID:
         description: Group identifier
         example: 1
         type: integer
       kubernetes:
-        $ref: '#/definitions/portaineree.KubernetesData'
+        $ref: '#/definitions/portainer.KubernetesData'
         description: Associated Kubernetes data
       name:
         description: Name that will be used to identify this environment(endpoint)
@@ -1135,7 +1028,7 @@ definitions:
           type: integer
         type: array
       teamAccessPolicies:
-        $ref: '#/definitions/portaineree.TeamAccessPolicies'
+        $ref: '#/definitions/portainer.TeamAccessPolicies'
       tls:
         description: Require TLS to connect against this environment(endpoint)
         example: true
@@ -1156,7 +1049,7 @@ definitions:
         example: docker.mydomain.tld:2375
         type: string
       userAccessPolicies:
-        $ref: '#/definitions/portaineree.UserAccessPolicies'
+        $ref: '#/definitions/portainer.UserAccessPolicies'
     type: object
   endpoints.forceUpdateServicePayload:
     properties:
@@ -1175,9 +1068,9 @@ definitions:
           type: string
         type: array
       teamAccessPolicies:
-        $ref: '#/definitions/portaineree.TeamAccessPolicies'
+        $ref: '#/definitions/portainer.TeamAccessPolicies'
       userAccessPolicies:
-        $ref: '#/definitions/portaineree.UserAccessPolicies'
+        $ref: '#/definitions/portainer.UserAccessPolicies'
     type: object
   endpoints.resourcePoolUpdatePayload:
     properties:
@@ -1445,7 +1338,7 @@ definitions:
         type: string
       UserRepositories:
         items:
-          $ref: '#/definitions/portaineree.HelmUserRepository'
+          $ref: '#/definitions/portainer.HelmUserRepository'
         type: array
     type: object
   helm.installChartPayload:
@@ -1477,7 +1370,7 @@ definitions:
   ldap.checkPayload:
     properties:
       ldapsettings:
-        $ref: '#/definitions/portaineree.LDAPSettings'
+        $ref: '#/definitions/portainer.LDAPSettings'
     type: object
   ldap.groupsPayload:
     properties:
@@ -6050,13 +5943,10 @@ definitions:
         example: registry.mydomain.tld:2375
         type: string
       ecr:
-        $ref: '#/definitions/portaineree.EcrData'
+        $ref: '#/definitions/portainer.EcrData'
         description: ECR specific details, required when type = 7
-      github:
-        $ref: '#/definitions/portaineree.GithubRegistryData'
-        description: Github specific details, required when type = 8
       gitlab:
-        $ref: '#/definitions/portaineree.GitlabRegistryData'
+        $ref: '#/definitions/portainer.GitlabRegistryData'
         description: Gitlab specific details, required when type = 4
       name:
         description: Name that will be used to identify this registry
@@ -6068,12 +5958,12 @@ definitions:
         example: registry_password
         type: string
       quay:
-        $ref: '#/definitions/portaineree.QuayRegistryData'
+        $ref: '#/definitions/portainer.QuayRegistryData'
         description: Quay specific details, required when type = 1
       type:
         description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure
           container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5
-          (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)\n\t8 (Github registry)"
+          (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)"
         enum:
         - 1
         - 2
@@ -6082,7 +5972,6 @@ definitions:
         - 5
         - 6
         - 7
-        - 8
         example: 1
         type: integer
       url:
@@ -6103,30 +5992,39 @@ definitions:
   registries.registryUpdatePayload:
     properties:
       authentication:
+        description: Is authentication against this registry enabled
         example: false
         type: boolean
         x-nullable: true
       baseURL:
+        description: BaseURL is used for quay registry
         example: registry.mydomain.tld:2375
         type: string
       ecr:
-        $ref: '#/definitions/portaineree.EcrData'
-      github:
-        $ref: '#/definitions/portaineree.GithubRegistryData'
+        $ref: '#/definitions/portainer.EcrData'
+        description: ECR data
       name:
+        description: Name that will be used to identify this registry
         example: my-registry
         type: string
       password:
+        description: Password used to authenticate against this registry. required
+          when Authentication is true
         example: registry_password
         type: string
       quay:
-        $ref: '#/definitions/portaineree.QuayRegistryData'
+        $ref: '#/definitions/portainer.QuayRegistryData'
+        description: Quay data
       registryAccesses:
-        $ref: '#/definitions/portaineree.RegistryAccesses'
+        $ref: '#/definitions/portainer.RegistryAccesses'
+        description: Registry access control
       url:
-        example: registry.mydomain.tld:2375/feed
+        description: URL or IP address of the Docker registry
+        example: registry.mydomain.tld:2375
         type: string
       username:
+        description: Username used to authenticate against this registry. Required
+          when Authentication is true
         example: registry_user
         type: string
     required:
@@ -6507,11 +6405,6 @@ definitions:
           values are: 1 for internal, 2 for LDAP, or 3 for oauth'
         example: 1
         type: integer
-      CustomLoginBanner:
-        description: The content in plaintext used to display in the login page. Will
-          hide when value is empty string
-        example: notice or agreement
-        type: string
       EnableEdgeComputeFeatures:
         description: Whether edge compute features are enabled
         example: true
@@ -6528,20 +6421,12 @@ definitions:
         description: Supported feature flags
         type: object
         x-nullable: true
-      GlobalDeploymentOptions:
-        $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
-        description: Deployment options for encouraging deployment as code
       LogoURL:
         description: URL to a logo that will be displayed on the login page as well
           as on top of the sidebar. Will use default Portainer logo when value is
           empty string
         example: https://mycompany.mydomain.tld/logo.png
         type: string
-      OAuthHideInternalAuth:
-        description: Whether portainer internal auth view will be hidden
-        example: true
-        type: boolean
-        x-nullable: true
       OAuthLoginURI:
         description: The URL used for oauth login
         example: https://gitlab.com/oauth
@@ -6564,13 +6449,6 @@ definitions:
         description: Whether team sync is enabled
         example: true
         type: boolean
-        x-nullable: true
-      defaultRegistry:
-        properties:
-          Hide:
-            example: false
-            type: boolean
-        type: object
         x-nullable: true
       edge:
         properties:
@@ -6632,39 +6510,8 @@ definitions:
         description: A list of label name & value that will be used to hide containers
           when querying containers
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
-      customLoginBanner:
-        description: The content in plaintext used to display in the login page. Will
-          hide when value is empty string
-        example: notice or agreement
-        type: string
-      edge:
-        properties:
-          CommandInterval:
-            description: The command list interval for edge agent - used in edge async
-              mode (in seconds)
-            example: 5
-            type: integer
-          PingInterval:
-            description: The ping interval for edge agent - used in edge async mode
-              (in seconds)
-            example: 5
-            type: integer
-          SnapshotInterval:
-            description: The snapshot interval for edge agent - used in edge async
-              mode (in seconds)
-            example: 5
-            type: integer
-          asyncMode:
-            description: AsyncMode enables edge agent to run in async mode by default
-            type: boolean
-            x-nullable: true
-          tunnelServerAddress:
-            description: The address where the tunneling server can be reached by
-              Edge agents
-            type: string
-        type: object
       edgeAgentCheckinInterval:
         description: The default check in interval for edge agent (in seconds)
         example: 5
@@ -6685,26 +6532,23 @@ definitions:
         example: false
         type: boolean
         x-nullable: true
-      globalDeploymentOptions:
-        $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
-        description: Deployment options for encouraging deployment as code
       helmRepositoryURL:
         description: Helm repository URL
         example: https://charts.bitnami.com/bitnami
         type: string
       internalAuthSettings:
-        $ref: '#/definitions/portaineree.InternalAuthSettings'
+        $ref: '#/definitions/portainer.InternalAuthSettings'
       kubeconfigExpiry:
         default: "0"
         description: The expiry of a Kubeconfig
         example: 24h
         type: string
       kubectlShellImage:
-        description: "Kubec\ttl Shell Image Name/Tag"
+        description: Kubectl Shell Image
         example: portainer/kubectl-shell:latest
         type: string
       ldapsettings:
-        $ref: '#/definitions/portaineree.LDAPSettings'
+        $ref: '#/definitions/portainer.LDAPSettings'
       logoURL:
         description: URL to a logo that will be displayed on the login page as well
           as on top of the sidebar. Will use default Portainer logo when value is
@@ -6712,7 +6556,7 @@ definitions:
         example: https://mycompany.mydomain.tld/logo.png
         type: string
       oauthSettings:
-        $ref: '#/definitions/portaineree.OAuthSettings'
+        $ref: '#/definitions/portainer.OAuthSettings'
       snapshotInterval:
         description: The interval in which environment(endpoint) snapshots are created
         example: 5m
@@ -6748,7 +6592,7 @@ definitions:
       env:
         description: A list of environment(endpoint) variables used during stack deployment
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
       fromAppTemplate:
         description: Whether the stack is from a app template
@@ -6767,11 +6611,6 @@ definitions:
            web:
            image:nginx
         type: string
-      webhook:
-        description: A UUID to identify a webhook. The stack will be force updated
-          and pull the latest image when the webhook was invoked.
-        example: c11fdf23-183e-428a-9bb6-16db01032174
-        type: string
     required:
     - name
     - stackFileContent
@@ -6787,7 +6626,7 @@ definitions:
           type: string
         type: array
       autoUpdate:
-        $ref: '#/definitions/portaineree.StackAutoUpdate'
+        $ref: '#/definitions/portainer.StackAutoUpdate'
         description: Optional auto update configuration
       composeFile:
         default: docker-compose.yml
@@ -6797,12 +6636,8 @@ definitions:
       env:
         description: A list of environment(endpoint) variables used during stack deployment
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
-      filesystemPath:
-        description: Local filesystem path
-        example: /tmp
-        type: string
       fromAppTemplate:
         description: Whether the stack is from a app template
         example: false
@@ -6817,16 +6652,9 @@ definitions:
         example: true
         type: boolean
         x-nullable: true
-      repositoryGitCredentialID:
-        description: |-
-          GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
-          is true and RepositoryUsername/RepositoryPassword are not provided
-        example: 0
-        type: integer
       repositoryPassword:
-        description: |-
-          Password used in basic authentication. Required when RepositoryAuthentication is true
-          and RepositoryGitCredentialID is 0
+        description: Password used in basic authentication. Required when RepositoryAuthentication
+          is true.
         example: myGitPassword
         type: string
       repositoryReferenceName:
@@ -6838,16 +6666,10 @@ definitions:
         example: https://github.com/openfaas/faas
         type: string
       repositoryUsername:
-        description: |-
-          Username used in basic authentication. Required when RepositoryAuthentication is true
-          and RepositoryGitCredentialID is 0
+        description: Username used in basic authentication. Required when RepositoryAuthentication
+          is true.
         example: myGitUsername
         type: string
-      supportRelativePath:
-        description: Whether the stack suppors relative path volume
-        example: false
-        type: boolean
-        x-nullable: true
     required:
     - name
     - repositoryURL
@@ -6859,7 +6681,7 @@ definitions:
           type: string
         type: array
       autoUpdate:
-        $ref: '#/definitions/portaineree.StackAutoUpdate'
+        $ref: '#/definitions/portainer.StackAutoUpdate'
       composeFormat:
         type: boolean
         x-nullable: true
@@ -6870,8 +6692,6 @@ definitions:
       repositoryAuthentication:
         type: boolean
         x-nullable: true
-      repositoryGitCredentialID:
-        type: integer
       repositoryPassword:
         type: string
       repositoryReferenceName:
@@ -6922,10 +6742,9 @@ definitions:
     properties:
       env:
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
       prune:
-        example: false
         type: boolean
         x-nullable: true
       pullImage:
@@ -6937,8 +6756,6 @@ definitions:
       repositoryAuthentication:
         type: boolean
         x-nullable: true
-      repositoryGitCredentialID:
-        type: integer
       repositoryPassword:
         type: string
       repositoryReferenceName:
@@ -6949,10 +6766,10 @@ definitions:
   stacks.stackGitUpdatePayload:
     properties:
       autoUpdate:
-        $ref: '#/definitions/portaineree.StackAutoUpdate'
+        $ref: '#/definitions/portainer.StackAutoUpdate'
       env:
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
       prune:
         type: boolean
@@ -6960,8 +6777,6 @@ definitions:
       repositoryAuthentication:
         type: boolean
         x-nullable: true
-      repositoryGitCredentialID:
-        type: integer
       repositoryPassword:
         type: string
       repositoryReferenceName:
@@ -6972,12 +6787,17 @@ definitions:
   stacks.stackMigratePayload:
     properties:
       endpointID:
+        description: Environment(Endpoint) identifier of the target environment(endpoint)
+          where the stack will be relocated
         example: 2
         type: integer
       name:
+        description: If provided will rename the migrated stack
         example: new-stack
         type: string
       swarmID:
+        description: Swarm cluster identifier, must match the identifier of the cluster
+          where the stack will be relocated
         example: jpofkc0i9uo9wtx1zesuk649w
         type: string
     required:
@@ -6988,7 +6808,7 @@ definitions:
       env:
         description: A list of environment(endpoint) variables used during stack deployment
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
       fromAppTemplate:
         description: Whether the stack is from a app template
@@ -7011,11 +6831,6 @@ definitions:
         description: Swarm cluster identifier
         example: jpofkc0i9uo9wtx1zesuk649w
         type: string
-      webhook:
-        description: A UUID to identify a webhook. The stack will be force updated
-          and pull the latest image when the webhook was invoked.
-        example: c11fdf23-183e-428a-9bb6-16db01032174
-        type: string
     required:
     - name
     - stackFileContent
@@ -7032,7 +6847,7 @@ definitions:
           type: string
         type: array
       autoUpdate:
-        $ref: '#/definitions/portaineree.StackAutoUpdate'
+        $ref: '#/definitions/portainer.StackAutoUpdate'
         description: Optional auto update configuration
       composeFile:
         default: docker-compose.yml
@@ -7042,12 +6857,8 @@ definitions:
       env:
         description: A list of environment(endpoint) variables used during stack deployment
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
-      filesystemPath:
-        description: Network filesystem path
-        example: /tmp
-        type: string
       fromAppTemplate:
         description: Whether the stack is from a app template
         example: false
@@ -7062,16 +6873,9 @@ definitions:
         example: true
         type: boolean
         x-nullable: true
-      repositoryGitCredentialID:
-        description: |-
-          GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
-          is true and RepositoryUsername/RepositoryPassword are not provided
-        example: 0
-        type: integer
       repositoryPassword:
-        description: |-
-          Password used in basic authentication. Required when RepositoryAuthentication is true
-          and RepositoryGitCredentialID is 0
+        description: Password used in basic authentication. Required when RepositoryAuthentication
+          is true.
         example: myGitPassword
         type: string
       repositoryReferenceName:
@@ -7083,16 +6887,10 @@ definitions:
         example: https://github.com/openfaas/faas
         type: string
       repositoryUsername:
-        description: |-
-          Username used in basic authentication. Required when RepositoryAuthentication is true
-          and RepositoryGitCredentialID is 0
+        description: Username used in basic authentication. Required when RepositoryAuthentication
+          is true.
         example: myGitUsername
         type: string
-      supportRelativePath:
-        description: Whether the stack suppors relative path volume
-        example: false
-        type: boolean
-        x-nullable: true
       swarmID:
         description: Swarm cluster identifier
         example: jpofkc0i9uo9wtx1zesuk649w
@@ -7107,7 +6905,7 @@ definitions:
       env:
         description: A list of environment(endpoint) variables used during stack deployment
         items:
-          $ref: '#/definitions/portaineree.Pair'
+          $ref: '#/definitions/portainer.Pair'
         type: array
       prune:
         description: Prune services that are no longer referenced (only available
@@ -7128,11 +6926,6 @@ definitions:
            services:
            web:
            image:nginx
-        type: string
-      webhook:
-        description: A UUID to identify a webhook. The stack will be force updated
-          and pull the latest image when the webhook was invoked.
-        example: c11fdf23-183e-428a-9bb6-16db01032174
         type: string
     type: object
   system.BuildInfo:
@@ -7264,7 +7057,6 @@ definitions:
         - 3
         - 5
         items:
-          description: User Identifier
           example: 1
           type: integer
         type: array
@@ -7303,7 +7095,7 @@ definitions:
     properties:
       templates:
         items:
-          $ref: '#/definitions/portaineree.Template'
+          $ref: '#/definitions/portainer.Template'
         type: array
       version:
         type: string
@@ -7479,7 +7271,7 @@ definitions:
   users.accessTokenResponse:
     properties:
       apiKey:
-        $ref: '#/definitions/portaineree.APIKey'
+        $ref: '#/definitions/portainer.APIKey'
       rawAPIKey:
         type: string
     type: object
@@ -7627,7 +7419,6 @@ definitions:
   webhooks.webhookUpdatePayload:
     properties:
       registryID:
-        description: Registry Identifier
         type: integer
     type: object
 info:
@@ -7701,7 +7492,7 @@ info:
   license:
     name: zlib
     url: https://github.com/portainer/portainer/blob/develop/LICENSE
-  title: PortainerEE API
+  title: PortainerCE API
   version: 2.17.1
 paths:
   /auth:
@@ -8141,7 +7932,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.CustomTemplate'
+              $ref: '#/definitions/portainer.CustomTemplate'
             type: array
         "500":
           description: Server error
@@ -8217,7 +8008,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.CustomTemplate'
+            $ref: '#/definitions/portainer.CustomTemplate'
         "400":
           description: Invalid request
         "500":
@@ -8274,7 +8065,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.CustomTemplate'
+            $ref: '#/definitions/portainer.CustomTemplate'
         "400":
           description: Invalid request
         "404":
@@ -8312,7 +8103,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.CustomTemplate'
+            $ref: '#/definitions/portainer.CustomTemplate'
         "400":
           description: Invalid request
         "403":
@@ -8553,7 +8344,7 @@ paths:
               $ref: '#/definitions/edgegroups.decoratedEdgeGroup'
             type: array
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8580,9 +8371,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeGroup'
+            $ref: '#/definitions/portainer.EdgeGroup'
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8603,9 +8394,9 @@ paths:
         type: integer
       responses:
         "204":
-          description: No Content
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8629,9 +8420,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeGroup'
+            $ref: '#/definitions/portainer.EdgeGroup'
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8663,9 +8454,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeGroup'
+            $ref: '#/definitions/portainer.EdgeGroup'
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8685,12 +8476,12 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/portaineree.EdgeJob'
+              $ref: '#/definitions/portainer.EdgeJob'
             type: array
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8729,9 +8520,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeGroup'
+            $ref: '#/definitions/portainer.EdgeGroup'
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8752,11 +8543,11 @@ paths:
         type: string
       responses:
         "204":
-          description: No Content
+          description: ""
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8780,11 +8571,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeJob'
+            $ref: '#/definitions/portainer.EdgeJob'
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8816,11 +8607,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeJob'
+            $ref: '#/definitions/portainer.EdgeJob'
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8847,9 +8638,9 @@ paths:
           schema:
             $ref: '#/definitions/edgejobs.edgeJobFileResponse'
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8878,9 +8669,9 @@ paths:
               $ref: '#/definitions/edgejobs.taskContainer'
             type: array
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8908,11 +8699,11 @@ paths:
       - application/json
       responses:
         "204":
-          description: No Content
+          description: ""
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8943,9 +8734,9 @@ paths:
           schema:
             $ref: '#/definitions/edgejobs.fileResponse'
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8972,11 +8763,11 @@ paths:
       - application/json
       responses:
         "204":
-          description: No Content
+          description: ""
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -8996,12 +8787,12 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/portaineree.EdgeStack'
+              $ref: '#/definitions/portainer.EdgeStack'
             type: array
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -9047,9 +8838,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeStack'
+            $ref: '#/definitions/portainer.EdgeStack'
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -9070,11 +8861,11 @@ paths:
         type: string
       responses:
         "204":
-          description: No Content
+          description: ""
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -9098,11 +8889,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeStack'
+            $ref: '#/definitions/portainer.EdgeStack'
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -9134,11 +8925,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeStack'
+            $ref: '#/definitions/portainer.EdgeStack'
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -9165,9 +8956,9 @@ paths:
           schema:
             $ref: '#/definitions/edgestacks.stackFileResponse'
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
         "503":
           description: Edge compute features are disabled
       security:
@@ -9286,15 +9077,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeStack'
+            $ref: '#/definitions/portainer.EdgeStack'
         "400":
-          description: Bad Request
+          description: ""
         "403":
-          description: Forbidden
+          description: ""
         "404":
-          description: Not Found
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       summary: Update an EdgeStack status
       tags:
       - edge_stacks
@@ -9314,15 +9105,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.EdgeStack'
+            $ref: '#/definitions/portainer.EdgeStack'
         "400":
-          description: Bad Request
+          description: ""
         "403":
-          description: Forbidden
+          description: ""
         "404":
-          description: Not Found
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       summary: Delete an EdgeStack status
       tags:
       - edge_stacks
@@ -9339,10 +9130,10 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/portaineree.Template'
+              $ref: '#/definitions/portainer.Template'
             type: array
         "500":
-          description: Internal Server Error
+          description: ""
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -9496,7 +9287,7 @@ paths:
           description: Environment(Endpoint) group
           schema:
             items:
-              $ref: '#/definitions/portaineree.EndpointGroup'
+              $ref: '#/definitions/portainer.EndpointGroup'
             type: array
         "500":
           description: Server error
@@ -9525,7 +9316,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.EndpointGroup'
+            $ref: '#/definitions/portainer.EndpointGroup'
         "400":
           description: Invalid request
         "500":
@@ -9581,7 +9372,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.EndpointGroup'
+            $ref: '#/definitions/portainer.EndpointGroup'
         "400":
           description: Invalid request
         "404":
@@ -9619,7 +9410,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.EndpointGroup'
+            $ref: '#/definitions/portainer.EndpointGroup'
         "400":
           description: Invalid request
         "404":
@@ -9794,7 +9585,7 @@ paths:
           description: Endpoints
           schema:
             items:
-              $ref: '#/definitions/portaineree.Endpoint'
+              $ref: '#/definitions/portainer.Endpoint'
             type: array
         "500":
           description: Server error
@@ -9916,7 +9707,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Endpoint'
+            $ref: '#/definitions/portainer.Endpoint'
         "400":
           description: Invalid request
         "500":
@@ -9971,7 +9762,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Endpoint'
+            $ref: '#/definitions/portainer.Endpoint'
         "400":
           description: Invalid request
         "404":
@@ -10009,7 +9800,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Endpoint'
+            $ref: '#/definitions/portainer.Endpoint'
         "400":
           description: Invalid request
         "404":
@@ -10037,10 +9828,8 @@ paths:
       produces:
       - application/json
       responses:
-        "200":
+        "204":
           description: Success
-          schema:
-            $ref: '#/definitions/portaineree.Endpoint'
         "400":
           description: Invalid request
         "404":
@@ -10168,7 +9957,7 @@ paths:
       - application/json
       description: '**Access policy**: public'
       parameters:
-      - description: Environment(Endpoint) Id
+      - description: environment(endpoint) Id
         in: path
         name: id
         required: true
@@ -10182,11 +9971,11 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: ""
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       summary: Inspect an EdgeJob Log
       tags:
       - edge
@@ -10197,7 +9986,7 @@ paths:
       - application/json
       description: '**Access policy**: public'
       parameters:
-      - description: Environment(Endpoint) Id
+      - description: environment(endpoint) Id
         in: path
         name: id
         required: true
@@ -10215,11 +10004,11 @@ paths:
           schema:
             $ref: '#/definitions/endpointedge.configResponse'
         "400":
-          description: Bad Request
+          description: ""
         "404":
-          description: Not Found
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       summary: Inspect an Edge Stack for an Environment(Endpoint)
       tags:
       - edge
@@ -10451,7 +10240,7 @@ paths:
         **Access policy**: authenticated
       operationId: HelmUserRepositoriesList
       parameters:
-      - description: Environment(Endpoint) identifier
+      - description: User identifier
         in: path
         name: id
         required: true
@@ -10500,7 +10289,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.HelmUserRepository'
+            $ref: '#/definitions/portainer.HelmUserRepository'
         "400":
           description: Invalid request
         "403":
@@ -10578,7 +10367,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.Registry'
+              $ref: '#/definitions/portainer.Registry'
             type: array
         "500":
           description: Server error
@@ -10656,7 +10445,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Endpoint'
+            $ref: '#/definitions/portainer.Endpoint'
         "400":
           description: Invalid request
         "404":
@@ -10756,7 +10545,7 @@ paths:
       security:
       - ApiKeyAuth: []
       - jwt: []
-      summary: Snapshot all environment(endpoint)
+      summary: Snapshot all environments(endpoints)
       tags:
       - endpoints
   /fdo:
@@ -11219,8 +11008,6 @@ paths:
           description: Success
         "400":
           description: Invalid request
-        "403":
-          description: Permission denied
         "404":
           description: Environment(Endpoint) not found
         "500":
@@ -11251,7 +11038,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.K8sNodesLimits'
+            $ref: '#/definitions/portainer.K8sNodesLimits'
         "400":
           description: Invalid request
         "401":
@@ -11930,7 +11717,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.Registry'
+              $ref: '#/definitions/portainer.Registry'
             type: array
         "500":
           description: Server error
@@ -11960,7 +11747,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Registry'
+            $ref: '#/definitions/portainer.Registry'
         "400":
           description: Invalid request
         "500":
@@ -12015,7 +11802,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Registry'
+            $ref: '#/definitions/portainer.Registry'
         "400":
           description: Invalid request
         "403":
@@ -12055,7 +11842,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Registry'
+            $ref: '#/definitions/portainer.Registry'
         "400":
           description: Invalid request
         "404":
@@ -12199,7 +11986,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.ResourceControl'
+            $ref: '#/definitions/portainer.ResourceControl'
         "400":
           description: Invalid request
         "409":
@@ -12264,7 +12051,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.ResourceControl'
+            $ref: '#/definitions/portainer.ResourceControl'
         "400":
           description: Invalid request
         "403":
@@ -12317,7 +12104,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.Role'
+              $ref: '#/definitions/portainer.Role'
             type: array
         "500":
           description: Server error
@@ -12339,7 +12126,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Settings'
+            $ref: '#/definitions/portainer.Settings'
         "500":
           description: Server error
       security:
@@ -12368,7 +12155,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Settings'
+            $ref: '#/definitions/portainer.Settings'
         "400":
           description: Invalid request
         "500":
@@ -12409,7 +12196,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.SSLSettings'
+            $ref: '#/definitions/portainer.SSLSettings'
         "400":
           description: Invalid request
         "403":
@@ -12474,7 +12261,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.Stack'
+              $ref: '#/definitions/portainer.Stack'
             type: array
         "204":
           description: Success
@@ -12584,7 +12371,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.CustomTemplate'
         "400":
           description: Invalid request
         "500":
@@ -12652,7 +12439,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.Stack'
         "400":
           description: Invalid request
         "403":
@@ -12698,7 +12485,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.Stack'
         "400":
           description: Invalid request
         "403":
@@ -12747,7 +12534,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.Stack'
         "400":
           description: Invalid request
         "403":
@@ -12827,7 +12614,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.Stack'
         "400":
           description: Invalid request
         "403":
@@ -12874,7 +12661,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.Stack'
         "400":
           description: Invalid request
         "403":
@@ -12919,7 +12706,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.Stack'
         "400":
           description: Invalid request
         "403":
@@ -12950,7 +12737,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.Stack'
         "400":
           description: Invalid request
         "403":
@@ -12981,7 +12768,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Stack'
+            $ref: '#/definitions/portainer.Stack'
         "400":
           description: Invalid request
         "403":
@@ -13032,7 +12819,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.status'
+            $ref: '#/definitions/system.status'
       summary: Check Portainer status
       tags:
       - status
@@ -13049,7 +12836,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse'
+            $ref: '#/definitions/system.nodesCountResponse'
         "500":
           description: Server error
       security:
@@ -13072,7 +12859,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.versionResponse'
+            $ref: '#/definitions/system.versionResponse'
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -13108,7 +12895,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse'
+            $ref: '#/definitions/system.nodesCountResponse'
         "500":
           description: Server error
       security:
@@ -13129,7 +12916,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.status'
+            $ref: '#/definitions/system.status'
       summary: Check Portainer status
       tags:
       - system
@@ -13145,7 +12932,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer_api_http_handler_system.status'
+            $ref: '#/definitions/system.status'
       summary: Upgrade Portainer to BE
       tags:
       - system
@@ -13161,7 +12948,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_system.versionResponse'
+            $ref: '#/definitions/system.versionResponse'
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -13181,7 +12968,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.Tag'
+              $ref: '#/definitions/portainer.Tag'
             type: array
         "500":
           description: Server error
@@ -13211,7 +12998,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Tag'
+            $ref: '#/definitions/portainer.Tag'
         "409":
           description: Tag name exists
         "500":
@@ -13341,7 +13128,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.TeamMembership'
+              $ref: '#/definitions/portainer.TeamMembership'
             type: array
         "400":
           description: Invalid request
@@ -13375,7 +13162,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.TeamMembership'
+            $ref: '#/definitions/portainer.TeamMembership'
         "204":
           description: Success
         "400":
@@ -13446,7 +13233,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.TeamMembership'
+            $ref: '#/definitions/portainer.TeamMembership'
         "400":
           description: Invalid request
         "403":
@@ -13485,7 +13272,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.Team'
+              $ref: '#/definitions/portainer.Team'
             type: array
         "500":
           description: Server error
@@ -13493,39 +13280,6 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: List teams
-      tags:
-      - teams
-    post:
-      consumes:
-      - application/json
-      description: |-
-        Create a new team.
-        **Access policy**: administrator
-      operationId: TeamCreate
-      parameters:
-      - description: details
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/teams.teamCreatePayload'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: '#/definitions/portaineree.Team'
-        "400":
-          description: Invalid request
-        "409":
-          description: Team already exists
-        "500":
-          description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Create a new team
       tags:
       - teams
   /teams/{id}:
@@ -13560,7 +13314,7 @@ paths:
     get:
       description: |-
         Retrieve details about a team. Access is only available for administrator and leaders of that team.
-        **Access policy**: administrator or team leader
+        **Access policy**: administrator
       operationId: TeamInspect
       parameters:
       - description: Team identifier
@@ -13574,7 +13328,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.Team'
+            $ref: '#/definitions/portainer.Team'
         "204":
           description: Success
         "400":
@@ -13589,48 +13343,6 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: Inspect a team
-      tags:
-      - teams
-    put:
-      consumes:
-      - application/json
-      description: |-
-        Update a team.
-        **Access policy**: administrator
-      operationId: TeamUpdate
-      parameters:
-      - description: Team identifier
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Team details
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/teams.teamUpdatePayload'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: '#/definitions/portaineree.Team'
-        "204":
-          description: Success
-        "400":
-          description: Invalid request
-        "403":
-          description: Permission denied
-        "404":
-          description: Team not found
-        "500":
-          description: Server error
-      security:
-      - ApiKeyAuth: []
-      - jwt: []
-      summary: Update a team
       tags:
       - teams
   /teams/{id}/memberships:
@@ -13652,7 +13364,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.TeamMembership'
+              $ref: '#/definitions/portainer.TeamMembership'
             type: array
         "400":
           description: Invalid request
@@ -14050,7 +13762,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.User'
+              $ref: '#/definitions/portainer.User'
             type: array
         "400":
           description: Invalid request
@@ -14083,7 +13795,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.User'
+            $ref: '#/definitions/portainer.User'
         "400":
           description: Invalid request
         "403":
@@ -14147,7 +13859,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.User'
+            $ref: '#/definitions/portainer.User'
         "400":
           description: Invalid request
         "403":
@@ -14187,7 +13899,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.User'
+            $ref: '#/definitions/portainer.User'
         "400":
           description: Invalid request
         "403":
@@ -14405,7 +14117,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.TeamMembership'
+            $ref: '#/definitions/portainer.TeamMembership'
         "400":
           description: Invalid request
         "403":
@@ -14510,7 +14222,7 @@ paths:
           description: Success
           schema:
             items:
-              $ref: '#/definitions/portaineree.APIKey'
+              $ref: '#/definitions/portainer.APIKey'
             type: array
         "400":
           description: Invalid request
@@ -14638,7 +14350,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/portaineree.User'
+            $ref: '#/definitions/portainer.User'
         "400":
           description: Invalid request
         "409":
@@ -14667,12 +14379,12 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/portaineree.Webhook'
+              $ref: '#/definitions/portainer.Webhook'
             type: array
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -14696,13 +14408,13 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.Webhook'
+            $ref: '#/definitions/portainer.Webhook'
         "400":
-          description: Bad Request
+          description: ""
         "409":
-          description: Conflict
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -14722,9 +14434,9 @@ paths:
         "202":
           description: Webhook deleted
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -14748,13 +14460,13 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/portaineree.Webhook'
+            $ref: '#/definitions/portainer.Webhook'
         "400":
-          description: Bad Request
+          description: ""
         "409":
-          description: Conflict
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -14809,9 +14521,9 @@ paths:
         "202":
           description: Webhook executed
         "400":
-          description: Bad Request
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       summary: Execute a webhook
       tags:
       - webhooks
@@ -14844,15 +14556,15 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: ""
         "400":
-          description: Bad Request
+          description: ""
         "403":
-          description: Forbidden
+          description: ""
         "404":
-          description: Not Found
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -14887,13 +14599,13 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: ""
         "400":
-          description: Bad Request
+          description: ""
         "409":
-          description: Conflict
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -14979,15 +14691,15 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: ""
         "400":
-          description: Bad Request
+          description: ""
         "403":
-          description: Forbidden
+          description: ""
         "404":
-          description: Not Found
+          description: ""
         "500":
-          description: Internal Server Error
+          description: ""
       security:
       - ApiKeyAuth: []
       - jwt: []
@@ -15012,8 +14724,6 @@ tags:
   name: auth
 - description: Manage Custom Templates
   name: custom_templates
-- description: Manage how Portainer connects to the DockerHub
-  name: dockerhub
 - description: Manage Edge Groups
   name: edge_groups
 - description: Manage Edge Jobs
@@ -15028,8 +14738,6 @@ tags:
   name: endpoints
 - description: Manage environment(endpoint) groups
   name: endpoint_groups
-- description: Operate git repository
-  name: gitops
 - description: Manage Kubernetes cluster
   name: kubernetes
 - description: Fetch the message of the day
@@ -15054,6 +14762,8 @@ tags:
   name: templates
 - description: Manage stacks
   name: stacks
+- description: Manage ssl settings
+  name: ssl
 - description: Upload files
   name: upload
 - description: Manage webhooks

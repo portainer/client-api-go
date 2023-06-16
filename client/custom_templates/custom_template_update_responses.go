@@ -69,7 +69,7 @@ CustomTemplateUpdateOK describes a response with status code 200, with default h
 Success
 */
 type CustomTemplateUpdateOK struct {
-	Payload *models.PortainereeCustomTemplate
+	Payload *models.PortainerCustomTemplate
 }
 
 // IsSuccess returns true when this custom template update o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *CustomTemplateUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *CustomTemplateUpdateOK) GetPayload() *models.PortainereeCustomTemplate {
+func (o *CustomTemplateUpdateOK) GetPayload() *models.PortainerCustomTemplate {
 	return o.Payload
 }
 
 func (o *CustomTemplateUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeCustomTemplate)
+	o.Payload = new(models.PortainerCustomTemplate)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

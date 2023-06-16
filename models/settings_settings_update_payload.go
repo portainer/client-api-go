@@ -31,14 +31,7 @@ type SettingsSettingsUpdatePayload struct {
 	AuthenticationMethod int64 `json:"authenticationMethod,omitempty"`
 
 	// A list of label name & value that will be used to hide containers when querying containers
-	BlackListedLabels []*PortainereePair `json:"blackListedLabels"`
-
-	// The content in plaintext used to display in the login page. Will hide when value is empty string
-	// Example: notice or agreement
-	CustomLoginBanner string `json:"customLoginBanner,omitempty"`
-
-	// edge
-	Edge *SettingsSettingsUpdatePayloadEdge `json:"edge,omitempty"`
+	BlackListedLabels []*PortainerPair `json:"blackListedLabels"`
 
 	// The default check in interval for edge agent (in seconds)
 	// Example: 5
@@ -56,33 +49,30 @@ type SettingsSettingsUpdatePayload struct {
 	// Example: false
 	EnforceEdgeID *bool `json:"enforceEdgeID,omitempty"`
 
-	// Deployment options for encouraging deployment as code
-	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"globalDeploymentOptions,omitempty"`
-
 	// Helm repository URL
 	// Example: https://charts.bitnami.com/bitnami
 	HelmRepositoryURL string `json:"helmRepositoryURL,omitempty"`
 
 	// internal auth settings
-	InternalAuthSettings *PortainereeInternalAuthSettings `json:"internalAuthSettings,omitempty"`
+	InternalAuthSettings *PortainerInternalAuthSettings `json:"internalAuthSettings,omitempty"`
 
 	// The expiry of a Kubeconfig
 	// Example: 24h
 	KubeconfigExpiry *string `json:"kubeconfigExpiry,omitempty"`
 
-	// Kubec	tl Shell Image Name/Tag
+	// Kubectl Shell Image
 	// Example: portainer/kubectl-shell:latest
 	KubectlShellImage string `json:"kubectlShellImage,omitempty"`
 
 	// ldapsettings
-	Ldapsettings *PortainereeLDAPSettings `json:"ldapsettings,omitempty"`
+	Ldapsettings *PortainerLDAPSettings `json:"ldapsettings,omitempty"`
 
 	// URL to a logo that will be displayed on the login page as well as on top of the sidebar. Will use default Portainer logo when value is empty string
 	// Example: https://mycompany.mydomain.tld/logo.png
 	LogoURL string `json:"logoURL,omitempty"`
 
 	// oauth settings
-	OauthSettings *PortainereeOAuthSettings `json:"oauthSettings,omitempty"`
+	OauthSettings *PortainerOAuthSettings `json:"oauthSettings,omitempty"`
 
 	// The interval in which environment(endpoint) snapshots are created
 	// Example: 5m
@@ -106,14 +96,6 @@ func (m *SettingsSettingsUpdatePayload) Validate(formats strfmt.Registry) error 
 	var res []error
 
 	if err := m.validateBlackListedLabels(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEdge(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateGlobalDeploymentOptions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -156,44 +138,6 @@ func (m *SettingsSettingsUpdatePayload) validateBlackListedLabels(formats strfmt
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *SettingsSettingsUpdatePayload) validateEdge(formats strfmt.Registry) error {
-	if swag.IsZero(m.Edge) { // not required
-		return nil
-	}
-
-	if m.Edge != nil {
-		if err := m.Edge.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("edge")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("edge")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *SettingsSettingsUpdatePayload) validateGlobalDeploymentOptions(formats strfmt.Registry) error {
-	if swag.IsZero(m.GlobalDeploymentOptions) { // not required
-		return nil
-	}
-
-	if m.GlobalDeploymentOptions != nil {
-		if err := m.GlobalDeploymentOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("globalDeploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("globalDeploymentOptions")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -264,14 +208,6 @@ func (m *SettingsSettingsUpdatePayload) ContextValidate(ctx context.Context, for
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateEdge(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateGlobalDeploymentOptions(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateInternalAuthSettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -305,38 +241,6 @@ func (m *SettingsSettingsUpdatePayload) contextValidateBlackListedLabels(ctx con
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *SettingsSettingsUpdatePayload) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Edge != nil {
-		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("edge")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("edge")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *SettingsSettingsUpdatePayload) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.GlobalDeploymentOptions != nil {
-		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("globalDeploymentOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("globalDeploymentOptions")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -401,58 +305,6 @@ func (m *SettingsSettingsUpdatePayload) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *SettingsSettingsUpdatePayload) UnmarshalBinary(b []byte) error {
 	var res SettingsSettingsUpdatePayload
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// SettingsSettingsUpdatePayloadEdge settings settings update payload edge
-//
-// swagger:model SettingsSettingsUpdatePayloadEdge
-type SettingsSettingsUpdatePayloadEdge struct {
-
-	// The command list interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	CommandInterval int64 `json:"CommandInterval,omitempty"`
-
-	// The ping interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	PingInterval int64 `json:"PingInterval,omitempty"`
-
-	// The snapshot interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
-
-	// AsyncMode enables edge agent to run in async mode by default
-	AsyncMode *bool `json:"asyncMode,omitempty"`
-
-	// The address where the tunneling server can be reached by Edge agents
-	TunnelServerAddress string `json:"tunnelServerAddress,omitempty"`
-}
-
-// Validate validates this settings settings update payload edge
-func (m *SettingsSettingsUpdatePayloadEdge) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this settings settings update payload edge based on context it is used
-func (m *SettingsSettingsUpdatePayloadEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *SettingsSettingsUpdatePayloadEdge) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *SettingsSettingsUpdatePayloadEdge) UnmarshalBinary(b []byte) error {
-	var res SettingsSettingsUpdatePayloadEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

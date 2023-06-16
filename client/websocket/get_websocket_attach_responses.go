@@ -63,7 +63,7 @@ func NewGetWebsocketAttachOK() *GetWebsocketAttachOK {
 /*
 GetWebsocketAttachOK describes a response with status code 200, with default header values.
 
-OK
+GetWebsocketAttachOK get websocket attach o k
 */
 type GetWebsocketAttachOK struct {
 }
@@ -114,7 +114,7 @@ func NewGetWebsocketAttachBadRequest() *GetWebsocketAttachBadRequest {
 /*
 GetWebsocketAttachBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+GetWebsocketAttachBadRequest get websocket attach bad request
 */
 type GetWebsocketAttachBadRequest struct {
 }
@@ -165,7 +165,7 @@ func NewGetWebsocketAttachForbidden() *GetWebsocketAttachForbidden {
 /*
 GetWebsocketAttachForbidden describes a response with status code 403, with default header values.
 
-Forbidden
+GetWebsocketAttachForbidden get websocket attach forbidden
 */
 type GetWebsocketAttachForbidden struct {
 }
@@ -216,7 +216,7 @@ func NewGetWebsocketAttachNotFound() *GetWebsocketAttachNotFound {
 /*
 GetWebsocketAttachNotFound describes a response with status code 404, with default header values.
 
-Not Found
+GetWebsocketAttachNotFound get websocket attach not found
 */
 type GetWebsocketAttachNotFound struct {
 }
@@ -267,7 +267,7 @@ func NewGetWebsocketAttachInternalServerError() *GetWebsocketAttachInternalServe
 /*
 GetWebsocketAttachInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+GetWebsocketAttachInternalServerError get websocket attach internal server error
 */
 type GetWebsocketAttachInternalServerError struct {
 }

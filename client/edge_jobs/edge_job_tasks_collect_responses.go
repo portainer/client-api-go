@@ -57,7 +57,7 @@ func NewEdgeJobTasksCollectNoContent() *EdgeJobTasksCollectNoContent {
 /*
 EdgeJobTasksCollectNoContent describes a response with status code 204, with default header values.
 
-No Content
+EdgeJobTasksCollectNoContent edge job tasks collect no content
 */
 type EdgeJobTasksCollectNoContent struct {
 }
@@ -108,7 +108,7 @@ func NewEdgeJobTasksCollectBadRequest() *EdgeJobTasksCollectBadRequest {
 /*
 EdgeJobTasksCollectBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeJobTasksCollectBadRequest edge job tasks collect bad request
 */
 type EdgeJobTasksCollectBadRequest struct {
 }
@@ -159,7 +159,7 @@ func NewEdgeJobTasksCollectInternalServerError() *EdgeJobTasksCollectInternalSer
 /*
 EdgeJobTasksCollectInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobTasksCollectInternalServerError edge job tasks collect internal server error
 */
 type EdgeJobTasksCollectInternalServerError struct {
 }

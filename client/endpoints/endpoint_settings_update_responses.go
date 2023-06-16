@@ -63,7 +63,7 @@ EndpointSettingsUpdateOK describes a response with status code 200, with default
 Success
 */
 type EndpointSettingsUpdateOK struct {
-	Payload *models.PortainereeEndpoint
+	Payload *models.PortainerEndpoint
 }
 
 // IsSuccess returns true when this endpoint settings update o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *EndpointSettingsUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *EndpointSettingsUpdateOK) GetPayload() *models.PortainereeEndpoint {
+func (o *EndpointSettingsUpdateOK) GetPayload() *models.PortainerEndpoint {
 	return o.Payload
 }
 
 func (o *EndpointSettingsUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEndpoint)
+	o.Payload = new(models.PortainerEndpoint)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

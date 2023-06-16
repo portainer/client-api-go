@@ -63,7 +63,7 @@ type GetEndpointsIDEdgeStacksStackIDParams struct {
 
 	/* ID.
 
-	   Environment(Endpoint) Id
+	   environment(endpoint) Id
 	*/
 	ID string
 

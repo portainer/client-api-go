@@ -63,7 +63,7 @@ HelmUserRepositoryCreateOK describes a response with status code 200, with defau
 Success
 */
 type HelmUserRepositoryCreateOK struct {
-	Payload *models.PortainereeHelmUserRepository
+	Payload *models.PortainerHelmUserRepository
 }
 
 // IsSuccess returns true when this helm user repository create o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *HelmUserRepositoryCreateOK) String() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateOK  %+v", 200, o.Payload)
 }
 
-func (o *HelmUserRepositoryCreateOK) GetPayload() *models.PortainereeHelmUserRepository {
+func (o *HelmUserRepositoryCreateOK) GetPayload() *models.PortainerHelmUserRepository {
 	return o.Payload
 }
 
 func (o *HelmUserRepositoryCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeHelmUserRepository)
+	o.Payload = new(models.PortainerHelmUserRepository)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -69,7 +69,7 @@ StackInspectOK describes a response with status code 200, with default header va
 Success
 */
 type StackInspectOK struct {
-	Payload *models.PortainereeStack
+	Payload *models.PortainerStack
 }
 
 // IsSuccess returns true when this stack inspect o k response has a 2xx status code
@@ -105,13 +105,13 @@ func (o *StackInspectOK) String() string {
 	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *StackInspectOK) GetPayload() *models.PortainereeStack {
+func (o *StackInspectOK) GetPayload() *models.PortainerStack {
 	return o.Payload
 }
 
 func (o *StackInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeStack)
+	o.Payload = new(models.PortainerStack)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

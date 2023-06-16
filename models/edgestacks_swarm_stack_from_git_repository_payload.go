@@ -42,20 +42,12 @@ type EdgestacksSwarmStackFromGitRepositoryPayload struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// Pre Pull image
-	// Example: false
-	PrePullImage *bool `json:"prePullImage,omitempty"`
-
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
 
 	// Use basic authentication to clone the Git repository
 	// Example: true
 	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
-
-	// GitCredentialID used to identify the binded git credential
-	// Example: 0
-	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
 
 	// Password used in basic authentication. Required when RepositoryAuthentication is true.
 	// Example: myGitPassword

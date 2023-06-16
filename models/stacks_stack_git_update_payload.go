@@ -20,19 +20,16 @@ import (
 type StacksStackGitUpdatePayload struct {
 
 	// auto update
-	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainerStackAutoUpdate `json:"autoUpdate,omitempty"`
 
 	// env
-	Env []*PortainereePair `json:"env"`
+	Env []*PortainerPair `json:"env"`
 
 	// prune
 	Prune *bool `json:"prune,omitempty"`
 
 	// repository authentication
 	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
-
-	// repository git credential ID
-	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
 
 	// repository password
 	RepositoryPassword string `json:"repositoryPassword,omitempty"`

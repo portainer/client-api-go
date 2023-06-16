@@ -115,7 +115,7 @@ func NewEdgeGroupListInternalServerError() *EdgeGroupListInternalServerError {
 /*
 EdgeGroupListInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeGroupListInternalServerError edge group list internal server error
 */
 type EdgeGroupListInternalServerError struct {
 }

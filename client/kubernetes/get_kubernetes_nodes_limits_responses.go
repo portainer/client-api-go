@@ -75,7 +75,7 @@ GetKubernetesNodesLimitsOK describes a response with status code 200, with defau
 Success
 */
 type GetKubernetesNodesLimitsOK struct {
-	Payload models.PortainereeK8sNodesLimits
+	Payload models.PortainerK8sNodesLimits
 }
 
 // IsSuccess returns true when this get kubernetes nodes limits o k response has a 2xx status code
@@ -111,7 +111,7 @@ func (o *GetKubernetesNodesLimitsOK) String() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetKubernetesNodesLimitsOK) GetPayload() models.PortainereeK8sNodesLimits {
+func (o *GetKubernetesNodesLimitsOK) GetPayload() models.PortainerK8sNodesLimits {
 	return o.Payload
 }
 

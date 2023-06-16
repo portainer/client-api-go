@@ -75,7 +75,7 @@ UserUpdateOK describes a response with status code 200, with default header valu
 Success
 */
 type UserUpdateOK struct {
-	Payload *models.PortainereeUser
+	Payload *models.PortainerUser
 }
 
 // IsSuccess returns true when this user update o k response has a 2xx status code
@@ -111,13 +111,13 @@ func (o *UserUpdateOK) String() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateOK  %+v", 200, o.Payload)
 }
 
-func (o *UserUpdateOK) GetPayload() *models.PortainereeUser {
+func (o *UserUpdateOK) GetPayload() *models.PortainerUser {
 	return o.Payload
 }
 
 func (o *UserUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeUser)
+	o.Payload = new(models.PortainerUser)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

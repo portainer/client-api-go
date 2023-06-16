@@ -123,7 +123,7 @@ func NewEdgeJobTaskLogsInspectBadRequest() *EdgeJobTaskLogsInspectBadRequest {
 /*
 EdgeJobTaskLogsInspectBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeJobTaskLogsInspectBadRequest edge job task logs inspect bad request
 */
 type EdgeJobTaskLogsInspectBadRequest struct {
 }
@@ -174,7 +174,7 @@ func NewEdgeJobTaskLogsInspectInternalServerError() *EdgeJobTaskLogsInspectInter
 /*
 EdgeJobTaskLogsInspectInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobTaskLogsInspectInternalServerError edge job task logs inspect internal server error
 */
 type EdgeJobTaskLogsInspectInternalServerError struct {
 }

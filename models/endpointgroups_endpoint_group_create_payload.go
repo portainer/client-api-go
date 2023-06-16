@@ -28,7 +28,7 @@ type EndpointgroupsEndpointGroupCreatePayload struct {
 	Description string `json:"description,omitempty"`
 
 	// Environment(Endpoint) group name
-	// Example: my-Environment-group
+	// Example: my-environment-group
 	// Required: true
 	Name *string `json:"name"`
 

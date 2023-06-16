@@ -121,7 +121,7 @@ func NewEdgeJobTasksListBadRequest() *EdgeJobTasksListBadRequest {
 /*
 EdgeJobTasksListBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+EdgeJobTasksListBadRequest edge job tasks list bad request
 */
 type EdgeJobTasksListBadRequest struct {
 }
@@ -172,7 +172,7 @@ func NewEdgeJobTasksListInternalServerError() *EdgeJobTasksListInternalServerErr
 /*
 EdgeJobTasksListInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+EdgeJobTasksListInternalServerError edge job tasks list internal server error
 */
 type EdgeJobTasksListInternalServerError struct {
 }

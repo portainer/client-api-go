@@ -51,7 +51,7 @@ TeamListOK describes a response with status code 200, with default header values
 Success
 */
 type TeamListOK struct {
-	Payload []*models.PortainereeTeam
+	Payload []*models.PortainerTeam
 }
 
 // IsSuccess returns true when this team list o k response has a 2xx status code
@@ -87,7 +87,7 @@ func (o *TeamListOK) String() string {
 	return fmt.Sprintf("[GET /teams][%d] teamListOK  %+v", 200, o.Payload)
 }
 
-func (o *TeamListOK) GetPayload() []*models.PortainereeTeam {
+func (o *TeamListOK) GetPayload() []*models.PortainerTeam {
 	return o.Payload
 }
 

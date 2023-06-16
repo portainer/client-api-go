@@ -63,7 +63,7 @@ StackListOK describes a response with status code 200, with default header value
 Success
 */
 type StackListOK struct {
-	Payload []*models.PortainereeStack
+	Payload []*models.PortainerStack
 }
 
 // IsSuccess returns true when this stack list o k response has a 2xx status code
@@ -99,7 +99,7 @@ func (o *StackListOK) String() string {
 	return fmt.Sprintf("[GET /stacks][%d] stackListOK  %+v", 200, o.Payload)
 }
 
-func (o *StackListOK) GetPayload() []*models.PortainereeStack {
+func (o *StackListOK) GetPayload() []*models.PortainerStack {
 	return o.Payload
 }
 
