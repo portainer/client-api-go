@@ -1,6 +1,6 @@
 module github.com/portainer/client-api-go/v2
 
-go 1.18
+go 1.20
 
 require (
 	github.com/go-openapi/errors v0.20.4
