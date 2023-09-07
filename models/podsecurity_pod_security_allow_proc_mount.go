@@ -18,7 +18,7 @@ import (
 type PodsecurityPodSecurityAllowProcMount struct {
 
 	// enabled
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
 
 	// proc mount type
 	ProcMountType string `json:"procMountType,omitempty"`

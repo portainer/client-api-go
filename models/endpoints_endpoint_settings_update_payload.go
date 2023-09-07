@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -18,15 +19,22 @@ import (
 // swagger:model endpoints.endpointSettingsUpdatePayload
 type EndpointsEndpointSettingsUpdatePayload struct {
 
-	// Whether automatic update time restrictions are enabled
+	// Whether GitOps update time restrictions are enabled
 	ChangeWindow *PortainereeEndpointChangeWindow `json:"changeWindow,omitempty"`
 
 	// Hide manual deployment forms for an environment
 	DeploymentOptions *PortainereeDeploymentOptions `json:"deploymentOptions,omitempty"`
 
-	// enable image notification
+	// enable g p u management
 	// Example: false
-	EnableImageNotification *bool `json:"enableImageNotification,omitempty"`
+	EnableGPUManagement bool `json:"enableGPUManagement,omitempty"`
+
+	// enable image notification
+	// Example: true
+	EnableImageNotification bool `json:"enableImageNotification,omitempty"`
+
+	// gpus
+	Gpus []*PortainereePair `json:"gpus"`
 
 	// security settings
 	SecuritySettings *EndpointsEndpointSettingsUpdatePayloadSecuritySettings `json:"securitySettings,omitempty"`
@@ -41,6 +49,10 @@ func (m *EndpointsEndpointSettingsUpdatePayload) Validate(formats strfmt.Registr
 	}
 
 	if err := m.validateDeploymentOptions(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGpus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -92,6 +104,32 @@ func (m *EndpointsEndpointSettingsUpdatePayload) validateDeploymentOptions(forma
 	return nil
 }
 
+func (m *EndpointsEndpointSettingsUpdatePayload) validateGpus(formats strfmt.Registry) error {
+	if swag.IsZero(m.Gpus) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Gpus); i++ {
+		if swag.IsZero(m.Gpus[i]) { // not required
+			continue
+		}
+
+		if m.Gpus[i] != nil {
+			if err := m.Gpus[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("gpus" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *EndpointsEndpointSettingsUpdatePayload) validateSecuritySettings(formats strfmt.Registry) error {
 	if swag.IsZero(m.SecuritySettings) { // not required
 		return nil
@@ -120,6 +158,10 @@ func (m *EndpointsEndpointSettingsUpdatePayload) ContextValidate(ctx context.Con
 	}
 
 	if err := m.contextValidateDeploymentOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGpus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -160,6 +202,26 @@ func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateDeploymentOption
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateGpus(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Gpus); i++ {
+
+		if m.Gpus[i] != nil {
+			if err := m.Gpus[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("gpus" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -206,39 +268,39 @@ type EndpointsEndpointSettingsUpdatePayloadSecuritySettings struct {
 
 	// Whether non-administrator should be able to use bind mounts when creating containers
 	// Example: false
-	AllowBindMountsForRegularUsers *bool `json:"allowBindMountsForRegularUsers,omitempty"`
+	AllowBindMountsForRegularUsers bool `json:"allowBindMountsForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use container capabilities
 	// Example: true
-	AllowContainerCapabilitiesForRegularUsers *bool `json:"allowContainerCapabilitiesForRegularUsers,omitempty"`
+	AllowContainerCapabilitiesForRegularUsers bool `json:"allowContainerCapabilitiesForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use device mapping
 	// Example: true
-	AllowDeviceMappingForRegularUsers *bool `json:"allowDeviceMappingForRegularUsers,omitempty"`
+	AllowDeviceMappingForRegularUsers bool `json:"allowDeviceMappingForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use the host pid
 	// Example: true
-	AllowHostNamespaceForRegularUsers *bool `json:"allowHostNamespaceForRegularUsers,omitempty"`
+	AllowHostNamespaceForRegularUsers bool `json:"allowHostNamespaceForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use privileged mode when creating containers
 	// Example: false
-	AllowPrivilegedModeForRegularUsers *bool `json:"allowPrivilegedModeForRegularUsers,omitempty"`
+	AllowPrivilegedModeForRegularUsers bool `json:"allowPrivilegedModeForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to manage stacks
 	// Example: true
-	AllowStackManagementForRegularUsers *bool `json:"allowStackManagementForRegularUsers,omitempty"`
+	AllowStackManagementForRegularUsers bool `json:"allowStackManagementForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to use sysctl settings
 	// Example: true
-	AllowSysctlSettingForRegularUsers *bool `json:"allowSysctlSettingForRegularUsers,omitempty"`
+	AllowSysctlSettingForRegularUsers bool `json:"allowSysctlSettingForRegularUsers,omitempty"`
 
 	// Whether non-administrator should be able to browse volumes
 	// Example: true
-	AllowVolumeBrowserForRegularUsers *bool `json:"allowVolumeBrowserForRegularUsers,omitempty"`
+	AllowVolumeBrowserForRegularUsers bool `json:"allowVolumeBrowserForRegularUsers,omitempty"`
 
 	// Whether host management features are enabled
 	// Example: true
-	EnableHostManagementFeatures *bool `json:"enableHostManagementFeatures,omitempty"`
+	EnableHostManagementFeatures bool `json:"enableHostManagementFeatures,omitempty"`
 }
 
 // Validate validates this endpoints endpoint settings update payload security settings

@@ -82,11 +82,11 @@ func (o *ContainerImageStatusOK) IsCode(code int) bool {
 }
 
 func (o *ContainerImageStatusOK) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerID}/image_status][%d] containerImageStatusOK ", 200)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusOK ", 200)
 }
 
 func (o *ContainerImageStatusOK) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerID}/image_status][%d] containerImageStatusOK ", 200)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusOK ", 200)
 }
 
 func (o *ContainerImageStatusOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,11 +133,11 @@ func (o *ContainerImageStatusBadRequest) IsCode(code int) bool {
 }
 
 func (o *ContainerImageStatusBadRequest) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerID}/image_status][%d] containerImageStatusBadRequest ", 400)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusBadRequest ", 400)
 }
 
 func (o *ContainerImageStatusBadRequest) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerID}/image_status][%d] containerImageStatusBadRequest ", 400)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusBadRequest ", 400)
 }
 
 func (o *ContainerImageStatusBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -184,11 +184,11 @@ func (o *ContainerImageStatusInternalServerError) IsCode(code int) bool {
 }
 
 func (o *ContainerImageStatusInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerID}/image_status][%d] containerImageStatusInternalServerError ", 500)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusInternalServerError ", 500)
 }
 
 func (o *ContainerImageStatusInternalServerError) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerID}/image_status][%d] containerImageStatusInternalServerError ", 500)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusInternalServerError ", 500)
 }
 
 func (o *ContainerImageStatusInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

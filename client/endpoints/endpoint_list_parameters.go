@@ -68,23 +68,41 @@ type EndpointListParams struct {
 	*/
 	AgentVersions []string
 
-	/* EdgeDevice.
+	/* EdgeAsync.
 
-	   if exists true show only edge devices, false show only regular edge endpoints. if missing, will show both types (relevant only for edge endpoints)
+	   if exists true show only edge async agents, false show only standard edge agents. if missing, will show both types (relevant only for edge agents)
 	*/
-	EdgeDevice *bool
+	EdgeAsync *bool
+
+	/* EdgeCheckInPassedSeconds.
+
+	   if bigger then zero, show only edge agents that checked-in in the last provided seconds (relevant only for edge agents)
+	*/
+	EdgeCheckInPassedSeconds *float64
 
 	/* EdgeDeviceUntrusted.
 
-	   if true, show only untrusted endpoints, if false show only trusted (relevant only for edge devices, and if edgeDevice is true)
+	   if true, show only untrusted edge agents, if false show only trusted edge agents (relevant only for edge agents)
 	*/
 	EdgeDeviceUntrusted *bool
+
+	/* EdgeStackStatus.
+
+	   only applied when edgeStackId exists. Filter the returned environments based on their deployment status in the stack (not the environment status!)
+	*/
+	EdgeStackStatus *string
 
 	/* EndpointIds.
 
 	   will return only these environments(endpoints)
 	*/
 	EndpointIds []int64
+
+	/* ExcludeSnapshots.
+
+	   if true, the snapshot data won't be retrieved
+	*/
+	ExcludeSnapshots *bool
 
 	/* GroupIds.
 
@@ -222,15 +240,26 @@ func (o *EndpointListParams) SetAgentVersions(agentVersions []string) {
 	o.AgentVersions = agentVersions
 }
 
-// WithEdgeDevice adds the edgeDevice to the endpoint list params
-func (o *EndpointListParams) WithEdgeDevice(edgeDevice *bool) *EndpointListParams {
-	o.SetEdgeDevice(edgeDevice)
+// WithEdgeAsync adds the edgeAsync to the endpoint list params
+func (o *EndpointListParams) WithEdgeAsync(edgeAsync *bool) *EndpointListParams {
+	o.SetEdgeAsync(edgeAsync)
 	return o
 }
 
-// SetEdgeDevice adds the edgeDevice to the endpoint list params
-func (o *EndpointListParams) SetEdgeDevice(edgeDevice *bool) {
-	o.EdgeDevice = edgeDevice
+// SetEdgeAsync adds the edgeAsync to the endpoint list params
+func (o *EndpointListParams) SetEdgeAsync(edgeAsync *bool) {
+	o.EdgeAsync = edgeAsync
+}
+
+// WithEdgeCheckInPassedSeconds adds the edgeCheckInPassedSeconds to the endpoint list params
+func (o *EndpointListParams) WithEdgeCheckInPassedSeconds(edgeCheckInPassedSeconds *float64) *EndpointListParams {
+	o.SetEdgeCheckInPassedSeconds(edgeCheckInPassedSeconds)
+	return o
+}
+
+// SetEdgeCheckInPassedSeconds adds the edgeCheckInPassedSeconds to the endpoint list params
+func (o *EndpointListParams) SetEdgeCheckInPassedSeconds(edgeCheckInPassedSeconds *float64) {
+	o.EdgeCheckInPassedSeconds = edgeCheckInPassedSeconds
 }
 
 // WithEdgeDeviceUntrusted adds the edgeDeviceUntrusted to the endpoint list params
@@ -244,6 +273,17 @@ func (o *EndpointListParams) SetEdgeDeviceUntrusted(edgeDeviceUntrusted *bool) {
 	o.EdgeDeviceUntrusted = edgeDeviceUntrusted
 }
 
+// WithEdgeStackStatus adds the edgeStackStatus to the endpoint list params
+func (o *EndpointListParams) WithEdgeStackStatus(edgeStackStatus *string) *EndpointListParams {
+	o.SetEdgeStackStatus(edgeStackStatus)
+	return o
+}
+
+// SetEdgeStackStatus adds the edgeStackStatus to the endpoint list params
+func (o *EndpointListParams) SetEdgeStackStatus(edgeStackStatus *string) {
+	o.EdgeStackStatus = edgeStackStatus
+}
+
 // WithEndpointIds adds the endpointIds to the endpoint list params
 func (o *EndpointListParams) WithEndpointIds(endpointIds []int64) *EndpointListParams {
 	o.SetEndpointIds(endpointIds)
@@ -253,6 +293,17 @@ func (o *EndpointListParams) WithEndpointIds(endpointIds []int64) *EndpointListP
 // SetEndpointIds adds the endpointIds to the endpoint list params
 func (o *EndpointListParams) SetEndpointIds(endpointIds []int64) {
 	o.EndpointIds = endpointIds
+}
+
+// WithExcludeSnapshots adds the excludeSnapshots to the endpoint list params
+func (o *EndpointListParams) WithExcludeSnapshots(excludeSnapshots *bool) *EndpointListParams {
+	o.SetExcludeSnapshots(excludeSnapshots)
+	return o
+}
+
+// SetExcludeSnapshots adds the excludeSnapshots to the endpoint list params
+func (o *EndpointListParams) SetExcludeSnapshots(excludeSnapshots *bool) {
+	o.ExcludeSnapshots = excludeSnapshots
 }
 
 // WithGroupIds adds the groupIds to the endpoint list params
@@ -406,18 +457,35 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.EdgeDevice != nil {
+	if o.EdgeAsync != nil {
 
-		// query param edgeDevice
-		var qrEdgeDevice bool
+		// query param edgeAsync
+		var qrEdgeAsync bool
 
-		if o.EdgeDevice != nil {
-			qrEdgeDevice = *o.EdgeDevice
+		if o.EdgeAsync != nil {
+			qrEdgeAsync = *o.EdgeAsync
 		}
-		qEdgeDevice := swag.FormatBool(qrEdgeDevice)
-		if qEdgeDevice != "" {
+		qEdgeAsync := swag.FormatBool(qrEdgeAsync)
+		if qEdgeAsync != "" {
 
-			if err := r.SetQueryParam("edgeDevice", qEdgeDevice); err != nil {
+			if err := r.SetQueryParam("edgeAsync", qEdgeAsync); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.EdgeCheckInPassedSeconds != nil {
+
+		// query param edgeCheckInPassedSeconds
+		var qrEdgeCheckInPassedSeconds float64
+
+		if o.EdgeCheckInPassedSeconds != nil {
+			qrEdgeCheckInPassedSeconds = *o.EdgeCheckInPassedSeconds
+		}
+		qEdgeCheckInPassedSeconds := swag.FormatFloat64(qrEdgeCheckInPassedSeconds)
+		if qEdgeCheckInPassedSeconds != "" {
+
+			if err := r.SetQueryParam("edgeCheckInPassedSeconds", qEdgeCheckInPassedSeconds); err != nil {
 				return err
 			}
 		}
@@ -440,6 +508,23 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
+	if o.EdgeStackStatus != nil {
+
+		// query param edgeStackStatus
+		var qrEdgeStackStatus string
+
+		if o.EdgeStackStatus != nil {
+			qrEdgeStackStatus = *o.EdgeStackStatus
+		}
+		qEdgeStackStatus := qrEdgeStackStatus
+		if qEdgeStackStatus != "" {
+
+			if err := r.SetQueryParam("edgeStackStatus", qEdgeStackStatus); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.EndpointIds != nil {
 
 		// binding items for endpointIds
@@ -448,6 +533,23 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		// query array param endpointIds
 		if err := r.SetQueryParam("endpointIds", joinedEndpointIds...); err != nil {
 			return err
+		}
+	}
+
+	if o.ExcludeSnapshots != nil {
+
+		// query param excludeSnapshots
+		var qrExcludeSnapshots bool
+
+		if o.ExcludeSnapshots != nil {
+			qrExcludeSnapshots = *o.ExcludeSnapshots
+		}
+		qExcludeSnapshots := swag.FormatBool(qrExcludeSnapshots)
+		if qExcludeSnapshots != "" {
+
+			if err := r.SetQueryParam("excludeSnapshots", qExcludeSnapshots); err != nil {
+				return err
+			}
 		}
 	}
 

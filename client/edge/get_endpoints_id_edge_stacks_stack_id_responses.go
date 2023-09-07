@@ -63,7 +63,7 @@ GetEndpointsIDEdgeStacksStackIDOK describes a response with status code 200, wit
 OK
 */
 type GetEndpointsIDEdgeStacksStackIDOK struct {
-	Payload *models.EndpointedgeConfigResponse
+	Payload *models.EdgeStackPayload
 }
 
 // IsSuccess returns true when this get endpoints Id edge stacks stack Id o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *GetEndpointsIDEdgeStacksStackIDOK) String() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdOK  %+v", 200, o.Payload)
 }
 
-func (o *GetEndpointsIDEdgeStacksStackIDOK) GetPayload() *models.EndpointedgeConfigResponse {
+func (o *GetEndpointsIDEdgeStacksStackIDOK) GetPayload() *models.EdgeStackPayload {
 	return o.Payload
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.EndpointedgeConfigResponse)
+	o.Payload = new(models.EdgeStackPayload)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

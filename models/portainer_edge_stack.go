@@ -19,7 +19,7 @@ import (
 // swagger:model portainer.EdgeStack
 type PortainerEdgeStack struct {
 
-	// creation date
+	// StatusArray    map[EndpointID][]EdgeStackStatus `json:"StatusArray"`
 	CreationDate int64 `json:"CreationDate,omitempty"`
 
 	// edge groups
@@ -42,7 +42,7 @@ type PortainerEdgeStack struct {
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
 	// Deprecated
-	Prune *bool `json:"Prune,omitempty"`
+	Prune bool `json:"Prune,omitempty"`
 
 	// status
 	Status map[string]PortainerEdgeStackStatus `json:"Status,omitempty"`
@@ -51,13 +51,13 @@ type PortainerEdgeStack struct {
 	Version int64 `json:"Version,omitempty"`
 
 	// deployment type
-	DeploymentType PortainerEdgeStackDeploymentType `json:"deploymentType,omitempty"`
+	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// manifest path
 	ManifestPath string `json:"manifestPath,omitempty"`
 
 	// Uses the manifest's namespaces instead of the default one
-	UseManifestNamespaces *bool `json:"useManifestNamespaces,omitempty"`
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
 }
 
 // Validate validates this portainer edge stack
@@ -65,10 +65,6 @@ func (m *PortainerEdgeStack) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateStatus(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateDeploymentType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -104,32 +100,11 @@ func (m *PortainerEdgeStack) validateStatus(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *PortainerEdgeStack) validateDeploymentType(formats strfmt.Registry) error {
-	if swag.IsZero(m.DeploymentType) { // not required
-		return nil
-	}
-
-	if err := m.DeploymentType.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("deploymentType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("deploymentType")
-		}
-		return err
-	}
-
-	return nil
-}
-
 // ContextValidate validate this portainer edge stack based on the context it is used
 func (m *PortainerEdgeStack) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateDeploymentType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -149,20 +124,6 @@ func (m *PortainerEdgeStack) contextValidateStatus(ctx context.Context, formats 
 			}
 		}
 
-	}
-
-	return nil
-}
-
-func (m *PortainerEdgeStack) contextValidateDeploymentType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := m.DeploymentType.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("deploymentType")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
-			return ce.ValidateName("deploymentType")
-		}
-		return err
 	}
 
 	return nil

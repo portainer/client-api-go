@@ -76,6 +76,12 @@ type EcrDeleteTagsParams struct {
 	*/
 	ID int64
 
+	/* RepositoryName.
+
+	   Repository name
+	*/
+	RepositoryName int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -151,6 +157,17 @@ func (o *EcrDeleteTagsParams) SetID(id int64) {
 	o.ID = id
 }
 
+// WithRepositoryName adds the repositoryName to the ecr delete tags params
+func (o *EcrDeleteTagsParams) WithRepositoryName(repositoryName int64) *EcrDeleteTagsParams {
+	o.SetRepositoryName(repositoryName)
+	return o
+}
+
+// SetRepositoryName adds the repositoryName to the ecr delete tags params
+func (o *EcrDeleteTagsParams) SetRepositoryName(repositoryName int64) {
+	o.RepositoryName = repositoryName
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *EcrDeleteTagsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -166,6 +183,11 @@ func (o *EcrDeleteTagsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
+	}
+
+	// path param repositoryName
+	if err := r.SetPathParam("repositoryName", swag.FormatInt64(o.RepositoryName)); err != nil {
 		return err
 	}
 

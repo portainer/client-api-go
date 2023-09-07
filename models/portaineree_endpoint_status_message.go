@@ -18,10 +18,18 @@ import (
 type PortainereeEndpointStatusMessage struct {
 
 	// detail
-	Detail string `json:"Detail,omitempty"`
+	Detail string `json:"detail,omitempty"`
+
+	// TODO: in future versions, we should think about removing these fields and
+	// create a separate bucket to store cluster operation messages instead or try to find a better way.
+	// Operation/OperationStatus blank means, nothing is happening
+	Operation string `json:"operation,omitempty"`
+
+	// ,processing,error
+	OperationStatus string `json:"operationStatus,omitempty"`
 
 	// summary
-	Summary string `json:"Summary,omitempty"`
+	Summary string `json:"summary,omitempty"`
 }
 
 // Validate validates this portaineree endpoint status message

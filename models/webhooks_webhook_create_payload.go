@@ -17,7 +17,8 @@ import (
 // swagger:model webhooks.webhookCreatePayload
 type WebhooksWebhookCreatePayload struct {
 
-	// endpoint ID
+	// Environment(Endpoint) identifier. Reference the environment(endpoint) that will be used for deployment
+	// Example: 1
 	EndpointID int64 `json:"endpointID,omitempty"`
 
 	// Registry Identifier
@@ -27,7 +28,7 @@ type WebhooksWebhookCreatePayload struct {
 	// resource ID
 	ResourceID string `json:"resourceID,omitempty"`
 
-	// webhook type
+	// Type of webhook (1 - service, 2 - container)
 	WebhookType int64 `json:"webhookType,omitempty"`
 }
 

@@ -30,9 +30,27 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	EdgeStackWebhookInvoke(params *EdgeStackWebhookInvokeParams, opts ...ClientOption) (*EdgeStackWebhookInvokeOK, error)
+
 	StackAssociate(params *StackAssociateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackAssociateOK, error)
 
-	StackCreate(params *StackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateOK, error)
+	StackCreateDockerStandaloneFile(params *StackCreateDockerStandaloneFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerStandaloneFileOK, error)
+
+	StackCreateDockerStandaloneRepository(params *StackCreateDockerStandaloneRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerStandaloneRepositoryOK, error)
+
+	StackCreateDockerStandaloneString(params *StackCreateDockerStandaloneStringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerStandaloneStringOK, error)
+
+	StackCreateDockerSwarmFile(params *StackCreateDockerSwarmFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerSwarmFileOK, error)
+
+	StackCreateDockerSwarmRepository(params *StackCreateDockerSwarmRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerSwarmRepositoryOK, error)
+
+	StackCreateDockerSwarmString(params *StackCreateDockerSwarmStringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerSwarmStringOK, error)
+
+	StackCreateKubernetesFile(params *StackCreateKubernetesFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateKubernetesFileOK, error)
+
+	StackCreateKubernetesGit(params *StackCreateKubernetesGitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateKubernetesGitOK, error)
+
+	StackCreateKubernetesURL(params *StackCreateKubernetesURLParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateKubernetesURLOK, error)
 
 	StackDelete(params *StackDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackDeleteNoContent, error)
 
@@ -54,9 +72,49 @@ type ClientService interface {
 
 	StackUpdateGit(params *StackUpdateGitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackUpdateGitOK, error)
 
-	WebhookInvoke(params *WebhookInvokeParams, opts ...ClientOption) (*WebhookInvokeOK, error)
+	StacksWebhookInvoke(params *StacksWebhookInvokeParams, opts ...ClientOption) (*StacksWebhookInvokeOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+EdgeStackWebhookInvoke webhooks for triggering edge stack updates from git
+
+**Access policy**: public
+*/
+func (a *Client) EdgeStackWebhookInvoke(params *EdgeStackWebhookInvokeParams, opts ...ClientOption) (*EdgeStackWebhookInvokeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEdgeStackWebhookInvokeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EdgeStackWebhookInvoke",
+		Method:             "POST",
+		PathPattern:        "/edge_stacks/webhooks/{webhookID}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EdgeStackWebhookInvokeReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EdgeStackWebhookInvokeOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EdgeStackWebhookInvoke: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -101,26 +159,26 @@ func (a *Client) StackAssociate(params *StackAssociateParams, authInfo runtime.C
 }
 
 /*
-	StackCreate deploys a new stack
+	StackCreateDockerStandaloneFile deploys a new compose stack from a file
 
-	Deploy a new stack into a Docker environment(endpoint) specified via the environment(endpoint) identifier.
+	Deploy a new stack into a Docker environment specified via the environment identifier.
 
 **Access policy**: authenticated
 */
-func (a *Client) StackCreate(params *StackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateOK, error) {
+func (a *Client) StackCreateDockerStandaloneFile(params *StackCreateDockerStandaloneFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerStandaloneFileOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewStackCreateParams()
+		params = NewStackCreateDockerStandaloneFileParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "StackCreate",
+		ID:                 "StackCreateDockerStandaloneFile",
 		Method:             "POST",
-		PathPattern:        "/stacks",
+		PathPattern:        "/stacks/create/standalone/file",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
+		ConsumesMediaTypes: []string{"multipart/form-data"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &StackCreateReader{formats: a.formats},
+		Reader:             &StackCreateDockerStandaloneFileReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -133,13 +191,357 @@ func (a *Client) StackCreate(params *StackCreateParams, authInfo runtime.ClientA
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*StackCreateOK)
+	success, ok := result.(*StackCreateDockerStandaloneFileOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for StackCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for StackCreateDockerStandaloneFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreateDockerStandaloneRepository deploys a new compose stack from repository
+
+	Deploy a new stack into a Docker environment specified via the environment identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreateDockerStandaloneRepository(params *StackCreateDockerStandaloneRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerStandaloneRepositoryOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateDockerStandaloneRepositoryParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreateDockerStandaloneRepository",
+		Method:             "POST",
+		PathPattern:        "/stacks/create/standalone/repository",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateDockerStandaloneRepositoryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateDockerStandaloneRepositoryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreateDockerStandaloneRepository: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreateDockerStandaloneString deploys a new compose stack from a text
+
+	Deploy a new stack into a Docker environment specified via the environment identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreateDockerStandaloneString(params *StackCreateDockerStandaloneStringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerStandaloneStringOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateDockerStandaloneStringParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreateDockerStandaloneString",
+		Method:             "POST",
+		PathPattern:        "/stacks/create/standalone/string",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateDockerStandaloneStringReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateDockerStandaloneStringOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreateDockerStandaloneString: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreateDockerSwarmFile deploys a new swarm stack from a file
+
+	Deploy a new stack into a Docker environment specified via the environment identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreateDockerSwarmFile(params *StackCreateDockerSwarmFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerSwarmFileOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateDockerSwarmFileParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreateDockerSwarmFile",
+		Method:             "POST",
+		PathPattern:        "/stacks/create/swarm/file",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"multipart/form-data"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateDockerSwarmFileReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateDockerSwarmFileOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreateDockerSwarmFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreateDockerSwarmRepository deploys a new swarm stack from a git repository
+
+	Deploy a new stack into a Docker environment specified via the environment identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreateDockerSwarmRepository(params *StackCreateDockerSwarmRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerSwarmRepositoryOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateDockerSwarmRepositoryParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreateDockerSwarmRepository",
+		Method:             "POST",
+		PathPattern:        "/stacks/create/swarm/repository",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateDockerSwarmRepositoryReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateDockerSwarmRepositoryOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreateDockerSwarmRepository: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreateDockerSwarmString deploys a new swarm stack from a text
+
+	Deploy a new stack into a Docker environment specified via the environment identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreateDockerSwarmString(params *StackCreateDockerSwarmStringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerSwarmStringOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateDockerSwarmStringParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreateDockerSwarmString",
+		Method:             "POST",
+		PathPattern:        "/stacks/create/swarm/string",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateDockerSwarmStringReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateDockerSwarmStringOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreateDockerSwarmString: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreateKubernetesFile deploys a new kubernetes stack from a file
+
+	Deploy a new stack into a Docker environment specified via the environment identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreateKubernetesFile(params *StackCreateKubernetesFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateKubernetesFileOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateKubernetesFileParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreateKubernetesFile",
+		Method:             "POST",
+		PathPattern:        "/stacks/create/kubernetes/string",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateKubernetesFileReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateKubernetesFileOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreateKubernetesFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreateKubernetesGit deploys a new kubernetes stack from a git repository
+
+	Deploy a new stack into a Docker environment specified via the environment identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreateKubernetesGit(params *StackCreateKubernetesGitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateKubernetesGitOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateKubernetesGitParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreateKubernetesGit",
+		Method:             "POST",
+		PathPattern:        "/stacks/create/kubernetes/repository",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateKubernetesGitReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateKubernetesGitOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreateKubernetesGit: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreateKubernetesURL deploys a new kubernetes stack from a url
+
+	Deploy a new stack into a Docker environment specified via the environment identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreateKubernetesURL(params *StackCreateKubernetesURLParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateKubernetesURLOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateKubernetesURLParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreateKubernetesUrl",
+		Method:             "POST",
+		PathPattern:        "/stacks/create/kubernetes/url",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateKubernetesURLReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateKubernetesURLOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreateKubernetesUrl: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -577,24 +979,24 @@ func (a *Client) StackUpdateGit(params *StackUpdateGitParams, authInfo runtime.C
 }
 
 /*
-WebhookInvoke webhooks for triggering stack updates from git
+StacksWebhookInvoke webhooks for triggering stack updates from git
 
 **Access policy**: public
 */
-func (a *Client) WebhookInvoke(params *WebhookInvokeParams, opts ...ClientOption) (*WebhookInvokeOK, error) {
+func (a *Client) StacksWebhookInvoke(params *StacksWebhookInvokeParams, opts ...ClientOption) (*StacksWebhookInvokeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewWebhookInvokeParams()
+		params = NewStacksWebhookInvokeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "WebhookInvoke",
+		ID:                 "StacksWebhookInvoke",
 		Method:             "POST",
 		PathPattern:        "/stacks/webhooks/{webhookID}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &WebhookInvokeReader{formats: a.formats},
+		Reader:             &StacksWebhookInvokeReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -606,13 +1008,13 @@ func (a *Client) WebhookInvoke(params *WebhookInvokeParams, opts ...ClientOption
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*WebhookInvokeOK)
+	success, ok := result.(*StacksWebhookInvokeOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for WebhookInvoke: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for StacksWebhookInvoke: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

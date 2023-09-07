@@ -80,11 +80,11 @@ func (o *GetKubernetesPodSecurityRuleOK) IsCode(code int) bool {
 }
 
 func (o *GetKubernetesPodSecurityRuleOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/opa][%d] getKubernetesPodSecurityRuleOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleOK  %+v", 200, o.Payload)
 }
 
 func (o *GetKubernetesPodSecurityRuleOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/opa][%d] getKubernetesPodSecurityRuleOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleOK  %+v", 200, o.Payload)
 }
 
 func (o *GetKubernetesPodSecurityRuleOK) GetPayload() *models.PodsecurityPodSecurityRule {
@@ -142,11 +142,11 @@ func (o *GetKubernetesPodSecurityRuleBadRequest) IsCode(code int) bool {
 }
 
 func (o *GetKubernetesPodSecurityRuleBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/opa][%d] getKubernetesPodSecurityRuleBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleBadRequest ", 400)
 }
 
 func (o *GetKubernetesPodSecurityRuleBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/opa][%d] getKubernetesPodSecurityRuleBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleBadRequest ", 400)
 }
 
 func (o *GetKubernetesPodSecurityRuleBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

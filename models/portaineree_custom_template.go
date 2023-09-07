@@ -33,12 +33,15 @@ type PortainereeCustomTemplate struct {
 	// Example: docker-compose.yml
 	EntryPoint string `json:"EntryPoint,omitempty"`
 
+	// git config
+	GitConfig *GittypesRepoConfig `json:"GitConfig,omitempty"`
+
 	// CustomTemplate Identifier
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
 	// URL of the template's logo
-	// Example: https://cloudinovasi.id/assets/img/logos/nginx.png
+	// Example: https://portainer.io/img/logo.svg
 	Logo string `json:"Logo,omitempty"`
 
 	// A note that will be displayed in the UI. Supports HTML content
@@ -62,9 +65,17 @@ type PortainereeCustomTemplate struct {
 	// Example: Nginx
 	Title string `json:"Title,omitempty"`
 
-	// Type of created stack (1 - swarm, 2 - compose)
+	// Type of created stack:
+	// * 1 - swarm
+	// * 2 - compose
+	// * 3 - kubernetes
 	// Example: 1
+	// Enum: [1 2 3]
 	Type int64 `json:"Type,omitempty"`
+
+	// IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
+	// Example: false
+	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
 
 	// variables
 	Variables []*PortainereeCustomTemplateVariableDefinition `json:"variables"`
@@ -74,11 +85,19 @@ type PortainereeCustomTemplate struct {
 func (m *PortainereeCustomTemplate) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateGitConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePlatform(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateResourceControl(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -89,6 +108,25 @@ func (m *PortainereeCustomTemplate) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PortainereeCustomTemplate) validateGitConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.GitConfig) { // not required
+		return nil
+	}
+
+	if m.GitConfig != nil {
+		if err := m.GitConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GitConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GitConfig")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -144,6 +182,39 @@ func (m *PortainereeCustomTemplate) validateResourceControl(formats strfmt.Regis
 	return nil
 }
 
+var portainereeCustomTemplateTypeTypePropEnum []interface{}
+
+func init() {
+	var res []int64
+	if err := json.Unmarshal([]byte(`[1,2,3]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		portainereeCustomTemplateTypeTypePropEnum = append(portainereeCustomTemplateTypeTypePropEnum, v)
+	}
+}
+
+// prop value enum
+func (m *PortainereeCustomTemplate) validateTypeEnum(path, location string, value int64) error {
+	if err := validate.EnumCase(path, location, value, portainereeCustomTemplateTypeTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PortainereeCustomTemplate) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("Type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *PortainereeCustomTemplate) validateVariables(formats strfmt.Registry) error {
 	if swag.IsZero(m.Variables) { // not required
 		return nil
@@ -174,6 +245,10 @@ func (m *PortainereeCustomTemplate) validateVariables(formats strfmt.Registry) e
 func (m *PortainereeCustomTemplate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateGitConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateResourceControl(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -185,6 +260,22 @@ func (m *PortainereeCustomTemplate) ContextValidate(ctx context.Context, formats
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PortainereeCustomTemplate) contextValidateGitConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.GitConfig != nil {
+		if err := m.GitConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("GitConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("GitConfig")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

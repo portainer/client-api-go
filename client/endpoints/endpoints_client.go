@@ -32,8 +32,6 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	EndpointAssociationDelete(params *EndpointAssociationDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointAssociationDeleteOK, error)
 
-	EndpointBrowsePut(params *EndpointBrowsePutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointBrowsePutOK, error)
-
 	EndpointCreate(params *EndpointCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointCreateOK, error)
 
 	EndpointCreateGlobalKey(params *EndpointCreateGlobalKeyParams, opts ...ClientOption) (*EndpointCreateGlobalKeyOK, error)
@@ -54,17 +52,21 @@ type ClientService interface {
 
 	EndpointUpdate(params *EndpointUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointUpdateOK, error)
 
+	EndpointUpdateRelations(params *EndpointUpdateRelationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointUpdateRelationsNoContent, error)
+
+	PostEndpointsIDDockerV2BrowsePut(params *PostEndpointsIDDockerV2BrowsePutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEndpointsIDDockerV2BrowsePutNoContent, error)
+
 	EndpointDockerhubStatus(params *EndpointDockerhubStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDockerhubStatusOK, error)
 
 	EndpointEdgeAsync(params *EndpointEdgeAsyncParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointEdgeAsyncOK, error)
 
 	EndpointForceUpdateService(params *EndpointForceUpdateServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointForceUpdateServiceOK, error)
 
-	EndpointPoolsAccessUpdate(params *EndpointPoolsAccessUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointPoolsAccessUpdateNoContent, error)
-
 	EndpointRegistriesList(params *EndpointRegistriesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistriesListOK, error)
 
 	EndpointRegistryAccess(params *EndpointRegistryAccessParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointRegistryAccessNoContent, error)
+
+	NamespacesAccessUpdate(params *NamespacesAccessUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NamespacesAccessUpdateNoContent, error)
 
 	SnapshotContainerInspect(params *SnapshotContainerInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SnapshotContainerInspectOK, error)
 
@@ -115,49 +117,6 @@ func (a *Client) EndpointAssociationDelete(params *EndpointAssociationDeletePara
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for EndpointAssociationDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	EndpointBrowsePut uploads a file under a specific path on the file system of an environment endpoint
-
-	Upload a file under a specific path on the file system of an environment (endpoint).
-
-**Access policy**: authenticated
-*/
-func (a *Client) EndpointBrowsePut(params *EndpointBrowsePutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointBrowsePutOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEndpointBrowsePutParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EndpointBrowsePut",
-		Method:             "POST",
-		PathPattern:        "/endpoints/{id}/docker/v2/browse/put",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded", "multipart/form-data"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EndpointBrowsePutReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EndpointBrowsePutOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EndpointBrowsePut: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -589,6 +548,94 @@ func (a *Client) EndpointUpdate(params *EndpointUpdateParams, authInfo runtime.C
 }
 
 /*
+	EndpointUpdateRelations updates relations for a list of environments
+
+	Update relations for a list of environments
+
+Edge groups, tags and environment group can be updated.
+
+**Access policy**: administrator
+*/
+func (a *Client) EndpointUpdateRelations(params *EndpointUpdateRelationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointUpdateRelationsNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEndpointUpdateRelationsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EndpointUpdateRelations",
+		Method:             "PUT",
+		PathPattern:        "/endpoints/relations",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EndpointUpdateRelationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EndpointUpdateRelationsNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EndpointUpdateRelations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	PostEndpointsIDDockerV2BrowsePut uploads a file under a specific path on the file system of an environment endpoint
+
+	Use this environment(endpoint) to upload TLS files.
+
+**Access policy**: administrator
+*/
+func (a *Client) PostEndpointsIDDockerV2BrowsePut(params *PostEndpointsIDDockerV2BrowsePutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEndpointsIDDockerV2BrowsePutNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostEndpointsIDDockerV2BrowsePutParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "PostEndpointsIDDockerV2BrowsePut",
+		Method:             "POST",
+		PathPattern:        "/endpoints/{id}/docker/v2/browse/put",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"multipart/form-data"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PostEndpointsIDDockerV2BrowsePutReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PostEndpointsIDDockerV2BrowsePutNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PostEndpointsIDDockerV2BrowsePut: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	EndpointDockerhubStatus fetches docker pull limits
 
 	get docker pull limits for a docker hub registry in the environment
@@ -718,49 +765,6 @@ func (a *Client) EndpointForceUpdateService(params *EndpointForceUpdateServicePa
 }
 
 /*
-	EndpointPoolsAccessUpdate updates resource pool access
-
-	update the access on the resource pool in the current environment
-
-**Access policy**: restricted
-*/
-func (a *Client) EndpointPoolsAccessUpdate(params *EndpointPoolsAccessUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointPoolsAccessUpdateNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEndpointPoolsAccessUpdateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "endpointPoolsAccessUpdate",
-		Method:             "PUT",
-		PathPattern:        "/endpoints/{id}/pools/{rpn}/access",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EndpointPoolsAccessUpdateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EndpointPoolsAccessUpdateNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for endpointPoolsAccessUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 	EndpointRegistriesList lists registries on environment
 
 	List all registries based on the current user authorizations in current environment.
@@ -845,6 +849,49 @@ func (a *Client) EndpointRegistryAccess(params *EndpointRegistryAccessParams, au
 }
 
 /*
+	NamespacesAccessUpdate updates namespace access
+
+	update the access on the namespace in the current environment
+
+**Access policy**: restricted
+*/
+func (a *Client) NamespacesAccessUpdate(params *NamespacesAccessUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NamespacesAccessUpdateNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewNamespacesAccessUpdateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "namespacesAccessUpdate",
+		Method:             "PUT",
+		PathPattern:        "/endpoints/{id}/pools/{rpn}/access",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &NamespacesAccessUpdateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*NamespacesAccessUpdateNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for namespacesAccessUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 SnapshotContainerInspect fetches container from a snapshot
 
 **Access policy**:
@@ -857,7 +904,7 @@ func (a *Client) SnapshotContainerInspect(params *SnapshotContainerInspectParams
 	op := &runtime.ClientOperation{
 		ID:                 "snapshotContainerInspect",
 		Method:             "GET",
-		PathPattern:        "/docker/{environmentId}/snapshot/container/{containerId}",
+		PathPattern:        "/docker/{environmentId}/snapshot/containers/{containerId}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

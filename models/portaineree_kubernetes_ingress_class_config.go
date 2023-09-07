@@ -18,7 +18,7 @@ import (
 type PortainereeKubernetesIngressClassConfig struct {
 
 	// blocked
-	Blocked *bool `json:"Blocked,omitempty"`
+	Blocked bool `json:"Blocked,omitempty"`
 
 	// blocked namespaces
 	BlockedNamespaces []string `json:"BlockedNamespaces"`

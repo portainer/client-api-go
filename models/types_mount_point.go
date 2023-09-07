@@ -17,28 +17,44 @@ import (
 // swagger:model types.MountPoint
 type TypesMountPoint struct {
 
-	// destination
+	// Destination is the path relative to the container root (`/`) where the
+	// Source is mounted inside the container.
 	Destination string `json:"destination,omitempty"`
 
-	// driver
+	// Driver is the volume driver used to create the volume (if it is a volume).
 	Driver string `json:"driver,omitempty"`
 
-	// mode
+	// Mode is a comma separated list of options supplied by the user when
+	// creating the bind/volume mount.
+	//
+	// The default is platform-specific (`"z"` on Linux, empty on Windows).
 	Mode string `json:"mode,omitempty"`
 
-	// name
+	// Name is the name reference to the underlying data defined by `Source`
+	// e.g., the volume name.
 	Name string `json:"name,omitempty"`
 
-	// propagation
+	// Propagation describes how mounts are propagated from the host into the
+	// mount point, and vice-versa. Refer to the Linux kernel documentation
+	// for details:
+	// https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt
+	//
+	// This field is not used on Windows.
 	Propagation string `json:"propagation,omitempty"`
 
-	// rw
-	Rw *bool `json:"rw,omitempty"`
+	// RW indicates whether the mount is mounted writable (read-write).
+	Rw bool `json:"rw,omitempty"`
 
-	// source
+	// Source is the source location of the mount.
+	//
+	// For volumes, this contains the storage location of the volume (within
+	// `/var/lib/docker/volumes/`). For bind-mounts, and `npipe`, this contains
+	// the source (host) part of the bind-mount. For `tmpfs` mount points, this
+	// field is empty.
 	Source string `json:"source,omitempty"`
 
-	// type
+	// Type is the type of mount, see `Type<foo>` definitions in
+	// github.com/docker/docker/api/types/mount.Type
 	Type string `json:"type,omitempty"`
 }
 

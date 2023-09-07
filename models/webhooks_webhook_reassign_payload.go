@@ -20,7 +20,7 @@ type WebhooksWebhookReassignPayload struct {
 	// resource ID
 	ResourceID string `json:"resourceID,omitempty"`
 
-	// webhook type
+	// Type of webhook (1 - service, 2 - container)
 	WebhookType int64 `json:"webhookType,omitempty"`
 }
 

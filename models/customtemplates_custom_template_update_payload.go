@@ -21,6 +21,10 @@ import (
 // swagger:model customtemplates.customTemplateUpdatePayload
 type CustomtemplatesCustomTemplateUpdatePayload struct {
 
+	// Path to the Stack file inside the Git repository
+	// Example: docker-compose.yml
+	ComposeFilePathInRepository *string `json:"composeFilePathInRepository,omitempty"`
+
 	// Description of the template
 	// Example: High performance web server
 	// Required: true
@@ -30,8 +34,12 @@ type CustomtemplatesCustomTemplateUpdatePayload struct {
 	// Required: true
 	FileContent *string `json:"fileContent"`
 
+	// IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
+	// Example: false
+	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
+
 	// URL of the template's logo
-	// Example: https://cloudinovasi.id/assets/img/logos/nginx.png
+	// Example: https://portainer.io/img/logo.svg
 	Logo string `json:"logo,omitempty"`
 
 	// A note that will be displayed in the UI. Supports HTML content
@@ -45,10 +53,42 @@ type CustomtemplatesCustomTemplateUpdatePayload struct {
 	// Enum: [1 2]
 	Platform int64 `json:"platform,omitempty"`
 
+	// Use basic authentication to clone the Git repository
+	// Example: true
+	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
+
+	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
+	// is true and RepositoryUsername/RepositoryPassword are not provided
+	// Example: 0
+	RepositoryGitCredentialID int64 `json:"repositoryGitCredentialID,omitempty"`
+
+	// Password used in basic authentication. Required when RepositoryAuthentication is true
+	// and RepositoryGitCredentialID is 0
+	// Example: myGitPassword
+	RepositoryPassword string `json:"repositoryPassword,omitempty"`
+
+	// Reference name of a Git repository hosting the Stack file
+	// Example: refs/heads/master
+	RepositoryReferenceName string `json:"repositoryReferenceName,omitempty"`
+
+	// URL of a Git repository hosting the Stack file
+	// Example: https://github.com/openfaas/faas
+	// Required: true
+	RepositoryURL *string `json:"repositoryURL"`
+
+	// Username used in basic authentication. Required when RepositoryAuthentication is true
+	// and RepositoryGitCredentialID is 0
+	// Example: myGitUsername
+	RepositoryUsername string `json:"repositoryUsername,omitempty"`
+
 	// Title of the template
 	// Example: Nginx
 	// Required: true
 	Title *string `json:"title"`
+
+	// TLSSkipVerify skips SSL verification when cloning the Git repository
+	// Example: false
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
 
 	// Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
 	// Example: 1
@@ -73,6 +113,10 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) Validate(formats strfmt.Reg
 	}
 
 	if err := m.validatePlatform(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRepositoryURL(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -139,6 +183,15 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) validatePlatform(formats st
 
 	// value enum
 	if err := m.validatePlatformEnum("platform", "body", m.Platform); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CustomtemplatesCustomTemplateUpdatePayload) validateRepositoryURL(formats strfmt.Registry) error {
+
+	if err := validate.Required("repositoryURL", "body", m.RepositoryURL); err != nil {
 		return err
 	}
 

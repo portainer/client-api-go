@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListJobsParams creates a new ListJobsParams object,
@@ -60,6 +61,13 @@ ListJobsParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type ListJobsParams struct {
+
+	/* EnvironmentID.
+
+	   Environment identifier
+	*/
+	EnvironmentID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +121,17 @@ func (o *ListJobsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEnvironmentID adds the environmentID to the list jobs params
+func (o *ListJobsParams) WithEnvironmentID(environmentID int64) *ListJobsParams {
+	o.SetEnvironmentID(environmentID)
+	return o
+}
+
+// SetEnvironmentID adds the environmentId to the list jobs params
+func (o *ListJobsParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +139,11 @@ func (o *ListJobsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

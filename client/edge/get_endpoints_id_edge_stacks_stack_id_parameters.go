@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetEndpointsIDEdgeStacksStackIDParams creates a new GetEndpointsIDEdgeStacksStackIDParams object,
@@ -65,13 +66,19 @@ type GetEndpointsIDEdgeStacksStackIDParams struct {
 
 	   Environment(Endpoint) Id
 	*/
-	ID string
+	ID int64
 
 	/* StackID.
 
 	   EdgeStack Id
 	*/
-	StackID string
+	StackID int64
+
+	/* Version.
+
+	   Stack file version maintained by Portainer
+	*/
+	Version *int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -127,25 +134,36 @@ func (o *GetEndpointsIDEdgeStacksStackIDParams) SetHTTPClient(client *http.Clien
 }
 
 // WithID adds the id to the get endpoints ID edge stacks stack ID params
-func (o *GetEndpointsIDEdgeStacksStackIDParams) WithID(id string) *GetEndpointsIDEdgeStacksStackIDParams {
+func (o *GetEndpointsIDEdgeStacksStackIDParams) WithID(id int64) *GetEndpointsIDEdgeStacksStackIDParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the get endpoints ID edge stacks stack ID params
-func (o *GetEndpointsIDEdgeStacksStackIDParams) SetID(id string) {
+func (o *GetEndpointsIDEdgeStacksStackIDParams) SetID(id int64) {
 	o.ID = id
 }
 
 // WithStackID adds the stackID to the get endpoints ID edge stacks stack ID params
-func (o *GetEndpointsIDEdgeStacksStackIDParams) WithStackID(stackID string) *GetEndpointsIDEdgeStacksStackIDParams {
+func (o *GetEndpointsIDEdgeStacksStackIDParams) WithStackID(stackID int64) *GetEndpointsIDEdgeStacksStackIDParams {
 	o.SetStackID(stackID)
 	return o
 }
 
 // SetStackID adds the stackId to the get endpoints ID edge stacks stack ID params
-func (o *GetEndpointsIDEdgeStacksStackIDParams) SetStackID(stackID string) {
+func (o *GetEndpointsIDEdgeStacksStackIDParams) SetStackID(stackID int64) {
 	o.StackID = stackID
+}
+
+// WithVersion adds the version to the get endpoints ID edge stacks stack ID params
+func (o *GetEndpointsIDEdgeStacksStackIDParams) WithVersion(version *int64) *GetEndpointsIDEdgeStacksStackIDParams {
+	o.SetVersion(version)
+	return o
+}
+
+// SetVersion adds the version to the get endpoints ID edge stacks stack ID params
+func (o *GetEndpointsIDEdgeStacksStackIDParams) SetVersion(version *int64) {
+	o.Version = version
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -157,13 +175,30 @@ func (o *GetEndpointsIDEdgeStacksStackIDParams) WriteToRequest(r runtime.ClientR
 	var res []error
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 
 	// path param stackId
-	if err := r.SetPathParam("stackId", o.StackID); err != nil {
+	if err := r.SetPathParam("stackId", swag.FormatInt64(o.StackID)); err != nil {
 		return err
+	}
+
+	if o.Version != nil {
+
+		// query param version
+		var qrVersion int64
+
+		if o.Version != nil {
+			qrVersion = *o.Version
+		}
+		qVersion := swag.FormatInt64(qrVersion)
+		if qVersion != "" {
+
+			if err := r.SetQueryParam("version", qVersion); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

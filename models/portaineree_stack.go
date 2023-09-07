@@ -22,8 +22,8 @@ type PortainereeStack struct {
 	// Only applies when deploying stack with multiple files
 	AdditionalFiles []string `json:"AdditionalFiles"`
 
-	// The auto update settings of a git stack
-	AutoUpdate *PortainereeStackAutoUpdate `json:"AutoUpdate,omitempty"`
+	// The GitOps update settings of a git stack
+	AutoUpdate *PortainereeAutoUpdateSettings `json:"AutoUpdate,omitempty"`
 
 	// Environment(Endpoint) identifier. Reference the environment(endpoint) that will be used for deployment
 	// Example: 1
@@ -46,6 +46,9 @@ type PortainereeStack struct {
 
 	// The stack deployment option
 	Option *PortainereeStackOption `json:"Option,omitempty"`
+
+	// The previous deployment info of the stack
+	PreviousDeploymentInfo *PortainerStackDeploymentInfo `json:"PreviousDeploymentInfo,omitempty"`
 
 	// resource control
 	ResourceControl *PortainereeResourceControl `json:"ResourceControl,omitempty"`
@@ -76,14 +79,14 @@ type PortainereeStack struct {
 
 	// Whether the stack is from a app template
 	// Example: false
-	FromAppTemplate *bool `json:"fromAppTemplate,omitempty"`
+	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
 
 	// The git configuration of a git stack
 	GitConfig *GittypesRepoConfig `json:"gitConfig,omitempty"`
 
 	// IsComposeFormat indicates if the Kubernetes stack is created from a Docker Compose file
 	// Example: false
-	IsComposeFormat *bool `json:"isComposeFormat,omitempty"`
+	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
 
 	// Kubernetes namespace if stack is a kube application
 	// Example: default
@@ -93,9 +96,13 @@ type PortainereeStack struct {
 	// Example: /data/compose/myStack_jpofkc0i9uo9wtx1zesuk649w
 	ProjectPath string `json:"projectPath,omitempty"`
 
+	// StackFileVersion indicates the stack file version, such as yaml, hcl, and manifest
+	// Example: 1
+	StackFileVersion int64 `json:"stackFileVersion,omitempty"`
+
 	// If stack support relative path volume
 	// Example: false
-	SupportRelativePath *bool `json:"supportRelativePath,omitempty"`
+	SupportRelativePath bool `json:"supportRelativePath,omitempty"`
 
 	// The date in unix time when stack was last updated
 	// Example: 1587399600
@@ -123,6 +130,10 @@ func (m *PortainereeStack) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOption(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePreviousDeploymentInfo(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -204,6 +215,25 @@ func (m *PortainereeStack) validateOption(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *PortainereeStack) validatePreviousDeploymentInfo(formats strfmt.Registry) error {
+	if swag.IsZero(m.PreviousDeploymentInfo) { // not required
+		return nil
+	}
+
+	if m.PreviousDeploymentInfo != nil {
+		if err := m.PreviousDeploymentInfo.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PreviousDeploymentInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PreviousDeploymentInfo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainereeStack) validateResourceControl(formats strfmt.Registry) error {
 	if swag.IsZero(m.ResourceControl) { // not required
 		return nil
@@ -255,6 +285,10 @@ func (m *PortainereeStack) ContextValidate(ctx context.Context, formats strfmt.R
 	}
 
 	if err := m.contextValidateOption(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePreviousDeploymentInfo(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -316,6 +350,22 @@ func (m *PortainereeStack) contextValidateOption(ctx context.Context, formats st
 				return ve.ValidateName("Option")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Option")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeStack) contextValidatePreviousDeploymentInfo(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PreviousDeploymentInfo != nil {
+		if err := m.PreviousDeploymentInfo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("PreviousDeploymentInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("PreviousDeploymentInfo")
 			}
 			return err
 		}

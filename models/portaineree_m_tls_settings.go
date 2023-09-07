@@ -17,17 +17,17 @@ import (
 // swagger:model portaineree.MTLSSettings
 type PortainereeMTLSSettings struct {
 
-	// ca cert file
+	// CaCertFile is the path to the mTLS CA certificate file
 	CaCertFile string `json:"CaCertFile,omitempty"`
 
-	// cert file
+	// CertFile is the path to the mTLS certificate file
 	CertFile string `json:"CertFile,omitempty"`
 
-	// key file
+	// KeyFile is the path to the mTLS key file
 	KeyFile string `json:"KeyFile,omitempty"`
 
 	// use separate cert
-	UseSeparateCert *bool `json:"UseSeparateCert,omitempty"`
+	UseSeparateCert bool `json:"UseSeparateCert,omitempty"`
 }
 
 // Validate validates this portaineree m TLS settings

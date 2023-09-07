@@ -21,7 +21,7 @@ type PodsecurityPodSecurityVolumeTypes struct {
 	AllowedTypes []string `json:"allowedTypes"`
 
 	// enabled
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
 }
 
 // Validate validates this podsecurity pod security volume types

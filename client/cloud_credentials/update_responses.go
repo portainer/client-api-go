@@ -86,11 +86,11 @@ func (o *UpdateOK) IsCode(code int) bool {
 }
 
 func (o *UpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /cloudcredentials][%d] updateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /cloud/credentials][%d] updateOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateOK) String() string {
-	return fmt.Sprintf("[PUT /cloudcredentials][%d] updateOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[PUT /cloud/credentials][%d] updateOK  %+v", 200, o.Payload)
 }
 
 func (o *UpdateOK) GetPayload() *models.ModelsCloudCredential {
@@ -148,11 +148,11 @@ func (o *UpdateBadRequest) IsCode(code int) bool {
 }
 
 func (o *UpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /cloudcredentials][%d] updateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /cloud/credentials][%d] updateBadRequest ", 400)
 }
 
 func (o *UpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /cloudcredentials][%d] updateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /cloud/credentials][%d] updateBadRequest ", 400)
 }
 
 func (o *UpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *UpdateInternalServerError) IsCode(code int) bool {
 }
 
 func (o *UpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /cloudcredentials][%d] updateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /cloud/credentials][%d] updateInternalServerError ", 500)
 }
 
 func (o *UpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /cloudcredentials][%d] updateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /cloud/credentials][%d] updateInternalServerError ", 500)
 }
 
 func (o *UpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

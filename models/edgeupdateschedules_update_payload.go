@@ -26,6 +26,10 @@ type EdgeupdateschedulesUpdatePayload struct {
 	// name
 	Name string `json:"name,omitempty"`
 
+	// ID of registry
+	// Example: 1
+	RegistryID int64 `json:"registryID,omitempty"`
+
 	// scheduled time
 	ScheduledTime string `json:"scheduledTime,omitempty"`
 

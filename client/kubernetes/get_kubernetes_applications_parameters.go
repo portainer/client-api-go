@@ -162,14 +162,9 @@ func (o *GetKubernetesApplicationsParams) WriteToRequest(r runtime.ClientRequest
 		return err
 	}
 
-	// query param namespace
-	qrNamespace := o.Namespace
-	qNamespace := qrNamespace
-	if qNamespace != "" {
-
-		if err := r.SetQueryParam("namespace", qNamespace); err != nil {
-			return err
-		}
+	// path param namespace
+	if err := r.SetPathParam("namespace", o.Namespace); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

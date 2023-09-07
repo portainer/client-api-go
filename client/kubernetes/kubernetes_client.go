@@ -34,23 +34,65 @@ type ClientService interface {
 
 	KubernetesNamespacesToggleSystem(params *KubernetesNamespacesToggleSystemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*KubernetesNamespacesToggleSystemOK, error)
 
+	CreateKubernetesIngress(params *CreateKubernetesIngressParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesIngressOK, error)
+
+	CreateKubernetesNamespace(params *CreateKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesNamespaceOK, error)
+
+	CreateKubernetesService(params *CreateKubernetesServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesServiceOK, error)
+
+	DeleteKubernetesIngresses(params *DeleteKubernetesIngressesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesIngressesOK, error)
+
+	DeleteKubernetesNamespace(params *DeleteKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesNamespaceOK, error)
+
+	DeleteKubernetesServices(params *DeleteKubernetesServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesServicesOK, error)
+
 	GetKubernetesApplication(params *GetKubernetesApplicationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesApplicationOK, error)
 
 	GetKubernetesApplications(params *GetKubernetesApplicationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesApplicationsOK, error)
+
+	GetKubernetesIngressControllers(params *GetKubernetesIngressControllersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesIngressControllersOK, error)
+
+	GetKubernetesIngressControllersByNamespace(params *GetKubernetesIngressControllersByNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesIngressControllersByNamespaceOK, error)
+
+	GetKubernetesIngresses(params *GetKubernetesIngressesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesIngressesOK, error)
+
+	GetKubernetesMetricsForAllNodes(params *GetKubernetesMetricsForAllNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMetricsForAllNodesOK, error)
+
+	GetKubernetesMetricsForAllPods(params *GetKubernetesMetricsForAllPodsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMetricsForAllPodsOK, error)
+
+	GetKubernetesMetricsForNode(params *GetKubernetesMetricsForNodeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMetricsForNodeOK, error)
+
+	GetKubernetesMetricsForPod(params *GetKubernetesMetricsForPodParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMetricsForPodOK, error)
+
+	GetKubernetesNamespace(params *GetKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNamespaceOK, error)
+
+	GetKubernetesNamespaces(params *GetKubernetesNamespacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNamespacesOK, error)
 
 	GetKubernetesNodesLimits(params *GetKubernetesNodesLimitsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNodesLimitsOK, error)
 
 	GetKubernetesPodSecurityRule(params *GetKubernetesPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesPodSecurityRuleOK, error)
 
+	GetKubernetesServices(params *GetKubernetesServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesServicesOK, error)
+
 	UpdateK8sPodSecurityRule(params *UpdateK8sPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateK8sPodSecurityRuleOK, error)
+
+	UpdateKubernetesIngress(params *UpdateKubernetesIngressParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesIngressOK, error)
+
+	UpdateKubernetesIngressControllers(params *UpdateKubernetesIngressControllersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesIngressControllersOK, error)
+
+	UpdateKubernetesIngressControllersByNamespace(params *UpdateKubernetesIngressControllersByNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesIngressControllersByNamespaceOK, error)
+
+	UpdateKubernetesNamespace(params *UpdateKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesNamespaceOK, error)
+
+	UpdateKubernetesService(params *UpdateKubernetesServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesServiceOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-	GetKubernetesConfig generates kubeconfig file enabling client communication with k8s api server
+	GetKubernetesConfig generates a kubeconfig file enabling client communication with k8s api server
 
-	Generates kubeconfig file enabling client communication with k8s api server
+	Generate a kubeconfig file enabling client communication with k8s api server
 
 **Access policy**: authenticated
 */
@@ -130,6 +172,264 @@ func (a *Client) KubernetesNamespacesToggleSystem(params *KubernetesNamespacesTo
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for KubernetesNamespacesToggleSystem: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	CreateKubernetesIngress creates a kubernetes ingress by namespace
+
+	Create a kubernetes ingress by namespace for the provided environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) CreateKubernetesIngress(params *CreateKubernetesIngressParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesIngressOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateKubernetesIngressParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createKubernetesIngress",
+		Method:             "POST",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/ingresses",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &CreateKubernetesIngressReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateKubernetesIngressOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createKubernetesIngress: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	CreateKubernetesNamespace creates a kubernetes namespace
+
+	Create a kubernetes namespace within the given environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) CreateKubernetesNamespace(params *CreateKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesNamespaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateKubernetesNamespaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createKubernetesNamespace",
+		Method:             "POST",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &CreateKubernetesNamespaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateKubernetesNamespaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createKubernetesNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	CreateKubernetesService creates a kubernetes service
+
+	Create a kubernetes service within a given namespace
+
+**Access policy**: authenticated
+*/
+func (a *Client) CreateKubernetesService(params *CreateKubernetesServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateKubernetesServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createKubernetesService",
+		Method:             "POST",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &CreateKubernetesServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateKubernetesServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createKubernetesService: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	DeleteKubernetesIngresses deletes a kubernetes ingress rule
+
+	Delete a kubernetes ingress rule for the provided environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) DeleteKubernetesIngresses(params *DeleteKubernetesIngressesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesIngressesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteKubernetesIngressesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteKubernetesIngresses",
+		Method:             "POST",
+		PathPattern:        "/kubernetes/{id}/ingresses/delete",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteKubernetesIngressesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteKubernetesIngressesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteKubernetesIngresses: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	DeleteKubernetesNamespace deletes kubernetes namespace
+
+	Delete a kubernetes namespace within the given environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) DeleteKubernetesNamespace(params *DeleteKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesNamespaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteKubernetesNamespaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteKubernetesNamespace",
+		Method:             "DELETE",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteKubernetesNamespaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteKubernetesNamespaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteKubernetesNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	DeleteKubernetesServices deletes kubernetes services
+
+	Delete the provided list of kubernetes services
+
+**Access policy**: authenticated
+*/
+func (a *Client) DeleteKubernetesServices(params *DeleteKubernetesServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesServicesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteKubernetesServicesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteKubernetesServices",
+		Method:             "POST",
+		PathPattern:        "/kubernetes/{id}/services/delete",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteKubernetesServicesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteKubernetesServicesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteKubernetesServices: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -220,6 +520,393 @@ func (a *Client) GetKubernetesApplications(params *GetKubernetesApplicationsPara
 }
 
 /*
+	GetKubernetesIngressControllers gets a list of ingress controllers
+
+	Get a list of ingress controllers for the given environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesIngressControllers(params *GetKubernetesIngressControllersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesIngressControllersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesIngressControllersParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesIngressControllers",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/ingresscontrollers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesIngressControllersReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesIngressControllersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesIngressControllers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesIngressControllersByNamespace gets a list ingress controllers by namespace
+
+	Get a list of ingress controllers for the given environment in the provided namespace
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesIngressControllersByNamespace(params *GetKubernetesIngressControllersByNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesIngressControllersByNamespaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesIngressControllersByNamespaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesIngressControllersByNamespace",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/ingresscontrollers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesIngressControllersByNamespaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesIngressControllersByNamespaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesIngressControllersByNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesIngresses gets kubernetes ingresses by namespace
+
+	Get kubernetes ingresses by namespace for the provided environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesIngresses(params *GetKubernetesIngressesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesIngressesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesIngressesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesIngresses",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/ingresses",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesIngressesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesIngressesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesIngresses: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesMetricsForAllNodes gets a list of nodes with their live metrics
+
+	Get a list of nodes with their live metrics
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesMetricsForAllNodes(params *GetKubernetesMetricsForAllNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMetricsForAllNodesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesMetricsForAllNodesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesMetricsForAllNodes",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/metrics/nodes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesMetricsForAllNodesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesMetricsForAllNodesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesMetricsForAllNodes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesMetricsForAllPods gets a list of pods with their live metrics
+
+	Get a list of pods with their live metrics
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesMetricsForAllPods(params *GetKubernetesMetricsForAllPodsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMetricsForAllPodsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesMetricsForAllPodsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesMetricsForAllPods",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/metrics/pods/{namespace}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesMetricsForAllPodsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesMetricsForAllPodsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesMetricsForAllPods: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesMetricsForNode gets live metrics for a node
+
+	Get live metrics for a node
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesMetricsForNode(params *GetKubernetesMetricsForNodeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMetricsForNodeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesMetricsForNodeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesMetricsForNode",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/metrics/nodes/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesMetricsForNodeReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesMetricsForNodeOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesMetricsForNode: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesMetricsForPod gets live metrics for a pod
+
+	Get live metrics for a pod
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesMetricsForPod(params *GetKubernetesMetricsForPodParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMetricsForPodOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesMetricsForPodParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesMetricsForPod",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/metrics/pods/{namespace}/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesMetricsForPodReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesMetricsForPodOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesMetricsForPod: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesNamespace gets kubernetes namespace details
+
+	Get kubernetes namespace details for the provided namespace within the given environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesNamespace(params *GetKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNamespaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesNamespaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesNamespace",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesNamespaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesNamespaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesNamespaces gets a list of kubernetes namespaces
+
+	Get a list of all kubernetes namespaces in the cluster
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesNamespaces(params *GetKubernetesNamespacesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNamespacesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesNamespacesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesNamespaces",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/namespaces",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesNamespacesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesNamespacesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesNamespaces: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	GetKubernetesNodesLimits gets CPU and memory limits of all nodes within k8s cluster
 
 	Get CPU and memory limits of all nodes within k8s cluster
@@ -277,7 +964,7 @@ func (a *Client) GetKubernetesPodSecurityRule(params *GetKubernetesPodSecurityRu
 	op := &runtime.ClientOperation{
 		ID:                 "getKubernetesPodSecurityRule",
 		Method:             "GET",
-		PathPattern:        "/kubernetes/{id}/opa",
+		PathPattern:        "/kubernetes/{environmentId}/opa",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -306,6 +993,49 @@ func (a *Client) GetKubernetesPodSecurityRule(params *GetKubernetesPodSecurityRu
 }
 
 /*
+	GetKubernetesServices gets a list of kubernetes services for a given namespace
+
+	Get a list of kubernetes services for a given namespace
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetKubernetesServices(params *GetKubernetesServicesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesServicesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesServicesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesServices",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesServicesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesServicesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesServices: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	UpdateK8sPodSecurityRule updates pod security rule within k8s cluster
 
 	Update Pod Security Rule within k8s cluster
@@ -320,7 +1050,7 @@ func (a *Client) UpdateK8sPodSecurityRule(params *UpdateK8sPodSecurityRuleParams
 	op := &runtime.ClientOperation{
 		ID:                 "updateK8sPodSecurityRule",
 		Method:             "PUT",
-		PathPattern:        "/kubernetes/{endpointId}/opa",
+		PathPattern:        "/kubernetes/{environmentId}/opa",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -345,6 +1075,221 @@ func (a *Client) UpdateK8sPodSecurityRule(params *UpdateK8sPodSecurityRuleParams
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for updateK8sPodSecurityRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UpdateKubernetesIngress updates kubernetes ingress rule
+
+	Update kubernetes ingress rule for the provided environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) UpdateKubernetesIngress(params *UpdateKubernetesIngressParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesIngressOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateKubernetesIngressParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateKubernetesIngress",
+		Method:             "PUT",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/ingresses",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UpdateKubernetesIngressReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateKubernetesIngressOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateKubernetesIngress: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UpdateKubernetesIngressControllers updates block unblock ingress controllers
+
+	Update (block/unblock) ingress controllers
+
+**Access policy**: authenticated
+*/
+func (a *Client) UpdateKubernetesIngressControllers(params *UpdateKubernetesIngressControllersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesIngressControllersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateKubernetesIngressControllersParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateKubernetesIngressControllers",
+		Method:             "PUT",
+		PathPattern:        "/kubernetes/{id}/ingresscontrollers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UpdateKubernetesIngressControllersReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateKubernetesIngressControllersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateKubernetesIngressControllers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UpdateKubernetesIngressControllersByNamespace updates block unblock ingress controllers by namespace
+
+	Update (block/unblock) ingress controllers by namespace for the provided environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) UpdateKubernetesIngressControllersByNamespace(params *UpdateKubernetesIngressControllersByNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesIngressControllersByNamespaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateKubernetesIngressControllersByNamespaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateKubernetesIngressControllersByNamespace",
+		Method:             "PUT",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/ingresscontrollers",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UpdateKubernetesIngressControllersByNamespaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateKubernetesIngressControllersByNamespaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateKubernetesIngressControllersByNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UpdateKubernetesNamespace updates a kubernetes namespace
+
+	Update a kubernetes namespace within the given environment
+
+**Access policy**: authenticated
+*/
+func (a *Client) UpdateKubernetesNamespace(params *UpdateKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesNamespaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateKubernetesNamespaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateKubernetesNamespace",
+		Method:             "PUT",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UpdateKubernetesNamespaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateKubernetesNamespaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateKubernetesNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	UpdateKubernetesService updates a kubernetes service
+
+	Update a kubernetes service within a given namespace
+
+**Access policy**: authenticated
+*/
+func (a *Client) UpdateKubernetesService(params *UpdateKubernetesServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesServiceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateKubernetesServiceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "updateKubernetesService",
+		Method:             "PUT",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/services",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UpdateKubernetesServiceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateKubernetesServiceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateKubernetesService: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -33,7 +33,7 @@ type EdgejobsEdgeJobUpdatePayload struct {
 	Name string `json:"name,omitempty"`
 
 	// recurring
-	Recurring *bool `json:"recurring,omitempty"`
+	Recurring bool `json:"recurring,omitempty"`
 }
 
 // Validate validates this edgejobs edge job update payload

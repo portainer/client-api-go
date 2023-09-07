@@ -24,7 +24,7 @@ type SettingsSettingsUpdatePayload struct {
 
 	// Show the Kompose build option (discontinued in 2.18)
 	// Example: false
-	ShowKomposeBuildOption *bool `json:"ShowKomposeBuildOption,omitempty"`
+	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
 
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
@@ -46,15 +46,15 @@ type SettingsSettingsUpdatePayload struct {
 
 	// Whether edge compute features are enabled
 	// Example: true
-	EnableEdgeComputeFeatures *bool `json:"enableEdgeComputeFeatures,omitempty"`
+	EnableEdgeComputeFeatures bool `json:"enableEdgeComputeFeatures,omitempty"`
 
 	// Whether telemetry is enabled
 	// Example: false
-	EnableTelemetry *bool `json:"enableTelemetry,omitempty"`
+	EnableTelemetry bool `json:"enableTelemetry,omitempty"`
 
 	// EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
 	// Example: false
-	EnforceEdgeID *bool `json:"enforceEdgeID,omitempty"`
+	EnforceEdgeID bool `json:"enforceEdgeID,omitempty"`
 
 	// Deployment options for encouraging deployment as code
 	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"globalDeploymentOptions,omitempty"`
@@ -94,7 +94,7 @@ type SettingsSettingsUpdatePayload struct {
 
 	// TrustOnFirstConnect makes Portainer accepting edge agent connection by default
 	// Example: false
-	TrustOnFirstConnect *bool `json:"trustOnFirstConnect,omitempty"`
+	TrustOnFirstConnect bool `json:"trustOnFirstConnect,omitempty"`
 
 	// The duration of a user session
 	// Example: 5m
@@ -426,7 +426,10 @@ type SettingsSettingsUpdatePayloadEdge struct {
 	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
 
 	// AsyncMode enables edge agent to run in async mode by default
-	AsyncMode *bool `json:"asyncMode,omitempty"`
+	AsyncMode bool `json:"asyncMode,omitempty"`
+
+	// mtls
+	Mtls *SettingsmTLSPayload `json:"mtls,omitempty"`
 
 	// The address where the tunneling server can be reached by Edge agents
 	TunnelServerAddress string `json:"tunnelServerAddress,omitempty"`
@@ -434,11 +437,64 @@ type SettingsSettingsUpdatePayloadEdge struct {
 
 // Validate validates this settings settings update payload edge
 func (m *SettingsSettingsUpdatePayloadEdge) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateMtls(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this settings settings update payload edge based on context it is used
+func (m *SettingsSettingsUpdatePayloadEdge) validateMtls(formats strfmt.Registry) error {
+	if swag.IsZero(m.Mtls) { // not required
+		return nil
+	}
+
+	if m.Mtls != nil {
+		if err := m.Mtls.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge" + "." + "mtls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge" + "." + "mtls")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this settings settings update payload edge based on the context it is used
 func (m *SettingsSettingsUpdatePayloadEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMtls(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SettingsSettingsUpdatePayloadEdge) contextValidateMtls(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Mtls != nil {
+		if err := m.Mtls.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge" + "." + "mtls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge" + "." + "mtls")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

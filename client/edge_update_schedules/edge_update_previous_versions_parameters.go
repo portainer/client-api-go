@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeUpdatePreviousVersionsParams creates a new EdgeUpdatePreviousVersionsParams object,
@@ -60,6 +61,13 @@ EdgeUpdatePreviousVersionsParams contains all the parameters to send to the API 
 	Typically these are written to a http.Request.
 */
 type EdgeUpdatePreviousVersionsParams struct {
+
+	/* SkipScheduleID.
+
+	   Schedule ID, ignore the schedule which is being edited
+	*/
+	SkipScheduleID *int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +121,17 @@ func (o *EdgeUpdatePreviousVersionsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithSkipScheduleID adds the skipScheduleID to the edge update previous versions params
+func (o *EdgeUpdatePreviousVersionsParams) WithSkipScheduleID(skipScheduleID *int64) *EdgeUpdatePreviousVersionsParams {
+	o.SetSkipScheduleID(skipScheduleID)
+	return o
+}
+
+// SetSkipScheduleID adds the skipScheduleId to the edge update previous versions params
+func (o *EdgeUpdatePreviousVersionsParams) SetSkipScheduleID(skipScheduleID *int64) {
+	o.SkipScheduleID = skipScheduleID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *EdgeUpdatePreviousVersionsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +139,23 @@ func (o *EdgeUpdatePreviousVersionsParams) WriteToRequest(r runtime.ClientReques
 		return err
 	}
 	var res []error
+
+	if o.SkipScheduleID != nil {
+
+		// query param skipScheduleID
+		var qrSkipScheduleID int64
+
+		if o.SkipScheduleID != nil {
+			qrSkipScheduleID = *o.SkipScheduleID
+		}
+		qSkipScheduleID := swag.FormatInt64(qrSkipScheduleID)
+		if qSkipScheduleID != "" {
+
+			if err := r.SetQueryParam("skipScheduleID", qSkipScheduleID); err != nil {
+				return err
+			}
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

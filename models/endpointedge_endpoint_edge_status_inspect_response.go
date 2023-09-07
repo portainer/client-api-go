@@ -26,6 +26,9 @@ type EndpointedgeEndpointEdgeStatusInspectResponse struct {
 	// credentials
 	Credentials string `json:"credentials,omitempty"`
 
+	// edge configurations
+	EdgeConfigurations map[string]int64 `json:"edge_configurations,omitempty"`
+
 	// The tunnel port
 	// Example: 8732
 	Port int64 `json:"port,omitempty"`

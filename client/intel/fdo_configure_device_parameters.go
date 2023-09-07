@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/portainer/client-api-go/v2/models"
 )
@@ -68,6 +69,12 @@ type FdoConfigureDeviceParams struct {
 	   Device Configuration
 	*/
 	Body *models.FdoDeviceConfigurePayload
+
+	/* GUID.
+
+	   Guid
+	*/
+	GUID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -133,6 +140,17 @@ func (o *FdoConfigureDeviceParams) SetBody(body *models.FdoDeviceConfigurePayloa
 	o.Body = body
 }
 
+// WithGUID adds the guid to the fdo configure device params
+func (o *FdoConfigureDeviceParams) WithGUID(guid int64) *FdoConfigureDeviceParams {
+	o.SetGUID(guid)
+	return o
+}
+
+// SetGUID adds the guid to the fdo configure device params
+func (o *FdoConfigureDeviceParams) SetGUID(guid int64) {
+	o.GUID = guid
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *FdoConfigureDeviceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -144,6 +162,11 @@ func (o *FdoConfigureDeviceParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
 		}
+	}
+
+	// path param guid
+	if err := r.SetPathParam("guid", swag.FormatInt64(o.GUID)); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

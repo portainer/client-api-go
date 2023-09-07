@@ -1,4 +1,5 @@
 # client-api
+
 Swagger generated Client APIs in Golang
 
 ## Technical Details
@@ -32,8 +33,6 @@ Create a GitHub tag based on the Portainer repository's tag where the Swagger fi
 
 ## Utilising Client APIs
 
-```
+```sh
 GOPRIVATE=github.com/portainer/client-api-go go get -u github.com/portainer/client-api-go/v2@v2.16.0
 ```
-
-

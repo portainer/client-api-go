@@ -64,9 +64,9 @@ type StackDeleteParams struct {
 
 	/* EndpointID.
 
-	   Environment(Endpoint) identifier used to remove an external stack (required when external is set to true)
+	   Environment identifier
 	*/
-	EndpointID *int64
+	EndpointID int64
 
 	/* External.
 
@@ -134,13 +134,13 @@ func (o *StackDeleteParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithEndpointID adds the endpointID to the stack delete params
-func (o *StackDeleteParams) WithEndpointID(endpointID *int64) *StackDeleteParams {
+func (o *StackDeleteParams) WithEndpointID(endpointID int64) *StackDeleteParams {
 	o.SetEndpointID(endpointID)
 	return o
 }
 
 // SetEndpointID adds the endpointId to the stack delete params
-func (o *StackDeleteParams) SetEndpointID(endpointID *int64) {
+func (o *StackDeleteParams) SetEndpointID(endpointID int64) {
 	o.EndpointID = endpointID
 }
 
@@ -174,20 +174,13 @@ func (o *StackDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	}
 	var res []error
 
-	if o.EndpointID != nil {
+	// query param endpointId
+	qrEndpointID := o.EndpointID
+	qEndpointID := swag.FormatInt64(qrEndpointID)
+	if qEndpointID != "" {
 
-		// query param endpointId
-		var qrEndpointID int64
-
-		if o.EndpointID != nil {
-			qrEndpointID = *o.EndpointID
-		}
-		qEndpointID := swag.FormatInt64(qrEndpointID)
-		if qEndpointID != "" {
-
-			if err := r.SetQueryParam("endpointId", qEndpointID); err != nil {
-				return err
-			}
+		if err := r.SetQueryParam("endpointId", qEndpointID); err != nil {
+			return err
 		}
 	}
 

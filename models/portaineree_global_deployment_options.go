@@ -19,19 +19,27 @@ type PortainereeGlobalDeploymentOptions struct {
 
 	// Hide manual deploy forms in portainer
 	// Example: false
-	HideAddWithForm *bool `json:"hideAddWithForm,omitempty"`
+	HideAddWithForm bool `json:"hideAddWithForm,omitempty"`
 
 	// Hide the file upload option in the remaining visible forms
 	// Example: false
-	HideFileUpload *bool `json:"hideFileUpload,omitempty"`
+	HideFileUpload bool `json:"hideFileUpload,omitempty"`
 
 	// Hide the webeditor in the remaining visible forms
 	// Example: false
-	HideWebEditor *bool `json:"hideWebEditor,omitempty"`
+	HideWebEditor bool `json:"hideWebEditor,omitempty"`
+
+	// min application note length
+	// Example: 10
+	MinApplicationNoteLength int64 `json:"minApplicationNoteLength,omitempty"`
 
 	// Configure this per environment or globally
 	// Example: false
-	PerEnvOverride *bool `json:"perEnvOverride,omitempty"`
+	PerEnvOverride bool `json:"perEnvOverride,omitempty"`
+
+	// Make note field mandatory if enabled
+	// Example: false
+	RequireNoteOnApplications bool `json:"requireNoteOnApplications,omitempty"`
 }
 
 // Validate validates this portaineree global deployment options

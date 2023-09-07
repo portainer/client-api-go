@@ -62,6 +62,12 @@ StackStopParams contains all the parameters to send to the API endpoint
 */
 type StackStopParams struct {
 
+	/* EndpointID.
+
+	   Environment identifier
+	*/
+	EndpointID int64
+
 	/* ID.
 
 	   Stack identifier
@@ -121,6 +127,17 @@ func (o *StackStopParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEndpointID adds the endpointID to the stack stop params
+func (o *StackStopParams) WithEndpointID(endpointID int64) *StackStopParams {
+	o.SetEndpointID(endpointID)
+	return o
+}
+
+// SetEndpointID adds the endpointId to the stack stop params
+func (o *StackStopParams) SetEndpointID(endpointID int64) {
+	o.EndpointID = endpointID
+}
+
 // WithID adds the id to the stack stop params
 func (o *StackStopParams) WithID(id int64) *StackStopParams {
 	o.SetID(id)
@@ -139,6 +156,16 @@ func (o *StackStopParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
+
+	// query param endpointId
+	qrEndpointID := o.EndpointID
+	qEndpointID := swag.FormatInt64(qrEndpointID)
+	if qEndpointID != "" {
+
+		if err := r.SetQueryParam("endpointId", qEndpointID); err != nil {
+			return err
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {

@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeStackFileParams creates a new EdgeStackFileParams object,
@@ -61,11 +62,23 @@ EdgeStackFileParams contains all the parameters to send to the API endpoint
 */
 type EdgeStackFileParams struct {
 
+	/* CommitHash.
+
+	   Git repository commit hash. If both version and commitHash are provided, the commitHash will be used
+	*/
+	CommitHash *string
+
 	/* ID.
 
 	   EdgeStack Id
 	*/
-	ID string
+	ID int64
+
+	/* Version.
+
+	   Stack file version maintained by Portainer. If both version and commitHash are provided, the commitHash will be used
+	*/
+	Version *int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,15 +133,37 @@ func (o *EdgeStackFileParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithCommitHash adds the commitHash to the edge stack file params
+func (o *EdgeStackFileParams) WithCommitHash(commitHash *string) *EdgeStackFileParams {
+	o.SetCommitHash(commitHash)
+	return o
+}
+
+// SetCommitHash adds the commitHash to the edge stack file params
+func (o *EdgeStackFileParams) SetCommitHash(commitHash *string) {
+	o.CommitHash = commitHash
+}
+
 // WithID adds the id to the edge stack file params
-func (o *EdgeStackFileParams) WithID(id string) *EdgeStackFileParams {
+func (o *EdgeStackFileParams) WithID(id int64) *EdgeStackFileParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack file params
-func (o *EdgeStackFileParams) SetID(id string) {
+func (o *EdgeStackFileParams) SetID(id int64) {
 	o.ID = id
+}
+
+// WithVersion adds the version to the edge stack file params
+func (o *EdgeStackFileParams) WithVersion(version *int64) *EdgeStackFileParams {
+	o.SetVersion(version)
+	return o
+}
+
+// SetVersion adds the version to the edge stack file params
+func (o *EdgeStackFileParams) SetVersion(version *int64) {
+	o.Version = version
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -139,9 +174,43 @@ func (o *EdgeStackFileParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	}
 	var res []error
 
+	if o.CommitHash != nil {
+
+		// query param commitHash
+		var qrCommitHash string
+
+		if o.CommitHash != nil {
+			qrCommitHash = *o.CommitHash
+		}
+		qCommitHash := qrCommitHash
+		if qCommitHash != "" {
+
+			if err := r.SetQueryParam("commitHash", qCommitHash); err != nil {
+				return err
+			}
+		}
+	}
+
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
+	}
+
+	if o.Version != nil {
+
+		// query param version
+		var qrVersion int64
+
+		if o.Version != nil {
+			qrVersion = *o.Version
+		}
+		qVersion := swag.FormatInt64(qrVersion)
+		if qVersion != "" {
+
+			if err := r.SetQueryParam("version", qVersion); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

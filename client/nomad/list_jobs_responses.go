@@ -82,11 +82,11 @@ func (o *ListJobsOK) IsCode(code int) bool {
 }
 
 func (o *ListJobsOK) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/jobs][%d] listJobsOK ", 200)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/jobs][%d] listJobsOK ", 200)
 }
 
 func (o *ListJobsOK) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/jobs][%d] listJobsOK ", 200)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/jobs][%d] listJobsOK ", 200)
 }
 
 func (o *ListJobsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,11 +133,11 @@ func (o *ListJobsNotFound) IsCode(code int) bool {
 }
 
 func (o *ListJobsNotFound) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/jobs][%d] listJobsNotFound ", 404)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/jobs][%d] listJobsNotFound ", 404)
 }
 
 func (o *ListJobsNotFound) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/jobs][%d] listJobsNotFound ", 404)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/jobs][%d] listJobsNotFound ", 404)
 }
 
 func (o *ListJobsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -184,11 +184,11 @@ func (o *ListJobsInternalServerError) IsCode(code int) bool {
 }
 
 func (o *ListJobsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/jobs][%d] listJobsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/jobs][%d] listJobsInternalServerError ", 500)
 }
 
 func (o *ListJobsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/jobs][%d] listJobsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/jobs][%d] listJobsInternalServerError ", 500)
 }
 
 func (o *ListJobsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

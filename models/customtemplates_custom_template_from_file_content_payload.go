@@ -31,7 +31,7 @@ type CustomtemplatesCustomTemplateFromFileContentPayload struct {
 	FileContent *string `json:"fileContent"`
 
 	// URL of the template's logo
-	// Example: https://cloudinovasi.id/assets/img/logos/nginx.png
+	// Example: https://portainer.io/img/logo.svg
 	Logo string `json:"logo,omitempty"`
 
 	// A note that will be displayed in the UI. Supports HTML content
@@ -50,7 +50,10 @@ type CustomtemplatesCustomTemplateFromFileContentPayload struct {
 	// Required: true
 	Title *string `json:"title"`
 
-	// Type of created stack (1 - swarm, 2 - compose, 3 - kubernetes)
+	// Type of created stack:
+	// * 1 - swarm
+	// * 2 - compose
+	// * 3 - kubernetes
 	// Example: 1
 	// Required: true
 	// Enum: [1 2 3]

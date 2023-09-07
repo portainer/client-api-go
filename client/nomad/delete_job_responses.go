@@ -76,11 +76,11 @@ func (o *DeleteJobOK) IsCode(code int) bool {
 }
 
 func (o *DeleteJobOK) Error() string {
-	return fmt.Sprintf("[DELETE /nomad/endpoints/{endpointID}/jobs/{id}][%d] deleteJobOK ", 200)
+	return fmt.Sprintf("[DELETE /nomad/endpoints/{environmentId}/jobs/{id}][%d] deleteJobOK ", 200)
 }
 
 func (o *DeleteJobOK) String() string {
-	return fmt.Sprintf("[DELETE /nomad/endpoints/{endpointID}/jobs/{id}][%d] deleteJobOK ", 200)
+	return fmt.Sprintf("[DELETE /nomad/endpoints/{environmentId}/jobs/{id}][%d] deleteJobOK ", 200)
 }
 
 func (o *DeleteJobOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -127,11 +127,11 @@ func (o *DeleteJobInternalServerError) IsCode(code int) bool {
 }
 
 func (o *DeleteJobInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /nomad/endpoints/{endpointID}/jobs/{id}][%d] deleteJobInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /nomad/endpoints/{environmentId}/jobs/{id}][%d] deleteJobInternalServerError ", 500)
 }
 
 func (o *DeleteJobInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /nomad/endpoints/{endpointID}/jobs/{id}][%d] deleteJobInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /nomad/endpoints/{environmentId}/jobs/{id}][%d] deleteJobInternalServerError ", 500)
 }
 
 func (o *DeleteJobInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

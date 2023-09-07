@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewContainerImageStatusParams creates a new ContainerImageStatusParams object,
@@ -60,6 +61,19 @@ ContainerImageStatusParams contains all the parameters to send to the API endpoi
 	Typically these are written to a http.Request.
 */
 type ContainerImageStatusParams struct {
+
+	/* ContainerID.
+
+	   Container identifier
+	*/
+	ContainerID int64
+
+	/* EnvironmentID.
+
+	   Environment identifier
+	*/
+	EnvironmentID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +127,28 @@ func (o *ContainerImageStatusParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithContainerID adds the containerID to the container image status params
+func (o *ContainerImageStatusParams) WithContainerID(containerID int64) *ContainerImageStatusParams {
+	o.SetContainerID(containerID)
+	return o
+}
+
+// SetContainerID adds the containerId to the container image status params
+func (o *ContainerImageStatusParams) SetContainerID(containerID int64) {
+	o.ContainerID = containerID
+}
+
+// WithEnvironmentID adds the environmentID to the container image status params
+func (o *ContainerImageStatusParams) WithEnvironmentID(environmentID int64) *ContainerImageStatusParams {
+	o.SetEnvironmentID(environmentID)
+	return o
+}
+
+// SetEnvironmentID adds the environmentId to the container image status params
+func (o *ContainerImageStatusParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ContainerImageStatusParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +156,16 @@ func (o *ContainerImageStatusParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
+
+	// path param containerId
+	if err := r.SetPathParam("containerId", swag.FormatInt64(o.ContainerID)); err != nil {
+		return err
+	}
+
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

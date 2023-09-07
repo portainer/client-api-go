@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewStackImagesStatusParams creates a new StackImagesStatusParams object,
@@ -60,6 +61,19 @@ StackImagesStatusParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type StackImagesStatusParams struct {
+
+	/* EnvironmentID.
+
+	   Environment identifier
+	*/
+	EnvironmentID int64
+
+	/* ID.
+
+	   Stack identifier
+	*/
+	ID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +127,28 @@ func (o *StackImagesStatusParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEnvironmentID adds the environmentID to the stack images status params
+func (o *StackImagesStatusParams) WithEnvironmentID(environmentID int64) *StackImagesStatusParams {
+	o.SetEnvironmentID(environmentID)
+	return o
+}
+
+// SetEnvironmentID adds the environmentId to the stack images status params
+func (o *StackImagesStatusParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
+}
+
+// WithID adds the id to the stack images status params
+func (o *StackImagesStatusParams) WithID(id int64) *StackImagesStatusParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the stack images status params
+func (o *StackImagesStatusParams) SetID(id int64) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *StackImagesStatusParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +156,16 @@ func (o *StackImagesStatusParams) WriteToRequest(r runtime.ClientRequest, reg st
 		return err
 	}
 	var res []error
+
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
+		return err
+	}
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

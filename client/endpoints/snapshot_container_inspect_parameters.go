@@ -62,6 +62,12 @@ SnapshotContainerInspectParams contains all the parameters to send to the API en
 */
 type SnapshotContainerInspectParams struct {
 
+	/* ContainerID.
+
+	   Container identifier
+	*/
+	ContainerID int64
+
 	/* EnvironmentID.
 
 	   Environment identifier
@@ -121,6 +127,17 @@ func (o *SnapshotContainerInspectParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithContainerID adds the containerID to the snapshot container inspect params
+func (o *SnapshotContainerInspectParams) WithContainerID(containerID int64) *SnapshotContainerInspectParams {
+	o.SetContainerID(containerID)
+	return o
+}
+
+// SetContainerID adds the containerId to the snapshot container inspect params
+func (o *SnapshotContainerInspectParams) SetContainerID(containerID int64) {
+	o.ContainerID = containerID
+}
+
 // WithEnvironmentID adds the environmentID to the snapshot container inspect params
 func (o *SnapshotContainerInspectParams) WithEnvironmentID(environmentID int64) *SnapshotContainerInspectParams {
 	o.SetEnvironmentID(environmentID)
@@ -139,6 +156,11 @@ func (o *SnapshotContainerInspectParams) WriteToRequest(r runtime.ClientRequest,
 		return err
 	}
 	var res []error
+
+	// path param containerId
+	if err := r.SetPathParam("containerId", swag.FormatInt64(o.ContainerID)); err != nil {
+		return err
+	}
 
 	// path param environmentId
 	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {

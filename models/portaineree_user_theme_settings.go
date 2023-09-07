@@ -26,7 +26,7 @@ type PortainereeUserThemeSettings struct {
 	Color string `json:"color,omitempty"`
 
 	// SubtleUpgradeButton indicates if the upgrade banner should be displayed in a subtle way
-	SubtleUpgradeButton *bool `json:"subtleUpgradeButton,omitempty"`
+	SubtleUpgradeButton bool `json:"subtleUpgradeButton,omitempty"`
 }
 
 // Validate validates this portaineree user theme settings

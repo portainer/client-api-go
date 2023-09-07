@@ -19,7 +19,7 @@ import (
 // swagger:model tags.tagCreatePayload
 type TagsTagCreatePayload struct {
 
-	// Name
+	// name
 	// Example: org/acme
 	// Required: true
 	Name *string `json:"name"`

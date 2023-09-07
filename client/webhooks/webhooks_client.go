@@ -36,7 +36,7 @@ type ClientService interface {
 
 	PostWebhooks(params *PostWebhooksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostWebhooksOK, error)
 
-	PostWebhooksToken(params *PostWebhooksTokenParams, opts ...ClientOption) (*PostWebhooksTokenAccepted, error)
+	PostWebhooksID(params *PostWebhooksIDParams, opts ...ClientOption) (*PostWebhooksIDAccepted, error)
 
 	PutWebhooksID(params *PutWebhooksIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutWebhooksIDOK, error)
 
@@ -169,26 +169,26 @@ func (a *Client) PostWebhooks(params *PostWebhooksParams, authInfo runtime.Clien
 }
 
 /*
-	PostWebhooksToken executes a webhook
+	PostWebhooksID executes a webhook
 
 	Acts on a passed in token UUID to restart the docker service
 
 **Access policy**: public
 */
-func (a *Client) PostWebhooksToken(params *PostWebhooksTokenParams, opts ...ClientOption) (*PostWebhooksTokenAccepted, error) {
+func (a *Client) PostWebhooksID(params *PostWebhooksIDParams, opts ...ClientOption) (*PostWebhooksIDAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewPostWebhooksTokenParams()
+		params = NewPostWebhooksIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostWebhooksToken",
+		ID:                 "PostWebhooksID",
 		Method:             "POST",
-		PathPattern:        "/webhooks/{token}",
+		PathPattern:        "/webhooks/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &PostWebhooksTokenReader{formats: a.formats},
+		Reader:             &PostWebhooksIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -200,13 +200,13 @@ func (a *Client) PostWebhooksToken(params *PostWebhooksTokenParams, opts ...Clie
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*PostWebhooksTokenAccepted)
+	success, ok := result.(*PostWebhooksIDAccepted)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostWebhooksToken: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for PostWebhooksID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

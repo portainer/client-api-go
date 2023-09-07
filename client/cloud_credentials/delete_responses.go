@@ -86,11 +86,11 @@ func (o *DeleteOK) IsCode(code int) bool {
 }
 
 func (o *DeleteOK) Error() string {
-	return fmt.Sprintf("[POST /cloudcredentials][%d] deleteOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] deleteOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteOK) String() string {
-	return fmt.Sprintf("[POST /cloudcredentials][%d] deleteOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] deleteOK  %+v", 200, o.Payload)
 }
 
 func (o *DeleteOK) GetPayload() *models.ModelsCloudCredential {
@@ -148,11 +148,11 @@ func (o *DeleteBadRequest) IsCode(code int) bool {
 }
 
 func (o *DeleteBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloudcredentials][%d] deleteBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] deleteBadRequest ", 400)
 }
 
 func (o *DeleteBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloudcredentials][%d] deleteBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] deleteBadRequest ", 400)
 }
 
 func (o *DeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *DeleteInternalServerError) IsCode(code int) bool {
 }
 
 func (o *DeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloudcredentials][%d] deleteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] deleteInternalServerError ", 500)
 }
 
 func (o *DeleteInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloudcredentials][%d] deleteInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] deleteInternalServerError ", 500)
 }
 
 func (o *DeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

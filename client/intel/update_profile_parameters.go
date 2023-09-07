@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewUpdateProfileParams creates a new UpdateProfileParams object,
@@ -60,6 +61,13 @@ UpdateProfileParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type UpdateProfileParams struct {
+
+	/* ID.
+
+	   FDO Profile identifier
+	*/
+	ID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +121,17 @@ func (o *UpdateProfileParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithID adds the id to the update profile params
+func (o *UpdateProfileParams) WithID(id int64) *UpdateProfileParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the update profile params
+func (o *UpdateProfileParams) SetID(id int64) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *UpdateProfileParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +139,11 @@ func (o *UpdateProfileParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeStackLogsDeleteParams creates a new EdgeStackLogsDeleteParams object,
@@ -65,13 +66,13 @@ type EdgeStackLogsDeleteParams struct {
 
 	   Endpoint Id
 	*/
-	EndpointID string
+	EndpointID int64
 
 	/* ID.
 
 	   EdgeStack Id
 	*/
-	ID string
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -127,24 +128,24 @@ func (o *EdgeStackLogsDeleteParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithEndpointID adds the endpointID to the edge stack logs delete params
-func (o *EdgeStackLogsDeleteParams) WithEndpointID(endpointID string) *EdgeStackLogsDeleteParams {
+func (o *EdgeStackLogsDeleteParams) WithEndpointID(endpointID int64) *EdgeStackLogsDeleteParams {
 	o.SetEndpointID(endpointID)
 	return o
 }
 
 // SetEndpointID adds the endpointId to the edge stack logs delete params
-func (o *EdgeStackLogsDeleteParams) SetEndpointID(endpointID string) {
+func (o *EdgeStackLogsDeleteParams) SetEndpointID(endpointID int64) {
 	o.EndpointID = endpointID
 }
 
 // WithID adds the id to the edge stack logs delete params
-func (o *EdgeStackLogsDeleteParams) WithID(id string) *EdgeStackLogsDeleteParams {
+func (o *EdgeStackLogsDeleteParams) WithID(id int64) *EdgeStackLogsDeleteParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack logs delete params
-func (o *EdgeStackLogsDeleteParams) SetID(id string) {
+func (o *EdgeStackLogsDeleteParams) SetID(id int64) {
 	o.ID = id
 }
 
@@ -157,12 +158,12 @@ func (o *EdgeStackLogsDeleteParams) WriteToRequest(r runtime.ClientRequest, reg 
 	var res []error
 
 	// path param endpoint_id
-	if err := r.SetPathParam("endpoint_id", o.EndpointID); err != nil {
+	if err := r.SetPathParam("endpoint_id", swag.FormatInt64(o.EndpointID)); err != nil {
 		return err
 	}
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 

@@ -54,7 +54,7 @@ func (a *Client) LicensesAttach(params *LicensesAttachParams, authInfo runtime.C
 	op := &runtime.ClientOperation{
 		ID:                 "licensesAttach",
 		Method:             "POST",
-		PathPattern:        "/licenses",
+		PathPattern:        "/licenses/add",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -94,8 +94,8 @@ func (a *Client) LicensesDelete(params *LicensesDeleteParams, authInfo runtime.C
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "licensesDelete",
-		Method:             "DELETE",
-		PathPattern:        "/licenses",
+		Method:             "POST",
+		PathPattern:        "/licenses/remove",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

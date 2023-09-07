@@ -36,7 +36,7 @@ type LicensesLicenseInfo struct {
 	Type int64 `json:"type,omitempty"`
 
 	// valid
-	Valid *bool `json:"valid,omitempty"`
+	Valid bool `json:"valid,omitempty"`
 }
 
 // Validate validates this licenses license info

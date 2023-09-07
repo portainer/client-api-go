@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeStackStatusDeleteParams creates a new EdgeStackStatusDeleteParams object,
@@ -61,11 +62,17 @@ EdgeStackStatusDeleteParams contains all the parameters to send to the API endpo
 */
 type EdgeStackStatusDeleteParams struct {
 
+	/* EnvironmentID.
+
+	   Environment identifier
+	*/
+	EnvironmentID int64
+
 	/* ID.
 
 	   EdgeStack Id
 	*/
-	ID string
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,14 +127,25 @@ func (o *EdgeStackStatusDeleteParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEnvironmentID adds the environmentID to the edge stack status delete params
+func (o *EdgeStackStatusDeleteParams) WithEnvironmentID(environmentID int64) *EdgeStackStatusDeleteParams {
+	o.SetEnvironmentID(environmentID)
+	return o
+}
+
+// SetEnvironmentID adds the environmentId to the edge stack status delete params
+func (o *EdgeStackStatusDeleteParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
+}
+
 // WithID adds the id to the edge stack status delete params
-func (o *EdgeStackStatusDeleteParams) WithID(id string) *EdgeStackStatusDeleteParams {
+func (o *EdgeStackStatusDeleteParams) WithID(id int64) *EdgeStackStatusDeleteParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack status delete params
-func (o *EdgeStackStatusDeleteParams) SetID(id string) {
+func (o *EdgeStackStatusDeleteParams) SetID(id int64) {
 	o.ID = id
 }
 
@@ -139,8 +157,13 @@ func (o *EdgeStackStatusDeleteParams) WriteToRequest(r runtime.ClientRequest, re
 	}
 	var res []error
 
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
+		return err
+	}
+
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 

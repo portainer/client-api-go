@@ -51,7 +51,7 @@ SnapshotContainerInspectOK describes a response with status code 200, with defau
 Success
 */
 type SnapshotContainerInspectOK struct {
-	Payload *models.TypesContainer
+	Payload *models.PortainerDockerContainerSnapshot
 }
 
 // IsSuccess returns true when this snapshot container inspect o k response has a 2xx status code
@@ -80,20 +80,20 @@ func (o *SnapshotContainerInspectOK) IsCode(code int) bool {
 }
 
 func (o *SnapshotContainerInspectOK) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/container/{containerId}][%d] snapshotContainerInspectOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers/{containerId}][%d] snapshotContainerInspectOK  %+v", 200, o.Payload)
 }
 
 func (o *SnapshotContainerInspectOK) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/container/{containerId}][%d] snapshotContainerInspectOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers/{containerId}][%d] snapshotContainerInspectOK  %+v", 200, o.Payload)
 }
 
-func (o *SnapshotContainerInspectOK) GetPayload() *models.TypesContainer {
+func (o *SnapshotContainerInspectOK) GetPayload() *models.PortainerDockerContainerSnapshot {
 	return o.Payload
 }
 
 func (o *SnapshotContainerInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.TypesContainer)
+	o.Payload = new(models.PortainerDockerContainerSnapshot)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -142,11 +142,11 @@ func (o *SnapshotContainerInspectNotFound) IsCode(code int) bool {
 }
 
 func (o *SnapshotContainerInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/container/{containerId}][%d] snapshotContainerInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers/{containerId}][%d] snapshotContainerInspectNotFound ", 404)
 }
 
 func (o *SnapshotContainerInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/container/{containerId}][%d] snapshotContainerInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers/{containerId}][%d] snapshotContainerInspectNotFound ", 404)
 }
 
 func (o *SnapshotContainerInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

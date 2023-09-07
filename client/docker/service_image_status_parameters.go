@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewServiceImageStatusParams creates a new ServiceImageStatusParams object,
@@ -60,6 +61,19 @@ ServiceImageStatusParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type ServiceImageStatusParams struct {
+
+	/* EnvironmentID.
+
+	   Environment identifier
+	*/
+	EnvironmentID int64
+
+	/* ServiceID.
+
+	   Service identifier
+	*/
+	ServiceID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +127,28 @@ func (o *ServiceImageStatusParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEnvironmentID adds the environmentID to the service image status params
+func (o *ServiceImageStatusParams) WithEnvironmentID(environmentID int64) *ServiceImageStatusParams {
+	o.SetEnvironmentID(environmentID)
+	return o
+}
+
+// SetEnvironmentID adds the environmentId to the service image status params
+func (o *ServiceImageStatusParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
+}
+
+// WithServiceID adds the serviceID to the service image status params
+func (o *ServiceImageStatusParams) WithServiceID(serviceID int64) *ServiceImageStatusParams {
+	o.SetServiceID(serviceID)
+	return o
+}
+
+// SetServiceID adds the serviceId to the service image status params
+func (o *ServiceImageStatusParams) SetServiceID(serviceID int64) {
+	o.ServiceID = serviceID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ServiceImageStatusParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +156,16 @@ func (o *ServiceImageStatusParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
+
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
+		return err
+	}
+
+	// path param serviceId
+	if err := r.SetPathParam("serviceId", swag.FormatInt64(o.ServiceID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

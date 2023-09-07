@@ -18,7 +18,7 @@ import (
 type PortainereeEdgeJobEndpointMeta struct {
 
 	// collect logs
-	CollectLogs *bool `json:"collectLogs,omitempty"`
+	CollectLogs bool `json:"collectLogs,omitempty"`
 
 	// logs status
 	LogsStatus int64 `json:"logsStatus,omitempty"`

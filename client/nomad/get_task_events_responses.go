@@ -80,11 +80,11 @@ func (o *GetTaskEventsOK) IsCode(code int) bool {
 }
 
 func (o *GetTaskEventsOK) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/allocation/{id}/events][%d] getTaskEventsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/allocation/{id}/events][%d] getTaskEventsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetTaskEventsOK) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/allocation/{id}/events][%d] getTaskEventsOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/allocation/{id}/events][%d] getTaskEventsOK  %+v", 200, o.Payload)
 }
 
 func (o *GetTaskEventsOK) GetPayload() []*models.NomadSlimNomadTaskEvent {
@@ -140,11 +140,11 @@ func (o *GetTaskEventsInternalServerError) IsCode(code int) bool {
 }
 
 func (o *GetTaskEventsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/allocation/{id}/events][%d] getTaskEventsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/allocation/{id}/events][%d] getTaskEventsInternalServerError ", 500)
 }
 
 func (o *GetTaskEventsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/allocation/{id}/events][%d] getTaskEventsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/allocation/{id}/events][%d] getTaskEventsInternalServerError ", 500)
 }
 
 func (o *GetTaskEventsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

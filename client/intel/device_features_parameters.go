@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/portainer/client-api-go/v2/models"
 )
@@ -68,6 +69,18 @@ type DeviceFeaturesParams struct {
 	   Device Features
 	*/
 	Body *models.OpenamtDeviceFeaturesPayload
+
+	/* DeviceID.
+
+	   Device identifier
+	*/
+	DeviceID int64
+
+	/* ID.
+
+	   Environment identifier
+	*/
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -133,6 +146,28 @@ func (o *DeviceFeaturesParams) SetBody(body *models.OpenamtDeviceFeaturesPayload
 	o.Body = body
 }
 
+// WithDeviceID adds the deviceID to the device features params
+func (o *DeviceFeaturesParams) WithDeviceID(deviceID int64) *DeviceFeaturesParams {
+	o.SetDeviceID(deviceID)
+	return o
+}
+
+// SetDeviceID adds the deviceId to the device features params
+func (o *DeviceFeaturesParams) SetDeviceID(deviceID int64) {
+	o.DeviceID = deviceID
+}
+
+// WithID adds the id to the device features params
+func (o *DeviceFeaturesParams) WithID(id int64) *DeviceFeaturesParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the device features params
+func (o *DeviceFeaturesParams) SetID(id int64) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *DeviceFeaturesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -144,6 +179,16 @@ func (o *DeviceFeaturesParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
 		}
+	}
+
+	// path param deviceId
+	if err := r.SetPathParam("deviceId", swag.FormatInt64(o.DeviceID)); err != nil {
+		return err
+	}
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

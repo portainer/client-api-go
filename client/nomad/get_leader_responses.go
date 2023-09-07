@@ -82,11 +82,11 @@ func (o *GetLeaderOK) IsCode(code int) bool {
 }
 
 func (o *GetLeaderOK) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/leader][%d] getLeaderOK ", 200)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/leader][%d] getLeaderOK ", 200)
 }
 
 func (o *GetLeaderOK) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/leader][%d] getLeaderOK ", 200)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/leader][%d] getLeaderOK ", 200)
 }
 
 func (o *GetLeaderOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,11 +133,11 @@ func (o *GetLeaderNotFound) IsCode(code int) bool {
 }
 
 func (o *GetLeaderNotFound) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/leader][%d] getLeaderNotFound ", 404)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/leader][%d] getLeaderNotFound ", 404)
 }
 
 func (o *GetLeaderNotFound) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/leader][%d] getLeaderNotFound ", 404)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/leader][%d] getLeaderNotFound ", 404)
 }
 
 func (o *GetLeaderNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -184,11 +184,11 @@ func (o *GetLeaderInternalServerError) IsCode(code int) bool {
 }
 
 func (o *GetLeaderInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/leader][%d] getLeaderInternalServerError ", 500)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/leader][%d] getLeaderInternalServerError ", 500)
 }
 
 func (o *GetLeaderInternalServerError) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/leader][%d] getLeaderInternalServerError ", 500)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/leader][%d] getLeaderInternalServerError ", 500)
 }
 
 func (o *GetLeaderInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

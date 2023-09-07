@@ -86,11 +86,11 @@ func (o *GetByIDOK) IsCode(code int) bool {
 }
 
 func (o *GetByIDOK) Error() string {
-	return fmt.Sprintf("[GET /cloudcredentials][%d] getByIdOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getByIdOK  %+v", 200, o.Payload)
 }
 
 func (o *GetByIDOK) String() string {
-	return fmt.Sprintf("[GET /cloudcredentials][%d] getByIdOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getByIdOK  %+v", 200, o.Payload)
 }
 
 func (o *GetByIDOK) GetPayload() *models.ModelsCloudCredential {
@@ -148,11 +148,11 @@ func (o *GetByIDBadRequest) IsCode(code int) bool {
 }
 
 func (o *GetByIDBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloudcredentials][%d] getByIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getByIdBadRequest ", 400)
 }
 
 func (o *GetByIDBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloudcredentials][%d] getByIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getByIdBadRequest ", 400)
 }
 
 func (o *GetByIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *GetByIDInternalServerError) IsCode(code int) bool {
 }
 
 func (o *GetByIDInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloudcredentials][%d] getByIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getByIdInternalServerError ", 500)
 }
 
 func (o *GetByIDInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloudcredentials][%d] getByIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getByIdInternalServerError ", 500)
 }
 
 func (o *GetByIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

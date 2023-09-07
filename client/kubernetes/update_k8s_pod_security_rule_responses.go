@@ -88,11 +88,11 @@ func (o *UpdateK8sPodSecurityRuleOK) IsCode(code int) bool {
 }
 
 func (o *UpdateK8sPodSecurityRuleOK) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{endpointId}/opa][%d] updateK8sPodSecurityRuleOK ", 200)
+	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleOK ", 200)
 }
 
 func (o *UpdateK8sPodSecurityRuleOK) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{endpointId}/opa][%d] updateK8sPodSecurityRuleOK ", 200)
+	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleOK ", 200)
 }
 
 func (o *UpdateK8sPodSecurityRuleOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -139,11 +139,11 @@ func (o *UpdateK8sPodSecurityRuleBadRequest) IsCode(code int) bool {
 }
 
 func (o *UpdateK8sPodSecurityRuleBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{endpointId}/opa][%d] updateK8sPodSecurityRuleBadRequest ", 400)
+	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleBadRequest ", 400)
 }
 
 func (o *UpdateK8sPodSecurityRuleBadRequest) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{endpointId}/opa][%d] updateK8sPodSecurityRuleBadRequest ", 400)
+	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleBadRequest ", 400)
 }
 
 func (o *UpdateK8sPodSecurityRuleBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -190,11 +190,11 @@ func (o *UpdateK8sPodSecurityRuleNotFound) IsCode(code int) bool {
 }
 
 func (o *UpdateK8sPodSecurityRuleNotFound) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{endpointId}/opa][%d] updateK8sPodSecurityRuleNotFound ", 404)
+	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleNotFound ", 404)
 }
 
 func (o *UpdateK8sPodSecurityRuleNotFound) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{endpointId}/opa][%d] updateK8sPodSecurityRuleNotFound ", 404)
+	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleNotFound ", 404)
 }
 
 func (o *UpdateK8sPodSecurityRuleNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -241,11 +241,11 @@ func (o *UpdateK8sPodSecurityRuleInternalServerError) IsCode(code int) bool {
 }
 
 func (o *UpdateK8sPodSecurityRuleInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{endpointId}/opa][%d] updateK8sPodSecurityRuleInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleInternalServerError ", 500)
 }
 
 func (o *UpdateK8sPodSecurityRuleInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{endpointId}/opa][%d] updateK8sPodSecurityRuleInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleInternalServerError ", 500)
 }
 
 func (o *UpdateK8sPodSecurityRuleInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

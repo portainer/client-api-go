@@ -36,7 +36,9 @@ type ClientService interface {
 
 	SystemStatus(params *SystemStatusParams, opts ...ClientOption) (*SystemStatusOK, error)
 
-	SystemUpgrade(params *SystemUpgradeParams, opts ...ClientOption) (*SystemUpgradeOK, error)
+	SystemUpdate(params *SystemUpdateParams, opts ...ClientOption) (*SystemUpdateNoContent, error)
+
+	SystemUpgrade(params *SystemUpgradeParams, opts ...ClientOption) (*SystemUpgradeNoContent, error)
 
 	SystemVersion(params *SystemVersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SystemVersionOK, error)
 
@@ -168,13 +170,55 @@ func (a *Client) SystemStatus(params *SystemStatusParams, opts ...ClientOption) 
 }
 
 /*
+	SystemUpdate updates portainer to latest version
+
+	Update Portainer to latest version
+
+**Access policy**: administrator
+*/
+func (a *Client) SystemUpdate(params *SystemUpdateParams, opts ...ClientOption) (*SystemUpdateNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSystemUpdateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "systemUpdate",
+		Method:             "POST",
+		PathPattern:        "/system/update",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &SystemUpdateReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SystemUpdateNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for systemUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	SystemUpgrade upgrades portainer to b e
 
 	Upgrade Portainer to BE
 
 **Access policy**: administrator
 */
-func (a *Client) SystemUpgrade(params *SystemUpgradeParams, opts ...ClientOption) (*SystemUpgradeOK, error) {
+func (a *Client) SystemUpgrade(params *SystemUpgradeParams, opts ...ClientOption) (*SystemUpgradeNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSystemUpgradeParams()
@@ -199,7 +243,7 @@ func (a *Client) SystemUpgrade(params *SystemUpgradeParams, opts ...ClientOption
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*SystemUpgradeOK)
+	success, ok := result.(*SystemUpgradeNoContent)
 	if ok {
 		return success, nil
 	}

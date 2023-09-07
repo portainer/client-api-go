@@ -54,7 +54,7 @@ func (a *Client) ServiceImageStatus(params *ServiceImageStatusParams, authInfo r
 	op := &runtime.ClientOperation{
 		ID:                 "ServiceImageStatus",
 		Method:             "GET",
-		PathPattern:        "/docker/{environmentId}/services/{serviceID}/image_status",
+		PathPattern:        "/docker/{environmentId}/services/{serviceId}/image_status",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -95,7 +95,7 @@ func (a *Client) ContainerImageStatus(params *ContainerImageStatusParams, authIn
 	op := &runtime.ClientOperation{
 		ID:                 "containerImageStatus",
 		Method:             "GET",
-		PathPattern:        "/docker/{environmentId}/containers/{containerID}/image_status",
+		PathPattern:        "/docker/{environmentId}/containers/{containerId}/image_status",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

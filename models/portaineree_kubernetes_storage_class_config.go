@@ -21,7 +21,7 @@ type PortainereeKubernetesStorageClassConfig struct {
 	AccessModes []string `json:"AccessModes"`
 
 	// allow volume expansion
-	AllowVolumeExpansion *bool `json:"AllowVolumeExpansion,omitempty"`
+	AllowVolumeExpansion bool `json:"AllowVolumeExpansion,omitempty"`
 
 	// name
 	Name string `json:"Name,omitempty"`

@@ -7,12 +7,9 @@ package license
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/portainer/client-api-go/v2/models"
 )
 
 // LicensesDeleteReader is a Reader for the LicensesDelete structure.
@@ -42,10 +39,9 @@ func NewLicensesDeleteOK() *LicensesDeleteOK {
 /*
 LicensesDeleteOK describes a response with status code 200, with default header values.
 
-Failures will be in `body.FailedKeys[key] = error`
+OK
 */
 type LicensesDeleteOK struct {
-	Payload *models.LicensesDeleteResponse
 }
 
 // IsSuccess returns true when this licenses delete o k response has a 2xx status code
@@ -74,25 +70,14 @@ func (o *LicensesDeleteOK) IsCode(code int) bool {
 }
 
 func (o *LicensesDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /licenses][%d] licensesDeleteOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /licenses/remove][%d] licensesDeleteOK ", 200)
 }
 
 func (o *LicensesDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /licenses][%d] licensesDeleteOK  %+v", 200, o.Payload)
-}
-
-func (o *LicensesDeleteOK) GetPayload() *models.LicensesDeleteResponse {
-	return o.Payload
+	return fmt.Sprintf("[POST /licenses/remove][%d] licensesDeleteOK ", 200)
 }
 
 func (o *LicensesDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(models.LicensesDeleteResponse)
-
-	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

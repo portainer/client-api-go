@@ -23,25 +23,25 @@ type PortainereeSettings struct {
 	AgentSecret string `json:"AgentSecret,omitempty"`
 
 	// allow bind mounts for regular users
-	AllowBindMountsForRegularUsers *bool `json:"AllowBindMountsForRegularUsers,omitempty"`
+	AllowBindMountsForRegularUsers bool `json:"AllowBindMountsForRegularUsers,omitempty"`
 
 	// allow container capabilities for regular users
-	AllowContainerCapabilitiesForRegularUsers *bool `json:"AllowContainerCapabilitiesForRegularUsers,omitempty"`
+	AllowContainerCapabilitiesForRegularUsers bool `json:"AllowContainerCapabilitiesForRegularUsers,omitempty"`
 
 	// allow device mapping for regular users
-	AllowDeviceMappingForRegularUsers *bool `json:"AllowDeviceMappingForRegularUsers,omitempty"`
+	AllowDeviceMappingForRegularUsers bool `json:"AllowDeviceMappingForRegularUsers,omitempty"`
 
 	// allow host namespace for regular users
-	AllowHostNamespaceForRegularUsers *bool `json:"AllowHostNamespaceForRegularUsers,omitempty"`
+	AllowHostNamespaceForRegularUsers bool `json:"AllowHostNamespaceForRegularUsers,omitempty"`
 
 	// allow privileged mode for regular users
-	AllowPrivilegedModeForRegularUsers *bool `json:"AllowPrivilegedModeForRegularUsers,omitempty"`
+	AllowPrivilegedModeForRegularUsers bool `json:"AllowPrivilegedModeForRegularUsers,omitempty"`
 
 	// allow stack management for regular users
-	AllowStackManagementForRegularUsers *bool `json:"AllowStackManagementForRegularUsers,omitempty"`
+	AllowStackManagementForRegularUsers bool `json:"AllowStackManagementForRegularUsers,omitempty"`
 
 	// allow volume browser for regular users
-	AllowVolumeBrowserForRegularUsers *bool `json:"AllowVolumeBrowserForRegularUsers,omitempty"`
+	AllowVolumeBrowserForRegularUsers bool `json:"AllowVolumeBrowserForRegularUsers,omitempty"`
 
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
@@ -56,6 +56,9 @@ type PortainereeSettings struct {
 	// The content in plaintext used to display in the login page. Will hide when value is empty string
 	CustomLoginBanner string `json:"CustomLoginBanner,omitempty"`
 
+	// edge
+	Edge *PortainereeEdge `json:"Edge,omitempty"`
+
 	// The default check in interval for edge agent (in seconds)
 	// Example: 5
 	EdgeAgentCheckinInterval int64 `json:"EdgeAgentCheckinInterval,omitempty"`
@@ -64,21 +67,21 @@ type PortainereeSettings struct {
 	EdgePortainerURL string `json:"EdgePortainerUrl,omitempty"`
 
 	// Whether edge compute features are enabled
-	EnableEdgeComputeFeatures *bool `json:"EnableEdgeComputeFeatures,omitempty"`
+	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
 
 	// Deprecated fields v26
-	EnableHostManagementFeatures *bool `json:"EnableHostManagementFeatures,omitempty"`
+	EnableHostManagementFeatures bool `json:"EnableHostManagementFeatures,omitempty"`
 
 	// Whether telemetry is enabled
 	// Example: false
-	EnableTelemetry *bool `json:"EnableTelemetry,omitempty"`
+	EnableTelemetry bool `json:"EnableTelemetry,omitempty"`
 
 	// EnforceEdgeID makes Portainer store the Edge ID instead of accepting anyone
 	// Example: false
-	EnforceEdgeID *bool `json:"EnforceEdgeID,omitempty"`
+	EnforceEdgeID bool `json:"EnforceEdgeID,omitempty"`
 
-	// feature flag settings
-	FeatureFlagSettings map[string]bool `json:"FeatureFlagSettings,omitempty"`
+	// Experimental features
+	ExperimentalFeatures *PortainereeExperimentalFeatures `json:"ExperimentalFeatures,omitempty"`
 
 	// Deployment options for encouraging git ops workflows
 	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
@@ -89,6 +92,9 @@ type PortainereeSettings struct {
 
 	// internal auth settings
 	InternalAuthSettings *PortainereeInternalAuthSettings `json:"InternalAuthSettings,omitempty"`
+
+	// is docker desktop extension
+	IsDockerDesktopExtension bool `json:"IsDockerDesktopExtension,omitempty"`
 
 	// The expiry of a Kubeconfig
 	// Example: 24h
@@ -110,7 +116,7 @@ type PortainereeSettings struct {
 
 	// Show the Kompose build option (discontinued in 2.18)
 	// Example: false
-	ShowKomposeBuildOption *bool `json:"ShowKomposeBuildOption,omitempty"`
+	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
 
 	// The interval in which environment(endpoint) snapshots are created
 	// Example: 5m
@@ -122,7 +128,7 @@ type PortainereeSettings struct {
 
 	// TrustOnFirstConnect makes Portainer accepting edge agent connection by default
 	// Example: false
-	TrustOnFirstConnect *bool `json:"TrustOnFirstConnect,omitempty"`
+	TrustOnFirstConnect bool `json:"TrustOnFirstConnect,omitempty"`
 
 	// The duration of a user session
 	// Example: 5m
@@ -132,13 +138,10 @@ type PortainereeSettings struct {
 	DefaultRegistry *PortainereeSettingsDefaultRegistry `json:"defaultRegistry,omitempty"`
 
 	// Deprecated fields
-	DisplayDonationHeader *bool `json:"displayDonationHeader,omitempty"`
+	DisplayDonationHeader bool `json:"displayDonationHeader,omitempty"`
 
 	// display external contributors
-	DisplayExternalContributors *bool `json:"displayExternalContributors,omitempty"`
-
-	// edge
-	Edge *PortainereeSettingsEdge `json:"edge,omitempty"`
+	DisplayExternalContributors bool `json:"displayExternalContributors,omitempty"`
 
 	// fdo configuration
 	FdoConfiguration *PortainereeFDOConfiguration `json:"fdoConfiguration,omitempty"`
@@ -159,6 +162,14 @@ func (m *PortainereeSettings) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateEdge(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExperimentalFeatures(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateGlobalDeploymentOptions(formats); err != nil {
 		res = append(res, err)
 	}
@@ -176,10 +187,6 @@ func (m *PortainereeSettings) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDefaultRegistry(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEdge(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -234,6 +241,44 @@ func (m *PortainereeSettings) validateCloudAPIKeys(formats strfmt.Registry) erro
 				return ve.ValidateName("CloudApiKeys")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("CloudApiKeys")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeSettings) validateEdge(formats strfmt.Registry) error {
+	if swag.IsZero(m.Edge) { // not required
+		return nil
+	}
+
+	if m.Edge != nil {
+		if err := m.Edge.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeSettings) validateExperimentalFeatures(formats strfmt.Registry) error {
+	if swag.IsZero(m.ExperimentalFeatures) { // not required
+		return nil
+	}
+
+	if m.ExperimentalFeatures != nil {
+		if err := m.ExperimentalFeatures.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ExperimentalFeatures")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ExperimentalFeatures")
 			}
 			return err
 		}
@@ -337,25 +382,6 @@ func (m *PortainereeSettings) validateDefaultRegistry(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *PortainereeSettings) validateEdge(formats strfmt.Registry) error {
-	if swag.IsZero(m.Edge) { // not required
-		return nil
-	}
-
-	if m.Edge != nil {
-		if err := m.Edge.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("edge")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("edge")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *PortainereeSettings) validateFdoConfiguration(formats strfmt.Registry) error {
 	if swag.IsZero(m.FdoConfiguration) { // not required
 		return nil
@@ -406,6 +432,14 @@ func (m *PortainereeSettings) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateEdge(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateExperimentalFeatures(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGlobalDeploymentOptions(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -423,10 +457,6 @@ func (m *PortainereeSettings) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidateDefaultRegistry(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEdge(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -472,6 +502,38 @@ func (m *PortainereeSettings) contextValidateCloudAPIKeys(ctx context.Context, f
 				return ve.ValidateName("CloudApiKeys")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("CloudApiKeys")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeSettings) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Edge != nil {
+		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Edge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Edge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeSettings) contextValidateExperimentalFeatures(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ExperimentalFeatures != nil {
+		if err := m.ExperimentalFeatures.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ExperimentalFeatures")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ExperimentalFeatures")
 			}
 			return err
 		}
@@ -552,22 +614,6 @@ func (m *PortainereeSettings) contextValidateDefaultRegistry(ctx context.Context
 				return ve.ValidateName("defaultRegistry")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("defaultRegistry")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PortainereeSettings) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Edge != nil {
-		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("edge")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("edge")
 			}
 			return err
 		}
@@ -657,59 +703,6 @@ func (m *PortainereeSettingsDefaultRegistry) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *PortainereeSettingsDefaultRegistry) UnmarshalBinary(b []byte) error {
 	var res PortainereeSettingsDefaultRegistry
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PortainereeSettingsEdge portaineree settings edge
-//
-// swagger:model PortainereeSettingsEdge
-type PortainereeSettingsEdge struct {
-
-	// The command list interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	CommandInterval int64 `json:"CommandInterval,omitempty"`
-
-	// The ping interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	PingInterval int64 `json:"PingInterval,omitempty"`
-
-	// The snapshot interval for edge agent - used in edge async mode (in seconds)
-	// Example: 5
-	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
-
-	// The address where the tunneling server can be reached by Edge agents
-	// Example: portainer.domain.tld
-	TunnelServerAddress string `json:"TunnelServerAddress,omitempty"`
-
-	// EdgeAsyncMode enables edge async mode by default
-	AsyncMode bool `json:"asyncMode,omitempty"`
-}
-
-// Validate validates this portaineree settings edge
-func (m *PortainereeSettingsEdge) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this portaineree settings edge based on context it is used
-func (m *PortainereeSettingsEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PortainereeSettingsEdge) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PortainereeSettingsEdge) UnmarshalBinary(b []byte) error {
-	var res PortainereeSettingsEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

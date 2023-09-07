@@ -26,7 +26,7 @@ type PortainereeTemplate struct {
 
 	// Whether the template should be available to administrators only
 	// Example: true
-	AdministratorOnly *bool `json:"administrator_only,omitempty"`
+	AdministratorOnly bool `json:"administrator_only,omitempty"`
 
 	// A list of categories associated to the template
 	// Example: ["database"]
@@ -55,13 +55,13 @@ type PortainereeTemplate struct {
 	// Whether the container should be started in
 	// interactive mode (-i -t equivalent on the CLI)
 	// Example: true
-	Interactive *bool `json:"interactive,omitempty"`
+	Interactive bool `json:"interactive,omitempty"`
 
 	// Container labels
 	Labels []*PortainereePair `json:"labels"`
 
 	// URL of the template's logo
-	// Example: https://cloudinovasi.id/assets/img/logos/nginx.png
+	// Example: https://portainer.io/img/logo.svg
 	Logo string `json:"logo,omitempty"`
 
 	// Optional stack/container fields
@@ -88,7 +88,7 @@ type PortainereeTemplate struct {
 
 	// Whether the container should be started in privileged mode
 	// Example: true
-	Privileged *bool `json:"privileged,omitempty"`
+	Privileged bool `json:"privileged,omitempty"`
 
 	// Optional container fields
 	// The URL of a registry associated to the image for a container template
@@ -110,7 +110,7 @@ type PortainereeTemplate struct {
 	// Example: Nginx
 	Title string `json:"title,omitempty"`
 
-	// Template type. Valid values are: 1 (container), 2 (Swarm stack) or 3 (Compose stack)
+	// Template type. Valid values are: 1 (container), 2 (Swarm stack), 3 (Compose stack), 4 (Compose edge stack)
 	// Example: 1
 	Type int64 `json:"type,omitempty"`
 

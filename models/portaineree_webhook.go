@@ -33,7 +33,7 @@ type PortainereeWebhook struct {
 	// token
 	Token string `json:"Token,omitempty"`
 
-	// type
+	// Type of webhook (1 - service, 2 - container)
 	Type int64 `json:"Type,omitempty"`
 }
 

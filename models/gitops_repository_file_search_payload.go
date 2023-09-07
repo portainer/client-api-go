@@ -19,6 +19,10 @@ import (
 // swagger:model gitops.repositoryFileSearchPayload
 type GitopsRepositoryFileSearchPayload struct {
 
+	// DirOnly List directories only
+	// Example: false
+	DirOnly bool `json:"dirOnly,omitempty"`
+
 	// git credential ID
 	GitCredentialID int64 `json:"gitCredentialID,omitempty"`
 
@@ -40,6 +44,10 @@ type GitopsRepositoryFileSearchPayload struct {
 	// repository
 	// Required: true
 	Repository *string `json:"repository"`
+
+	// TLSSkipVerify skips SSL verification when cloning the Git repository
+	// Example: false
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
 
 	// username
 	Username string `json:"username,omitempty"`

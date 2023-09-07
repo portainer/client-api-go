@@ -60,7 +60,7 @@ func (a *Client) GetTaskEvents(params *GetTaskEventsParams, authInfo runtime.Cli
 	op := &runtime.ClientOperation{
 		ID:                 "GetTaskEvents",
 		Method:             "GET",
-		PathPattern:        "/nomad/endpoints/{endpointID}/allocation/{id}/events",
+		PathPattern:        "/nomad/endpoints/{environmentId}/allocation/{id}/events",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -103,7 +103,7 @@ func (a *Client) GetTaskLogs(params *GetTaskLogsParams, authInfo runtime.ClientA
 	op := &runtime.ClientOperation{
 		ID:                 "GetTaskLogs",
 		Method:             "GET",
-		PathPattern:        "/nomad/endpoints/{endpointID}/allocation/{id}/logs",
+		PathPattern:        "/nomad/endpoints/{environmentId}/allocation/{id}/logs",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -146,7 +146,7 @@ func (a *Client) DeleteJob(params *DeleteJobParams, authInfo runtime.ClientAuthI
 	op := &runtime.ClientOperation{
 		ID:                 "deleteJob",
 		Method:             "DELETE",
-		PathPattern:        "/nomad/endpoints/{endpointID}/jobs/{id}",
+		PathPattern:        "/nomad/endpoints/{environmentId}/jobs/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -187,7 +187,7 @@ func (a *Client) GetDashboard(params *GetDashboardParams, authInfo runtime.Clien
 	op := &runtime.ClientOperation{
 		ID:                 "getDashboard",
 		Method:             "GET",
-		PathPattern:        "/nomad/endpoints/{endpointID}/dashboard",
+		PathPattern:        "/nomad/endpoints/{environmentId}/dashboard",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -228,7 +228,7 @@ func (a *Client) GetLeader(params *GetLeaderParams, authInfo runtime.ClientAuthI
 	op := &runtime.ClientOperation{
 		ID:                 "getLeader",
 		Method:             "GET",
-		PathPattern:        "/nomad/endpoints/{endpointID}/leader",
+		PathPattern:        "/nomad/endpoints/{environmentId}/leader",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -271,7 +271,7 @@ func (a *Client) ListJobs(params *ListJobsParams, authInfo runtime.ClientAuthInf
 	op := &runtime.ClientOperation{
 		ID:                 "listJobs",
 		Method:             "GET",
-		PathPattern:        "/nomad/endpoints/{endpointID}/jobs",
+		PathPattern:        "/nomad/endpoints/{environmentId}/jobs",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

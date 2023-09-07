@@ -21,7 +21,7 @@ type PortainereeLDAPSettings struct {
 
 	// Whether auto admin population is switched on or not
 	// Example: true
-	AdminAutoPopulate *bool `json:"AdminAutoPopulate,omitempty"`
+	AdminAutoPopulate bool `json:"AdminAutoPopulate,omitempty"`
 
 	// admin group search settings
 	AdminGroupSearchSettings []*PortainereeLDAPGroupSearchSettings `json:"AdminGroupSearchSettings"`
@@ -32,11 +32,11 @@ type PortainereeLDAPSettings struct {
 
 	// Enable this option if the server is configured for Anonymous access. When enabled, ReaderDN and Password will not be used
 	// Example: true
-	AnonymousMode *bool `json:"AnonymousMode,omitempty"`
+	AnonymousMode bool `json:"AnonymousMode,omitempty"`
 
 	// Automatically provision users and assign them to matching LDAP group names
 	// Example: true
-	AutoCreateUsers *bool `json:"AutoCreateUsers,omitempty"`
+	AutoCreateUsers bool `json:"AutoCreateUsers,omitempty"`
 
 	// group search settings
 	GroupSearchSettings []*PortainereeLDAPGroupSearchSettings `json:"GroupSearchSettings"`
@@ -58,7 +58,7 @@ type PortainereeLDAPSettings struct {
 
 	// Whether LDAP connection should use StartTLS
 	// Example: true
-	StartTLS *bool `json:"StartTLS,omitempty"`
+	StartTLS bool `json:"StartTLS,omitempty"`
 
 	// TLS config
 	TLSConfig *PortainereeTLSConfiguration `json:"TLSConfig,omitempty"`

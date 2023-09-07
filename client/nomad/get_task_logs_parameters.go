@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetTaskLogsParams creates a new GetTaskLogsParams object,
@@ -60,6 +61,19 @@ GetTaskLogsParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type GetTaskLogsParams struct {
+
+	/* EnvironmentID.
+
+	   Environment identifier
+	*/
+	EnvironmentID int64
+
+	/* ID.
+
+	   Allocation identifier
+	*/
+	ID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +127,28 @@ func (o *GetTaskLogsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEnvironmentID adds the environmentID to the get task logs params
+func (o *GetTaskLogsParams) WithEnvironmentID(environmentID int64) *GetTaskLogsParams {
+	o.SetEnvironmentID(environmentID)
+	return o
+}
+
+// SetEnvironmentID adds the environmentId to the get task logs params
+func (o *GetTaskLogsParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
+}
+
+// WithID adds the id to the get task logs params
+func (o *GetTaskLogsParams) WithID(id int64) *GetTaskLogsParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the get task logs params
+func (o *GetTaskLogsParams) SetID(id int64) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetTaskLogsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +156,16 @@ func (o *GetTaskLogsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
+
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
+		return err
+	}
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

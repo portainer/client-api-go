@@ -68,13 +68,13 @@ type StackUpdateParams struct {
 
 	   Stack details
 	*/
-	Body *models.StacksUpdateSwarmStackPayload
+	Body *models.StacksUpdateStackPayload
 
 	/* EndpointID.
 
-	   Stacks created before version 1.18.0 might not have an associated environment(endpoint) identifier. Use this optional parameter to set the environment(endpoint) identifier used by the stack.
+	   Environment identifier
 	*/
-	EndpointID *int64
+	EndpointID int64
 
 	/* ID.
 
@@ -136,24 +136,24 @@ func (o *StackUpdateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the stack update params
-func (o *StackUpdateParams) WithBody(body *models.StacksUpdateSwarmStackPayload) *StackUpdateParams {
+func (o *StackUpdateParams) WithBody(body *models.StacksUpdateStackPayload) *StackUpdateParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the stack update params
-func (o *StackUpdateParams) SetBody(body *models.StacksUpdateSwarmStackPayload) {
+func (o *StackUpdateParams) SetBody(body *models.StacksUpdateStackPayload) {
 	o.Body = body
 }
 
 // WithEndpointID adds the endpointID to the stack update params
-func (o *StackUpdateParams) WithEndpointID(endpointID *int64) *StackUpdateParams {
+func (o *StackUpdateParams) WithEndpointID(endpointID int64) *StackUpdateParams {
 	o.SetEndpointID(endpointID)
 	return o
 }
 
 // SetEndpointID adds the endpointId to the stack update params
-func (o *StackUpdateParams) SetEndpointID(endpointID *int64) {
+func (o *StackUpdateParams) SetEndpointID(endpointID int64) {
 	o.EndpointID = endpointID
 }
 
@@ -181,20 +181,13 @@ func (o *StackUpdateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		}
 	}
 
-	if o.EndpointID != nil {
+	// query param endpointId
+	qrEndpointID := o.EndpointID
+	qEndpointID := swag.FormatInt64(qrEndpointID)
+	if qEndpointID != "" {
 
-		// query param endpointId
-		var qrEndpointID int64
-
-		if o.EndpointID != nil {
-			qrEndpointID = *o.EndpointID
-		}
-		qEndpointID := swag.FormatInt64(qrEndpointID)
-		if qEndpointID != "" {
-
-			if err := r.SetQueryParam("endpointId", qEndpointID); err != nil {
-				return err
-			}
+		if err := r.SetQueryParam("endpointId", qEndpointID); err != nil {
+			return err
 		}
 	}
 

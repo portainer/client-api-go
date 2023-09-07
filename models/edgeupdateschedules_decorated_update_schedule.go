@@ -46,6 +46,10 @@ type EdgeupdateschedulesDecoratedUpdateSchedule struct {
 	// Example: Update Schedule
 	Name string `json:"name,omitempty"`
 
+	// ID of registry
+	// Example: 1
+	RegistryID int64 `json:"registryId,omitempty"`
+
 	// scheduled time
 	ScheduledTime string `json:"scheduledTime,omitempty"`
 

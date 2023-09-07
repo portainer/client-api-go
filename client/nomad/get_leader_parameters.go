@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetLeaderParams creates a new GetLeaderParams object,
@@ -60,6 +61,13 @@ GetLeaderParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type GetLeaderParams struct {
+
+	/* EnvironmentID.
+
+	   Environment identifier
+	*/
+	EnvironmentID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +121,17 @@ func (o *GetLeaderParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEnvironmentID adds the environmentID to the get leader params
+func (o *GetLeaderParams) WithEnvironmentID(environmentID int64) *GetLeaderParams {
+	o.SetEnvironmentID(environmentID)
+	return o
+}
+
+// SetEnvironmentID adds the environmentId to the get leader params
+func (o *GetLeaderParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetLeaderParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +139,11 @@ func (o *GetLeaderParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
+
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

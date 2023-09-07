@@ -62,11 +62,23 @@ StackFileInspectParams contains all the parameters to send to the API endpoint
 */
 type StackFileInspectParams struct {
 
+	/* CommitHash.
+
+	   Git repository commit hash. If both version and commitHash are provided, the commitHash will be used
+	*/
+	CommitHash *string
+
 	/* ID.
 
 	   Stack identifier
 	*/
 	ID int64
+
+	/* Version.
+
+	   Stack file version maintained by Portainer. If both version and commitHash are provided, the commitHash will be used
+	*/
+	Version *int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,6 +133,17 @@ func (o *StackFileInspectParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithCommitHash adds the commitHash to the stack file inspect params
+func (o *StackFileInspectParams) WithCommitHash(commitHash *string) *StackFileInspectParams {
+	o.SetCommitHash(commitHash)
+	return o
+}
+
+// SetCommitHash adds the commitHash to the stack file inspect params
+func (o *StackFileInspectParams) SetCommitHash(commitHash *string) {
+	o.CommitHash = commitHash
+}
+
 // WithID adds the id to the stack file inspect params
 func (o *StackFileInspectParams) WithID(id int64) *StackFileInspectParams {
 	o.SetID(id)
@@ -132,6 +155,17 @@ func (o *StackFileInspectParams) SetID(id int64) {
 	o.ID = id
 }
 
+// WithVersion adds the version to the stack file inspect params
+func (o *StackFileInspectParams) WithVersion(version *int64) *StackFileInspectParams {
+	o.SetVersion(version)
+	return o
+}
+
+// SetVersion adds the version to the stack file inspect params
+func (o *StackFileInspectParams) SetVersion(version *int64) {
+	o.Version = version
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *StackFileInspectParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -140,9 +174,43 @@ func (o *StackFileInspectParams) WriteToRequest(r runtime.ClientRequest, reg str
 	}
 	var res []error
 
+	if o.CommitHash != nil {
+
+		// query param commitHash
+		var qrCommitHash string
+
+		if o.CommitHash != nil {
+			qrCommitHash = *o.CommitHash
+		}
+		qCommitHash := qrCommitHash
+		if qCommitHash != "" {
+
+			if err := r.SetQueryParam("commitHash", qCommitHash); err != nil {
+				return err
+			}
+		}
+	}
+
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
+	}
+
+	if o.Version != nil {
+
+		// query param version
+		var qrVersion int64
+
+		if o.Version != nil {
+			qrVersion = *o.Version
+		}
+		qVersion := swag.FormatInt64(qrVersion)
+		if qVersion != "" {
+
+			if err := r.SetQueryParam("version", qVersion); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

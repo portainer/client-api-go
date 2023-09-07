@@ -30,8 +30,12 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Required: true
 	Description *string `json:"description"`
 
+	// IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
+	// Example: false
+	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
+
 	// URL of the template's logo
-	// Example: https://cloudinovasi.id/assets/img/logos/nginx.png
+	// Example: https://portainer.io/img/logo.svg
 	Logo string `json:"logo,omitempty"`
 
 	// A note that will be displayed in the UI. Supports HTML content
@@ -47,7 +51,7 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 
 	// Use basic authentication to clone the Git repository
 	// Example: true
-	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
+	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
 
 	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
 	// is true and RepositoryUsername/RepositoryPassword are not provided
@@ -78,7 +82,14 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Required: true
 	Title *string `json:"title"`
 
-	// Type of created stack (1 - swarm, 2 - compose)
+	// TLSSkipVerify skips SSL verification when cloning the Git repository
+	// Example: false
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
+
+	// Type of created stack:
+	// * 1 - swarm
+	// * 2 - compose
+	// * 3 - kubernetes
 	// Example: 1
 	// Required: true
 	// Enum: [1 2]

@@ -62,11 +62,11 @@ UpdateK8sPodSecurityRuleParams contains all the parameters to send to the API en
 */
 type UpdateK8sPodSecurityRuleParams struct {
 
-	/* ID.
+	/* EnvironmentID.
 
 	   Environment(Endpoint) identifier
 	*/
-	ID int64
+	EnvironmentID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,15 +121,15 @@ func (o *UpdateK8sPodSecurityRuleParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the update k8s pod security rule params
-func (o *UpdateK8sPodSecurityRuleParams) WithID(id int64) *UpdateK8sPodSecurityRuleParams {
-	o.SetID(id)
+// WithEnvironmentID adds the environmentID to the update k8s pod security rule params
+func (o *UpdateK8sPodSecurityRuleParams) WithEnvironmentID(environmentID int64) *UpdateK8sPodSecurityRuleParams {
+	o.SetEnvironmentID(environmentID)
 	return o
 }
 
-// SetID adds the id to the update k8s pod security rule params
-func (o *UpdateK8sPodSecurityRuleParams) SetID(id int64) {
-	o.ID = id
+// SetEnvironmentID adds the environmentId to the update k8s pod security rule params
+func (o *UpdateK8sPodSecurityRuleParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,8 +140,8 @@ func (o *UpdateK8sPodSecurityRuleParams) WriteToRequest(r runtime.ClientRequest,
 	}
 	var res []error
 
-	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
 		return err
 	}
 

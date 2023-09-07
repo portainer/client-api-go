@@ -32,7 +32,7 @@ type PortainereeEndpoint struct {
 	// azure credentials
 	AzureCredentials *PortainereeAzureCredentials `json:"AzureCredentials,omitempty"`
 
-	// Automatic update change window restriction for stacks and apps
+	// GitOps update change window restriction for stacks and apps
 	ChangeWindow *PortainereeEndpointChangeWindow `json:"ChangeWindow,omitempty"`
 
 	// A Kubernetes as a service cloud provider. Only included if this
@@ -56,8 +56,11 @@ type PortainereeEndpoint struct {
 	// The key which is used to map the agent to Portainer
 	EdgeKey string `json:"EdgeKey,omitempty"`
 
+	// enable g p u management
+	EnableGPUManagement bool `json:"EnableGPUManagement,omitempty"`
+
 	// enable image notification
-	EnableImageNotification *bool `json:"EnableImageNotification,omitempty"`
+	EnableImageNotification bool `json:"EnableImageNotification,omitempty"`
 
 	// gpus
 	Gpus []*PortainereePair `json:"Gpus"`
@@ -65,6 +68,10 @@ type PortainereeEndpoint struct {
 	// Environment(Endpoint) group identifier
 	// Example: 1
 	GroupID int64 `json:"GroupId,omitempty"`
+
+	// Heartbeat indicates the heartbeat status of an edge environment
+	// Example: true
+	Heartbeat bool `json:"Heartbeat,omitempty"`
 
 	// Environment(Endpoint) Identifier
 	// Example: 1
@@ -101,7 +108,7 @@ type PortainereeEndpoint struct {
 
 	// Deprecated fields
 	// Deprecated in DBVersion == 4
-	TLS *bool `json:"TLS,omitempty"`
+	TLS bool `json:"TLS,omitempty"`
 
 	// TLS c a cert
 	TLSCACert string `json:"TLSCACert,omitempty"`
@@ -139,10 +146,10 @@ type PortainereeEndpoint struct {
 	Agent *PortainereeEndpointAgent `json:"agent,omitempty"`
 
 	// edge
-	Edge *PortainereeEndpointEdge `json:"edge,omitempty"`
+	Edge *PortainereeEnvironmentEdgeSettings `json:"edge,omitempty"`
 
-	// IsEdgeDevice marks if the environment was created as an EdgeDevice
-	IsEdgeDevice *bool `json:"isEdgeDevice,omitempty"`
+	// Deprecated v2.18
+	IsEdgeDevice bool `json:"isEdgeDevice,omitempty"`
 
 	// LastCheckInDate mark last check-in date on checkin
 	LastCheckInDate int64 `json:"lastCheckInDate,omitempty"`
@@ -157,7 +164,7 @@ type PortainereeEndpoint struct {
 	SecuritySettings *PortainereeEndpointSecuritySettings `json:"securitySettings,omitempty"`
 
 	// Whether the device has been trusted or not by the user
-	UserTrusted *bool `json:"userTrusted,omitempty"`
+	UserTrusted bool `json:"userTrusted,omitempty"`
 }
 
 // Validate validates this portaineree endpoint
@@ -935,55 +942,6 @@ func (m *PortainereeEndpointAgent) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *PortainereeEndpointAgent) UnmarshalBinary(b []byte) error {
 	var res PortainereeEndpointAgent
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// PortainereeEndpointEdge portaineree endpoint edge
-//
-// swagger:model PortainereeEndpointEdge
-type PortainereeEndpointEdge struct {
-
-	// The command list interval for edge agent - used in edge async mode [seconds]
-	// Example: 60
-	CommandInterval int64 `json:"CommandInterval,omitempty"`
-
-	// The ping interval for edge agent - used in edge async mode [seconds]
-	// Example: 60
-	PingInterval int64 `json:"PingInterval,omitempty"`
-
-	// The snapshot interval for edge agent - used in edge async mode [seconds]
-	// Example: 60
-	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
-
-	// Whether the device has been started in edge async mode
-	AsyncMode bool `json:"asyncMode,omitempty"`
-}
-
-// Validate validates this portaineree endpoint edge
-func (m *PortainereeEndpointEdge) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this portaineree endpoint edge based on context it is used
-func (m *PortainereeEndpointEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *PortainereeEndpointEdge) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *PortainereeEndpointEdge) UnmarshalBinary(b []byte) error {
-	var res PortainereeEndpointEdge
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

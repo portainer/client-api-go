@@ -25,6 +25,10 @@ type PortainereeUser struct {
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
+	// OpenAI integration parameters
+	// Example: sk-1234567890
+	OpenAIAPIKey string `json:"OpenAIApiKey,omitempty"`
+
 	// portainer authorizations
 	PortainerAuthorizations PortainereeAuthorizations `json:"PortainerAuthorizations,omitempty"`
 

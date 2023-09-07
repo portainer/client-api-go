@@ -47,22 +47,38 @@ type LiblicensePortainerLicense struct {
 	// nodes
 	Nodes int64 `json:"nodes,omitempty"`
 
-	// product edition
+	// ProductEdition was created originally with plans on having a
+	// seperate portainer product for Enterprise users and Business users
+	// with differing features. This didn't wind up coming about, but may
+	// still serve useful in the future if we need to issue keys for a
+	// different product entirely.
+	// Originally, the ProductEdition was used as the prefix for generating
+	// license keys, but in practice most people thought it was the
+	// "version" due to us having the original extension licenses which can
+	// be thought of as the true version 1 licenses.
 	ProductEdition int64 `json:"productEdition,omitempty"`
+
+	// redis ref
+	RedisRef string `json:"redisRef,omitempty"`
 
 	// reference
 	Reference string `json:"reference,omitempty"`
 
 	// revoked
-	Revoked *bool `json:"revoked,omitempty"`
+	Revoked bool `json:"revoked,omitempty"`
 
 	// revoked at
 	RevokedAt int64 `json:"revokedAt,omitempty"`
 
-	// type
+	// Type is used to distinguish different kinds of licenses, trial
+	// licenses, enterprise subscriptions
 	Type int64 `json:"type,omitempty"`
 
-	// version
+	// unique Id
+	UniqueID string `json:"uniqueId,omitempty"`
+
+	// Version indicates which key should be used to encode/decode the
+	// license string.
 	Version int64 `json:"version,omitempty"`
 }
 

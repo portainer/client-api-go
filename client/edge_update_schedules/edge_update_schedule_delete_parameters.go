@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeUpdateScheduleDeleteParams creates a new EdgeUpdateScheduleDeleteParams object,
@@ -60,6 +61,13 @@ EdgeUpdateScheduleDeleteParams contains all the parameters to send to the API en
 	Typically these are written to a http.Request.
 */
 type EdgeUpdateScheduleDeleteParams struct {
+
+	/* ID.
+
+	   EdgeUpdate Id
+	*/
+	ID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +121,17 @@ func (o *EdgeUpdateScheduleDeleteParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithID adds the id to the edge update schedule delete params
+func (o *EdgeUpdateScheduleDeleteParams) WithID(id int64) *EdgeUpdateScheduleDeleteParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the edge update schedule delete params
+func (o *EdgeUpdateScheduleDeleteParams) SetID(id int64) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *EdgeUpdateScheduleDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +139,11 @@ func (o *EdgeUpdateScheduleDeleteParams) WriteToRequest(r runtime.ClientRequest,
 		return err
 	}
 	var res []error
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

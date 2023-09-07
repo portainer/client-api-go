@@ -42,7 +42,7 @@ func NewLicensesAttachOK() *LicensesAttachOK {
 /*
 LicensesAttachOK describes a response with status code 200, with default header values.
 
-Success license data will be in `body.Licenses`, Failures will be in `body.FailedKeys[key] = error`
+Success license data will be in `body.Licenses`, Failures will be in `body.ConflictingKeys = error`
 */
 type LicensesAttachOK struct {
 	Payload *models.LicensesAttachResponse
@@ -74,11 +74,11 @@ func (o *LicensesAttachOK) IsCode(code int) bool {
 }
 
 func (o *LicensesAttachOK) Error() string {
-	return fmt.Sprintf("[POST /licenses][%d] licensesAttachOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /licenses/add][%d] licensesAttachOK  %+v", 200, o.Payload)
 }
 
 func (o *LicensesAttachOK) String() string {
-	return fmt.Sprintf("[POST /licenses][%d] licensesAttachOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[POST /licenses/add][%d] licensesAttachOK  %+v", 200, o.Payload)
 }
 
 func (o *LicensesAttachOK) GetPayload() *models.LicensesAttachResponse {

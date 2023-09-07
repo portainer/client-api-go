@@ -20,13 +20,13 @@ import (
 type PortainereeKubernetesConfiguration struct {
 
 	// allow none ingress class
-	AllowNoneIngressClass *bool `json:"AllowNoneIngressClass,omitempty"`
+	AllowNoneIngressClass bool `json:"AllowNoneIngressClass,omitempty"`
 
 	// enable resource over commit
-	EnableResourceOverCommit *bool `json:"EnableResourceOverCommit,omitempty"`
+	EnableResourceOverCommit bool `json:"EnableResourceOverCommit,omitempty"`
 
 	// ingress availability per namespace
-	IngressAvailabilityPerNamespace *bool `json:"IngressAvailabilityPerNamespace,omitempty"`
+	IngressAvailabilityPerNamespace bool `json:"IngressAvailabilityPerNamespace,omitempty"`
 
 	// ingress classes
 	IngressClasses []*PortainereeKubernetesIngressClassConfig `json:"IngressClasses"`
@@ -35,19 +35,19 @@ type PortainereeKubernetesConfiguration struct {
 	ResourceOverCommitPercentage int64 `json:"ResourceOverCommitPercentage,omitempty"`
 
 	// restrict default namespace
-	RestrictDefaultNamespace *bool `json:"RestrictDefaultNamespace,omitempty"`
+	RestrictDefaultNamespace bool `json:"RestrictDefaultNamespace,omitempty"`
 
 	// restrict standard user ingress w
-	RestrictStandardUserIngressW *bool `json:"RestrictStandardUserIngressW,omitempty"`
+	RestrictStandardUserIngressW bool `json:"RestrictStandardUserIngressW,omitempty"`
 
 	// storage classes
 	StorageClasses []*PortainereeKubernetesStorageClassConfig `json:"StorageClasses"`
 
 	// use load balancer
-	UseLoadBalancer *bool `json:"UseLoadBalancer,omitempty"`
+	UseLoadBalancer bool `json:"UseLoadBalancer,omitempty"`
 
 	// use server metrics
-	UseServerMetrics *bool `json:"UseServerMetrics,omitempty"`
+	UseServerMetrics bool `json:"UseServerMetrics,omitempty"`
 }
 
 // Validate validates this portaineree kubernetes configuration

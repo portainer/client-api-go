@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewDuplicateParams creates a new DuplicateParams object,
@@ -60,6 +61,13 @@ DuplicateParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type DuplicateParams struct {
+
+	/* ID.
+
+	   FDO Profile identifier
+	*/
+	ID int64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +121,17 @@ func (o *DuplicateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithID adds the id to the duplicate params
+func (o *DuplicateParams) WithID(id int64) *DuplicateParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the duplicate params
+func (o *DuplicateParams) SetID(id int64) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *DuplicateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +139,11 @@ func (o *DuplicateParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Reg
 		return err
 	}
 	var res []error
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

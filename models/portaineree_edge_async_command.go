@@ -21,7 +21,7 @@ type PortainereeEdgeAsyncCommand struct {
 	EndpointID int64 `json:"endpointID,omitempty"`
 
 	// executed
-	Executed *bool `json:"executed,omitempty"`
+	Executed bool `json:"executed,omitempty"`
 
 	// id
 	ID int64 `json:"id,omitempty"`

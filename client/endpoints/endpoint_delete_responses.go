@@ -32,6 +32,12 @@ func (o *EndpointDeleteReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
+	case 403:
+		result := NewEndpointDeleteForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 404:
 		result := NewEndpointDeleteNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -147,6 +153,57 @@ func (o *EndpointDeleteBadRequest) String() string {
 }
 
 func (o *EndpointDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewEndpointDeleteForbidden creates a EndpointDeleteForbidden with default headers values
+func NewEndpointDeleteForbidden() *EndpointDeleteForbidden {
+	return &EndpointDeleteForbidden{}
+}
+
+/*
+EndpointDeleteForbidden describes a response with status code 403, with default header values.
+
+Permission denied
+*/
+type EndpointDeleteForbidden struct {
+}
+
+// IsSuccess returns true when this endpoint delete forbidden response has a 2xx status code
+func (o *EndpointDeleteForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint delete forbidden response has a 3xx status code
+func (o *EndpointDeleteForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint delete forbidden response has a 4xx status code
+func (o *EndpointDeleteForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint delete forbidden response has a 5xx status code
+func (o *EndpointDeleteForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint delete forbidden response a status code equal to that given
+func (o *EndpointDeleteForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+func (o *EndpointDeleteForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteForbidden ", 403)
+}
+
+func (o *EndpointDeleteForbidden) String() string {
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteForbidden ", 403)
+}
+
+func (o *EndpointDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

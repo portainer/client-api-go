@@ -12,10 +12,12 @@ import (
 
 	"github.com/portainer/client-api-go/v2/client/auth"
 	"github.com/portainer/client-api-go/v2/client/backup"
+	"github.com/portainer/client-api-go/v2/client/chat"
 	"github.com/portainer/client-api-go/v2/client/cloud_credentials"
 	"github.com/portainer/client-api-go/v2/client/custom_templates"
 	"github.com/portainer/client-api-go/v2/client/docker"
 	"github.com/portainer/client-api-go/v2/client/edge"
+	"github.com/portainer/client-api-go/v2/client/edge_configs"
 	"github.com/portainer/client-api-go/v2/client/edge_groups"
 	"github.com/portainer/client-api-go/v2/client/edge_jobs"
 	"github.com/portainer/client-api-go/v2/client/edge_stacks"
@@ -96,10 +98,12 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.Transport = transport
 	cli.Auth = auth.New(transport, formats)
 	cli.Backup = backup.New(transport, formats)
+	cli.Chat = chat.New(transport, formats)
 	cli.CloudCredentials = cloud_credentials.New(transport, formats)
 	cli.CustomTemplates = custom_templates.New(transport, formats)
 	cli.Docker = docker.New(transport, formats)
 	cli.Edge = edge.New(transport, formats)
+	cli.EdgeConfigs = edge_configs.New(transport, formats)
 	cli.EdgeGroups = edge_groups.New(transport, formats)
 	cli.EdgeJobs = edge_jobs.New(transport, formats)
 	cli.EdgeStacks = edge_stacks.New(transport, formats)
@@ -182,6 +186,8 @@ type PortainerClientAPI struct {
 
 	Backup backup.ClientService
 
+	Chat chat.ClientService
+
 	CloudCredentials cloud_credentials.ClientService
 
 	CustomTemplates custom_templates.ClientService
@@ -189,6 +195,8 @@ type PortainerClientAPI struct {
 	Docker docker.ClientService
 
 	Edge edge.ClientService
+
+	EdgeConfigs edge_configs.ClientService
 
 	EdgeGroups edge_groups.ClientService
 
@@ -266,10 +274,12 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Auth.SetTransport(transport)
 	c.Backup.SetTransport(transport)
+	c.Chat.SetTransport(transport)
 	c.CloudCredentials.SetTransport(transport)
 	c.CustomTemplates.SetTransport(transport)
 	c.Docker.SetTransport(transport)
 	c.Edge.SetTransport(transport)
+	c.EdgeConfigs.SetTransport(transport)
 	c.EdgeGroups.SetTransport(transport)
 	c.EdgeJobs.SetTransport(transport)
 	c.EdgeStacks.SetTransport(transport)

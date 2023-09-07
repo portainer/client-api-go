@@ -80,6 +80,12 @@ type EndpointCreateParams struct {
 	*/
 	AzureTenantID *string
 
+	/* EdgeAsyncMode.
+
+	   Enable async mode for edge agent
+	*/
+	EdgeAsyncMode *bool
+
 	/* EdgeCheckinInterval.
 
 	   The check in interval for edge agent (in seconds)
@@ -88,33 +94,27 @@ type EndpointCreateParams struct {
 
 	/* EdgeTunnelServerAddress.
 
-	   URL or IP address that will be used to establish a reverse tunnel
+	   URL or IP address that will be used to establish a reverse tunnel. Required when settings.EnableEdgeComputeFeatures is set to false or when settings.Edge.TunnelServerAddress is not set
 	*/
-	EdgeTunnelServerAddress string
+	EdgeTunnelServerAddress *string
 
 	/* EndpointCreationType.
 
-	   Environment(Endpoint) type. Value must be one of: 1 (Local Docker environment), 2 (Agent environment), 3 (Azure environment), 4 (Edge agent environment) or 5 (Local Kubernetes Environment
+	   Environment(Endpoint) type. Value must be one of: 1 (Local Docker environment), 2 (Agent environment), 3 (Azure environment), 4 (Edge agent environment) or 5 (Local Kubernetes Environment)
 	*/
 	EndpointCreationType int64
 
 	/* Gpus.
 
-	   List of GPUs
+	   List of GPUs - json stringified array of {name, value} structs
 	*/
-	Gpus []string
+	Gpus *string
 
 	/* GroupID.
 
 	   Environment(Endpoint) group identifier. If not specified will default to 1 (unassigned).
 	*/
 	GroupID *int64
-
-	/* IsEdgeDevice.
-
-	   Is Edge Device
-	*/
-	IsEdgeDevice *bool
 
 	/* Name.
 
@@ -130,7 +130,7 @@ type EndpointCreateParams struct {
 
 	/* TLS.
 
-	   Require TLS to connect against this environment(endpoint)
+	   Require TLS to connect against this environment(endpoint). Must be true if EndpointCreationType is set to 2 (Agent environment)
 	*/
 	TLS *bool
 
@@ -154,25 +154,25 @@ type EndpointCreateParams struct {
 
 	/* TLSSkipClientVerify.
 
-	   Skip client verification when using TLS
+	   Skip client verification when using TLS. Must be true if EndpointCreationType is set to 2 (Agent environment)
 	*/
 	TLSSkipClientVerify *bool
 
 	/* TLSSkipVerify.
 
-	   Skip server verification when using TLS
+	   Skip server verification when using TLS. Must be true if EndpointCreationType is set to 2 (Agent environment)
 	*/
 	TLSSkipVerify *bool
 
-	/* TagIDs.
+	/* TagIds.
 
 	   List of tag identifiers to which this environment(endpoint) is associated
 	*/
-	TagIDs []int64
+	TagIds []int64
 
 	/* URL.
 
-	   URL or IP address of a Docker host (example: docker.mydomain.tld:2375). Defaults to local if not specified (Linux: /var/run/docker.sock, Windows: //./pipe/docker_engine)
+	   URL or IP address of a Docker host (example: docker.mydomain.tld:2375). Defaults to local if not specified (Linux: /var/run/docker.sock, Windows: //./pipe/docker_engine). Cannot be empty if EndpointCreationType is set to 4 (Edge agent environment)
 	*/
 	URL *string
 
@@ -262,6 +262,17 @@ func (o *EndpointCreateParams) SetAzureTenantID(azureTenantID *string) {
 	o.AzureTenantID = azureTenantID
 }
 
+// WithEdgeAsyncMode adds the edgeAsyncMode to the endpoint create params
+func (o *EndpointCreateParams) WithEdgeAsyncMode(edgeAsyncMode *bool) *EndpointCreateParams {
+	o.SetEdgeAsyncMode(edgeAsyncMode)
+	return o
+}
+
+// SetEdgeAsyncMode adds the edgeAsyncMode to the endpoint create params
+func (o *EndpointCreateParams) SetEdgeAsyncMode(edgeAsyncMode *bool) {
+	o.EdgeAsyncMode = edgeAsyncMode
+}
+
 // WithEdgeCheckinInterval adds the edgeCheckinInterval to the endpoint create params
 func (o *EndpointCreateParams) WithEdgeCheckinInterval(edgeCheckinInterval *int64) *EndpointCreateParams {
 	o.SetEdgeCheckinInterval(edgeCheckinInterval)
@@ -274,13 +285,13 @@ func (o *EndpointCreateParams) SetEdgeCheckinInterval(edgeCheckinInterval *int64
 }
 
 // WithEdgeTunnelServerAddress adds the edgeTunnelServerAddress to the endpoint create params
-func (o *EndpointCreateParams) WithEdgeTunnelServerAddress(edgeTunnelServerAddress string) *EndpointCreateParams {
+func (o *EndpointCreateParams) WithEdgeTunnelServerAddress(edgeTunnelServerAddress *string) *EndpointCreateParams {
 	o.SetEdgeTunnelServerAddress(edgeTunnelServerAddress)
 	return o
 }
 
 // SetEdgeTunnelServerAddress adds the edgeTunnelServerAddress to the endpoint create params
-func (o *EndpointCreateParams) SetEdgeTunnelServerAddress(edgeTunnelServerAddress string) {
+func (o *EndpointCreateParams) SetEdgeTunnelServerAddress(edgeTunnelServerAddress *string) {
 	o.EdgeTunnelServerAddress = edgeTunnelServerAddress
 }
 
@@ -296,13 +307,13 @@ func (o *EndpointCreateParams) SetEndpointCreationType(endpointCreationType int6
 }
 
 // WithGpus adds the gpus to the endpoint create params
-func (o *EndpointCreateParams) WithGpus(gpus []string) *EndpointCreateParams {
+func (o *EndpointCreateParams) WithGpus(gpus *string) *EndpointCreateParams {
 	o.SetGpus(gpus)
 	return o
 }
 
 // SetGpus adds the gpus to the endpoint create params
-func (o *EndpointCreateParams) SetGpus(gpus []string) {
+func (o *EndpointCreateParams) SetGpus(gpus *string) {
 	o.Gpus = gpus
 }
 
@@ -315,17 +326,6 @@ func (o *EndpointCreateParams) WithGroupID(groupID *int64) *EndpointCreateParams
 // SetGroupID adds the groupId to the endpoint create params
 func (o *EndpointCreateParams) SetGroupID(groupID *int64) {
 	o.GroupID = groupID
-}
-
-// WithIsEdgeDevice adds the isEdgeDevice to the endpoint create params
-func (o *EndpointCreateParams) WithIsEdgeDevice(isEdgeDevice *bool) *EndpointCreateParams {
-	o.SetIsEdgeDevice(isEdgeDevice)
-	return o
-}
-
-// SetIsEdgeDevice adds the isEdgeDevice to the endpoint create params
-func (o *EndpointCreateParams) SetIsEdgeDevice(isEdgeDevice *bool) {
-	o.IsEdgeDevice = isEdgeDevice
 }
 
 // WithName adds the name to the endpoint create params
@@ -416,15 +416,15 @@ func (o *EndpointCreateParams) SetTLSSkipVerify(tLSSkipVerify *bool) {
 	o.TLSSkipVerify = tLSSkipVerify
 }
 
-// WithTagIDs adds the tagIDs to the endpoint create params
-func (o *EndpointCreateParams) WithTagIDs(tagIDs []int64) *EndpointCreateParams {
-	o.SetTagIDs(tagIDs)
+// WithTagIds adds the tagIds to the endpoint create params
+func (o *EndpointCreateParams) WithTagIds(tagIds []int64) *EndpointCreateParams {
+	o.SetTagIds(tagIds)
 	return o
 }
 
-// SetTagIDs adds the tagIDs to the endpoint create params
-func (o *EndpointCreateParams) SetTagIDs(tagIDs []int64) {
-	o.TagIDs = tagIDs
+// SetTagIds adds the tagIds to the endpoint create params
+func (o *EndpointCreateParams) SetTagIds(tagIds []int64) {
+	o.TagIds = tagIds
 }
 
 // WithURL adds the url to the endpoint create params
@@ -491,6 +491,21 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		}
 	}
 
+	if o.EdgeAsyncMode != nil {
+
+		// form param EdgeAsyncMode
+		var frEdgeAsyncMode bool
+		if o.EdgeAsyncMode != nil {
+			frEdgeAsyncMode = *o.EdgeAsyncMode
+		}
+		fEdgeAsyncMode := swag.FormatBool(frEdgeAsyncMode)
+		if fEdgeAsyncMode != "" {
+			if err := r.SetFormParam("EdgeAsyncMode", fEdgeAsyncMode); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.EdgeCheckinInterval != nil {
 
 		// form param EdgeCheckinInterval
@@ -506,12 +521,18 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		}
 	}
 
-	// form param EdgeTunnelServerAddress
-	frEdgeTunnelServerAddress := o.EdgeTunnelServerAddress
-	fEdgeTunnelServerAddress := frEdgeTunnelServerAddress
-	if fEdgeTunnelServerAddress != "" {
-		if err := r.SetFormParam("EdgeTunnelServerAddress", fEdgeTunnelServerAddress); err != nil {
-			return err
+	if o.EdgeTunnelServerAddress != nil {
+
+		// form param EdgeTunnelServerAddress
+		var frEdgeTunnelServerAddress string
+		if o.EdgeTunnelServerAddress != nil {
+			frEdgeTunnelServerAddress = *o.EdgeTunnelServerAddress
+		}
+		fEdgeTunnelServerAddress := frEdgeTunnelServerAddress
+		if fEdgeTunnelServerAddress != "" {
+			if err := r.SetFormParam("EdgeTunnelServerAddress", fEdgeTunnelServerAddress); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -526,12 +547,16 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 
 	if o.Gpus != nil {
 
-		// binding items for Gpus
-		joinedGpus := o.bindParamGpus(reg)
-
-		// form array param Gpus
-		if err := r.SetFormParam("Gpus", joinedGpus...); err != nil {
-			return err
+		// form param Gpus
+		var frGpus string
+		if o.Gpus != nil {
+			frGpus = *o.Gpus
+		}
+		fGpus := frGpus
+		if fGpus != "" {
+			if err := r.SetFormParam("Gpus", fGpus); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -545,21 +570,6 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		fGroupID := swag.FormatInt64(frGroupID)
 		if fGroupID != "" {
 			if err := r.SetFormParam("GroupID", fGroupID); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.IsEdgeDevice != nil {
-
-		// form param IsEdgeDevice
-		var frIsEdgeDevice bool
-		if o.IsEdgeDevice != nil {
-			frIsEdgeDevice = *o.IsEdgeDevice
-		}
-		fIsEdgeDevice := swag.FormatBool(frIsEdgeDevice)
-		if fIsEdgeDevice != "" {
-			if err := r.SetFormParam("IsEdgeDevice", fIsEdgeDevice); err != nil {
 				return err
 			}
 		}
@@ -664,13 +674,13 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		}
 	}
 
-	if o.TagIDs != nil {
+	if o.TagIds != nil {
 
-		// binding items for TagIDs
-		joinedTagIDs := o.bindParamTagIDs(reg)
+		// binding items for TagIds
+		joinedTagIds := o.bindParamTagIds(reg)
 
-		// form array param TagIDs
-		if err := r.SetFormParam("TagIDs", joinedTagIDs...); err != nil {
+		// form array param TagIds
+		if err := r.SetFormParam("TagIds", joinedTagIds...); err != nil {
 			return err
 		}
 	}
@@ -696,36 +706,19 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	return nil
 }
 
-// bindParamEndpointCreate binds the parameter Gpus
-func (o *EndpointCreateParams) bindParamGpus(formats strfmt.Registry) []string {
-	gpusIR := o.Gpus
+// bindParamEndpointCreate binds the parameter TagIds
+func (o *EndpointCreateParams) bindParamTagIds(formats strfmt.Registry) []string {
+	tagIdsIR := o.TagIds
 
-	var gpusIC []string
-	for _, gpusIIR := range gpusIR { // explode []string
+	var tagIdsIC []string
+	for _, tagIdsIIR := range tagIdsIR { // explode []int64
 
-		gpusIIV := gpusIIR // string as string
-		gpusIC = append(gpusIC, gpusIIV)
+		tagIdsIIV := swag.FormatInt64(tagIdsIIR) // int64 as string
+		tagIdsIC = append(tagIdsIC, tagIdsIIV)
 	}
 
 	// items.CollectionFormat: ""
-	gpusIS := swag.JoinByFormat(gpusIC, "")
+	tagIdsIS := swag.JoinByFormat(tagIdsIC, "")
 
-	return gpusIS
-}
-
-// bindParamEndpointCreate binds the parameter TagIDs
-func (o *EndpointCreateParams) bindParamTagIDs(formats strfmt.Registry) []string {
-	tagIDsIR := o.TagIDs
-
-	var tagIDsIC []string
-	for _, tagIDsIIR := range tagIDsIR { // explode []int64
-
-		tagIDsIIV := swag.FormatInt64(tagIDsIIR) // int64 as string
-		tagIDsIC = append(tagIDsIC, tagIDsIIV)
-	}
-
-	// items.CollectionFormat: ""
-	tagIDsIS := swag.JoinByFormat(tagIDsIC, "")
-
-	return tagIDsIS
+	return tagIdsIS
 }

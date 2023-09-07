@@ -7,7 +7,9 @@ package models
 
 import (
 	"context"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,6 +18,9 @@ import (
 //
 // swagger:model portaineree.CloudProvider
 type PortainereeCloudProvider struct {
+
+	// MicroK8S specific fields
+	AddonWithArgs []*PortainereeMicroK8sAddon `json:"AddonWithArgs"`
 
 	// Amazon specific fields
 	AmiType string `json:"AmiType,omitempty"`
@@ -42,8 +47,14 @@ type PortainereeCloudProvider struct {
 	// node count
 	NodeCount int64 `json:"NodeCount,omitempty"`
 
+	// node i ps
+	NodeIPs string `json:"NodeIPs,omitempty"`
+
 	// node volume size
 	NodeVolumeSize int64 `json:"NodeVolumeSize,omitempty"`
+
+	// provider
+	Provider string `json:"Provider,omitempty"`
 
 	// RAM
 	RAM float64 `json:"RAM,omitempty"`
@@ -75,11 +86,75 @@ type PortainereeCloudProvider struct {
 
 // Validate validates this portaineree cloud provider
 func (m *PortainereeCloudProvider) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateAddonWithArgs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this portaineree cloud provider based on context it is used
+func (m *PortainereeCloudProvider) validateAddonWithArgs(formats strfmt.Registry) error {
+	if swag.IsZero(m.AddonWithArgs) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.AddonWithArgs); i++ {
+		if swag.IsZero(m.AddonWithArgs[i]) { // not required
+			continue
+		}
+
+		if m.AddonWithArgs[i] != nil {
+			if err := m.AddonWithArgs[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("AddonWithArgs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("AddonWithArgs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this portaineree cloud provider based on the context it is used
 func (m *PortainereeCloudProvider) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAddonWithArgs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PortainereeCloudProvider) contextValidateAddonWithArgs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.AddonWithArgs); i++ {
+
+		if m.AddonWithArgs[i] != nil {
+			if err := m.AddonWithArgs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("AddonWithArgs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("AddonWithArgs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

@@ -28,6 +28,14 @@ type TypesUpdateSchedule struct {
 	// Example: 1
 	CreatedBy int64 `json:"createdBy,omitempty"`
 
+	// EdgeGroups to be updated
+	//
+	// There is some duplication here with EdgeStack.EdgeGroups
+	// EdgeStack.EdgeGroup should have only one group which a temporary group, used only for the update
+	// This field is saved only to show which groups the user chose when creating the schedule
+	// Example: [1]
+	EdgeGroupIds []int64 `json:"edgeGroupIds"`
+
 	// EdgeStack Identifier
 	// Example: 1
 	EdgeStackID int64 `json:"edgeStackId,omitempty"`
@@ -42,6 +50,10 @@ type TypesUpdateSchedule struct {
 	// Name of the schedule
 	// Example: Update Schedule
 	Name string `json:"name,omitempty"`
+
+	// ID of registry
+	// Example: 1
+	RegistryID int64 `json:"registryId,omitempty"`
 
 	// Type of the update (1 - update, 2 - rollback)
 	// Example: 1

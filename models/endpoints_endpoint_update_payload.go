@@ -22,6 +22,9 @@ type EndpointsEndpointUpdatePayload struct {
 	// Hide manual deployment forms for an environment
 	DeploymentOptions *PortainereeDeploymentOptions `json:"DeploymentOptions,omitempty"`
 
+	// is set status message
+	IsSetStatusMessage bool `json:"IsSetStatusMessage,omitempty"`
+
 	// Azure application ID
 	// Example: eag7cdo9-o09l-9i83-9dO9-f0b23oe78db4
 	AzureApplicationID string `json:"azureApplicationID,omitempty"`
@@ -34,7 +37,7 @@ type EndpointsEndpointUpdatePayload struct {
 	// Example: 34ddc78d-4fel-2358-8cc1-df84c8o839f5
 	AzureTenantID string `json:"azureTenantID,omitempty"`
 
-	// Whether automatic update time restrictions are enabled
+	// Whether GitOps update time restrictions are enabled
 	ChangeWindow *PortainereeEndpointChangeWindow `json:"changeWindow,omitempty"`
 
 	// edge
@@ -67,6 +70,9 @@ type EndpointsEndpointUpdatePayload struct {
 	// Example: 1
 	Status int64 `json:"status,omitempty"`
 
+	// status message
+	StatusMessage *EndpointsEndpointUpdatePayloadStatusMessage `json:"statusMessage,omitempty"`
+
 	// List of tag identifiers to which this environment(endpoint) is associated
 	// Example: [1,2]
 	TagIDs []int64 `json:"tagIDs"`
@@ -76,15 +82,15 @@ type EndpointsEndpointUpdatePayload struct {
 
 	// Require TLS to connect against this environment(endpoint)
 	// Example: true
-	TLS *bool `json:"tls,omitempty"`
+	TLS bool `json:"tls,omitempty"`
 
 	// Skip client verification when using TLS
 	// Example: false
-	TlsskipClientVerify *bool `json:"tlsskipClientVerify,omitempty"`
+	TlsskipClientVerify bool `json:"tlsskipClientVerify,omitempty"`
 
 	// Skip server verification when using TLS
 	// Example: false
-	TlsskipVerify *bool `json:"tlsskipVerify,omitempty"`
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
 
 	// URL or IP address of a Docker host
 	// Example: docker.mydomain.tld:2375
@@ -115,6 +121,10 @@ func (m *EndpointsEndpointUpdatePayload) Validate(formats strfmt.Registry) error
 	}
 
 	if err := m.validateKubernetes(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatusMessage(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -234,6 +244,25 @@ func (m *EndpointsEndpointUpdatePayload) validateKubernetes(formats strfmt.Regis
 	return nil
 }
 
+func (m *EndpointsEndpointUpdatePayload) validateStatusMessage(formats strfmt.Registry) error {
+	if swag.IsZero(m.StatusMessage) { // not required
+		return nil
+	}
+
+	if m.StatusMessage != nil {
+		if err := m.StatusMessage.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("statusMessage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("statusMessage")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *EndpointsEndpointUpdatePayload) validateTeamAccessPolicies(formats strfmt.Registry) error {
 	if swag.IsZero(m.TeamAccessPolicies) { // not required
 		return nil
@@ -293,6 +322,10 @@ func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, fo
 	}
 
 	if err := m.contextValidateKubernetes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatusMessage(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -394,6 +427,22 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateKubernetes(ctx context.C
 	return nil
 }
 
+func (m *EndpointsEndpointUpdatePayload) contextValidateStatusMessage(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StatusMessage != nil {
+		if err := m.StatusMessage.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("statusMessage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("statusMessage")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *EndpointsEndpointUpdatePayload) contextValidateTeamAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.TeamAccessPolicies.ContextValidate(ctx, formats); err != nil {
@@ -479,6 +528,56 @@ func (m *EndpointsEndpointUpdatePayloadEdge) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *EndpointsEndpointUpdatePayloadEdge) UnmarshalBinary(b []byte) error {
 	var res EndpointsEndpointUpdatePayloadEdge
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// EndpointsEndpointUpdatePayloadStatusMessage endpoints endpoint update payload status message
+//
+// swagger:model EndpointsEndpointUpdatePayloadStatusMessage
+type EndpointsEndpointUpdatePayloadStatusMessage struct {
+
+	// detail
+	// Example: Error message
+	Detail string `json:"Detail,omitempty"`
+
+	// summary
+	// Example: Error
+	Summary string `json:"Summary,omitempty"`
+
+	// 'scale', 'upgrade', 'addons'
+	// Example: scale
+	Operation string `json:"operation,omitempty"`
+
+	// '', 'error', 'processing'
+	// Example: error
+	OperationStatus string `json:"operationStatus,omitempty"`
+}
+
+// Validate validates this endpoints endpoint update payload status message
+func (m *EndpointsEndpointUpdatePayloadStatusMessage) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this endpoints endpoint update payload status message based on context it is used
+func (m *EndpointsEndpointUpdatePayloadStatusMessage) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *EndpointsEndpointUpdatePayloadStatusMessage) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *EndpointsEndpointUpdatePayloadStatusMessage) UnmarshalBinary(b []byte) error {
+	var res EndpointsEndpointUpdatePayloadStatusMessage
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

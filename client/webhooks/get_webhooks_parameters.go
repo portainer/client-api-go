@@ -63,10 +63,10 @@ GetWebhooksParams contains all the parameters to send to the API endpoint
 type GetWebhooksParams struct {
 
 	// EndpointID.
-	EndpointID *int64
+	EndpointID int64
 
 	// ResourceID.
-	ResourceID *string
+	ResourceID string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,24 +122,24 @@ func (o *GetWebhooksParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithEndpointID adds the endpointID to the get webhooks params
-func (o *GetWebhooksParams) WithEndpointID(endpointID *int64) *GetWebhooksParams {
+func (o *GetWebhooksParams) WithEndpointID(endpointID int64) *GetWebhooksParams {
 	o.SetEndpointID(endpointID)
 	return o
 }
 
 // SetEndpointID adds the endpointId to the get webhooks params
-func (o *GetWebhooksParams) SetEndpointID(endpointID *int64) {
+func (o *GetWebhooksParams) SetEndpointID(endpointID int64) {
 	o.EndpointID = endpointID
 }
 
 // WithResourceID adds the resourceID to the get webhooks params
-func (o *GetWebhooksParams) WithResourceID(resourceID *string) *GetWebhooksParams {
+func (o *GetWebhooksParams) WithResourceID(resourceID string) *GetWebhooksParams {
 	o.SetResourceID(resourceID)
 	return o
 }
 
 // SetResourceID adds the resourceId to the get webhooks params
-func (o *GetWebhooksParams) SetResourceID(resourceID *string) {
+func (o *GetWebhooksParams) SetResourceID(resourceID string) {
 	o.ResourceID = resourceID
 }
 
@@ -151,37 +151,23 @@ func (o *GetWebhooksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	}
 	var res []error
 
-	if o.EndpointID != nil {
+	// query param EndpointID
+	qrEndpointID := o.EndpointID
+	qEndpointID := swag.FormatInt64(qrEndpointID)
+	if qEndpointID != "" {
 
-		// query param EndpointID
-		var qrEndpointID int64
-
-		if o.EndpointID != nil {
-			qrEndpointID = *o.EndpointID
-		}
-		qEndpointID := swag.FormatInt64(qrEndpointID)
-		if qEndpointID != "" {
-
-			if err := r.SetQueryParam("EndpointID", qEndpointID); err != nil {
-				return err
-			}
+		if err := r.SetQueryParam("EndpointID", qEndpointID); err != nil {
+			return err
 		}
 	}
 
-	if o.ResourceID != nil {
+	// query param ResourceID
+	qrResourceID := o.ResourceID
+	qResourceID := qrResourceID
+	if qResourceID != "" {
 
-		// query param ResourceID
-		var qrResourceID string
-
-		if o.ResourceID != nil {
-			qrResourceID = *o.ResourceID
-		}
-		qResourceID := qrResourceID
-		if qResourceID != "" {
-
-			if err := r.SetQueryParam("ResourceID", qResourceID); err != nil {
-				return err
-			}
+		if err := r.SetQueryParam("ResourceID", qResourceID); err != nil {
+			return err
 		}
 	}
 

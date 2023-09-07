@@ -30,34 +30,220 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	KaasProviderInfo(params *KaasProviderInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*KaasProviderInfoOK, error)
+	AddNodes(params *AddNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddNodesOK, error)
 
-	ProvisionKaaSCluster(params *ProvisionKaaSClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProvisionKaaSClusterOK, error)
+	Microk8sGetAddons(params *Microk8sGetAddonsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sGetAddonsOK, error)
+
+	Microk8sGetNodeStatus(params *Microk8sGetNodeStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sGetNodeStatusOK, error)
+
+	Microk8sUpdateAddons(params *Microk8sUpdateAddonsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sUpdateAddonsOK, error)
+
+	ProviderInfo(params *ProviderInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProviderInfoOK, error)
+
+	RemoveNodes(params *RemoveNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RemoveNodesOK, error)
+
+	TestSSH(params *TestSSHParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestSSHOK, error)
+
+	Upgrade(params *UpgradeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpgradeOK, error)
+
+	Version(params *VersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VersionOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-	KaasProviderInfo returns information about a cloud provider
+	AddNodes adds nodes to the cluster scale up
+
+	Add control plane and worker nodes to the cluster.
+
+**Access policy**: authenticated
+*/
+func (a *Client) AddNodes(params *AddNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddNodesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAddNodesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "addNodes",
+		Method:             "POST",
+		PathPattern:        "/cloud/endpoints/{environmentid}/nodes/add",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &AddNodesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AddNodesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for addNodes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	Microk8sGetAddons gets a list of addons which are installed in a micro k8s cluster
+
+	The information returned can be used to query the MircoK8s cluster.
+
+**Access policy**: authenticated
+*/
+func (a *Client) Microk8sGetAddons(params *Microk8sGetAddonsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sGetAddonsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMicrok8sGetAddonsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "microk8sGetAddons",
+		Method:             "GET",
+		PathPattern:        "/cloud/endpoints/{environmentid}/addons",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &Microk8sGetAddonsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*Microk8sGetAddonsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for microk8sGetAddons: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	Microk8sGetNodeStatus gets the micro k8s status for a control plane node
+
+	Get the MicroK8s status for a control plane node in a MicroK8s cluster.
+
+**Access policy**: authenticated
+*/
+func (a *Client) Microk8sGetNodeStatus(params *Microk8sGetNodeStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sGetNodeStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMicrok8sGetNodeStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "microk8sGetNodeStatus",
+		Method:             "GET",
+		PathPattern:        "/cloud/endpoints/{environmentid}/nodes/nodestatus",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &Microk8sGetNodeStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*Microk8sGetNodeStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for microk8sGetNodeStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	Microk8sUpdateAddons gets a list of addons which are installed in a micro k8s cluster
+
+	The information returned can be used to query the MircoK8s cluster.
+
+**Access policy**: authenticated
+*/
+func (a *Client) Microk8sUpdateAddons(params *Microk8sUpdateAddonsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sUpdateAddonsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMicrok8sUpdateAddonsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "microk8sUpdateAddons",
+		Method:             "POST",
+		PathPattern:        "/cloud/endpoints/{environmentid}/addons",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &Microk8sUpdateAddonsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*Microk8sUpdateAddonsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for microk8sUpdateAddons: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	ProviderInfo gets information about the provisioning options for a cloud provider
 
 	The information returned can be used to provision a KaaS cluster.
 
 **Access policy**: administrator
 */
-func (a *Client) KaasProviderInfo(params *KaasProviderInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*KaasProviderInfoOK, error) {
+func (a *Client) ProviderInfo(params *ProviderInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProviderInfoOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewKaasProviderInfoParams()
+		params = NewProviderInfoParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "kaasProviderInfo",
-		Method:             "POST",
-		PathPattern:        "/cloud",
+		ID:                 "providerInfo",
+		Method:             "GET",
+		PathPattern:        "/cloud/{provider}/info",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &KaasProviderInfoReader{formats: a.formats},
+		Reader:             &ProviderInfoReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -70,37 +256,37 @@ func (a *Client) KaasProviderInfo(params *KaasProviderInfoParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*KaasProviderInfoOK)
+	success, ok := result.(*ProviderInfoOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for kaasProviderInfo: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for providerInfo: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-	ProvisionKaaSCluster provisions a new kaa s cluster and create an environment
+	RemoveNodes removes nodes from the cluster and uninstall micro k8s from them
 
-	Provision a new KaaS cluster and create an environment.
+	Remove nodes from the cluster and uninstall MicroK8s from them.
 
-**Access policy**: administrator
+**Access policy**: authenticated
 */
-func (a *Client) ProvisionKaaSCluster(params *ProvisionKaaSClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProvisionKaaSClusterOK, error) {
+func (a *Client) RemoveNodes(params *RemoveNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RemoveNodesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewProvisionKaaSClusterParams()
+		params = NewRemoveNodesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "provisionKaaSCluster",
+		ID:                 "removeNodes",
 		Method:             "POST",
-		PathPattern:        "/cloud/{provider}",
+		PathPattern:        "/cloud/endpoints/{environmentid}/nodes/remove",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &ProvisionKaaSClusterReader{formats: a.formats},
+		Reader:             &RemoveNodesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -113,13 +299,142 @@ func (a *Client) ProvisionKaaSCluster(params *ProvisionKaaSClusterParams, authIn
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*ProvisionKaaSClusterOK)
+	success, ok := result.(*RemoveNodesOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for provisionKaaSCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for removeNodes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	TestSSH tests SSH connection to nodes
+
+	Test SSH connection to nodes.
+
+**Access policy**: administrator
+*/
+func (a *Client) TestSSH(params *TestSSHParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TestSSHOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewTestSSHParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "testSSH",
+		Method:             "POST",
+		PathPattern:        "/cloud/testssh",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &TestSSHReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*TestSSHOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for testSSH: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	Upgrade upgrades the cluster to the next stable kubernetes version
+
+	Upgrade the cluster to the next stable kubernetes version.
+
+**Access policy**: authenticated
+*/
+func (a *Client) Upgrade(params *UpgradeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpgradeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpgradeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "upgrade",
+		Method:             "POST",
+		PathPattern:        "/cloud/endpoints/{environmentid}/upgrade",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UpgradeReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpgradeOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for upgrade: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	Version gets the current cluster version
+
+	Get the current cluster version.
+
+**Access policy**: authenticated
+*/
+func (a *Client) Version(params *VersionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*VersionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewVersionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "version",
+		Method:             "GET",
+		PathPattern:        "/cloud/endpoints/{environmentid}/version",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &VersionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*VersionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for version: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

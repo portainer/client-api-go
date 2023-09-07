@@ -28,11 +28,11 @@ type SettingsPublicSettingsResponse struct {
 
 	// Whether edge compute features are enabled
 	// Example: true
-	EnableEdgeComputeFeatures *bool `json:"EnableEdgeComputeFeatures,omitempty"`
+	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
 
 	// Whether telemetry is enabled
 	// Example: true
-	EnableTelemetry *bool `json:"EnableTelemetry,omitempty"`
+	EnableTelemetry bool `json:"EnableTelemetry,omitempty"`
 
 	// Supported feature flags
 	Features map[string]bool `json:"Features,omitempty"`
@@ -46,7 +46,7 @@ type SettingsPublicSettingsResponse struct {
 
 	// Whether portainer internal auth view will be hidden
 	// Example: true
-	OAuthHideInternalAuth *bool `json:"OAuthHideInternalAuth,omitempty"`
+	OAuthHideInternalAuth bool `json:"OAuthHideInternalAuth,omitempty"`
 
 	// The URL used for oauth login
 	// Example: https://gitlab.com/oauth
@@ -62,11 +62,11 @@ type SettingsPublicSettingsResponse struct {
 
 	// Show the Kompose build option (discontinued in 2.18)
 	// Example: false
-	ShowKomposeBuildOption *bool `json:"ShowKomposeBuildOption,omitempty"`
+	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
 
 	// Whether team sync is enabled
 	// Example: true
-	TeamSync *bool `json:"TeamSync,omitempty"`
+	TeamSync bool `json:"TeamSync,omitempty"`
 
 	// default registry
 	DefaultRegistry *SettingsPublicSettingsResponseDefaultRegistry `json:"defaultRegistry,omitempty"`
@@ -75,10 +75,10 @@ type SettingsPublicSettingsResponse struct {
 	Edge *SettingsPublicSettingsResponseEdge `json:"edge,omitempty"`
 
 	// Whether AMT is enabled
-	IsAMTEnabled *bool `json:"isAMTEnabled,omitempty"`
+	IsAMTEnabled bool `json:"isAMTEnabled,omitempty"`
 
 	// Whether FDO is enabled
-	IsFDOEnabled *bool `json:"isFDOEnabled,omitempty"`
+	IsFDOEnabled bool `json:"isFDOEnabled,omitempty"`
 
 	// The expiry of a Kubeconfig
 	// Example: 24h
@@ -307,21 +307,74 @@ type SettingsPublicSettingsResponseEdge struct {
 	// Example: 60
 	SnapshotInterval int64 `json:"SnapshotInterval,omitempty"`
 
-	// Whether the device has been started in edge async mode
-	AsyncMode *bool `json:"asyncMode,omitempty"`
-
 	// The check in interval for edge agent (in seconds) - used in non async mode [seconds]
 	// Example: 60
 	CheckinInterval int64 `json:"checkinInterval,omitempty"`
+
+	// mtls
+	Mtls *PortainereeMTLSSettings `json:"mtls,omitempty"`
 }
 
 // Validate validates this settings public settings response edge
 func (m *SettingsPublicSettingsResponseEdge) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateMtls(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this settings public settings response edge based on context it is used
+func (m *SettingsPublicSettingsResponseEdge) validateMtls(formats strfmt.Registry) error {
+	if swag.IsZero(m.Mtls) { // not required
+		return nil
+	}
+
+	if m.Mtls != nil {
+		if err := m.Mtls.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge" + "." + "mtls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge" + "." + "mtls")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this settings public settings response edge based on the context it is used
 func (m *SettingsPublicSettingsResponseEdge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMtls(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SettingsPublicSettingsResponseEdge) contextValidateMtls(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Mtls != nil {
+		if err := m.Mtls.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edge" + "." + "mtls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edge" + "." + "mtls")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/portainer/client-api-go/v2/models"
 )
@@ -68,6 +69,12 @@ type PutWebhooksIDReassignParams struct {
 	   Webhook data
 	*/
 	Body *models.WebhooksWebhookReassignPayload
+
+	/* ID.
+
+	   Webhook id
+	*/
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -133,6 +140,17 @@ func (o *PutWebhooksIDReassignParams) SetBody(body *models.WebhooksWebhookReassi
 	o.Body = body
 }
 
+// WithID adds the id to the put webhooks ID reassign params
+func (o *PutWebhooksIDReassignParams) WithID(id int64) *PutWebhooksIDReassignParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the put webhooks ID reassign params
+func (o *PutWebhooksIDReassignParams) SetID(id int64) {
+	o.ID = id
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *PutWebhooksIDReassignParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -144,6 +162,11 @@ func (o *PutWebhooksIDReassignParams) WriteToRequest(r runtime.ClientRequest, re
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
 		}
+	}
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

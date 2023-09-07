@@ -14,6 +14,9 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
+
+	"github.com/portainer/client-api-go/v2/models"
 )
 
 // NewEdgeStackStatusUpdateParams creates a new EdgeStackStatusUpdateParams object,
@@ -61,11 +64,17 @@ EdgeStackStatusUpdateParams contains all the parameters to send to the API endpo
 */
 type EdgeStackStatusUpdateParams struct {
 
+	/* Body.
+
+	   EdgeStack status payload
+	*/
+	Body *models.EdgestacksUpdateStatusPayload
+
 	/* ID.
 
 	   EdgeStack Id
 	*/
-	ID string
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,14 +129,25 @@ func (o *EdgeStackStatusUpdateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the edge stack status update params
+func (o *EdgeStackStatusUpdateParams) WithBody(body *models.EdgestacksUpdateStatusPayload) *EdgeStackStatusUpdateParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the edge stack status update params
+func (o *EdgeStackStatusUpdateParams) SetBody(body *models.EdgestacksUpdateStatusPayload) {
+	o.Body = body
+}
+
 // WithID adds the id to the edge stack status update params
-func (o *EdgeStackStatusUpdateParams) WithID(id string) *EdgeStackStatusUpdateParams {
+func (o *EdgeStackStatusUpdateParams) WithID(id int64) *EdgeStackStatusUpdateParams {
 	o.SetID(id)
 	return o
 }
 
 // SetID adds the id to the edge stack status update params
-func (o *EdgeStackStatusUpdateParams) SetID(id string) {
+func (o *EdgeStackStatusUpdateParams) SetID(id int64) {
 	o.ID = id
 }
 
@@ -138,9 +158,14 @@ func (o *EdgeStackStatusUpdateParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	// path param id
-	if err := r.SetPathParam("id", o.ID); err != nil {
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
 	}
 

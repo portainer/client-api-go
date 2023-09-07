@@ -17,8 +17,8 @@ import (
 // swagger:model licenses.attachPayload
 type LicensesAttachPayload struct {
 
-	// List of license keys to attach
-	LicenseKeys []string `json:"licenseKeys"`
+	// key
+	Key string `json:"key,omitempty"`
 }
 
 // Validate validates this licenses attach payload

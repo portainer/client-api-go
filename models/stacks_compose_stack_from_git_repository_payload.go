@@ -24,14 +24,14 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// Example: ["[nz.compose.yml"," uat.compose.yml]"]
 	AdditionalFiles []string `json:"additionalFiles"`
 
-	// Optional auto update configuration
-	AutoUpdate *PortainereeStackAutoUpdate `json:"autoUpdate,omitempty"`
+	// Optional GitOps update configuration
+	AutoUpdate *PortainereeAutoUpdateSettings `json:"autoUpdate,omitempty"`
 
 	// Path to the Stack file inside the Git repository
 	// Example: docker-compose.yml
 	ComposeFile *string `json:"composeFile,omitempty"`
 
-	// A list of environment(endpoint) variables used during stack deployment
+	// A list of environment variables used during stack deployment
 	Env []*PortainereePair `json:"env"`
 
 	// Local filesystem path
@@ -40,7 +40,7 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 
 	// Whether the stack is from a app template
 	// Example: false
-	FromAppTemplate *bool `json:"fromAppTemplate,omitempty"`
+	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
 
 	// Name of the stack
 	// Example: myStack
@@ -49,7 +49,7 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 
 	// Use basic authentication to clone the Git repository
 	// Example: true
-	RepositoryAuthentication *bool `json:"repositoryAuthentication,omitempty"`
+	RepositoryAuthentication bool `json:"repositoryAuthentication,omitempty"`
 
 	// GitCredentialID used to identify the bound git credential. Required when RepositoryAuthentication
 	// is true and RepositoryUsername/RepositoryPassword are not provided
@@ -75,9 +75,13 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	// Example: myGitUsername
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
 
-	// Whether the stack suppors relative path volume
+	// Whether the stack supports relative path volume
 	// Example: false
-	SupportRelativePath *bool `json:"supportRelativePath,omitempty"`
+	SupportRelativePath bool `json:"supportRelativePath,omitempty"`
+
+	// TLSSkipVerify skips SSL verification when cloning the Git repository
+	// Example: false
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
 }
 
 // Validate validates this stacks compose stack from git repository payload

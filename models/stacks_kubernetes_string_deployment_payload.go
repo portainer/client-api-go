@@ -18,7 +18,11 @@ import (
 type StacksKubernetesStringDeploymentPayload struct {
 
 	// compose format
-	ComposeFormat *bool `json:"composeFormat,omitempty"`
+	ComposeFormat bool `json:"composeFormat,omitempty"`
+
+	// Whether the stack is from a app template
+	// Example: false
+	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
 
 	// namespace
 	Namespace string `json:"namespace,omitempty"`

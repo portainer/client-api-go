@@ -62,11 +62,11 @@ GetKubernetesPodSecurityRuleParams contains all the parameters to send to the AP
 */
 type GetKubernetesPodSecurityRuleParams struct {
 
-	/* ID.
+	/* EnvironmentID.
 
-	   Environment(Endpoint) identifier
+	   Environment identifier
 	*/
-	ID int64
+	EnvironmentID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,15 +121,15 @@ func (o *GetKubernetesPodSecurityRuleParams) SetHTTPClient(client *http.Client) 
 	o.HTTPClient = client
 }
 
-// WithID adds the id to the get kubernetes pod security rule params
-func (o *GetKubernetesPodSecurityRuleParams) WithID(id int64) *GetKubernetesPodSecurityRuleParams {
-	o.SetID(id)
+// WithEnvironmentID adds the environmentID to the get kubernetes pod security rule params
+func (o *GetKubernetesPodSecurityRuleParams) WithEnvironmentID(environmentID int64) *GetKubernetesPodSecurityRuleParams {
+	o.SetEnvironmentID(environmentID)
 	return o
 }
 
-// SetID adds the id to the get kubernetes pod security rule params
-func (o *GetKubernetesPodSecurityRuleParams) SetID(id int64) {
-	o.ID = id
+// SetEnvironmentID adds the environmentId to the get kubernetes pod security rule params
+func (o *GetKubernetesPodSecurityRuleParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,8 +140,8 @@ func (o *GetKubernetesPodSecurityRuleParams) WriteToRequest(r runtime.ClientRequ
 	}
 	var res []error
 
-	// path param id
-	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
 		return err
 	}
 

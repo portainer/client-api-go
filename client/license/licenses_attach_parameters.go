@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/portainer/client-api-go/v2/models"
 )
@@ -68,6 +69,12 @@ type LicensesAttachParams struct {
 	   list of licenses keys to attach
 	*/
 	Body *models.LicensesAttachPayload
+
+	/* Force.
+
+	   remove conflicting licenses
+	*/
+	Force *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -133,6 +140,17 @@ func (o *LicensesAttachParams) SetBody(body *models.LicensesAttachPayload) {
 	o.Body = body
 }
 
+// WithForce adds the force to the licenses attach params
+func (o *LicensesAttachParams) WithForce(force *bool) *LicensesAttachParams {
+	o.SetForce(force)
+	return o
+}
+
+// SetForce adds the force to the licenses attach params
+func (o *LicensesAttachParams) SetForce(force *bool) {
+	o.Force = force
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *LicensesAttachParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -143,6 +161,23 @@ func (o *LicensesAttachParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
+		}
+	}
+
+	if o.Force != nil {
+
+		// query param force
+		var qrForce bool
+
+		if o.Force != nil {
+			qrForce = *o.Force
+		}
+		qForce := swag.FormatBool(qrForce)
+		if qForce != "" {
+
+			if err := r.SetQueryParam("force", qForce); err != nil {
+				return err
+			}
 		}
 	}
 

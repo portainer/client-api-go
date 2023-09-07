@@ -7,9 +7,13 @@ package models
 
 import (
 	"context"
+	"encoding/json"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // EdgestacksUpdateEdgeStackPayload edgestacks update edge stack payload
@@ -19,40 +23,202 @@ type EdgestacksUpdateEdgeStackPayload struct {
 
 	// Deployment type to deploy this stack
 	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
-	// for compose stacks will use kompose to convert to kubernetes manifest for kubernetes environments(endpoints)
-	// kubernetes deploy type is enabled only for kubernetes environments(endpoints)
-	// nomad deploy type is enabled only for nomad environments(endpoints)
+	// compose is enabled only for docker environments
+	// kubernetes is enabled only for kubernetes environments
+	// nomad is enabled only for nomad environments
+	// Example: 0
+	// Enum: [0 1 2]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// edge groups
 	EdgeGroups []int64 `json:"edgeGroups"`
 
+	// Environment variables to inject into the stack
+	EnvVars []*PortainerPair `json:"envVars"`
+
 	// pre pull image
-	PrePullImage *bool `json:"prePullImage,omitempty"`
+	PrePullImage bool `json:"prePullImage,omitempty"`
 
 	// re pull image
-	RePullImage *bool `json:"rePullImage,omitempty"`
+	RePullImage bool `json:"rePullImage,omitempty"`
 
 	// registries
 	Registries []int64 `json:"registries"`
 
+	// retry deploy
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
+
+	// RollbackTo specifies the stack file version to rollback to (only support to rollback to the last version currently)
+	RollbackTo int64 `json:"rollbackTo,omitempty"`
+
 	// stack file content
 	StackFileContent string `json:"stackFileContent,omitempty"`
 
-	// Uses the manifest's namespaces instead of the default one
-	UseManifestNamespaces *bool `json:"useManifestNamespaces,omitempty"`
+	// Configuration for stagger updates
+	StaggerConfig *PortainereeEdgeStaggerConfig `json:"staggerConfig,omitempty"`
 
-	// version
-	Version int64 `json:"version,omitempty"`
+	// update version
+	UpdateVersion bool `json:"updateVersion,omitempty"`
+
+	// Uses the manifest's namespaces instead of the default one
+	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`
+
+	// Optional webhook configuration
+	// Example: c11fdf23-183e-428a-9bb6-16db01032174
+	Webhook string `json:"webhook,omitempty"`
 }
 
 // Validate validates this edgestacks update edge stack payload
 func (m *EdgestacksUpdateEdgeStackPayload) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateDeploymentType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEnvVars(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStaggerConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this edgestacks update edge stack payload based on context it is used
+var edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum []interface{}
+
+func init() {
+	var res []int64
+	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum = append(edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum, v)
+	}
+}
+
+// prop value enum
+func (m *EdgestacksUpdateEdgeStackPayload) validateDeploymentTypeEnum(path, location string, value int64) error {
+	if err := validate.EnumCase(path, location, value, edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *EdgestacksUpdateEdgeStackPayload) validateDeploymentType(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeploymentType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EdgestacksUpdateEdgeStackPayload) validateEnvVars(formats strfmt.Registry) error {
+	if swag.IsZero(m.EnvVars) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.EnvVars); i++ {
+		if swag.IsZero(m.EnvVars[i]) { // not required
+			continue
+		}
+
+		if m.EnvVars[i] != nil {
+			if err := m.EnvVars[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("envVars" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("envVars" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *EdgestacksUpdateEdgeStackPayload) validateStaggerConfig(formats strfmt.Registry) error {
+	if swag.IsZero(m.StaggerConfig) { // not required
+		return nil
+	}
+
+	if m.StaggerConfig != nil {
+		if err := m.StaggerConfig.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("staggerConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("staggerConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this edgestacks update edge stack payload based on the context it is used
 func (m *EdgestacksUpdateEdgeStackPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateEnvVars(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStaggerConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EdgestacksUpdateEdgeStackPayload) contextValidateEnvVars(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.EnvVars); i++ {
+
+		if m.EnvVars[i] != nil {
+			if err := m.EnvVars[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("envVars" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("envVars" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *EdgestacksUpdateEdgeStackPayload) contextValidateStaggerConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.StaggerConfig != nil {
+		if err := m.StaggerConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("staggerConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("staggerConfig")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

@@ -33,6 +33,10 @@ type GittypesRepoConfig struct {
 	// Example: refs/heads/branch_name
 	ReferenceName string `json:"referenceName,omitempty"`
 
+	// TLSSkipVerify skips SSL verification when cloning the Git repository
+	// Example: false
+	TlsskipVerify bool `json:"tlsskipVerify,omitempty"`
+
 	// The repo url
 	// Example: https://github.com/portainer/portainer.git
 	URL string `json:"url,omitempty"`

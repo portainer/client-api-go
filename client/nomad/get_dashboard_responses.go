@@ -82,11 +82,11 @@ func (o *GetDashboardOK) IsCode(code int) bool {
 }
 
 func (o *GetDashboardOK) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/dashboard][%d] getDashboardOK ", 200)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/dashboard][%d] getDashboardOK ", 200)
 }
 
 func (o *GetDashboardOK) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/dashboard][%d] getDashboardOK ", 200)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/dashboard][%d] getDashboardOK ", 200)
 }
 
 func (o *GetDashboardOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -133,11 +133,11 @@ func (o *GetDashboardNotFound) IsCode(code int) bool {
 }
 
 func (o *GetDashboardNotFound) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/dashboard][%d] getDashboardNotFound ", 404)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/dashboard][%d] getDashboardNotFound ", 404)
 }
 
 func (o *GetDashboardNotFound) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/dashboard][%d] getDashboardNotFound ", 404)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/dashboard][%d] getDashboardNotFound ", 404)
 }
 
 func (o *GetDashboardNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -184,11 +184,11 @@ func (o *GetDashboardInternalServerError) IsCode(code int) bool {
 }
 
 func (o *GetDashboardInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/dashboard][%d] getDashboardInternalServerError ", 500)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/dashboard][%d] getDashboardInternalServerError ", 500)
 }
 
 func (o *GetDashboardInternalServerError) String() string {
-	return fmt.Sprintf("[GET /nomad/endpoints/{endpointID}/dashboard][%d] getDashboardInternalServerError ", 500)
+	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/dashboard][%d] getDashboardInternalServerError ", 500)
 }
 
 func (o *GetDashboardInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

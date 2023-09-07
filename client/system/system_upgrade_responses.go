@@ -23,8 +23,8 @@ type SystemUpgradeReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *SystemUpgradeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewSystemUpgradeOK()
+	case 204:
+		result := NewSystemUpgradeNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -34,58 +34,58 @@ func (o *SystemUpgradeReader) ReadResponse(response runtime.ClientResponse, cons
 	}
 }
 
-// NewSystemUpgradeOK creates a SystemUpgradeOK with default headers values
-func NewSystemUpgradeOK() *SystemUpgradeOK {
-	return &SystemUpgradeOK{}
+// NewSystemUpgradeNoContent creates a SystemUpgradeNoContent with default headers values
+func NewSystemUpgradeNoContent() *SystemUpgradeNoContent {
+	return &SystemUpgradeNoContent{}
 }
 
 /*
-SystemUpgradeOK describes a response with status code 200, with default header values.
+SystemUpgradeNoContent describes a response with status code 204, with default header values.
 
 Success
 */
-type SystemUpgradeOK struct {
+type SystemUpgradeNoContent struct {
 	Payload *models.GithubComPortainerPortainerAPIHTTPHandlerSystemStatus
 }
 
-// IsSuccess returns true when this system upgrade o k response has a 2xx status code
-func (o *SystemUpgradeOK) IsSuccess() bool {
+// IsSuccess returns true when this system upgrade no content response has a 2xx status code
+func (o *SystemUpgradeNoContent) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this system upgrade o k response has a 3xx status code
-func (o *SystemUpgradeOK) IsRedirect() bool {
+// IsRedirect returns true when this system upgrade no content response has a 3xx status code
+func (o *SystemUpgradeNoContent) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this system upgrade o k response has a 4xx status code
-func (o *SystemUpgradeOK) IsClientError() bool {
+// IsClientError returns true when this system upgrade no content response has a 4xx status code
+func (o *SystemUpgradeNoContent) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this system upgrade o k response has a 5xx status code
-func (o *SystemUpgradeOK) IsServerError() bool {
+// IsServerError returns true when this system upgrade no content response has a 5xx status code
+func (o *SystemUpgradeNoContent) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this system upgrade o k response a status code equal to that given
-func (o *SystemUpgradeOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this system upgrade no content response a status code equal to that given
+func (o *SystemUpgradeNoContent) IsCode(code int) bool {
+	return code == 204
 }
 
-func (o *SystemUpgradeOK) Error() string {
-	return fmt.Sprintf("[POST /system/upgrade][%d] systemUpgradeOK  %+v", 200, o.Payload)
+func (o *SystemUpgradeNoContent) Error() string {
+	return fmt.Sprintf("[POST /system/upgrade][%d] systemUpgradeNoContent  %+v", 204, o.Payload)
 }
 
-func (o *SystemUpgradeOK) String() string {
-	return fmt.Sprintf("[POST /system/upgrade][%d] systemUpgradeOK  %+v", 200, o.Payload)
+func (o *SystemUpgradeNoContent) String() string {
+	return fmt.Sprintf("[POST /system/upgrade][%d] systemUpgradeNoContent  %+v", 204, o.Payload)
 }
 
-func (o *SystemUpgradeOK) GetPayload() *models.GithubComPortainerPortainerAPIHTTPHandlerSystemStatus {
+func (o *SystemUpgradeNoContent) GetPayload() *models.GithubComPortainerPortainerAPIHTTPHandlerSystemStatus {
 	return o.Payload
 }
 
-func (o *SystemUpgradeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *SystemUpgradeNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.GithubComPortainerPortainerAPIHTTPHandlerSystemStatus)
 

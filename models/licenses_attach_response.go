@@ -7,9 +7,7 @@ package models
 
 import (
 	"context"
-	"strconv"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -19,84 +17,17 @@ import (
 // swagger:model licenses.attachResponse
 type LicensesAttachResponse struct {
 
-	// failed keys
-	FailedKeys map[string]string `json:"failedKeys,omitempty"`
-
-	// licenses
-	Licenses []*LiblicensePortainerLicense `json:"licenses"`
+	// conflicting keys
+	ConflictingKeys []string `json:"conflictingKeys"`
 }
 
 // Validate validates this licenses attach response
 func (m *LicensesAttachResponse) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateLicenses(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *LicensesAttachResponse) validateLicenses(formats strfmt.Registry) error {
-	if swag.IsZero(m.Licenses) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Licenses); i++ {
-		if swag.IsZero(m.Licenses[i]) { // not required
-			continue
-		}
-
-		if m.Licenses[i] != nil {
-			if err := m.Licenses[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("licenses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("licenses" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ContextValidate validate this licenses attach response based on the context it is used
+// ContextValidate validates this licenses attach response based on context it is used
 func (m *LicensesAttachResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateLicenses(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *LicensesAttachResponse) contextValidateLicenses(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Licenses); i++ {
-
-		if m.Licenses[i] != nil {
-			if err := m.Licenses[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("licenses" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("licenses" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 

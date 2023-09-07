@@ -30,7 +30,9 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	EdgeJobCreate(params *EdgeJobCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateOK, error)
+	EdgeJobCreateFile(params *EdgeJobCreateFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateFileOK, error)
+
+	EdgeJobCreateString(params *EdgeJobCreateStringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateStringOK, error)
 
 	EdgeJobDelete(params *EdgeJobDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobDeleteNoContent, error)
 
@@ -54,24 +56,24 @@ type ClientService interface {
 }
 
 /*
-EdgeJobCreate creates an edge job
+EdgeJobCreateFile creates an edge job from a file
 
 **Access policy**: administrator
 */
-func (a *Client) EdgeJobCreate(params *EdgeJobCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateOK, error) {
+func (a *Client) EdgeJobCreateFile(params *EdgeJobCreateFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateFileOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEdgeJobCreateParams()
+		params = NewEdgeJobCreateFileParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EdgeJobCreate",
+		ID:                 "EdgeJobCreateFile",
 		Method:             "POST",
-		PathPattern:        "/edge_jobs",
+		PathPattern:        "/edge_jobs/create/file",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"multipart/form-data"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EdgeJobCreateReader{formats: a.formats},
+		Reader:             &EdgeJobCreateFileReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -84,13 +86,54 @@ func (a *Client) EdgeJobCreate(params *EdgeJobCreateParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EdgeJobCreateOK)
+	success, ok := result.(*EdgeJobCreateFileOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeJobCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for EdgeJobCreateFile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+EdgeJobCreateString creates an edge job from a text
+
+**Access policy**: administrator
+*/
+func (a *Client) EdgeJobCreateString(params *EdgeJobCreateStringParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeJobCreateStringOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEdgeJobCreateStringParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EdgeJobCreateString",
+		Method:             "POST",
+		PathPattern:        "/edge_jobs/create/string",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EdgeJobCreateStringReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EdgeJobCreateStringOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EdgeJobCreateString: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
