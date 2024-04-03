@@ -51,7 +51,7 @@ func (o *UserRemoveAPIKeyReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /users/{id}/tokens/{keyID}] UserRemoveAPIKey", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *UserRemoveAPIKeyNoContent) IsServerError() bool {
 // IsCode returns true when this user remove Api key no content response a status code equal to that given
 func (o *UserRemoveAPIKeyNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the user remove Api key no content response
+func (o *UserRemoveAPIKeyNoContent) Code() int {
+	return 204
 }
 
 func (o *UserRemoveAPIKeyNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *UserRemoveAPIKeyBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user remove Api key bad request response
+func (o *UserRemoveAPIKeyBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserRemoveAPIKeyBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *UserRemoveAPIKeyForbidden) IsServerError() bool {
 // IsCode returns true when this user remove Api key forbidden response a status code equal to that given
 func (o *UserRemoveAPIKeyForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user remove Api key forbidden response
+func (o *UserRemoveAPIKeyForbidden) Code() int {
+	return 403
 }
 
 func (o *UserRemoveAPIKeyForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *UserRemoveAPIKeyNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user remove Api key not found response
+func (o *UserRemoveAPIKeyNotFound) Code() int {
+	return 404
+}
+
 func (o *UserRemoveAPIKeyNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *UserRemoveAPIKeyInternalServerError) IsServerError() bool {
 // IsCode returns true when this user remove Api key internal server error response a status code equal to that given
 func (o *UserRemoveAPIKeyInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user remove Api key internal server error response
+func (o *UserRemoveAPIKeyInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserRemoveAPIKeyInternalServerError) Error() string {

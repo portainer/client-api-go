@@ -42,7 +42,7 @@ func (o *StackCreateDockerSwarmRepositoryReader) ReadResponse(response runtime.C
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/create/swarm/repository] StackCreateDockerSwarmRepository", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *StackCreateDockerSwarmRepositoryOK) IsServerError() bool {
 // IsCode returns true when this stack create docker swarm repository o k response a status code equal to that given
 func (o *StackCreateDockerSwarmRepositoryOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack create docker swarm repository o k response
+func (o *StackCreateDockerSwarmRepositoryOK) Code() int {
+	return 200
 }
 
 func (o *StackCreateDockerSwarmRepositoryOK) Error() string {
@@ -147,6 +152,11 @@ func (o *StackCreateDockerSwarmRepositoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack create docker swarm repository bad request response
+func (o *StackCreateDockerSwarmRepositoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackCreateDockerSwarmRepositoryBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *StackCreateDockerSwarmRepositoryInternalServerError) IsServerError() bo
 // IsCode returns true when this stack create docker swarm repository internal server error response a status code equal to that given
 func (o *StackCreateDockerSwarmRepositoryInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack create docker swarm repository internal server error response
+func (o *StackCreateDockerSwarmRepositoryInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackCreateDockerSwarmRepositoryInternalServerError) Error() string {

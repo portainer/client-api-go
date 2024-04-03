@@ -178,6 +178,11 @@ func (m *EndpointsEndpointSettingsUpdatePayload) ContextValidate(ctx context.Con
 func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateChangeWindow(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ChangeWindow != nil {
+
+		if swag.IsZero(m.ChangeWindow) { // not required
+			return nil
+		}
+
 		if err := m.ChangeWindow.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("changeWindow")
@@ -194,6 +199,11 @@ func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateChangeWindow(ctx
 func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DeploymentOptions != nil {
+
+		if swag.IsZero(m.DeploymentOptions) { // not required
+			return nil
+		}
+
 		if err := m.DeploymentOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("deploymentOptions")
@@ -212,6 +222,11 @@ func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateGpus(ctx context
 	for i := 0; i < len(m.Gpus); i++ {
 
 		if m.Gpus[i] != nil {
+
+			if swag.IsZero(m.Gpus[i]) { // not required
+				return nil
+			}
+
 			if err := m.Gpus[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
@@ -230,6 +245,11 @@ func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateGpus(ctx context
 func (m *EndpointsEndpointSettingsUpdatePayload) contextValidateSecuritySettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SecuritySettings != nil {
+
+		if swag.IsZero(m.SecuritySettings) { // not required
+			return nil
+		}
+
 		if err := m.SecuritySettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("securitySettings")

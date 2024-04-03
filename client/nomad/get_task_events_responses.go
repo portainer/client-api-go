@@ -36,7 +36,7 @@ func (o *GetTaskEventsReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /nomad/endpoints/{environmentId}/allocation/{id}/events] GetTaskEvents", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *GetTaskEventsOK) IsServerError() bool {
 // IsCode returns true when this get task events o k response a status code equal to that given
 func (o *GetTaskEventsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get task events o k response
+func (o *GetTaskEventsOK) Code() int {
+	return 200
 }
 
 func (o *GetTaskEventsOK) Error() string {
@@ -137,6 +142,11 @@ func (o *GetTaskEventsInternalServerError) IsServerError() bool {
 // IsCode returns true when this get task events internal server error response a status code equal to that given
 func (o *GetTaskEventsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get task events internal server error response
+func (o *GetTaskEventsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetTaskEventsInternalServerError) Error() string {

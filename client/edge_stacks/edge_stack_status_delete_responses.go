@@ -54,7 +54,7 @@ func (o *EdgeStackStatusDeleteReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge_stacks/{id}/status/{environmentId}] EdgeStackStatusDelete", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *EdgeStackStatusDeleteOK) IsServerError() bool {
 // IsCode returns true when this edge stack status delete o k response a status code equal to that given
 func (o *EdgeStackStatusDeleteOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack status delete o k response
+func (o *EdgeStackStatusDeleteOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackStatusDeleteOK) Error() string {
@@ -159,6 +164,11 @@ func (o *EdgeStackStatusDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack status delete bad request response
+func (o *EdgeStackStatusDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackStatusDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *EdgeStackStatusDeleteForbidden) IsServerError() bool {
 // IsCode returns true when this edge stack status delete forbidden response a status code equal to that given
 func (o *EdgeStackStatusDeleteForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the edge stack status delete forbidden response
+func (o *EdgeStackStatusDeleteForbidden) Code() int {
+	return 403
 }
 
 func (o *EdgeStackStatusDeleteForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *EdgeStackStatusDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the edge stack status delete not found response
+func (o *EdgeStackStatusDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *EdgeStackStatusDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *EdgeStackStatusDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge stack status delete internal server error response a status code equal to that given
 func (o *EdgeStackStatusDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge stack status delete internal server error response
+func (o *EdgeStackStatusDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeStackStatusDeleteInternalServerError) Error() string {

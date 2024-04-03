@@ -39,7 +39,7 @@ func (o *PostEndpointsEdgeGenerateKeyReader) ReadResponse(response runtime.Clien
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/edge/generate-key] PostEndpointsEdgeGenerateKey", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *PostEndpointsEdgeGenerateKeyOK) IsServerError() bool {
 // IsCode returns true when this post endpoints edge generate key o k response a status code equal to that given
 func (o *PostEndpointsEdgeGenerateKeyOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the post endpoints edge generate key o k response
+func (o *PostEndpointsEdgeGenerateKeyOK) Code() int {
+	return 200
 }
 
 func (o *PostEndpointsEdgeGenerateKeyOK) Error() string {
@@ -132,6 +137,11 @@ func (o *PostEndpointsEdgeGenerateKeyBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the post endpoints edge generate key bad request response
+func (o *PostEndpointsEdgeGenerateKeyBadRequest) Code() int {
+	return 400
+}
+
 func (o *PostEndpointsEdgeGenerateKeyBadRequest) Error() string {
 	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *PostEndpointsEdgeGenerateKeyInternalServerError) IsServerError() bool {
 // IsCode returns true when this post endpoints edge generate key internal server error response a status code equal to that given
 func (o *PostEndpointsEdgeGenerateKeyInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the post endpoints edge generate key internal server error response
+func (o *PostEndpointsEdgeGenerateKeyInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostEndpointsEdgeGenerateKeyInternalServerError) Error() string {

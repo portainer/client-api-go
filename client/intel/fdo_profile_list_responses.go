@@ -45,7 +45,7 @@ func (o *FdoProfileListReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /fdo/profiles] fdoProfileList", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *FdoProfileListOK) IsServerError() bool {
 // IsCode returns true when this fdo profile list o k response a status code equal to that given
 func (o *FdoProfileListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the fdo profile list o k response
+func (o *FdoProfileListOK) Code() int {
+	return 200
 }
 
 func (o *FdoProfileListOK) Error() string {
@@ -138,6 +143,11 @@ func (o *FdoProfileListBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the fdo profile list bad request response
+func (o *FdoProfileListBadRequest) Code() int {
+	return 400
+}
+
 func (o *FdoProfileListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /fdo/profiles][%d] fdoProfileListBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *FdoProfileListForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the fdo profile list forbidden response
+func (o *FdoProfileListForbidden) Code() int {
+	return 403
+}
+
 func (o *FdoProfileListForbidden) Error() string {
 	return fmt.Sprintf("[GET /fdo/profiles][%d] fdoProfileListForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *FdoProfileListInternalServerError) IsServerError() bool {
 // IsCode returns true when this fdo profile list internal server error response a status code equal to that given
 func (o *FdoProfileListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the fdo profile list internal server error response
+func (o *FdoProfileListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *FdoProfileListInternalServerError) Error() string {

@@ -42,7 +42,7 @@ func (o *GetWebhooksReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /webhooks] GetWebhooks", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *GetWebhooksOK) IsServerError() bool {
 // IsCode returns true when this get webhooks o k response a status code equal to that given
 func (o *GetWebhooksOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get webhooks o k response
+func (o *GetWebhooksOK) Code() int {
+	return 200
 }
 
 func (o *GetWebhooksOK) Error() string {
@@ -145,6 +150,11 @@ func (o *GetWebhooksBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get webhooks bad request response
+func (o *GetWebhooksBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetWebhooksBadRequest) Error() string {
 	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksBadRequest ", 400)
 }
@@ -194,6 +204,11 @@ func (o *GetWebhooksInternalServerError) IsServerError() bool {
 // IsCode returns true when this get webhooks internal server error response a status code equal to that given
 func (o *GetWebhooksInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get webhooks internal server error response
+func (o *GetWebhooksInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetWebhooksInternalServerError) Error() string {

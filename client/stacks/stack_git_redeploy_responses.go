@@ -54,7 +54,7 @@ func (o *StackGitRedeployReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /stacks/{id}/git/redeploy] StackGitRedeploy", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *StackGitRedeployOK) IsServerError() bool {
 // IsCode returns true when this stack git redeploy o k response a status code equal to that given
 func (o *StackGitRedeployOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack git redeploy o k response
+func (o *StackGitRedeployOK) Code() int {
+	return 200
 }
 
 func (o *StackGitRedeployOK) Error() string {
@@ -159,6 +164,11 @@ func (o *StackGitRedeployBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack git redeploy bad request response
+func (o *StackGitRedeployBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackGitRedeployBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *StackGitRedeployForbidden) IsServerError() bool {
 // IsCode returns true when this stack git redeploy forbidden response a status code equal to that given
 func (o *StackGitRedeployForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack git redeploy forbidden response
+func (o *StackGitRedeployForbidden) Code() int {
+	return 403
 }
 
 func (o *StackGitRedeployForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *StackGitRedeployNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack git redeploy not found response
+func (o *StackGitRedeployNotFound) Code() int {
+	return 404
+}
+
 func (o *StackGitRedeployNotFound) Error() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *StackGitRedeployInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack git redeploy internal server error response a status code equal to that given
 func (o *StackGitRedeployInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack git redeploy internal server error response
+func (o *StackGitRedeployInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackGitRedeployInternalServerError) Error() string {

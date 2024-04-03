@@ -48,7 +48,7 @@ func (o *DockerContainerGpusInspectReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /docker/{environmentId}/containers/{containerId}/gpus] dockerContainerGpusInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *DockerContainerGpusInspectOK) IsServerError() bool {
 // IsCode returns true when this docker container gpus inspect o k response a status code equal to that given
 func (o *DockerContainerGpusInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the docker container gpus inspect o k response
+func (o *DockerContainerGpusInspectOK) Code() int {
+	return 200
 }
 
 func (o *DockerContainerGpusInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *DockerContainerGpusInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the docker container gpus inspect bad request response
+func (o *DockerContainerGpusInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *DockerContainerGpusInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *DockerContainerGpusInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the docker container gpus inspect not found response
+func (o *DockerContainerGpusInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *DockerContainerGpusInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *DockerContainerGpusInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this docker container gpus inspect internal server error response a status code equal to that given
 func (o *DockerContainerGpusInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the docker container gpus inspect internal server error response
+func (o *DockerContainerGpusInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *DockerContainerGpusInspectInternalServerError) Error() string {

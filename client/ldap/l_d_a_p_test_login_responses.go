@@ -42,7 +42,7 @@ func (o *LDAPTestLoginReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /ldap/test] LDAPTestLogin", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *LDAPTestLoginOK) IsServerError() bool {
 // IsCode returns true when this l d a p test login o k response a status code equal to that given
 func (o *LDAPTestLoginOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the l d a p test login o k response
+func (o *LDAPTestLoginOK) Code() int {
+	return 200
 }
 
 func (o *LDAPTestLoginOK) Error() string {
@@ -147,6 +152,11 @@ func (o *LDAPTestLoginBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the l d a p test login bad request response
+func (o *LDAPTestLoginBadRequest) Code() int {
+	return 400
+}
+
 func (o *LDAPTestLoginBadRequest) Error() string {
 	return fmt.Sprintf("[POST /ldap/test][%d] lDAPTestLoginBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *LDAPTestLoginInternalServerError) IsServerError() bool {
 // IsCode returns true when this l d a p test login internal server error response a status code equal to that given
 func (o *LDAPTestLoginInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the l d a p test login internal server error response
+func (o *LDAPTestLoginInternalServerError) Code() int {
+	return 500
 }
 
 func (o *LDAPTestLoginInternalServerError) Error() string {

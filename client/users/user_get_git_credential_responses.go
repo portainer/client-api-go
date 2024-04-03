@@ -54,7 +54,7 @@ func (o *UserGetGitCredentialReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}/gitcredentials/{credentialID}] UserGetGitCredential", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *UserGetGitCredentialOK) IsServerError() bool {
 // IsCode returns true when this user get git credential o k response a status code equal to that given
 func (o *UserGetGitCredentialOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user get git credential o k response
+func (o *UserGetGitCredentialOK) Code() int {
+	return 200
 }
 
 func (o *UserGetGitCredentialOK) Error() string {
@@ -159,6 +164,11 @@ func (o *UserGetGitCredentialBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user get git credential bad request response
+func (o *UserGetGitCredentialBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserGetGitCredentialBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/gitcredentials/{credentialID}][%d] userGetGitCredentialBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *UserGetGitCredentialForbidden) IsServerError() bool {
 // IsCode returns true when this user get git credential forbidden response a status code equal to that given
 func (o *UserGetGitCredentialForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user get git credential forbidden response
+func (o *UserGetGitCredentialForbidden) Code() int {
+	return 403
 }
 
 func (o *UserGetGitCredentialForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *UserGetGitCredentialNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user get git credential not found response
+func (o *UserGetGitCredentialNotFound) Code() int {
+	return 404
+}
+
 func (o *UserGetGitCredentialNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/gitcredentials/{credentialID}][%d] userGetGitCredentialNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *UserGetGitCredentialInternalServerError) IsServerError() bool {
 // IsCode returns true when this user get git credential internal server error response a status code equal to that given
 func (o *UserGetGitCredentialInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user get git credential internal server error response
+func (o *UserGetGitCredentialInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserGetGitCredentialInternalServerError) Error() string {

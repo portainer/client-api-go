@@ -36,7 +36,7 @@ func (o *AuthLogsListReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /useractivity/authlogs] AuthLogsList", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *AuthLogsListOK) IsServerError() bool {
 // IsCode returns true when this auth logs list o k response a status code equal to that given
 func (o *AuthLogsListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the auth logs list o k response
+func (o *AuthLogsListOK) Code() int {
+	return 200
 }
 
 func (o *AuthLogsListOK) Error() string {
@@ -137,6 +142,11 @@ func (o *AuthLogsListInternalServerError) IsServerError() bool {
 // IsCode returns true when this auth logs list internal server error response a status code equal to that given
 func (o *AuthLogsListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the auth logs list internal server error response
+func (o *AuthLogsListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *AuthLogsListInternalServerError) Error() string {

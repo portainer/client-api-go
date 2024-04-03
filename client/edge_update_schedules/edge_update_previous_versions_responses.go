@@ -40,7 +40,7 @@ func (o *EdgeUpdatePreviousVersionsReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_update_schedules/previous_versions] EdgeUpdatePreviousVersions", response, response.Code())
 	}
 }
 
@@ -55,7 +55,7 @@ EdgeUpdatePreviousVersionsOK describes a response with status code 200, with def
 OK
 */
 type EdgeUpdatePreviousVersionsOK struct {
-	Payload []string
+	Payload map[string]string
 }
 
 // IsSuccess returns true when this edge update previous versions o k response has a 2xx status code
@@ -83,6 +83,11 @@ func (o *EdgeUpdatePreviousVersionsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the edge update previous versions o k response
+func (o *EdgeUpdatePreviousVersionsOK) Code() int {
+	return 200
+}
+
 func (o *EdgeUpdatePreviousVersionsOK) Error() string {
 	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsOK  %+v", 200, o.Payload)
 }
@@ -91,7 +96,7 @@ func (o *EdgeUpdatePreviousVersionsOK) String() string {
 	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsOK  %+v", 200, o.Payload)
 }
 
-func (o *EdgeUpdatePreviousVersionsOK) GetPayload() []string {
+func (o *EdgeUpdatePreviousVersionsOK) GetPayload() map[string]string {
 	return o.Payload
 }
 
@@ -143,6 +148,11 @@ func (o *EdgeUpdatePreviousVersionsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge update previous versions bad request response
+func (o *EdgeUpdatePreviousVersionsBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeUpdatePreviousVersionsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_update_schedules/previous_versions][%d] edgeUpdatePreviousVersionsBadRequest ", 400)
 }
@@ -192,6 +202,11 @@ func (o *EdgeUpdatePreviousVersionsInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge update previous versions internal server error response a status code equal to that given
 func (o *EdgeUpdatePreviousVersionsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge update previous versions internal server error response
+func (o *EdgeUpdatePreviousVersionsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeUpdatePreviousVersionsInternalServerError) Error() string {

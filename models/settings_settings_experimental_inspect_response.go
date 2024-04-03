@@ -72,6 +72,11 @@ func (m *SettingsSettingsExperimentalInspectResponse) ContextValidate(ctx contex
 func (m *SettingsSettingsExperimentalInspectResponse) contextValidateExperimentalFeatures(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExperimentalFeatures != nil {
+
+		if swag.IsZero(m.ExperimentalFeatures) { // not required
+			return nil
+		}
+
 		if err := m.ExperimentalFeatures.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("experimentalFeatures")

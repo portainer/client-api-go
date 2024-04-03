@@ -54,7 +54,7 @@ func (o *PutWebhooksIDReassignReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /webhooks/{id}/reassign] PutWebhooksIDReassign", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *PutWebhooksIDReassignOK) IsServerError() bool {
 // IsCode returns true when this put webhooks Id reassign o k response a status code equal to that given
 func (o *PutWebhooksIDReassignOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the put webhooks Id reassign o k response
+func (o *PutWebhooksIDReassignOK) Code() int {
+	return 200
 }
 
 func (o *PutWebhooksIDReassignOK) Error() string {
@@ -159,6 +164,11 @@ func (o *PutWebhooksIDReassignNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the put webhooks Id reassign no content response
+func (o *PutWebhooksIDReassignNoContent) Code() int {
+	return 204
+}
+
 func (o *PutWebhooksIDReassignNoContent) Error() string {
 	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNoContent ", 204)
 }
@@ -208,6 +218,11 @@ func (o *PutWebhooksIDReassignBadRequest) IsServerError() bool {
 // IsCode returns true when this put webhooks Id reassign bad request response a status code equal to that given
 func (o *PutWebhooksIDReassignBadRequest) IsCode(code int) bool {
 	return code == 400
+}
+
+// Code gets the status code for the put webhooks Id reassign bad request response
+func (o *PutWebhooksIDReassignBadRequest) Code() int {
+	return 400
 }
 
 func (o *PutWebhooksIDReassignBadRequest) Error() string {
@@ -261,6 +276,11 @@ func (o *PutWebhooksIDReassignNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the put webhooks Id reassign not found response
+func (o *PutWebhooksIDReassignNotFound) Code() int {
+	return 404
+}
+
 func (o *PutWebhooksIDReassignNotFound) Error() string {
 	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *PutWebhooksIDReassignInternalServerError) IsServerError() bool {
 // IsCode returns true when this put webhooks Id reassign internal server error response a status code equal to that given
 func (o *PutWebhooksIDReassignInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the put webhooks Id reassign internal server error response
+func (o *PutWebhooksIDReassignInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PutWebhooksIDReassignInternalServerError) Error() string {

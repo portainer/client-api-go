@@ -54,7 +54,7 @@ func (o *EndpointEdgeAsyncReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/edge/async] endpointEdgeAsync", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *EndpointEdgeAsyncOK) IsServerError() bool {
 // IsCode returns true when this endpoint edge async o k response a status code equal to that given
 func (o *EndpointEdgeAsyncOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint edge async o k response
+func (o *EndpointEdgeAsyncOK) Code() int {
+	return 200
 }
 
 func (o *EndpointEdgeAsyncOK) Error() string {
@@ -159,6 +164,11 @@ func (o *EndpointEdgeAsyncBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint edge async bad request response
+func (o *EndpointEdgeAsyncBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointEdgeAsyncBadRequest) Error() string {
 	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *EndpointEdgeAsyncForbidden) IsServerError() bool {
 // IsCode returns true when this endpoint edge async forbidden response a status code equal to that given
 func (o *EndpointEdgeAsyncForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the endpoint edge async forbidden response
+func (o *EndpointEdgeAsyncForbidden) Code() int {
+	return 403
 }
 
 func (o *EndpointEdgeAsyncForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *EndpointEdgeAsyncNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint edge async not found response
+func (o *EndpointEdgeAsyncNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointEdgeAsyncNotFound) Error() string {
 	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *EndpointEdgeAsyncInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint edge async internal server error response a status code equal to that given
 func (o *EndpointEdgeAsyncInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint edge async internal server error response
+func (o *EndpointEdgeAsyncInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointEdgeAsyncInternalServerError) Error() string {

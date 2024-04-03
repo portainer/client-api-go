@@ -52,7 +52,7 @@ func (o *HelmRepoSearchReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /templates/helm] HelmRepoSearch", response, response.Code())
 	}
 }
 
@@ -93,6 +93,11 @@ func (o *HelmRepoSearchOK) IsServerError() bool {
 // IsCode returns true when this helm repo search o k response a status code equal to that given
 func (o *HelmRepoSearchOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the helm repo search o k response
+func (o *HelmRepoSearchOK) Code() int {
+	return 200
 }
 
 func (o *HelmRepoSearchOK) Error() string {
@@ -155,6 +160,11 @@ func (o *HelmRepoSearchBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the helm repo search bad request response
+func (o *HelmRepoSearchBadRequest) Code() int {
+	return 400
+}
+
 func (o *HelmRepoSearchBadRequest) Error() string {
 	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *HelmRepoSearchUnauthorized) IsServerError() bool {
 // IsCode returns true when this helm repo search unauthorized response a status code equal to that given
 func (o *HelmRepoSearchUnauthorized) IsCode(code int) bool {
 	return code == 401
+}
+
+// Code gets the status code for the helm repo search unauthorized response
+func (o *HelmRepoSearchUnauthorized) Code() int {
+	return 401
 }
 
 func (o *HelmRepoSearchUnauthorized) Error() string {
@@ -257,6 +272,11 @@ func (o *HelmRepoSearchNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the helm repo search not found response
+func (o *HelmRepoSearchNotFound) Code() int {
+	return 404
+}
+
 func (o *HelmRepoSearchNotFound) Error() string {
 	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchNotFound ", 404)
 }
@@ -306,6 +326,11 @@ func (o *HelmRepoSearchInternalServerError) IsServerError() bool {
 // IsCode returns true when this helm repo search internal server error response a status code equal to that given
 func (o *HelmRepoSearchInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the helm repo search internal server error response
+func (o *HelmRepoSearchInternalServerError) Code() int {
+	return 500
 }
 
 func (o *HelmRepoSearchInternalServerError) Error() string {

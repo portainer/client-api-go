@@ -87,6 +87,10 @@ func (m *ModelsCloudCredential) ContextValidate(ctx context.Context, formats str
 
 func (m *ModelsCloudCredential) contextValidateCredentials(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Credentials) { // not required
+		return nil
+	}
+
 	if err := m.Credentials.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("credentials")

@@ -42,7 +42,7 @@ func (o *StackCreateDockerStandaloneRepositoryReader) ReadResponse(response runt
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/create/standalone/repository] StackCreateDockerStandaloneRepository", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *StackCreateDockerStandaloneRepositoryOK) IsServerError() bool {
 // IsCode returns true when this stack create docker standalone repository o k response a status code equal to that given
 func (o *StackCreateDockerStandaloneRepositoryOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack create docker standalone repository o k response
+func (o *StackCreateDockerStandaloneRepositoryOK) Code() int {
+	return 200
 }
 
 func (o *StackCreateDockerStandaloneRepositoryOK) Error() string {
@@ -147,6 +152,11 @@ func (o *StackCreateDockerStandaloneRepositoryBadRequest) IsCode(code int) bool 
 	return code == 400
 }
 
+// Code gets the status code for the stack create docker standalone repository bad request response
+func (o *StackCreateDockerStandaloneRepositoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackCreateDockerStandaloneRepositoryBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *StackCreateDockerStandaloneRepositoryInternalServerError) IsServerError
 // IsCode returns true when this stack create docker standalone repository internal server error response a status code equal to that given
 func (o *StackCreateDockerStandaloneRepositoryInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack create docker standalone repository internal server error response
+func (o *StackCreateDockerStandaloneRepositoryInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackCreateDockerStandaloneRepositoryInternalServerError) Error() string {

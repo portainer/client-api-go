@@ -54,7 +54,7 @@ func (o *EndpointForceUpdateServiceReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoints/{id}/forceupdateservice] endpointForceUpdateService", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *EndpointForceUpdateServiceOK) IsServerError() bool {
 // IsCode returns true when this endpoint force update service o k response a status code equal to that given
 func (o *EndpointForceUpdateServiceOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint force update service o k response
+func (o *EndpointForceUpdateServiceOK) Code() int {
+	return 200
 }
 
 func (o *EndpointForceUpdateServiceOK) Error() string {
@@ -159,6 +164,11 @@ func (o *EndpointForceUpdateServiceBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint force update service bad request response
+func (o *EndpointForceUpdateServiceBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointForceUpdateServiceBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *EndpointForceUpdateServiceForbidden) IsServerError() bool {
 // IsCode returns true when this endpoint force update service forbidden response a status code equal to that given
 func (o *EndpointForceUpdateServiceForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the endpoint force update service forbidden response
+func (o *EndpointForceUpdateServiceForbidden) Code() int {
+	return 403
 }
 
 func (o *EndpointForceUpdateServiceForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *EndpointForceUpdateServiceNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint force update service not found response
+func (o *EndpointForceUpdateServiceNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointForceUpdateServiceNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *EndpointForceUpdateServiceInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint force update service internal server error response a status code equal to that given
 func (o *EndpointForceUpdateServiceInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint force update service internal server error response
+func (o *EndpointForceUpdateServiceInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointForceUpdateServiceInternalServerError) Error() string {

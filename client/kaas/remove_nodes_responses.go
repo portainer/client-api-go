@@ -51,7 +51,7 @@ func (o *RemoveNodesReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /cloud/endpoints/{environmentId}/nodes/remove] removeNodes", response, response.Code())
 	}
 }
 
@@ -93,12 +93,17 @@ func (o *RemoveNodesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the remove nodes o k response
+func (o *RemoveNodesOK) Code() int {
+	return 200
+}
+
 func (o *RemoveNodesOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesOK ", 200)
 }
 
 func (o *RemoveNodesOK) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesOK ", 200)
 }
 
 func (o *RemoveNodesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -144,12 +149,17 @@ func (o *RemoveNodesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the remove nodes bad request response
+func (o *RemoveNodesBadRequest) Code() int {
+	return 400
+}
+
 func (o *RemoveNodesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesBadRequest ", 400)
 }
 
 func (o *RemoveNodesBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesBadRequest ", 400)
 }
 
 func (o *RemoveNodesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -195,12 +205,17 @@ func (o *RemoveNodesForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the remove nodes forbidden response
+func (o *RemoveNodesForbidden) Code() int {
+	return 403
+}
+
 func (o *RemoveNodesForbidden) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesForbidden ", 403)
 }
 
 func (o *RemoveNodesForbidden) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesForbidden ", 403)
 }
 
 func (o *RemoveNodesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -246,12 +261,17 @@ func (o *RemoveNodesInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the remove nodes internal server error response
+func (o *RemoveNodesInternalServerError) Code() int {
+	return 500
+}
+
 func (o *RemoveNodesInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesInternalServerError ", 500)
 }
 
 func (o *RemoveNodesInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesInternalServerError ", 500)
 }
 
 func (o *RemoveNodesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,12 +317,17 @@ func (o *RemoveNodesServiceUnavailable) IsCode(code int) bool {
 	return code == 503
 }
 
+// Code gets the status code for the remove nodes service unavailable response
+func (o *RemoveNodesServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *RemoveNodesServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesServiceUnavailable ", 503)
 }
 
 func (o *RemoveNodesServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/remove][%d] removeNodesServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesServiceUnavailable ", 503)
 }
 
 func (o *RemoveNodesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

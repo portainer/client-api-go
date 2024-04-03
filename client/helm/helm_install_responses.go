@@ -48,7 +48,7 @@ func (o *HelmInstallReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/{id}/kubernetes/helm] HelmInstall", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *HelmInstallCreated) IsServerError() bool {
 // IsCode returns true when this helm install created response a status code equal to that given
 func (o *HelmInstallCreated) IsCode(code int) bool {
 	return code == 201
+}
+
+// Code gets the status code for the helm install created response
+func (o *HelmInstallCreated) Code() int {
+	return 201
 }
 
 func (o *HelmInstallCreated) Error() string {
@@ -153,6 +158,11 @@ func (o *HelmInstallUnauthorized) IsCode(code int) bool {
 	return code == 401
 }
 
+// Code gets the status code for the helm install unauthorized response
+func (o *HelmInstallUnauthorized) Code() int {
+	return 401
+}
+
 func (o *HelmInstallUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallUnauthorized ", 401)
 }
@@ -204,6 +214,11 @@ func (o *HelmInstallNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the helm install not found response
+func (o *HelmInstallNotFound) Code() int {
+	return 404
+}
+
 func (o *HelmInstallNotFound) Error() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *HelmInstallInternalServerError) IsServerError() bool {
 // IsCode returns true when this helm install internal server error response a status code equal to that given
 func (o *HelmInstallInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the helm install internal server error response
+func (o *HelmInstallInternalServerError) Code() int {
+	return 500
 }
 
 func (o *HelmInstallInternalServerError) Error() string {

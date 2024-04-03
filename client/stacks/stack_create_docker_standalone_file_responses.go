@@ -42,7 +42,7 @@ func (o *StackCreateDockerStandaloneFileReader) ReadResponse(response runtime.Cl
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/create/standalone/file] StackCreateDockerStandaloneFile", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *StackCreateDockerStandaloneFileOK) IsServerError() bool {
 // IsCode returns true when this stack create docker standalone file o k response a status code equal to that given
 func (o *StackCreateDockerStandaloneFileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack create docker standalone file o k response
+func (o *StackCreateDockerStandaloneFileOK) Code() int {
+	return 200
 }
 
 func (o *StackCreateDockerStandaloneFileOK) Error() string {
@@ -147,6 +152,11 @@ func (o *StackCreateDockerStandaloneFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack create docker standalone file bad request response
+func (o *StackCreateDockerStandaloneFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackCreateDockerStandaloneFileBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/create/standalone/file][%d] stackCreateDockerStandaloneFileBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *StackCreateDockerStandaloneFileInternalServerError) IsServerError() boo
 // IsCode returns true when this stack create docker standalone file internal server error response a status code equal to that given
 func (o *StackCreateDockerStandaloneFileInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack create docker standalone file internal server error response
+func (o *StackCreateDockerStandaloneFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackCreateDockerStandaloneFileInternalServerError) Error() string {

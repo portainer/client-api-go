@@ -54,7 +54,7 @@ func (o *ResourceControlUpdateReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /resource_controls/{id}] ResourceControlUpdate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *ResourceControlUpdateOK) IsServerError() bool {
 // IsCode returns true when this resource control update o k response a status code equal to that given
 func (o *ResourceControlUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the resource control update o k response
+func (o *ResourceControlUpdateOK) Code() int {
+	return 200
 }
 
 func (o *ResourceControlUpdateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *ResourceControlUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the resource control update bad request response
+func (o *ResourceControlUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *ResourceControlUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *ResourceControlUpdateForbidden) IsServerError() bool {
 // IsCode returns true when this resource control update forbidden response a status code equal to that given
 func (o *ResourceControlUpdateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the resource control update forbidden response
+func (o *ResourceControlUpdateForbidden) Code() int {
+	return 403
 }
 
 func (o *ResourceControlUpdateForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *ResourceControlUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the resource control update not found response
+func (o *ResourceControlUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *ResourceControlUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /resource_controls/{id}][%d] resourceControlUpdateNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *ResourceControlUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this resource control update internal server error response a status code equal to that given
 func (o *ResourceControlUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the resource control update internal server error response
+func (o *ResourceControlUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *ResourceControlUpdateInternalServerError) Error() string {

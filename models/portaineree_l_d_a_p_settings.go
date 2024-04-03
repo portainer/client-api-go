@@ -224,6 +224,11 @@ func (m *PortainereeLDAPSettings) contextValidateAdminGroupSearchSettings(ctx co
 	for i := 0; i < len(m.AdminGroupSearchSettings); i++ {
 
 		if m.AdminGroupSearchSettings[i] != nil {
+
+			if swag.IsZero(m.AdminGroupSearchSettings[i]) { // not required
+				return nil
+			}
+
 			if err := m.AdminGroupSearchSettings[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("AdminGroupSearchSettings" + "." + strconv.Itoa(i))
@@ -244,6 +249,11 @@ func (m *PortainereeLDAPSettings) contextValidateGroupSearchSettings(ctx context
 	for i := 0; i < len(m.GroupSearchSettings); i++ {
 
 		if m.GroupSearchSettings[i] != nil {
+
+			if swag.IsZero(m.GroupSearchSettings[i]) { // not required
+				return nil
+			}
+
 			if err := m.GroupSearchSettings[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("GroupSearchSettings" + "." + strconv.Itoa(i))
@@ -264,6 +274,11 @@ func (m *PortainereeLDAPSettings) contextValidateSearchSettings(ctx context.Cont
 	for i := 0; i < len(m.SearchSettings); i++ {
 
 		if m.SearchSettings[i] != nil {
+
+			if swag.IsZero(m.SearchSettings[i]) { // not required
+				return nil
+			}
+
 			if err := m.SearchSettings[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("SearchSettings" + "." + strconv.Itoa(i))
@@ -282,6 +297,11 @@ func (m *PortainereeLDAPSettings) contextValidateSearchSettings(ctx context.Cont
 func (m *PortainereeLDAPSettings) contextValidateTLSConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TLSConfig != nil {
+
+		if swag.IsZero(m.TLSConfig) { // not required
+			return nil
+		}
+
 		if err := m.TLSConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("TLSConfig")

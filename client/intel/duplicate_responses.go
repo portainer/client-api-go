@@ -39,7 +39,7 @@ func (o *DuplicateReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /fdo/profiles/{id}/duplicate] duplicate", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *DuplicateOK) IsServerError() bool {
 // IsCode returns true when this duplicate o k response a status code equal to that given
 func (o *DuplicateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the duplicate o k response
+func (o *DuplicateOK) Code() int {
+	return 200
 }
 
 func (o *DuplicateOK) Error() string {
@@ -132,6 +137,11 @@ func (o *DuplicateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the duplicate bad request response
+func (o *DuplicateBadRequest) Code() int {
+	return 400
+}
+
 func (o *DuplicateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /fdo/profiles/{id}/duplicate][%d] duplicateBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *DuplicateInternalServerError) IsServerError() bool {
 // IsCode returns true when this duplicate internal server error response a status code equal to that given
 func (o *DuplicateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the duplicate internal server error response
+func (o *DuplicateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *DuplicateInternalServerError) Error() string {

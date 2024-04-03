@@ -39,7 +39,7 @@ func (o *SettingsExperimentalUpdateReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /settings/experimental] SettingsExperimentalUpdate", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *SettingsExperimentalUpdateNoContent) IsServerError() bool {
 // IsCode returns true when this settings experimental update no content response a status code equal to that given
 func (o *SettingsExperimentalUpdateNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the settings experimental update no content response
+func (o *SettingsExperimentalUpdateNoContent) Code() int {
+	return 204
 }
 
 func (o *SettingsExperimentalUpdateNoContent) Error() string {
@@ -132,6 +137,11 @@ func (o *SettingsExperimentalUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the settings experimental update bad request response
+func (o *SettingsExperimentalUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *SettingsExperimentalUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *SettingsExperimentalUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this settings experimental update internal server error response a status code equal to that given
 func (o *SettingsExperimentalUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the settings experimental update internal server error response
+func (o *SettingsExperimentalUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *SettingsExperimentalUpdateInternalServerError) Error() string {

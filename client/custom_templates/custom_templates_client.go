@@ -30,6 +30,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	CustomTemplateCreate(params *CustomTemplateCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateCreateOK, error)
+
 	CustomTemplateCreateFile(params *CustomTemplateCreateFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateCreateFileOK, error)
 
 	CustomTemplateCreateRepository(params *CustomTemplateCreateRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateCreateRepositoryOK, error)
@@ -49,6 +51,49 @@ type ClientService interface {
 	CustomTemplateUpdate(params *CustomTemplateUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+	CustomTemplateCreate creates a custom template
+
+	Create a custom template.
+
+**Access policy**: authenticated
+*/
+func (a *Client) CustomTemplateCreate(params *CustomTemplateCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CustomTemplateCreateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCustomTemplateCreateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CustomTemplateCreate",
+		Method:             "POST",
+		PathPattern:        "/custom_templates",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &CustomTemplateCreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CustomTemplateCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CustomTemplateCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*

@@ -39,7 +39,7 @@ func (o *EdgeGroupDeleteReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge_groups/{id}] EdgeGroupDelete", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *EdgeGroupDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this edge group delete no content response a status code equal to that given
 func (o *EdgeGroupDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge group delete no content response
+func (o *EdgeGroupDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeGroupDeleteNoContent) Error() string {
@@ -132,6 +137,11 @@ func (o *EdgeGroupDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge group delete internal server error response
+func (o *EdgeGroupDeleteInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeGroupDeleteInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteInternalServerError ", 500)
 }
@@ -181,6 +191,11 @@ func (o *EdgeGroupDeleteServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge group delete service unavailable response a status code equal to that given
 func (o *EdgeGroupDeleteServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge group delete service unavailable response
+func (o *EdgeGroupDeleteServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeGroupDeleteServiceUnavailable) Error() string {

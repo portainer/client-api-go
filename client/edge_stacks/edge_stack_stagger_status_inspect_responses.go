@@ -48,7 +48,7 @@ func (o *EdgeStackStaggerStatusInspectReader) ReadResponse(response runtime.Clie
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_stacks/{id}/stagger/status] EdgeStackStaggerStatusInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeStackStaggerStatusInspectOK) IsServerError() bool {
 // IsCode returns true when this edge stack stagger status inspect o k response a status code equal to that given
 func (o *EdgeStackStaggerStatusInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack stagger status inspect o k response
+func (o *EdgeStackStaggerStatusInspectOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackStaggerStatusInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeStackStaggerStatusInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack stagger status inspect bad request response
+func (o *EdgeStackStaggerStatusInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackStaggerStatusInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}/stagger/status][%d] edgeStackStaggerStatusInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeStackStaggerStatusInspectInternalServerError) IsCode(code int) bool
 	return code == 500
 }
 
+// Code gets the status code for the edge stack stagger status inspect internal server error response
+func (o *EdgeStackStaggerStatusInspectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackStaggerStatusInspectInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}/stagger/status][%d] edgeStackStaggerStatusInspectInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeStackStaggerStatusInspectServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack stagger status inspect service unavailable response a status code equal to that given
 func (o *EdgeStackStaggerStatusInspectServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack stagger status inspect service unavailable response
+func (o *EdgeStackStaggerStatusInspectServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackStaggerStatusInspectServiceUnavailable) Error() string {

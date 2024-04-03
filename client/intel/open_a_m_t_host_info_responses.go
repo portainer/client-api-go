@@ -45,7 +45,7 @@ func (o *OpenAMTHostInfoReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /open_amt/{id}/info] OpenAMTHostInfo", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *OpenAMTHostInfoOK) IsServerError() bool {
 // IsCode returns true when this open a m t host info o k response a status code equal to that given
 func (o *OpenAMTHostInfoOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the open a m t host info o k response
+func (o *OpenAMTHostInfoOK) Code() int {
+	return 200
 }
 
 func (o *OpenAMTHostInfoOK) Error() string {
@@ -138,6 +143,11 @@ func (o *OpenAMTHostInfoBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the open a m t host info bad request response
+func (o *OpenAMTHostInfoBadRequest) Code() int {
+	return 400
+}
+
 func (o *OpenAMTHostInfoBadRequest) Error() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *OpenAMTHostInfoForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the open a m t host info forbidden response
+func (o *OpenAMTHostInfoForbidden) Code() int {
+	return 403
+}
+
 func (o *OpenAMTHostInfoForbidden) Error() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *OpenAMTHostInfoInternalServerError) IsServerError() bool {
 // IsCode returns true when this open a m t host info internal server error response a status code equal to that given
 func (o *OpenAMTHostInfoInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the open a m t host info internal server error response
+func (o *OpenAMTHostInfoInternalServerError) Code() int {
+	return 500
 }
 
 func (o *OpenAMTHostInfoInternalServerError) Error() string {

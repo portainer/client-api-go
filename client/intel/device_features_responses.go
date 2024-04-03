@@ -45,7 +45,7 @@ func (o *DeviceFeaturesReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /open_amt/{id}/devices_features/{deviceId}] DeviceFeatures", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *DeviceFeaturesNoContent) IsServerError() bool {
 // IsCode returns true when this device features no content response a status code equal to that given
 func (o *DeviceFeaturesNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the device features no content response
+func (o *DeviceFeaturesNoContent) Code() int {
+	return 204
 }
 
 func (o *DeviceFeaturesNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *DeviceFeaturesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the device features bad request response
+func (o *DeviceFeaturesBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeviceFeaturesBadRequest) Error() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *DeviceFeaturesForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the device features forbidden response
+func (o *DeviceFeaturesForbidden) Code() int {
+	return 403
+}
+
 func (o *DeviceFeaturesForbidden) Error() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *DeviceFeaturesInternalServerError) IsServerError() bool {
 // IsCode returns true when this device features internal server error response a status code equal to that given
 func (o *DeviceFeaturesInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the device features internal server error response
+func (o *DeviceFeaturesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *DeviceFeaturesInternalServerError) Error() string {

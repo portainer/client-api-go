@@ -85,6 +85,11 @@ func (m *HelmHelmUserRepositoryResponse) contextValidateUserRepositories(ctx con
 	for i := 0; i < len(m.UserRepositories); i++ {
 
 		if m.UserRepositories[i] != nil {
+
+			if swag.IsZero(m.UserRepositories[i]) { // not required
+				return nil
+			}
+
 			if err := m.UserRepositories[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("UserRepositories" + "." + strconv.Itoa(i))

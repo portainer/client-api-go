@@ -36,7 +36,7 @@ func (o *EdgeTemplateListReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_templates] EdgeTemplateList", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *EdgeTemplateListOK) IsServerError() bool {
 // IsCode returns true when this edge template list o k response a status code equal to that given
 func (o *EdgeTemplateListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge template list o k response
+func (o *EdgeTemplateListOK) Code() int {
+	return 200
 }
 
 func (o *EdgeTemplateListOK) Error() string {
@@ -137,6 +142,11 @@ func (o *EdgeTemplateListInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge template list internal server error response a status code equal to that given
 func (o *EdgeTemplateListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge template list internal server error response
+func (o *EdgeTemplateListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeTemplateListInternalServerError) Error() string {

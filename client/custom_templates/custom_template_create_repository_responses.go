@@ -42,7 +42,7 @@ func (o *CustomTemplateCreateRepositoryReader) ReadResponse(response runtime.Cli
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /custom_templates/repository] CustomTemplateCreateRepository", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *CustomTemplateCreateRepositoryOK) IsServerError() bool {
 // IsCode returns true when this custom template create repository o k response a status code equal to that given
 func (o *CustomTemplateCreateRepositoryOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the custom template create repository o k response
+func (o *CustomTemplateCreateRepositoryOK) Code() int {
+	return 200
 }
 
 func (o *CustomTemplateCreateRepositoryOK) Error() string {
@@ -147,6 +152,11 @@ func (o *CustomTemplateCreateRepositoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the custom template create repository bad request response
+func (o *CustomTemplateCreateRepositoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *CustomTemplateCreateRepositoryBadRequest) Error() string {
 	return fmt.Sprintf("[POST /custom_templates/repository][%d] customTemplateCreateRepositoryBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *CustomTemplateCreateRepositoryInternalServerError) IsServerError() bool
 // IsCode returns true when this custom template create repository internal server error response a status code equal to that given
 func (o *CustomTemplateCreateRepositoryInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the custom template create repository internal server error response
+func (o *CustomTemplateCreateRepositoryInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CustomTemplateCreateRepositoryInternalServerError) Error() string {

@@ -165,6 +165,11 @@ func (m *PodsecurityPodSecurityUsers) ContextValidate(ctx context.Context, forma
 func (m *PodsecurityPodSecurityUsers) contextValidateFsGroups(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.FsGroups != nil {
+
+		if swag.IsZero(m.FsGroups) { // not required
+			return nil
+		}
+
 		if err := m.FsGroups.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fsGroups")
@@ -181,6 +186,11 @@ func (m *PodsecurityPodSecurityUsers) contextValidateFsGroups(ctx context.Contex
 func (m *PodsecurityPodSecurityUsers) contextValidateRunAsGroup(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RunAsGroup != nil {
+
+		if swag.IsZero(m.RunAsGroup) { // not required
+			return nil
+		}
+
 		if err := m.RunAsGroup.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("runAsGroup")
@@ -197,6 +207,11 @@ func (m *PodsecurityPodSecurityUsers) contextValidateRunAsGroup(ctx context.Cont
 func (m *PodsecurityPodSecurityUsers) contextValidateRunAsUser(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.RunAsUser != nil {
+
+		if swag.IsZero(m.RunAsUser) { // not required
+			return nil
+		}
+
 		if err := m.RunAsUser.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("runAsUser")
@@ -213,6 +228,11 @@ func (m *PodsecurityPodSecurityUsers) contextValidateRunAsUser(ctx context.Conte
 func (m *PodsecurityPodSecurityUsers) contextValidateSupplementalGroups(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SupplementalGroups != nil {
+
+		if swag.IsZero(m.SupplementalGroups) { // not required
+			return nil
+		}
+
 		if err := m.SupplementalGroups.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("supplementalGroups")

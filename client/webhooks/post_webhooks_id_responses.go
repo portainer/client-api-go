@@ -39,7 +39,7 @@ func (o *PostWebhooksIDReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /webhooks/{id}] PostWebhooksID", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *PostWebhooksIDAccepted) IsServerError() bool {
 // IsCode returns true when this post webhooks Id accepted response a status code equal to that given
 func (o *PostWebhooksIDAccepted) IsCode(code int) bool {
 	return code == 202
+}
+
+// Code gets the status code for the post webhooks Id accepted response
+func (o *PostWebhooksIDAccepted) Code() int {
+	return 202
 }
 
 func (o *PostWebhooksIDAccepted) Error() string {
@@ -132,6 +137,11 @@ func (o *PostWebhooksIDBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the post webhooks Id bad request response
+func (o *PostWebhooksIDBadRequest) Code() int {
+	return 400
+}
+
 func (o *PostWebhooksIDBadRequest) Error() string {
 	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *PostWebhooksIDInternalServerError) IsServerError() bool {
 // IsCode returns true when this post webhooks Id internal server error response a status code equal to that given
 func (o *PostWebhooksIDInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the post webhooks Id internal server error response
+func (o *PostWebhooksIDInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostWebhooksIDInternalServerError) Error() string {

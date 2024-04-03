@@ -54,7 +54,7 @@ func (o *UserNamespacesReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}/namespaces] UserNamespaces", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *UserNamespacesOK) IsServerError() bool {
 // IsCode returns true when this user namespaces o k response a status code equal to that given
 func (o *UserNamespacesOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user namespaces o k response
+func (o *UserNamespacesOK) Code() int {
+	return 200
 }
 
 func (o *UserNamespacesOK) Error() string {
@@ -157,6 +162,11 @@ func (o *UserNamespacesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user namespaces bad request response
+func (o *UserNamespacesBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserNamespacesBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesBadRequest ", 400)
 }
@@ -206,6 +216,11 @@ func (o *UserNamespacesForbidden) IsServerError() bool {
 // IsCode returns true when this user namespaces forbidden response a status code equal to that given
 func (o *UserNamespacesForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user namespaces forbidden response
+func (o *UserNamespacesForbidden) Code() int {
+	return 403
 }
 
 func (o *UserNamespacesForbidden) Error() string {
@@ -259,6 +274,11 @@ func (o *UserNamespacesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user namespaces not found response
+func (o *UserNamespacesNotFound) Code() int {
+	return 404
+}
+
 func (o *UserNamespacesNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesNotFound ", 404)
 }
@@ -308,6 +328,11 @@ func (o *UserNamespacesInternalServerError) IsServerError() bool {
 // IsCode returns true when this user namespaces internal server error response a status code equal to that given
 func (o *UserNamespacesInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user namespaces internal server error response
+func (o *UserNamespacesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserNamespacesInternalServerError) Error() string {

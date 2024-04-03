@@ -201,6 +201,11 @@ func (m *EdgeStackPayload) contextValidateDirEntries(ctx context.Context, format
 	for i := 0; i < len(m.DirEntries); i++ {
 
 		if m.DirEntries[i] != nil {
+
+			if swag.IsZero(m.DirEntries[i]) { // not required
+				return nil
+			}
+
 			if err := m.DirEntries[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dirEntries" + "." + strconv.Itoa(i))
@@ -221,6 +226,11 @@ func (m *EdgeStackPayload) contextValidateEnvVars(ctx context.Context, formats s
 	for i := 0; i < len(m.EnvVars); i++ {
 
 		if m.EnvVars[i] != nil {
+
+			if swag.IsZero(m.EnvVars[i]) { // not required
+				return nil
+			}
+
 			if err := m.EnvVars[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("envVars" + "." + strconv.Itoa(i))
@@ -241,6 +251,11 @@ func (m *EdgeStackPayload) contextValidateRegistryCredentials(ctx context.Contex
 	for i := 0; i < len(m.RegistryCredentials); i++ {
 
 		if m.RegistryCredentials[i] != nil {
+
+			if swag.IsZero(m.RegistryCredentials[i]) { // not required
+				return nil
+			}
+
 			if err := m.RegistryCredentials[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("registryCredentials" + "." + strconv.Itoa(i))

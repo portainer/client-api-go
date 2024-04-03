@@ -366,6 +366,11 @@ func (m *PortainereeRegistry) ContextValidate(ctx context.Context, formats strfm
 func (m *PortainereeRegistry) contextValidateEcr(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ecr != nil {
+
+		if swag.IsZero(m.Ecr) { // not required
+			return nil
+		}
+
 		if err := m.Ecr.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Ecr")
@@ -382,6 +387,11 @@ func (m *PortainereeRegistry) contextValidateEcr(ctx context.Context, formats st
 func (m *PortainereeRegistry) contextValidateGithub(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Github != nil {
+
+		if swag.IsZero(m.Github) { // not required
+			return nil
+		}
+
 		if err := m.Github.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Github")
@@ -398,6 +408,11 @@ func (m *PortainereeRegistry) contextValidateGithub(ctx context.Context, formats
 func (m *PortainereeRegistry) contextValidateGitlab(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Gitlab != nil {
+
+		if swag.IsZero(m.Gitlab) { // not required
+			return nil
+		}
+
 		if err := m.Gitlab.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Gitlab")
@@ -414,6 +429,11 @@ func (m *PortainereeRegistry) contextValidateGitlab(ctx context.Context, formats
 func (m *PortainereeRegistry) contextValidateManagementConfiguration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ManagementConfiguration != nil {
+
+		if swag.IsZero(m.ManagementConfiguration) { // not required
+			return nil
+		}
+
 		if err := m.ManagementConfiguration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ManagementConfiguration")
@@ -430,6 +450,11 @@ func (m *PortainereeRegistry) contextValidateManagementConfiguration(ctx context
 func (m *PortainereeRegistry) contextValidateQuay(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Quay != nil {
+
+		if swag.IsZero(m.Quay) { // not required
+			return nil
+		}
+
 		if err := m.Quay.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Quay")
@@ -445,6 +470,10 @@ func (m *PortainereeRegistry) contextValidateQuay(ctx context.Context, formats s
 
 func (m *PortainereeRegistry) contextValidateRegistryAccesses(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.RegistryAccesses) { // not required
+		return nil
+	}
+
 	if err := m.RegistryAccesses.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("RegistryAccesses")
@@ -459,6 +488,10 @@ func (m *PortainereeRegistry) contextValidateRegistryAccesses(ctx context.Contex
 
 func (m *PortainereeRegistry) contextValidateTeamAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.TeamAccessPolicies) { // not required
+		return nil
+	}
+
 	if err := m.TeamAccessPolicies.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("TeamAccessPolicies")
@@ -472,6 +505,10 @@ func (m *PortainereeRegistry) contextValidateTeamAccessPolicies(ctx context.Cont
 }
 
 func (m *PortainereeRegistry) contextValidateUserAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserAccessPolicies) { // not required
+		return nil
+	}
 
 	if err := m.UserAccessPolicies.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

@@ -45,7 +45,7 @@ func (o *CreateProfileReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /fdo/profiles] createProfile", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *CreateProfileOK) IsServerError() bool {
 // IsCode returns true when this create profile o k response a status code equal to that given
 func (o *CreateProfileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the create profile o k response
+func (o *CreateProfileOK) Code() int {
+	return 200
 }
 
 func (o *CreateProfileOK) Error() string {
@@ -138,6 +143,11 @@ func (o *CreateProfileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create profile bad request response
+func (o *CreateProfileBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateProfileBadRequest) Error() string {
 	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *CreateProfileConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the create profile conflict response
+func (o *CreateProfileConflict) Code() int {
+	return 409
+}
+
 func (o *CreateProfileConflict) Error() string {
 	return fmt.Sprintf("[POST /fdo/profiles][%d] createProfileConflict ", 409)
 }
@@ -238,6 +253,11 @@ func (o *CreateProfileInternalServerError) IsServerError() bool {
 // IsCode returns true when this create profile internal server error response a status code equal to that given
 func (o *CreateProfileInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the create profile internal server error response
+func (o *CreateProfileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CreateProfileInternalServerError) Error() string {

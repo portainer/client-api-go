@@ -36,7 +36,7 @@ func (o *EdgeUpdateScheduleInspectReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_update_schedules/{id}] EdgeUpdateScheduleInspect", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *EdgeUpdateScheduleInspectOK) IsServerError() bool {
 // IsCode returns true when this edge update schedule inspect o k response a status code equal to that given
 func (o *EdgeUpdateScheduleInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge update schedule inspect o k response
+func (o *EdgeUpdateScheduleInspectOK) Code() int {
+	return 200
 }
 
 func (o *EdgeUpdateScheduleInspectOK) Error() string {
@@ -139,6 +144,11 @@ func (o *EdgeUpdateScheduleInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge update schedule inspect internal server error response a status code equal to that given
 func (o *EdgeUpdateScheduleInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge update schedule inspect internal server error response
+func (o *EdgeUpdateScheduleInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeUpdateScheduleInspectInternalServerError) Error() string {

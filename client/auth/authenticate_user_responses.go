@@ -48,7 +48,7 @@ func (o *AuthenticateUserReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /auth] AuthenticateUser", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *AuthenticateUserOK) IsServerError() bool {
 // IsCode returns true when this authenticate user o k response a status code equal to that given
 func (o *AuthenticateUserOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the authenticate user o k response
+func (o *AuthenticateUserOK) Code() int {
+	return 200
 }
 
 func (o *AuthenticateUserOK) Error() string {
@@ -153,6 +158,11 @@ func (o *AuthenticateUserBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the authenticate user bad request response
+func (o *AuthenticateUserBadRequest) Code() int {
+	return 400
+}
+
 func (o *AuthenticateUserBadRequest) Error() string {
 	return fmt.Sprintf("[POST /auth][%d] authenticateUserBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *AuthenticateUserUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the authenticate user unprocessable entity response
+func (o *AuthenticateUserUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *AuthenticateUserUnprocessableEntity) Error() string {
 	return fmt.Sprintf("[POST /auth][%d] authenticateUserUnprocessableEntity ", 422)
 }
@@ -253,6 +268,11 @@ func (o *AuthenticateUserInternalServerError) IsServerError() bool {
 // IsCode returns true when this authenticate user internal server error response a status code equal to that given
 func (o *AuthenticateUserInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the authenticate user internal server error response
+func (o *AuthenticateUserInternalServerError) Code() int {
+	return 500
 }
 
 func (o *AuthenticateUserInternalServerError) Error() string {

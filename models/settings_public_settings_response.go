@@ -189,6 +189,11 @@ func (m *SettingsPublicSettingsResponse) ContextValidate(ctx context.Context, fo
 func (m *SettingsPublicSettingsResponse) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GlobalDeploymentOptions != nil {
+
+		if swag.IsZero(m.GlobalDeploymentOptions) { // not required
+			return nil
+		}
+
 		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("GlobalDeploymentOptions")
@@ -205,6 +210,11 @@ func (m *SettingsPublicSettingsResponse) contextValidateGlobalDeploymentOptions(
 func (m *SettingsPublicSettingsResponse) contextValidateDefaultRegistry(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DefaultRegistry != nil {
+
+		if swag.IsZero(m.DefaultRegistry) { // not required
+			return nil
+		}
+
 		if err := m.DefaultRegistry.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("defaultRegistry")
@@ -221,6 +231,11 @@ func (m *SettingsPublicSettingsResponse) contextValidateDefaultRegistry(ctx cont
 func (m *SettingsPublicSettingsResponse) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Edge != nil {
+
+		if swag.IsZero(m.Edge) { // not required
+			return nil
+		}
+
 		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("edge")
@@ -365,6 +380,11 @@ func (m *SettingsPublicSettingsResponseEdge) ContextValidate(ctx context.Context
 func (m *SettingsPublicSettingsResponseEdge) contextValidateMtls(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mtls != nil {
+
+		if swag.IsZero(m.Mtls) { // not required
+			return nil
+		}
+
 		if err := m.Mtls.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("edge" + "." + "mtls")

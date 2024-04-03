@@ -48,7 +48,7 @@ func (o *EdgeJobUpdateReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_jobs/{id}] EdgeJobUpdate", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeJobUpdateOK) IsServerError() bool {
 // IsCode returns true when this edge job update o k response a status code equal to that given
 func (o *EdgeJobUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge job update o k response
+func (o *EdgeJobUpdateOK) Code() int {
+	return 200
 }
 
 func (o *EdgeJobUpdateOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeJobUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge job update bad request response
+func (o *EdgeJobUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeJobUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeJobUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job update internal server error response
+func (o *EdgeJobUpdateInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobUpdateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeJobUpdateServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job update service unavailable response a status code equal to that given
 func (o *EdgeJobUpdateServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job update service unavailable response
+func (o *EdgeJobUpdateServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobUpdateServiceUnavailable) Error() string {

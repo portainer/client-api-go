@@ -62,11 +62,11 @@ Microk8sGetNodeStatusParams contains all the parameters to send to the API endpo
 */
 type Microk8sGetNodeStatusParams struct {
 
-	/* Environmentid.
+	/* Endpointid.
 
 	   Environment(Endpoint) identifier
 	*/
-	Environmentid int64
+	Endpointid int64
 
 	/* NodeIP.
 
@@ -127,15 +127,15 @@ func (o *Microk8sGetNodeStatusParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithEnvironmentid adds the environmentid to the microk8s get node status params
-func (o *Microk8sGetNodeStatusParams) WithEnvironmentid(environmentid int64) *Microk8sGetNodeStatusParams {
-	o.SetEnvironmentid(environmentid)
+// WithEndpointid adds the endpointid to the microk8s get node status params
+func (o *Microk8sGetNodeStatusParams) WithEndpointid(endpointid int64) *Microk8sGetNodeStatusParams {
+	o.SetEndpointid(endpointid)
 	return o
 }
 
-// SetEnvironmentid adds the environmentid to the microk8s get node status params
-func (o *Microk8sGetNodeStatusParams) SetEnvironmentid(environmentid int64) {
-	o.Environmentid = environmentid
+// SetEndpointid adds the endpointid to the microk8s get node status params
+func (o *Microk8sGetNodeStatusParams) SetEndpointid(endpointid int64) {
+	o.Endpointid = endpointid
 }
 
 // WithNodeIP adds the nodeIP to the microk8s get node status params
@@ -157,8 +157,8 @@ func (o *Microk8sGetNodeStatusParams) WriteToRequest(r runtime.ClientRequest, re
 	}
 	var res []error
 
-	// path param environmentid
-	if err := r.SetPathParam("environmentid", swag.FormatInt64(o.Environmentid)); err != nil {
+	// path param endpointid
+	if err := r.SetPathParam("endpointid", swag.FormatInt64(o.Endpointid)); err != nil {
 		return err
 	}
 

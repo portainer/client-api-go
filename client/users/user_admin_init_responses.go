@@ -48,7 +48,7 @@ func (o *UserAdminInitReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /users/admin/init] UserAdminInit", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *UserAdminInitOK) IsServerError() bool {
 // IsCode returns true when this user admin init o k response a status code equal to that given
 func (o *UserAdminInitOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user admin init o k response
+func (o *UserAdminInitOK) Code() int {
+	return 200
 }
 
 func (o *UserAdminInitOK) Error() string {
@@ -153,6 +158,11 @@ func (o *UserAdminInitBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user admin init bad request response
+func (o *UserAdminInitBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserAdminInitBadRequest) Error() string {
 	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *UserAdminInitConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the user admin init conflict response
+func (o *UserAdminInitConflict) Code() int {
+	return 409
+}
+
 func (o *UserAdminInitConflict) Error() string {
 	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitConflict ", 409)
 }
@@ -253,6 +268,11 @@ func (o *UserAdminInitInternalServerError) IsServerError() bool {
 // IsCode returns true when this user admin init internal server error response a status code equal to that given
 func (o *UserAdminInitInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user admin init internal server error response
+func (o *UserAdminInitInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserAdminInitInternalServerError) Error() string {

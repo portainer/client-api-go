@@ -51,7 +51,7 @@ func (o *StackDeleteReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /stacks/{id}] StackDelete", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *StackDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this stack delete no content response a status code equal to that given
 func (o *StackDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the stack delete no content response
+func (o *StackDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *StackDeleteNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *StackDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack delete bad request response
+func (o *StackDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *StackDeleteForbidden) IsServerError() bool {
 // IsCode returns true when this stack delete forbidden response a status code equal to that given
 func (o *StackDeleteForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack delete forbidden response
+func (o *StackDeleteForbidden) Code() int {
+	return 403
 }
 
 func (o *StackDeleteForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *StackDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack delete not found response
+func (o *StackDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *StackDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *StackDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack delete internal server error response a status code equal to that given
 func (o *StackDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack delete internal server error response
+func (o *StackDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackDeleteInternalServerError) Error() string {

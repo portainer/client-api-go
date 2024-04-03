@@ -74,6 +74,10 @@ func (m *V1beta1ContainerMetrics) ContextValidate(ctx context.Context, formats s
 
 func (m *V1beta1ContainerMetrics) contextValidateUsage(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Usage) { // not required
+		return nil
+	}
+
 	if err := m.Usage.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("usage")

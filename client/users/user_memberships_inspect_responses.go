@@ -48,7 +48,7 @@ func (o *UserMembershipsInspectReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}/memberships] UserMembershipsInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *UserMembershipsInspectOK) IsServerError() bool {
 // IsCode returns true when this user memberships inspect o k response a status code equal to that given
 func (o *UserMembershipsInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user memberships inspect o k response
+func (o *UserMembershipsInspectOK) Code() int {
+	return 200
 }
 
 func (o *UserMembershipsInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *UserMembershipsInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user memberships inspect bad request response
+func (o *UserMembershipsInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserMembershipsInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *UserMembershipsInspectForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the user memberships inspect forbidden response
+func (o *UserMembershipsInspectForbidden) Code() int {
+	return 403
+}
+
 func (o *UserMembershipsInspectForbidden) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectForbidden ", 403)
 }
@@ -253,6 +268,11 @@ func (o *UserMembershipsInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this user memberships inspect internal server error response a status code equal to that given
 func (o *UserMembershipsInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user memberships inspect internal server error response
+func (o *UserMembershipsInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserMembershipsInspectInternalServerError) Error() string {

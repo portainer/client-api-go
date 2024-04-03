@@ -54,7 +54,7 @@ func (o *CustomTemplateUpdateReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /custom_templates/{id}] CustomTemplateUpdate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *CustomTemplateUpdateOK) IsServerError() bool {
 // IsCode returns true when this custom template update o k response a status code equal to that given
 func (o *CustomTemplateUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the custom template update o k response
+func (o *CustomTemplateUpdateOK) Code() int {
+	return 200
 }
 
 func (o *CustomTemplateUpdateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *CustomTemplateUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the custom template update bad request response
+func (o *CustomTemplateUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *CustomTemplateUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *CustomTemplateUpdateForbidden) IsServerError() bool {
 // IsCode returns true when this custom template update forbidden response a status code equal to that given
 func (o *CustomTemplateUpdateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the custom template update forbidden response
+func (o *CustomTemplateUpdateForbidden) Code() int {
+	return 403
 }
 
 func (o *CustomTemplateUpdateForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *CustomTemplateUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the custom template update not found response
+func (o *CustomTemplateUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *CustomTemplateUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *CustomTemplateUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this custom template update internal server error response a status code equal to that given
 func (o *CustomTemplateUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the custom template update internal server error response
+func (o *CustomTemplateUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CustomTemplateUpdateInternalServerError) Error() string {

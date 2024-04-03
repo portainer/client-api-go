@@ -42,7 +42,7 @@ func (o *StackCreateDockerSwarmFileReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/create/swarm/file] StackCreateDockerSwarmFile", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *StackCreateDockerSwarmFileOK) IsServerError() bool {
 // IsCode returns true when this stack create docker swarm file o k response a status code equal to that given
 func (o *StackCreateDockerSwarmFileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack create docker swarm file o k response
+func (o *StackCreateDockerSwarmFileOK) Code() int {
+	return 200
 }
 
 func (o *StackCreateDockerSwarmFileOK) Error() string {
@@ -147,6 +152,11 @@ func (o *StackCreateDockerSwarmFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack create docker swarm file bad request response
+func (o *StackCreateDockerSwarmFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackCreateDockerSwarmFileBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *StackCreateDockerSwarmFileInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack create docker swarm file internal server error response a status code equal to that given
 func (o *StackCreateDockerSwarmFileInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack create docker swarm file internal server error response
+func (o *StackCreateDockerSwarmFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackCreateDockerSwarmFileInternalServerError) Error() string {

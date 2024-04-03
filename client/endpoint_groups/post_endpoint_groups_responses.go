@@ -42,7 +42,7 @@ func (o *PostEndpointGroupsReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoint_groups] PostEndpointGroups", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *PostEndpointGroupsOK) IsServerError() bool {
 // IsCode returns true when this post endpoint groups o k response a status code equal to that given
 func (o *PostEndpointGroupsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the post endpoint groups o k response
+func (o *PostEndpointGroupsOK) Code() int {
+	return 200
 }
 
 func (o *PostEndpointGroupsOK) Error() string {
@@ -147,6 +152,11 @@ func (o *PostEndpointGroupsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the post endpoint groups bad request response
+func (o *PostEndpointGroupsBadRequest) Code() int {
+	return 400
+}
+
 func (o *PostEndpointGroupsBadRequest) Error() string {
 	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *PostEndpointGroupsInternalServerError) IsServerError() bool {
 // IsCode returns true when this post endpoint groups internal server error response a status code equal to that given
 func (o *PostEndpointGroupsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the post endpoint groups internal server error response
+func (o *PostEndpointGroupsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostEndpointGroupsInternalServerError) Error() string {

@@ -75,6 +75,11 @@ func (m *UsersAccessTokenResponse) ContextValidate(ctx context.Context, formats 
 func (m *UsersAccessTokenResponse) contextValidateAPIKey(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.APIKey != nil {
+
+		if swag.IsZero(m.APIKey) { // not required
+			return nil
+		}
+
 		if err := m.APIKey.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("apiKey")

@@ -48,7 +48,7 @@ func (o *TeamMembershipsReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /teams/{id}/memberships] TeamMemberships", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *TeamMembershipsOK) IsServerError() bool {
 // IsCode returns true when this team memberships o k response a status code equal to that given
 func (o *TeamMembershipsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the team memberships o k response
+func (o *TeamMembershipsOK) Code() int {
+	return 200
 }
 
 func (o *TeamMembershipsOK) Error() string {
@@ -151,6 +156,11 @@ func (o *TeamMembershipsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the team memberships bad request response
+func (o *TeamMembershipsBadRequest) Code() int {
+	return 400
+}
+
 func (o *TeamMembershipsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /teams/{id}/memberships][%d] teamMembershipsBadRequest ", 400)
 }
@@ -202,6 +212,11 @@ func (o *TeamMembershipsForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the team memberships forbidden response
+func (o *TeamMembershipsForbidden) Code() int {
+	return 403
+}
+
 func (o *TeamMembershipsForbidden) Error() string {
 	return fmt.Sprintf("[GET /teams/{id}/memberships][%d] teamMembershipsForbidden ", 403)
 }
@@ -251,6 +266,11 @@ func (o *TeamMembershipsInternalServerError) IsServerError() bool {
 // IsCode returns true when this team memberships internal server error response a status code equal to that given
 func (o *TeamMembershipsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the team memberships internal server error response
+func (o *TeamMembershipsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TeamMembershipsInternalServerError) Error() string {

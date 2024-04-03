@@ -54,7 +54,7 @@ func (o *StackUpdateReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /stacks/{id}] StackUpdate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *StackUpdateOK) IsServerError() bool {
 // IsCode returns true when this stack update o k response a status code equal to that given
 func (o *StackUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack update o k response
+func (o *StackUpdateOK) Code() int {
+	return 200
 }
 
 func (o *StackUpdateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *StackUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack update bad request response
+func (o *StackUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *StackUpdateForbidden) IsServerError() bool {
 // IsCode returns true when this stack update forbidden response a status code equal to that given
 func (o *StackUpdateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack update forbidden response
+func (o *StackUpdateForbidden) Code() int {
+	return 403
 }
 
 func (o *StackUpdateForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *StackUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack update not found response
+func (o *StackUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *StackUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *StackUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack update internal server error response a status code equal to that given
 func (o *StackUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack update internal server error response
+func (o *StackUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackUpdateInternalServerError) Error() string {

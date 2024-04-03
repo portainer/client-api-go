@@ -54,7 +54,7 @@ func (o *StackMigrateReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/{id}/migrate] StackMigrate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *StackMigrateOK) IsServerError() bool {
 // IsCode returns true when this stack migrate o k response a status code equal to that given
 func (o *StackMigrateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack migrate o k response
+func (o *StackMigrateOK) Code() int {
+	return 200
 }
 
 func (o *StackMigrateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *StackMigrateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack migrate bad request response
+func (o *StackMigrateBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackMigrateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *StackMigrateForbidden) IsServerError() bool {
 // IsCode returns true when this stack migrate forbidden response a status code equal to that given
 func (o *StackMigrateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack migrate forbidden response
+func (o *StackMigrateForbidden) Code() int {
+	return 403
 }
 
 func (o *StackMigrateForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *StackMigrateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack migrate not found response
+func (o *StackMigrateNotFound) Code() int {
+	return 404
+}
+
 func (o *StackMigrateNotFound) Error() string {
 	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *StackMigrateInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack migrate internal server error response a status code equal to that given
 func (o *StackMigrateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack migrate internal server error response
+func (o *StackMigrateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackMigrateInternalServerError) Error() string {

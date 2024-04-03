@@ -39,7 +39,7 @@ func (o *FdoProfileInspectReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /fdo/profiles/{id}] fdoProfileInspect", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *FdoProfileInspectOK) IsServerError() bool {
 // IsCode returns true when this fdo profile inspect o k response a status code equal to that given
 func (o *FdoProfileInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the fdo profile inspect o k response
+func (o *FdoProfileInspectOK) Code() int {
+	return 200
 }
 
 func (o *FdoProfileInspectOK) Error() string {
@@ -132,6 +137,11 @@ func (o *FdoProfileInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the fdo profile inspect bad request response
+func (o *FdoProfileInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *FdoProfileInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /fdo/profiles/{id}][%d] fdoProfileInspectBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *FdoProfileInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this fdo profile inspect internal server error response a status code equal to that given
 func (o *FdoProfileInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the fdo profile inspect internal server error response
+func (o *FdoProfileInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *FdoProfileInspectInternalServerError) Error() string {

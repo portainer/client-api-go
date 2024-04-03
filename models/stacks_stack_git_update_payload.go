@@ -131,6 +131,11 @@ func (m *StacksStackGitUpdatePayload) ContextValidate(ctx context.Context, forma
 func (m *StacksStackGitUpdatePayload) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AutoUpdate != nil {
+
+		if swag.IsZero(m.AutoUpdate) { // not required
+			return nil
+		}
+
 		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("autoUpdate")
@@ -149,6 +154,11 @@ func (m *StacksStackGitUpdatePayload) contextValidateEnv(ctx context.Context, fo
 	for i := 0; i < len(m.Env); i++ {
 
 		if m.Env[i] != nil {
+
+			if swag.IsZero(m.Env[i]) { // not required
+				return nil
+			}
+
 			if err := m.Env[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("env" + "." + strconv.Itoa(i))

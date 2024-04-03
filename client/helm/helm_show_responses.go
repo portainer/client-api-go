@@ -46,7 +46,7 @@ func (o *HelmShowReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /templates/helm/{command}] HelmShow", response, response.Code())
 	}
 }
 
@@ -87,6 +87,11 @@ func (o *HelmShowOK) IsServerError() bool {
 // IsCode returns true when this helm show o k response a status code equal to that given
 func (o *HelmShowOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the helm show o k response
+func (o *HelmShowOK) Code() int {
+	return 200
 }
 
 func (o *HelmShowOK) Error() string {
@@ -149,6 +154,11 @@ func (o *HelmShowUnauthorized) IsCode(code int) bool {
 	return code == 401
 }
 
+// Code gets the status code for the helm show unauthorized response
+func (o *HelmShowUnauthorized) Code() int {
+	return 401
+}
+
 func (o *HelmShowUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowUnauthorized ", 401)
 }
@@ -200,6 +210,11 @@ func (o *HelmShowNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the helm show not found response
+func (o *HelmShowNotFound) Code() int {
+	return 404
+}
+
 func (o *HelmShowNotFound) Error() string {
 	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowNotFound ", 404)
 }
@@ -249,6 +264,11 @@ func (o *HelmShowInternalServerError) IsServerError() bool {
 // IsCode returns true when this helm show internal server error response a status code equal to that given
 func (o *HelmShowInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the helm show internal server error response
+func (o *HelmShowInternalServerError) Code() int {
+	return 500
 }
 
 func (o *HelmShowInternalServerError) Error() string {

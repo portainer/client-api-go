@@ -45,7 +45,7 @@ func (o *SSLUpdateReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /ssl] SSLUpdate", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *SSLUpdateNoContent) IsServerError() bool {
 // IsCode returns true when this s s l update no content response a status code equal to that given
 func (o *SSLUpdateNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the s s l update no content response
+func (o *SSLUpdateNoContent) Code() int {
+	return 204
 }
 
 func (o *SSLUpdateNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *SSLUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the s s l update bad request response
+func (o *SSLUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *SSLUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *SSLUpdateForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the s s l update forbidden response
+func (o *SSLUpdateForbidden) Code() int {
+	return 403
+}
+
 func (o *SSLUpdateForbidden) Error() string {
 	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *SSLUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this s s l update internal server error response a status code equal to that given
 func (o *SSLUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the s s l update internal server error response
+func (o *SSLUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *SSLUpdateInternalServerError) Error() string {

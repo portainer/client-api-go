@@ -36,7 +36,7 @@ func (o *SettingsPublicReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /settings/public] SettingsPublic", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *SettingsPublicOK) IsServerError() bool {
 // IsCode returns true when this settings public o k response a status code equal to that given
 func (o *SettingsPublicOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the settings public o k response
+func (o *SettingsPublicOK) Code() int {
+	return 200
 }
 
 func (o *SettingsPublicOK) Error() string {
@@ -139,6 +144,11 @@ func (o *SettingsPublicInternalServerError) IsServerError() bool {
 // IsCode returns true when this settings public internal server error response a status code equal to that given
 func (o *SettingsPublicInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the settings public internal server error response
+func (o *SettingsPublicInternalServerError) Code() int {
+	return 500
 }
 
 func (o *SettingsPublicInternalServerError) Error() string {

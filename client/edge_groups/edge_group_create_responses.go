@@ -42,7 +42,7 @@ func (o *EdgeGroupCreateReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_groups] EdgeGroupCreate", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *EdgeGroupCreateOK) IsServerError() bool {
 // IsCode returns true when this edge group create o k response a status code equal to that given
 func (o *EdgeGroupCreateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge group create o k response
+func (o *EdgeGroupCreateOK) Code() int {
+	return 200
 }
 
 func (o *EdgeGroupCreateOK) Error() string {
@@ -147,6 +152,11 @@ func (o *EdgeGroupCreateInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge group create internal server error response
+func (o *EdgeGroupCreateInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeGroupCreateInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateInternalServerError ", 500)
 }
@@ -196,6 +206,11 @@ func (o *EdgeGroupCreateServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge group create service unavailable response a status code equal to that given
 func (o *EdgeGroupCreateServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge group create service unavailable response
+func (o *EdgeGroupCreateServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeGroupCreateServiceUnavailable) Error() string {

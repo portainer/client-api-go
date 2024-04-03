@@ -42,7 +42,7 @@ func (o *StackCreateKubernetesURLReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/create/kubernetes/url] StackCreateKubernetesUrl", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *StackCreateKubernetesURLOK) IsServerError() bool {
 // IsCode returns true when this stack create kubernetes Url o k response a status code equal to that given
 func (o *StackCreateKubernetesURLOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack create kubernetes Url o k response
+func (o *StackCreateKubernetesURLOK) Code() int {
+	return 200
 }
 
 func (o *StackCreateKubernetesURLOK) Error() string {
@@ -147,6 +152,11 @@ func (o *StackCreateKubernetesURLBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack create kubernetes Url bad request response
+func (o *StackCreateKubernetesURLBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackCreateKubernetesURLBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *StackCreateKubernetesURLInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack create kubernetes Url internal server error response a status code equal to that given
 func (o *StackCreateKubernetesURLInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack create kubernetes Url internal server error response
+func (o *StackCreateKubernetesURLInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackCreateKubernetesURLInternalServerError) Error() string {

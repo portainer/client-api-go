@@ -57,7 +57,7 @@ func (o *GetKubernetesConfigReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/config] GetKubernetesConfig", response, response.Code())
 	}
 }
 
@@ -97,6 +97,11 @@ func (o *GetKubernetesConfigOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes config o k response a status code equal to that given
 func (o *GetKubernetesConfigOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes config o k response
+func (o *GetKubernetesConfigOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesConfigOK) Error() string {
@@ -150,6 +155,11 @@ func (o *GetKubernetesConfigBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get kubernetes config bad request response
+func (o *GetKubernetesConfigBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetKubernetesConfigBadRequest) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigBadRequest ", 400)
 }
@@ -199,6 +209,11 @@ func (o *GetKubernetesConfigUnauthorized) IsServerError() bool {
 // IsCode returns true when this get kubernetes config unauthorized response a status code equal to that given
 func (o *GetKubernetesConfigUnauthorized) IsCode(code int) bool {
 	return code == 401
+}
+
+// Code gets the status code for the get kubernetes config unauthorized response
+func (o *GetKubernetesConfigUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetKubernetesConfigUnauthorized) Error() string {
@@ -252,6 +267,11 @@ func (o *GetKubernetesConfigForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the get kubernetes config forbidden response
+func (o *GetKubernetesConfigForbidden) Code() int {
+	return 403
+}
+
 func (o *GetKubernetesConfigForbidden) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigForbidden ", 403)
 }
@@ -303,6 +323,11 @@ func (o *GetKubernetesConfigNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get kubernetes config not found response
+func (o *GetKubernetesConfigNotFound) Code() int {
+	return 404
+}
+
 func (o *GetKubernetesConfigNotFound) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/config][%d] getKubernetesConfigNotFound ", 404)
 }
@@ -352,6 +377,11 @@ func (o *GetKubernetesConfigInternalServerError) IsServerError() bool {
 // IsCode returns true when this get kubernetes config internal server error response a status code equal to that given
 func (o *GetKubernetesConfigInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get kubernetes config internal server error response
+func (o *GetKubernetesConfigInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetKubernetesConfigInternalServerError) Error() string {

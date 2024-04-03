@@ -48,7 +48,7 @@ func (o *ValidateOAuthReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /auth/oauth/validate] ValidateOAuth", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *ValidateOAuthOK) IsServerError() bool {
 // IsCode returns true when this validate o auth o k response a status code equal to that given
 func (o *ValidateOAuthOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the validate o auth o k response
+func (o *ValidateOAuthOK) Code() int {
+	return 200
 }
 
 func (o *ValidateOAuthOK) Error() string {
@@ -153,6 +158,11 @@ func (o *ValidateOAuthBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the validate o auth bad request response
+func (o *ValidateOAuthBadRequest) Code() int {
+	return 400
+}
+
 func (o *ValidateOAuthBadRequest) Error() string {
 	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *ValidateOAuthUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the validate o auth unprocessable entity response
+func (o *ValidateOAuthUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ValidateOAuthUnprocessableEntity) Error() string {
 	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthUnprocessableEntity ", 422)
 }
@@ -253,6 +268,11 @@ func (o *ValidateOAuthInternalServerError) IsServerError() bool {
 // IsCode returns true when this validate o auth internal server error response a status code equal to that given
 func (o *ValidateOAuthInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the validate o auth internal server error response
+func (o *ValidateOAuthInternalServerError) Code() int {
+	return 500
 }
 
 func (o *ValidateOAuthInternalServerError) Error() string {

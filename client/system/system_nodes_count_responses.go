@@ -36,7 +36,7 @@ func (o *SystemNodesCountReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /system/nodes] systemNodesCount", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *SystemNodesCountOK) IsServerError() bool {
 // IsCode returns true when this system nodes count o k response a status code equal to that given
 func (o *SystemNodesCountOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the system nodes count o k response
+func (o *SystemNodesCountOK) Code() int {
+	return 200
 }
 
 func (o *SystemNodesCountOK) Error() string {
@@ -139,6 +144,11 @@ func (o *SystemNodesCountInternalServerError) IsServerError() bool {
 // IsCode returns true when this system nodes count internal server error response a status code equal to that given
 func (o *SystemNodesCountInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the system nodes count internal server error response
+func (o *SystemNodesCountInternalServerError) Code() int {
+	return 500
 }
 
 func (o *SystemNodesCountInternalServerError) Error() string {

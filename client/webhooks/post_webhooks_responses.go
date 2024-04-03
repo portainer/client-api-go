@@ -48,7 +48,7 @@ func (o *PostWebhooksReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /webhooks] PostWebhooks", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *PostWebhooksOK) IsServerError() bool {
 // IsCode returns true when this post webhooks o k response a status code equal to that given
 func (o *PostWebhooksOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the post webhooks o k response
+func (o *PostWebhooksOK) Code() int {
+	return 200
 }
 
 func (o *PostWebhooksOK) Error() string {
@@ -153,6 +158,11 @@ func (o *PostWebhooksBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the post webhooks bad request response
+func (o *PostWebhooksBadRequest) Code() int {
+	return 400
+}
+
 func (o *PostWebhooksBadRequest) Error() string {
 	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *PostWebhooksConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the post webhooks conflict response
+func (o *PostWebhooksConflict) Code() int {
+	return 409
+}
+
 func (o *PostWebhooksConflict) Error() string {
 	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksConflict ", 409)
 }
@@ -253,6 +268,11 @@ func (o *PostWebhooksInternalServerError) IsServerError() bool {
 // IsCode returns true when this post webhooks internal server error response a status code equal to that given
 func (o *PostWebhooksInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the post webhooks internal server error response
+func (o *PostWebhooksInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostWebhooksInternalServerError) Error() string {

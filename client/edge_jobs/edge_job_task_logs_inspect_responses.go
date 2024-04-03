@@ -48,7 +48,7 @@ func (o *EdgeJobTaskLogsInspectReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_jobs/{id}/tasks/{taskID}/logs] EdgeJobTaskLogsInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeJobTaskLogsInspectOK) IsServerError() bool {
 // IsCode returns true when this edge job task logs inspect o k response a status code equal to that given
 func (o *EdgeJobTaskLogsInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge job task logs inspect o k response
+func (o *EdgeJobTaskLogsInspectOK) Code() int {
+	return 200
 }
 
 func (o *EdgeJobTaskLogsInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeJobTaskLogsInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge job task logs inspect bad request response
+func (o *EdgeJobTaskLogsInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeJobTaskLogsInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeJobTaskLogsInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job task logs inspect internal server error response
+func (o *EdgeJobTaskLogsInspectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobTaskLogsInspectInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeJobTaskLogsInspectServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job task logs inspect service unavailable response a status code equal to that given
 func (o *EdgeJobTaskLogsInspectServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job task logs inspect service unavailable response
+func (o *EdgeJobTaskLogsInspectServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobTaskLogsInspectServiceUnavailable) Error() string {

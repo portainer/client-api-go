@@ -91,6 +91,11 @@ func (m *PortainereeEdge) ContextValidate(ctx context.Context, formats strfmt.Re
 func (m *PortainereeEdge) contextValidateMtls(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mtls != nil {
+
+		if swag.IsZero(m.Mtls) { // not required
+			return nil
+		}
+
 		if err := m.Mtls.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("mtls")

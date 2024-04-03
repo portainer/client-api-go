@@ -51,7 +51,7 @@ func (o *UserRemoveGitCredentialReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /users/{id}/gitcredentials/{credentialID}] UserRemoveGitCredential", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *UserRemoveGitCredentialNoContent) IsServerError() bool {
 // IsCode returns true when this user remove git credential no content response a status code equal to that given
 func (o *UserRemoveGitCredentialNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the user remove git credential no content response
+func (o *UserRemoveGitCredentialNoContent) Code() int {
+	return 204
 }
 
 func (o *UserRemoveGitCredentialNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *UserRemoveGitCredentialBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user remove git credential bad request response
+func (o *UserRemoveGitCredentialBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserRemoveGitCredentialBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *UserRemoveGitCredentialForbidden) IsServerError() bool {
 // IsCode returns true when this user remove git credential forbidden response a status code equal to that given
 func (o *UserRemoveGitCredentialForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user remove git credential forbidden response
+func (o *UserRemoveGitCredentialForbidden) Code() int {
+	return 403
 }
 
 func (o *UserRemoveGitCredentialForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *UserRemoveGitCredentialNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user remove git credential not found response
+func (o *UserRemoveGitCredentialNotFound) Code() int {
+	return 404
+}
+
 func (o *UserRemoveGitCredentialNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *UserRemoveGitCredentialInternalServerError) IsServerError() bool {
 // IsCode returns true when this user remove git credential internal server error response a status code equal to that given
 func (o *UserRemoveGitCredentialInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user remove git credential internal server error response
+func (o *UserRemoveGitCredentialInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserRemoveGitCredentialInternalServerError) Error() string {

@@ -42,7 +42,7 @@ func (o *EndpointCreateGlobalKeyReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/global-key] EndpointCreateGlobalKey", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *EndpointCreateGlobalKeyOK) IsServerError() bool {
 // IsCode returns true when this endpoint create global key o k response a status code equal to that given
 func (o *EndpointCreateGlobalKeyOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint create global key o k response
+func (o *EndpointCreateGlobalKeyOK) Code() int {
+	return 200
 }
 
 func (o *EndpointCreateGlobalKeyOK) Error() string {
@@ -147,6 +152,11 @@ func (o *EndpointCreateGlobalKeyBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint create global key bad request response
+func (o *EndpointCreateGlobalKeyBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointCreateGlobalKeyBadRequest) Error() string {
 	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *EndpointCreateGlobalKeyInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint create global key internal server error response a status code equal to that given
 func (o *EndpointCreateGlobalKeyInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint create global key internal server error response
+func (o *EndpointCreateGlobalKeyInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointCreateGlobalKeyInternalServerError) Error() string {

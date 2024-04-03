@@ -45,7 +45,7 @@ func (o *DeviceActionReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /open_amt/{id}/devices/{deviceId}/action] DeviceAction", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *DeviceActionNoContent) IsServerError() bool {
 // IsCode returns true when this device action no content response a status code equal to that given
 func (o *DeviceActionNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the device action no content response
+func (o *DeviceActionNoContent) Code() int {
+	return 204
 }
 
 func (o *DeviceActionNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *DeviceActionBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the device action bad request response
+func (o *DeviceActionBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeviceActionBadRequest) Error() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *DeviceActionForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the device action forbidden response
+func (o *DeviceActionForbidden) Code() int {
+	return 403
+}
+
 func (o *DeviceActionForbidden) Error() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *DeviceActionInternalServerError) IsServerError() bool {
 // IsCode returns true when this device action internal server error response a status code equal to that given
 func (o *DeviceActionInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the device action internal server error response
+func (o *DeviceActionInternalServerError) Code() int {
+	return 500
 }
 
 func (o *DeviceActionInternalServerError) Error() string {

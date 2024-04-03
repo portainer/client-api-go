@@ -36,7 +36,7 @@ func (o *CustomTemplateListReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /custom_templates] CustomTemplateList", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *CustomTemplateListOK) IsServerError() bool {
 // IsCode returns true when this custom template list o k response a status code equal to that given
 func (o *CustomTemplateListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the custom template list o k response
+func (o *CustomTemplateListOK) Code() int {
+	return 200
 }
 
 func (o *CustomTemplateListOK) Error() string {
@@ -137,6 +142,11 @@ func (o *CustomTemplateListInternalServerError) IsServerError() bool {
 // IsCode returns true when this custom template list internal server error response a status code equal to that given
 func (o *CustomTemplateListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the custom template list internal server error response
+func (o *CustomTemplateListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CustomTemplateListInternalServerError) Error() string {

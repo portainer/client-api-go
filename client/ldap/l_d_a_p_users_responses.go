@@ -42,7 +42,7 @@ func (o *LDAPUsersReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /ldap/users] LDAPUsers", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *LDAPUsersOK) IsServerError() bool {
 // IsCode returns true when this l d a p users o k response a status code equal to that given
 func (o *LDAPUsersOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the l d a p users o k response
+func (o *LDAPUsersOK) Code() int {
+	return 200
 }
 
 func (o *LDAPUsersOK) Error() string {
@@ -145,6 +150,11 @@ func (o *LDAPUsersBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the l d a p users bad request response
+func (o *LDAPUsersBadRequest) Code() int {
+	return 400
+}
+
 func (o *LDAPUsersBadRequest) Error() string {
 	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersBadRequest ", 400)
 }
@@ -194,6 +204,11 @@ func (o *LDAPUsersInternalServerError) IsServerError() bool {
 // IsCode returns true when this l d a p users internal server error response a status code equal to that given
 func (o *LDAPUsersInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the l d a p users internal server error response
+func (o *LDAPUsersInternalServerError) Code() int {
+	return 500
 }
 
 func (o *LDAPUsersInternalServerError) Error() string {

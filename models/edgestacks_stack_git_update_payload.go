@@ -232,6 +232,11 @@ func (m *EdgestacksStackGitUpdatePayload) ContextValidate(ctx context.Context, f
 func (m *EdgestacksStackGitUpdatePayload) contextValidateAuthentication(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Authentication != nil {
+
+		if swag.IsZero(m.Authentication) { // not required
+			return nil
+		}
+
 		if err := m.Authentication.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authentication")
@@ -248,6 +253,11 @@ func (m *EdgestacksStackGitUpdatePayload) contextValidateAuthentication(ctx cont
 func (m *EdgestacksStackGitUpdatePayload) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AutoUpdate != nil {
+
+		if swag.IsZero(m.AutoUpdate) { // not required
+			return nil
+		}
+
 		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("autoUpdate")
@@ -266,6 +276,11 @@ func (m *EdgestacksStackGitUpdatePayload) contextValidateEnvVars(ctx context.Con
 	for i := 0; i < len(m.EnvVars); i++ {
 
 		if m.EnvVars[i] != nil {
+
+			if swag.IsZero(m.EnvVars[i]) { // not required
+				return nil
+			}
+
 			if err := m.EnvVars[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("envVars" + "." + strconv.Itoa(i))
@@ -284,6 +299,11 @@ func (m *EdgestacksStackGitUpdatePayload) contextValidateEnvVars(ctx context.Con
 func (m *EdgestacksStackGitUpdatePayload) contextValidateStaggerConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.StaggerConfig != nil {
+
+		if swag.IsZero(m.StaggerConfig) { // not required
+			return nil
+		}
+
 		if err := m.StaggerConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("staggerConfig")

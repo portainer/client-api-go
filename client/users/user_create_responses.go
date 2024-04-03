@@ -54,7 +54,7 @@ func (o *UserCreateReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /users] UserCreate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *UserCreateOK) IsServerError() bool {
 // IsCode returns true when this user create o k response a status code equal to that given
 func (o *UserCreateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user create o k response
+func (o *UserCreateOK) Code() int {
+	return 200
 }
 
 func (o *UserCreateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *UserCreateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user create bad request response
+func (o *UserCreateBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /users][%d] userCreateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *UserCreateForbidden) IsServerError() bool {
 // IsCode returns true when this user create forbidden response a status code equal to that given
 func (o *UserCreateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user create forbidden response
+func (o *UserCreateForbidden) Code() int {
+	return 403
 }
 
 func (o *UserCreateForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *UserCreateConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the user create conflict response
+func (o *UserCreateConflict) Code() int {
+	return 409
+}
+
 func (o *UserCreateConflict) Error() string {
 	return fmt.Sprintf("[POST /users][%d] userCreateConflict ", 409)
 }
@@ -310,6 +330,11 @@ func (o *UserCreateInternalServerError) IsServerError() bool {
 // IsCode returns true when this user create internal server error response a status code equal to that given
 func (o *UserCreateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user create internal server error response
+func (o *UserCreateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserCreateInternalServerError) Error() string {

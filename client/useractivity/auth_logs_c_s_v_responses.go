@@ -33,7 +33,7 @@ func (o *AuthLogsCSVReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /useractivity/authlogs.csv] AuthLogsCSV", response, response.Code())
 	}
 }
 
@@ -73,6 +73,11 @@ func (o *AuthLogsCSVOK) IsServerError() bool {
 // IsCode returns true when this auth logs c s v o k response a status code equal to that given
 func (o *AuthLogsCSVOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the auth logs c s v o k response
+func (o *AuthLogsCSVOK) Code() int {
+	return 200
 }
 
 func (o *AuthLogsCSVOK) Error() string {
@@ -124,6 +129,11 @@ func (o *AuthLogsCSVInternalServerError) IsServerError() bool {
 // IsCode returns true when this auth logs c s v internal server error response a status code equal to that given
 func (o *AuthLogsCSVInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the auth logs c s v internal server error response
+func (o *AuthLogsCSVInternalServerError) Code() int {
+	return 500
 }
 
 func (o *AuthLogsCSVInternalServerError) Error() string {

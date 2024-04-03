@@ -48,7 +48,7 @@ func (o *EndpointAssociationDeleteReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoints/{id}/association] EndpointAssociationDelete", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EndpointAssociationDeleteOK) IsServerError() bool {
 // IsCode returns true when this endpoint association delete o k response a status code equal to that given
 func (o *EndpointAssociationDeleteOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint association delete o k response
+func (o *EndpointAssociationDeleteOK) Code() int {
+	return 200
 }
 
 func (o *EndpointAssociationDeleteOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EndpointAssociationDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint association delete bad request response
+func (o *EndpointAssociationDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointAssociationDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EndpointAssociationDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint association delete not found response
+func (o *EndpointAssociationDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointAssociationDeleteNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *EndpointAssociationDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint association delete internal server error response a status code equal to that given
 func (o *EndpointAssociationDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint association delete internal server error response
+func (o *EndpointAssociationDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointAssociationDeleteInternalServerError) Error() string {

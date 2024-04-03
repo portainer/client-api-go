@@ -40,7 +40,7 @@ func (o *GitOperationRepoRefsReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /gitops/repo/refs] GitOperationRepoRefs", response, response.Code())
 	}
 }
 
@@ -81,6 +81,11 @@ func (o *GitOperationRepoRefsOK) IsServerError() bool {
 // IsCode returns true when this git operation repo refs o k response a status code equal to that given
 func (o *GitOperationRepoRefsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the git operation repo refs o k response
+func (o *GitOperationRepoRefsOK) Code() int {
+	return 200
 }
 
 func (o *GitOperationRepoRefsOK) Error() string {
@@ -143,6 +148,11 @@ func (o *GitOperationRepoRefsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the git operation repo refs bad request response
+func (o *GitOperationRepoRefsBadRequest) Code() int {
+	return 400
+}
+
 func (o *GitOperationRepoRefsBadRequest) Error() string {
 	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsBadRequest ", 400)
 }
@@ -192,6 +202,11 @@ func (o *GitOperationRepoRefsInternalServerError) IsServerError() bool {
 // IsCode returns true when this git operation repo refs internal server error response a status code equal to that given
 func (o *GitOperationRepoRefsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the git operation repo refs internal server error response
+func (o *GitOperationRepoRefsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GitOperationRepoRefsInternalServerError) Error() string {

@@ -39,7 +39,7 @@ func (o *PostEndpointsIDEdgeTrustReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/{id}/edge/trust] PostEndpointsIDEdgeTrust", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *PostEndpointsIDEdgeTrustNoContent) IsServerError() bool {
 // IsCode returns true when this post endpoints Id edge trust no content response a status code equal to that given
 func (o *PostEndpointsIDEdgeTrustNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the post endpoints Id edge trust no content response
+func (o *PostEndpointsIDEdgeTrustNoContent) Code() int {
+	return 204
 }
 
 func (o *PostEndpointsIDEdgeTrustNoContent) Error() string {
@@ -132,6 +137,11 @@ func (o *PostEndpointsIDEdgeTrustBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the post endpoints Id edge trust bad request response
+func (o *PostEndpointsIDEdgeTrustBadRequest) Code() int {
+	return 400
+}
+
 func (o *PostEndpointsIDEdgeTrustBadRequest) Error() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/edge/trust][%d] postEndpointsIdEdgeTrustBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *PostEndpointsIDEdgeTrustInternalServerError) IsServerError() bool {
 // IsCode returns true when this post endpoints Id edge trust internal server error response a status code equal to that given
 func (o *PostEndpointsIDEdgeTrustInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the post endpoints Id edge trust internal server error response
+func (o *PostEndpointsIDEdgeTrustInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostEndpointsIDEdgeTrustInternalServerError) Error() string {

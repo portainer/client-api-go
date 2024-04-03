@@ -54,7 +54,7 @@ func (o *EdgeStackStatusUpdateReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /edge_stacks/{id}/status] EdgeStackStatusUpdate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *EdgeStackStatusUpdateOK) IsServerError() bool {
 // IsCode returns true when this edge stack status update o k response a status code equal to that given
 func (o *EdgeStackStatusUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack status update o k response
+func (o *EdgeStackStatusUpdateOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackStatusUpdateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *EdgeStackStatusUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack status update bad request response
+func (o *EdgeStackStatusUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackStatusUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *EdgeStackStatusUpdateForbidden) IsServerError() bool {
 // IsCode returns true when this edge stack status update forbidden response a status code equal to that given
 func (o *EdgeStackStatusUpdateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the edge stack status update forbidden response
+func (o *EdgeStackStatusUpdateForbidden) Code() int {
+	return 403
 }
 
 func (o *EdgeStackStatusUpdateForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *EdgeStackStatusUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the edge stack status update not found response
+func (o *EdgeStackStatusUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *EdgeStackStatusUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *EdgeStackStatusUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge stack status update internal server error response a status code equal to that given
 func (o *EdgeStackStatusUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge stack status update internal server error response
+func (o *EdgeStackStatusUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeStackStatusUpdateInternalServerError) Error() string {

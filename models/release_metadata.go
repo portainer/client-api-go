@@ -165,6 +165,11 @@ func (m *ReleaseMetadata) contextValidateDependencies(ctx context.Context, forma
 	for i := 0; i < len(m.Dependencies); i++ {
 
 		if m.Dependencies[i] != nil {
+
+			if swag.IsZero(m.Dependencies[i]) { // not required
+				return nil
+			}
+
 			if err := m.Dependencies[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("dependencies" + "." + strconv.Itoa(i))
@@ -185,6 +190,11 @@ func (m *ReleaseMetadata) contextValidateMaintainers(ctx context.Context, format
 	for i := 0; i < len(m.Maintainers); i++ {
 
 		if m.Maintainers[i] != nil {
+
+			if swag.IsZero(m.Maintainers[i]) { // not required
+				return nil
+			}
+
 			if err := m.Maintainers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("maintainers" + "." + strconv.Itoa(i))

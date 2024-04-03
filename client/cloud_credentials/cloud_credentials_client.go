@@ -30,15 +30,62 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error)
+
 	Generate(params *GenerateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GenerateOK, error)
 
-	Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error)
+	CloudCredsDelete(params *CloudCredsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CloudCredsDeleteOK, error)
 
-	Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error)
+	CloudCredsGetByID(params *CloudCredsGetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CloudCredsGetByIDOK, error)
 
-	GetByID(params *GetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetByIDOK, error)
+	CloudCredsUpdate(params *CloudCredsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CloudCredsUpdateOK, error)
+
+	GetAll(params *GetAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+	Create creates a cloud credential
+
+	Create a cloud credential
+
+**Access policy**: authenticated
+*/
+func (a *Client) Create(params *CreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "Create",
+		Method:             "POST",
+		PathPattern:        "/cloud/credentials",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &CreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for Create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -85,69 +132,26 @@ func (a *Client) Generate(params *GenerateParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-	Update updates a cloud credential
-
-	Update a cloud credential
-
-**Access policy**: authenticated
-*/
-func (a *Client) Update(params *UpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "Update",
-		Method:             "PUT",
-		PathPattern:        "/cloud/credentials",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &UpdateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for Update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	Delete deletes delete a cloud credential by ID
+	CloudCredsDelete deletes delete a cloud credential by ID
 
 	delete delete a cloud credential by ID
 
 **Access policy**: authenticated
 */
-func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOK, error) {
+func (a *Client) CloudCredsDelete(params *CloudCredsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CloudCredsDeleteOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteParams()
+		params = NewCloudCredsDeleteParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "delete",
+		ID:                 "cloudCredsDelete",
 		Method:             "POST",
-		PathPattern:        "/cloud/credentials",
+		PathPattern:        "/cloud/credentials/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &DeleteReader{formats: a.formats},
+		Reader:             &CloudCredsDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -160,37 +164,123 @@ func (a *Client) Delete(params *DeleteParams, authInfo runtime.ClientAuthInfoWri
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*DeleteOK)
+	success, ok := result.(*CloudCredsDeleteOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for cloudCredsDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-	GetByID gets by ID gets a cloud credential by ID
+	CloudCredsGetByID gets by ID gets a cloud credential by ID
 
 	getByID gets a cloud credential by ID
 
 **Access policy**: authenticated
 */
-func (a *Client) GetByID(params *GetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetByIDOK, error) {
+func (a *Client) CloudCredsGetByID(params *CloudCredsGetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CloudCredsGetByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetByIDParams()
+		params = NewCloudCredsGetByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getByID",
+		ID:                 "cloudCredsGetByID",
+		Method:             "GET",
+		PathPattern:        "/cloud/credentials/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &CloudCredsGetByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CloudCredsGetByIDOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for cloudCredsGetByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	CloudCredsUpdate updates a cloud credential
+
+	Update a cloud credential
+
+**Access policy**: authenticated
+*/
+func (a *Client) CloudCredsUpdate(params *CloudCredsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CloudCredsUpdateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCloudCredsUpdateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "cloudCredsUpdate",
+		Method:             "PUT",
+		PathPattern:        "/cloud/credentials/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &CloudCredsUpdateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CloudCredsUpdateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for cloudCredsUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetAll gets all cloud credentials
+
+	getAll cloud credential
+
+**Access policy**: authenticated
+*/
+func (a *Client) GetAll(params *GetAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAll",
 		Method:             "GET",
 		PathPattern:        "/cloud/credentials",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &GetByIDReader{formats: a.formats},
+		Reader:             &GetAllReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -203,13 +293,13 @@ func (a *Client) GetByID(params *GetByIDParams, authInfo runtime.ClientAuthInfoW
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetByIDOK)
+	success, ok := result.(*GetAllOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getAll: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

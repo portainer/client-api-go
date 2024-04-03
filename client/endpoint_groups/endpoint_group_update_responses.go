@@ -48,7 +48,7 @@ func (o *EndpointGroupUpdateReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoint_groups/{id}] EndpointGroupUpdate", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EndpointGroupUpdateOK) IsServerError() bool {
 // IsCode returns true when this endpoint group update o k response a status code equal to that given
 func (o *EndpointGroupUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint group update o k response
+func (o *EndpointGroupUpdateOK) Code() int {
+	return 200
 }
 
 func (o *EndpointGroupUpdateOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EndpointGroupUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint group update bad request response
+func (o *EndpointGroupUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointGroupUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}][%d] endpointGroupUpdateBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EndpointGroupUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint group update not found response
+func (o *EndpointGroupUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointGroupUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}][%d] endpointGroupUpdateNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *EndpointGroupUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint group update internal server error response a status code equal to that given
 func (o *EndpointGroupUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint group update internal server error response
+func (o *EndpointGroupUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointGroupUpdateInternalServerError) Error() string {

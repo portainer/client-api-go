@@ -82,6 +82,11 @@ func (m *ProvidersMicrok8sUpdateAddonsPayload) contextValidateAddons(ctx context
 	for i := 0; i < len(m.Addons); i++ {
 
 		if m.Addons[i] != nil {
+
+			if swag.IsZero(m.Addons[i]) { // not required
+				return nil
+			}
+
 			if err := m.Addons[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("addons" + "." + strconv.Itoa(i))

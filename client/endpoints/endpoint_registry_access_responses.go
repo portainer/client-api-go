@@ -51,7 +51,7 @@ func (o *EndpointRegistryAccessReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoints/{id}/registries/{registryId}] endpointRegistryAccess", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *EndpointRegistryAccessNoContent) IsServerError() bool {
 // IsCode returns true when this endpoint registry access no content response a status code equal to that given
 func (o *EndpointRegistryAccessNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the endpoint registry access no content response
+func (o *EndpointRegistryAccessNoContent) Code() int {
+	return 204
 }
 
 func (o *EndpointRegistryAccessNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *EndpointRegistryAccessBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint registry access bad request response
+func (o *EndpointRegistryAccessBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointRegistryAccessBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *EndpointRegistryAccessForbidden) IsServerError() bool {
 // IsCode returns true when this endpoint registry access forbidden response a status code equal to that given
 func (o *EndpointRegistryAccessForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the endpoint registry access forbidden response
+func (o *EndpointRegistryAccessForbidden) Code() int {
+	return 403
 }
 
 func (o *EndpointRegistryAccessForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *EndpointRegistryAccessNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint registry access not found response
+func (o *EndpointRegistryAccessNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointRegistryAccessNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *EndpointRegistryAccessInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint registry access internal server error response a status code equal to that given
 func (o *EndpointRegistryAccessInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint registry access internal server error response
+func (o *EndpointRegistryAccessInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointRegistryAccessInternalServerError) Error() string {

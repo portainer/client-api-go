@@ -45,7 +45,7 @@ func (o *FdoConfigureReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /fdo] fdoConfigure", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *FdoConfigureNoContent) IsServerError() bool {
 // IsCode returns true when this fdo configure no content response a status code equal to that given
 func (o *FdoConfigureNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the fdo configure no content response
+func (o *FdoConfigureNoContent) Code() int {
+	return 204
 }
 
 func (o *FdoConfigureNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *FdoConfigureBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the fdo configure bad request response
+func (o *FdoConfigureBadRequest) Code() int {
+	return 400
+}
+
 func (o *FdoConfigureBadRequest) Error() string {
 	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *FdoConfigureForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the fdo configure forbidden response
+func (o *FdoConfigureForbidden) Code() int {
+	return 403
+}
+
 func (o *FdoConfigureForbidden) Error() string {
 	return fmt.Sprintf("[POST /fdo][%d] fdoConfigureForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *FdoConfigureInternalServerError) IsServerError() bool {
 // IsCode returns true when this fdo configure internal server error response a status code equal to that given
 func (o *FdoConfigureInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the fdo configure internal server error response
+func (o *FdoConfigureInternalServerError) Code() int {
+	return 500
 }
 
 func (o *FdoConfigureInternalServerError) Error() string {

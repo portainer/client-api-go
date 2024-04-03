@@ -60,7 +60,7 @@ func (o *GetKubernetesApplicationsReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/namespaces/{namespace}/applications] getKubernetesApplications", response, response.Code())
 	}
 }
 
@@ -101,6 +101,11 @@ func (o *GetKubernetesApplicationsOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes applications o k response a status code equal to that given
 func (o *GetKubernetesApplicationsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes applications o k response
+func (o *GetKubernetesApplicationsOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesApplicationsOK) Error() string {
@@ -163,6 +168,11 @@ func (o *GetKubernetesApplicationsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get kubernetes applications bad request response
+func (o *GetKubernetesApplicationsBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetKubernetesApplicationsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/applications][%d] getKubernetesApplicationsBadRequest ", 400)
 }
@@ -212,6 +222,11 @@ func (o *GetKubernetesApplicationsUnauthorized) IsServerError() bool {
 // IsCode returns true when this get kubernetes applications unauthorized response a status code equal to that given
 func (o *GetKubernetesApplicationsUnauthorized) IsCode(code int) bool {
 	return code == 401
+}
+
+// Code gets the status code for the get kubernetes applications unauthorized response
+func (o *GetKubernetesApplicationsUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetKubernetesApplicationsUnauthorized) Error() string {
@@ -265,6 +280,11 @@ func (o *GetKubernetesApplicationsForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the get kubernetes applications forbidden response
+func (o *GetKubernetesApplicationsForbidden) Code() int {
+	return 403
+}
+
 func (o *GetKubernetesApplicationsForbidden) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/applications][%d] getKubernetesApplicationsForbidden ", 403)
 }
@@ -316,6 +336,11 @@ func (o *GetKubernetesApplicationsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get kubernetes applications not found response
+func (o *GetKubernetesApplicationsNotFound) Code() int {
+	return 404
+}
+
 func (o *GetKubernetesApplicationsNotFound) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/applications][%d] getKubernetesApplicationsNotFound ", 404)
 }
@@ -365,6 +390,11 @@ func (o *GetKubernetesApplicationsInternalServerError) IsServerError() bool {
 // IsCode returns true when this get kubernetes applications internal server error response a status code equal to that given
 func (o *GetKubernetesApplicationsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get kubernetes applications internal server error response
+func (o *GetKubernetesApplicationsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetKubernetesApplicationsInternalServerError) Error() string {

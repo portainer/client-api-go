@@ -33,7 +33,7 @@ func (o *EndpointSnapshotsReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/snapshot] EndpointSnapshots", response, response.Code())
 	}
 }
 
@@ -73,6 +73,11 @@ func (o *EndpointSnapshotsNoContent) IsServerError() bool {
 // IsCode returns true when this endpoint snapshots no content response a status code equal to that given
 func (o *EndpointSnapshotsNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the endpoint snapshots no content response
+func (o *EndpointSnapshotsNoContent) Code() int {
+	return 204
 }
 
 func (o *EndpointSnapshotsNoContent) Error() string {
@@ -124,6 +129,11 @@ func (o *EndpointSnapshotsInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint snapshots internal server error response a status code equal to that given
 func (o *EndpointSnapshotsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint snapshots internal server error response
+func (o *EndpointSnapshotsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointSnapshotsInternalServerError) Error() string {

@@ -282,6 +282,11 @@ func (m *RegistriesRegistryCreatePayload) ContextValidate(ctx context.Context, f
 func (m *RegistriesRegistryCreatePayload) contextValidateEcr(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ecr != nil {
+
+		if swag.IsZero(m.Ecr) { // not required
+			return nil
+		}
+
 		if err := m.Ecr.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ecr")
@@ -298,6 +303,11 @@ func (m *RegistriesRegistryCreatePayload) contextValidateEcr(ctx context.Context
 func (m *RegistriesRegistryCreatePayload) contextValidateGithub(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Github != nil {
+
+		if swag.IsZero(m.Github) { // not required
+			return nil
+		}
+
 		if err := m.Github.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("github")
@@ -314,6 +324,11 @@ func (m *RegistriesRegistryCreatePayload) contextValidateGithub(ctx context.Cont
 func (m *RegistriesRegistryCreatePayload) contextValidateGitlab(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Gitlab != nil {
+
+		if swag.IsZero(m.Gitlab) { // not required
+			return nil
+		}
+
 		if err := m.Gitlab.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gitlab")
@@ -330,6 +345,11 @@ func (m *RegistriesRegistryCreatePayload) contextValidateGitlab(ctx context.Cont
 func (m *RegistriesRegistryCreatePayload) contextValidateQuay(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Quay != nil {
+
+		if swag.IsZero(m.Quay) { // not required
+			return nil
+		}
+
 		if err := m.Quay.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("quay")

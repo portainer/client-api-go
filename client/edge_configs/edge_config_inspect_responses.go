@@ -48,7 +48,7 @@ func (o *EdgeConfigInspectReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_configurations/{id}] EdgeConfigInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeConfigInspectOK) IsServerError() bool {
 // IsCode returns true when this edge config inspect o k response a status code equal to that given
 func (o *EdgeConfigInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge config inspect o k response
+func (o *EdgeConfigInspectOK) Code() int {
+	return 200
 }
 
 func (o *EdgeConfigInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeConfigInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge config inspect bad request response
+func (o *EdgeConfigInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeConfigInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_configurations/{id}][%d] edgeConfigInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeConfigInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the edge config inspect not found response
+func (o *EdgeConfigInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *EdgeConfigInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /edge_configurations/{id}][%d] edgeConfigInspectNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *EdgeConfigInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge config inspect internal server error response a status code equal to that given
 func (o *EdgeConfigInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge config inspect internal server error response
+func (o *EdgeConfigInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeConfigInspectInternalServerError) Error() string {

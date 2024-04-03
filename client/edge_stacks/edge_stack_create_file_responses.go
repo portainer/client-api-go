@@ -48,7 +48,7 @@ func (o *EdgeStackCreateFileReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_stacks/create/file] EdgeStackCreateFile", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeStackCreateFileOK) IsServerError() bool {
 // IsCode returns true when this edge stack create file o k response a status code equal to that given
 func (o *EdgeStackCreateFileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack create file o k response
+func (o *EdgeStackCreateFileOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackCreateFileOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeStackCreateFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack create file bad request response
+func (o *EdgeStackCreateFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackCreateFileBadRequest) Error() string {
 	return fmt.Sprintf("[POST /edge_stacks/create/file][%d] edgeStackCreateFileBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeStackCreateFileInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack create file internal server error response
+func (o *EdgeStackCreateFileInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackCreateFileInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /edge_stacks/create/file][%d] edgeStackCreateFileInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeStackCreateFileServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack create file service unavailable response a status code equal to that given
 func (o *EdgeStackCreateFileServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack create file service unavailable response
+func (o *EdgeStackCreateFileServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackCreateFileServiceUnavailable) Error() string {

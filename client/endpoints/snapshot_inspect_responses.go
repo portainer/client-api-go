@@ -36,7 +36,7 @@ func (o *SnapshotInspectReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /docker/{environmentId}/snapshot] snapshotInspect", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *SnapshotInspectOK) IsServerError() bool {
 // IsCode returns true when this snapshot inspect o k response a status code equal to that given
 func (o *SnapshotInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the snapshot inspect o k response
+func (o *SnapshotInspectOK) Code() int {
+	return 200
 }
 
 func (o *SnapshotInspectOK) Error() string {
@@ -137,6 +142,11 @@ func (o *SnapshotInspectNotFound) IsServerError() bool {
 // IsCode returns true when this snapshot inspect not found response a status code equal to that given
 func (o *SnapshotInspectNotFound) IsCode(code int) bool {
 	return code == 404
+}
+
+// Code gets the status code for the snapshot inspect not found response
+func (o *SnapshotInspectNotFound) Code() int {
+	return 404
 }
 
 func (o *SnapshotInspectNotFound) Error() string {

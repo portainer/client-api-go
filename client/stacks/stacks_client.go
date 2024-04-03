@@ -34,6 +34,8 @@ type ClientService interface {
 
 	StackAssociate(params *StackAssociateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackAssociateOK, error)
 
+	StackCreate(params *StackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateOK, error)
+
 	StackCreateDockerStandaloneFile(params *StackCreateDockerStandaloneFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerStandaloneFileOK, error)
 
 	StackCreateDockerStandaloneRepository(params *StackCreateDockerStandaloneRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateDockerStandaloneRepositoryOK, error)
@@ -155,6 +157,49 @@ func (a *Client) StackAssociate(params *StackAssociateParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for StackAssociate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StackCreate deploys a new stack
+
+	Deploy a new stack into a Docker environment(endpoint) specified via the environment(endpoint) identifier.
+
+**Access policy**: authenticated
+*/
+func (a *Client) StackCreate(params *StackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackCreateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackCreateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackCreate",
+		Method:             "POST",
+		PathPattern:        "/stacks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "multipart/form-data"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackCreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

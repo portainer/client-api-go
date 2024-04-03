@@ -45,7 +45,7 @@ func (o *RegistryDeleteReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /registries/{id}] RegistryDelete", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *RegistryDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this registry delete no content response a status code equal to that given
 func (o *RegistryDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the registry delete no content response
+func (o *RegistryDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *RegistryDeleteNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *RegistryDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the registry delete bad request response
+func (o *RegistryDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *RegistryDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *RegistryDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the registry delete not found response
+func (o *RegistryDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *RegistryDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNotFound ", 404)
 }
@@ -238,6 +253,11 @@ func (o *RegistryDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this registry delete internal server error response a status code equal to that given
 func (o *RegistryDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the registry delete internal server error response
+func (o *RegistryDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *RegistryDeleteInternalServerError) Error() string {

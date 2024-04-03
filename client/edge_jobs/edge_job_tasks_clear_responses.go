@@ -45,7 +45,7 @@ func (o *EdgeJobTasksClearReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs] EdgeJobTasksClear", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EdgeJobTasksClearNoContent) IsServerError() bool {
 // IsCode returns true when this edge job tasks clear no content response a status code equal to that given
 func (o *EdgeJobTasksClearNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge job tasks clear no content response
+func (o *EdgeJobTasksClearNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeJobTasksClearNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *EdgeJobTasksClearBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge job tasks clear bad request response
+func (o *EdgeJobTasksClearBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeJobTasksClearBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EdgeJobTasksClearInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job tasks clear internal server error response
+func (o *EdgeJobTasksClearInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobTasksClearInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearInternalServerError ", 500)
 }
@@ -238,6 +253,11 @@ func (o *EdgeJobTasksClearServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job tasks clear service unavailable response a status code equal to that given
 func (o *EdgeJobTasksClearServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job tasks clear service unavailable response
+func (o *EdgeJobTasksClearServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobTasksClearServiceUnavailable) Error() string {

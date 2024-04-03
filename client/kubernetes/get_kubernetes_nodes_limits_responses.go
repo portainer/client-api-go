@@ -60,7 +60,7 @@ func (o *GetKubernetesNodesLimitsReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/nodes_limits] getKubernetesNodesLimits", response, response.Code())
 	}
 }
 
@@ -101,6 +101,11 @@ func (o *GetKubernetesNodesLimitsOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes nodes limits o k response a status code equal to that given
 func (o *GetKubernetesNodesLimitsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes nodes limits o k response
+func (o *GetKubernetesNodesLimitsOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesNodesLimitsOK) Error() string {
@@ -163,6 +168,11 @@ func (o *GetKubernetesNodesLimitsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get kubernetes nodes limits bad request response
+func (o *GetKubernetesNodesLimitsBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetKubernetesNodesLimitsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsBadRequest ", 400)
 }
@@ -212,6 +222,11 @@ func (o *GetKubernetesNodesLimitsUnauthorized) IsServerError() bool {
 // IsCode returns true when this get kubernetes nodes limits unauthorized response a status code equal to that given
 func (o *GetKubernetesNodesLimitsUnauthorized) IsCode(code int) bool {
 	return code == 401
+}
+
+// Code gets the status code for the get kubernetes nodes limits unauthorized response
+func (o *GetKubernetesNodesLimitsUnauthorized) Code() int {
+	return 401
 }
 
 func (o *GetKubernetesNodesLimitsUnauthorized) Error() string {
@@ -265,6 +280,11 @@ func (o *GetKubernetesNodesLimitsForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the get kubernetes nodes limits forbidden response
+func (o *GetKubernetesNodesLimitsForbidden) Code() int {
+	return 403
+}
+
 func (o *GetKubernetesNodesLimitsForbidden) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsForbidden ", 403)
 }
@@ -316,6 +336,11 @@ func (o *GetKubernetesNodesLimitsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get kubernetes nodes limits not found response
+func (o *GetKubernetesNodesLimitsNotFound) Code() int {
+	return 404
+}
+
 func (o *GetKubernetesNodesLimitsNotFound) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsNotFound ", 404)
 }
@@ -365,6 +390,11 @@ func (o *GetKubernetesNodesLimitsInternalServerError) IsServerError() bool {
 // IsCode returns true when this get kubernetes nodes limits internal server error response a status code equal to that given
 func (o *GetKubernetesNodesLimitsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get kubernetes nodes limits internal server error response
+func (o *GetKubernetesNodesLimitsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetKubernetesNodesLimitsInternalServerError) Error() string {

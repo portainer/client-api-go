@@ -42,7 +42,7 @@ func (o *LDAPGroupsReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /ldap/groups] LDAPGroups", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *LDAPGroupsOK) IsServerError() bool {
 // IsCode returns true when this l d a p groups o k response a status code equal to that given
 func (o *LDAPGroupsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the l d a p groups o k response
+func (o *LDAPGroupsOK) Code() int {
+	return 200
 }
 
 func (o *LDAPGroupsOK) Error() string {
@@ -145,6 +150,11 @@ func (o *LDAPGroupsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the l d a p groups bad request response
+func (o *LDAPGroupsBadRequest) Code() int {
+	return 400
+}
+
 func (o *LDAPGroupsBadRequest) Error() string {
 	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsBadRequest ", 400)
 }
@@ -194,6 +204,11 @@ func (o *LDAPGroupsInternalServerError) IsServerError() bool {
 // IsCode returns true when this l d a p groups internal server error response a status code equal to that given
 func (o *LDAPGroupsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the l d a p groups internal server error response
+func (o *LDAPGroupsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *LDAPGroupsInternalServerError) Error() string {

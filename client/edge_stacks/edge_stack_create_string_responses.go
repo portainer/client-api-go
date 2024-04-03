@@ -48,7 +48,7 @@ func (o *EdgeStackCreateStringReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_stacks/create/string] EdgeStackCreateString", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeStackCreateStringOK) IsServerError() bool {
 // IsCode returns true when this edge stack create string o k response a status code equal to that given
 func (o *EdgeStackCreateStringOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack create string o k response
+func (o *EdgeStackCreateStringOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackCreateStringOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeStackCreateStringBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack create string bad request response
+func (o *EdgeStackCreateStringBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackCreateStringBadRequest) Error() string {
 	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeStackCreateStringInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack create string internal server error response
+func (o *EdgeStackCreateStringInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackCreateStringInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeStackCreateStringServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack create string service unavailable response a status code equal to that given
 func (o *EdgeStackCreateStringServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack create string service unavailable response
+func (o *EdgeStackCreateStringServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackCreateStringServiceUnavailable) Error() string {

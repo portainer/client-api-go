@@ -128,6 +128,11 @@ func (m *ReleaseRelease) ContextValidate(ctx context.Context, formats strfmt.Reg
 func (m *ReleaseRelease) contextValidateChart(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Chart != nil {
+
+		if swag.IsZero(m.Chart) { // not required
+			return nil
+		}
+
 		if err := m.Chart.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("chart")
@@ -146,6 +151,11 @@ func (m *ReleaseRelease) contextValidateHooks(ctx context.Context, formats strfm
 	for i := 0; i < len(m.Hooks); i++ {
 
 		if m.Hooks[i] != nil {
+
+			if swag.IsZero(m.Hooks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Hooks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("hooks" + "." + strconv.Itoa(i))

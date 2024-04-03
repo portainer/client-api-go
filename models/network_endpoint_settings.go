@@ -108,6 +108,11 @@ func (m *NetworkEndpointSettings) ContextValidate(ctx context.Context, formats s
 func (m *NetworkEndpointSettings) contextValidateIpamconfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ipamconfig != nil {
+
+		if swag.IsZero(m.Ipamconfig) { // not required
+			return nil
+		}
+
 		if err := m.Ipamconfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ipamconfig")

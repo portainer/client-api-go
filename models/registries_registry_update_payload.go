@@ -229,6 +229,11 @@ func (m *RegistriesRegistryUpdatePayload) ContextValidate(ctx context.Context, f
 func (m *RegistriesRegistryUpdatePayload) contextValidateEcr(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ecr != nil {
+
+		if swag.IsZero(m.Ecr) { // not required
+			return nil
+		}
+
 		if err := m.Ecr.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ecr")
@@ -245,6 +250,11 @@ func (m *RegistriesRegistryUpdatePayload) contextValidateEcr(ctx context.Context
 func (m *RegistriesRegistryUpdatePayload) contextValidateGithub(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Github != nil {
+
+		if swag.IsZero(m.Github) { // not required
+			return nil
+		}
+
 		if err := m.Github.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("github")
@@ -261,6 +271,11 @@ func (m *RegistriesRegistryUpdatePayload) contextValidateGithub(ctx context.Cont
 func (m *RegistriesRegistryUpdatePayload) contextValidateQuay(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Quay != nil {
+
+		if swag.IsZero(m.Quay) { // not required
+			return nil
+		}
+
 		if err := m.Quay.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("quay")
@@ -275,6 +290,10 @@ func (m *RegistriesRegistryUpdatePayload) contextValidateQuay(ctx context.Contex
 }
 
 func (m *RegistriesRegistryUpdatePayload) contextValidateRegistryAccesses(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.RegistryAccesses) { // not required
+		return nil
+	}
 
 	if err := m.RegistryAccesses.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

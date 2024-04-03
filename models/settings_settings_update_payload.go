@@ -295,6 +295,11 @@ func (m *SettingsSettingsUpdatePayload) contextValidateBlackListedLabels(ctx con
 	for i := 0; i < len(m.BlackListedLabels); i++ {
 
 		if m.BlackListedLabels[i] != nil {
+
+			if swag.IsZero(m.BlackListedLabels[i]) { // not required
+				return nil
+			}
+
 			if err := m.BlackListedLabels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("blackListedLabels" + "." + strconv.Itoa(i))
@@ -313,6 +318,11 @@ func (m *SettingsSettingsUpdatePayload) contextValidateBlackListedLabels(ctx con
 func (m *SettingsSettingsUpdatePayload) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Edge != nil {
+
+		if swag.IsZero(m.Edge) { // not required
+			return nil
+		}
+
 		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("edge")
@@ -329,6 +339,11 @@ func (m *SettingsSettingsUpdatePayload) contextValidateEdge(ctx context.Context,
 func (m *SettingsSettingsUpdatePayload) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GlobalDeploymentOptions != nil {
+
+		if swag.IsZero(m.GlobalDeploymentOptions) { // not required
+			return nil
+		}
+
 		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("globalDeploymentOptions")
@@ -345,6 +360,11 @@ func (m *SettingsSettingsUpdatePayload) contextValidateGlobalDeploymentOptions(c
 func (m *SettingsSettingsUpdatePayload) contextValidateInternalAuthSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InternalAuthSettings != nil {
+
+		if swag.IsZero(m.InternalAuthSettings) { // not required
+			return nil
+		}
+
 		if err := m.InternalAuthSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("internalAuthSettings")
@@ -361,6 +381,11 @@ func (m *SettingsSettingsUpdatePayload) contextValidateInternalAuthSettings(ctx 
 func (m *SettingsSettingsUpdatePayload) contextValidateLdapsettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ldapsettings != nil {
+
+		if swag.IsZero(m.Ldapsettings) { // not required
+			return nil
+		}
+
 		if err := m.Ldapsettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ldapsettings")
@@ -377,6 +402,11 @@ func (m *SettingsSettingsUpdatePayload) contextValidateLdapsettings(ctx context.
 func (m *SettingsSettingsUpdatePayload) contextValidateOauthSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OauthSettings != nil {
+
+		if swag.IsZero(m.OauthSettings) { // not required
+			return nil
+		}
+
 		if err := m.OauthSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("oauthSettings")
@@ -485,6 +515,11 @@ func (m *SettingsSettingsUpdatePayloadEdge) ContextValidate(ctx context.Context,
 func (m *SettingsSettingsUpdatePayloadEdge) contextValidateMtls(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Mtls != nil {
+
+		if swag.IsZero(m.Mtls) { // not required
+			return nil
+		}
+
 		if err := m.Mtls.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("edge" + "." + "mtls")

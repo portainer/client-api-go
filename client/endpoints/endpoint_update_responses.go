@@ -48,7 +48,7 @@ func (o *EndpointUpdateReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoints/{id}] EndpointUpdate", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EndpointUpdateOK) IsServerError() bool {
 // IsCode returns true when this endpoint update o k response a status code equal to that given
 func (o *EndpointUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint update o k response
+func (o *EndpointUpdateOK) Code() int {
+	return 200
 }
 
 func (o *EndpointUpdateOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EndpointUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint update bad request response
+func (o *EndpointUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EndpointUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint update not found response
+func (o *EndpointUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *EndpointUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint update internal server error response a status code equal to that given
 func (o *EndpointUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint update internal server error response
+func (o *EndpointUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointUpdateInternalServerError) Error() string {

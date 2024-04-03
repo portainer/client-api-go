@@ -39,7 +39,7 @@ func (o *EdgeStackLogsDeleteReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge_stacks/{id}/logs/{endpoint_id}] EdgeStackLogsDelete", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *EdgeStackLogsDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this edge stack logs delete no content response a status code equal to that given
 func (o *EdgeStackLogsDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge stack logs delete no content response
+func (o *EdgeStackLogsDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeStackLogsDeleteNoContent) Error() string {
@@ -132,6 +137,11 @@ func (o *EdgeStackLogsDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack logs delete bad request response
+func (o *EdgeStackLogsDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackLogsDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *EdgeStackLogsDeleteServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack logs delete service unavailable response a status code equal to that given
 func (o *EdgeStackLogsDeleteServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack logs delete service unavailable response
+func (o *EdgeStackLogsDeleteServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackLogsDeleteServiceUnavailable) Error() string {

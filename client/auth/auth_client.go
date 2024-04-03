@@ -84,7 +84,7 @@ func (a *Client) AuthenticateUser(params *AuthenticateUserParams, opts ...Client
 /*
 Logout logouts
 
-**Access policy**: authenticated
+**Access policy**: public
 */
 func (a *Client) Logout(params *LogoutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogoutNoContent, error) {
 	// TODO: Validate the params before sending

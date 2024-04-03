@@ -36,7 +36,7 @@ func (o *EndpointGroupListReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /endpoint_groups] EndpointGroupList", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *EndpointGroupListOK) IsServerError() bool {
 // IsCode returns true when this endpoint group list o k response a status code equal to that given
 func (o *EndpointGroupListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint group list o k response
+func (o *EndpointGroupListOK) Code() int {
+	return 200
 }
 
 func (o *EndpointGroupListOK) Error() string {
@@ -137,6 +142,11 @@ func (o *EndpointGroupListInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint group list internal server error response a status code equal to that given
 func (o *EndpointGroupListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint group list internal server error response
+func (o *EndpointGroupListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointGroupListInternalServerError) Error() string {

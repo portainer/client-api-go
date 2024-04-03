@@ -51,7 +51,7 @@ func (o *EndpointDeleteReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /endpoints/{id}] EndpointDelete", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *EndpointDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this endpoint delete no content response a status code equal to that given
 func (o *EndpointDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the endpoint delete no content response
+func (o *EndpointDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *EndpointDeleteNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *EndpointDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint delete bad request response
+func (o *EndpointDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *EndpointDeleteForbidden) IsServerError() bool {
 // IsCode returns true when this endpoint delete forbidden response a status code equal to that given
 func (o *EndpointDeleteForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the endpoint delete forbidden response
+func (o *EndpointDeleteForbidden) Code() int {
+	return 403
 }
 
 func (o *EndpointDeleteForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *EndpointDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint delete not found response
+func (o *EndpointDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *EndpointDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint delete internal server error response a status code equal to that given
 func (o *EndpointDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint delete internal server error response
+func (o *EndpointDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointDeleteInternalServerError) Error() string {

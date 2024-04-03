@@ -52,7 +52,7 @@ func (o *EdgeConfigFilesReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_configurations/{id}/files] EdgeConfigFiles", response, response.Code())
 	}
 }
 
@@ -93,6 +93,11 @@ func (o *EdgeConfigFilesOK) IsServerError() bool {
 // IsCode returns true when this edge config files o k response a status code equal to that given
 func (o *EdgeConfigFilesOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge config files o k response
+func (o *EdgeConfigFilesOK) Code() int {
+	return 200
 }
 
 func (o *EdgeConfigFilesOK) Error() string {
@@ -155,6 +160,11 @@ func (o *EdgeConfigFilesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge config files bad request response
+func (o *EdgeConfigFilesBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeConfigFilesBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeConfigFilesForbidden) IsServerError() bool {
 // IsCode returns true when this edge config files forbidden response a status code equal to that given
 func (o *EdgeConfigFilesForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the edge config files forbidden response
+func (o *EdgeConfigFilesForbidden) Code() int {
+	return 403
 }
 
 func (o *EdgeConfigFilesForbidden) Error() string {
@@ -257,6 +272,11 @@ func (o *EdgeConfigFilesNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the edge config files not found response
+func (o *EdgeConfigFilesNotFound) Code() int {
+	return 404
+}
+
 func (o *EdgeConfigFilesNotFound) Error() string {
 	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesNotFound ", 404)
 }
@@ -306,6 +326,11 @@ func (o *EdgeConfigFilesInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge config files internal server error response a status code equal to that given
 func (o *EdgeConfigFilesInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge config files internal server error response
+func (o *EdgeConfigFilesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeConfigFilesInternalServerError) Error() string {

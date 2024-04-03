@@ -42,7 +42,7 @@ func (o *UserListReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users] UserList", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *UserListOK) IsServerError() bool {
 // IsCode returns true when this user list o k response a status code equal to that given
 func (o *UserListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user list o k response
+func (o *UserListOK) Code() int {
+	return 200
 }
 
 func (o *UserListOK) Error() string {
@@ -145,6 +150,11 @@ func (o *UserListBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user list bad request response
+func (o *UserListBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users][%d] userListBadRequest ", 400)
 }
@@ -194,6 +204,11 @@ func (o *UserListInternalServerError) IsServerError() bool {
 // IsCode returns true when this user list internal server error response a status code equal to that given
 func (o *UserListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user list internal server error response
+func (o *UserListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserListInternalServerError) Error() string {

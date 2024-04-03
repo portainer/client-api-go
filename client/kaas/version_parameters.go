@@ -62,11 +62,11 @@ VersionParams contains all the parameters to send to the API endpoint
 */
 type VersionParams struct {
 
-	/* Environmentid.
+	/* EnvironmentID.
 
 	   Environment(Endpoint) identifier
 	*/
-	Environmentid int64
+	EnvironmentID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,15 +121,15 @@ func (o *VersionParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithEnvironmentid adds the environmentid to the version params
-func (o *VersionParams) WithEnvironmentid(environmentid int64) *VersionParams {
-	o.SetEnvironmentid(environmentid)
+// WithEnvironmentID adds the environmentID to the version params
+func (o *VersionParams) WithEnvironmentID(environmentID int64) *VersionParams {
+	o.SetEnvironmentID(environmentID)
 	return o
 }
 
-// SetEnvironmentid adds the environmentid to the version params
-func (o *VersionParams) SetEnvironmentid(environmentid int64) {
-	o.Environmentid = environmentid
+// SetEnvironmentID adds the environmentId to the version params
+func (o *VersionParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,8 +140,8 @@ func (o *VersionParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regis
 	}
 	var res []error
 
-	// path param environmentid
-	if err := r.SetPathParam("environmentid", swag.FormatInt64(o.Environmentid)); err != nil {
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
 		return err
 	}
 

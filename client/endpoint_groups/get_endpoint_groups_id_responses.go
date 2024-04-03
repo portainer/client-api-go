@@ -48,7 +48,7 @@ func (o *GetEndpointGroupsIDReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /endpoint_groups/{id}] GetEndpointGroupsID", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *GetEndpointGroupsIDOK) IsServerError() bool {
 // IsCode returns true when this get endpoint groups Id o k response a status code equal to that given
 func (o *GetEndpointGroupsIDOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get endpoint groups Id o k response
+func (o *GetEndpointGroupsIDOK) Code() int {
+	return 200
 }
 
 func (o *GetEndpointGroupsIDOK) Error() string {
@@ -153,6 +158,11 @@ func (o *GetEndpointGroupsIDBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get endpoint groups Id bad request response
+func (o *GetEndpointGroupsIDBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetEndpointGroupsIDBadRequest) Error() string {
 	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *GetEndpointGroupsIDNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get endpoint groups Id not found response
+func (o *GetEndpointGroupsIDNotFound) Code() int {
+	return 404
+}
+
 func (o *GetEndpointGroupsIDNotFound) Error() string {
 	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *GetEndpointGroupsIDInternalServerError) IsServerError() bool {
 // IsCode returns true when this get endpoint groups Id internal server error response a status code equal to that given
 func (o *GetEndpointGroupsIDInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get endpoint groups Id internal server error response
+func (o *GetEndpointGroupsIDInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetEndpointGroupsIDInternalServerError) Error() string {

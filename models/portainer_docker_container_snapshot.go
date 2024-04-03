@@ -213,6 +213,11 @@ func (m *PortainerDockerContainerSnapshot) ContextValidate(ctx context.Context, 
 func (m *PortainerDockerContainerSnapshot) contextValidateHostConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HostConfig != nil {
+
+		if swag.IsZero(m.HostConfig) { // not required
+			return nil
+		}
+
 		if err := m.HostConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hostConfig")
@@ -231,6 +236,11 @@ func (m *PortainerDockerContainerSnapshot) contextValidateMounts(ctx context.Con
 	for i := 0; i < len(m.Mounts); i++ {
 
 		if m.Mounts[i] != nil {
+
+			if swag.IsZero(m.Mounts[i]) { // not required
+				return nil
+			}
+
 			if err := m.Mounts[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("mounts" + "." + strconv.Itoa(i))
@@ -249,6 +259,11 @@ func (m *PortainerDockerContainerSnapshot) contextValidateMounts(ctx context.Con
 func (m *PortainerDockerContainerSnapshot) contextValidateNetworkSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.NetworkSettings != nil {
+
+		if swag.IsZero(m.NetworkSettings) { // not required
+			return nil
+		}
+
 		if err := m.NetworkSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("networkSettings")
@@ -267,6 +282,11 @@ func (m *PortainerDockerContainerSnapshot) contextValidatePorts(ctx context.Cont
 	for i := 0; i < len(m.Ports); i++ {
 
 		if m.Ports[i] != nil {
+
+			if swag.IsZero(m.Ports[i]) { // not required
+				return nil
+			}
+
 			if err := m.Ports[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ports" + "." + strconv.Itoa(i))

@@ -54,7 +54,7 @@ func (o *RegistryUpdateReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /registries/{id}] RegistryUpdate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *RegistryUpdateOK) IsServerError() bool {
 // IsCode returns true when this registry update o k response a status code equal to that given
 func (o *RegistryUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the registry update o k response
+func (o *RegistryUpdateOK) Code() int {
+	return 200
 }
 
 func (o *RegistryUpdateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *RegistryUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the registry update bad request response
+func (o *RegistryUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *RegistryUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *RegistryUpdateNotFound) IsServerError() bool {
 // IsCode returns true when this registry update not found response a status code equal to that given
 func (o *RegistryUpdateNotFound) IsCode(code int) bool {
 	return code == 404
+}
+
+// Code gets the status code for the registry update not found response
+func (o *RegistryUpdateNotFound) Code() int {
+	return 404
 }
 
 func (o *RegistryUpdateNotFound) Error() string {
@@ -261,6 +276,11 @@ func (o *RegistryUpdateConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the registry update conflict response
+func (o *RegistryUpdateConflict) Code() int {
+	return 409
+}
+
 func (o *RegistryUpdateConflict) Error() string {
 	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateConflict ", 409)
 }
@@ -310,6 +330,11 @@ func (o *RegistryUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this registry update internal server error response a status code equal to that given
 func (o *RegistryUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the registry update internal server error response
+func (o *RegistryUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *RegistryUpdateInternalServerError) Error() string {

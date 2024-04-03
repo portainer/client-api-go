@@ -39,7 +39,7 @@ func (o *PostEndpointsIDDockerV2BrowsePutReader) ReadResponse(response runtime.C
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/{id}/docker/v2/browse/put] PostEndpointsIDDockerV2BrowsePut", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *PostEndpointsIDDockerV2BrowsePutNoContent) IsServerError() bool {
 // IsCode returns true when this post endpoints Id docker v2 browse put no content response a status code equal to that given
 func (o *PostEndpointsIDDockerV2BrowsePutNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the post endpoints Id docker v2 browse put no content response
+func (o *PostEndpointsIDDockerV2BrowsePutNoContent) Code() int {
+	return 204
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutNoContent) Error() string {
@@ -132,6 +137,11 @@ func (o *PostEndpointsIDDockerV2BrowsePutBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the post endpoints Id docker v2 browse put bad request response
+func (o *PostEndpointsIDDockerV2BrowsePutBadRequest) Code() int {
+	return 400
+}
+
 func (o *PostEndpointsIDDockerV2BrowsePutBadRequest) Error() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *PostEndpointsIDDockerV2BrowsePutInternalServerError) IsServerError() bo
 // IsCode returns true when this post endpoints Id docker v2 browse put internal server error response a status code equal to that given
 func (o *PostEndpointsIDDockerV2BrowsePutInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the post endpoints Id docker v2 browse put internal server error response
+func (o *PostEndpointsIDDockerV2BrowsePutInternalServerError) Code() int {
+	return 500
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutInternalServerError) Error() string {

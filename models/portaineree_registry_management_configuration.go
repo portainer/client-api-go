@@ -120,6 +120,11 @@ func (m *PortainereeRegistryManagementConfiguration) ContextValidate(ctx context
 func (m *PortainereeRegistryManagementConfiguration) contextValidateEcr(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ecr != nil {
+
+		if swag.IsZero(m.Ecr) { // not required
+			return nil
+		}
+
 		if err := m.Ecr.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Ecr")
@@ -136,6 +141,11 @@ func (m *PortainereeRegistryManagementConfiguration) contextValidateEcr(ctx cont
 func (m *PortainereeRegistryManagementConfiguration) contextValidateTLSConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TLSConfig != nil {
+
+		if swag.IsZero(m.TLSConfig) { // not required
+			return nil
+		}
+
 		if err := m.TLSConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("TLSConfig")

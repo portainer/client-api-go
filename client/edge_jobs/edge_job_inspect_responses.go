@@ -48,7 +48,7 @@ func (o *EdgeJobInspectReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_jobs/{id}] EdgeJobInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeJobInspectOK) IsServerError() bool {
 // IsCode returns true when this edge job inspect o k response a status code equal to that given
 func (o *EdgeJobInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge job inspect o k response
+func (o *EdgeJobInspectOK) Code() int {
+	return 200
 }
 
 func (o *EdgeJobInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeJobInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge job inspect bad request response
+func (o *EdgeJobInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeJobInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeJobInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job inspect internal server error response
+func (o *EdgeJobInspectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobInspectInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}][%d] edgeJobInspectInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeJobInspectServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job inspect service unavailable response a status code equal to that given
 func (o *EdgeJobInspectServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job inspect service unavailable response
+func (o *EdgeJobInspectServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobInspectServiceUnavailable) Error() string {

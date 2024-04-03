@@ -72,6 +72,11 @@ func (m *UsersGitCredentialResponse) ContextValidate(ctx context.Context, format
 func (m *UsersGitCredentialResponse) contextValidateGitCredential(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GitCredential != nil {
+
+		if swag.IsZero(m.GitCredential) { // not required
+			return nil
+		}
+
 		if err := m.GitCredential.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gitCredential")

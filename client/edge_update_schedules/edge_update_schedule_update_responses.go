@@ -33,7 +33,7 @@ func (o *EdgeUpdateScheduleUpdateReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_update_schedules/{id}] EdgeUpdateScheduleUpdate", response, response.Code())
 	}
 }
 
@@ -75,12 +75,17 @@ func (o *EdgeUpdateScheduleUpdateNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the edge update schedule update no content response
+func (o *EdgeUpdateScheduleUpdateNoContent) Code() int {
+	return 204
+}
+
 func (o *EdgeUpdateScheduleUpdateNoContent) Error() string {
-	return fmt.Sprintf("[POST /edge_update_schedules][%d] edgeUpdateScheduleUpdateNoContent ", 204)
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateNoContent ", 204)
 }
 
 func (o *EdgeUpdateScheduleUpdateNoContent) String() string {
-	return fmt.Sprintf("[POST /edge_update_schedules][%d] edgeUpdateScheduleUpdateNoContent ", 204)
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateNoContent ", 204)
 }
 
 func (o *EdgeUpdateScheduleUpdateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -126,12 +131,17 @@ func (o *EdgeUpdateScheduleUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge update schedule update internal server error response
+func (o *EdgeUpdateScheduleUpdateInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeUpdateScheduleUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_update_schedules][%d] edgeUpdateScheduleUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateInternalServerError ", 500)
 }
 
 func (o *EdgeUpdateScheduleUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_update_schedules][%d] edgeUpdateScheduleUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateInternalServerError ", 500)
 }
 
 func (o *EdgeUpdateScheduleUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

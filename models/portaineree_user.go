@@ -155,6 +155,10 @@ func (m *PortainereeUser) ContextValidate(ctx context.Context, formats strfmt.Re
 
 func (m *PortainereeUser) contextValidateEndpointAuthorizations(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.EndpointAuthorizations) { // not required
+		return nil
+	}
+
 	if err := m.EndpointAuthorizations.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("EndpointAuthorizations")
@@ -168,6 +172,10 @@ func (m *PortainereeUser) contextValidateEndpointAuthorizations(ctx context.Cont
 }
 
 func (m *PortainereeUser) contextValidatePortainerAuthorizations(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.PortainerAuthorizations) { // not required
+		return nil
+	}
 
 	if err := m.PortainerAuthorizations.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
@@ -184,6 +192,11 @@ func (m *PortainereeUser) contextValidatePortainerAuthorizations(ctx context.Con
 func (m *PortainereeUser) contextValidateThemeSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ThemeSettings != nil {
+
+		if swag.IsZero(m.ThemeSettings) { // not required
+			return nil
+		}
+
 		if err := m.ThemeSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("themeSettings")

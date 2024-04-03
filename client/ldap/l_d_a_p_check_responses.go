@@ -39,7 +39,7 @@ func (o *LDAPCheckReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /ldap/check] LDAPCheck", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *LDAPCheckNoContent) IsServerError() bool {
 // IsCode returns true when this l d a p check no content response a status code equal to that given
 func (o *LDAPCheckNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the l d a p check no content response
+func (o *LDAPCheckNoContent) Code() int {
+	return 204
 }
 
 func (o *LDAPCheckNoContent) Error() string {
@@ -132,6 +137,11 @@ func (o *LDAPCheckBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the l d a p check bad request response
+func (o *LDAPCheckBadRequest) Code() int {
+	return 400
+}
+
 func (o *LDAPCheckBadRequest) Error() string {
 	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *LDAPCheckInternalServerError) IsServerError() bool {
 // IsCode returns true when this l d a p check internal server error response a status code equal to that given
 func (o *LDAPCheckInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the l d a p check internal server error response
+func (o *LDAPCheckInternalServerError) Code() int {
+	return 500
 }
 
 func (o *LDAPCheckInternalServerError) Error() string {

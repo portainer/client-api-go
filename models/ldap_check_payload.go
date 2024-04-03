@@ -72,6 +72,11 @@ func (m *LdapCheckPayload) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *LdapCheckPayload) contextValidateLdapsettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ldapsettings != nil {
+
+		if swag.IsZero(m.Ldapsettings) { // not required
+			return nil
+		}
+
 		if err := m.Ldapsettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ldapsettings")

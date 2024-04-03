@@ -54,7 +54,7 @@ func (o *TeamMembershipUpdateReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /team_memberships/{id}] TeamMembershipUpdate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *TeamMembershipUpdateOK) IsServerError() bool {
 // IsCode returns true when this team membership update o k response a status code equal to that given
 func (o *TeamMembershipUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the team membership update o k response
+func (o *TeamMembershipUpdateOK) Code() int {
+	return 200
 }
 
 func (o *TeamMembershipUpdateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *TeamMembershipUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the team membership update bad request response
+func (o *TeamMembershipUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *TeamMembershipUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *TeamMembershipUpdateForbidden) IsServerError() bool {
 // IsCode returns true when this team membership update forbidden response a status code equal to that given
 func (o *TeamMembershipUpdateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the team membership update forbidden response
+func (o *TeamMembershipUpdateForbidden) Code() int {
+	return 403
 }
 
 func (o *TeamMembershipUpdateForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *TeamMembershipUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the team membership update not found response
+func (o *TeamMembershipUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *TeamMembershipUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *TeamMembershipUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this team membership update internal server error response a status code equal to that given
 func (o *TeamMembershipUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the team membership update internal server error response
+func (o *TeamMembershipUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TeamMembershipUpdateInternalServerError) Error() string {

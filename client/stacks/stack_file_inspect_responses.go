@@ -54,7 +54,7 @@ func (o *StackFileInspectReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /stacks/{id}/file] StackFileInspect", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *StackFileInspectOK) IsServerError() bool {
 // IsCode returns true when this stack file inspect o k response a status code equal to that given
 func (o *StackFileInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack file inspect o k response
+func (o *StackFileInspectOK) Code() int {
+	return 200
 }
 
 func (o *StackFileInspectOK) Error() string {
@@ -159,6 +164,11 @@ func (o *StackFileInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack file inspect bad request response
+func (o *StackFileInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackFileInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *StackFileInspectForbidden) IsServerError() bool {
 // IsCode returns true when this stack file inspect forbidden response a status code equal to that given
 func (o *StackFileInspectForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack file inspect forbidden response
+func (o *StackFileInspectForbidden) Code() int {
+	return 403
 }
 
 func (o *StackFileInspectForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *StackFileInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack file inspect not found response
+func (o *StackFileInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *StackFileInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /stacks/{id}/file][%d] stackFileInspectNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *StackFileInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack file inspect internal server error response a status code equal to that given
 func (o *StackFileInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack file inspect internal server error response
+func (o *StackFileInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackFileInspectInternalServerError) Error() string {

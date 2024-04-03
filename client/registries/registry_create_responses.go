@@ -42,7 +42,7 @@ func (o *RegistryCreateReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /registries] RegistryCreate", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *RegistryCreateOK) IsServerError() bool {
 // IsCode returns true when this registry create o k response a status code equal to that given
 func (o *RegistryCreateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the registry create o k response
+func (o *RegistryCreateOK) Code() int {
+	return 200
 }
 
 func (o *RegistryCreateOK) Error() string {
@@ -147,6 +152,11 @@ func (o *RegistryCreateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the registry create bad request response
+func (o *RegistryCreateBadRequest) Code() int {
+	return 400
+}
+
 func (o *RegistryCreateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /registries][%d] registryCreateBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *RegistryCreateInternalServerError) IsServerError() bool {
 // IsCode returns true when this registry create internal server error response a status code equal to that given
 func (o *RegistryCreateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the registry create internal server error response
+func (o *RegistryCreateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *RegistryCreateInternalServerError) Error() string {

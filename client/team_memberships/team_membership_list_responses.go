@@ -48,7 +48,7 @@ func (o *TeamMembershipListReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /team_memberships] TeamMembershipList", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *TeamMembershipListOK) IsServerError() bool {
 // IsCode returns true when this team membership list o k response a status code equal to that given
 func (o *TeamMembershipListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the team membership list o k response
+func (o *TeamMembershipListOK) Code() int {
+	return 200
 }
 
 func (o *TeamMembershipListOK) Error() string {
@@ -151,6 +156,11 @@ func (o *TeamMembershipListBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the team membership list bad request response
+func (o *TeamMembershipListBadRequest) Code() int {
+	return 400
+}
+
 func (o *TeamMembershipListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListBadRequest ", 400)
 }
@@ -202,6 +212,11 @@ func (o *TeamMembershipListForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the team membership list forbidden response
+func (o *TeamMembershipListForbidden) Code() int {
+	return 403
+}
+
 func (o *TeamMembershipListForbidden) Error() string {
 	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListForbidden ", 403)
 }
@@ -251,6 +266,11 @@ func (o *TeamMembershipListInternalServerError) IsServerError() bool {
 // IsCode returns true when this team membership list internal server error response a status code equal to that given
 func (o *TeamMembershipListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the team membership list internal server error response
+func (o *TeamMembershipListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TeamMembershipListInternalServerError) Error() string {

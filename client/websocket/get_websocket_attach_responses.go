@@ -51,7 +51,7 @@ func (o *GetWebsocketAttachReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /websocket/attach] GetWebsocketAttach", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *GetWebsocketAttachOK) IsServerError() bool {
 // IsCode returns true when this get websocket attach o k response a status code equal to that given
 func (o *GetWebsocketAttachOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get websocket attach o k response
+func (o *GetWebsocketAttachOK) Code() int {
+	return 200
 }
 
 func (o *GetWebsocketAttachOK) Error() string {
@@ -144,6 +149,11 @@ func (o *GetWebsocketAttachBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get websocket attach bad request response
+func (o *GetWebsocketAttachBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetWebsocketAttachBadRequest) Error() string {
 	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *GetWebsocketAttachForbidden) IsServerError() bool {
 // IsCode returns true when this get websocket attach forbidden response a status code equal to that given
 func (o *GetWebsocketAttachForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the get websocket attach forbidden response
+func (o *GetWebsocketAttachForbidden) Code() int {
+	return 403
 }
 
 func (o *GetWebsocketAttachForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *GetWebsocketAttachNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get websocket attach not found response
+func (o *GetWebsocketAttachNotFound) Code() int {
+	return 404
+}
+
 func (o *GetWebsocketAttachNotFound) Error() string {
 	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *GetWebsocketAttachInternalServerError) IsServerError() bool {
 // IsCode returns true when this get websocket attach internal server error response a status code equal to that given
 func (o *GetWebsocketAttachInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get websocket attach internal server error response
+func (o *GetWebsocketAttachInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetWebsocketAttachInternalServerError) Error() string {

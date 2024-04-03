@@ -45,7 +45,7 @@ func (o *UpdateProfileReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /fdo/profiles/{id}] updateProfile", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *UpdateProfileOK) IsServerError() bool {
 // IsCode returns true when this update profile o k response a status code equal to that given
 func (o *UpdateProfileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the update profile o k response
+func (o *UpdateProfileOK) Code() int {
+	return 200
 }
 
 func (o *UpdateProfileOK) Error() string {
@@ -138,6 +143,11 @@ func (o *UpdateProfileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update profile bad request response
+func (o *UpdateProfileBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateProfileBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /fdo/profiles/{id}][%d] updateProfileBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *UpdateProfileConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the update profile conflict response
+func (o *UpdateProfileConflict) Code() int {
+	return 409
+}
+
 func (o *UpdateProfileConflict) Error() string {
 	return fmt.Sprintf("[PUT /fdo/profiles/{id}][%d] updateProfileConflict ", 409)
 }
@@ -238,6 +253,11 @@ func (o *UpdateProfileInternalServerError) IsServerError() bool {
 // IsCode returns true when this update profile internal server error response a status code equal to that given
 func (o *UpdateProfileInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the update profile internal server error response
+func (o *UpdateProfileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UpdateProfileInternalServerError) Error() string {

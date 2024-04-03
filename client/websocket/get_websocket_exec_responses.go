@@ -45,7 +45,7 @@ func (o *GetWebsocketExecReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /websocket/exec] GetWebsocketExec", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *GetWebsocketExecOK) IsServerError() bool {
 // IsCode returns true when this get websocket exec o k response a status code equal to that given
 func (o *GetWebsocketExecOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get websocket exec o k response
+func (o *GetWebsocketExecOK) Code() int {
+	return 200
 }
 
 func (o *GetWebsocketExecOK) Error() string {
@@ -138,6 +143,11 @@ func (o *GetWebsocketExecBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get websocket exec bad request response
+func (o *GetWebsocketExecBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetWebsocketExecBadRequest) Error() string {
 	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *GetWebsocketExecConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the get websocket exec conflict response
+func (o *GetWebsocketExecConflict) Code() int {
+	return 409
+}
+
 func (o *GetWebsocketExecConflict) Error() string {
 	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecConflict ", 409)
 }
@@ -238,6 +253,11 @@ func (o *GetWebsocketExecInternalServerError) IsServerError() bool {
 // IsCode returns true when this get websocket exec internal server error response a status code equal to that given
 func (o *GetWebsocketExecInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get websocket exec internal server error response
+func (o *GetWebsocketExecInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetWebsocketExecInternalServerError) Error() string {

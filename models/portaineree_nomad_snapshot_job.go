@@ -94,6 +94,11 @@ func (m *PortainereeNomadSnapshotJob) contextValidateTasks(ctx context.Context, 
 	for i := 0; i < len(m.Tasks); i++ {
 
 		if m.Tasks[i] != nil {
+
+			if swag.IsZero(m.Tasks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Tasks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Tasks" + "." + strconv.Itoa(i))

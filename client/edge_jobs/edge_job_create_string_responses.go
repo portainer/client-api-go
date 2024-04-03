@@ -42,7 +42,7 @@ func (o *EdgeJobCreateStringReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_jobs/create/string] EdgeJobCreateString", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *EdgeJobCreateStringOK) IsServerError() bool {
 // IsCode returns true when this edge job create string o k response a status code equal to that given
 func (o *EdgeJobCreateStringOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge job create string o k response
+func (o *EdgeJobCreateStringOK) Code() int {
+	return 200
 }
 
 func (o *EdgeJobCreateStringOK) Error() string {
@@ -147,6 +152,11 @@ func (o *EdgeJobCreateStringInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job create string internal server error response
+func (o *EdgeJobCreateStringInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobCreateStringInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /edge_jobs/create/string][%d] edgeJobCreateStringInternalServerError ", 500)
 }
@@ -196,6 +206,11 @@ func (o *EdgeJobCreateStringServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job create string service unavailable response a status code equal to that given
 func (o *EdgeJobCreateStringServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job create string service unavailable response
+func (o *EdgeJobCreateStringServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobCreateStringServiceUnavailable) Error() string {

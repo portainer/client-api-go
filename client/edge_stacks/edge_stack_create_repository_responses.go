@@ -48,7 +48,7 @@ func (o *EdgeStackCreateRepositoryReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_stacks/create/repository] EdgeStackCreateRepository", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeStackCreateRepositoryOK) IsServerError() bool {
 // IsCode returns true when this edge stack create repository o k response a status code equal to that given
 func (o *EdgeStackCreateRepositoryOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack create repository o k response
+func (o *EdgeStackCreateRepositoryOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackCreateRepositoryOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeStackCreateRepositoryBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack create repository bad request response
+func (o *EdgeStackCreateRepositoryBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackCreateRepositoryBadRequest) Error() string {
 	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeStackCreateRepositoryInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack create repository internal server error response
+func (o *EdgeStackCreateRepositoryInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackCreateRepositoryInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeStackCreateRepositoryServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack create repository service unavailable response a status code equal to that given
 func (o *EdgeStackCreateRepositoryServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack create repository service unavailable response
+func (o *EdgeStackCreateRepositoryServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackCreateRepositoryServiceUnavailable) Error() string {

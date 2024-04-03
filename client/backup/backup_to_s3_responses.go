@@ -39,7 +39,7 @@ func (o *BackupToS3Reader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /backup/s3/execute] BackupToS3", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *BackupToS3NoContent) IsServerError() bool {
 // IsCode returns true when this backup to s3 no content response a status code equal to that given
 func (o *BackupToS3NoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the backup to s3 no content response
+func (o *BackupToS3NoContent) Code() int {
+	return 204
 }
 
 func (o *BackupToS3NoContent) Error() string {
@@ -132,6 +137,11 @@ func (o *BackupToS3BadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the backup to s3 bad request response
+func (o *BackupToS3BadRequest) Code() int {
+	return 400
+}
+
 func (o *BackupToS3BadRequest) Error() string {
 	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3BadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *BackupToS3InternalServerError) IsServerError() bool {
 // IsCode returns true when this backup to s3 internal server error response a status code equal to that given
 func (o *BackupToS3InternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the backup to s3 internal server error response
+func (o *BackupToS3InternalServerError) Code() int {
+	return 500
 }
 
 func (o *BackupToS3InternalServerError) Error() string {

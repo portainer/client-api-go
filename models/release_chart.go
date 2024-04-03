@@ -186,6 +186,11 @@ func (m *ReleaseChart) contextValidateFiles(ctx context.Context, formats strfmt.
 	for i := 0; i < len(m.Files); i++ {
 
 		if m.Files[i] != nil {
+
+			if swag.IsZero(m.Files[i]) { // not required
+				return nil
+			}
+
 			if err := m.Files[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("files" + "." + strconv.Itoa(i))
@@ -204,6 +209,11 @@ func (m *ReleaseChart) contextValidateFiles(ctx context.Context, formats strfmt.
 func (m *ReleaseChart) contextValidateLock(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Lock != nil {
+
+		if swag.IsZero(m.Lock) { // not required
+			return nil
+		}
+
 		if err := m.Lock.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("lock")
@@ -220,6 +230,11 @@ func (m *ReleaseChart) contextValidateLock(ctx context.Context, formats strfmt.R
 func (m *ReleaseChart) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Metadata != nil {
+
+		if swag.IsZero(m.Metadata) { // not required
+			return nil
+		}
+
 		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("metadata")
@@ -238,6 +253,11 @@ func (m *ReleaseChart) contextValidateTemplates(ctx context.Context, formats str
 	for i := 0; i < len(m.Templates); i++ {
 
 		if m.Templates[i] != nil {
+
+			if swag.IsZero(m.Templates[i]) { // not required
+				return nil
+			}
+
 			if err := m.Templates[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("templates" + "." + strconv.Itoa(i))

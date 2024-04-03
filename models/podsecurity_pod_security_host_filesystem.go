@@ -85,6 +85,11 @@ func (m *PodsecurityPodSecurityHostFilesystem) contextValidateAllowedPaths(ctx c
 	for i := 0; i < len(m.AllowedPaths); i++ {
 
 		if m.AllowedPaths[i] != nil {
+
+			if swag.IsZero(m.AllowedPaths[i]) { // not required
+				return nil
+			}
+
 			if err := m.AllowedPaths[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("allowedPaths" + "." + strconv.Itoa(i))

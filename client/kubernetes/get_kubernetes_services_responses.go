@@ -42,7 +42,7 @@ func (o *GetKubernetesServicesReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/namespaces/{namespace}/services] getKubernetesServices", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *GetKubernetesServicesOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes services o k response a status code equal to that given
 func (o *GetKubernetesServicesOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes services o k response
+func (o *GetKubernetesServicesOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesServicesOK) Error() string {
@@ -145,6 +150,11 @@ func (o *GetKubernetesServicesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get kubernetes services bad request response
+func (o *GetKubernetesServicesBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetKubernetesServicesBadRequest) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/services][%d] getKubernetesServicesBadRequest ", 400)
 }
@@ -194,6 +204,11 @@ func (o *GetKubernetesServicesInternalServerError) IsServerError() bool {
 // IsCode returns true when this get kubernetes services internal server error response a status code equal to that given
 func (o *GetKubernetesServicesInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get kubernetes services internal server error response
+func (o *GetKubernetesServicesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetKubernetesServicesInternalServerError) Error() string {

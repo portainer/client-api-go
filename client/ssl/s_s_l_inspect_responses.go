@@ -48,7 +48,7 @@ func (o *SSLInspectReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /ssl] SSLInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *SSLInspectOK) IsServerError() bool {
 // IsCode returns true when this s s l inspect o k response a status code equal to that given
 func (o *SSLInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the s s l inspect o k response
+func (o *SSLInspectOK) Code() int {
+	return 200
 }
 
 func (o *SSLInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *SSLInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the s s l inspect bad request response
+func (o *SSLInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *SSLInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /ssl][%d] sSLInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *SSLInspectForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the s s l inspect forbidden response
+func (o *SSLInspectForbidden) Code() int {
+	return 403
+}
+
 func (o *SSLInspectForbidden) Error() string {
 	return fmt.Sprintf("[GET /ssl][%d] sSLInspectForbidden ", 403)
 }
@@ -253,6 +268,11 @@ func (o *SSLInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this s s l inspect internal server error response a status code equal to that given
 func (o *SSLInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the s s l inspect internal server error response
+func (o *SSLInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *SSLInspectInternalServerError) Error() string {

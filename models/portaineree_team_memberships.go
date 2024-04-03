@@ -91,6 +91,11 @@ func (m *PortainereeTeamMemberships) contextValidateOAuthClaimMappings(ctx conte
 	for i := 0; i < len(m.OAuthClaimMappings); i++ {
 
 		if m.OAuthClaimMappings[i] != nil {
+
+			if swag.IsZero(m.OAuthClaimMappings[i]) { // not required
+				return nil
+			}
+
 			if err := m.OAuthClaimMappings[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("OAuthClaimMappings" + "." + strconv.Itoa(i))

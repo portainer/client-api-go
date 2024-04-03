@@ -42,7 +42,7 @@ func (o *StackCreateKubernetesFileReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/create/kubernetes/string] StackCreateKubernetesFile", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *StackCreateKubernetesFileOK) IsServerError() bool {
 // IsCode returns true when this stack create kubernetes file o k response a status code equal to that given
 func (o *StackCreateKubernetesFileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack create kubernetes file o k response
+func (o *StackCreateKubernetesFileOK) Code() int {
+	return 200
 }
 
 func (o *StackCreateKubernetesFileOK) Error() string {
@@ -147,6 +152,11 @@ func (o *StackCreateKubernetesFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack create kubernetes file bad request response
+func (o *StackCreateKubernetesFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackCreateKubernetesFileBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *StackCreateKubernetesFileInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack create kubernetes file internal server error response a status code equal to that given
 func (o *StackCreateKubernetesFileInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack create kubernetes file internal server error response
+func (o *StackCreateKubernetesFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackCreateKubernetesFileInternalServerError) Error() string {

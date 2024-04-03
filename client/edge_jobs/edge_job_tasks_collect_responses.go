@@ -45,7 +45,7 @@ func (o *EdgeJobTasksCollectReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_jobs/{id}/tasks/{taskID}/logs] EdgeJobTasksCollect", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EdgeJobTasksCollectNoContent) IsServerError() bool {
 // IsCode returns true when this edge job tasks collect no content response a status code equal to that given
 func (o *EdgeJobTasksCollectNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge job tasks collect no content response
+func (o *EdgeJobTasksCollectNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeJobTasksCollectNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *EdgeJobTasksCollectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge job tasks collect bad request response
+func (o *EdgeJobTasksCollectBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeJobTasksCollectBadRequest) Error() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EdgeJobTasksCollectInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job tasks collect internal server error response
+func (o *EdgeJobTasksCollectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobTasksCollectInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectInternalServerError ", 500)
 }
@@ -238,6 +253,11 @@ func (o *EdgeJobTasksCollectServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job tasks collect service unavailable response a status code equal to that given
 func (o *EdgeJobTasksCollectServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job tasks collect service unavailable response
+func (o *EdgeJobTasksCollectServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobTasksCollectServiceUnavailable) Error() string {

@@ -88,6 +88,10 @@ type PortainereeStack struct {
 	// Example: false
 	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
 
+	// Whether the stack is detached from git
+	// Example: false
+	IsDetachedFromGit bool `json:"isDetachedFromGit,omitempty"`
+
 	// Kubernetes namespace if stack is a kube application
 	// Example: default
 	Namespace string `json:"namespace,omitempty"`
@@ -309,6 +313,11 @@ func (m *PortainereeStack) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *PortainereeStack) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AutoUpdate != nil {
+
+		if swag.IsZero(m.AutoUpdate) { // not required
+			return nil
+		}
+
 		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("AutoUpdate")
@@ -327,6 +336,11 @@ func (m *PortainereeStack) contextValidateEnv(ctx context.Context, formats strfm
 	for i := 0; i < len(m.Env); i++ {
 
 		if m.Env[i] != nil {
+
+			if swag.IsZero(m.Env[i]) { // not required
+				return nil
+			}
+
 			if err := m.Env[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Env" + "." + strconv.Itoa(i))
@@ -345,6 +359,11 @@ func (m *PortainereeStack) contextValidateEnv(ctx context.Context, formats strfm
 func (m *PortainereeStack) contextValidateOption(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Option != nil {
+
+		if swag.IsZero(m.Option) { // not required
+			return nil
+		}
+
 		if err := m.Option.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Option")
@@ -361,6 +380,11 @@ func (m *PortainereeStack) contextValidateOption(ctx context.Context, formats st
 func (m *PortainereeStack) contextValidatePreviousDeploymentInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PreviousDeploymentInfo != nil {
+
+		if swag.IsZero(m.PreviousDeploymentInfo) { // not required
+			return nil
+		}
+
 		if err := m.PreviousDeploymentInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("PreviousDeploymentInfo")
@@ -377,6 +401,11 @@ func (m *PortainereeStack) contextValidatePreviousDeploymentInfo(ctx context.Con
 func (m *PortainereeStack) contextValidateResourceControl(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ResourceControl != nil {
+
+		if swag.IsZero(m.ResourceControl) { // not required
+			return nil
+		}
+
 		if err := m.ResourceControl.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ResourceControl")
@@ -393,6 +422,11 @@ func (m *PortainereeStack) contextValidateResourceControl(ctx context.Context, f
 func (m *PortainereeStack) contextValidateGitConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GitConfig != nil {
+
+		if swag.IsZero(m.GitConfig) { // not required
+			return nil
+		}
+
 		if err := m.GitConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gitConfig")

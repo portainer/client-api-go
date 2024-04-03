@@ -36,6 +36,8 @@ type ClientService interface {
 
 	EdgeUpdateScheduleActiveSchedulesList(params *EdgeUpdateScheduleActiveSchedulesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdateScheduleActiveSchedulesListOK, error)
 
+	EdgeUpdateScheduleCreate(params *EdgeUpdateScheduleCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdateScheduleCreateOK, error)
+
 	EdgeUpdateScheduleDelete(params *EdgeUpdateScheduleDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdateScheduleDeleteNoContent, error)
 
 	EdgeUpdateScheduleInspect(params *EdgeUpdateScheduleInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdateScheduleInspectOK, error)
@@ -167,6 +169,47 @@ func (a *Client) EdgeUpdateScheduleActiveSchedulesList(params *EdgeUpdateSchedul
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for EdgeUpdateScheduleActiveSchedulesList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+EdgeUpdateScheduleCreate creates a new edge update schedule
+
+**Access policy**: administrator
+*/
+func (a *Client) EdgeUpdateScheduleCreate(params *EdgeUpdateScheduleCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdateScheduleCreateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEdgeUpdateScheduleCreateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EdgeUpdateScheduleCreate",
+		Method:             "POST",
+		PathPattern:        "/edge_update_schedules",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EdgeUpdateScheduleCreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EdgeUpdateScheduleCreateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EdgeUpdateScheduleCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -306,7 +349,7 @@ func (a *Client) EdgeUpdateScheduleUpdate(params *EdgeUpdateScheduleUpdateParams
 	op := &runtime.ClientOperation{
 		ID:                 "EdgeUpdateScheduleUpdate",
 		Method:             "POST",
-		PathPattern:        "/edge_update_schedules",
+		PathPattern:        "/edge_update_schedules/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

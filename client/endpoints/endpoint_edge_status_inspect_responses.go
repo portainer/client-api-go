@@ -54,7 +54,7 @@ func (o *EndpointEdgeStatusInspectReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /endpoints/{id}/edge/status] EndpointEdgeStatusInspect", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *EndpointEdgeStatusInspectOK) IsServerError() bool {
 // IsCode returns true when this endpoint edge status inspect o k response a status code equal to that given
 func (o *EndpointEdgeStatusInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint edge status inspect o k response
+func (o *EndpointEdgeStatusInspectOK) Code() int {
+	return 200
 }
 
 func (o *EndpointEdgeStatusInspectOK) Error() string {
@@ -159,6 +164,11 @@ func (o *EndpointEdgeStatusInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint edge status inspect bad request response
+func (o *EndpointEdgeStatusInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointEdgeStatusInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *EndpointEdgeStatusInspectForbidden) IsServerError() bool {
 // IsCode returns true when this endpoint edge status inspect forbidden response a status code equal to that given
 func (o *EndpointEdgeStatusInspectForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the endpoint edge status inspect forbidden response
+func (o *EndpointEdgeStatusInspectForbidden) Code() int {
+	return 403
 }
 
 func (o *EndpointEdgeStatusInspectForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *EndpointEdgeStatusInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint edge status inspect not found response
+func (o *EndpointEdgeStatusInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointEdgeStatusInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *EndpointEdgeStatusInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint edge status inspect internal server error response a status code equal to that given
 func (o *EndpointEdgeStatusInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint edge status inspect internal server error response
+func (o *EndpointEdgeStatusInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointEdgeStatusInspectInternalServerError) Error() string {
