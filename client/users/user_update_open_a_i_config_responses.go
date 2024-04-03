@@ -51,7 +51,7 @@ func (o *UserUpdateOpenAIConfigReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /users/{id}/openai] UserUpdateOpenAIConfig", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *UserUpdateOpenAIConfigNoContent) IsServerError() bool {
 // IsCode returns true when this user update open a i config no content response a status code equal to that given
 func (o *UserUpdateOpenAIConfigNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the user update open a i config no content response
+func (o *UserUpdateOpenAIConfigNoContent) Code() int {
+	return 204
 }
 
 func (o *UserUpdateOpenAIConfigNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *UserUpdateOpenAIConfigBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user update open a i config bad request response
+func (o *UserUpdateOpenAIConfigBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserUpdateOpenAIConfigBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *UserUpdateOpenAIConfigForbidden) IsServerError() bool {
 // IsCode returns true when this user update open a i config forbidden response a status code equal to that given
 func (o *UserUpdateOpenAIConfigForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user update open a i config forbidden response
+func (o *UserUpdateOpenAIConfigForbidden) Code() int {
+	return 403
 }
 
 func (o *UserUpdateOpenAIConfigForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *UserUpdateOpenAIConfigNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user update open a i config not found response
+func (o *UserUpdateOpenAIConfigNotFound) Code() int {
+	return 404
+}
+
 func (o *UserUpdateOpenAIConfigNotFound) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *UserUpdateOpenAIConfigInternalServerError) IsServerError() bool {
 // IsCode returns true when this user update open a i config internal server error response a status code equal to that given
 func (o *UserUpdateOpenAIConfigInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user update open a i config internal server error response
+func (o *UserUpdateOpenAIConfigInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserUpdateOpenAIConfigInternalServerError) Error() string {

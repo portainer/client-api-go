@@ -92,6 +92,11 @@ func (m *GittypesRepoConfig) ContextValidate(ctx context.Context, formats strfmt
 func (m *GittypesRepoConfig) contextValidateAuthentication(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Authentication != nil {
+
+		if swag.IsZero(m.Authentication) { // not required
+			return nil
+		}
+
 		if err := m.Authentication.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authentication")

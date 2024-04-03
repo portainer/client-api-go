@@ -54,7 +54,7 @@ func (o *StackUpdateGitReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/{id}/git] StackUpdateGit", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *StackUpdateGitOK) IsServerError() bool {
 // IsCode returns true when this stack update git o k response a status code equal to that given
 func (o *StackUpdateGitOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack update git o k response
+func (o *StackUpdateGitOK) Code() int {
+	return 200
 }
 
 func (o *StackUpdateGitOK) Error() string {
@@ -159,6 +164,11 @@ func (o *StackUpdateGitBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack update git bad request response
+func (o *StackUpdateGitBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackUpdateGitBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *StackUpdateGitForbidden) IsServerError() bool {
 // IsCode returns true when this stack update git forbidden response a status code equal to that given
 func (o *StackUpdateGitForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack update git forbidden response
+func (o *StackUpdateGitForbidden) Code() int {
+	return 403
 }
 
 func (o *StackUpdateGitForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *StackUpdateGitNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack update git not found response
+func (o *StackUpdateGitNotFound) Code() int {
+	return 404
+}
+
 func (o *StackUpdateGitNotFound) Error() string {
 	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *StackUpdateGitInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack update git internal server error response a status code equal to that given
 func (o *StackUpdateGitInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack update git internal server error response
+func (o *StackUpdateGitInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackUpdateGitInternalServerError) Error() string {

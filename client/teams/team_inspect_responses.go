@@ -60,7 +60,7 @@ func (o *TeamInspectReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /teams/{id}] TeamInspect", response, response.Code())
 	}
 }
 
@@ -101,6 +101,11 @@ func (o *TeamInspectOK) IsServerError() bool {
 // IsCode returns true when this team inspect o k response a status code equal to that given
 func (o *TeamInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the team inspect o k response
+func (o *TeamInspectOK) Code() int {
+	return 200
 }
 
 func (o *TeamInspectOK) Error() string {
@@ -165,6 +170,11 @@ func (o *TeamInspectNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the team inspect no content response
+func (o *TeamInspectNoContent) Code() int {
+	return 204
+}
+
 func (o *TeamInspectNoContent) Error() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent ", 204)
 }
@@ -214,6 +224,11 @@ func (o *TeamInspectBadRequest) IsServerError() bool {
 // IsCode returns true when this team inspect bad request response a status code equal to that given
 func (o *TeamInspectBadRequest) IsCode(code int) bool {
 	return code == 400
+}
+
+// Code gets the status code for the team inspect bad request response
+func (o *TeamInspectBadRequest) Code() int {
+	return 400
 }
 
 func (o *TeamInspectBadRequest) Error() string {
@@ -267,6 +282,11 @@ func (o *TeamInspectForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the team inspect forbidden response
+func (o *TeamInspectForbidden) Code() int {
+	return 403
+}
+
 func (o *TeamInspectForbidden) Error() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectForbidden ", 403)
 }
@@ -318,6 +338,11 @@ func (o *TeamInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the team inspect not found response
+func (o *TeamInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *TeamInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNotFound ", 404)
 }
@@ -367,6 +392,11 @@ func (o *TeamInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this team inspect internal server error response a status code equal to that given
 func (o *TeamInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the team inspect internal server error response
+func (o *TeamInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TeamInspectInternalServerError) Error() string {

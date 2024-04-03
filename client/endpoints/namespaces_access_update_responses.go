@@ -51,7 +51,7 @@ func (o *NamespacesAccessUpdateReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoints/{id}/pools/{rpn}/access] namespacesAccessUpdate", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *NamespacesAccessUpdateNoContent) IsServerError() bool {
 // IsCode returns true when this namespaces access update no content response a status code equal to that given
 func (o *NamespacesAccessUpdateNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the namespaces access update no content response
+func (o *NamespacesAccessUpdateNoContent) Code() int {
+	return 204
 }
 
 func (o *NamespacesAccessUpdateNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *NamespacesAccessUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the namespaces access update bad request response
+func (o *NamespacesAccessUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *NamespacesAccessUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *NamespacesAccessUpdateForbidden) IsServerError() bool {
 // IsCode returns true when this namespaces access update forbidden response a status code equal to that given
 func (o *NamespacesAccessUpdateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the namespaces access update forbidden response
+func (o *NamespacesAccessUpdateForbidden) Code() int {
+	return 403
 }
 
 func (o *NamespacesAccessUpdateForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *NamespacesAccessUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the namespaces access update not found response
+func (o *NamespacesAccessUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *NamespacesAccessUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *NamespacesAccessUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this namespaces access update internal server error response a status code equal to that given
 func (o *NamespacesAccessUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the namespaces access update internal server error response
+func (o *NamespacesAccessUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *NamespacesAccessUpdateInternalServerError) Error() string {

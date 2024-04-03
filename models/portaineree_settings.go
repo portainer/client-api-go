@@ -479,6 +479,11 @@ func (m *PortainereeSettings) contextValidateBlackListedLabels(ctx context.Conte
 	for i := 0; i < len(m.BlackListedLabels); i++ {
 
 		if m.BlackListedLabels[i] != nil {
+
+			if swag.IsZero(m.BlackListedLabels[i]) { // not required
+				return nil
+			}
+
 			if err := m.BlackListedLabels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("BlackListedLabels" + "." + strconv.Itoa(i))
@@ -497,6 +502,11 @@ func (m *PortainereeSettings) contextValidateBlackListedLabels(ctx context.Conte
 func (m *PortainereeSettings) contextValidateCloudAPIKeys(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CloudAPIKeys != nil {
+
+		if swag.IsZero(m.CloudAPIKeys) { // not required
+			return nil
+		}
+
 		if err := m.CloudAPIKeys.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("CloudApiKeys")
@@ -513,6 +523,11 @@ func (m *PortainereeSettings) contextValidateCloudAPIKeys(ctx context.Context, f
 func (m *PortainereeSettings) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Edge != nil {
+
+		if swag.IsZero(m.Edge) { // not required
+			return nil
+		}
+
 		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Edge")
@@ -529,6 +544,11 @@ func (m *PortainereeSettings) contextValidateEdge(ctx context.Context, formats s
 func (m *PortainereeSettings) contextValidateExperimentalFeatures(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ExperimentalFeatures != nil {
+
+		if swag.IsZero(m.ExperimentalFeatures) { // not required
+			return nil
+		}
+
 		if err := m.ExperimentalFeatures.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ExperimentalFeatures")
@@ -545,6 +565,11 @@ func (m *PortainereeSettings) contextValidateExperimentalFeatures(ctx context.Co
 func (m *PortainereeSettings) contextValidateGlobalDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GlobalDeploymentOptions != nil {
+
+		if swag.IsZero(m.GlobalDeploymentOptions) { // not required
+			return nil
+		}
+
 		if err := m.GlobalDeploymentOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("GlobalDeploymentOptions")
@@ -561,6 +586,11 @@ func (m *PortainereeSettings) contextValidateGlobalDeploymentOptions(ctx context
 func (m *PortainereeSettings) contextValidateInternalAuthSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.InternalAuthSettings != nil {
+
+		if swag.IsZero(m.InternalAuthSettings) { // not required
+			return nil
+		}
+
 		if err := m.InternalAuthSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("InternalAuthSettings")
@@ -577,6 +607,11 @@ func (m *PortainereeSettings) contextValidateInternalAuthSettings(ctx context.Co
 func (m *PortainereeSettings) contextValidateLDAPSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LDAPSettings != nil {
+
+		if swag.IsZero(m.LDAPSettings) { // not required
+			return nil
+		}
+
 		if err := m.LDAPSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("LDAPSettings")
@@ -593,6 +628,11 @@ func (m *PortainereeSettings) contextValidateLDAPSettings(ctx context.Context, f
 func (m *PortainereeSettings) contextValidateOAuthSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OAuthSettings != nil {
+
+		if swag.IsZero(m.OAuthSettings) { // not required
+			return nil
+		}
+
 		if err := m.OAuthSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("OAuthSettings")
@@ -609,6 +649,11 @@ func (m *PortainereeSettings) contextValidateOAuthSettings(ctx context.Context, 
 func (m *PortainereeSettings) contextValidateDefaultRegistry(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DefaultRegistry != nil {
+
+		if swag.IsZero(m.DefaultRegistry) { // not required
+			return nil
+		}
+
 		if err := m.DefaultRegistry.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("defaultRegistry")
@@ -625,6 +670,11 @@ func (m *PortainereeSettings) contextValidateDefaultRegistry(ctx context.Context
 func (m *PortainereeSettings) contextValidateFdoConfiguration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.FdoConfiguration != nil {
+
+		if swag.IsZero(m.FdoConfiguration) { // not required
+			return nil
+		}
+
 		if err := m.FdoConfiguration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fdoConfiguration")
@@ -641,6 +691,11 @@ func (m *PortainereeSettings) contextValidateFdoConfiguration(ctx context.Contex
 func (m *PortainereeSettings) contextValidateOpenAMTConfiguration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OpenAMTConfiguration != nil {
+
+		if swag.IsZero(m.OpenAMTConfiguration) { // not required
+			return nil
+		}
+
 		if err := m.OpenAMTConfiguration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("openAMTConfiguration")

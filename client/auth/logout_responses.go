@@ -33,7 +33,7 @@ func (o *LogoutReader) ReadResponse(response runtime.ClientResponse, consumer ru
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /auth/logout] Logout", response, response.Code())
 	}
 }
 
@@ -73,6 +73,11 @@ func (o *LogoutNoContent) IsServerError() bool {
 // IsCode returns true when this logout no content response a status code equal to that given
 func (o *LogoutNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the logout no content response
+func (o *LogoutNoContent) Code() int {
+	return 204
 }
 
 func (o *LogoutNoContent) Error() string {
@@ -124,6 +129,11 @@ func (o *LogoutInternalServerError) IsServerError() bool {
 // IsCode returns true when this logout internal server error response a status code equal to that given
 func (o *LogoutInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the logout internal server error response
+func (o *LogoutInternalServerError) Code() int {
+	return 500
 }
 
 func (o *LogoutInternalServerError) Error() string {

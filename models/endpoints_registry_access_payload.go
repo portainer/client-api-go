@@ -104,6 +104,10 @@ func (m *EndpointsRegistryAccessPayload) ContextValidate(ctx context.Context, fo
 
 func (m *EndpointsRegistryAccessPayload) contextValidateTeamAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.TeamAccessPolicies) { // not required
+		return nil
+	}
+
 	if err := m.TeamAccessPolicies.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("teamAccessPolicies")
@@ -117,6 +121,10 @@ func (m *EndpointsRegistryAccessPayload) contextValidateTeamAccessPolicies(ctx c
 }
 
 func (m *EndpointsRegistryAccessPayload) contextValidateUserAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserAccessPolicies) { // not required
+		return nil
+	}
 
 	if err := m.UserAccessPolicies.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

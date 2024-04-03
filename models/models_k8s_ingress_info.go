@@ -146,6 +146,11 @@ func (m *ModelsK8sIngressInfo) contextValidatePaths(ctx context.Context, formats
 	for i := 0; i < len(m.Paths); i++ {
 
 		if m.Paths[i] != nil {
+
+			if swag.IsZero(m.Paths[i]) { // not required
+				return nil
+			}
+
 			if err := m.Paths[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Paths" + "." + strconv.Itoa(i))
@@ -166,6 +171,11 @@ func (m *ModelsK8sIngressInfo) contextValidateTLS(ctx context.Context, formats s
 	for i := 0; i < len(m.TLS); i++ {
 
 		if m.TLS[i] != nil {
+
+			if swag.IsZero(m.TLS[i]) { // not required
+				return nil
+			}
+
 			if err := m.TLS[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("TLS" + "." + strconv.Itoa(i))

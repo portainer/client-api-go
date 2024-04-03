@@ -32,6 +32,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	AddNodes(params *AddNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddNodesOK, error)
 
+	Microk8sAddons(params *Microk8sAddonsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sAddonsOK, error)
+
 	Microk8sGetAddons(params *Microk8sGetAddonsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sGetAddonsOK, error)
 
 	Microk8sGetNodeStatus(params *Microk8sGetNodeStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sGetNodeStatusOK, error)
@@ -39,6 +41,8 @@ type ClientService interface {
 	Microk8sUpdateAddons(params *Microk8sUpdateAddonsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sUpdateAddonsOK, error)
 
 	ProviderInfo(params *ProviderInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProviderInfoOK, error)
+
+	ProvisionKaaSCluster(params *ProvisionKaaSClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProvisionKaaSClusterOK, error)
 
 	RemoveNodes(params *RemoveNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RemoveNodesOK, error)
 
@@ -66,7 +70,7 @@ func (a *Client) AddNodes(params *AddNodesParams, authInfo runtime.ClientAuthInf
 	op := &runtime.ClientOperation{
 		ID:                 "addNodes",
 		Method:             "POST",
-		PathPattern:        "/cloud/endpoints/{environmentid}/nodes/add",
+		PathPattern:        "/cloud/endpoints/{environmentId}/nodes/add",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -95,6 +99,49 @@ func (a *Client) AddNodes(params *AddNodesParams, authInfo runtime.ClientAuthInf
 }
 
 /*
+	Microk8sAddons gets a list of addons which are installed in a micro k8s cluster
+
+	The information returned can be used to query the MircoK8s cluster.
+
+**Access policy**: authenticated
+*/
+func (a *Client) Microk8sAddons(params *Microk8sAddonsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*Microk8sAddonsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMicrok8sAddonsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "microk8sAddons",
+		Method:             "GET",
+		PathPattern:        "/cloud/microk8s/addons",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &Microk8sAddonsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*Microk8sAddonsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for microk8sAddons: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	Microk8sGetAddons gets a list of addons which are installed in a micro k8s cluster
 
 	The information returned can be used to query the MircoK8s cluster.
@@ -109,7 +156,7 @@ func (a *Client) Microk8sGetAddons(params *Microk8sGetAddonsParams, authInfo run
 	op := &runtime.ClientOperation{
 		ID:                 "microk8sGetAddons",
 		Method:             "GET",
-		PathPattern:        "/cloud/endpoints/{environmentid}/addons",
+		PathPattern:        "/cloud/endpoints/{environmentId}/addons",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -152,7 +199,7 @@ func (a *Client) Microk8sGetNodeStatus(params *Microk8sGetNodeStatusParams, auth
 	op := &runtime.ClientOperation{
 		ID:                 "microk8sGetNodeStatus",
 		Method:             "GET",
-		PathPattern:        "/cloud/endpoints/{environmentid}/nodes/nodestatus",
+		PathPattern:        "/cloud/endpoints/{endpointid}/nodes/nodestatus",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -195,7 +242,7 @@ func (a *Client) Microk8sUpdateAddons(params *Microk8sUpdateAddonsParams, authIn
 	op := &runtime.ClientOperation{
 		ID:                 "microk8sUpdateAddons",
 		Method:             "POST",
-		PathPattern:        "/cloud/endpoints/{environmentid}/addons",
+		PathPattern:        "/cloud/endpoints/{environmentId}/addons",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -267,6 +314,49 @@ func (a *Client) ProviderInfo(params *ProviderInfoParams, authInfo runtime.Clien
 }
 
 /*
+	ProvisionKaaSCluster provisions a new kaa s cluster and create an environment
+
+	Provision a new KaaS cluster and create an environment.
+
+**Access policy**: administrator
+*/
+func (a *Client) ProvisionKaaSCluster(params *ProvisionKaaSClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ProvisionKaaSClusterOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewProvisionKaaSClusterParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "provisionKaaSCluster",
+		Method:             "POST",
+		PathPattern:        "/cloud/{provider}/cluster",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ProvisionKaaSClusterReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ProvisionKaaSClusterOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for provisionKaaSCluster: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	RemoveNodes removes nodes from the cluster and uninstall micro k8s from them
 
 	Remove nodes from the cluster and uninstall MicroK8s from them.
@@ -281,7 +371,7 @@ func (a *Client) RemoveNodes(params *RemoveNodesParams, authInfo runtime.ClientA
 	op := &runtime.ClientOperation{
 		ID:                 "removeNodes",
 		Method:             "POST",
-		PathPattern:        "/cloud/endpoints/{environmentid}/nodes/remove",
+		PathPattern:        "/cloud/endpoints/{environmentId}/nodes/remove",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -367,7 +457,7 @@ func (a *Client) Upgrade(params *UpgradeParams, authInfo runtime.ClientAuthInfoW
 	op := &runtime.ClientOperation{
 		ID:                 "upgrade",
 		Method:             "POST",
-		PathPattern:        "/cloud/endpoints/{environmentid}/upgrade",
+		PathPattern:        "/cloud/endpoints/{environmentId}/upgrade",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -410,7 +500,7 @@ func (a *Client) Version(params *VersionParams, authInfo runtime.ClientAuthInfoW
 	op := &runtime.ClientOperation{
 		ID:                 "version",
 		Method:             "GET",
-		PathPattern:        "/cloud/endpoints/{environmentid}/version",
+		PathPattern:        "/cloud/endpoints/{environmentId}/version",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},

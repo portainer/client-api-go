@@ -45,7 +45,7 @@ func (o *FdoConfigureDeviceReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /fdo/configure/{guid}] fdoConfigureDevice", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *FdoConfigureDeviceOK) IsServerError() bool {
 // IsCode returns true when this fdo configure device o k response a status code equal to that given
 func (o *FdoConfigureDeviceOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the fdo configure device o k response
+func (o *FdoConfigureDeviceOK) Code() int {
+	return 200
 }
 
 func (o *FdoConfigureDeviceOK) Error() string {
@@ -138,6 +143,11 @@ func (o *FdoConfigureDeviceBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the fdo configure device bad request response
+func (o *FdoConfigureDeviceBadRequest) Code() int {
+	return 400
+}
+
 func (o *FdoConfigureDeviceBadRequest) Error() string {
 	return fmt.Sprintf("[POST /fdo/configure/{guid}][%d] fdoConfigureDeviceBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *FdoConfigureDeviceForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the fdo configure device forbidden response
+func (o *FdoConfigureDeviceForbidden) Code() int {
+	return 403
+}
+
 func (o *FdoConfigureDeviceForbidden) Error() string {
 	return fmt.Sprintf("[POST /fdo/configure/{guid}][%d] fdoConfigureDeviceForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *FdoConfigureDeviceInternalServerError) IsServerError() bool {
 // IsCode returns true when this fdo configure device internal server error response a status code equal to that given
 func (o *FdoConfigureDeviceInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the fdo configure device internal server error response
+func (o *FdoConfigureDeviceInternalServerError) Code() int {
+	return 500
 }
 
 func (o *FdoConfigureDeviceInternalServerError) Error() string {

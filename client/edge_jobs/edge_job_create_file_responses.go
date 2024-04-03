@@ -42,7 +42,7 @@ func (o *EdgeJobCreateFileReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_jobs/create/file] EdgeJobCreateFile", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *EdgeJobCreateFileOK) IsServerError() bool {
 // IsCode returns true when this edge job create file o k response a status code equal to that given
 func (o *EdgeJobCreateFileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge job create file o k response
+func (o *EdgeJobCreateFileOK) Code() int {
+	return 200
 }
 
 func (o *EdgeJobCreateFileOK) Error() string {
@@ -147,6 +152,11 @@ func (o *EdgeJobCreateFileInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job create file internal server error response
+func (o *EdgeJobCreateFileInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobCreateFileInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileInternalServerError ", 500)
 }
@@ -196,6 +206,11 @@ func (o *EdgeJobCreateFileServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job create file service unavailable response a status code equal to that given
 func (o *EdgeJobCreateFileServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job create file service unavailable response
+func (o *EdgeJobCreateFileServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobCreateFileServiceUnavailable) Error() string {

@@ -39,7 +39,7 @@ func (o *ContainerImageStatusReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /docker/{environmentId}/containers/{containerId}/image_status] containerImageStatus", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *ContainerImageStatusOK) IsServerError() bool {
 // IsCode returns true when this container image status o k response a status code equal to that given
 func (o *ContainerImageStatusOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the container image status o k response
+func (o *ContainerImageStatusOK) Code() int {
+	return 200
 }
 
 func (o *ContainerImageStatusOK) Error() string {
@@ -132,6 +137,11 @@ func (o *ContainerImageStatusBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the container image status bad request response
+func (o *ContainerImageStatusBadRequest) Code() int {
+	return 400
+}
+
 func (o *ContainerImageStatusBadRequest) Error() string {
 	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *ContainerImageStatusInternalServerError) IsServerError() bool {
 // IsCode returns true when this container image status internal server error response a status code equal to that given
 func (o *ContainerImageStatusInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the container image status internal server error response
+func (o *ContainerImageStatusInternalServerError) Code() int {
+	return 500
 }
 
 func (o *ContainerImageStatusInternalServerError) Error() string {

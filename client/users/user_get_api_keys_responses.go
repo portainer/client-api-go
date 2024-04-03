@@ -54,7 +54,7 @@ func (o *UserGetAPIKeysReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}/tokens] UserGetAPIKeys", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *UserGetAPIKeysOK) IsServerError() bool {
 // IsCode returns true when this user get Api keys o k response a status code equal to that given
 func (o *UserGetAPIKeysOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user get Api keys o k response
+func (o *UserGetAPIKeysOK) Code() int {
+	return 200
 }
 
 func (o *UserGetAPIKeysOK) Error() string {
@@ -157,6 +162,11 @@ func (o *UserGetAPIKeysBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user get Api keys bad request response
+func (o *UserGetAPIKeysBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserGetAPIKeysBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysBadRequest ", 400)
 }
@@ -206,6 +216,11 @@ func (o *UserGetAPIKeysForbidden) IsServerError() bool {
 // IsCode returns true when this user get Api keys forbidden response a status code equal to that given
 func (o *UserGetAPIKeysForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user get Api keys forbidden response
+func (o *UserGetAPIKeysForbidden) Code() int {
+	return 403
 }
 
 func (o *UserGetAPIKeysForbidden) Error() string {
@@ -259,6 +274,11 @@ func (o *UserGetAPIKeysNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user get Api keys not found response
+func (o *UserGetAPIKeysNotFound) Code() int {
+	return 404
+}
+
 func (o *UserGetAPIKeysNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysNotFound ", 404)
 }
@@ -308,6 +328,11 @@ func (o *UserGetAPIKeysInternalServerError) IsServerError() bool {
 // IsCode returns true when this user get Api keys internal server error response a status code equal to that given
 func (o *UserGetAPIKeysInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user get Api keys internal server error response
+func (o *UserGetAPIKeysInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserGetAPIKeysInternalServerError) Error() string {

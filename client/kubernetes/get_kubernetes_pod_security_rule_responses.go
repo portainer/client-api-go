@@ -36,7 +36,7 @@ func (o *GetKubernetesPodSecurityRuleReader) ReadResponse(response runtime.Clien
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{environmentId}/opa] getKubernetesPodSecurityRule", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *GetKubernetesPodSecurityRuleOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes pod security rule o k response a status code equal to that given
 func (o *GetKubernetesPodSecurityRuleOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes pod security rule o k response
+func (o *GetKubernetesPodSecurityRuleOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesPodSecurityRuleOK) Error() string {
@@ -139,6 +144,11 @@ func (o *GetKubernetesPodSecurityRuleBadRequest) IsServerError() bool {
 // IsCode returns true when this get kubernetes pod security rule bad request response a status code equal to that given
 func (o *GetKubernetesPodSecurityRuleBadRequest) IsCode(code int) bool {
 	return code == 400
+}
+
+// Code gets the status code for the get kubernetes pod security rule bad request response
+func (o *GetKubernetesPodSecurityRuleBadRequest) Code() int {
+	return 400
 }
 
 func (o *GetKubernetesPodSecurityRuleBadRequest) Error() string {

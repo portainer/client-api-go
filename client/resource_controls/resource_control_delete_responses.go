@@ -45,7 +45,7 @@ func (o *ResourceControlDeleteReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /resource_controls/{id}] ResourceControlDelete", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *ResourceControlDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this resource control delete no content response a status code equal to that given
 func (o *ResourceControlDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the resource control delete no content response
+func (o *ResourceControlDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *ResourceControlDeleteNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *ResourceControlDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the resource control delete bad request response
+func (o *ResourceControlDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *ResourceControlDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *ResourceControlDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the resource control delete not found response
+func (o *ResourceControlDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *ResourceControlDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNotFound ", 404)
 }
@@ -238,6 +253,11 @@ func (o *ResourceControlDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this resource control delete internal server error response a status code equal to that given
 func (o *ResourceControlDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the resource control delete internal server error response
+func (o *ResourceControlDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *ResourceControlDeleteInternalServerError) Error() string {

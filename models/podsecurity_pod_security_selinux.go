@@ -85,6 +85,11 @@ func (m *PodsecurityPodSecuritySelinux) contextValidateAllowedCapabilities(ctx c
 	for i := 0; i < len(m.AllowedCapabilities); i++ {
 
 		if m.AllowedCapabilities[i] != nil {
+
+			if swag.IsZero(m.AllowedCapabilities[i]) { // not required
+				return nil
+			}
+
 			if err := m.AllowedCapabilities[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("allowedCapabilities" + "." + strconv.Itoa(i))

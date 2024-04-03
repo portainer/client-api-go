@@ -72,6 +72,11 @@ func (m *OpenamtDeviceFeaturesPayload) ContextValidate(ctx context.Context, form
 func (m *OpenamtDeviceFeaturesPayload) contextValidateFeatures(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Features != nil {
+
+		if swag.IsZero(m.Features) { // not required
+			return nil
+		}
+
 		if err := m.Features.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("features")

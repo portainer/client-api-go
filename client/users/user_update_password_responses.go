@@ -51,7 +51,7 @@ func (o *UserUpdatePasswordReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /users/{id}/passwd] UserUpdatePassword", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *UserUpdatePasswordNoContent) IsServerError() bool {
 // IsCode returns true when this user update password no content response a status code equal to that given
 func (o *UserUpdatePasswordNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the user update password no content response
+func (o *UserUpdatePasswordNoContent) Code() int {
+	return 204
 }
 
 func (o *UserUpdatePasswordNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *UserUpdatePasswordBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user update password bad request response
+func (o *UserUpdatePasswordBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserUpdatePasswordBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *UserUpdatePasswordForbidden) IsServerError() bool {
 // IsCode returns true when this user update password forbidden response a status code equal to that given
 func (o *UserUpdatePasswordForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user update password forbidden response
+func (o *UserUpdatePasswordForbidden) Code() int {
+	return 403
 }
 
 func (o *UserUpdatePasswordForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *UserUpdatePasswordNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user update password not found response
+func (o *UserUpdatePasswordNotFound) Code() int {
+	return 404
+}
+
 func (o *UserUpdatePasswordNotFound) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *UserUpdatePasswordInternalServerError) IsServerError() bool {
 // IsCode returns true when this user update password internal server error response a status code equal to that given
 func (o *UserUpdatePasswordInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user update password internal server error response
+func (o *UserUpdatePasswordInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserUpdatePasswordInternalServerError) Error() string {

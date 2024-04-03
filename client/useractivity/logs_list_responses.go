@@ -36,7 +36,7 @@ func (o *LogsListReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /useractivity/logs] LogsList", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *LogsListOK) IsServerError() bool {
 // IsCode returns true when this logs list o k response a status code equal to that given
 func (o *LogsListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the logs list o k response
+func (o *LogsListOK) Code() int {
+	return 200
 }
 
 func (o *LogsListOK) Error() string {
@@ -139,6 +144,11 @@ func (o *LogsListInternalServerError) IsServerError() bool {
 // IsCode returns true when this logs list internal server error response a status code equal to that given
 func (o *LogsListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the logs list internal server error response
+func (o *LogsListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *LogsListInternalServerError) Error() string {

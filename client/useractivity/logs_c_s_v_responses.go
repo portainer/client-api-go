@@ -33,7 +33,7 @@ func (o *LogsCSVReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /useractivity/logs.csv] LogsCSV", response, response.Code())
 	}
 }
 
@@ -73,6 +73,11 @@ func (o *LogsCSVOK) IsServerError() bool {
 // IsCode returns true when this logs c s v o k response a status code equal to that given
 func (o *LogsCSVOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the logs c s v o k response
+func (o *LogsCSVOK) Code() int {
+	return 200
 }
 
 func (o *LogsCSVOK) Error() string {
@@ -124,6 +129,11 @@ func (o *LogsCSVInternalServerError) IsServerError() bool {
 // IsCode returns true when this logs c s v internal server error response a status code equal to that given
 func (o *LogsCSVInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the logs c s v internal server error response
+func (o *LogsCSVInternalServerError) Code() int {
+	return 500
 }
 
 func (o *LogsCSVInternalServerError) Error() string {

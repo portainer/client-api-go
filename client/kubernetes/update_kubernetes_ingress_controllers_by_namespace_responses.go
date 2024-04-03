@@ -40,7 +40,7 @@ func (o *UpdateKubernetesIngressControllersByNamespaceReader) ReadResponse(respo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers] updateKubernetesIngressControllersByNamespace", response, response.Code())
 	}
 }
 
@@ -81,6 +81,11 @@ func (o *UpdateKubernetesIngressControllersByNamespaceOK) IsServerError() bool {
 // IsCode returns true when this update kubernetes ingress controllers by namespace o k response a status code equal to that given
 func (o *UpdateKubernetesIngressControllersByNamespaceOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the update kubernetes ingress controllers by namespace o k response
+func (o *UpdateKubernetesIngressControllersByNamespaceOK) Code() int {
+	return 200
 }
 
 func (o *UpdateKubernetesIngressControllersByNamespaceOK) Error() string {
@@ -143,6 +148,11 @@ func (o *UpdateKubernetesIngressControllersByNamespaceBadRequest) IsCode(code in
 	return code == 400
 }
 
+// Code gets the status code for the update kubernetes ingress controllers by namespace bad request response
+func (o *UpdateKubernetesIngressControllersByNamespaceBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateKubernetesIngressControllersByNamespaceBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] updateKubernetesIngressControllersByNamespaceBadRequest ", 400)
 }
@@ -192,6 +202,11 @@ func (o *UpdateKubernetesIngressControllersByNamespaceInternalServerError) IsSer
 // IsCode returns true when this update kubernetes ingress controllers by namespace internal server error response a status code equal to that given
 func (o *UpdateKubernetesIngressControllersByNamespaceInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the update kubernetes ingress controllers by namespace internal server error response
+func (o *UpdateKubernetesIngressControllersByNamespaceInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UpdateKubernetesIngressControllersByNamespaceInternalServerError) Error() string {

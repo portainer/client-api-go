@@ -48,7 +48,7 @@ func (o *EndpointSettingsUpdateReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoints/{id}/settings] EndpointSettingsUpdate", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EndpointSettingsUpdateOK) IsServerError() bool {
 // IsCode returns true when this endpoint settings update o k response a status code equal to that given
 func (o *EndpointSettingsUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint settings update o k response
+func (o *EndpointSettingsUpdateOK) Code() int {
+	return 200
 }
 
 func (o *EndpointSettingsUpdateOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EndpointSettingsUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint settings update bad request response
+func (o *EndpointSettingsUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointSettingsUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EndpointSettingsUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint settings update not found response
+func (o *EndpointSettingsUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointSettingsUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *EndpointSettingsUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint settings update internal server error response a status code equal to that given
 func (o *EndpointSettingsUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint settings update internal server error response
+func (o *EndpointSettingsUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointSettingsUpdateInternalServerError) Error() string {

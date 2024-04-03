@@ -45,7 +45,7 @@ func (o *OpenAMTConfigureReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /open_amt] OpenAMTConfigure", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *OpenAMTConfigureNoContent) IsServerError() bool {
 // IsCode returns true when this open a m t configure no content response a status code equal to that given
 func (o *OpenAMTConfigureNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the open a m t configure no content response
+func (o *OpenAMTConfigureNoContent) Code() int {
+	return 204
 }
 
 func (o *OpenAMTConfigureNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *OpenAMTConfigureBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the open a m t configure bad request response
+func (o *OpenAMTConfigureBadRequest) Code() int {
+	return 400
+}
+
 func (o *OpenAMTConfigureBadRequest) Error() string {
 	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *OpenAMTConfigureForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the open a m t configure forbidden response
+func (o *OpenAMTConfigureForbidden) Code() int {
+	return 403
+}
+
 func (o *OpenAMTConfigureForbidden) Error() string {
 	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *OpenAMTConfigureInternalServerError) IsServerError() bool {
 // IsCode returns true when this open a m t configure internal server error response a status code equal to that given
 func (o *OpenAMTConfigureInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the open a m t configure internal server error response
+func (o *OpenAMTConfigureInternalServerError) Code() int {
+	return 500
 }
 
 func (o *OpenAMTConfigureInternalServerError) Error() string {

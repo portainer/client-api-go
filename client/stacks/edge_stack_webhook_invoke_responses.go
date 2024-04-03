@@ -45,7 +45,7 @@ func (o *EdgeStackWebhookInvokeReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_stacks/webhooks/{webhookID}] EdgeStackWebhookInvoke", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EdgeStackWebhookInvokeOK) IsServerError() bool {
 // IsCode returns true when this edge stack webhook invoke o k response a status code equal to that given
 func (o *EdgeStackWebhookInvokeOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack webhook invoke o k response
+func (o *EdgeStackWebhookInvokeOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackWebhookInvokeOK) Error() string {
@@ -138,6 +143,11 @@ func (o *EdgeStackWebhookInvokeBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack webhook invoke bad request response
+func (o *EdgeStackWebhookInvokeBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackWebhookInvokeBadRequest) Error() string {
 	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EdgeStackWebhookInvokeConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the edge stack webhook invoke conflict response
+func (o *EdgeStackWebhookInvokeConflict) Code() int {
+	return 409
+}
+
 func (o *EdgeStackWebhookInvokeConflict) Error() string {
 	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeConflict ", 409)
 }
@@ -238,6 +253,11 @@ func (o *EdgeStackWebhookInvokeInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge stack webhook invoke internal server error response a status code equal to that given
 func (o *EdgeStackWebhookInvokeInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge stack webhook invoke internal server error response
+func (o *EdgeStackWebhookInvokeInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeStackWebhookInvokeInternalServerError) Error() string {

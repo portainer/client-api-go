@@ -45,7 +45,7 @@ func (o *EndpointSnapshotReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/{id}/snapshot] EndpointSnapshot", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EndpointSnapshotNoContent) IsServerError() bool {
 // IsCode returns true when this endpoint snapshot no content response a status code equal to that given
 func (o *EndpointSnapshotNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the endpoint snapshot no content response
+func (o *EndpointSnapshotNoContent) Code() int {
+	return 204
 }
 
 func (o *EndpointSnapshotNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *EndpointSnapshotBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint snapshot bad request response
+func (o *EndpointSnapshotBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointSnapshotBadRequest) Error() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EndpointSnapshotNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint snapshot not found response
+func (o *EndpointSnapshotNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointSnapshotNotFound) Error() string {
 	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNotFound ", 404)
 }
@@ -238,6 +253,11 @@ func (o *EndpointSnapshotInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint snapshot internal server error response a status code equal to that given
 func (o *EndpointSnapshotInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint snapshot internal server error response
+func (o *EndpointSnapshotInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointSnapshotInternalServerError) Error() string {

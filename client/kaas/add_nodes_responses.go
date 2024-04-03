@@ -51,7 +51,7 @@ func (o *AddNodesReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /cloud/endpoints/{environmentId}/nodes/add] addNodes", response, response.Code())
 	}
 }
 
@@ -93,12 +93,17 @@ func (o *AddNodesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the add nodes o k response
+func (o *AddNodesOK) Code() int {
+	return 200
+}
+
 func (o *AddNodesOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesOK ", 200)
 }
 
 func (o *AddNodesOK) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesOK ", 200)
 }
 
 func (o *AddNodesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -144,12 +149,17 @@ func (o *AddNodesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the add nodes bad request response
+func (o *AddNodesBadRequest) Code() int {
+	return 400
+}
+
 func (o *AddNodesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesBadRequest ", 400)
 }
 
 func (o *AddNodesBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesBadRequest ", 400)
 }
 
 func (o *AddNodesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -195,12 +205,17 @@ func (o *AddNodesForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the add nodes forbidden response
+func (o *AddNodesForbidden) Code() int {
+	return 403
+}
+
 func (o *AddNodesForbidden) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesForbidden ", 403)
 }
 
 func (o *AddNodesForbidden) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesForbidden ", 403)
 }
 
 func (o *AddNodesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -246,12 +261,17 @@ func (o *AddNodesInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the add nodes internal server error response
+func (o *AddNodesInternalServerError) Code() int {
+	return 500
+}
+
 func (o *AddNodesInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesInternalServerError ", 500)
 }
 
 func (o *AddNodesInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesInternalServerError ", 500)
 }
 
 func (o *AddNodesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,12 +317,17 @@ func (o *AddNodesServiceUnavailable) IsCode(code int) bool {
 	return code == 503
 }
 
+// Code gets the status code for the add nodes service unavailable response
+func (o *AddNodesServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *AddNodesServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesServiceUnavailable ", 503)
 }
 
 func (o *AddNodesServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentid}/nodes/add][%d] addNodesServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesServiceUnavailable ", 503)
 }
 
 func (o *AddNodesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

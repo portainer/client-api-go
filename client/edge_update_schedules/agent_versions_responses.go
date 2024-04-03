@@ -40,7 +40,7 @@ func (o *AgentVersionsReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_update_schedules/agent_versions] AgentVersions", response, response.Code())
 	}
 }
 
@@ -81,6 +81,11 @@ func (o *AgentVersionsOK) IsServerError() bool {
 // IsCode returns true when this agent versions o k response a status code equal to that given
 func (o *AgentVersionsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the agent versions o k response
+func (o *AgentVersionsOK) Code() int {
+	return 200
 }
 
 func (o *AgentVersionsOK) Error() string {
@@ -143,6 +148,11 @@ func (o *AgentVersionsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the agent versions bad request response
+func (o *AgentVersionsBadRequest) Code() int {
+	return 400
+}
+
 func (o *AgentVersionsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsBadRequest ", 400)
 }
@@ -192,6 +202,11 @@ func (o *AgentVersionsInternalServerError) IsServerError() bool {
 // IsCode returns true when this agent versions internal server error response a status code equal to that given
 func (o *AgentVersionsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the agent versions internal server error response
+func (o *AgentVersionsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *AgentVersionsInternalServerError) Error() string {

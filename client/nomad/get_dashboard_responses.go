@@ -39,7 +39,7 @@ func (o *GetDashboardReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /nomad/endpoints/{environmentId}/dashboard] getDashboard", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *GetDashboardOK) IsServerError() bool {
 // IsCode returns true when this get dashboard o k response a status code equal to that given
 func (o *GetDashboardOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get dashboard o k response
+func (o *GetDashboardOK) Code() int {
+	return 200
 }
 
 func (o *GetDashboardOK) Error() string {
@@ -132,6 +137,11 @@ func (o *GetDashboardNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get dashboard not found response
+func (o *GetDashboardNotFound) Code() int {
+	return 404
+}
+
 func (o *GetDashboardNotFound) Error() string {
 	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/dashboard][%d] getDashboardNotFound ", 404)
 }
@@ -181,6 +191,11 @@ func (o *GetDashboardInternalServerError) IsServerError() bool {
 // IsCode returns true when this get dashboard internal server error response a status code equal to that given
 func (o *GetDashboardInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get dashboard internal server error response
+func (o *GetDashboardInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetDashboardInternalServerError) Error() string {

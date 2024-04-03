@@ -51,7 +51,7 @@ func (o *HelmDeleteReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /endpoints/{id}/kubernetes/helm/{release}] HelmDelete", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *HelmDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this helm delete no content response a status code equal to that given
 func (o *HelmDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the helm delete no content response
+func (o *HelmDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *HelmDeleteNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *HelmDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the helm delete bad request response
+func (o *HelmDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *HelmDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *HelmDeleteUnauthorized) IsServerError() bool {
 // IsCode returns true when this helm delete unauthorized response a status code equal to that given
 func (o *HelmDeleteUnauthorized) IsCode(code int) bool {
 	return code == 401
+}
+
+// Code gets the status code for the helm delete unauthorized response
+func (o *HelmDeleteUnauthorized) Code() int {
+	return 401
 }
 
 func (o *HelmDeleteUnauthorized) Error() string {
@@ -246,6 +261,11 @@ func (o *HelmDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the helm delete not found response
+func (o *HelmDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *HelmDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *HelmDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this helm delete internal server error response a status code equal to that given
 func (o *HelmDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the helm delete internal server error response
+func (o *HelmDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *HelmDeleteInternalServerError) Error() string {

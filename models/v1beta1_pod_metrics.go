@@ -356,6 +356,11 @@ func (m *V1beta1PodMetrics) contextValidateContainers(ctx context.Context, forma
 	for i := 0; i < len(m.Containers); i++ {
 
 		if m.Containers[i] != nil {
+
+			if swag.IsZero(m.Containers[i]) { // not required
+				return nil
+			}
+
 			if err := m.Containers[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("containers" + "." + strconv.Itoa(i))
@@ -376,6 +381,11 @@ func (m *V1beta1PodMetrics) contextValidateManagedFields(ctx context.Context, fo
 	for i := 0; i < len(m.ManagedFields); i++ {
 
 		if m.ManagedFields[i] != nil {
+
+			if swag.IsZero(m.ManagedFields[i]) { // not required
+				return nil
+			}
+
 			if err := m.ManagedFields[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("managedFields" + "." + strconv.Itoa(i))
@@ -396,6 +406,11 @@ func (m *V1beta1PodMetrics) contextValidateOwnerReferences(ctx context.Context, 
 	for i := 0; i < len(m.OwnerReferences); i++ {
 
 		if m.OwnerReferences[i] != nil {
+
+			if swag.IsZero(m.OwnerReferences[i]) { // not required
+				return nil
+			}
+
 			if err := m.OwnerReferences[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ownerReferences" + "." + strconv.Itoa(i))
@@ -414,6 +429,11 @@ func (m *V1beta1PodMetrics) contextValidateOwnerReferences(ctx context.Context, 
 func (m *V1beta1PodMetrics) contextValidateWindow(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Window != nil {
+
+		if swag.IsZero(m.Window) { // not required
+			return nil
+		}
+
 		if err := m.Window.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("window")

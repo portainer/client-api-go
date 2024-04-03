@@ -20,6 +20,11 @@ import (
 // swagger:model users.userUpdatePayload
 type UsersUserUpdatePayload struct {
 
+	// new password
+	// Example: asfj2emv
+	// Required: true
+	NewPassword *string `json:"newPassword"`
+
 	// password
 	// Example: cg9Wgky3
 	// Required: true
@@ -44,6 +49,10 @@ type UsersUserUpdatePayload struct {
 func (m *UsersUserUpdatePayload) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateNewPassword(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePassword(formats); err != nil {
 		res = append(res, err)
 	}
@@ -63,6 +72,15 @@ func (m *UsersUserUpdatePayload) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *UsersUserUpdatePayload) validateNewPassword(formats strfmt.Registry) error {
+
+	if err := validate.Required("newPassword", "body", m.NewPassword); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -154,6 +172,11 @@ func (m *UsersUserUpdatePayload) ContextValidate(ctx context.Context, formats st
 func (m *UsersUserUpdatePayload) contextValidateTheme(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Theme != nil {
+
+		if swag.IsZero(m.Theme) { // not required
+			return nil
+		}
+
 		if err := m.Theme.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("theme")

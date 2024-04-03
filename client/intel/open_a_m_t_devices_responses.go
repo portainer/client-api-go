@@ -45,7 +45,7 @@ func (o *OpenAMTDevicesReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /open_amt/{id}/devices] OpenAMTDevices", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *OpenAMTDevicesOK) IsServerError() bool {
 // IsCode returns true when this open a m t devices o k response a status code equal to that given
 func (o *OpenAMTDevicesOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the open a m t devices o k response
+func (o *OpenAMTDevicesOK) Code() int {
+	return 200
 }
 
 func (o *OpenAMTDevicesOK) Error() string {
@@ -138,6 +143,11 @@ func (o *OpenAMTDevicesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the open a m t devices bad request response
+func (o *OpenAMTDevicesBadRequest) Code() int {
+	return 400
+}
+
 func (o *OpenAMTDevicesBadRequest) Error() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *OpenAMTDevicesForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the open a m t devices forbidden response
+func (o *OpenAMTDevicesForbidden) Code() int {
+	return 403
+}
+
 func (o *OpenAMTDevicesForbidden) Error() string {
 	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *OpenAMTDevicesInternalServerError) IsServerError() bool {
 // IsCode returns true when this open a m t devices internal server error response a status code equal to that given
 func (o *OpenAMTDevicesInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the open a m t devices internal server error response
+func (o *OpenAMTDevicesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *OpenAMTDevicesInternalServerError) Error() string {

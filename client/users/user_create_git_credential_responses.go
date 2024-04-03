@@ -54,7 +54,7 @@ func (o *UserCreateGitCredentialReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /users/{id}/gitcredentials] UserCreateGitCredential", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *UserCreateGitCredentialCreated) IsServerError() bool {
 // IsCode returns true when this user create git credential created response a status code equal to that given
 func (o *UserCreateGitCredentialCreated) IsCode(code int) bool {
 	return code == 201
+}
+
+// Code gets the status code for the user create git credential created response
+func (o *UserCreateGitCredentialCreated) Code() int {
+	return 201
 }
 
 func (o *UserCreateGitCredentialCreated) Error() string {
@@ -159,6 +164,11 @@ func (o *UserCreateGitCredentialBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user create git credential bad request response
+func (o *UserCreateGitCredentialBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserCreateGitCredentialBadRequest) Error() string {
 	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *UserCreateGitCredentialUnauthorized) IsServerError() bool {
 // IsCode returns true when this user create git credential unauthorized response a status code equal to that given
 func (o *UserCreateGitCredentialUnauthorized) IsCode(code int) bool {
 	return code == 401
+}
+
+// Code gets the status code for the user create git credential unauthorized response
+func (o *UserCreateGitCredentialUnauthorized) Code() int {
+	return 401
 }
 
 func (o *UserCreateGitCredentialUnauthorized) Error() string {
@@ -261,6 +276,11 @@ func (o *UserCreateGitCredentialForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the user create git credential forbidden response
+func (o *UserCreateGitCredentialForbidden) Code() int {
+	return 403
+}
+
 func (o *UserCreateGitCredentialForbidden) Error() string {
 	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialForbidden ", 403)
 }
@@ -310,6 +330,11 @@ func (o *UserCreateGitCredentialInternalServerError) IsServerError() bool {
 // IsCode returns true when this user create git credential internal server error response a status code equal to that given
 func (o *UserCreateGitCredentialInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user create git credential internal server error response
+func (o *UserCreateGitCredentialInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserCreateGitCredentialInternalServerError) Error() string {

@@ -48,7 +48,7 @@ func (o *CustomTemplateInspectReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /custom_templates/{id}] CustomTemplateInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *CustomTemplateInspectOK) IsServerError() bool {
 // IsCode returns true when this custom template inspect o k response a status code equal to that given
 func (o *CustomTemplateInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the custom template inspect o k response
+func (o *CustomTemplateInspectOK) Code() int {
+	return 200
 }
 
 func (o *CustomTemplateInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *CustomTemplateInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the custom template inspect bad request response
+func (o *CustomTemplateInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *CustomTemplateInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *CustomTemplateInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the custom template inspect not found response
+func (o *CustomTemplateInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *CustomTemplateInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *CustomTemplateInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this custom template inspect internal server error response a status code equal to that given
 func (o *CustomTemplateInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the custom template inspect internal server error response
+func (o *CustomTemplateInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CustomTemplateInspectInternalServerError) Error() string {

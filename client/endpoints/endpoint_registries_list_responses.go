@@ -36,7 +36,7 @@ func (o *EndpointRegistriesListReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /endpoints/{id}/registries] endpointRegistriesList", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *EndpointRegistriesListOK) IsServerError() bool {
 // IsCode returns true when this endpoint registries list o k response a status code equal to that given
 func (o *EndpointRegistriesListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint registries list o k response
+func (o *EndpointRegistriesListOK) Code() int {
+	return 200
 }
 
 func (o *EndpointRegistriesListOK) Error() string {
@@ -137,6 +142,11 @@ func (o *EndpointRegistriesListInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint registries list internal server error response a status code equal to that given
 func (o *EndpointRegistriesListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint registries list internal server error response
+func (o *EndpointRegistriesListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointRegistriesListInternalServerError) Error() string {

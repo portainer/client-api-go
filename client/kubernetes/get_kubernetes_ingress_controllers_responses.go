@@ -42,7 +42,7 @@ func (o *GetKubernetesIngressControllersReader) ReadResponse(response runtime.Cl
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/ingresscontrollers] getKubernetesIngressControllers", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *GetKubernetesIngressControllersOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes ingress controllers o k response a status code equal to that given
 func (o *GetKubernetesIngressControllersOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes ingress controllers o k response
+func (o *GetKubernetesIngressControllersOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesIngressControllersOK) Error() string {
@@ -145,6 +150,11 @@ func (o *GetKubernetesIngressControllersBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get kubernetes ingress controllers bad request response
+func (o *GetKubernetesIngressControllersBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetKubernetesIngressControllersBadRequest) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/ingresscontrollers][%d] getKubernetesIngressControllersBadRequest ", 400)
 }
@@ -194,6 +204,11 @@ func (o *GetKubernetesIngressControllersInternalServerError) IsServerError() boo
 // IsCode returns true when this get kubernetes ingress controllers internal server error response a status code equal to that given
 func (o *GetKubernetesIngressControllersInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get kubernetes ingress controllers internal server error response
+func (o *GetKubernetesIngressControllersInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetKubernetesIngressControllersInternalServerError) Error() string {

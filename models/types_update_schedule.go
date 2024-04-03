@@ -40,7 +40,7 @@ type TypesUpdateSchedule struct {
 	// Example: 1
 	EdgeStackID int64 `json:"edgeStackId,omitempty"`
 
-	// environments previous versions
+	// Deprecated - use Environment.Agent.PreviousVersion instead
 	EnvironmentsPreviousVersions map[string]string `json:"environmentsPreviousVersions,omitempty"`
 
 	// EdgeUpdateSchedule Identifier

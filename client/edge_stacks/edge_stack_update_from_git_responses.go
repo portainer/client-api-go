@@ -51,7 +51,7 @@ func (o *EdgeStackUpdateFromGitReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /edge_stacks/{id}/git] edgeStackUpdateFromGit", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *EdgeStackUpdateFromGitNoContent) IsServerError() bool {
 // IsCode returns true when this edge stack update from git no content response a status code equal to that given
 func (o *EdgeStackUpdateFromGitNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge stack update from git no content response
+func (o *EdgeStackUpdateFromGitNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeStackUpdateFromGitNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *EdgeStackUpdateFromGitBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack update from git bad request response
+func (o *EdgeStackUpdateFromGitBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackUpdateFromGitBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *EdgeStackUpdateFromGitForbidden) IsServerError() bool {
 // IsCode returns true when this edge stack update from git forbidden response a status code equal to that given
 func (o *EdgeStackUpdateFromGitForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the edge stack update from git forbidden response
+func (o *EdgeStackUpdateFromGitForbidden) Code() int {
+	return 403
 }
 
 func (o *EdgeStackUpdateFromGitForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *EdgeStackUpdateFromGitNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the edge stack update from git not found response
+func (o *EdgeStackUpdateFromGitNotFound) Code() int {
+	return 404
+}
+
 func (o *EdgeStackUpdateFromGitNotFound) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *EdgeStackUpdateFromGitInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge stack update from git internal server error response a status code equal to that given
 func (o *EdgeStackUpdateFromGitInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge stack update from git internal server error response
+func (o *EdgeStackUpdateFromGitInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeStackUpdateFromGitInternalServerError) Error() string {

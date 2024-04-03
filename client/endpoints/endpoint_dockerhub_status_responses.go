@@ -54,7 +54,7 @@ func (o *EndpointDockerhubStatusReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /endpoints/{id}/dockerhub/{registryId}] endpointDockerhubStatus", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *EndpointDockerhubStatusOK) IsServerError() bool {
 // IsCode returns true when this endpoint dockerhub status o k response a status code equal to that given
 func (o *EndpointDockerhubStatusOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint dockerhub status o k response
+func (o *EndpointDockerhubStatusOK) Code() int {
+	return 200
 }
 
 func (o *EndpointDockerhubStatusOK) Error() string {
@@ -159,6 +164,11 @@ func (o *EndpointDockerhubStatusBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint dockerhub status bad request response
+func (o *EndpointDockerhubStatusBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointDockerhubStatusBadRequest) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *EndpointDockerhubStatusForbidden) IsServerError() bool {
 // IsCode returns true when this endpoint dockerhub status forbidden response a status code equal to that given
 func (o *EndpointDockerhubStatusForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the endpoint dockerhub status forbidden response
+func (o *EndpointDockerhubStatusForbidden) Code() int {
+	return 403
 }
 
 func (o *EndpointDockerhubStatusForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *EndpointDockerhubStatusNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint dockerhub status not found response
+func (o *EndpointDockerhubStatusNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointDockerhubStatusNotFound) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *EndpointDockerhubStatusInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint dockerhub status internal server error response a status code equal to that given
 func (o *EndpointDockerhubStatusInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint dockerhub status internal server error response
+func (o *EndpointDockerhubStatusInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointDockerhubStatusInternalServerError) Error() string {

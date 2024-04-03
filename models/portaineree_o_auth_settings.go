@@ -120,6 +120,11 @@ func (m *PortainereeOAuthSettings) ContextValidate(ctx context.Context, formats 
 func (m *PortainereeOAuthSettings) contextValidateTeamMemberships(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TeamMemberships != nil {
+
+		if swag.IsZero(m.TeamMemberships) { // not required
+			return nil
+		}
+
 		if err := m.TeamMemberships.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("TeamMemberships")

@@ -51,7 +51,7 @@ func (o *UserUpdateGitCredentialReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /users/{id}/gitcredentials/{credentialID}] UserUpdateGitCredential", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *UserUpdateGitCredentialNoContent) IsServerError() bool {
 // IsCode returns true when this user update git credential no content response a status code equal to that given
 func (o *UserUpdateGitCredentialNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the user update git credential no content response
+func (o *UserUpdateGitCredentialNoContent) Code() int {
+	return 204
 }
 
 func (o *UserUpdateGitCredentialNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *UserUpdateGitCredentialBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user update git credential bad request response
+func (o *UserUpdateGitCredentialBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserUpdateGitCredentialBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *UserUpdateGitCredentialForbidden) IsServerError() bool {
 // IsCode returns true when this user update git credential forbidden response a status code equal to that given
 func (o *UserUpdateGitCredentialForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user update git credential forbidden response
+func (o *UserUpdateGitCredentialForbidden) Code() int {
+	return 403
 }
 
 func (o *UserUpdateGitCredentialForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *UserUpdateGitCredentialNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user update git credential not found response
+func (o *UserUpdateGitCredentialNotFound) Code() int {
+	return 404
+}
+
 func (o *UserUpdateGitCredentialNotFound) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *UserUpdateGitCredentialInternalServerError) IsServerError() bool {
 // IsCode returns true when this user update git credential internal server error response a status code equal to that given
 func (o *UserUpdateGitCredentialInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user update git credential internal server error response
+func (o *UserUpdateGitCredentialInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserUpdateGitCredentialInternalServerError) Error() string {

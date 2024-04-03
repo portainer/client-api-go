@@ -36,7 +36,7 @@ func (o *GenerateReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /sshkeygen] Generate", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *GenerateOK) IsServerError() bool {
 // IsCode returns true when this generate o k response a status code equal to that given
 func (o *GenerateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the generate o k response
+func (o *GenerateOK) Code() int {
+	return 200
 }
 
 func (o *GenerateOK) Error() string {
@@ -139,6 +144,11 @@ func (o *GenerateInternalServerError) IsServerError() bool {
 // IsCode returns true when this generate internal server error response a status code equal to that given
 func (o *GenerateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the generate internal server error response
+func (o *GenerateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GenerateInternalServerError) Error() string {

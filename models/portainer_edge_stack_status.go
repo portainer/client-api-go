@@ -149,6 +149,11 @@ func (m *PortainerEdgeStackStatus) ContextValidate(ctx context.Context, formats 
 func (m *PortainerEdgeStackStatus) contextValidateDeploymentInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DeploymentInfo != nil {
+
+		if swag.IsZero(m.DeploymentInfo) { // not required
+			return nil
+		}
+
 		if err := m.DeploymentInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("deploymentInfo")
@@ -165,6 +170,11 @@ func (m *PortainerEdgeStackStatus) contextValidateDeploymentInfo(ctx context.Con
 func (m *PortainerEdgeStackStatus) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Details != nil {
+
+		if swag.IsZero(m.Details) { // not required
+			return nil
+		}
+
 		if err := m.Details.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
@@ -183,6 +193,11 @@ func (m *PortainerEdgeStackStatus) contextValidateStatus(ctx context.Context, fo
 	for i := 0; i < len(m.Status); i++ {
 
 		if m.Status[i] != nil {
+
+			if swag.IsZero(m.Status[i]) { // not required
+				return nil
+			}
+
 			if err := m.Status[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("status" + "." + strconv.Itoa(i))

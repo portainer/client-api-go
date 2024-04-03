@@ -62,11 +62,11 @@ Microk8sGetAddonsParams contains all the parameters to send to the API endpoint
 */
 type Microk8sGetAddonsParams struct {
 
-	/* Environmentid.
+	/* EnvironmentID.
 
 	   Environment(Endpoint) identifier
 	*/
-	Environmentid int64
+	EnvironmentID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,15 +121,15 @@ func (o *Microk8sGetAddonsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithEnvironmentid adds the environmentid to the microk8s get addons params
-func (o *Microk8sGetAddonsParams) WithEnvironmentid(environmentid int64) *Microk8sGetAddonsParams {
-	o.SetEnvironmentid(environmentid)
+// WithEnvironmentID adds the environmentID to the microk8s get addons params
+func (o *Microk8sGetAddonsParams) WithEnvironmentID(environmentID int64) *Microk8sGetAddonsParams {
+	o.SetEnvironmentID(environmentID)
 	return o
 }
 
-// SetEnvironmentid adds the environmentid to the microk8s get addons params
-func (o *Microk8sGetAddonsParams) SetEnvironmentid(environmentid int64) {
-	o.Environmentid = environmentid
+// SetEnvironmentID adds the environmentId to the microk8s get addons params
+func (o *Microk8sGetAddonsParams) SetEnvironmentID(environmentID int64) {
+	o.EnvironmentID = environmentID
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,8 +140,8 @@ func (o *Microk8sGetAddonsParams) WriteToRequest(r runtime.ClientRequest, reg st
 	}
 	var res []error
 
-	// path param environmentid
-	if err := r.SetPathParam("environmentid", swag.FormatInt64(o.Environmentid)); err != nil {
+	// path param environmentId
+	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
 		return err
 	}
 

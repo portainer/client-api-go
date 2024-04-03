@@ -286,6 +286,11 @@ func (m *CustomtemplatesCustomTemplateUpdatePayload) contextValidateVariables(ct
 	for i := 0; i < len(m.Variables); i++ {
 
 		if m.Variables[i] != nil {
+
+			if swag.IsZero(m.Variables[i]) { // not required
+				return nil
+			}
+
 			if err := m.Variables[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("variables" + "." + strconv.Itoa(i))

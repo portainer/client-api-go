@@ -39,7 +39,7 @@ func (o *DeleteKubernetesServicesReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/services/delete] deleteKubernetesServices", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *DeleteKubernetesServicesOK) IsServerError() bool {
 // IsCode returns true when this delete kubernetes services o k response a status code equal to that given
 func (o *DeleteKubernetesServicesOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the delete kubernetes services o k response
+func (o *DeleteKubernetesServicesOK) Code() int {
+	return 200
 }
 
 func (o *DeleteKubernetesServicesOK) Error() string {
@@ -132,6 +137,11 @@ func (o *DeleteKubernetesServicesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete kubernetes services bad request response
+func (o *DeleteKubernetesServicesBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteKubernetesServicesBadRequest) Error() string {
 	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *DeleteKubernetesServicesInternalServerError) IsServerError() bool {
 // IsCode returns true when this delete kubernetes services internal server error response a status code equal to that given
 func (o *DeleteKubernetesServicesInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the delete kubernetes services internal server error response
+func (o *DeleteKubernetesServicesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *DeleteKubernetesServicesInternalServerError) Error() string {

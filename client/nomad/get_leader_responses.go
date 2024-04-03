@@ -39,7 +39,7 @@ func (o *GetLeaderReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /nomad/endpoints/{environmentId}/leader] getLeader", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *GetLeaderOK) IsServerError() bool {
 // IsCode returns true when this get leader o k response a status code equal to that given
 func (o *GetLeaderOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get leader o k response
+func (o *GetLeaderOK) Code() int {
+	return 200
 }
 
 func (o *GetLeaderOK) Error() string {
@@ -132,6 +137,11 @@ func (o *GetLeaderNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get leader not found response
+func (o *GetLeaderNotFound) Code() int {
+	return 404
+}
+
 func (o *GetLeaderNotFound) Error() string {
 	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/leader][%d] getLeaderNotFound ", 404)
 }
@@ -181,6 +191,11 @@ func (o *GetLeaderInternalServerError) IsServerError() bool {
 // IsCode returns true when this get leader internal server error response a status code equal to that given
 func (o *GetLeaderInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get leader internal server error response
+func (o *GetLeaderInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetLeaderInternalServerError) Error() string {

@@ -51,7 +51,7 @@ func (o *EdgeConfigStateReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /edge_configurations/{id}/{state}] EdgeConfigState", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *EdgeConfigStateNoContent) IsServerError() bool {
 // IsCode returns true when this edge config state no content response a status code equal to that given
 func (o *EdgeConfigStateNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge config state no content response
+func (o *EdgeConfigStateNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeConfigStateNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *EdgeConfigStateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge config state bad request response
+func (o *EdgeConfigStateBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeConfigStateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *EdgeConfigStateForbidden) IsServerError() bool {
 // IsCode returns true when this edge config state forbidden response a status code equal to that given
 func (o *EdgeConfigStateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the edge config state forbidden response
+func (o *EdgeConfigStateForbidden) Code() int {
+	return 403
 }
 
 func (o *EdgeConfigStateForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *EdgeConfigStateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the edge config state not found response
+func (o *EdgeConfigStateNotFound) Code() int {
+	return 404
+}
+
 func (o *EdgeConfigStateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *EdgeConfigStateInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge config state internal server error response a status code equal to that given
 func (o *EdgeConfigStateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge config state internal server error response
+func (o *EdgeConfigStateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeConfigStateInternalServerError) Error() string {

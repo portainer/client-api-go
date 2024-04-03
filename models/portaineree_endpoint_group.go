@@ -166,6 +166,11 @@ func (m *PortainereeEndpointGroup) contextValidateLabels(ctx context.Context, fo
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Labels" + "." + strconv.Itoa(i))
@@ -183,6 +188,10 @@ func (m *PortainereeEndpointGroup) contextValidateLabels(ctx context.Context, fo
 
 func (m *PortainereeEndpointGroup) contextValidateTeamAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.TeamAccessPolicies) { // not required
+		return nil
+	}
+
 	if err := m.TeamAccessPolicies.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("TeamAccessPolicies")
@@ -196,6 +205,10 @@ func (m *PortainereeEndpointGroup) contextValidateTeamAccessPolicies(ctx context
 }
 
 func (m *PortainereeEndpointGroup) contextValidateUserAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserAccessPolicies) { // not required
+		return nil
+	}
 
 	if err := m.UserAccessPolicies.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

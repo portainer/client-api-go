@@ -42,7 +42,7 @@ func (o *SettingsUpdateReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /settings] SettingsUpdate", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *SettingsUpdateOK) IsServerError() bool {
 // IsCode returns true when this settings update o k response a status code equal to that given
 func (o *SettingsUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the settings update o k response
+func (o *SettingsUpdateOK) Code() int {
+	return 200
 }
 
 func (o *SettingsUpdateOK) Error() string {
@@ -147,6 +152,11 @@ func (o *SettingsUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the settings update bad request response
+func (o *SettingsUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *SettingsUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *SettingsUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this settings update internal server error response a status code equal to that given
 func (o *SettingsUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the settings update internal server error response
+func (o *SettingsUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *SettingsUpdateInternalServerError) Error() string {

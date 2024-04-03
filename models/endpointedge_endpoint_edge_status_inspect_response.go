@@ -137,6 +137,11 @@ func (m *EndpointedgeEndpointEdgeStatusInspectResponse) contextValidateSchedules
 	for i := 0; i < len(m.Schedules); i++ {
 
 		if m.Schedules[i] != nil {
+
+			if swag.IsZero(m.Schedules[i]) { // not required
+				return nil
+			}
+
 			if err := m.Schedules[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("schedules" + "." + strconv.Itoa(i))
@@ -157,6 +162,11 @@ func (m *EndpointedgeEndpointEdgeStatusInspectResponse) contextValidateStacks(ct
 	for i := 0; i < len(m.Stacks); i++ {
 
 		if m.Stacks[i] != nil {
+
+			if swag.IsZero(m.Stacks[i]) { // not required
+				return nil
+			}
+
 			if err := m.Stacks[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("stacks" + "." + strconv.Itoa(i))

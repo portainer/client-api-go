@@ -45,7 +45,7 @@ func (o *EdgeStackDeleteReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge_stacks/{id}] EdgeStackDelete", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EdgeStackDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this edge stack delete no content response a status code equal to that given
 func (o *EdgeStackDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge stack delete no content response
+func (o *EdgeStackDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeStackDeleteNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *EdgeStackDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack delete bad request response
+func (o *EdgeStackDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EdgeStackDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack delete internal server error response
+func (o *EdgeStackDeleteInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackDeleteInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteInternalServerError ", 500)
 }
@@ -238,6 +253,11 @@ func (o *EdgeStackDeleteServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack delete service unavailable response a status code equal to that given
 func (o *EdgeStackDeleteServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack delete service unavailable response
+func (o *EdgeStackDeleteServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackDeleteServiceUnavailable) Error() string {

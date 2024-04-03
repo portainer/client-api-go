@@ -39,7 +39,7 @@ func (o *ListJobsReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /nomad/endpoints/{environmentId}/jobs] listJobs", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *ListJobsOK) IsServerError() bool {
 // IsCode returns true when this list jobs o k response a status code equal to that given
 func (o *ListJobsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the list jobs o k response
+func (o *ListJobsOK) Code() int {
+	return 200
 }
 
 func (o *ListJobsOK) Error() string {
@@ -132,6 +137,11 @@ func (o *ListJobsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the list jobs not found response
+func (o *ListJobsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListJobsNotFound) Error() string {
 	return fmt.Sprintf("[GET /nomad/endpoints/{environmentId}/jobs][%d] listJobsNotFound ", 404)
 }
@@ -181,6 +191,11 @@ func (o *ListJobsInternalServerError) IsServerError() bool {
 // IsCode returns true when this list jobs internal server error response a status code equal to that given
 func (o *ListJobsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the list jobs internal server error response
+func (o *ListJobsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *ListJobsInternalServerError) Error() string {

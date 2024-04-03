@@ -140,6 +140,11 @@ func (m *PortainereeKubernetesData) ContextValidate(ctx context.Context, formats
 func (m *PortainereeKubernetesData) contextValidateConfiguration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Configuration != nil {
+
+		if swag.IsZero(m.Configuration) { // not required
+			return nil
+		}
+
 		if err := m.Configuration.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Configuration")
@@ -156,6 +161,11 @@ func (m *PortainereeKubernetesData) contextValidateConfiguration(ctx context.Con
 func (m *PortainereeKubernetesData) contextValidateFlags(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Flags != nil {
+
+		if swag.IsZero(m.Flags) { // not required
+			return nil
+		}
+
 		if err := m.Flags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Flags")
@@ -174,6 +184,11 @@ func (m *PortainereeKubernetesData) contextValidateSnapshots(ctx context.Context
 	for i := 0; i < len(m.Snapshots); i++ {
 
 		if m.Snapshots[i] != nil {
+
+			if swag.IsZero(m.Snapshots[i]) { // not required
+				return nil
+			}
+
 			if err := m.Snapshots[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Snapshots" + "." + strconv.Itoa(i))

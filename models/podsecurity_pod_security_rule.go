@@ -501,6 +501,11 @@ func (m *PodsecurityPodSecurityRule) ContextValidate(ctx context.Context, format
 func (m *PodsecurityPodSecurityRule) contextValidateAllowFlexVolumes(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AllowFlexVolumes != nil {
+
+		if swag.IsZero(m.AllowFlexVolumes) { // not required
+			return nil
+		}
+
 		if err := m.AllowFlexVolumes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allowFlexVolumes")
@@ -517,6 +522,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateAllowFlexVolumes(ctx context
 func (m *PodsecurityPodSecurityRule) contextValidateAllowPrivilegeEscalation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AllowPrivilegeEscalation != nil {
+
+		if swag.IsZero(m.AllowPrivilegeEscalation) { // not required
+			return nil
+		}
+
 		if err := m.AllowPrivilegeEscalation.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allowPrivilegeEscalation")
@@ -533,6 +543,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateAllowPrivilegeEscalation(ctx
 func (m *PodsecurityPodSecurityRule) contextValidateAllowProcMount(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AllowProcMount != nil {
+
+		if swag.IsZero(m.AllowProcMount) { // not required
+			return nil
+		}
+
 		if err := m.AllowProcMount.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allowProcMount")
@@ -549,6 +564,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateAllowProcMount(ctx context.C
 func (m *PodsecurityPodSecurityRule) contextValidateAppArmor(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AppArmor != nil {
+
+		if swag.IsZero(m.AppArmor) { // not required
+			return nil
+		}
+
 		if err := m.AppArmor.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("appArmor")
@@ -565,6 +585,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateAppArmor(ctx context.Context
 func (m *PodsecurityPodSecurityRule) contextValidateCapabilities(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Capabilities != nil {
+
+		if swag.IsZero(m.Capabilities) { // not required
+			return nil
+		}
+
 		if err := m.Capabilities.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("capabilities")
@@ -581,6 +606,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateCapabilities(ctx context.Con
 func (m *PodsecurityPodSecurityRule) contextValidateForbiddenSysctlsList(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ForbiddenSysctlsList != nil {
+
+		if swag.IsZero(m.ForbiddenSysctlsList) { // not required
+			return nil
+		}
+
 		if err := m.ForbiddenSysctlsList.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("forbiddenSysctlsList")
@@ -597,6 +627,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateForbiddenSysctlsList(ctx con
 func (m *PodsecurityPodSecurityRule) contextValidateHostFilesystem(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HostFilesystem != nil {
+
+		if swag.IsZero(m.HostFilesystem) { // not required
+			return nil
+		}
+
 		if err := m.HostFilesystem.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hostFilesystem")
@@ -613,6 +648,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateHostFilesystem(ctx context.C
 func (m *PodsecurityPodSecurityRule) contextValidateHostNamespaces(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HostNamespaces != nil {
+
+		if swag.IsZero(m.HostNamespaces) { // not required
+			return nil
+		}
+
 		if err := m.HostNamespaces.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hostNamespaces")
@@ -629,6 +669,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateHostNamespaces(ctx context.C
 func (m *PodsecurityPodSecurityRule) contextValidateHostPorts(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.HostPorts != nil {
+
+		if swag.IsZero(m.HostPorts) { // not required
+			return nil
+		}
+
 		if err := m.HostPorts.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hostPorts")
@@ -645,6 +690,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateHostPorts(ctx context.Contex
 func (m *PodsecurityPodSecurityRule) contextValidatePrivilegedContainers(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PrivilegedContainers != nil {
+
+		if swag.IsZero(m.PrivilegedContainers) { // not required
+			return nil
+		}
+
 		if err := m.PrivilegedContainers.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("privilegedContainers")
@@ -661,6 +711,11 @@ func (m *PodsecurityPodSecurityRule) contextValidatePrivilegedContainers(ctx con
 func (m *PodsecurityPodSecurityRule) contextValidateReadOnlyRootFileSystem(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ReadOnlyRootFileSystem != nil {
+
+		if swag.IsZero(m.ReadOnlyRootFileSystem) { // not required
+			return nil
+		}
+
 		if err := m.ReadOnlyRootFileSystem.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("readOnlyRootFileSystem")
@@ -677,6 +732,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateReadOnlyRootFileSystem(ctx c
 func (m *PodsecurityPodSecurityRule) contextValidateSecComp(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SecComp != nil {
+
+		if swag.IsZero(m.SecComp) { // not required
+			return nil
+		}
+
 		if err := m.SecComp.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("secComp")
@@ -693,6 +753,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateSecComp(ctx context.Context,
 func (m *PodsecurityPodSecurityRule) contextValidateSelinux(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Selinux != nil {
+
+		if swag.IsZero(m.Selinux) { // not required
+			return nil
+		}
+
 		if err := m.Selinux.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("selinux")
@@ -709,6 +774,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateSelinux(ctx context.Context,
 func (m *PodsecurityPodSecurityRule) contextValidateUsers(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Users != nil {
+
+		if swag.IsZero(m.Users) { // not required
+			return nil
+		}
+
 		if err := m.Users.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("users")
@@ -725,6 +795,11 @@ func (m *PodsecurityPodSecurityRule) contextValidateUsers(ctx context.Context, f
 func (m *PodsecurityPodSecurityRule) contextValidateVolumeTypes(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.VolumeTypes != nil {
+
+		if swag.IsZero(m.VolumeTypes) { // not required
+			return nil
+		}
+
 		if err := m.VolumeTypes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("volumeTypes")

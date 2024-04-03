@@ -730,6 +730,7 @@ func (a *Client) UserRemoveGitCredential(params *UserRemoveGitCredentialParams, 
 
 	Update user details. A regular user account can only update his details.
 
+A regular user account cannot change their username or role.
 **Access policy**: authenticated
 */
 func (a *Client) UserUpdate(params *UserUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserUpdateOK, error) {

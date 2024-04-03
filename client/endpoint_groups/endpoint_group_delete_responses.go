@@ -45,7 +45,7 @@ func (o *EndpointGroupDeleteReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /endpoint_groups/{id}] EndpointGroupDelete", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EndpointGroupDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this endpoint group delete no content response a status code equal to that given
 func (o *EndpointGroupDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the endpoint group delete no content response
+func (o *EndpointGroupDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *EndpointGroupDeleteNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *EndpointGroupDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint group delete bad request response
+func (o *EndpointGroupDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointGroupDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /endpoint_groups/{id}][%d] endpointGroupDeleteBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EndpointGroupDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint group delete not found response
+func (o *EndpointGroupDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointGroupDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /endpoint_groups/{id}][%d] endpointGroupDeleteNotFound ", 404)
 }
@@ -238,6 +253,11 @@ func (o *EndpointGroupDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint group delete internal server error response a status code equal to that given
 func (o *EndpointGroupDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint group delete internal server error response
+func (o *EndpointGroupDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointGroupDeleteInternalServerError) Error() string {

@@ -54,7 +54,7 @@ func (o *StackAssociateReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /stacks/{id}/associate] StackAssociate", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *StackAssociateOK) IsServerError() bool {
 // IsCode returns true when this stack associate o k response a status code equal to that given
 func (o *StackAssociateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack associate o k response
+func (o *StackAssociateOK) Code() int {
+	return 200
 }
 
 func (o *StackAssociateOK) Error() string {
@@ -159,6 +164,11 @@ func (o *StackAssociateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack associate bad request response
+func (o *StackAssociateBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackAssociateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *StackAssociateForbidden) IsServerError() bool {
 // IsCode returns true when this stack associate forbidden response a status code equal to that given
 func (o *StackAssociateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack associate forbidden response
+func (o *StackAssociateForbidden) Code() int {
+	return 403
 }
 
 func (o *StackAssociateForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *StackAssociateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack associate not found response
+func (o *StackAssociateNotFound) Code() int {
+	return 404
+}
+
 func (o *StackAssociateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *StackAssociateInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack associate internal server error response a status code equal to that given
 func (o *StackAssociateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack associate internal server error response
+func (o *StackAssociateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackAssociateInternalServerError) Error() string {

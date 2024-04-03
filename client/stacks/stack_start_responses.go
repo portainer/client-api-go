@@ -54,7 +54,7 @@ func (o *StackStartReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/{id}/start] StackStart", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *StackStartOK) IsServerError() bool {
 // IsCode returns true when this stack start o k response a status code equal to that given
 func (o *StackStartOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack start o k response
+func (o *StackStartOK) Code() int {
+	return 200
 }
 
 func (o *StackStartOK) Error() string {
@@ -159,6 +164,11 @@ func (o *StackStartBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack start bad request response
+func (o *StackStartBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackStartBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *StackStartForbidden) IsServerError() bool {
 // IsCode returns true when this stack start forbidden response a status code equal to that given
 func (o *StackStartForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack start forbidden response
+func (o *StackStartForbidden) Code() int {
+	return 403
 }
 
 func (o *StackStartForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *StackStartNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack start not found response
+func (o *StackStartNotFound) Code() int {
+	return 404
+}
+
 func (o *StackStartNotFound) Error() string {
 	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *StackStartInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack start internal server error response a status code equal to that given
 func (o *StackStartInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack start internal server error response
+func (o *StackStartInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackStartInternalServerError) Error() string {

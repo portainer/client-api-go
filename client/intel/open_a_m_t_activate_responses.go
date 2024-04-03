@@ -45,7 +45,7 @@ func (o *OpenAMTActivateReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /open_amt/{id}/activate] openAMTActivate", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *OpenAMTActivateOK) IsServerError() bool {
 // IsCode returns true when this open a m t activate o k response a status code equal to that given
 func (o *OpenAMTActivateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the open a m t activate o k response
+func (o *OpenAMTActivateOK) Code() int {
+	return 200
 }
 
 func (o *OpenAMTActivateOK) Error() string {
@@ -138,6 +143,11 @@ func (o *OpenAMTActivateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the open a m t activate bad request response
+func (o *OpenAMTActivateBadRequest) Code() int {
+	return 400
+}
+
 func (o *OpenAMTActivateBadRequest) Error() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *OpenAMTActivateForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the open a m t activate forbidden response
+func (o *OpenAMTActivateForbidden) Code() int {
+	return 403
+}
+
 func (o *OpenAMTActivateForbidden) Error() string {
 	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *OpenAMTActivateInternalServerError) IsServerError() bool {
 // IsCode returns true when this open a m t activate internal server error response a status code equal to that given
 func (o *OpenAMTActivateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the open a m t activate internal server error response
+func (o *OpenAMTActivateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *OpenAMTActivateInternalServerError) Error() string {

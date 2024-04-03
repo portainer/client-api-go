@@ -42,7 +42,7 @@ func (o *GetKubernetesMetricsForAllNodesReader) ReadResponse(response runtime.Cl
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/metrics/nodes] getKubernetesMetricsForAllNodes", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *GetKubernetesMetricsForAllNodesOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes metrics for all nodes o k response a status code equal to that given
 func (o *GetKubernetesMetricsForAllNodesOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes metrics for all nodes o k response
+func (o *GetKubernetesMetricsForAllNodesOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesMetricsForAllNodesOK) Error() string {
@@ -147,6 +152,11 @@ func (o *GetKubernetesMetricsForAllNodesBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get kubernetes metrics for all nodes bad request response
+func (o *GetKubernetesMetricsForAllNodesBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetKubernetesMetricsForAllNodesBadRequest) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *GetKubernetesMetricsForAllNodesInternalServerError) IsServerError() boo
 // IsCode returns true when this get kubernetes metrics for all nodes internal server error response a status code equal to that given
 func (o *GetKubernetesMetricsForAllNodesInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get kubernetes metrics for all nodes internal server error response
+func (o *GetKubernetesMetricsForAllNodesInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetKubernetesMetricsForAllNodesInternalServerError) Error() string {

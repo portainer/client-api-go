@@ -30,7 +30,7 @@ func (o *SystemUpdateReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /system/update] systemUpdate", response, response.Code())
 	}
 }
 
@@ -71,6 +71,11 @@ func (o *SystemUpdateNoContent) IsServerError() bool {
 // IsCode returns true when this system update no content response a status code equal to that given
 func (o *SystemUpdateNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the system update no content response
+func (o *SystemUpdateNoContent) Code() int {
+	return 204
 }
 
 func (o *SystemUpdateNoContent) Error() string {

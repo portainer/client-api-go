@@ -51,7 +51,7 @@ func (o *VersionReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /cloud/endpoints/{environmentId}/version] version", response, response.Code())
 	}
 }
 
@@ -93,12 +93,17 @@ func (o *VersionOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the version o k response
+func (o *VersionOK) Code() int {
+	return 200
+}
+
 func (o *VersionOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionOK ", 200)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionOK ", 200)
 }
 
 func (o *VersionOK) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionOK ", 200)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionOK ", 200)
 }
 
 func (o *VersionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -144,12 +149,17 @@ func (o *VersionBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the version bad request response
+func (o *VersionBadRequest) Code() int {
+	return 400
+}
+
 func (o *VersionBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionBadRequest ", 400)
 }
 
 func (o *VersionBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionBadRequest ", 400)
 }
 
 func (o *VersionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -195,12 +205,17 @@ func (o *VersionForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the version forbidden response
+func (o *VersionForbidden) Code() int {
+	return 403
+}
+
 func (o *VersionForbidden) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionForbidden ", 403)
 }
 
 func (o *VersionForbidden) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionForbidden ", 403)
 }
 
 func (o *VersionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -246,12 +261,17 @@ func (o *VersionInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the version internal server error response
+func (o *VersionInternalServerError) Code() int {
+	return 500
+}
+
 func (o *VersionInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionInternalServerError ", 500)
 }
 
 func (o *VersionInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionInternalServerError ", 500)
 }
 
 func (o *VersionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,12 +317,17 @@ func (o *VersionServiceUnavailable) IsCode(code int) bool {
 	return code == 503
 }
 
+// Code gets the status code for the version service unavailable response
+func (o *VersionServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *VersionServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionServiceUnavailable ", 503)
 }
 
 func (o *VersionServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/version][%d] versionServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/version][%d] versionServiceUnavailable ", 503)
 }
 
 func (o *VersionServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

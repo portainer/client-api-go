@@ -48,7 +48,7 @@ func (o *CustomTemplateGitFetchReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /custom_templates/{id}/git_fetch] CustomTemplateGitFetch", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *CustomTemplateGitFetchOK) IsServerError() bool {
 // IsCode returns true when this custom template git fetch o k response a status code equal to that given
 func (o *CustomTemplateGitFetchOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the custom template git fetch o k response
+func (o *CustomTemplateGitFetchOK) Code() int {
+	return 200
 }
 
 func (o *CustomTemplateGitFetchOK) Error() string {
@@ -153,6 +158,11 @@ func (o *CustomTemplateGitFetchBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the custom template git fetch bad request response
+func (o *CustomTemplateGitFetchBadRequest) Code() int {
+	return 400
+}
+
 func (o *CustomTemplateGitFetchBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *CustomTemplateGitFetchNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the custom template git fetch not found response
+func (o *CustomTemplateGitFetchNotFound) Code() int {
+	return 404
+}
+
 func (o *CustomTemplateGitFetchNotFound) Error() string {
 	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *CustomTemplateGitFetchInternalServerError) IsServerError() bool {
 // IsCode returns true when this custom template git fetch internal server error response a status code equal to that given
 func (o *CustomTemplateGitFetchInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the custom template git fetch internal server error response
+func (o *CustomTemplateGitFetchInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CustomTemplateGitFetchInternalServerError) Error() string {

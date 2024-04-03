@@ -36,7 +36,7 @@ func (o *StatusNodesCountReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /status/nodes] statusNodesCount", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *StatusNodesCountOK) IsServerError() bool {
 // IsCode returns true when this status nodes count o k response a status code equal to that given
 func (o *StatusNodesCountOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the status nodes count o k response
+func (o *StatusNodesCountOK) Code() int {
+	return 200
 }
 
 func (o *StatusNodesCountOK) Error() string {
@@ -139,6 +144,11 @@ func (o *StatusNodesCountInternalServerError) IsServerError() bool {
 // IsCode returns true when this status nodes count internal server error response a status code equal to that given
 func (o *StatusNodesCountInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the status nodes count internal server error response
+func (o *StatusNodesCountInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StatusNodesCountInternalServerError) Error() string {

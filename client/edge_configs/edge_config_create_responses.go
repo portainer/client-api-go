@@ -33,7 +33,7 @@ func (o *EdgeConfigCreateReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_configurations] EdgeConfigCreate", response, response.Code())
 	}
 }
 
@@ -73,6 +73,11 @@ func (o *EdgeConfigCreateNoContent) IsServerError() bool {
 // IsCode returns true when this edge config create no content response a status code equal to that given
 func (o *EdgeConfigCreateNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge config create no content response
+func (o *EdgeConfigCreateNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeConfigCreateNoContent) Error() string {
@@ -124,6 +129,11 @@ func (o *EdgeConfigCreateBadRequest) IsServerError() bool {
 // IsCode returns true when this edge config create bad request response a status code equal to that given
 func (o *EdgeConfigCreateBadRequest) IsCode(code int) bool {
 	return code == 400
+}
+
+// Code gets the status code for the edge config create bad request response
+func (o *EdgeConfigCreateBadRequest) Code() int {
+	return 400
 }
 
 func (o *EdgeConfigCreateBadRequest) Error() string {

@@ -82,6 +82,11 @@ func (m *PortainereeNomadData) contextValidateSnapshots(ctx context.Context, for
 	for i := 0; i < len(m.Snapshots); i++ {
 
 		if m.Snapshots[i] != nil {
+
+			if swag.IsZero(m.Snapshots[i]) { // not required
+				return nil
+			}
+
 			if err := m.Snapshots[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("Snapshots" + "." + strconv.Itoa(i))

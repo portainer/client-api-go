@@ -45,7 +45,7 @@ func (o *GetWebsocketMicrok8sShellReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /websocket/microk8s-shell] GetWebsocketMicrok8sShell", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *GetWebsocketMicrok8sShellOK) IsServerError() bool {
 // IsCode returns true when this get websocket microk8s shell o k response a status code equal to that given
 func (o *GetWebsocketMicrok8sShellOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get websocket microk8s shell o k response
+func (o *GetWebsocketMicrok8sShellOK) Code() int {
+	return 200
 }
 
 func (o *GetWebsocketMicrok8sShellOK) Error() string {
@@ -138,6 +143,11 @@ func (o *GetWebsocketMicrok8sShellBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get websocket microk8s shell bad request response
+func (o *GetWebsocketMicrok8sShellBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetWebsocketMicrok8sShellBadRequest) Error() string {
 	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *GetWebsocketMicrok8sShellConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the get websocket microk8s shell conflict response
+func (o *GetWebsocketMicrok8sShellConflict) Code() int {
+	return 409
+}
+
 func (o *GetWebsocketMicrok8sShellConflict) Error() string {
 	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellConflict ", 409)
 }
@@ -238,6 +253,11 @@ func (o *GetWebsocketMicrok8sShellInternalServerError) IsServerError() bool {
 // IsCode returns true when this get websocket microk8s shell internal server error response a status code equal to that given
 func (o *GetWebsocketMicrok8sShellInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get websocket microk8s shell internal server error response
+func (o *GetWebsocketMicrok8sShellInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetWebsocketMicrok8sShellInternalServerError) Error() string {

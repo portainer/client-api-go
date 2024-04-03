@@ -36,7 +36,7 @@ func (o *TeamListReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /teams] TeamList", response, response.Code())
 	}
 }
 
@@ -77,6 +77,11 @@ func (o *TeamListOK) IsServerError() bool {
 // IsCode returns true when this team list o k response a status code equal to that given
 func (o *TeamListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the team list o k response
+func (o *TeamListOK) Code() int {
+	return 200
 }
 
 func (o *TeamListOK) Error() string {
@@ -137,6 +142,11 @@ func (o *TeamListInternalServerError) IsServerError() bool {
 // IsCode returns true when this team list internal server error response a status code equal to that given
 func (o *TeamListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the team list internal server error response
+func (o *TeamListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TeamListInternalServerError) Error() string {

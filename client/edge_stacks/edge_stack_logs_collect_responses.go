@@ -51,7 +51,7 @@ func (o *EdgeStackLogsCollectReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /edge_stacks/{id}/logs/{endpoint_id}] EdgeStackLogsCollect", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *EdgeStackLogsCollectNoContent) IsServerError() bool {
 // IsCode returns true when this edge stack logs collect no content response a status code equal to that given
 func (o *EdgeStackLogsCollectNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge stack logs collect no content response
+func (o *EdgeStackLogsCollectNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeStackLogsCollectNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *EdgeStackLogsCollectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack logs collect bad request response
+func (o *EdgeStackLogsCollectBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackLogsCollectBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *EdgeStackLogsCollectNotFound) IsServerError() bool {
 // IsCode returns true when this edge stack logs collect not found response a status code equal to that given
 func (o *EdgeStackLogsCollectNotFound) IsCode(code int) bool {
 	return code == 404
+}
+
+// Code gets the status code for the edge stack logs collect not found response
+func (o *EdgeStackLogsCollectNotFound) Code() int {
+	return 404
 }
 
 func (o *EdgeStackLogsCollectNotFound) Error() string {
@@ -246,6 +261,11 @@ func (o *EdgeStackLogsCollectInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack logs collect internal server error response
+func (o *EdgeStackLogsCollectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackLogsCollectInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectInternalServerError ", 500)
 }
@@ -295,6 +315,11 @@ func (o *EdgeStackLogsCollectServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack logs collect service unavailable response a status code equal to that given
 func (o *EdgeStackLogsCollectServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack logs collect service unavailable response
+func (o *EdgeStackLogsCollectServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackLogsCollectServiceUnavailable) Error() string {

@@ -45,7 +45,7 @@ func (o *EdgeStackLogsStatusGetReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_stacks/{id}/logs/{endpoint_id}] EdgeStackLogsStatusGet", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EdgeStackLogsStatusGetOK) IsServerError() bool {
 // IsCode returns true when this edge stack logs status get o k response a status code equal to that given
 func (o *EdgeStackLogsStatusGetOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack logs status get o k response
+func (o *EdgeStackLogsStatusGetOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackLogsStatusGetOK) Error() string {
@@ -138,6 +143,11 @@ func (o *EdgeStackLogsStatusGetBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack logs status get bad request response
+func (o *EdgeStackLogsStatusGetBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackLogsStatusGetBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EdgeStackLogsStatusGetInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack logs status get internal server error response
+func (o *EdgeStackLogsStatusGetInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackLogsStatusGetInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetInternalServerError ", 500)
 }
@@ -238,6 +253,11 @@ func (o *EdgeStackLogsStatusGetServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack logs status get service unavailable response a status code equal to that given
 func (o *EdgeStackLogsStatusGetServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack logs status get service unavailable response
+func (o *EdgeStackLogsStatusGetServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackLogsStatusGetServiceUnavailable) Error() string {

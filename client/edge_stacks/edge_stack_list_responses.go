@@ -48,7 +48,7 @@ func (o *EdgeStackListReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_stacks] EdgeStackList", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeStackListOK) IsServerError() bool {
 // IsCode returns true when this edge stack list o k response a status code equal to that given
 func (o *EdgeStackListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack list o k response
+func (o *EdgeStackListOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackListOK) Error() string {
@@ -151,6 +156,11 @@ func (o *EdgeStackListBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack list bad request response
+func (o *EdgeStackListBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks][%d] edgeStackListBadRequest ", 400)
 }
@@ -202,6 +212,11 @@ func (o *EdgeStackListInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack list internal server error response
+func (o *EdgeStackListInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks][%d] edgeStackListInternalServerError ", 500)
 }
@@ -251,6 +266,11 @@ func (o *EdgeStackListServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack list service unavailable response a status code equal to that given
 func (o *EdgeStackListServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack list service unavailable response
+func (o *EdgeStackListServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackListServiceUnavailable) Error() string {

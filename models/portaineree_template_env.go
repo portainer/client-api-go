@@ -102,6 +102,11 @@ func (m *PortainereeTemplateEnv) contextValidateSelect(ctx context.Context, form
 	for i := 0; i < len(m.Select); i++ {
 
 		if m.Select[i] != nil {
+
+			if swag.IsZero(m.Select[i]) { // not required
+				return nil
+			}
+
 			if err := m.Select[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("select" + "." + strconv.Itoa(i))

@@ -48,7 +48,7 @@ func (o *StackListReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /stacks] StackList", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *StackListOK) IsServerError() bool {
 // IsCode returns true when this stack list o k response a status code equal to that given
 func (o *StackListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack list o k response
+func (o *StackListOK) Code() int {
+	return 200
 }
 
 func (o *StackListOK) Error() string {
@@ -151,6 +156,11 @@ func (o *StackListNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the stack list no content response
+func (o *StackListNoContent) Code() int {
+	return 204
+}
+
 func (o *StackListNoContent) Error() string {
 	return fmt.Sprintf("[GET /stacks][%d] stackListNoContent ", 204)
 }
@@ -202,6 +212,11 @@ func (o *StackListBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack list bad request response
+func (o *StackListBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /stacks][%d] stackListBadRequest ", 400)
 }
@@ -251,6 +266,11 @@ func (o *StackListInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack list internal server error response a status code equal to that given
 func (o *StackListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack list internal server error response
+func (o *StackListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackListInternalServerError) Error() string {

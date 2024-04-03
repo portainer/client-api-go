@@ -371,6 +371,11 @@ func (m *PortainereeEdgeStack) ContextValidate(ctx context.Context, formats strf
 func (m *PortainereeEdgeStack) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AutoUpdate != nil {
+
+		if swag.IsZero(m.AutoUpdate) { // not required
+			return nil
+		}
+
 		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("AutoUpdate")
@@ -387,6 +392,11 @@ func (m *PortainereeEdgeStack) contextValidateAutoUpdate(ctx context.Context, fo
 func (m *PortainereeEdgeStack) contextValidatePreviousDeploymentInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.PreviousDeploymentInfo != nil {
+
+		if swag.IsZero(m.PreviousDeploymentInfo) { // not required
+			return nil
+		}
+
 		if err := m.PreviousDeploymentInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("PreviousDeploymentInfo")
@@ -420,6 +430,11 @@ func (m *PortainereeEdgeStack) contextValidateEnvVars(ctx context.Context, forma
 	for i := 0; i < len(m.EnvVars); i++ {
 
 		if m.EnvVars[i] != nil {
+
+			if swag.IsZero(m.EnvVars[i]) { // not required
+				return nil
+			}
+
 			if err := m.EnvVars[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("envVars" + "." + strconv.Itoa(i))
@@ -438,6 +453,11 @@ func (m *PortainereeEdgeStack) contextValidateEnvVars(ctx context.Context, forma
 func (m *PortainereeEdgeStack) contextValidateGitConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GitConfig != nil {
+
+		if swag.IsZero(m.GitConfig) { // not required
+			return nil
+		}
+
 		if err := m.GitConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gitConfig")
@@ -454,6 +474,11 @@ func (m *PortainereeEdgeStack) contextValidateGitConfig(ctx context.Context, for
 func (m *PortainereeEdgeStack) contextValidateStaggerConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.StaggerConfig != nil {
+
+		if swag.IsZero(m.StaggerConfig) { // not required
+			return nil
+		}
+
 		if err := m.StaggerConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("staggerConfig")

@@ -45,7 +45,7 @@ func (o *FdoRegisterDeviceReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /fdo/register] fdoRegisterDevice", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *FdoRegisterDeviceOK) IsServerError() bool {
 // IsCode returns true when this fdo register device o k response a status code equal to that given
 func (o *FdoRegisterDeviceOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the fdo register device o k response
+func (o *FdoRegisterDeviceOK) Code() int {
+	return 200
 }
 
 func (o *FdoRegisterDeviceOK) Error() string {
@@ -138,6 +143,11 @@ func (o *FdoRegisterDeviceBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the fdo register device bad request response
+func (o *FdoRegisterDeviceBadRequest) Code() int {
+	return 400
+}
+
 func (o *FdoRegisterDeviceBadRequest) Error() string {
 	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *FdoRegisterDeviceForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the fdo register device forbidden response
+func (o *FdoRegisterDeviceForbidden) Code() int {
+	return 403
+}
+
 func (o *FdoRegisterDeviceForbidden) Error() string {
 	return fmt.Sprintf("[POST /fdo/register][%d] fdoRegisterDeviceForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *FdoRegisterDeviceInternalServerError) IsServerError() bool {
 // IsCode returns true when this fdo register device internal server error response a status code equal to that given
 func (o *FdoRegisterDeviceInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the fdo register device internal server error response
+func (o *FdoRegisterDeviceInternalServerError) Code() int {
+	return 500
 }
 
 func (o *FdoRegisterDeviceInternalServerError) Error() string {

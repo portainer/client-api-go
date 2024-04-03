@@ -45,7 +45,7 @@ func (o *UpdateK8sPodSecurityRuleReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /kubernetes/{environmentId}/opa] updateK8sPodSecurityRule", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *UpdateK8sPodSecurityRuleOK) IsServerError() bool {
 // IsCode returns true when this update k8s pod security rule o k response a status code equal to that given
 func (o *UpdateK8sPodSecurityRuleOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the update k8s pod security rule o k response
+func (o *UpdateK8sPodSecurityRuleOK) Code() int {
+	return 200
 }
 
 func (o *UpdateK8sPodSecurityRuleOK) Error() string {
@@ -138,6 +143,11 @@ func (o *UpdateK8sPodSecurityRuleBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the update k8s pod security rule bad request response
+func (o *UpdateK8sPodSecurityRuleBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateK8sPodSecurityRuleBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *UpdateK8sPodSecurityRuleNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the update k8s pod security rule not found response
+func (o *UpdateK8sPodSecurityRuleNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateK8sPodSecurityRuleNotFound) Error() string {
 	return fmt.Sprintf("[PUT /kubernetes/{environmentId}/opa][%d] updateK8sPodSecurityRuleNotFound ", 404)
 }
@@ -238,6 +253,11 @@ func (o *UpdateK8sPodSecurityRuleInternalServerError) IsServerError() bool {
 // IsCode returns true when this update k8s pod security rule internal server error response a status code equal to that given
 func (o *UpdateK8sPodSecurityRuleInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the update k8s pod security rule internal server error response
+func (o *UpdateK8sPodSecurityRuleInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UpdateK8sPodSecurityRuleInternalServerError) Error() string {

@@ -48,7 +48,7 @@ func (o *TestSSHReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /cloud/testssh] testSSH", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *TestSSHOK) IsServerError() bool {
 // IsCode returns true when this test Ssh o k response a status code equal to that given
 func (o *TestSSHOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the test Ssh o k response
+func (o *TestSSHOK) Code() int {
+	return 200
 }
 
 func (o *TestSSHOK) Error() string {
@@ -151,6 +156,11 @@ func (o *TestSSHBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the test Ssh bad request response
+func (o *TestSSHBadRequest) Code() int {
+	return 400
+}
+
 func (o *TestSSHBadRequest) Error() string {
 	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshBadRequest ", 400)
 }
@@ -202,6 +212,11 @@ func (o *TestSSHInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the test Ssh internal server error response
+func (o *TestSSHInternalServerError) Code() int {
+	return 500
+}
+
 func (o *TestSSHInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshInternalServerError ", 500)
 }
@@ -251,6 +266,11 @@ func (o *TestSSHServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this test Ssh service unavailable response a status code equal to that given
 func (o *TestSSHServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the test Ssh service unavailable response
+func (o *TestSSHServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *TestSSHServiceUnavailable) Error() string {

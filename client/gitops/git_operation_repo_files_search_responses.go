@@ -40,7 +40,7 @@ func (o *GitOperationRepoFilesSearchReader) ReadResponse(response runtime.Client
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /gitops/repo/files/search] GitOperationRepoFilesSearch", response, response.Code())
 	}
 }
 
@@ -81,6 +81,11 @@ func (o *GitOperationRepoFilesSearchOK) IsServerError() bool {
 // IsCode returns true when this git operation repo files search o k response a status code equal to that given
 func (o *GitOperationRepoFilesSearchOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the git operation repo files search o k response
+func (o *GitOperationRepoFilesSearchOK) Code() int {
+	return 200
 }
 
 func (o *GitOperationRepoFilesSearchOK) Error() string {
@@ -143,6 +148,11 @@ func (o *GitOperationRepoFilesSearchBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the git operation repo files search bad request response
+func (o *GitOperationRepoFilesSearchBadRequest) Code() int {
+	return 400
+}
+
 func (o *GitOperationRepoFilesSearchBadRequest) Error() string {
 	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchBadRequest ", 400)
 }
@@ -192,6 +202,11 @@ func (o *GitOperationRepoFilesSearchInternalServerError) IsServerError() bool {
 // IsCode returns true when this git operation repo files search internal server error response a status code equal to that given
 func (o *GitOperationRepoFilesSearchInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the git operation repo files search internal server error response
+func (o *GitOperationRepoFilesSearchInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GitOperationRepoFilesSearchInternalServerError) Error() string {

@@ -143,6 +143,11 @@ func (m *PortainereeKubernetesConfiguration) contextValidateIngressClasses(ctx c
 	for i := 0; i < len(m.IngressClasses); i++ {
 
 		if m.IngressClasses[i] != nil {
+
+			if swag.IsZero(m.IngressClasses[i]) { // not required
+				return nil
+			}
+
 			if err := m.IngressClasses[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("IngressClasses" + "." + strconv.Itoa(i))
@@ -163,6 +168,11 @@ func (m *PortainereeKubernetesConfiguration) contextValidateStorageClasses(ctx c
 	for i := 0; i < len(m.StorageClasses); i++ {
 
 		if m.StorageClasses[i] != nil {
+
+			if swag.IsZero(m.StorageClasses[i]) { // not required
+				return nil
+			}
+
 			if err := m.StorageClasses[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("StorageClasses" + "." + strconv.Itoa(i))

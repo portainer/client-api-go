@@ -51,7 +51,7 @@ func (o *Microk8sGetAddonsReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /cloud/endpoints/{environmentId}/addons] microk8sGetAddons", response, response.Code())
 	}
 }
 
@@ -93,12 +93,17 @@ func (o *Microk8sGetAddonsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the microk8s get addons o k response
+func (o *Microk8sGetAddonsOK) Code() int {
+	return 200
+}
+
 func (o *Microk8sGetAddonsOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsOK ", 200)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsOK ", 200)
 }
 
 func (o *Microk8sGetAddonsOK) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsOK ", 200)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsOK ", 200)
 }
 
 func (o *Microk8sGetAddonsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -144,12 +149,17 @@ func (o *Microk8sGetAddonsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the microk8s get addons bad request response
+func (o *Microk8sGetAddonsBadRequest) Code() int {
+	return 400
+}
+
 func (o *Microk8sGetAddonsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsBadRequest ", 400)
 }
 
 func (o *Microk8sGetAddonsBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsBadRequest ", 400)
 }
 
 func (o *Microk8sGetAddonsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -195,12 +205,17 @@ func (o *Microk8sGetAddonsForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the microk8s get addons forbidden response
+func (o *Microk8sGetAddonsForbidden) Code() int {
+	return 403
+}
+
 func (o *Microk8sGetAddonsForbidden) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsForbidden ", 403)
 }
 
 func (o *Microk8sGetAddonsForbidden) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsForbidden ", 403)
 }
 
 func (o *Microk8sGetAddonsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -246,12 +261,17 @@ func (o *Microk8sGetAddonsInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the microk8s get addons internal server error response
+func (o *Microk8sGetAddonsInternalServerError) Code() int {
+	return 500
+}
+
 func (o *Microk8sGetAddonsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsInternalServerError ", 500)
 }
 
 func (o *Microk8sGetAddonsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsInternalServerError ", 500)
 }
 
 func (o *Microk8sGetAddonsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -297,12 +317,17 @@ func (o *Microk8sGetAddonsServiceUnavailable) IsCode(code int) bool {
 	return code == 503
 }
 
+// Code gets the status code for the microk8s get addons service unavailable response
+func (o *Microk8sGetAddonsServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *Microk8sGetAddonsServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsServiceUnavailable ", 503)
 }
 
 func (o *Microk8sGetAddonsServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentid}/addons][%d] microk8sGetAddonsServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsServiceUnavailable ", 503)
 }
 
 func (o *Microk8sGetAddonsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

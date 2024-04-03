@@ -97,6 +97,11 @@ func (m *EndpointedgeEdgeAsyncResponse) contextValidateCommands(ctx context.Cont
 	for i := 0; i < len(m.Commands); i++ {
 
 		if m.Commands[i] != nil {
+
+			if swag.IsZero(m.Commands[i]) { // not required
+				return nil
+			}
+
 			if err := m.Commands[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("commands" + "." + strconv.Itoa(i))

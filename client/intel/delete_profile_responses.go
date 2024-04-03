@@ -39,7 +39,7 @@ func (o *DeleteProfileReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /fdo/profiles/{id}] deleteProfile", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *DeleteProfileOK) IsServerError() bool {
 // IsCode returns true when this delete profile o k response a status code equal to that given
 func (o *DeleteProfileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the delete profile o k response
+func (o *DeleteProfileOK) Code() int {
+	return 200
 }
 
 func (o *DeleteProfileOK) Error() string {
@@ -132,6 +137,11 @@ func (o *DeleteProfileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete profile bad request response
+func (o *DeleteProfileBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteProfileBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /fdo/profiles/{id}][%d] deleteProfileBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *DeleteProfileInternalServerError) IsServerError() bool {
 // IsCode returns true when this delete profile internal server error response a status code equal to that given
 func (o *DeleteProfileInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the delete profile internal server error response
+func (o *DeleteProfileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *DeleteProfileInternalServerError) Error() string {

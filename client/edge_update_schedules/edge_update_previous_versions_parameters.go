@@ -62,11 +62,11 @@ EdgeUpdatePreviousVersionsParams contains all the parameters to send to the API 
 */
 type EdgeUpdatePreviousVersionsParams struct {
 
-	/* SkipScheduleID.
+	/* EnvironmentIds.
 
-	   Schedule ID, ignore the schedule which is being edited
+	   Environment IDs
 	*/
-	SkipScheduleID *int64
+	EnvironmentIds []int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,15 +121,15 @@ func (o *EdgeUpdatePreviousVersionsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithSkipScheduleID adds the skipScheduleID to the edge update previous versions params
-func (o *EdgeUpdatePreviousVersionsParams) WithSkipScheduleID(skipScheduleID *int64) *EdgeUpdatePreviousVersionsParams {
-	o.SetSkipScheduleID(skipScheduleID)
+// WithEnvironmentIds adds the environmentIds to the edge update previous versions params
+func (o *EdgeUpdatePreviousVersionsParams) WithEnvironmentIds(environmentIds []int64) *EdgeUpdatePreviousVersionsParams {
+	o.SetEnvironmentIds(environmentIds)
 	return o
 }
 
-// SetSkipScheduleID adds the skipScheduleId to the edge update previous versions params
-func (o *EdgeUpdatePreviousVersionsParams) SetSkipScheduleID(skipScheduleID *int64) {
-	o.SkipScheduleID = skipScheduleID
+// SetEnvironmentIds adds the environmentIds to the edge update previous versions params
+func (o *EdgeUpdatePreviousVersionsParams) SetEnvironmentIds(environmentIds []int64) {
+	o.EnvironmentIds = environmentIds
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,20 +140,14 @@ func (o *EdgeUpdatePreviousVersionsParams) WriteToRequest(r runtime.ClientReques
 	}
 	var res []error
 
-	if o.SkipScheduleID != nil {
+	if o.EnvironmentIds != nil {
 
-		// query param skipScheduleID
-		var qrSkipScheduleID int64
+		// binding items for environmentIds
+		joinedEnvironmentIds := o.bindParamEnvironmentIds(reg)
 
-		if o.SkipScheduleID != nil {
-			qrSkipScheduleID = *o.SkipScheduleID
-		}
-		qSkipScheduleID := swag.FormatInt64(qrSkipScheduleID)
-		if qSkipScheduleID != "" {
-
-			if err := r.SetQueryParam("skipScheduleID", qSkipScheduleID); err != nil {
-				return err
-			}
+		// query array param environmentIds
+		if err := r.SetQueryParam("environmentIds", joinedEnvironmentIds...); err != nil {
+			return err
 		}
 	}
 
@@ -161,4 +155,21 @@ func (o *EdgeUpdatePreviousVersionsParams) WriteToRequest(r runtime.ClientReques
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamEdgeUpdatePreviousVersions binds the parameter environmentIds
+func (o *EdgeUpdatePreviousVersionsParams) bindParamEnvironmentIds(formats strfmt.Registry) []string {
+	environmentIdsIR := o.EnvironmentIds
+
+	var environmentIdsIC []string
+	for _, environmentIdsIIR := range environmentIdsIR { // explode []int64
+
+		environmentIdsIIV := swag.FormatInt64(environmentIdsIIR) // int64 as string
+		environmentIdsIC = append(environmentIdsIC, environmentIdsIIV)
+	}
+
+	// items.CollectionFormat: ""
+	environmentIdsIS := swag.JoinByFormat(environmentIdsIC, "")
+
+	return environmentIdsIS
 }

@@ -60,7 +60,7 @@ func (o *UserGenerateAPIKeyReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /users/{id}/tokens] UserGenerateAPIKey", response, response.Code())
 	}
 }
 
@@ -101,6 +101,11 @@ func (o *UserGenerateAPIKeyCreated) IsServerError() bool {
 // IsCode returns true when this user generate Api key created response a status code equal to that given
 func (o *UserGenerateAPIKeyCreated) IsCode(code int) bool {
 	return code == 201
+}
+
+// Code gets the status code for the user generate Api key created response
+func (o *UserGenerateAPIKeyCreated) Code() int {
+	return 201
 }
 
 func (o *UserGenerateAPIKeyCreated) Error() string {
@@ -165,6 +170,11 @@ func (o *UserGenerateAPIKeyBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user generate Api key bad request response
+func (o *UserGenerateAPIKeyBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserGenerateAPIKeyBadRequest) Error() string {
 	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyBadRequest ", 400)
 }
@@ -214,6 +224,11 @@ func (o *UserGenerateAPIKeyUnauthorized) IsServerError() bool {
 // IsCode returns true when this user generate Api key unauthorized response a status code equal to that given
 func (o *UserGenerateAPIKeyUnauthorized) IsCode(code int) bool {
 	return code == 401
+}
+
+// Code gets the status code for the user generate Api key unauthorized response
+func (o *UserGenerateAPIKeyUnauthorized) Code() int {
+	return 401
 }
 
 func (o *UserGenerateAPIKeyUnauthorized) Error() string {
@@ -267,6 +282,11 @@ func (o *UserGenerateAPIKeyForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the user generate Api key forbidden response
+func (o *UserGenerateAPIKeyForbidden) Code() int {
+	return 403
+}
+
 func (o *UserGenerateAPIKeyForbidden) Error() string {
 	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyForbidden ", 403)
 }
@@ -318,6 +338,11 @@ func (o *UserGenerateAPIKeyNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user generate Api key not found response
+func (o *UserGenerateAPIKeyNotFound) Code() int {
+	return 404
+}
+
 func (o *UserGenerateAPIKeyNotFound) Error() string {
 	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyNotFound ", 404)
 }
@@ -367,6 +392,11 @@ func (o *UserGenerateAPIKeyInternalServerError) IsServerError() bool {
 // IsCode returns true when this user generate Api key internal server error response a status code equal to that given
 func (o *UserGenerateAPIKeyInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user generate Api key internal server error response
+func (o *UserGenerateAPIKeyInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserGenerateAPIKeyInternalServerError) Error() string {

@@ -48,7 +48,7 @@ func (o *CustomTemplateFileReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /custom_templates/{id}/file] CustomTemplateFile", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *CustomTemplateFileOK) IsServerError() bool {
 // IsCode returns true when this custom template file o k response a status code equal to that given
 func (o *CustomTemplateFileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the custom template file o k response
+func (o *CustomTemplateFileOK) Code() int {
+	return 200
 }
 
 func (o *CustomTemplateFileOK) Error() string {
@@ -153,6 +158,11 @@ func (o *CustomTemplateFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the custom template file bad request response
+func (o *CustomTemplateFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *CustomTemplateFileBadRequest) Error() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *CustomTemplateFileNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the custom template file not found response
+func (o *CustomTemplateFileNotFound) Code() int {
+	return 404
+}
+
 func (o *CustomTemplateFileNotFound) Error() string {
 	return fmt.Sprintf("[GET /custom_templates/{id}/file][%d] customTemplateFileNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *CustomTemplateFileInternalServerError) IsServerError() bool {
 // IsCode returns true when this custom template file internal server error response a status code equal to that given
 func (o *CustomTemplateFileInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the custom template file internal server error response
+func (o *CustomTemplateFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CustomTemplateFileInternalServerError) Error() string {

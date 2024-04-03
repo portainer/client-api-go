@@ -42,7 +42,7 @@ func (o *TagCreateReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /tags] TagCreate", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *TagCreateOK) IsServerError() bool {
 // IsCode returns true when this tag create o k response a status code equal to that given
 func (o *TagCreateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the tag create o k response
+func (o *TagCreateOK) Code() int {
+	return 200
 }
 
 func (o *TagCreateOK) Error() string {
@@ -147,6 +152,11 @@ func (o *TagCreateConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the tag create conflict response
+func (o *TagCreateConflict) Code() int {
+	return 409
+}
+
 func (o *TagCreateConflict) Error() string {
 	return fmt.Sprintf("[POST /tags][%d] tagCreateConflict ", 409)
 }
@@ -196,6 +206,11 @@ func (o *TagCreateInternalServerError) IsServerError() bool {
 // IsCode returns true when this tag create internal server error response a status code equal to that given
 func (o *TagCreateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the tag create internal server error response
+func (o *TagCreateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TagCreateInternalServerError) Error() string {

@@ -346,6 +346,11 @@ func (m *EndpointsEndpointUpdatePayload) ContextValidate(ctx context.Context, fo
 func (m *EndpointsEndpointUpdatePayload) contextValidateDeploymentOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DeploymentOptions != nil {
+
+		if swag.IsZero(m.DeploymentOptions) { // not required
+			return nil
+		}
+
 		if err := m.DeploymentOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("DeploymentOptions")
@@ -362,6 +367,11 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateDeploymentOptions(ctx co
 func (m *EndpointsEndpointUpdatePayload) contextValidateChangeWindow(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ChangeWindow != nil {
+
+		if swag.IsZero(m.ChangeWindow) { // not required
+			return nil
+		}
+
 		if err := m.ChangeWindow.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("changeWindow")
@@ -378,6 +388,11 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateChangeWindow(ctx context
 func (m *EndpointsEndpointUpdatePayload) contextValidateEdge(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Edge != nil {
+
+		if swag.IsZero(m.Edge) { // not required
+			return nil
+		}
+
 		if err := m.Edge.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("edge")
@@ -396,6 +411,11 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateGpus(ctx context.Context
 	for i := 0; i < len(m.Gpus); i++ {
 
 		if m.Gpus[i] != nil {
+
+			if swag.IsZero(m.Gpus[i]) { // not required
+				return nil
+			}
+
 			if err := m.Gpus[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("gpus" + "." + strconv.Itoa(i))
@@ -414,6 +434,11 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateGpus(ctx context.Context
 func (m *EndpointsEndpointUpdatePayload) contextValidateKubernetes(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Kubernetes != nil {
+
+		if swag.IsZero(m.Kubernetes) { // not required
+			return nil
+		}
+
 		if err := m.Kubernetes.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("kubernetes")
@@ -430,6 +455,11 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateKubernetes(ctx context.C
 func (m *EndpointsEndpointUpdatePayload) contextValidateStatusMessage(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.StatusMessage != nil {
+
+		if swag.IsZero(m.StatusMessage) { // not required
+			return nil
+		}
+
 		if err := m.StatusMessage.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("statusMessage")
@@ -445,6 +475,10 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateStatusMessage(ctx contex
 
 func (m *EndpointsEndpointUpdatePayload) contextValidateTeamAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.TeamAccessPolicies) { // not required
+		return nil
+	}
+
 	if err := m.TeamAccessPolicies.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("teamAccessPolicies")
@@ -458,6 +492,10 @@ func (m *EndpointsEndpointUpdatePayload) contextValidateTeamAccessPolicies(ctx c
 }
 
 func (m *EndpointsEndpointUpdatePayload) contextValidateUserAccessPolicies(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.UserAccessPolicies) { // not required
+		return nil
+	}
 
 	if err := m.UserAccessPolicies.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

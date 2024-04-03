@@ -54,7 +54,7 @@ func (o *RegistryInspectReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /registries/{id}] RegistryInspect", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *RegistryInspectOK) IsServerError() bool {
 // IsCode returns true when this registry inspect o k response a status code equal to that given
 func (o *RegistryInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the registry inspect o k response
+func (o *RegistryInspectOK) Code() int {
+	return 200
 }
 
 func (o *RegistryInspectOK) Error() string {
@@ -159,6 +164,11 @@ func (o *RegistryInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the registry inspect bad request response
+func (o *RegistryInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *RegistryInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *RegistryInspectForbidden) IsServerError() bool {
 // IsCode returns true when this registry inspect forbidden response a status code equal to that given
 func (o *RegistryInspectForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the registry inspect forbidden response
+func (o *RegistryInspectForbidden) Code() int {
+	return 403
 }
 
 func (o *RegistryInspectForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *RegistryInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the registry inspect not found response
+func (o *RegistryInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *RegistryInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *RegistryInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this registry inspect internal server error response a status code equal to that given
 func (o *RegistryInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the registry inspect internal server error response
+func (o *RegistryInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *RegistryInspectInternalServerError) Error() string {

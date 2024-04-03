@@ -54,7 +54,7 @@ func (o *StackInspectReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /stacks/{id}] StackInspect", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *StackInspectOK) IsServerError() bool {
 // IsCode returns true when this stack inspect o k response a status code equal to that given
 func (o *StackInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stack inspect o k response
+func (o *StackInspectOK) Code() int {
+	return 200
 }
 
 func (o *StackInspectOK) Error() string {
@@ -159,6 +164,11 @@ func (o *StackInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stack inspect bad request response
+func (o *StackInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *StackInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *StackInspectForbidden) IsServerError() bool {
 // IsCode returns true when this stack inspect forbidden response a status code equal to that given
 func (o *StackInspectForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the stack inspect forbidden response
+func (o *StackInspectForbidden) Code() int {
+	return 403
 }
 
 func (o *StackInspectForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *StackInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the stack inspect not found response
+func (o *StackInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *StackInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *StackInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this stack inspect internal server error response a status code equal to that given
 func (o *StackInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stack inspect internal server error response
+func (o *StackInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StackInspectInternalServerError) Error() string {

@@ -48,7 +48,7 @@ func (o *EndpointInspectReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /endpoints/{id}] EndpointInspect", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EndpointInspectOK) IsServerError() bool {
 // IsCode returns true when this endpoint inspect o k response a status code equal to that given
 func (o *EndpointInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the endpoint inspect o k response
+func (o *EndpointInspectOK) Code() int {
+	return 200
 }
 
 func (o *EndpointInspectOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EndpointInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint inspect bad request response
+func (o *EndpointInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EndpointInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint inspect not found response
+func (o *EndpointInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *EndpointInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint inspect internal server error response a status code equal to that given
 func (o *EndpointInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint inspect internal server error response
+func (o *EndpointInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointInspectInternalServerError) Error() string {

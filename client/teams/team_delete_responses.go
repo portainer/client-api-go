@@ -51,7 +51,7 @@ func (o *TeamDeleteReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /teams/{id}] TeamDelete", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *TeamDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this team delete no content response a status code equal to that given
 func (o *TeamDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the team delete no content response
+func (o *TeamDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *TeamDeleteNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *TeamDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the team delete bad request response
+func (o *TeamDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *TeamDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *TeamDeleteForbidden) IsServerError() bool {
 // IsCode returns true when this team delete forbidden response a status code equal to that given
 func (o *TeamDeleteForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the team delete forbidden response
+func (o *TeamDeleteForbidden) Code() int {
+	return 403
 }
 
 func (o *TeamDeleteForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *TeamDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the team delete not found response
+func (o *TeamDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *TeamDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *TeamDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this team delete internal server error response a status code equal to that given
 func (o *TeamDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the team delete internal server error response
+func (o *TeamDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TeamDeleteInternalServerError) Error() string {

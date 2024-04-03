@@ -48,7 +48,7 @@ func (o *HelmUserRepositoriesListReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /endpoints/{id}/kubernetes/helm/repositories] HelmUserRepositoriesList", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *HelmUserRepositoriesListOK) IsServerError() bool {
 // IsCode returns true when this helm user repositories list o k response a status code equal to that given
 func (o *HelmUserRepositoriesListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the helm user repositories list o k response
+func (o *HelmUserRepositoriesListOK) Code() int {
+	return 200
 }
 
 func (o *HelmUserRepositoriesListOK) Error() string {
@@ -153,6 +158,11 @@ func (o *HelmUserRepositoriesListBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the helm user repositories list bad request response
+func (o *HelmUserRepositoriesListBadRequest) Code() int {
+	return 400
+}
+
 func (o *HelmUserRepositoriesListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *HelmUserRepositoriesListForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the helm user repositories list forbidden response
+func (o *HelmUserRepositoriesListForbidden) Code() int {
+	return 403
+}
+
 func (o *HelmUserRepositoriesListForbidden) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoriesListForbidden ", 403)
 }
@@ -253,6 +268,11 @@ func (o *HelmUserRepositoriesListInternalServerError) IsServerError() bool {
 // IsCode returns true when this helm user repositories list internal server error response a status code equal to that given
 func (o *HelmUserRepositoriesListInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the helm user repositories list internal server error response
+func (o *HelmUserRepositoriesListInternalServerError) Code() int {
+	return 500
 }
 
 func (o *HelmUserRepositoriesListInternalServerError) Error() string {

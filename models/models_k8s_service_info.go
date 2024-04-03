@@ -192,6 +192,11 @@ func (m *ModelsK8sServiceInfo) contextValidateApplications(ctx context.Context, 
 	for i := 0; i < len(m.Applications); i++ {
 
 		if m.Applications[i] != nil {
+
+			if swag.IsZero(m.Applications[i]) { // not required
+				return nil
+			}
+
 			if err := m.Applications[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("applications" + "." + strconv.Itoa(i))
@@ -212,6 +217,11 @@ func (m *ModelsK8sServiceInfo) contextValidateIngressStatus(ctx context.Context,
 	for i := 0; i < len(m.IngressStatus); i++ {
 
 		if m.IngressStatus[i] != nil {
+
+			if swag.IsZero(m.IngressStatus[i]) { // not required
+				return nil
+			}
+
 			if err := m.IngressStatus[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ingressStatus" + "." + strconv.Itoa(i))
@@ -232,6 +242,11 @@ func (m *ModelsK8sServiceInfo) contextValidatePorts(ctx context.Context, formats
 	for i := 0; i < len(m.Ports); i++ {
 
 		if m.Ports[i] != nil {
+
+			if swag.IsZero(m.Ports[i]) { // not required
+				return nil
+			}
+
 			if err := m.Ports[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ports" + "." + strconv.Itoa(i))

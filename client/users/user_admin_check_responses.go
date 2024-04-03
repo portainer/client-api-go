@@ -33,7 +33,7 @@ func (o *UserAdminCheckReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/admin/check] UserAdminCheck", response, response.Code())
 	}
 }
 
@@ -73,6 +73,11 @@ func (o *UserAdminCheckNoContent) IsServerError() bool {
 // IsCode returns true when this user admin check no content response a status code equal to that given
 func (o *UserAdminCheckNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the user admin check no content response
+func (o *UserAdminCheckNoContent) Code() int {
+	return 204
 }
 
 func (o *UserAdminCheckNoContent) Error() string {
@@ -124,6 +129,11 @@ func (o *UserAdminCheckNotFound) IsServerError() bool {
 // IsCode returns true when this user admin check not found response a status code equal to that given
 func (o *UserAdminCheckNotFound) IsCode(code int) bool {
 	return code == 404
+}
+
+// Code gets the status code for the user admin check not found response
+func (o *UserAdminCheckNotFound) Code() int {
+	return 404
 }
 
 func (o *UserAdminCheckNotFound) Error() string {

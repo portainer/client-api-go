@@ -51,7 +51,7 @@ func (o *TagDeleteReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /tags/{id}] TagDelete", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *TagDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this tag delete no content response a status code equal to that given
 func (o *TagDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the tag delete no content response
+func (o *TagDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *TagDeleteNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *TagDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the tag delete bad request response
+func (o *TagDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *TagDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *TagDeleteForbidden) IsServerError() bool {
 // IsCode returns true when this tag delete forbidden response a status code equal to that given
 func (o *TagDeleteForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the tag delete forbidden response
+func (o *TagDeleteForbidden) Code() int {
+	return 403
 }
 
 func (o *TagDeleteForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *TagDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the tag delete not found response
+func (o *TagDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *TagDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *TagDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this tag delete internal server error response a status code equal to that given
 func (o *TagDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the tag delete internal server error response
+func (o *TagDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TagDeleteInternalServerError) Error() string {

@@ -42,7 +42,7 @@ func (o *EdgeGroupListReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_groups] EdgeGroupList", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *EdgeGroupListOK) IsServerError() bool {
 // IsCode returns true when this edge group list o k response a status code equal to that given
 func (o *EdgeGroupListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge group list o k response
+func (o *EdgeGroupListOK) Code() int {
+	return 200
 }
 
 func (o *EdgeGroupListOK) Error() string {
@@ -145,6 +150,11 @@ func (o *EdgeGroupListInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge group list internal server error response
+func (o *EdgeGroupListInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeGroupListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListInternalServerError ", 500)
 }
@@ -194,6 +204,11 @@ func (o *EdgeGroupListServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge group list service unavailable response a status code equal to that given
 func (o *EdgeGroupListServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge group list service unavailable response
+func (o *EdgeGroupListServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeGroupListServiceUnavailable) Error() string {

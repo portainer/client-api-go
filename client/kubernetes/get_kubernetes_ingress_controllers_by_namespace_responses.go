@@ -42,7 +42,7 @@ func (o *GetKubernetesIngressControllersByNamespaceReader) ReadResponse(response
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers] getKubernetesIngressControllersByNamespace", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *GetKubernetesIngressControllersByNamespaceOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes ingress controllers by namespace o k response a status code equal to that given
 func (o *GetKubernetesIngressControllersByNamespaceOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes ingress controllers by namespace o k response
+func (o *GetKubernetesIngressControllersByNamespaceOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceOK) Error() string {
@@ -145,6 +150,11 @@ func (o *GetKubernetesIngressControllersByNamespaceBadRequest) IsCode(code int) 
 	return code == 400
 }
 
+// Code gets the status code for the get kubernetes ingress controllers by namespace bad request response
+func (o *GetKubernetesIngressControllersByNamespaceBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetKubernetesIngressControllersByNamespaceBadRequest) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceBadRequest ", 400)
 }
@@ -194,6 +204,11 @@ func (o *GetKubernetesIngressControllersByNamespaceInternalServerError) IsServer
 // IsCode returns true when this get kubernetes ingress controllers by namespace internal server error response a status code equal to that given
 func (o *GetKubernetesIngressControllersByNamespaceInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get kubernetes ingress controllers by namespace internal server error response
+func (o *GetKubernetesIngressControllersByNamespaceInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceInternalServerError) Error() string {

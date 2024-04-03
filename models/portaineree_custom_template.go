@@ -266,6 +266,11 @@ func (m *PortainereeCustomTemplate) ContextValidate(ctx context.Context, formats
 func (m *PortainereeCustomTemplate) contextValidateGitConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.GitConfig != nil {
+
+		if swag.IsZero(m.GitConfig) { // not required
+			return nil
+		}
+
 		if err := m.GitConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("GitConfig")
@@ -282,6 +287,11 @@ func (m *PortainereeCustomTemplate) contextValidateGitConfig(ctx context.Context
 func (m *PortainereeCustomTemplate) contextValidateResourceControl(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ResourceControl != nil {
+
+		if swag.IsZero(m.ResourceControl) { // not required
+			return nil
+		}
+
 		if err := m.ResourceControl.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ResourceControl")
@@ -300,6 +310,11 @@ func (m *PortainereeCustomTemplate) contextValidateVariables(ctx context.Context
 	for i := 0; i < len(m.Variables); i++ {
 
 		if m.Variables[i] != nil {
+
+			if swag.IsZero(m.Variables[i]) { // not required
+				return nil
+			}
+
 			if err := m.Variables[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("variables" + "." + strconv.Itoa(i))

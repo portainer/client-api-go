@@ -39,7 +39,7 @@ func (o *BackupReader) ReadResponse(response runtime.ClientResponse, consumer ru
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /backup] Backup", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *BackupOK) IsServerError() bool {
 // IsCode returns true when this backup o k response a status code equal to that given
 func (o *BackupOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the backup o k response
+func (o *BackupOK) Code() int {
+	return 200
 }
 
 func (o *BackupOK) Error() string {
@@ -132,6 +137,11 @@ func (o *BackupBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the backup bad request response
+func (o *BackupBadRequest) Code() int {
+	return 400
+}
+
 func (o *BackupBadRequest) Error() string {
 	return fmt.Sprintf("[POST /backup][%d] backupBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *BackupInternalServerError) IsServerError() bool {
 // IsCode returns true when this backup internal server error response a status code equal to that given
 func (o *BackupInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the backup internal server error response
+func (o *BackupInternalServerError) Code() int {
+	return 500
 }
 
 func (o *BackupInternalServerError) Error() string {

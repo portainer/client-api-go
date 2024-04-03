@@ -143,6 +143,11 @@ func (m *PortainereeCloudProvider) contextValidateAddonWithArgs(ctx context.Cont
 	for i := 0; i < len(m.AddonWithArgs); i++ {
 
 		if m.AddonWithArgs[i] != nil {
+
+			if swag.IsZero(m.AddonWithArgs[i]) { // not required
+				return nil
+			}
+
 			if err := m.AddonWithArgs[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("AddonWithArgs" + "." + strconv.Itoa(i))

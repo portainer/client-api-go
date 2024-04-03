@@ -51,7 +51,7 @@ func (o *GetWebsocketPodReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /websocket/pod] GetWebsocketPod", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *GetWebsocketPodOK) IsServerError() bool {
 // IsCode returns true when this get websocket pod o k response a status code equal to that given
 func (o *GetWebsocketPodOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get websocket pod o k response
+func (o *GetWebsocketPodOK) Code() int {
+	return 200
 }
 
 func (o *GetWebsocketPodOK) Error() string {
@@ -144,6 +149,11 @@ func (o *GetWebsocketPodBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get websocket pod bad request response
+func (o *GetWebsocketPodBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetWebsocketPodBadRequest) Error() string {
 	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *GetWebsocketPodForbidden) IsServerError() bool {
 // IsCode returns true when this get websocket pod forbidden response a status code equal to that given
 func (o *GetWebsocketPodForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the get websocket pod forbidden response
+func (o *GetWebsocketPodForbidden) Code() int {
+	return 403
 }
 
 func (o *GetWebsocketPodForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *GetWebsocketPodNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get websocket pod not found response
+func (o *GetWebsocketPodNotFound) Code() int {
+	return 404
+}
+
 func (o *GetWebsocketPodNotFound) Error() string {
 	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *GetWebsocketPodInternalServerError) IsServerError() bool {
 // IsCode returns true when this get websocket pod internal server error response a status code equal to that given
 func (o *GetWebsocketPodInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get websocket pod internal server error response
+func (o *GetWebsocketPodInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetWebsocketPodInternalServerError) Error() string {

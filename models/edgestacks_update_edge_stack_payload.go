@@ -191,6 +191,11 @@ func (m *EdgestacksUpdateEdgeStackPayload) contextValidateEnvVars(ctx context.Co
 	for i := 0; i < len(m.EnvVars); i++ {
 
 		if m.EnvVars[i] != nil {
+
+			if swag.IsZero(m.EnvVars[i]) { // not required
+				return nil
+			}
+
 			if err := m.EnvVars[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("envVars" + "." + strconv.Itoa(i))
@@ -209,6 +214,11 @@ func (m *EdgestacksUpdateEdgeStackPayload) contextValidateEnvVars(ctx context.Co
 func (m *EdgestacksUpdateEdgeStackPayload) contextValidateStaggerConfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.StaggerConfig != nil {
+
+		if swag.IsZero(m.StaggerConfig) { // not required
+			return nil
+		}
+
 		if err := m.StaggerConfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("staggerConfig")

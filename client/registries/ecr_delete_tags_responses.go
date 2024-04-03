@@ -51,7 +51,7 @@ func (o *EcrDeleteTagsReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags] ecrDeleteTags", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *EcrDeleteTagsNoContent) IsServerError() bool {
 // IsCode returns true when this ecr delete tags no content response a status code equal to that given
 func (o *EcrDeleteTagsNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the ecr delete tags no content response
+func (o *EcrDeleteTagsNoContent) Code() int {
+	return 204
 }
 
 func (o *EcrDeleteTagsNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *EcrDeleteTagsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the ecr delete tags bad request response
+func (o *EcrDeleteTagsBadRequest) Code() int {
+	return 400
+}
+
 func (o *EcrDeleteTagsBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *EcrDeleteTagsForbidden) IsServerError() bool {
 // IsCode returns true when this ecr delete tags forbidden response a status code equal to that given
 func (o *EcrDeleteTagsForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the ecr delete tags forbidden response
+func (o *EcrDeleteTagsForbidden) Code() int {
+	return 403
 }
 
 func (o *EcrDeleteTagsForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *EcrDeleteTagsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the ecr delete tags not found response
+func (o *EcrDeleteTagsNotFound) Code() int {
+	return 404
+}
+
 func (o *EcrDeleteTagsNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *EcrDeleteTagsInternalServerError) IsServerError() bool {
 // IsCode returns true when this ecr delete tags internal server error response a status code equal to that given
 func (o *EcrDeleteTagsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the ecr delete tags internal server error response
+func (o *EcrDeleteTagsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EcrDeleteTagsInternalServerError) Error() string {

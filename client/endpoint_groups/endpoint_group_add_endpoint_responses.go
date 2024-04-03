@@ -45,7 +45,7 @@ func (o *EndpointGroupAddEndpointReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoint_groups/{id}/endpoints/{endpointId}] EndpointGroupAddEndpoint", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EndpointGroupAddEndpointNoContent) IsServerError() bool {
 // IsCode returns true when this endpoint group add endpoint no content response a status code equal to that given
 func (o *EndpointGroupAddEndpointNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the endpoint group add endpoint no content response
+func (o *EndpointGroupAddEndpointNoContent) Code() int {
+	return 204
 }
 
 func (o *EndpointGroupAddEndpointNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *EndpointGroupAddEndpointBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint group add endpoint bad request response
+func (o *EndpointGroupAddEndpointBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointGroupAddEndpointBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EndpointGroupAddEndpointNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint group add endpoint not found response
+func (o *EndpointGroupAddEndpointNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointGroupAddEndpointNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNotFound ", 404)
 }
@@ -238,6 +253,11 @@ func (o *EndpointGroupAddEndpointInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint group add endpoint internal server error response a status code equal to that given
 func (o *EndpointGroupAddEndpointInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint group add endpoint internal server error response
+func (o *EndpointGroupAddEndpointInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointGroupAddEndpointInternalServerError) Error() string {

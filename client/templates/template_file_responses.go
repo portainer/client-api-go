@@ -42,7 +42,7 @@ func (o *TemplateFileReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /templates/file] TemplateFile", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *TemplateFileOK) IsServerError() bool {
 // IsCode returns true when this template file o k response a status code equal to that given
 func (o *TemplateFileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the template file o k response
+func (o *TemplateFileOK) Code() int {
+	return 200
 }
 
 func (o *TemplateFileOK) Error() string {
@@ -147,6 +152,11 @@ func (o *TemplateFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the template file bad request response
+func (o *TemplateFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *TemplateFileBadRequest) Error() string {
 	return fmt.Sprintf("[POST /templates/file][%d] templateFileBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *TemplateFileInternalServerError) IsServerError() bool {
 // IsCode returns true when this template file internal server error response a status code equal to that given
 func (o *TemplateFileInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the template file internal server error response
+func (o *TemplateFileInternalServerError) Code() int {
+	return 500
 }
 
 func (o *TemplateFileInternalServerError) Error() string {

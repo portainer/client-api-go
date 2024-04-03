@@ -39,7 +39,7 @@ func (o *DeleteWebhooksIDReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /webhooks/{id}] DeleteWebhooksID", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *DeleteWebhooksIDAccepted) IsServerError() bool {
 // IsCode returns true when this delete webhooks Id accepted response a status code equal to that given
 func (o *DeleteWebhooksIDAccepted) IsCode(code int) bool {
 	return code == 202
+}
+
+// Code gets the status code for the delete webhooks Id accepted response
+func (o *DeleteWebhooksIDAccepted) Code() int {
+	return 202
 }
 
 func (o *DeleteWebhooksIDAccepted) Error() string {
@@ -132,6 +137,11 @@ func (o *DeleteWebhooksIDBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the delete webhooks Id bad request response
+func (o *DeleteWebhooksIDBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteWebhooksIDBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *DeleteWebhooksIDInternalServerError) IsServerError() bool {
 // IsCode returns true when this delete webhooks Id internal server error response a status code equal to that given
 func (o *DeleteWebhooksIDInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the delete webhooks Id internal server error response
+func (o *DeleteWebhooksIDInternalServerError) Code() int {
+	return 500
 }
 
 func (o *DeleteWebhooksIDInternalServerError) Error() string {

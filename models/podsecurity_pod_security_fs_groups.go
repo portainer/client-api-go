@@ -85,6 +85,11 @@ func (m *PodsecurityPodSecurityFsGroups) contextValidateIdrange(ctx context.Cont
 	for i := 0; i < len(m.Idrange); i++ {
 
 		if m.Idrange[i] != nil {
+
+			if swag.IsZero(m.Idrange[i]) { // not required
+				return nil
+			}
+
 			if err := m.Idrange[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("idrange" + "." + strconv.Itoa(i))

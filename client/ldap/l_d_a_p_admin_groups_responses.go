@@ -40,7 +40,7 @@ func (o *LDAPAdminGroupsReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /ldap/admin-groups] LDAPAdminGroups", response, response.Code())
 	}
 }
 
@@ -81,6 +81,11 @@ func (o *LDAPAdminGroupsOK) IsServerError() bool {
 // IsCode returns true when this l d a p admin groups o k response a status code equal to that given
 func (o *LDAPAdminGroupsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the l d a p admin groups o k response
+func (o *LDAPAdminGroupsOK) Code() int {
+	return 200
 }
 
 func (o *LDAPAdminGroupsOK) Error() string {
@@ -143,6 +148,11 @@ func (o *LDAPAdminGroupsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the l d a p admin groups bad request response
+func (o *LDAPAdminGroupsBadRequest) Code() int {
+	return 400
+}
+
 func (o *LDAPAdminGroupsBadRequest) Error() string {
 	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsBadRequest ", 400)
 }
@@ -192,6 +202,11 @@ func (o *LDAPAdminGroupsInternalServerError) IsServerError() bool {
 // IsCode returns true when this l d a p admin groups internal server error response a status code equal to that given
 func (o *LDAPAdminGroupsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the l d a p admin groups internal server error response
+func (o *LDAPAdminGroupsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *LDAPAdminGroupsInternalServerError) Error() string {

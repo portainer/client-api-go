@@ -155,6 +155,11 @@ func (m *PortainereeResourceControl) contextValidateTeamAccesses(ctx context.Con
 	for i := 0; i < len(m.TeamAccesses); i++ {
 
 		if m.TeamAccesses[i] != nil {
+
+			if swag.IsZero(m.TeamAccesses[i]) { // not required
+				return nil
+			}
+
 			if err := m.TeamAccesses[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("TeamAccesses" + "." + strconv.Itoa(i))
@@ -175,6 +180,11 @@ func (m *PortainereeResourceControl) contextValidateUserAccesses(ctx context.Con
 	for i := 0; i < len(m.UserAccesses); i++ {
 
 		if m.UserAccesses[i] != nil {
+
+			if swag.IsZero(m.UserAccesses[i]) { // not required
+				return nil
+			}
+
 			if err := m.UserAccesses[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("UserAccesses" + "." + strconv.Itoa(i))

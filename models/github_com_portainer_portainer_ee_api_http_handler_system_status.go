@@ -80,6 +80,11 @@ func (m *GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus) ContextValidat
 func (m *GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus) contextValidateDemoEnvironment(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DemoEnvironment != nil {
+
+		if swag.IsZero(m.DemoEnvironment) { // not required
+			return nil
+		}
+
 		if err := m.DemoEnvironment.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("demoEnvironment")

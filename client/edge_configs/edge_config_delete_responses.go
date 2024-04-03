@@ -45,7 +45,7 @@ func (o *EdgeConfigDeleteReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge_configurations/{id}] EdgeConfigDelete", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EdgeConfigDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this edge config delete no content response a status code equal to that given
 func (o *EdgeConfigDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge config delete no content response
+func (o *EdgeConfigDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeConfigDeleteNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *EdgeConfigDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge config delete bad request response
+func (o *EdgeConfigDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeConfigDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EdgeConfigDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the edge config delete not found response
+func (o *EdgeConfigDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *EdgeConfigDeleteNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNotFound ", 404)
 }
@@ -238,6 +253,11 @@ func (o *EdgeConfigDeleteInternalServerError) IsServerError() bool {
 // IsCode returns true when this edge config delete internal server error response a status code equal to that given
 func (o *EdgeConfigDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the edge config delete internal server error response
+func (o *EdgeConfigDeleteInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EdgeConfigDeleteInternalServerError) Error() string {

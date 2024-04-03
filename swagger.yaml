@@ -1011,6 +1011,7 @@ definitions:
       environmentsPreviousVersions:
         additionalProperties:
           type: string
+        description: Deprecated - use Environment.Agent.PreviousVersion instead
         type: object
       id:
         description: EdgeUpdateSchedule Identifier
@@ -3433,11 +3434,7 @@ definitions:
         $ref: '#/definitions/portaineree.UserAccessPolicies'
         description: List of user identifiers authorized to connect to this environment(endpoint)
       agent:
-        properties:
-          version:
-            example: 1.0.0
-            type: string
-        type: object
+        $ref: '#/definitions/portaineree.EnvironmentAgentData'
       edge:
         $ref: '#/definitions/portaineree.EnvironmentEdgeSettings'
       isEdgeDevice:
@@ -3588,6 +3585,15 @@ definitions:
         description: ',processing,error'
         type: string
       summary:
+        type: string
+    type: object
+  portaineree.EnvironmentAgentData:
+    properties:
+      previousVersion:
+        example: 1.0.0
+        type: string
+      version:
+        example: 1.0.0
         type: string
     type: object
   portaineree.EnvironmentEdgeSettings:
@@ -4508,6 +4514,10 @@ definitions:
       isComposeFormat:
         description: IsComposeFormat indicates if the Kubernetes stack is created
           from a Docker Compose file
+        example: false
+        type: boolean
+      isDetachedFromGit:
+        description: Whether the stack is detached from git
         example: false
         type: boolean
       namespace:
@@ -6367,6 +6377,7 @@ definitions:
       environmentsPreviousVersions:
         additionalProperties:
           type: string
+        description: Deprecated - use Environment.Agent.PreviousVersion instead
         type: object
       id:
         description: EdgeUpdateSchedule Identifier
@@ -6517,6 +6528,9 @@ definitions:
     type: object
   users.userUpdatePayload:
     properties:
+      newPassword:
+        example: asfj2emv
+        type: string
       password:
         example: cg9Wgky3
         type: string
@@ -6533,6 +6547,7 @@ definitions:
         example: bob
         type: string
     required:
+    - newPassword
     - password
     - role
     - username
@@ -7295,7 +7310,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.19.0
+  version: 2.19.4
 paths:
   /auth:
     post:
@@ -7330,7 +7345,7 @@ paths:
       - auth
   /auth/logout:
     post:
-      description: '**Access policy**: authenticated'
+      description: '**Access policy**: public'
       operationId: Logout
       responses:
         "204":
@@ -7548,6 +7563,47 @@ paths:
       summary: Send a chat query to the OpenAI API
       tags:
       - chat
+  /cloud/{provider}/cluster:
+    post:
+      consumes:
+      - application/json
+      deprecated: true
+      description: |-
+        Provision a new KaaS cluster and create an environment.
+        **Access policy**: administrator
+      operationId: provisionKaaSCluster
+      parameters:
+      - description: Provider
+        in: path
+        name: provider
+        required: true
+        type: integer
+      - description: for body documentation see the relevant /cloud/{provider}/provision
+          endpoint
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/portaineree.Endpoint'
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+        "503":
+          description: Missing configuration
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Provision a new KaaS cluster and create an environment
+      tags:
+      - kaas
   /cloud/{provider}/info:
     get:
       description: |-
@@ -7584,12 +7640,76 @@ paths:
   /cloud/credentials:
     get:
       description: |-
+        getAll cloud credential
+        **Access policy**: authenticated
+      operationId: getAll
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CloudCredential'
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: getAll cloud credentials
+      tags:
+      - cloud_credentials
+    post:
+      consumes:
+      - application/json
+      - multipart/form-data
+      description: |-
+        Create a cloud credential
+        **Access policy**: authenticated
+      operationId: Create
+      parameters:
+      - description: cloud provider such as aws, aks, civo, digitalocean, etc.
+        in: formData
+        name: provider
+        required: true
+        type: string
+      - description: name of the credentials such as rnd-test-credential
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: credentials in json format
+        in: formData
+        name: credentials
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CloudCredential'
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a cloud credential
+      tags:
+      - cloud_credentials
+  /cloud/credentials/{id}:
+    get:
+      description: |-
         getByID gets a cloud credential by ID
         **Access policy**: authenticated
-      operationId: getByID
+      operationId: cloudCredsGetByID
       parameters:
       - description: ID of the cloud credential
-        in: query
+        in: path
         name: id
         required: true
         type: string
@@ -7614,10 +7734,10 @@ paths:
       description: |-
         delete delete a cloud credential by ID
         **Access policy**: authenticated
-      operationId: delete
+      operationId: cloudCredsDelete
       parameters:
       - description: ID of the cloud credential
-        in: query
+        in: path
         name: id
         required: true
         type: string
@@ -7645,8 +7765,13 @@ paths:
       description: |-
         Update a cloud credential
         **Access policy**: authenticated
-      operationId: Update
+      operationId: cloudCredsUpdate
       parameters:
+      - description: ID of the cloud credential
+        in: path
+        name: id
+        required: true
+        type: string
       - description: cloud provider such as aws, aks, civo, digitalocean, etc.
         in: formData
         name: provider
@@ -7679,7 +7804,7 @@ paths:
       summary: Update a cloud credential
       tags:
       - cloud_credentials
-  /cloud/endpoints/{environmentid}/nodes/nodestatus:
+  /cloud/endpoints/{endpointid}/nodes/nodestatus:
     get:
       description: |-
         Get the MicroK8s status for a control plane node in a MicroK8s cluster.
@@ -7688,7 +7813,7 @@ paths:
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
-        name: environmentid
+        name: endpointid
         required: true
         type: integer
       - description: The external node ip of the control plane node.
@@ -7715,7 +7840,7 @@ paths:
       summary: Get the MicroK8s status for a control plane node.
       tags:
       - kaas
-  /cloud/endpoints/{environmentid}/addons:
+  /cloud/endpoints/{environmentId}/addons:
     get:
       description: |-
         The information returned can be used to query the MircoK8s cluster.
@@ -7724,7 +7849,7 @@ paths:
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
-        name: environmentid
+        name: environmentId
         required: true
         type: integer
       produces:
@@ -7754,7 +7879,7 @@ paths:
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
-        name: environmentid
+        name: environmentId
         required: true
         type: integer
       - description: The list of addons to install in the cluster.
@@ -7782,7 +7907,7 @@ paths:
       summary: Get a list of addons which are installed in a MicroK8s cluster.
       tags:
       - kaas
-  /cloud/endpoints/{environmentid}/nodes/add:
+  /cloud/endpoints/{environmentId}/nodes/add:
     post:
       description: |-
         Add control plane and worker nodes to the cluster.
@@ -7791,7 +7916,7 @@ paths:
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
-        name: environmentid
+        name: environmentId
         required: true
         type: integer
       produces:
@@ -7813,7 +7938,7 @@ paths:
       summary: Add nodes to the cluster (scale up).
       tags:
       - kaas
-  /cloud/endpoints/{environmentid}/nodes/remove:
+  /cloud/endpoints/{environmentId}/nodes/remove:
     post:
       description: |-
         Remove nodes from the cluster and uninstall MicroK8s from them.
@@ -7822,7 +7947,7 @@ paths:
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
-        name: environmentid
+        name: environmentId
         required: true
         type: integer
       produces:
@@ -7844,7 +7969,7 @@ paths:
       summary: Remove nodes from the cluster and uninstall MicroK8s from them.
       tags:
       - kaas
-  /cloud/endpoints/{environmentid}/upgrade:
+  /cloud/endpoints/{environmentId}/upgrade:
     post:
       description: |-
         Upgrade the cluster to the next stable kubernetes version.
@@ -7853,7 +7978,7 @@ paths:
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
-        name: environmentid
+        name: environmentId
         required: true
         type: integer
       produces:
@@ -7875,7 +8000,7 @@ paths:
       summary: Upgrade the cluster to the next stable kubernetes version.
       tags:
       - kaas
-  /cloud/endpoints/{environmentid}/version:
+  /cloud/endpoints/{environmentId}/version:
     get:
       description: |-
         Get the current cluster version.
@@ -7884,7 +8009,7 @@ paths:
       parameters:
       - description: Environment(Endpoint) identifier
         in: path
-        name: environmentid
+        name: environmentId
         required: true
         type: integer
       produces:
@@ -7904,6 +8029,44 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: Get the current cluster version.
+      tags:
+      - kaas
+  /cloud/microk8s/addons:
+    get:
+      deprecated: true
+      description: |-
+        The information returned can be used to query the MircoK8s cluster.
+        **Access policy**: authenticated
+      operationId: microk8sAddons
+      parameters:
+      - description: The environment ID of the cluster within Portainer.
+        in: query
+        name: environmentID
+        required: true
+        type: integer
+      - description: The credential ID to use to connect to a node in the MicroK8s
+          cluster.
+        in: query
+        name: credentialID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "500":
+          description: Server error
+        "503":
+          description: Missing configuration
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get a list of addons which are installed in a MicroK8s cluster.
       tags:
       - kaas
   /cloud/testssh:
@@ -7975,6 +8138,49 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: List available custom templates
+      tags:
+      - custom_templates
+    post:
+      consumes:
+      - application/json
+      - multipart/form-data
+      deprecated: true
+      description: |-
+        Create a custom template.
+        **Access policy**: authenticated
+      operationId: CustomTemplateCreate
+      parameters:
+      - description: method for creating template
+        enum:
+        - string
+        - file
+        - repository
+        in: query
+        name: method
+        required: true
+        type: string
+      - description: for body documentation see the relevant /custom_templates/{method}
+          endpoint
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/portaineree.CustomTemplate'
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create a custom template
       tags:
       - custom_templates
   /custom_templates/{id}:
@@ -8867,6 +9073,43 @@ paths:
       summary: Fetch EdgeJobs list
       tags:
       - edge_jobs
+    post:
+      deprecated: true
+      description: '**Access policy**: administrator'
+      operationId: EdgeJobCreate
+      parameters:
+      - description: Creation Method
+        enum:
+        - file
+        - string
+        in: query
+        name: method
+        required: true
+        type: string
+      - description: for body documentation see the relevant /edge_jobs/create/{method}
+          endpoint
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/portaineree.EdgeGroup'
+        "500":
+          description: Internal Server Error
+        "503":
+          description: Edge compute features are disabled
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create an EdgeJob
+      tags:
+      - edge_jobs
   /edge_jobs/{id}:
     delete:
       description: '**Access policy**: administrator'
@@ -9216,6 +9459,44 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: Fetches the list of EdgeStacks
+      tags:
+      - edge_stacks
+    post:
+      deprecated: true
+      description: '**Access policy**: administrator'
+      operationId: EdgeStackCreate
+      parameters:
+      - description: Creation Method
+        enum:
+        - file
+        - string
+        - repository
+        in: query
+        name: method
+        required: true
+        type: string
+      - description: for body documentation see the relevant /edge_stacks/create/{method}
+          endpoint
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/portaineree.EdgeStack'
+        "500":
+          description: Internal Server Error
+        "503":
+          description: Edge compute features are disabled
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Create an EdgeStack
       tags:
       - edge_stacks
   /edge_stacks/{id}:
@@ -9795,25 +10076,27 @@ paths:
       consumes:
       - application/json
       description: '**Access policy**: administrator'
-      operationId: EdgeUpdateScheduleUpdate
+      operationId: EdgeUpdateScheduleCreate
       parameters:
       - description: Schedule details
         in: body
         name: body
         required: true
         schema:
-          $ref: '#/definitions/edgeupdateschedules.updatePayload'
+          $ref: '#/definitions/edgeupdateschedules.createPayload'
       produces:
       - application/json
       responses:
-        "204":
-          description: No Content
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/types.UpdateSchedule'
         "500":
           description: Internal Server Error
       security:
       - ApiKeyAuth: []
       - jwt: []
-      summary: Updates an Edge Update Schedule
+      summary: Creates a new Edge Update Schedule
       tags:
       - edge_update_schedules
   /edge_update_schedules/{id}:
@@ -9859,6 +10142,31 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: Returns the Edge Update Schedule with the given ID
+      tags:
+      - edge_update_schedules
+    post:
+      consumes:
+      - application/json
+      description: '**Access policy**: administrator'
+      operationId: EdgeUpdateScheduleUpdate
+      parameters:
+      - description: Schedule details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/edgeupdateschedules.updatePayload'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "500":
+          description: Internal Server Error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Updates an Edge Update Schedule
       tags:
       - edge_update_schedules
   /edge_update_schedules/active:
@@ -9919,19 +10227,22 @@ paths:
       description: '**Access policy**: administrator'
       operationId: EdgeUpdatePreviousVersions
       parameters:
-      - description: Schedule ID, ignore the schedule which is being edited
+      - description: Environment IDs
         in: query
-        name: skipScheduleID
-        type: integer
+        items:
+          type: integer
+        name: environmentIds
+        required: true
+        type: array
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            items:
+            additionalProperties:
               type: string
-            type: array
+            type: object
         "400":
           description: Invalid request
         "500":
@@ -14014,6 +14325,67 @@ paths:
       summary: List stacks
       tags:
       - stacks
+    post:
+      consumes:
+      - application/json
+      - multipart/form-data
+      deprecated: true
+      description: |-
+        Deploy a new stack into a Docker environment(endpoint) specified via the environment(endpoint) identifier.
+        **Access policy**: authenticated
+      operationId: StackCreate
+      parameters:
+      - description: 'Stack deployment type. Possible values: 1 (Swarm stack), 2 (Compose
+          stack) or 3 (Kubernetes stack).'
+        enum:
+        - 1
+        - 2
+        - 3
+        in: query
+        name: type
+        required: true
+        type: integer
+      - description: 'Stack deployment method. Possible values: file, string, repository
+          or url.'
+        enum:
+        - string
+        - file
+        - repository
+        - url
+        in: query
+        name: method
+        required: true
+        type: string
+      - description: Identifier of the environment(endpoint) that will be used to
+          deploy the stack
+        in: query
+        name: endpointId
+        required: true
+        type: integer
+      - description: for body documentation see the relevant /stacks/create/{type}/{method}
+          endpoint
+        in: body
+        name: body
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/portaineree.Stack'
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Deploy a new stack
+      tags:
+      - stacks
   /stacks/{id}:
     delete:
       description: |-
@@ -15890,6 +16262,7 @@ paths:
       - application/json
       description: |-
         Update user details. A regular user account can only update his details.
+        A regular user account cannot change their username or role.
         **Access policy**: authenticated
       operationId: UserUpdate
       parameters:

@@ -40,7 +40,7 @@ func (o *CreateKubernetesNamespaceReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/namespaces/{namespace}] createKubernetesNamespace", response, response.Code())
 	}
 }
 
@@ -81,6 +81,11 @@ func (o *CreateKubernetesNamespaceOK) IsServerError() bool {
 // IsCode returns true when this create kubernetes namespace o k response a status code equal to that given
 func (o *CreateKubernetesNamespaceOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the create kubernetes namespace o k response
+func (o *CreateKubernetesNamespaceOK) Code() int {
+	return 200
 }
 
 func (o *CreateKubernetesNamespaceOK) Error() string {
@@ -143,6 +148,11 @@ func (o *CreateKubernetesNamespaceBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the create kubernetes namespace bad request response
+func (o *CreateKubernetesNamespaceBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateKubernetesNamespaceBadRequest) Error() string {
 	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}][%d] createKubernetesNamespaceBadRequest ", 400)
 }
@@ -192,6 +202,11 @@ func (o *CreateKubernetesNamespaceInternalServerError) IsServerError() bool {
 // IsCode returns true when this create kubernetes namespace internal server error response a status code equal to that given
 func (o *CreateKubernetesNamespaceInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the create kubernetes namespace internal server error response
+func (o *CreateKubernetesNamespaceInternalServerError) Code() int {
+	return 500
 }
 
 func (o *CreateKubernetesNamespaceInternalServerError) Error() string {

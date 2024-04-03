@@ -109,6 +109,11 @@ func (m *StacksKubernetesGitDeploymentPayload) ContextValidate(ctx context.Conte
 func (m *StacksKubernetesGitDeploymentPayload) contextValidateAutoUpdate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AutoUpdate != nil {
+
+		if swag.IsZero(m.AutoUpdate) { // not required
+			return nil
+		}
+
 		if err := m.AutoUpdate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("autoUpdate")

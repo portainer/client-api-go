@@ -48,7 +48,7 @@ func (o *EdgeStackUpdateReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /edge_stacks/{id}] EdgeStackUpdate", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeStackUpdateOK) IsServerError() bool {
 // IsCode returns true when this edge stack update o k response a status code equal to that given
 func (o *EdgeStackUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack update o k response
+func (o *EdgeStackUpdateOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackUpdateOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeStackUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack update bad request response
+func (o *EdgeStackUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeStackUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack update internal server error response
+func (o *EdgeStackUpdateInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackUpdateInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeStackUpdateServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack update service unavailable response a status code equal to that given
 func (o *EdgeStackUpdateServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack update service unavailable response
+func (o *EdgeStackUpdateServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackUpdateServiceUnavailable) Error() string {

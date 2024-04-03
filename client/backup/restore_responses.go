@@ -39,7 +39,7 @@ func (o *RestoreReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /restore] Restore", response, response.Code())
 	}
 }
 
@@ -79,6 +79,11 @@ func (o *RestoreOK) IsServerError() bool {
 // IsCode returns true when this restore o k response a status code equal to that given
 func (o *RestoreOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the restore o k response
+func (o *RestoreOK) Code() int {
+	return 200
 }
 
 func (o *RestoreOK) Error() string {
@@ -132,6 +137,11 @@ func (o *RestoreBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the restore bad request response
+func (o *RestoreBadRequest) Code() int {
+	return 400
+}
+
 func (o *RestoreBadRequest) Error() string {
 	return fmt.Sprintf("[POST /restore][%d] restoreBadRequest ", 400)
 }
@@ -181,6 +191,11 @@ func (o *RestoreInternalServerError) IsServerError() bool {
 // IsCode returns true when this restore internal server error response a status code equal to that given
 func (o *RestoreInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the restore internal server error response
+func (o *RestoreInternalServerError) Code() int {
+	return 500
 }
 
 func (o *RestoreInternalServerError) Error() string {

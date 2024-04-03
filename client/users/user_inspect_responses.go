@@ -54,7 +54,7 @@ func (o *UserInspectReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}] UserInspect", response, response.Code())
 	}
 }
 
@@ -95,6 +95,11 @@ func (o *UserInspectOK) IsServerError() bool {
 // IsCode returns true when this user inspect o k response a status code equal to that given
 func (o *UserInspectOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user inspect o k response
+func (o *UserInspectOK) Code() int {
+	return 200
 }
 
 func (o *UserInspectOK) Error() string {
@@ -159,6 +164,11 @@ func (o *UserInspectBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user inspect bad request response
+func (o *UserInspectBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserInspectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /users/{id}][%d] userInspectBadRequest ", 400)
 }
@@ -208,6 +218,11 @@ func (o *UserInspectForbidden) IsServerError() bool {
 // IsCode returns true when this user inspect forbidden response a status code equal to that given
 func (o *UserInspectForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user inspect forbidden response
+func (o *UserInspectForbidden) Code() int {
+	return 403
 }
 
 func (o *UserInspectForbidden) Error() string {
@@ -261,6 +276,11 @@ func (o *UserInspectNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user inspect not found response
+func (o *UserInspectNotFound) Code() int {
+	return 404
+}
+
 func (o *UserInspectNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{id}][%d] userInspectNotFound ", 404)
 }
@@ -310,6 +330,11 @@ func (o *UserInspectInternalServerError) IsServerError() bool {
 // IsCode returns true when this user inspect internal server error response a status code equal to that given
 func (o *UserInspectInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user inspect internal server error response
+func (o *UserInspectInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserInspectInternalServerError) Error() string {

@@ -42,7 +42,7 @@ func (o *GetKubernetesMetricsForAllPodsReader) ReadResponse(response runtime.Cli
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/metrics/pods/{namespace}] getKubernetesMetricsForAllPods", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *GetKubernetesMetricsForAllPodsOK) IsServerError() bool {
 // IsCode returns true when this get kubernetes metrics for all pods o k response a status code equal to that given
 func (o *GetKubernetesMetricsForAllPodsOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get kubernetes metrics for all pods o k response
+func (o *GetKubernetesMetricsForAllPodsOK) Code() int {
+	return 200
 }
 
 func (o *GetKubernetesMetricsForAllPodsOK) Error() string {
@@ -147,6 +152,11 @@ func (o *GetKubernetesMetricsForAllPodsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get kubernetes metrics for all pods bad request response
+func (o *GetKubernetesMetricsForAllPodsBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetKubernetesMetricsForAllPodsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *GetKubernetesMetricsForAllPodsInternalServerError) IsServerError() bool
 // IsCode returns true when this get kubernetes metrics for all pods internal server error response a status code equal to that given
 func (o *GetKubernetesMetricsForAllPodsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get kubernetes metrics for all pods internal server error response
+func (o *GetKubernetesMetricsForAllPodsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetKubernetesMetricsForAllPodsInternalServerError) Error() string {

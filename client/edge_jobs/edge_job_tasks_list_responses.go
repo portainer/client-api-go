@@ -48,7 +48,7 @@ func (o *EdgeJobTasksListReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_jobs/{id}/tasks] EdgeJobTasksList", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeJobTasksListOK) IsServerError() bool {
 // IsCode returns true when this edge job tasks list o k response a status code equal to that given
 func (o *EdgeJobTasksListOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge job tasks list o k response
+func (o *EdgeJobTasksListOK) Code() int {
+	return 200
 }
 
 func (o *EdgeJobTasksListOK) Error() string {
@@ -151,6 +156,11 @@ func (o *EdgeJobTasksListBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge job tasks list bad request response
+func (o *EdgeJobTasksListBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeJobTasksListBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListBadRequest ", 400)
 }
@@ -202,6 +212,11 @@ func (o *EdgeJobTasksListInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job tasks list internal server error response
+func (o *EdgeJobTasksListInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobTasksListInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListInternalServerError ", 500)
 }
@@ -251,6 +266,11 @@ func (o *EdgeJobTasksListServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job tasks list service unavailable response a status code equal to that given
 func (o *EdgeJobTasksListServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job tasks list service unavailable response
+func (o *EdgeJobTasksListServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobTasksListServiceUnavailable) Error() string {

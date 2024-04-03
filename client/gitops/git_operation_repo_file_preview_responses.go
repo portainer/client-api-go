@@ -42,7 +42,7 @@ func (o *GitOperationRepoFilePreviewReader) ReadResponse(response runtime.Client
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /gitops/repo/file/preview] GitOperationRepoFilePreview", response, response.Code())
 	}
 }
 
@@ -83,6 +83,11 @@ func (o *GitOperationRepoFilePreviewOK) IsServerError() bool {
 // IsCode returns true when this git operation repo file preview o k response a status code equal to that given
 func (o *GitOperationRepoFilePreviewOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the git operation repo file preview o k response
+func (o *GitOperationRepoFilePreviewOK) Code() int {
+	return 200
 }
 
 func (o *GitOperationRepoFilePreviewOK) Error() string {
@@ -147,6 +152,11 @@ func (o *GitOperationRepoFilePreviewBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the git operation repo file preview bad request response
+func (o *GitOperationRepoFilePreviewBadRequest) Code() int {
+	return 400
+}
+
 func (o *GitOperationRepoFilePreviewBadRequest) Error() string {
 	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewBadRequest ", 400)
 }
@@ -196,6 +206,11 @@ func (o *GitOperationRepoFilePreviewInternalServerError) IsServerError() bool {
 // IsCode returns true when this git operation repo file preview internal server error response a status code equal to that given
 func (o *GitOperationRepoFilePreviewInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the git operation repo file preview internal server error response
+func (o *GitOperationRepoFilePreviewInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GitOperationRepoFilePreviewInternalServerError) Error() string {

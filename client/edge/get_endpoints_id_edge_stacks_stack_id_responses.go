@@ -48,7 +48,7 @@ func (o *GetEndpointsIDEdgeStacksStackIDReader) ReadResponse(response runtime.Cl
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /endpoints/{id}/edge/stacks/{stackId}] GetEndpointsIDEdgeStacksStackID", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *GetEndpointsIDEdgeStacksStackIDOK) IsServerError() bool {
 // IsCode returns true when this get endpoints Id edge stacks stack Id o k response a status code equal to that given
 func (o *GetEndpointsIDEdgeStacksStackIDOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get endpoints Id edge stacks stack Id o k response
+func (o *GetEndpointsIDEdgeStacksStackIDOK) Code() int {
+	return 200
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDOK) Error() string {
@@ -153,6 +158,11 @@ func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get endpoints Id edge stacks stack Id bad request response
+func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *GetEndpointsIDEdgeStacksStackIDNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the get endpoints Id edge stacks stack Id not found response
+func (o *GetEndpointsIDEdgeStacksStackIDNotFound) Code() int {
+	return 404
+}
+
 func (o *GetEndpointsIDEdgeStacksStackIDNotFound) Error() string {
 	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdNotFound ", 404)
 }
@@ -253,6 +268,11 @@ func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) IsServerError() boo
 // IsCode returns true when this get endpoints Id edge stacks stack Id internal server error response a status code equal to that given
 func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get endpoints Id edge stacks stack Id internal server error response
+func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) Error() string {

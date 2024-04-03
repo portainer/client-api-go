@@ -272,6 +272,11 @@ func (m *PortainereeTemplate) contextValidateEnv(ctx context.Context, formats st
 	for i := 0; i < len(m.Env); i++ {
 
 		if m.Env[i] != nil {
+
+			if swag.IsZero(m.Env[i]) { // not required
+				return nil
+			}
+
 			if err := m.Env[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("env" + "." + strconv.Itoa(i))
@@ -292,6 +297,11 @@ func (m *PortainereeTemplate) contextValidateLabels(ctx context.Context, formats
 	for i := 0; i < len(m.Labels); i++ {
 
 		if m.Labels[i] != nil {
+
+			if swag.IsZero(m.Labels[i]) { // not required
+				return nil
+			}
+
 			if err := m.Labels[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("labels" + "." + strconv.Itoa(i))
@@ -310,6 +320,11 @@ func (m *PortainereeTemplate) contextValidateLabels(ctx context.Context, formats
 func (m *PortainereeTemplate) contextValidateRepository(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Repository != nil {
+
+		if swag.IsZero(m.Repository) { // not required
+			return nil
+		}
+
 		if err := m.Repository.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("repository")
@@ -328,6 +343,11 @@ func (m *PortainereeTemplate) contextValidateVolumes(ctx context.Context, format
 	for i := 0; i < len(m.Volumes); i++ {
 
 		if m.Volumes[i] != nil {
+
+			if swag.IsZero(m.Volumes[i]) { // not required
+				return nil
+			}
+
 			if err := m.Volumes[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("volumes" + "." + strconv.Itoa(i))

@@ -45,7 +45,7 @@ func (o *GetWebsocketKubernetesShellReader) ReadResponse(response runtime.Client
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /websocket/kubernetes-shell] GetWebsocketKubernetesShell", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *GetWebsocketKubernetesShellOK) IsServerError() bool {
 // IsCode returns true when this get websocket kubernetes shell o k response a status code equal to that given
 func (o *GetWebsocketKubernetesShellOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the get websocket kubernetes shell o k response
+func (o *GetWebsocketKubernetesShellOK) Code() int {
+	return 200
 }
 
 func (o *GetWebsocketKubernetesShellOK) Error() string {
@@ -138,6 +143,11 @@ func (o *GetWebsocketKubernetesShellBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the get websocket kubernetes shell bad request response
+func (o *GetWebsocketKubernetesShellBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetWebsocketKubernetesShellBadRequest) Error() string {
 	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *GetWebsocketKubernetesShellForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the get websocket kubernetes shell forbidden response
+func (o *GetWebsocketKubernetesShellForbidden) Code() int {
+	return 403
+}
+
 func (o *GetWebsocketKubernetesShellForbidden) Error() string {
 	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellForbidden ", 403)
 }
@@ -238,6 +253,11 @@ func (o *GetWebsocketKubernetesShellInternalServerError) IsServerError() bool {
 // IsCode returns true when this get websocket kubernetes shell internal server error response a status code equal to that given
 func (o *GetWebsocketKubernetesShellInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the get websocket kubernetes shell internal server error response
+func (o *GetWebsocketKubernetesShellInternalServerError) Code() int {
+	return 500
 }
 
 func (o *GetWebsocketKubernetesShellInternalServerError) Error() string {

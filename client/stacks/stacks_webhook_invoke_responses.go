@@ -45,7 +45,7 @@ func (o *StacksWebhookInvokeReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /stacks/webhooks/{webhookID}] StacksWebhookInvoke", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *StacksWebhookInvokeOK) IsServerError() bool {
 // IsCode returns true when this stacks webhook invoke o k response a status code equal to that given
 func (o *StacksWebhookInvokeOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the stacks webhook invoke o k response
+func (o *StacksWebhookInvokeOK) Code() int {
+	return 200
 }
 
 func (o *StacksWebhookInvokeOK) Error() string {
@@ -138,6 +143,11 @@ func (o *StacksWebhookInvokeBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the stacks webhook invoke bad request response
+func (o *StacksWebhookInvokeBadRequest) Code() int {
+	return 400
+}
+
 func (o *StacksWebhookInvokeBadRequest) Error() string {
 	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *StacksWebhookInvokeConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the stacks webhook invoke conflict response
+func (o *StacksWebhookInvokeConflict) Code() int {
+	return 409
+}
+
 func (o *StacksWebhookInvokeConflict) Error() string {
 	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeConflict ", 409)
 }
@@ -238,6 +253,11 @@ func (o *StacksWebhookInvokeInternalServerError) IsServerError() bool {
 // IsCode returns true when this stacks webhook invoke internal server error response a status code equal to that given
 func (o *StacksWebhookInvokeInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the stacks webhook invoke internal server error response
+func (o *StacksWebhookInvokeInternalServerError) Code() int {
+	return 500
 }
 
 func (o *StacksWebhookInvokeInternalServerError) Error() string {

@@ -60,7 +60,7 @@ func (o *UserUpdateReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /users/{id}] UserUpdate", response, response.Code())
 	}
 }
 
@@ -101,6 +101,11 @@ func (o *UserUpdateOK) IsServerError() bool {
 // IsCode returns true when this user update o k response a status code equal to that given
 func (o *UserUpdateOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the user update o k response
+func (o *UserUpdateOK) Code() int {
+	return 200
 }
 
 func (o *UserUpdateOK) Error() string {
@@ -165,6 +170,11 @@ func (o *UserUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the user update bad request response
+func (o *UserUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *UserUpdateBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateBadRequest ", 400)
 }
@@ -214,6 +224,11 @@ func (o *UserUpdateForbidden) IsServerError() bool {
 // IsCode returns true when this user update forbidden response a status code equal to that given
 func (o *UserUpdateForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the user update forbidden response
+func (o *UserUpdateForbidden) Code() int {
+	return 403
 }
 
 func (o *UserUpdateForbidden) Error() string {
@@ -267,6 +282,11 @@ func (o *UserUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the user update not found response
+func (o *UserUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *UserUpdateNotFound) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateNotFound ", 404)
 }
@@ -318,6 +338,11 @@ func (o *UserUpdateConflict) IsCode(code int) bool {
 	return code == 409
 }
 
+// Code gets the status code for the user update conflict response
+func (o *UserUpdateConflict) Code() int {
+	return 409
+}
+
 func (o *UserUpdateConflict) Error() string {
 	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateConflict ", 409)
 }
@@ -367,6 +392,11 @@ func (o *UserUpdateInternalServerError) IsServerError() bool {
 // IsCode returns true when this user update internal server error response a status code equal to that given
 func (o *UserUpdateInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the user update internal server error response
+func (o *UserUpdateInternalServerError) Code() int {
+	return 500
 }
 
 func (o *UserUpdateInternalServerError) Error() string {

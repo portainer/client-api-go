@@ -51,7 +51,7 @@ func (o *EndpointUpdateRelationsReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /endpoints/relations] EndpointUpdateRelations", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *EndpointUpdateRelationsNoContent) IsServerError() bool {
 // IsCode returns true when this endpoint update relations no content response a status code equal to that given
 func (o *EndpointUpdateRelationsNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the endpoint update relations no content response
+func (o *EndpointUpdateRelationsNoContent) Code() int {
+	return 204
 }
 
 func (o *EndpointUpdateRelationsNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *EndpointUpdateRelationsBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the endpoint update relations bad request response
+func (o *EndpointUpdateRelationsBadRequest) Code() int {
+	return 400
+}
+
 func (o *EndpointUpdateRelationsBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *EndpointUpdateRelationsUnauthorized) IsServerError() bool {
 // IsCode returns true when this endpoint update relations unauthorized response a status code equal to that given
 func (o *EndpointUpdateRelationsUnauthorized) IsCode(code int) bool {
 	return code == 401
+}
+
+// Code gets the status code for the endpoint update relations unauthorized response
+func (o *EndpointUpdateRelationsUnauthorized) Code() int {
+	return 401
 }
 
 func (o *EndpointUpdateRelationsUnauthorized) Error() string {
@@ -246,6 +261,11 @@ func (o *EndpointUpdateRelationsNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the endpoint update relations not found response
+func (o *EndpointUpdateRelationsNotFound) Code() int {
+	return 404
+}
+
 func (o *EndpointUpdateRelationsNotFound) Error() string {
 	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *EndpointUpdateRelationsInternalServerError) IsServerError() bool {
 // IsCode returns true when this endpoint update relations internal server error response a status code equal to that given
 func (o *EndpointUpdateRelationsInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the endpoint update relations internal server error response
+func (o *EndpointUpdateRelationsInternalServerError) Code() int {
+	return 500
 }
 
 func (o *EndpointUpdateRelationsInternalServerError) Error() string {

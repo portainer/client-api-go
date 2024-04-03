@@ -45,7 +45,7 @@ func (o *EdgeJobDeleteReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /edge_jobs/{id}] EdgeJobDelete", response, response.Code())
 	}
 }
 
@@ -85,6 +85,11 @@ func (o *EdgeJobDeleteNoContent) IsServerError() bool {
 // IsCode returns true when this edge job delete no content response a status code equal to that given
 func (o *EdgeJobDeleteNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the edge job delete no content response
+func (o *EdgeJobDeleteNoContent) Code() int {
+	return 204
 }
 
 func (o *EdgeJobDeleteNoContent) Error() string {
@@ -138,6 +143,11 @@ func (o *EdgeJobDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge job delete bad request response
+func (o *EdgeJobDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeJobDeleteBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteBadRequest ", 400)
 }
@@ -189,6 +199,11 @@ func (o *EdgeJobDeleteInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge job delete internal server error response
+func (o *EdgeJobDeleteInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeJobDeleteInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteInternalServerError ", 500)
 }
@@ -238,6 +253,11 @@ func (o *EdgeJobDeleteServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge job delete service unavailable response a status code equal to that given
 func (o *EdgeJobDeleteServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge job delete service unavailable response
+func (o *EdgeJobDeleteServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeJobDeleteServiceUnavailable) Error() string {

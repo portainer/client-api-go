@@ -48,7 +48,7 @@ func (o *EdgeStackFileReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /edge_stacks/{id}/file] EdgeStackFile", response, response.Code())
 	}
 }
 
@@ -89,6 +89,11 @@ func (o *EdgeStackFileOK) IsServerError() bool {
 // IsCode returns true when this edge stack file o k response a status code equal to that given
 func (o *EdgeStackFileOK) IsCode(code int) bool {
 	return code == 200
+}
+
+// Code gets the status code for the edge stack file o k response
+func (o *EdgeStackFileOK) Code() int {
+	return 200
 }
 
 func (o *EdgeStackFileOK) Error() string {
@@ -153,6 +158,11 @@ func (o *EdgeStackFileBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the edge stack file bad request response
+func (o *EdgeStackFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *EdgeStackFileBadRequest) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}/file][%d] edgeStackFileBadRequest ", 400)
 }
@@ -204,6 +214,11 @@ func (o *EdgeStackFileInternalServerError) IsCode(code int) bool {
 	return code == 500
 }
 
+// Code gets the status code for the edge stack file internal server error response
+func (o *EdgeStackFileInternalServerError) Code() int {
+	return 500
+}
+
 func (o *EdgeStackFileInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /edge_stacks/{id}/file][%d] edgeStackFileInternalServerError ", 500)
 }
@@ -253,6 +268,11 @@ func (o *EdgeStackFileServiceUnavailable) IsServerError() bool {
 // IsCode returns true when this edge stack file service unavailable response a status code equal to that given
 func (o *EdgeStackFileServiceUnavailable) IsCode(code int) bool {
 	return code == 503
+}
+
+// Code gets the status code for the edge stack file service unavailable response
+func (o *EdgeStackFileServiceUnavailable) Code() int {
+	return 503
 }
 
 func (o *EdgeStackFileServiceUnavailable) Error() string {

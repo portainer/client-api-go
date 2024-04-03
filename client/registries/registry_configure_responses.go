@@ -51,7 +51,7 @@ func (o *RegistryConfigureReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /registries/{id}/configure] RegistryConfigure", response, response.Code())
 	}
 }
 
@@ -91,6 +91,11 @@ func (o *RegistryConfigureNoContent) IsServerError() bool {
 // IsCode returns true when this registry configure no content response a status code equal to that given
 func (o *RegistryConfigureNoContent) IsCode(code int) bool {
 	return code == 204
+}
+
+// Code gets the status code for the registry configure no content response
+func (o *RegistryConfigureNoContent) Code() int {
+	return 204
 }
 
 func (o *RegistryConfigureNoContent) Error() string {
@@ -144,6 +149,11 @@ func (o *RegistryConfigureBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the registry configure bad request response
+func (o *RegistryConfigureBadRequest) Code() int {
+	return 400
+}
+
 func (o *RegistryConfigureBadRequest) Error() string {
 	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureBadRequest ", 400)
 }
@@ -193,6 +203,11 @@ func (o *RegistryConfigureForbidden) IsServerError() bool {
 // IsCode returns true when this registry configure forbidden response a status code equal to that given
 func (o *RegistryConfigureForbidden) IsCode(code int) bool {
 	return code == 403
+}
+
+// Code gets the status code for the registry configure forbidden response
+func (o *RegistryConfigureForbidden) Code() int {
+	return 403
 }
 
 func (o *RegistryConfigureForbidden) Error() string {
@@ -246,6 +261,11 @@ func (o *RegistryConfigureNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the registry configure not found response
+func (o *RegistryConfigureNotFound) Code() int {
+	return 404
+}
+
 func (o *RegistryConfigureNotFound) Error() string {
 	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNotFound ", 404)
 }
@@ -295,6 +315,11 @@ func (o *RegistryConfigureInternalServerError) IsServerError() bool {
 // IsCode returns true when this registry configure internal server error response a status code equal to that given
 func (o *RegistryConfigureInternalServerError) IsCode(code int) bool {
 	return code == 500
+}
+
+// Code gets the status code for the registry configure internal server error response
+func (o *RegistryConfigureInternalServerError) Code() int {
+	return 500
 }
 
 func (o *RegistryConfigureInternalServerError) Error() string {
