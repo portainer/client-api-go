@@ -6,6 +6,7 @@ package tags
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -57,7 +58,7 @@ TagCreateOK describes a response with status code 200, with default header value
 Success
 */
 type TagCreateOK struct {
-	Payload *models.PortainereeTag
+	Payload *models.PortainerTag
 }
 
 // IsSuccess returns true when this tag create o k response has a 2xx status code
@@ -91,20 +92,22 @@ func (o *TagCreateOK) Code() int {
 }
 
 func (o *TagCreateOK) Error() string {
-	return fmt.Sprintf("[POST /tags][%d] tagCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tags][%d] tagCreateOK %s", 200, payload)
 }
 
 func (o *TagCreateOK) String() string {
-	return fmt.Sprintf("[POST /tags][%d] tagCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tags][%d] tagCreateOK %s", 200, payload)
 }
 
-func (o *TagCreateOK) GetPayload() *models.PortainereeTag {
+func (o *TagCreateOK) GetPayload() *models.PortainerTag {
 	return o.Payload
 }
 
 func (o *TagCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTag)
+	o.Payload = new(models.PortainerTag)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -122,7 +125,7 @@ func NewTagCreateConflict() *TagCreateConflict {
 /*
 TagCreateConflict describes a response with status code 409, with default header values.
 
-Tag name exists
+This name is already associated to a tag
 */
 type TagCreateConflict struct {
 }
@@ -158,11 +161,11 @@ func (o *TagCreateConflict) Code() int {
 }
 
 func (o *TagCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /tags][%d] tagCreateConflict ", 409)
+	return fmt.Sprintf("[POST /tags][%d] tagCreateConflict", 409)
 }
 
 func (o *TagCreateConflict) String() string {
-	return fmt.Sprintf("[POST /tags][%d] tagCreateConflict ", 409)
+	return fmt.Sprintf("[POST /tags][%d] tagCreateConflict", 409)
 }
 
 func (o *TagCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *TagCreateInternalServerError) Code() int {
 }
 
 func (o *TagCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /tags][%d] tagCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /tags][%d] tagCreateInternalServerError", 500)
 }
 
 func (o *TagCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /tags][%d] tagCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /tags][%d] tagCreateInternalServerError", 500)
 }
 
 func (o *TagCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

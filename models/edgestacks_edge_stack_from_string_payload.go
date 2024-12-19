@@ -22,12 +22,11 @@ import (
 type EdgestacksEdgeStackFromStringPayload struct {
 
 	// Deployment type to deploy this stack
-	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
+	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
 	// compose is enabled only for docker environments
 	// kubernetes is enabled only for kubernetes environments
-	// nomad is enabled only for nomad environments
 	// Example: 0
-	// Enum: [0 1 2]
+	// Enum: [0,1]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// List of identifiers of EdgeGroups
@@ -38,7 +37,11 @@ type EdgestacksEdgeStackFromStringPayload struct {
 	EnvVars []*PortainerPair `json:"envVars"`
 
 	// Name of the stack
-	// Example: myStack
+	// Max length: 255
+	// Name must only contains lowercase characters, numbers, hyphens, or underscores
+	// Name must start with a lowercase character or number
+	// Example: stack-name or stack_123 or stackName
+	// Example: stack-name
 	// Required: true
 	Name *string `json:"name"`
 
@@ -52,6 +55,9 @@ type EdgestacksEdgeStackFromStringPayload struct {
 	// Retry deploy
 	// Example: false
 	RetryDeploy bool `json:"retryDeploy,omitempty"`
+
+	// Retry period specifies the duration, in seconds, for which the agent should continue attempting to deploy the stack after a failure
+	RetryPeriod int64 `json:"retryPeriod,omitempty"`
 
 	// Content of the Stack file
 	// Example: version: 3\n services:\n web:\n image:nginx
@@ -103,7 +109,7 @@ var edgestacksEdgeStackFromStringPayloadTypeDeploymentTypePropEnum []interface{}
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[0,1]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

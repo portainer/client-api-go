@@ -99,11 +99,11 @@ func (o *UserDeleteNoContent) Code() int {
 }
 
 func (o *UserDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteNoContent", 204)
 }
 
 func (o *UserDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteNoContent", 204)
 }
 
 func (o *UserDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *UserDeleteBadRequest) Code() int {
 }
 
 func (o *UserDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteBadRequest", 400)
 }
 
 func (o *UserDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteBadRequest", 400)
 }
 
 func (o *UserDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *UserDeleteForbidden) Code() int {
 }
 
 func (o *UserDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteForbidden", 403)
 }
 
 func (o *UserDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteForbidden", 403)
 }
 
 func (o *UserDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *UserDeleteNotFound) Code() int {
 }
 
 func (o *UserDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteNotFound", 404)
 }
 
 func (o *UserDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteNotFound", 404)
 }
 
 func (o *UserDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *UserDeleteInternalServerError) Code() int {
 }
 
 func (o *UserDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteInternalServerError", 500)
 }
 
 func (o *UserDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /users/{id}][%d] userDeleteInternalServerError", 500)
 }
 
 func (o *UserDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

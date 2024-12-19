@@ -6,6 +6,7 @@ package useractivity
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *LogsListOK) Code() int {
 }
 
 func (o *LogsListOK) Error() string {
-	return fmt.Sprintf("[GET /useractivity/logs][%d] logsListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /useractivity/logs][%d] logsListOK %s", 200, payload)
 }
 
 func (o *LogsListOK) String() string {
-	return fmt.Sprintf("[GET /useractivity/logs][%d] logsListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /useractivity/logs][%d] logsListOK %s", 200, payload)
 }
 
 func (o *LogsListOK) GetPayload() *models.UseractivityLogsListResponse {
@@ -152,11 +155,11 @@ func (o *LogsListInternalServerError) Code() int {
 }
 
 func (o *LogsListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /useractivity/logs][%d] logsListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /useractivity/logs][%d] logsListInternalServerError", 500)
 }
 
 func (o *LogsListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /useractivity/logs][%d] logsListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /useractivity/logs][%d] logsListInternalServerError", 500)
 }
 
 func (o *LogsListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

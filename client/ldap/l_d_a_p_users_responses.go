@@ -6,6 +6,7 @@ package ldap
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -57,7 +58,7 @@ LDAPUsersOK describes a response with status code 200, with default header value
 Success
 */
 type LDAPUsersOK struct {
-	Payload []*models.PortainereeLDAPUser
+	Payload []*models.PortainerLDAPUser
 }
 
 // IsSuccess returns true when this l d a p users o k response has a 2xx status code
@@ -91,14 +92,16 @@ func (o *LDAPUsersOK) Code() int {
 }
 
 func (o *LDAPUsersOK) Error() string {
-	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersOK %s", 200, payload)
 }
 
 func (o *LDAPUsersOK) String() string {
-	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersOK %s", 200, payload)
 }
 
-func (o *LDAPUsersOK) GetPayload() []*models.PortainereeLDAPUser {
+func (o *LDAPUsersOK) GetPayload() []*models.PortainerLDAPUser {
 	return o.Payload
 }
 
@@ -156,11 +159,11 @@ func (o *LDAPUsersBadRequest) Code() int {
 }
 
 func (o *LDAPUsersBadRequest) Error() string {
-	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersBadRequest ", 400)
+	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersBadRequest", 400)
 }
 
 func (o *LDAPUsersBadRequest) String() string {
-	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersBadRequest ", 400)
+	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersBadRequest", 400)
 }
 
 func (o *LDAPUsersBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -212,11 +215,11 @@ func (o *LDAPUsersInternalServerError) Code() int {
 }
 
 func (o *LDAPUsersInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersInternalServerError ", 500)
+	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersInternalServerError", 500)
 }
 
 func (o *LDAPUsersInternalServerError) String() string {
-	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersInternalServerError ", 500)
+	return fmt.Sprintf("[POST /ldap/users][%d] lDAPUsersInternalServerError", 500)
 }
 
 func (o *LDAPUsersInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

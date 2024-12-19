@@ -99,11 +99,11 @@ func (o *HelmDeleteNoContent) Code() int {
 }
 
 func (o *HelmDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNoContent", 204)
 }
 
 func (o *HelmDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNoContent", 204)
 }
 
 func (o *HelmDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *HelmDeleteBadRequest) Code() int {
 }
 
 func (o *HelmDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteBadRequest", 400)
 }
 
 func (o *HelmDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteBadRequest", 400)
 }
 
 func (o *HelmDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *HelmDeleteUnauthorized) Code() int {
 }
 
 func (o *HelmDeleteUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteUnauthorized", 401)
 }
 
 func (o *HelmDeleteUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteUnauthorized", 401)
 }
 
 func (o *HelmDeleteUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *HelmDeleteNotFound) Code() int {
 }
 
 func (o *HelmDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNotFound", 404)
 }
 
 func (o *HelmDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteNotFound", 404)
 }
 
 func (o *HelmDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *HelmDeleteInternalServerError) Code() int {
 }
 
 func (o *HelmDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteInternalServerError", 500)
 }
 
 func (o *HelmDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /endpoints/{id}/kubernetes/helm/{release}][%d] helmDeleteInternalServerError", 500)
 }
 
 func (o *HelmDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

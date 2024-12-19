@@ -99,11 +99,11 @@ func (o *Microk8sGetAddonsOK) Code() int {
 }
 
 func (o *Microk8sGetAddonsOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsOK ", 200)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsOK", 200)
 }
 
 func (o *Microk8sGetAddonsOK) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsOK ", 200)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsOK", 200)
 }
 
 func (o *Microk8sGetAddonsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *Microk8sGetAddonsBadRequest) Code() int {
 }
 
 func (o *Microk8sGetAddonsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsBadRequest", 400)
 }
 
 func (o *Microk8sGetAddonsBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsBadRequest", 400)
 }
 
 func (o *Microk8sGetAddonsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *Microk8sGetAddonsForbidden) Code() int {
 }
 
 func (o *Microk8sGetAddonsForbidden) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsForbidden", 403)
 }
 
 func (o *Microk8sGetAddonsForbidden) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsForbidden", 403)
 }
 
 func (o *Microk8sGetAddonsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *Microk8sGetAddonsInternalServerError) Code() int {
 }
 
 func (o *Microk8sGetAddonsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsInternalServerError", 500)
 }
 
 func (o *Microk8sGetAddonsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsInternalServerError", 500)
 }
 
 func (o *Microk8sGetAddonsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *Microk8sGetAddonsServiceUnavailable) Code() int {
 }
 
 func (o *Microk8sGetAddonsServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsServiceUnavailable", 503)
 }
 
 func (o *Microk8sGetAddonsServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/addons][%d] microk8sGetAddonsServiceUnavailable", 503)
 }
 
 func (o *Microk8sGetAddonsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

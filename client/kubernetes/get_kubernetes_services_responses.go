@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -35,6 +36,24 @@ func (o *GetKubernetesServicesReader) ReadResponse(response runtime.ClientRespon
 			return nil, err
 		}
 		return nil, result
+	case 401:
+		result := NewGetKubernetesServicesUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetKubernetesServicesForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetKubernetesServicesNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewGetKubernetesServicesInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -42,7 +61,7 @@ func (o *GetKubernetesServicesReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/namespaces/{namespace}/services] getKubernetesServices", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/services] GetKubernetesServices", response, response.Code())
 	}
 }
 
@@ -57,7 +76,7 @@ GetKubernetesServicesOK describes a response with status code 200, with default 
 Success
 */
 type GetKubernetesServicesOK struct {
-	Payload []*models.ModelsK8sServiceInfo
+	Payload []*models.KubernetesK8sServiceInfo
 }
 
 // IsSuccess returns true when this get kubernetes services o k response has a 2xx status code
@@ -91,14 +110,16 @@ func (o *GetKubernetesServicesOK) Code() int {
 }
 
 func (o *GetKubernetesServicesOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/services][%d] getKubernetesServicesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesOK %s", 200, payload)
 }
 
 func (o *GetKubernetesServicesOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/services][%d] getKubernetesServicesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesOK %s", 200, payload)
 }
 
-func (o *GetKubernetesServicesOK) GetPayload() []*models.ModelsK8sServiceInfo {
+func (o *GetKubernetesServicesOK) GetPayload() []*models.KubernetesK8sServiceInfo {
 	return o.Payload
 }
 
@@ -120,7 +141,7 @@ func NewGetKubernetesServicesBadRequest() *GetKubernetesServicesBadRequest {
 /*
 GetKubernetesServicesBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type GetKubernetesServicesBadRequest struct {
 }
@@ -156,14 +177,182 @@ func (o *GetKubernetesServicesBadRequest) Code() int {
 }
 
 func (o *GetKubernetesServicesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/services][%d] getKubernetesServicesBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesBadRequest", 400)
 }
 
 func (o *GetKubernetesServicesBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/services][%d] getKubernetesServicesBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesBadRequest", 400)
 }
 
 func (o *GetKubernetesServicesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesServicesUnauthorized creates a GetKubernetesServicesUnauthorized with default headers values
+func NewGetKubernetesServicesUnauthorized() *GetKubernetesServicesUnauthorized {
+	return &GetKubernetesServicesUnauthorized{}
+}
+
+/*
+GetKubernetesServicesUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type GetKubernetesServicesUnauthorized struct {
+}
+
+// IsSuccess returns true when this get kubernetes services unauthorized response has a 2xx status code
+func (o *GetKubernetesServicesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes services unauthorized response has a 3xx status code
+func (o *GetKubernetesServicesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes services unauthorized response has a 4xx status code
+func (o *GetKubernetesServicesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes services unauthorized response has a 5xx status code
+func (o *GetKubernetesServicesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes services unauthorized response a status code equal to that given
+func (o *GetKubernetesServicesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get kubernetes services unauthorized response
+func (o *GetKubernetesServicesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetKubernetesServicesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesUnauthorized", 401)
+}
+
+func (o *GetKubernetesServicesUnauthorized) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesUnauthorized", 401)
+}
+
+func (o *GetKubernetesServicesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesServicesForbidden creates a GetKubernetesServicesForbidden with default headers values
+func NewGetKubernetesServicesForbidden() *GetKubernetesServicesForbidden {
+	return &GetKubernetesServicesForbidden{}
+}
+
+/*
+GetKubernetesServicesForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type GetKubernetesServicesForbidden struct {
+}
+
+// IsSuccess returns true when this get kubernetes services forbidden response has a 2xx status code
+func (o *GetKubernetesServicesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes services forbidden response has a 3xx status code
+func (o *GetKubernetesServicesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes services forbidden response has a 4xx status code
+func (o *GetKubernetesServicesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes services forbidden response has a 5xx status code
+func (o *GetKubernetesServicesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes services forbidden response a status code equal to that given
+func (o *GetKubernetesServicesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get kubernetes services forbidden response
+func (o *GetKubernetesServicesForbidden) Code() int {
+	return 403
+}
+
+func (o *GetKubernetesServicesForbidden) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesForbidden", 403)
+}
+
+func (o *GetKubernetesServicesForbidden) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesForbidden", 403)
+}
+
+func (o *GetKubernetesServicesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesServicesNotFound creates a GetKubernetesServicesNotFound with default headers values
+func NewGetKubernetesServicesNotFound() *GetKubernetesServicesNotFound {
+	return &GetKubernetesServicesNotFound{}
+}
+
+/*
+GetKubernetesServicesNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier.
+*/
+type GetKubernetesServicesNotFound struct {
+}
+
+// IsSuccess returns true when this get kubernetes services not found response has a 2xx status code
+func (o *GetKubernetesServicesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes services not found response has a 3xx status code
+func (o *GetKubernetesServicesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes services not found response has a 4xx status code
+func (o *GetKubernetesServicesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes services not found response has a 5xx status code
+func (o *GetKubernetesServicesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes services not found response a status code equal to that given
+func (o *GetKubernetesServicesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get kubernetes services not found response
+func (o *GetKubernetesServicesNotFound) Code() int {
+	return 404
+}
+
+func (o *GetKubernetesServicesNotFound) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesNotFound", 404)
+}
+
+func (o *GetKubernetesServicesNotFound) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesNotFound", 404)
+}
+
+func (o *GetKubernetesServicesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -176,7 +365,7 @@ func NewGetKubernetesServicesInternalServerError() *GetKubernetesServicesInterna
 /*
 GetKubernetesServicesInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to retrieve all services.
 */
 type GetKubernetesServicesInternalServerError struct {
 }
@@ -212,11 +401,11 @@ func (o *GetKubernetesServicesInternalServerError) Code() int {
 }
 
 func (o *GetKubernetesServicesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/services][%d] getKubernetesServicesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesInternalServerError", 500)
 }
 
 func (o *GetKubernetesServicesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/services][%d] getKubernetesServicesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/services][%d] getKubernetesServicesInternalServerError", 500)
 }
 
 func (o *GetKubernetesServicesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

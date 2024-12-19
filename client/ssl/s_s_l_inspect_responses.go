@@ -6,6 +6,7 @@ package ssl
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *SSLInspectOK) Code() int {
 }
 
 func (o *SSLInspectOK) Error() string {
-	return fmt.Sprintf("[GET /ssl][%d] sSLInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectOK %s", 200, payload)
 }
 
 func (o *SSLInspectOK) String() string {
-	return fmt.Sprintf("[GET /ssl][%d] sSLInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectOK %s", 200, payload)
 }
 
 func (o *SSLInspectOK) GetPayload() *models.PortainereeSSLSettings {
@@ -164,11 +167,11 @@ func (o *SSLInspectBadRequest) Code() int {
 }
 
 func (o *SSLInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /ssl][%d] sSLInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectBadRequest", 400)
 }
 
 func (o *SSLInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /ssl][%d] sSLInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectBadRequest", 400)
 }
 
 func (o *SSLInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *SSLInspectForbidden) Code() int {
 }
 
 func (o *SSLInspectForbidden) Error() string {
-	return fmt.Sprintf("[GET /ssl][%d] sSLInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectForbidden", 403)
 }
 
 func (o *SSLInspectForbidden) String() string {
-	return fmt.Sprintf("[GET /ssl][%d] sSLInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectForbidden", 403)
 }
 
 func (o *SSLInspectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *SSLInspectInternalServerError) Code() int {
 }
 
 func (o *SSLInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /ssl][%d] sSLInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectInternalServerError", 500)
 }
 
 func (o *SSLInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /ssl][%d] sSLInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /ssl][%d] sSLInspectInternalServerError", 500)
 }
 
 func (o *SSLInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

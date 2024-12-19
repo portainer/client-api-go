@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -37,6 +38,12 @@ func (o *EndpointUpdateReader) ReadResponse(response runtime.ClientResponse, con
 		return nil, result
 	case 404:
 		result := NewEndpointUpdateNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewEndpointUpdateConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -97,11 +104,13 @@ func (o *EndpointUpdateOK) Code() int {
 }
 
 func (o *EndpointUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateOK %s", 200, payload)
 }
 
 func (o *EndpointUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateOK %s", 200, payload)
 }
 
 func (o *EndpointUpdateOK) GetPayload() *models.PortainereeEndpoint {
@@ -164,11 +173,11 @@ func (o *EndpointUpdateBadRequest) Code() int {
 }
 
 func (o *EndpointUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateBadRequest", 400)
 }
 
 func (o *EndpointUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateBadRequest", 400)
 }
 
 func (o *EndpointUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,14 +229,70 @@ func (o *EndpointUpdateNotFound) Code() int {
 }
 
 func (o *EndpointUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateNotFound", 404)
 }
 
 func (o *EndpointUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateNotFound", 404)
 }
 
 func (o *EndpointUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewEndpointUpdateConflict creates a EndpointUpdateConflict with default headers values
+func NewEndpointUpdateConflict() *EndpointUpdateConflict {
+	return &EndpointUpdateConflict{}
+}
+
+/*
+EndpointUpdateConflict describes a response with status code 409, with default header values.
+
+Name is not unique
+*/
+type EndpointUpdateConflict struct {
+}
+
+// IsSuccess returns true when this endpoint update conflict response has a 2xx status code
+func (o *EndpointUpdateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint update conflict response has a 3xx status code
+func (o *EndpointUpdateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint update conflict response has a 4xx status code
+func (o *EndpointUpdateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint update conflict response has a 5xx status code
+func (o *EndpointUpdateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint update conflict response a status code equal to that given
+func (o *EndpointUpdateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the endpoint update conflict response
+func (o *EndpointUpdateConflict) Code() int {
+	return 409
+}
+
+func (o *EndpointUpdateConflict) Error() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateConflict", 409)
+}
+
+func (o *EndpointUpdateConflict) String() string {
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateConflict", 409)
+}
+
+func (o *EndpointUpdateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -276,11 +341,11 @@ func (o *EndpointUpdateInternalServerError) Code() int {
 }
 
 func (o *EndpointUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateInternalServerError", 500)
 }
 
 func (o *EndpointUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}][%d] endpointUpdateInternalServerError", 500)
 }
 
 func (o *EndpointUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

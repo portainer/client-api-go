@@ -23,7 +23,7 @@ type TeammembershipsTeamMembershipCreatePayload struct {
 	// Role for the user inside the team (1 for leader and 2 for regular member)
 	// Example: 1
 	// Required: true
-	// Enum: [1 2]
+	// Enum: [1,2]
 	Role *int64 `json:"role"`
 
 	// Team identifier

@@ -6,6 +6,7 @@ package registries
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *RegistryUpdateOK) Code() int {
 }
 
 func (o *RegistryUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateOK %s", 200, payload)
 }
 
 func (o *RegistryUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateOK %s", 200, payload)
 }
 
 func (o *RegistryUpdateOK) GetPayload() *models.PortainereeRegistry {
@@ -170,11 +173,11 @@ func (o *RegistryUpdateBadRequest) Code() int {
 }
 
 func (o *RegistryUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateBadRequest", 400)
 }
 
 func (o *RegistryUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateBadRequest", 400)
 }
 
 func (o *RegistryUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *RegistryUpdateNotFound) Code() int {
 }
 
 func (o *RegistryUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateNotFound", 404)
 }
 
 func (o *RegistryUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateNotFound", 404)
 }
 
 func (o *RegistryUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -246,7 +249,7 @@ func NewRegistryUpdateConflict() *RegistryUpdateConflict {
 /*
 RegistryUpdateConflict describes a response with status code 409, with default header values.
 
-Another registry with the same URL already exists
+Another registry with either the same name or same URL & credentials already exists
 */
 type RegistryUpdateConflict struct {
 }
@@ -282,11 +285,11 @@ func (o *RegistryUpdateConflict) Code() int {
 }
 
 func (o *RegistryUpdateConflict) Error() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateConflict ", 409)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateConflict", 409)
 }
 
 func (o *RegistryUpdateConflict) String() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateConflict ", 409)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateConflict", 409)
 }
 
 func (o *RegistryUpdateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *RegistryUpdateInternalServerError) Code() int {
 }
 
 func (o *RegistryUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateInternalServerError", 500)
 }
 
 func (o *RegistryUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] registryUpdateInternalServerError", 500)
 }
 
 func (o *RegistryUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

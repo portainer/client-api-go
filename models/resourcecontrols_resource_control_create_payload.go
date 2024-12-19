@@ -45,7 +45,7 @@ type ResourcecontrolsResourceControlCreatePayload struct {
 	// 3 - volume, 4 - network, 5 - secret, 6 - stack, 7 - config, 8 - custom template, 9 - azure-container-group
 	// Example: 1
 	// Required: true
-	// Enum: [1 2 3 4 5 6 7 8 9]
+	// Enum: [1,2,3,4,5,6,7,8,9]
 	Type *int64 `json:"type"`
 
 	// List of user identifiers with access to the associated resource

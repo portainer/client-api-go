@@ -20,7 +20,7 @@ import (
 type StacksStackGitRedployPayload struct {
 
 	// env
-	Env []*PortainereePair `json:"env"`
+	Env []*PortainerPair `json:"env"`
 
 	// prune
 	// Example: false
@@ -44,6 +44,9 @@ type StacksStackGitRedployPayload struct {
 
 	// repository username
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
+
+	// stack name
+	StackName string `json:"stackName,omitempty"`
 }
 
 // Validate validates this stacks stack git redploy payload

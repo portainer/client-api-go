@@ -99,11 +99,11 @@ func (o *RegistryConfigureNoContent) Code() int {
 }
 
 func (o *RegistryConfigureNoContent) Error() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNoContent ", 204)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNoContent", 204)
 }
 
 func (o *RegistryConfigureNoContent) String() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNoContent ", 204)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNoContent", 204)
 }
 
 func (o *RegistryConfigureNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *RegistryConfigureBadRequest) Code() int {
 }
 
 func (o *RegistryConfigureBadRequest) Error() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureBadRequest ", 400)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureBadRequest", 400)
 }
 
 func (o *RegistryConfigureBadRequest) String() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureBadRequest ", 400)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureBadRequest", 400)
 }
 
 func (o *RegistryConfigureBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *RegistryConfigureForbidden) Code() int {
 }
 
 func (o *RegistryConfigureForbidden) Error() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureForbidden ", 403)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureForbidden", 403)
 }
 
 func (o *RegistryConfigureForbidden) String() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureForbidden ", 403)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureForbidden", 403)
 }
 
 func (o *RegistryConfigureForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *RegistryConfigureNotFound) Code() int {
 }
 
 func (o *RegistryConfigureNotFound) Error() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNotFound ", 404)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNotFound", 404)
 }
 
 func (o *RegistryConfigureNotFound) String() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNotFound ", 404)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureNotFound", 404)
 }
 
 func (o *RegistryConfigureNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *RegistryConfigureInternalServerError) Code() int {
 }
 
 func (o *RegistryConfigureInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureInternalServerError ", 500)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureInternalServerError", 500)
 }
 
 func (o *RegistryConfigureInternalServerError) String() string {
-	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureInternalServerError ", 500)
+	return fmt.Sprintf("[POST /registries/{id}/configure][%d] registryConfigureInternalServerError", 500)
 }
 
 func (o *RegistryConfigureInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

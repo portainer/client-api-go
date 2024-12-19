@@ -99,11 +99,11 @@ func (o *EcrDeleteRepositoryOK) Code() int {
 }
 
 func (o *EcrDeleteRepositoryOK) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryOK ", 200)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryOK", 200)
 }
 
 func (o *EcrDeleteRepositoryOK) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryOK ", 200)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryOK", 200)
 }
 
 func (o *EcrDeleteRepositoryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *EcrDeleteRepositoryBadRequest) Code() int {
 }
 
 func (o *EcrDeleteRepositoryBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryBadRequest", 400)
 }
 
 func (o *EcrDeleteRepositoryBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryBadRequest", 400)
 }
 
 func (o *EcrDeleteRepositoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *EcrDeleteRepositoryForbidden) Code() int {
 }
 
 func (o *EcrDeleteRepositoryForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryForbidden ", 403)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryForbidden", 403)
 }
 
 func (o *EcrDeleteRepositoryForbidden) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryForbidden ", 403)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryForbidden", 403)
 }
 
 func (o *EcrDeleteRepositoryForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *EcrDeleteRepositoryNotFound) Code() int {
 }
 
 func (o *EcrDeleteRepositoryNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryNotFound ", 404)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryNotFound", 404)
 }
 
 func (o *EcrDeleteRepositoryNotFound) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryNotFound ", 404)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryNotFound", 404)
 }
 
 func (o *EcrDeleteRepositoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *EcrDeleteRepositoryInternalServerError) Code() int {
 }
 
 func (o *EcrDeleteRepositoryInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryInternalServerError", 500)
 }
 
 func (o *EcrDeleteRepositoryInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}][%d] ecrDeleteRepositoryInternalServerError", 500)
 }
 
 func (o *EcrDeleteRepositoryInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

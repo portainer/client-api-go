@@ -99,11 +99,11 @@ func (o *Microk8sAddonsOK) Code() int {
 }
 
 func (o *Microk8sAddonsOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsOK ", 200)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsOK", 200)
 }
 
 func (o *Microk8sAddonsOK) String() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsOK ", 200)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsOK", 200)
 }
 
 func (o *Microk8sAddonsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *Microk8sAddonsBadRequest) Code() int {
 }
 
 func (o *Microk8sAddonsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsBadRequest", 400)
 }
 
 func (o *Microk8sAddonsBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsBadRequest", 400)
 }
 
 func (o *Microk8sAddonsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *Microk8sAddonsForbidden) Code() int {
 }
 
 func (o *Microk8sAddonsForbidden) Error() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsForbidden", 403)
 }
 
 func (o *Microk8sAddonsForbidden) String() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsForbidden", 403)
 }
 
 func (o *Microk8sAddonsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *Microk8sAddonsInternalServerError) Code() int {
 }
 
 func (o *Microk8sAddonsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsInternalServerError", 500)
 }
 
 func (o *Microk8sAddonsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsInternalServerError", 500)
 }
 
 func (o *Microk8sAddonsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *Microk8sAddonsServiceUnavailable) Code() int {
 }
 
 func (o *Microk8sAddonsServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsServiceUnavailable", 503)
 }
 
 func (o *Microk8sAddonsServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/microk8s/addons][%d] microk8sAddonsServiceUnavailable", 503)
 }
 
 func (o *Microk8sAddonsServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

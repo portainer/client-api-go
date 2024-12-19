@@ -6,6 +6,7 @@ package endpoint_groups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -63,7 +64,7 @@ GetEndpointGroupsIDOK describes a response with status code 200, with default he
 Success
 */
 type GetEndpointGroupsIDOK struct {
-	Payload *models.PortainereeEndpointGroup
+	Payload *models.PortainerEndpointGroup
 }
 
 // IsSuccess returns true when this get endpoint groups Id o k response has a 2xx status code
@@ -97,20 +98,22 @@ func (o *GetEndpointGroupsIDOK) Code() int {
 }
 
 func (o *GetEndpointGroupsIDOK) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdOK %s", 200, payload)
 }
 
 func (o *GetEndpointGroupsIDOK) String() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdOK %s", 200, payload)
 }
 
-func (o *GetEndpointGroupsIDOK) GetPayload() *models.PortainereeEndpointGroup {
+func (o *GetEndpointGroupsIDOK) GetPayload() *models.PortainerEndpointGroup {
 	return o.Payload
 }
 
 func (o *GetEndpointGroupsIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEndpointGroup)
+	o.Payload = new(models.PortainerEndpointGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -164,11 +167,11 @@ func (o *GetEndpointGroupsIDBadRequest) Code() int {
 }
 
 func (o *GetEndpointGroupsIDBadRequest) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdBadRequest", 400)
 }
 
 func (o *GetEndpointGroupsIDBadRequest) String() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdBadRequest", 400)
 }
 
 func (o *GetEndpointGroupsIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *GetEndpointGroupsIDNotFound) Code() int {
 }
 
 func (o *GetEndpointGroupsIDNotFound) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdNotFound", 404)
 }
 
 func (o *GetEndpointGroupsIDNotFound) String() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdNotFound", 404)
 }
 
 func (o *GetEndpointGroupsIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *GetEndpointGroupsIDInternalServerError) Code() int {
 }
 
 func (o *GetEndpointGroupsIDInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdInternalServerError", 500)
 }
 
 func (o *GetEndpointGroupsIDInternalServerError) String() string {
-	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoint_groups/{id}][%d] getEndpointGroupsIdInternalServerError", 500)
 }
 
 func (o *GetEndpointGroupsIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

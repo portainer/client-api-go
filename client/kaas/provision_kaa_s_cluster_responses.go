@@ -6,6 +6,7 @@ package kaas
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *ProvisionKaaSClusterOK) Code() int {
 }
 
 func (o *ProvisionKaaSClusterOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterOK %s", 200, payload)
 }
 
 func (o *ProvisionKaaSClusterOK) String() string {
-	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterOK %s", 200, payload)
 }
 
 func (o *ProvisionKaaSClusterOK) GetPayload() *models.PortainereeEndpoint {
@@ -164,11 +167,11 @@ func (o *ProvisionKaaSClusterBadRequest) Code() int {
 }
 
 func (o *ProvisionKaaSClusterBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterBadRequest", 400)
 }
 
 func (o *ProvisionKaaSClusterBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterBadRequest", 400)
 }
 
 func (o *ProvisionKaaSClusterBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *ProvisionKaaSClusterInternalServerError) Code() int {
 }
 
 func (o *ProvisionKaaSClusterInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterInternalServerError", 500)
 }
 
 func (o *ProvisionKaaSClusterInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterInternalServerError", 500)
 }
 
 func (o *ProvisionKaaSClusterInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *ProvisionKaaSClusterServiceUnavailable) Code() int {
 }
 
 func (o *ProvisionKaaSClusterServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterServiceUnavailable", 503)
 }
 
 func (o *ProvisionKaaSClusterServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/{provider}/cluster][%d] provisionKaaSClusterServiceUnavailable", 503)
 }
 
 func (o *ProvisionKaaSClusterServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

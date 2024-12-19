@@ -6,6 +6,7 @@ package cloud_credentials
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -42,7 +43,7 @@ func (o *CloudCredsDeleteReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /cloud/credentials/{id}] cloudCredsDelete", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /cloud/credentials/{id}] cloudCredsDelete", response, response.Code())
 	}
 }
 
@@ -91,11 +92,13 @@ func (o *CloudCredsDeleteOK) Code() int {
 }
 
 func (o *CloudCredsDeleteOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/credentials/{id}][%d] cloudCredsDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /cloud/credentials/{id}][%d] cloudCredsDeleteOK %s", 200, payload)
 }
 
 func (o *CloudCredsDeleteOK) String() string {
-	return fmt.Sprintf("[POST /cloud/credentials/{id}][%d] cloudCredsDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /cloud/credentials/{id}][%d] cloudCredsDeleteOK %s", 200, payload)
 }
 
 func (o *CloudCredsDeleteOK) GetPayload() *models.ModelsCloudCredential {
@@ -158,11 +161,11 @@ func (o *CloudCredsDeleteBadRequest) Code() int {
 }
 
 func (o *CloudCredsDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/credentials/{id}][%d] cloudCredsDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /cloud/credentials/{id}][%d] cloudCredsDeleteBadRequest", 400)
 }
 
 func (o *CloudCredsDeleteBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/credentials/{id}][%d] cloudCredsDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /cloud/credentials/{id}][%d] cloudCredsDeleteBadRequest", 400)
 }
 
 func (o *CloudCredsDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *CloudCredsDeleteInternalServerError) Code() int {
 }
 
 func (o *CloudCredsDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/credentials/{id}][%d] cloudCredsDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /cloud/credentials/{id}][%d] cloudCredsDeleteInternalServerError", 500)
 }
 
 func (o *CloudCredsDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/credentials/{id}][%d] cloudCredsDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /cloud/credentials/{id}][%d] cloudCredsDeleteInternalServerError", 500)
 }
 
 func (o *CloudCredsDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

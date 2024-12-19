@@ -6,6 +6,7 @@ package teams
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -51,7 +52,7 @@ TeamListOK describes a response with status code 200, with default header values
 Success
 */
 type TeamListOK struct {
-	Payload []*models.PortainereeTeam
+	Payload []*models.PortainerTeam
 }
 
 // IsSuccess returns true when this team list o k response has a 2xx status code
@@ -85,14 +86,16 @@ func (o *TeamListOK) Code() int {
 }
 
 func (o *TeamListOK) Error() string {
-	return fmt.Sprintf("[GET /teams][%d] teamListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams][%d] teamListOK %s", 200, payload)
 }
 
 func (o *TeamListOK) String() string {
-	return fmt.Sprintf("[GET /teams][%d] teamListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams][%d] teamListOK %s", 200, payload)
 }
 
-func (o *TeamListOK) GetPayload() []*models.PortainereeTeam {
+func (o *TeamListOK) GetPayload() []*models.PortainerTeam {
 	return o.Payload
 }
 
@@ -150,11 +153,11 @@ func (o *TeamListInternalServerError) Code() int {
 }
 
 func (o *TeamListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /teams][%d] teamListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /teams][%d] teamListInternalServerError", 500)
 }
 
 func (o *TeamListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /teams][%d] teamListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /teams][%d] teamListInternalServerError", 500)
 }
 
 func (o *TeamListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

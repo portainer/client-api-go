@@ -6,6 +6,7 @@ package system
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *SystemInfoOK) Code() int {
 }
 
 func (o *SystemInfoOK) Error() string {
-	return fmt.Sprintf("[GET /system/info][%d] systemInfoOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /system/info][%d] systemInfoOK %s", 200, payload)
 }
 
 func (o *SystemInfoOK) String() string {
-	return fmt.Sprintf("[GET /system/info][%d] systemInfoOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /system/info][%d] systemInfoOK %s", 200, payload)
 }
 
 func (o *SystemInfoOK) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemSystemInfoResponse {
@@ -152,11 +155,11 @@ func (o *SystemInfoInternalServerError) Code() int {
 }
 
 func (o *SystemInfoInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /system/info][%d] systemInfoInternalServerError ", 500)
+	return fmt.Sprintf("[GET /system/info][%d] systemInfoInternalServerError", 500)
 }
 
 func (o *SystemInfoInternalServerError) String() string {
-	return fmt.Sprintf("[GET /system/info][%d] systemInfoInternalServerError ", 500)
+	return fmt.Sprintf("[GET /system/info][%d] systemInfoInternalServerError", 500)
 }
 
 func (o *SystemInfoInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

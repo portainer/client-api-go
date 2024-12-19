@@ -26,7 +26,7 @@ type ReleaseRelease struct {
 
 	// Config is the set of extra Values added to the chart.
 	// These values override the default values inside of the chart.
-	Config interface{} `json:"config,omitempty"`
+	Config map[string]interface{} `json:"config,omitempty"`
 
 	// Hooks are all of the hooks declared for this release.
 	Hooks []*ReleaseHook `json:"hooks"`

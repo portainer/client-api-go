@@ -7,7 +7,6 @@ package kubernetes
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -21,14 +20,38 @@ type CreateKubernetesIngressReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *CreateKubernetesIngressReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewCreateKubernetesIngressOK()
+	case 204:
+		result := NewCreateKubernetesIngressNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
 	case 400:
 		result := NewCreateKubernetesIngressBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewCreateKubernetesIngressUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewCreateKubernetesIngressForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewCreateKubernetesIngressNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewCreateKubernetesIngressConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -40,72 +63,62 @@ func (o *CreateKubernetesIngressReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses] createKubernetesIngress", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses] CreateKubernetesIngress", response, response.Code())
 	}
 }
 
-// NewCreateKubernetesIngressOK creates a CreateKubernetesIngressOK with default headers values
-func NewCreateKubernetesIngressOK() *CreateKubernetesIngressOK {
-	return &CreateKubernetesIngressOK{}
+// NewCreateKubernetesIngressNoContent creates a CreateKubernetesIngressNoContent with default headers values
+func NewCreateKubernetesIngressNoContent() *CreateKubernetesIngressNoContent {
+	return &CreateKubernetesIngressNoContent{}
 }
 
 /*
-CreateKubernetesIngressOK describes a response with status code 200, with default header values.
+CreateKubernetesIngressNoContent describes a response with status code 204, with default header values.
 
 Success
 */
-type CreateKubernetesIngressOK struct {
-	Payload string
+type CreateKubernetesIngressNoContent struct {
 }
 
-// IsSuccess returns true when this create kubernetes ingress o k response has a 2xx status code
-func (o *CreateKubernetesIngressOK) IsSuccess() bool {
+// IsSuccess returns true when this create kubernetes ingress no content response has a 2xx status code
+func (o *CreateKubernetesIngressNoContent) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this create kubernetes ingress o k response has a 3xx status code
-func (o *CreateKubernetesIngressOK) IsRedirect() bool {
+// IsRedirect returns true when this create kubernetes ingress no content response has a 3xx status code
+func (o *CreateKubernetesIngressNoContent) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this create kubernetes ingress o k response has a 4xx status code
-func (o *CreateKubernetesIngressOK) IsClientError() bool {
+// IsClientError returns true when this create kubernetes ingress no content response has a 4xx status code
+func (o *CreateKubernetesIngressNoContent) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this create kubernetes ingress o k response has a 5xx status code
-func (o *CreateKubernetesIngressOK) IsServerError() bool {
+// IsServerError returns true when this create kubernetes ingress no content response has a 5xx status code
+func (o *CreateKubernetesIngressNoContent) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this create kubernetes ingress o k response a status code equal to that given
-func (o *CreateKubernetesIngressOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this create kubernetes ingress no content response a status code equal to that given
+func (o *CreateKubernetesIngressNoContent) IsCode(code int) bool {
+	return code == 204
 }
 
-// Code gets the status code for the create kubernetes ingress o k response
-func (o *CreateKubernetesIngressOK) Code() int {
-	return 200
+// Code gets the status code for the create kubernetes ingress no content response
+func (o *CreateKubernetesIngressNoContent) Code() int {
+	return 204
 }
 
-func (o *CreateKubernetesIngressOK) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressOK  %+v", 200, o.Payload)
+func (o *CreateKubernetesIngressNoContent) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressNoContent", 204)
 }
 
-func (o *CreateKubernetesIngressOK) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressOK  %+v", 200, o.Payload)
+func (o *CreateKubernetesIngressNoContent) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressNoContent", 204)
 }
 
-func (o *CreateKubernetesIngressOK) GetPayload() string {
-	return o.Payload
-}
-
-func (o *CreateKubernetesIngressOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
+func (o *CreateKubernetesIngressNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -118,7 +131,7 @@ func NewCreateKubernetesIngressBadRequest() *CreateKubernetesIngressBadRequest {
 /*
 CreateKubernetesIngressBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type CreateKubernetesIngressBadRequest struct {
 }
@@ -154,14 +167,238 @@ func (o *CreateKubernetesIngressBadRequest) Code() int {
 }
 
 func (o *CreateKubernetesIngressBadRequest) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressBadRequest", 400)
 }
 
 func (o *CreateKubernetesIngressBadRequest) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressBadRequest", 400)
 }
 
 func (o *CreateKubernetesIngressBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesIngressUnauthorized creates a CreateKubernetesIngressUnauthorized with default headers values
+func NewCreateKubernetesIngressUnauthorized() *CreateKubernetesIngressUnauthorized {
+	return &CreateKubernetesIngressUnauthorized{}
+}
+
+/*
+CreateKubernetesIngressUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type CreateKubernetesIngressUnauthorized struct {
+}
+
+// IsSuccess returns true when this create kubernetes ingress unauthorized response has a 2xx status code
+func (o *CreateKubernetesIngressUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes ingress unauthorized response has a 3xx status code
+func (o *CreateKubernetesIngressUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes ingress unauthorized response has a 4xx status code
+func (o *CreateKubernetesIngressUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes ingress unauthorized response has a 5xx status code
+func (o *CreateKubernetesIngressUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes ingress unauthorized response a status code equal to that given
+func (o *CreateKubernetesIngressUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create kubernetes ingress unauthorized response
+func (o *CreateKubernetesIngressUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateKubernetesIngressUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressUnauthorized", 401)
+}
+
+func (o *CreateKubernetesIngressUnauthorized) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressUnauthorized", 401)
+}
+
+func (o *CreateKubernetesIngressUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesIngressForbidden creates a CreateKubernetesIngressForbidden with default headers values
+func NewCreateKubernetesIngressForbidden() *CreateKubernetesIngressForbidden {
+	return &CreateKubernetesIngressForbidden{}
+}
+
+/*
+CreateKubernetesIngressForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type CreateKubernetesIngressForbidden struct {
+}
+
+// IsSuccess returns true when this create kubernetes ingress forbidden response has a 2xx status code
+func (o *CreateKubernetesIngressForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes ingress forbidden response has a 3xx status code
+func (o *CreateKubernetesIngressForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes ingress forbidden response has a 4xx status code
+func (o *CreateKubernetesIngressForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes ingress forbidden response has a 5xx status code
+func (o *CreateKubernetesIngressForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes ingress forbidden response a status code equal to that given
+func (o *CreateKubernetesIngressForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create kubernetes ingress forbidden response
+func (o *CreateKubernetesIngressForbidden) Code() int {
+	return 403
+}
+
+func (o *CreateKubernetesIngressForbidden) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressForbidden", 403)
+}
+
+func (o *CreateKubernetesIngressForbidden) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressForbidden", 403)
+}
+
+func (o *CreateKubernetesIngressForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesIngressNotFound creates a CreateKubernetesIngressNotFound with default headers values
+func NewCreateKubernetesIngressNotFound() *CreateKubernetesIngressNotFound {
+	return &CreateKubernetesIngressNotFound{}
+}
+
+/*
+CreateKubernetesIngressNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier.
+*/
+type CreateKubernetesIngressNotFound struct {
+}
+
+// IsSuccess returns true when this create kubernetes ingress not found response has a 2xx status code
+func (o *CreateKubernetesIngressNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes ingress not found response has a 3xx status code
+func (o *CreateKubernetesIngressNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes ingress not found response has a 4xx status code
+func (o *CreateKubernetesIngressNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes ingress not found response has a 5xx status code
+func (o *CreateKubernetesIngressNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes ingress not found response a status code equal to that given
+func (o *CreateKubernetesIngressNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create kubernetes ingress not found response
+func (o *CreateKubernetesIngressNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateKubernetesIngressNotFound) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressNotFound", 404)
+}
+
+func (o *CreateKubernetesIngressNotFound) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressNotFound", 404)
+}
+
+func (o *CreateKubernetesIngressNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesIngressConflict creates a CreateKubernetesIngressConflict with default headers values
+func NewCreateKubernetesIngressConflict() *CreateKubernetesIngressConflict {
+	return &CreateKubernetesIngressConflict{}
+}
+
+/*
+CreateKubernetesIngressConflict describes a response with status code 409, with default header values.
+
+Conflict - an ingress with the same name already exists in the specified namespace.
+*/
+type CreateKubernetesIngressConflict struct {
+}
+
+// IsSuccess returns true when this create kubernetes ingress conflict response has a 2xx status code
+func (o *CreateKubernetesIngressConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes ingress conflict response has a 3xx status code
+func (o *CreateKubernetesIngressConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes ingress conflict response has a 4xx status code
+func (o *CreateKubernetesIngressConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes ingress conflict response has a 5xx status code
+func (o *CreateKubernetesIngressConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes ingress conflict response a status code equal to that given
+func (o *CreateKubernetesIngressConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create kubernetes ingress conflict response
+func (o *CreateKubernetesIngressConflict) Code() int {
+	return 409
+}
+
+func (o *CreateKubernetesIngressConflict) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressConflict", 409)
+}
+
+func (o *CreateKubernetesIngressConflict) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressConflict", 409)
+}
+
+func (o *CreateKubernetesIngressConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -174,7 +411,7 @@ func NewCreateKubernetesIngressInternalServerError() *CreateKubernetesIngressInt
 /*
 CreateKubernetesIngressInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to create an ingress.
 */
 type CreateKubernetesIngressInternalServerError struct {
 }
@@ -210,11 +447,11 @@ func (o *CreateKubernetesIngressInternalServerError) Code() int {
 }
 
 func (o *CreateKubernetesIngressInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressInternalServerError", 500)
 }
 
 func (o *CreateKubernetesIngressInternalServerError) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] createKubernetesIngressInternalServerError", 500)
 }
 
 func (o *CreateKubernetesIngressInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

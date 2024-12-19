@@ -21,13 +21,15 @@ import (
 // swagger:model edgestacks.updateEdgeStackPayload
 type EdgestacksUpdateEdgeStackPayload struct {
 
+	// Options to control the deployer behaviour
+	DeployerOptions *EdgestacksDeployerOptionsPayload `json:"deployerOptions,omitempty"`
+
 	// Deployment type to deploy this stack
-	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
+	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
 	// compose is enabled only for docker environments
 	// kubernetes is enabled only for kubernetes environments
-	// nomad is enabled only for nomad environments
 	// Example: 0
-	// Enum: [0 1 2]
+	// Enum: [0,1]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// edge groups
@@ -47,6 +49,9 @@ type EdgestacksUpdateEdgeStackPayload struct {
 
 	// retry deploy
 	RetryDeploy bool `json:"retryDeploy,omitempty"`
+
+	// RetryPeriod specifies the duration, in seconds, for which the agent should continue attempting to deploy the stack after a failure
+	RetryPeriod int64 `json:"retryPeriod,omitempty"`
 
 	// RollbackTo specifies the stack file version to rollback to (only support to rollback to the last version currently)
 	RollbackTo int64 `json:"rollbackTo,omitempty"`
@@ -72,6 +77,10 @@ type EdgestacksUpdateEdgeStackPayload struct {
 func (m *EdgestacksUpdateEdgeStackPayload) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDeployerOptions(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDeploymentType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -90,11 +99,30 @@ func (m *EdgestacksUpdateEdgeStackPayload) Validate(formats strfmt.Registry) err
 	return nil
 }
 
+func (m *EdgestacksUpdateEdgeStackPayload) validateDeployerOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeployerOptions) { // not required
+		return nil
+	}
+
+	if m.DeployerOptions != nil {
+		if err := m.DeployerOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deployerOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deployerOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 var edgestacksUpdateEdgeStackPayloadTypeDeploymentTypePropEnum []interface{}
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[0,1]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -172,6 +200,10 @@ func (m *EdgestacksUpdateEdgeStackPayload) validateStaggerConfig(formats strfmt.
 func (m *EdgestacksUpdateEdgeStackPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateDeployerOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEnvVars(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -183,6 +215,27 @@ func (m *EdgestacksUpdateEdgeStackPayload) ContextValidate(ctx context.Context, 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EdgestacksUpdateEdgeStackPayload) contextValidateDeployerOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DeployerOptions != nil {
+
+		if swag.IsZero(m.DeployerOptions) { // not required
+			return nil
+		}
+
+		if err := m.DeployerOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deployerOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deployerOptions")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

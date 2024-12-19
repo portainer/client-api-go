@@ -30,6 +30,13 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Required: true
 	Description *string `json:"description"`
 
+	// edge settings
+	EdgeSettings *PortainereeCustomTemplateEdgeSettings `json:"edgeSettings,omitempty"`
+
+	// EdgeTemplate indicates if this template purpose for Edge Stack
+	// Example: false
+	EdgeTemplate bool `json:"edgeTemplate,omitempty"`
+
 	// IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
 	// Example: false
 	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
@@ -46,7 +53,7 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// Valid values are: 1 - 'linux', 2 - 'windows'
 	// Required for Docker stacks
 	// Example: 1
-	// Enum: [1 2]
+	// Enum: [1,2]
 	Platform int64 `json:"platform,omitempty"`
 
 	// Use basic authentication to clone the Git repository
@@ -92,11 +99,11 @@ type CustomtemplatesCustomTemplateFromGitRepositoryPayload struct {
 	// * 3 - kubernetes
 	// Example: 1
 	// Required: true
-	// Enum: [1 2]
+	// Enum: [1,2]
 	Type *int64 `json:"type"`
 
 	// Definitions of variables in the stack file
-	Variables []*PortainereeCustomTemplateVariableDefinition `json:"variables"`
+	Variables []*PortainerCustomTemplateVariableDefinition `json:"variables"`
 }
 
 // Validate validates this customtemplates custom template from git repository payload
@@ -104,6 +111,10 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) Validate(formats
 	var res []error
 
 	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEdgeSettings(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -137,6 +148,25 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateDescript
 
 	if err := validate.Required("description", "body", m.Description); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateEdgeSettings(formats strfmt.Registry) error {
+	if swag.IsZero(m.EdgeSettings) { // not required
+		return nil
+	}
+
+	if m.EdgeSettings != nil {
+		if err := m.EdgeSettings.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edgeSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edgeSettings")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -257,6 +287,10 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) validateVariable
 func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateEdgeSettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateVariables(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -264,6 +298,27 @@ func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) ContextValidate(
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *CustomtemplatesCustomTemplateFromGitRepositoryPayload) contextValidateEdgeSettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.EdgeSettings != nil {
+
+		if swag.IsZero(m.EdgeSettings) { // not required
+			return nil
+		}
+
+		if err := m.EdgeSettings.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edgeSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edgeSettings")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

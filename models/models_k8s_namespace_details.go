@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // ModelsK8sNamespaceDetails models k8s namespace details
@@ -20,17 +22,184 @@ type ModelsK8sNamespaceDetails struct {
 	// annotations
 	Annotations map[string]string `json:"Annotations,omitempty"`
 
+	// load balancer quota
+	LoadBalancerQuota *ModelsK8sLoadBalancerQuota `json:"LoadBalancerQuota,omitempty"`
+
 	// name
 	Name string `json:"Name,omitempty"`
+
+	// owner
+	Owner string `json:"Owner,omitempty"`
+
+	// resource quota
+	ResourceQuota *ModelsK8sResourceQuota `json:"ResourceQuota,omitempty"`
+
+	// storage quotas
+	StorageQuotas map[string]ModelsK8sStorageQuota `json:"StorageQuotas,omitempty"`
 }
 
 // Validate validates this models k8s namespace details
 func (m *ModelsK8sNamespaceDetails) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLoadBalancerQuota(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateResourceQuota(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStorageQuotas(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this models k8s namespace details based on context it is used
+func (m *ModelsK8sNamespaceDetails) validateLoadBalancerQuota(formats strfmt.Registry) error {
+	if swag.IsZero(m.LoadBalancerQuota) { // not required
+		return nil
+	}
+
+	if m.LoadBalancerQuota != nil {
+		if err := m.LoadBalancerQuota.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("LoadBalancerQuota")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("LoadBalancerQuota")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsK8sNamespaceDetails) validateResourceQuota(formats strfmt.Registry) error {
+	if swag.IsZero(m.ResourceQuota) { // not required
+		return nil
+	}
+
+	if m.ResourceQuota != nil {
+		if err := m.ResourceQuota.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ResourceQuota")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ResourceQuota")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsK8sNamespaceDetails) validateStorageQuotas(formats strfmt.Registry) error {
+	if swag.IsZero(m.StorageQuotas) { // not required
+		return nil
+	}
+
+	for k := range m.StorageQuotas {
+
+		if err := validate.Required("StorageQuotas"+"."+k, "body", m.StorageQuotas[k]); err != nil {
+			return err
+		}
+		if val, ok := m.StorageQuotas[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("StorageQuotas" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("StorageQuotas" + "." + k)
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this models k8s namespace details based on the context it is used
 func (m *ModelsK8sNamespaceDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLoadBalancerQuota(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateResourceQuota(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStorageQuotas(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ModelsK8sNamespaceDetails) contextValidateLoadBalancerQuota(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LoadBalancerQuota != nil {
+
+		if swag.IsZero(m.LoadBalancerQuota) { // not required
+			return nil
+		}
+
+		if err := m.LoadBalancerQuota.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("LoadBalancerQuota")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("LoadBalancerQuota")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsK8sNamespaceDetails) contextValidateResourceQuota(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ResourceQuota != nil {
+
+		if swag.IsZero(m.ResourceQuota) { // not required
+			return nil
+		}
+
+		if err := m.ResourceQuota.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ResourceQuota")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ResourceQuota")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ModelsK8sNamespaceDetails) contextValidateStorageQuotas(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.StorageQuotas {
+
+		if val, ok := m.StorageQuotas[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

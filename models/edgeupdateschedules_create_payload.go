@@ -17,13 +17,16 @@ import (
 // swagger:model edgeupdateschedules.createPayload
 type EdgeupdateschedulesCreatePayload struct {
 
+	// default to "" == portainer/agent:<current_server_version>
+	AgentImage string `json:"agentImage,omitempty"`
+
 	// group i ds
 	GroupIDs []int64 `json:"groupIDs"`
 
 	// name
 	Name string `json:"name,omitempty"`
 
-	// registry ID
+	// default to 0 = dockerhub
 	RegistryID int64 `json:"registryID,omitempty"`
 
 	// scheduled time
@@ -32,8 +35,8 @@ type EdgeupdateschedulesCreatePayload struct {
 	// type
 	Type int64 `json:"type,omitempty"`
 
-	// version
-	Version string `json:"version,omitempty"`
+	// default to "" == portainer/portainer-updater:<current_server_version>
+	UpdaterImage string `json:"updaterImage,omitempty"`
 }
 
 // Validate validates this edgeupdateschedules create payload

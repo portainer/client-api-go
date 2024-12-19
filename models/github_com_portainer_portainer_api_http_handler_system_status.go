@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -22,9 +21,6 @@ type GithubComPortainerPortainerAPIHTTPHandlerSystemStatus struct {
 	// Example: 2.0.0
 	Version string `json:"Version,omitempty"`
 
-	// demo environment
-	DemoEnvironment *GithubComPortainerPortainerAPIDemoEnvironmentDetails `json:"demoEnvironment,omitempty"`
-
 	// Server Instance ID
 	// Example: 299ab403-70a8-4c05-92f7-bf7a994d50df
 	InstanceID string `json:"instanceID,omitempty"`
@@ -32,69 +28,11 @@ type GithubComPortainerPortainerAPIHTTPHandlerSystemStatus struct {
 
 // Validate validates this github com portainer portainer api http handler system status
 func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemStatus) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateDemoEnvironment(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
 	return nil
 }
 
-func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemStatus) validateDemoEnvironment(formats strfmt.Registry) error {
-	if swag.IsZero(m.DemoEnvironment) { // not required
-		return nil
-	}
-
-	if m.DemoEnvironment != nil {
-		if err := m.DemoEnvironment.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("demoEnvironment")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("demoEnvironment")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this github com portainer portainer api http handler system status based on the context it is used
+// ContextValidate validates this github com portainer portainer api http handler system status based on context it is used
 func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateDemoEnvironment(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemStatus) contextValidateDemoEnvironment(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.DemoEnvironment != nil {
-
-		if swag.IsZero(m.DemoEnvironment) { // not required
-			return nil
-		}
-
-		if err := m.DemoEnvironment.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("demoEnvironment")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("demoEnvironment")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

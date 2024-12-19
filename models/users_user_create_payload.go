@@ -25,10 +25,12 @@ type UsersUserCreatePayload struct {
 	// Required: true
 	Password *string `json:"password"`
 
-	// User role (1 for administrator account and 2 for regular account)
-	// Example: 2
+	// User role
+	// 1 = administrator account
+	// 2 = regular account
+	// Example: 1
 	// Required: true
-	// Enum: [1 2]
+	// Enum: [1,2]
 	Role *int64 `json:"role"`
 
 	// username

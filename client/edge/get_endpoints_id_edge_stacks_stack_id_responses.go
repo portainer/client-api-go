@@ -6,6 +6,7 @@ package edge
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *GetEndpointsIDEdgeStacksStackIDOK) Code() int {
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDOK) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdOK %s", 200, payload)
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDOK) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdOK %s", 200, payload)
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDOK) GetPayload() *models.EdgeStackPayload {
@@ -164,11 +167,11 @@ func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) Code() int {
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdBadRequest", 400)
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdBadRequest", 400)
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *GetEndpointsIDEdgeStacksStackIDNotFound) Code() int {
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDNotFound) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdNotFound", 404)
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDNotFound) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdNotFound", 404)
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) Code() int {
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdInternalServerError", 500)
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/stacks/{stackId}][%d] getEndpointsIdEdgeStacksStackIdInternalServerError", 500)
 }
 
 func (o *GetEndpointsIDEdgeStacksStackIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

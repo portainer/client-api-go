@@ -19,11 +19,11 @@ type PortainereeEnvironmentAgentData struct {
 
 	// previous version
 	// Example: 1.0.0
-	PreviousVersion string `json:"previousVersion,omitempty"`
+	PreviousVersion string `json:"PreviousVersion,omitempty"`
 
 	// version
 	// Example: 1.0.0
-	Version string `json:"version,omitempty"`
+	Version string `json:"Version,omitempty"`
 }
 
 // Validate validates this portaineree environment agent data

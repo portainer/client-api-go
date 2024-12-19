@@ -6,6 +6,7 @@ package gitops
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *GitOperationRepoRefsOK) Code() int {
 }
 
 func (o *GitOperationRepoRefsOK) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsOK %s", 200, payload)
 }
 
 func (o *GitOperationRepoRefsOK) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsOK %s", 200, payload)
 }
 
 func (o *GitOperationRepoRefsOK) GetPayload() []string {
@@ -154,11 +157,11 @@ func (o *GitOperationRepoRefsBadRequest) Code() int {
 }
 
 func (o *GitOperationRepoRefsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsBadRequest ", 400)
+	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsBadRequest", 400)
 }
 
 func (o *GitOperationRepoRefsBadRequest) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsBadRequest ", 400)
+	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsBadRequest", 400)
 }
 
 func (o *GitOperationRepoRefsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -210,11 +213,11 @@ func (o *GitOperationRepoRefsInternalServerError) Code() int {
 }
 
 func (o *GitOperationRepoRefsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsInternalServerError", 500)
 }
 
 func (o *GitOperationRepoRefsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /gitops/repo/refs][%d] gitOperationRepoRefsInternalServerError", 500)
 }
 
 func (o *GitOperationRepoRefsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package edge_stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EdgeStackCreateStringOK) Code() int {
 }
 
 func (o *EdgeStackCreateStringOK) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringOK %s", 200, payload)
 }
 
 func (o *EdgeStackCreateStringOK) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringOK %s", 200, payload)
 }
 
 func (o *EdgeStackCreateStringOK) GetPayload() *models.PortainereeEdgeStack {
@@ -164,11 +167,11 @@ func (o *EdgeStackCreateStringBadRequest) Code() int {
 }
 
 func (o *EdgeStackCreateStringBadRequest) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringBadRequest", 400)
 }
 
 func (o *EdgeStackCreateStringBadRequest) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringBadRequest", 400)
 }
 
 func (o *EdgeStackCreateStringBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EdgeStackCreateStringInternalServerError) Code() int {
 }
 
 func (o *EdgeStackCreateStringInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringInternalServerError", 500)
 }
 
 func (o *EdgeStackCreateStringInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringInternalServerError", 500)
 }
 
 func (o *EdgeStackCreateStringInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EdgeStackCreateStringServiceUnavailable) Code() int {
 }
 
 func (o *EdgeStackCreateStringServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringServiceUnavailable", 503)
 }
 
 func (o *EdgeStackCreateStringServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_stacks/create/string][%d] edgeStackCreateStringServiceUnavailable", 503)
 }
 
 func (o *EdgeStackCreateStringServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -20,14 +20,32 @@ type CreateKubernetesServiceReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *CreateKubernetesServiceReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewCreateKubernetesServiceOK()
+	case 204:
+		result := NewCreateKubernetesServiceNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
 	case 400:
 		result := NewCreateKubernetesServiceBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewCreateKubernetesServiceUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewCreateKubernetesServiceForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewCreateKubernetesServiceNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -39,62 +57,62 @@ func (o *CreateKubernetesServiceReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/namespaces/{namespace}/services] createKubernetesService", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/namespaces/{namespace}/services] CreateKubernetesService", response, response.Code())
 	}
 }
 
-// NewCreateKubernetesServiceOK creates a CreateKubernetesServiceOK with default headers values
-func NewCreateKubernetesServiceOK() *CreateKubernetesServiceOK {
-	return &CreateKubernetesServiceOK{}
+// NewCreateKubernetesServiceNoContent creates a CreateKubernetesServiceNoContent with default headers values
+func NewCreateKubernetesServiceNoContent() *CreateKubernetesServiceNoContent {
+	return &CreateKubernetesServiceNoContent{}
 }
 
 /*
-CreateKubernetesServiceOK describes a response with status code 200, with default header values.
+CreateKubernetesServiceNoContent describes a response with status code 204, with default header values.
 
 Success
 */
-type CreateKubernetesServiceOK struct {
+type CreateKubernetesServiceNoContent struct {
 }
 
-// IsSuccess returns true when this create kubernetes service o k response has a 2xx status code
-func (o *CreateKubernetesServiceOK) IsSuccess() bool {
+// IsSuccess returns true when this create kubernetes service no content response has a 2xx status code
+func (o *CreateKubernetesServiceNoContent) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this create kubernetes service o k response has a 3xx status code
-func (o *CreateKubernetesServiceOK) IsRedirect() bool {
+// IsRedirect returns true when this create kubernetes service no content response has a 3xx status code
+func (o *CreateKubernetesServiceNoContent) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this create kubernetes service o k response has a 4xx status code
-func (o *CreateKubernetesServiceOK) IsClientError() bool {
+// IsClientError returns true when this create kubernetes service no content response has a 4xx status code
+func (o *CreateKubernetesServiceNoContent) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this create kubernetes service o k response has a 5xx status code
-func (o *CreateKubernetesServiceOK) IsServerError() bool {
+// IsServerError returns true when this create kubernetes service no content response has a 5xx status code
+func (o *CreateKubernetesServiceNoContent) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this create kubernetes service o k response a status code equal to that given
-func (o *CreateKubernetesServiceOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this create kubernetes service no content response a status code equal to that given
+func (o *CreateKubernetesServiceNoContent) IsCode(code int) bool {
+	return code == 204
 }
 
-// Code gets the status code for the create kubernetes service o k response
-func (o *CreateKubernetesServiceOK) Code() int {
-	return 200
+// Code gets the status code for the create kubernetes service no content response
+func (o *CreateKubernetesServiceNoContent) Code() int {
+	return 204
 }
 
-func (o *CreateKubernetesServiceOK) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceOK ", 200)
+func (o *CreateKubernetesServiceNoContent) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceNoContent", 204)
 }
 
-func (o *CreateKubernetesServiceOK) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceOK ", 200)
+func (o *CreateKubernetesServiceNoContent) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceNoContent", 204)
 }
 
-func (o *CreateKubernetesServiceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *CreateKubernetesServiceNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -107,7 +125,7 @@ func NewCreateKubernetesServiceBadRequest() *CreateKubernetesServiceBadRequest {
 /*
 CreateKubernetesServiceBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type CreateKubernetesServiceBadRequest struct {
 }
@@ -143,14 +161,182 @@ func (o *CreateKubernetesServiceBadRequest) Code() int {
 }
 
 func (o *CreateKubernetesServiceBadRequest) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceBadRequest", 400)
 }
 
 func (o *CreateKubernetesServiceBadRequest) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceBadRequest", 400)
 }
 
 func (o *CreateKubernetesServiceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesServiceUnauthorized creates a CreateKubernetesServiceUnauthorized with default headers values
+func NewCreateKubernetesServiceUnauthorized() *CreateKubernetesServiceUnauthorized {
+	return &CreateKubernetesServiceUnauthorized{}
+}
+
+/*
+CreateKubernetesServiceUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type CreateKubernetesServiceUnauthorized struct {
+}
+
+// IsSuccess returns true when this create kubernetes service unauthorized response has a 2xx status code
+func (o *CreateKubernetesServiceUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes service unauthorized response has a 3xx status code
+func (o *CreateKubernetesServiceUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes service unauthorized response has a 4xx status code
+func (o *CreateKubernetesServiceUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes service unauthorized response has a 5xx status code
+func (o *CreateKubernetesServiceUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes service unauthorized response a status code equal to that given
+func (o *CreateKubernetesServiceUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create kubernetes service unauthorized response
+func (o *CreateKubernetesServiceUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateKubernetesServiceUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceUnauthorized", 401)
+}
+
+func (o *CreateKubernetesServiceUnauthorized) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceUnauthorized", 401)
+}
+
+func (o *CreateKubernetesServiceUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesServiceForbidden creates a CreateKubernetesServiceForbidden with default headers values
+func NewCreateKubernetesServiceForbidden() *CreateKubernetesServiceForbidden {
+	return &CreateKubernetesServiceForbidden{}
+}
+
+/*
+CreateKubernetesServiceForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type CreateKubernetesServiceForbidden struct {
+}
+
+// IsSuccess returns true when this create kubernetes service forbidden response has a 2xx status code
+func (o *CreateKubernetesServiceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes service forbidden response has a 3xx status code
+func (o *CreateKubernetesServiceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes service forbidden response has a 4xx status code
+func (o *CreateKubernetesServiceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes service forbidden response has a 5xx status code
+func (o *CreateKubernetesServiceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes service forbidden response a status code equal to that given
+func (o *CreateKubernetesServiceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create kubernetes service forbidden response
+func (o *CreateKubernetesServiceForbidden) Code() int {
+	return 403
+}
+
+func (o *CreateKubernetesServiceForbidden) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceForbidden", 403)
+}
+
+func (o *CreateKubernetesServiceForbidden) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceForbidden", 403)
+}
+
+func (o *CreateKubernetesServiceForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesServiceNotFound creates a CreateKubernetesServiceNotFound with default headers values
+func NewCreateKubernetesServiceNotFound() *CreateKubernetesServiceNotFound {
+	return &CreateKubernetesServiceNotFound{}
+}
+
+/*
+CreateKubernetesServiceNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier.
+*/
+type CreateKubernetesServiceNotFound struct {
+}
+
+// IsSuccess returns true when this create kubernetes service not found response has a 2xx status code
+func (o *CreateKubernetesServiceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes service not found response has a 3xx status code
+func (o *CreateKubernetesServiceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes service not found response has a 4xx status code
+func (o *CreateKubernetesServiceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes service not found response has a 5xx status code
+func (o *CreateKubernetesServiceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes service not found response a status code equal to that given
+func (o *CreateKubernetesServiceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create kubernetes service not found response
+func (o *CreateKubernetesServiceNotFound) Code() int {
+	return 404
+}
+
+func (o *CreateKubernetesServiceNotFound) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceNotFound", 404)
+}
+
+func (o *CreateKubernetesServiceNotFound) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceNotFound", 404)
+}
+
+func (o *CreateKubernetesServiceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -163,7 +349,7 @@ func NewCreateKubernetesServiceInternalServerError() *CreateKubernetesServiceInt
 /*
 CreateKubernetesServiceInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to create a service.
 */
 type CreateKubernetesServiceInternalServerError struct {
 }
@@ -199,11 +385,11 @@ func (o *CreateKubernetesServiceInternalServerError) Code() int {
 }
 
 func (o *CreateKubernetesServiceInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceInternalServerError", 500)
 }
 
 func (o *CreateKubernetesServiceInternalServerError) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}/services][%d] createKubernetesServiceInternalServerError", 500)
 }
 
 func (o *CreateKubernetesServiceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

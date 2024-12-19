@@ -99,11 +99,11 @@ func (o *UserRemoveGitCredentialNoContent) Code() int {
 }
 
 func (o *UserRemoveGitCredentialNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNoContent ", 204)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNoContent", 204)
 }
 
 func (o *UserRemoveGitCredentialNoContent) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNoContent ", 204)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNoContent", 204)
 }
 
 func (o *UserRemoveGitCredentialNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *UserRemoveGitCredentialBadRequest) Code() int {
 }
 
 func (o *UserRemoveGitCredentialBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialBadRequest", 400)
 }
 
 func (o *UserRemoveGitCredentialBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialBadRequest", 400)
 }
 
 func (o *UserRemoveGitCredentialBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *UserRemoveGitCredentialForbidden) Code() int {
 }
 
 func (o *UserRemoveGitCredentialForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialForbidden ", 403)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialForbidden", 403)
 }
 
 func (o *UserRemoveGitCredentialForbidden) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialForbidden ", 403)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialForbidden", 403)
 }
 
 func (o *UserRemoveGitCredentialForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *UserRemoveGitCredentialNotFound) Code() int {
 }
 
 func (o *UserRemoveGitCredentialNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNotFound ", 404)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNotFound", 404)
 }
 
 func (o *UserRemoveGitCredentialNotFound) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNotFound ", 404)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialNotFound", 404)
 }
 
 func (o *UserRemoveGitCredentialNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *UserRemoveGitCredentialInternalServerError) Code() int {
 }
 
 func (o *UserRemoveGitCredentialInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialInternalServerError", 500)
 }
 
 func (o *UserRemoveGitCredentialInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /users/{id}/gitcredentials/{credentialID}][%d] userRemoveGitCredentialInternalServerError", 500)
 }
 
 func (o *UserRemoveGitCredentialInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

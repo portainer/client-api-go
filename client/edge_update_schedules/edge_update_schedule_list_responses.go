@@ -6,6 +6,7 @@ package edge_update_schedules
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *EdgeUpdateScheduleListOK) Code() int {
 }
 
 func (o *EdgeUpdateScheduleListOK) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListOK %s", 200, payload)
 }
 
 func (o *EdgeUpdateScheduleListOK) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListOK %s", 200, payload)
 }
 
 func (o *EdgeUpdateScheduleListOK) GetPayload() []*models.EdgeupdateschedulesDecoratedUpdateSchedule {
@@ -150,11 +153,11 @@ func (o *EdgeUpdateScheduleListInternalServerError) Code() int {
 }
 
 func (o *EdgeUpdateScheduleListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListInternalServerError", 500)
 }
 
 func (o *EdgeUpdateScheduleListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_update_schedules][%d] edgeUpdateScheduleListInternalServerError", 500)
 }
 
 func (o *EdgeUpdateScheduleListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

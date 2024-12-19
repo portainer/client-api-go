@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -69,7 +70,7 @@ EndpointForceUpdateServiceOK describes a response with status code 200, with def
 Success
 */
 type EndpointForceUpdateServiceOK struct {
-	Payload *models.TypesServiceUpdateResponse
+	Payload *models.SwarmServiceUpdateResponse
 }
 
 // IsSuccess returns true when this endpoint force update service o k response has a 2xx status code
@@ -103,20 +104,22 @@ func (o *EndpointForceUpdateServiceOK) Code() int {
 }
 
 func (o *EndpointForceUpdateServiceOK) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceOK %s", 200, payload)
 }
 
 func (o *EndpointForceUpdateServiceOK) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceOK %s", 200, payload)
 }
 
-func (o *EndpointForceUpdateServiceOK) GetPayload() *models.TypesServiceUpdateResponse {
+func (o *EndpointForceUpdateServiceOK) GetPayload() *models.SwarmServiceUpdateResponse {
 	return o.Payload
 }
 
 func (o *EndpointForceUpdateServiceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.TypesServiceUpdateResponse)
+	o.Payload = new(models.SwarmServiceUpdateResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -170,11 +173,11 @@ func (o *EndpointForceUpdateServiceBadRequest) Code() int {
 }
 
 func (o *EndpointForceUpdateServiceBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceBadRequest", 400)
 }
 
 func (o *EndpointForceUpdateServiceBadRequest) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceBadRequest", 400)
 }
 
 func (o *EndpointForceUpdateServiceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *EndpointForceUpdateServiceForbidden) Code() int {
 }
 
 func (o *EndpointForceUpdateServiceForbidden) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceForbidden ", 403)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceForbidden", 403)
 }
 
 func (o *EndpointForceUpdateServiceForbidden) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceForbidden ", 403)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceForbidden", 403)
 }
 
 func (o *EndpointForceUpdateServiceForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *EndpointForceUpdateServiceNotFound) Code() int {
 }
 
 func (o *EndpointForceUpdateServiceNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceNotFound", 404)
 }
 
 func (o *EndpointForceUpdateServiceNotFound) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceNotFound", 404)
 }
 
 func (o *EndpointForceUpdateServiceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *EndpointForceUpdateServiceInternalServerError) Code() int {
 }
 
 func (o *EndpointForceUpdateServiceInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceInternalServerError", 500)
 }
 
 func (o *EndpointForceUpdateServiceInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/forceupdateservice][%d] endpointForceUpdateServiceInternalServerError", 500)
 }
 
 func (o *EndpointForceUpdateServiceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

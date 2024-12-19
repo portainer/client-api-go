@@ -6,6 +6,7 @@ package edge_stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EdgeStackUpdateOK) Code() int {
 }
 
 func (o *EdgeStackUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateOK %s", 200, payload)
 }
 
 func (o *EdgeStackUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateOK %s", 200, payload)
 }
 
 func (o *EdgeStackUpdateOK) GetPayload() *models.PortainereeEdgeStack {
@@ -164,11 +167,11 @@ func (o *EdgeStackUpdateBadRequest) Code() int {
 }
 
 func (o *EdgeStackUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateBadRequest", 400)
 }
 
 func (o *EdgeStackUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateBadRequest", 400)
 }
 
 func (o *EdgeStackUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EdgeStackUpdateInternalServerError) Code() int {
 }
 
 func (o *EdgeStackUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateInternalServerError", 500)
 }
 
 func (o *EdgeStackUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateInternalServerError", 500)
 }
 
 func (o *EdgeStackUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EdgeStackUpdateServiceUnavailable) Code() int {
 }
 
 func (o *EdgeStackUpdateServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateServiceUnavailable ", 503)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateServiceUnavailable", 503)
 }
 
 func (o *EdgeStackUpdateServiceUnavailable) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateServiceUnavailable ", 503)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}][%d] edgeStackUpdateServiceUnavailable", 503)
 }
 
 func (o *EdgeStackUpdateServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package edge_update_schedules
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -36,7 +37,7 @@ func (o *EdgeUpdateScheduleActiveSchedulesListReader) ReadResponse(response runt
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /edge_update_schedules/active] EdgeUpdateScheduleActiveSchedulesList", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /edge_update_schedules/active] EdgeUpdateScheduleActiveSchedulesList", response, response.Code())
 	}
 }
 
@@ -85,11 +86,13 @@ func (o *EdgeUpdateScheduleActiveSchedulesListOK) Code() int {
 }
 
 func (o *EdgeUpdateScheduleActiveSchedulesListOK) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/active][%d] edgeUpdateScheduleActiveSchedulesListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_update_schedules/active][%d] edgeUpdateScheduleActiveSchedulesListOK %s", 200, payload)
 }
 
 func (o *EdgeUpdateScheduleActiveSchedulesListOK) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/active][%d] edgeUpdateScheduleActiveSchedulesListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_update_schedules/active][%d] edgeUpdateScheduleActiveSchedulesListOK %s", 200, payload)
 }
 
 func (o *EdgeUpdateScheduleActiveSchedulesListOK) GetPayload() []*models.TypesEndpointUpdateScheduleRelation {
@@ -150,11 +153,11 @@ func (o *EdgeUpdateScheduleActiveSchedulesListInternalServerError) Code() int {
 }
 
 func (o *EdgeUpdateScheduleActiveSchedulesListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/active][%d] edgeUpdateScheduleActiveSchedulesListInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_update_schedules/active][%d] edgeUpdateScheduleActiveSchedulesListInternalServerError", 500)
 }
 
 func (o *EdgeUpdateScheduleActiveSchedulesListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/active][%d] edgeUpdateScheduleActiveSchedulesListInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_update_schedules/active][%d] edgeUpdateScheduleActiveSchedulesListInternalServerError", 500)
 }
 
 func (o *EdgeUpdateScheduleActiveSchedulesListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -23,6 +23,11 @@ type UsersUserAccessTokenCreatePayload struct {
 	// Example: github-api-key
 	// Required: true
 	Description *string `json:"description"`
+
+	// password
+	// Example: password
+	// Required: true
+	Password *string `json:"password"`
 }
 
 // Validate validates this users user access token create payload
@@ -30,6 +35,10 @@ func (m *UsersUserAccessTokenCreatePayload) Validate(formats strfmt.Registry) er
 	var res []error
 
 	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePassword(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -42,6 +51,15 @@ func (m *UsersUserAccessTokenCreatePayload) Validate(formats strfmt.Registry) er
 func (m *UsersUserAccessTokenCreatePayload) validateDescription(formats strfmt.Registry) error {
 
 	if err := validate.Required("description", "body", m.Description); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UsersUserAccessTokenCreatePayload) validatePassword(formats strfmt.Registry) error {
+
+	if err := validate.Required("password", "body", m.Password); err != nil {
 		return err
 	}
 

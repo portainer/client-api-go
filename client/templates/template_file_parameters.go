@@ -14,8 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/portainer/client-api-go/v2/models"
+	"github.com/go-openapi/swag"
 )
 
 // NewTemplateFileParams creates a new TemplateFileParams object,
@@ -63,11 +62,11 @@ TemplateFileParams contains all the parameters to send to the API endpoint
 */
 type TemplateFileParams struct {
 
-	/* Body.
+	/* ID.
 
-	   File details
+	   Template identifier
 	*/
-	Body *models.TemplatesFilePayload
+	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -122,15 +121,15 @@ func (o *TemplateFileParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the template file params
-func (o *TemplateFileParams) WithBody(body *models.TemplatesFilePayload) *TemplateFileParams {
-	o.SetBody(body)
+// WithID adds the id to the template file params
+func (o *TemplateFileParams) WithID(id int64) *TemplateFileParams {
+	o.SetID(id)
 	return o
 }
 
-// SetBody adds the body to the template file params
-func (o *TemplateFileParams) SetBody(body *models.TemplatesFilePayload) {
-	o.Body = body
+// SetID adds the id to the template file params
+func (o *TemplateFileParams) SetID(id int64) {
+	o.ID = id
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -140,10 +139,10 @@ func (o *TemplateFileParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

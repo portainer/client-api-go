@@ -6,6 +6,7 @@ package cloud_credentials
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *CloudCredsGetByIDOK) Code() int {
 }
 
 func (o *CloudCredsGetByIDOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdOK %s", 200, payload)
 }
 
 func (o *CloudCredsGetByIDOK) String() string {
-	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdOK %s", 200, payload)
 }
 
 func (o *CloudCredsGetByIDOK) GetPayload() *models.ModelsCloudCredential {
@@ -158,11 +161,11 @@ func (o *CloudCredsGetByIDBadRequest) Code() int {
 }
 
 func (o *CloudCredsGetByIDBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdBadRequest", 400)
 }
 
 func (o *CloudCredsGetByIDBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdBadRequest", 400)
 }
 
 func (o *CloudCredsGetByIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *CloudCredsGetByIDInternalServerError) Code() int {
 }
 
 func (o *CloudCredsGetByIDInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdInternalServerError", 500)
 }
 
 func (o *CloudCredsGetByIDInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/credentials/{id}][%d] cloudCredsGetByIdInternalServerError", 500)
 }
 
 func (o *CloudCredsGetByIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

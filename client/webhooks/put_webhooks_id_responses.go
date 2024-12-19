@@ -6,6 +6,7 @@ package webhooks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -63,7 +64,7 @@ PutWebhooksIDOK describes a response with status code 200, with default header v
 OK
 */
 type PutWebhooksIDOK struct {
-	Payload *models.PortainereeWebhook
+	Payload *models.PortainerWebhook
 }
 
 // IsSuccess returns true when this put webhooks Id o k response has a 2xx status code
@@ -97,20 +98,22 @@ func (o *PutWebhooksIDOK) Code() int {
 }
 
 func (o *PutWebhooksIDOK) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdOK %s", 200, payload)
 }
 
 func (o *PutWebhooksIDOK) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdOK %s", 200, payload)
 }
 
-func (o *PutWebhooksIDOK) GetPayload() *models.PortainereeWebhook {
+func (o *PutWebhooksIDOK) GetPayload() *models.PortainerWebhook {
 	return o.Payload
 }
 
 func (o *PutWebhooksIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeWebhook)
+	o.Payload = new(models.PortainerWebhook)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -164,11 +167,11 @@ func (o *PutWebhooksIDBadRequest) Code() int {
 }
 
 func (o *PutWebhooksIDBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdBadRequest ", 400)
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdBadRequest", 400)
 }
 
 func (o *PutWebhooksIDBadRequest) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdBadRequest ", 400)
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdBadRequest", 400)
 }
 
 func (o *PutWebhooksIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *PutWebhooksIDConflict) Code() int {
 }
 
 func (o *PutWebhooksIDConflict) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdConflict ", 409)
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdConflict", 409)
 }
 
 func (o *PutWebhooksIDConflict) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdConflict ", 409)
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdConflict", 409)
 }
 
 func (o *PutWebhooksIDConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *PutWebhooksIDInternalServerError) Code() int {
 }
 
 func (o *PutWebhooksIDInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdInternalServerError", 500)
 }
 
 func (o *PutWebhooksIDInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /webhooks/{id}][%d] putWebhooksIdInternalServerError", 500)
 }
 
 func (o *PutWebhooksIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

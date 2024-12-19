@@ -6,6 +6,7 @@ package teams
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -75,7 +76,7 @@ TeamInspectOK describes a response with status code 200, with default header val
 Success
 */
 type TeamInspectOK struct {
-	Payload *models.PortainereeTeam
+	Payload *models.PortainerTeam
 }
 
 // IsSuccess returns true when this team inspect o k response has a 2xx status code
@@ -109,20 +110,22 @@ func (o *TeamInspectOK) Code() int {
 }
 
 func (o *TeamInspectOK) Error() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectOK %s", 200, payload)
 }
 
 func (o *TeamInspectOK) String() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectOK %s", 200, payload)
 }
 
-func (o *TeamInspectOK) GetPayload() *models.PortainereeTeam {
+func (o *TeamInspectOK) GetPayload() *models.PortainerTeam {
 	return o.Payload
 }
 
 func (o *TeamInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTeam)
+	o.Payload = new(models.PortainerTeam)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -176,11 +179,11 @@ func (o *TeamInspectNoContent) Code() int {
 }
 
 func (o *TeamInspectNoContent) Error() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent ", 204)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent", 204)
 }
 
 func (o *TeamInspectNoContent) String() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent ", 204)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent", 204)
 }
 
 func (o *TeamInspectNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *TeamInspectBadRequest) Code() int {
 }
 
 func (o *TeamInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectBadRequest", 400)
 }
 
 func (o *TeamInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectBadRequest", 400)
 }
 
 func (o *TeamInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *TeamInspectForbidden) Code() int {
 }
 
 func (o *TeamInspectForbidden) Error() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectForbidden", 403)
 }
 
 func (o *TeamInspectForbidden) String() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectForbidden", 403)
 }
 
 func (o *TeamInspectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *TeamInspectNotFound) Code() int {
 }
 
 func (o *TeamInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNotFound", 404)
 }
 
 func (o *TeamInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNotFound", 404)
 }
 
 func (o *TeamInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *TeamInspectInternalServerError) Code() int {
 }
 
 func (o *TeamInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectInternalServerError", 500)
 }
 
 func (o *TeamInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectInternalServerError", 500)
 }
 
 func (o *TeamInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

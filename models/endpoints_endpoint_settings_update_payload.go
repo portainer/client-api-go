@@ -34,7 +34,7 @@ type EndpointsEndpointSettingsUpdatePayload struct {
 	EnableImageNotification bool `json:"enableImageNotification,omitempty"`
 
 	// gpus
-	Gpus []*PortainereePair `json:"gpus"`
+	Gpus []*PortainerPair `json:"gpus"`
 
 	// security settings
 	SecuritySettings *EndpointsEndpointSettingsUpdatePayloadSecuritySettings `json:"securitySettings,omitempty"`

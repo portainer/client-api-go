@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *UserCreateOK) Code() int {
 }
 
 func (o *UserCreateOK) Error() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users][%d] userCreateOK %s", 200, payload)
 }
 
 func (o *UserCreateOK) String() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users][%d] userCreateOK %s", 200, payload)
 }
 
 func (o *UserCreateOK) GetPayload() *models.PortainereeUser {
@@ -170,11 +173,11 @@ func (o *UserCreateBadRequest) Code() int {
 }
 
 func (o *UserCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /users][%d] userCreateBadRequest", 400)
 }
 
 func (o *UserCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /users][%d] userCreateBadRequest", 400)
 }
 
 func (o *UserCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *UserCreateForbidden) Code() int {
 }
 
 func (o *UserCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /users][%d] userCreateForbidden", 403)
 }
 
 func (o *UserCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /users][%d] userCreateForbidden", 403)
 }
 
 func (o *UserCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *UserCreateConflict) Code() int {
 }
 
 func (o *UserCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateConflict ", 409)
+	return fmt.Sprintf("[POST /users][%d] userCreateConflict", 409)
 }
 
 func (o *UserCreateConflict) String() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateConflict ", 409)
+	return fmt.Sprintf("[POST /users][%d] userCreateConflict", 409)
 }
 
 func (o *UserCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *UserCreateInternalServerError) Code() int {
 }
 
 func (o *UserCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users][%d] userCreateInternalServerError", 500)
 }
 
 func (o *UserCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /users][%d] userCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users][%d] userCreateInternalServerError", 500)
 }
 
 func (o *UserCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

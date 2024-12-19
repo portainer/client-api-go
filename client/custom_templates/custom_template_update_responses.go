@@ -6,6 +6,7 @@ package custom_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *CustomTemplateUpdateOK) Code() int {
 }
 
 func (o *CustomTemplateUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateOK %s", 200, payload)
 }
 
 func (o *CustomTemplateUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateOK %s", 200, payload)
 }
 
 func (o *CustomTemplateUpdateOK) GetPayload() *models.PortainereeCustomTemplate {
@@ -170,11 +173,11 @@ func (o *CustomTemplateUpdateBadRequest) Code() int {
 }
 
 func (o *CustomTemplateUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateBadRequest", 400)
 }
 
 func (o *CustomTemplateUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateBadRequest", 400)
 }
 
 func (o *CustomTemplateUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *CustomTemplateUpdateForbidden) Code() int {
 }
 
 func (o *CustomTemplateUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateForbidden", 403)
 }
 
 func (o *CustomTemplateUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateForbidden", 403)
 }
 
 func (o *CustomTemplateUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *CustomTemplateUpdateNotFound) Code() int {
 }
 
 func (o *CustomTemplateUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateNotFound", 404)
 }
 
 func (o *CustomTemplateUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateNotFound", 404)
 }
 
 func (o *CustomTemplateUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *CustomTemplateUpdateInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateInternalServerError", 500)
 }
 
 func (o *CustomTemplateUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /custom_templates/{id}][%d] customTemplateUpdateInternalServerError", 500)
 }
 
 func (o *CustomTemplateUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

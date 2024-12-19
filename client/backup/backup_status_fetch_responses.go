@@ -6,6 +6,7 @@ package backup
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *BackupStatusFetchOK) Code() int {
 }
 
 func (o *BackupStatusFetchOK) Error() string {
-	return fmt.Sprintf("[GET /backup/s3/status][%d] backupStatusFetchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /backup/s3/status][%d] backupStatusFetchOK %s", 200, payload)
 }
 
 func (o *BackupStatusFetchOK) String() string {
-	return fmt.Sprintf("[GET /backup/s3/status][%d] backupStatusFetchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /backup/s3/status][%d] backupStatusFetchOK %s", 200, payload)
 }
 
 func (o *BackupStatusFetchOK) GetPayload() *models.BackupBackupStatus {
@@ -152,11 +155,11 @@ func (o *BackupStatusFetchInternalServerError) Code() int {
 }
 
 func (o *BackupStatusFetchInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /backup/s3/status][%d] backupStatusFetchInternalServerError ", 500)
+	return fmt.Sprintf("[GET /backup/s3/status][%d] backupStatusFetchInternalServerError", 500)
 }
 
 func (o *BackupStatusFetchInternalServerError) String() string {
-	return fmt.Sprintf("[GET /backup/s3/status][%d] backupStatusFetchInternalServerError ", 500)
+	return fmt.Sprintf("[GET /backup/s3/status][%d] backupStatusFetchInternalServerError", 500)
 }
 
 func (o *BackupStatusFetchInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -87,11 +87,11 @@ func (o *PostWebhooksIDAccepted) Code() int {
 }
 
 func (o *PostWebhooksIDAccepted) Error() string {
-	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdAccepted ", 202)
+	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdAccepted", 202)
 }
 
 func (o *PostWebhooksIDAccepted) String() string {
-	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdAccepted ", 202)
+	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdAccepted", 202)
 }
 
 func (o *PostWebhooksIDAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *PostWebhooksIDBadRequest) Code() int {
 }
 
 func (o *PostWebhooksIDBadRequest) Error() string {
-	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdBadRequest ", 400)
+	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdBadRequest", 400)
 }
 
 func (o *PostWebhooksIDBadRequest) String() string {
-	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdBadRequest ", 400)
+	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdBadRequest", 400)
 }
 
 func (o *PostWebhooksIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *PostWebhooksIDInternalServerError) Code() int {
 }
 
 func (o *PostWebhooksIDInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdInternalServerError ", 500)
+	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdInternalServerError", 500)
 }
 
 func (o *PostWebhooksIDInternalServerError) String() string {
-	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdInternalServerError ", 500)
+	return fmt.Sprintf("[POST /webhooks/{id}][%d] postWebhooksIdInternalServerError", 500)
 }
 
 func (o *PostWebhooksIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

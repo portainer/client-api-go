@@ -20,6 +20,9 @@ import (
 // swagger:model edgeupdateschedules.updatePayload
 type EdgeupdateschedulesUpdatePayload struct {
 
+	// default to "" == portainer/agent:<current_server_version>
+	AgentImage string `json:"agentImage,omitempty"`
+
 	// group i ds
 	GroupIDs []int64 `json:"groupIDs"`
 
@@ -35,11 +38,11 @@ type EdgeupdateschedulesUpdatePayload struct {
 
 	// Type of the update (1 - update, 2 - rollback)
 	// Example: 1
-	// Enum: [1 2]
+	// Enum: [1,2]
 	Type int64 `json:"type,omitempty"`
 
-	// version
-	Version string `json:"version,omitempty"`
+	// default to "" == portainer/portainer-updater:latest
+	UpdaterImage string `json:"updaterImage,omitempty"`
 }
 
 // Validate validates this edgeupdateschedules update payload

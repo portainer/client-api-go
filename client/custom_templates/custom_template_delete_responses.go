@@ -99,11 +99,11 @@ func (o *CustomTemplateDeleteNoContent) Code() int {
 }
 
 func (o *CustomTemplateDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNoContent", 204)
 }
 
 func (o *CustomTemplateDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNoContent", 204)
 }
 
 func (o *CustomTemplateDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *CustomTemplateDeleteBadRequest) Code() int {
 }
 
 func (o *CustomTemplateDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteBadRequest", 400)
 }
 
 func (o *CustomTemplateDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteBadRequest", 400)
 }
 
 func (o *CustomTemplateDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *CustomTemplateDeleteForbidden) Code() int {
 }
 
 func (o *CustomTemplateDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteForbidden", 403)
 }
 
 func (o *CustomTemplateDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteForbidden", 403)
 }
 
 func (o *CustomTemplateDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *CustomTemplateDeleteNotFound) Code() int {
 }
 
 func (o *CustomTemplateDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNotFound", 404)
 }
 
 func (o *CustomTemplateDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteNotFound", 404)
 }
 
 func (o *CustomTemplateDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *CustomTemplateDeleteInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteInternalServerError", 500)
 }
 
 func (o *CustomTemplateDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /custom_templates/{id}][%d] customTemplateDeleteInternalServerError", 500)
 }
 
 func (o *CustomTemplateDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

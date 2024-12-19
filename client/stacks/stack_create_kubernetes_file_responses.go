@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *StackCreateKubernetesFileOK) Code() int {
 }
 
 func (o *StackCreateKubernetesFileOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileOK %s", 200, payload)
 }
 
 func (o *StackCreateKubernetesFileOK) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileOK %s", 200, payload)
 }
 
 func (o *StackCreateKubernetesFileOK) GetPayload() *models.PortainereeStack {
@@ -158,11 +161,11 @@ func (o *StackCreateKubernetesFileBadRequest) Code() int {
 }
 
 func (o *StackCreateKubernetesFileBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileBadRequest", 400)
 }
 
 func (o *StackCreateKubernetesFileBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileBadRequest", 400)
 }
 
 func (o *StackCreateKubernetesFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *StackCreateKubernetesFileInternalServerError) Code() int {
 }
 
 func (o *StackCreateKubernetesFileInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileInternalServerError", 500)
 }
 
 func (o *StackCreateKubernetesFileInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/string][%d] stackCreateKubernetesFileInternalServerError", 500)
 }
 
 func (o *StackCreateKubernetesFileInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

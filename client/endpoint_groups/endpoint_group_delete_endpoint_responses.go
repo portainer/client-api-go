@@ -93,11 +93,11 @@ func (o *EndpointGroupDeleteEndpointNoContent) Code() int {
 }
 
 func (o *EndpointGroupDeleteEndpointNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNoContent ", 204)
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNoContent", 204)
 }
 
 func (o *EndpointGroupDeleteEndpointNoContent) String() string {
-	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNoContent ", 204)
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNoContent", 204)
 }
 
 func (o *EndpointGroupDeleteEndpointNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EndpointGroupDeleteEndpointBadRequest) Code() int {
 }
 
 func (o *EndpointGroupDeleteEndpointBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointBadRequest", 400)
 }
 
 func (o *EndpointGroupDeleteEndpointBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointBadRequest", 400)
 }
 
 func (o *EndpointGroupDeleteEndpointBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EndpointGroupDeleteEndpointNotFound) Code() int {
 }
 
 func (o *EndpointGroupDeleteEndpointNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNotFound ", 404)
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNotFound", 404)
 }
 
 func (o *EndpointGroupDeleteEndpointNotFound) String() string {
-	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNotFound ", 404)
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointNotFound", 404)
 }
 
 func (o *EndpointGroupDeleteEndpointNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EndpointGroupDeleteEndpointInternalServerError) Code() int {
 }
 
 func (o *EndpointGroupDeleteEndpointInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointInternalServerError", 500)
 }
 
 func (o *EndpointGroupDeleteEndpointInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupDeleteEndpointInternalServerError", 500)
 }
 
 func (o *EndpointGroupDeleteEndpointInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -45,6 +45,9 @@ type EdgegroupsDecoratedEdgeGroup struct {
 	// tag ids
 	TagIds []int64 `json:"TagIds"`
 
+	// trusted endpoints
+	TrustedEndpoints []int64 `json:"TrustedEndpoints"`
+
 	// edge update ID
 	EdgeUpdateID int64 `json:"edgeUpdateID,omitempty"`
 

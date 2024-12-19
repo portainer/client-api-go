@@ -48,7 +48,7 @@ type EndpointsEndpointUpdatePayload struct {
 	EdgeCheckinInterval int64 `json:"edgeCheckinInterval,omitempty"`
 
 	// GPUs information
-	Gpus []*PortainereePair `json:"gpus"`
+	Gpus []*PortainerPair `json:"gpus"`
 
 	// Group identifier
 	// Example: 1
@@ -78,7 +78,7 @@ type EndpointsEndpointUpdatePayload struct {
 	TagIDs []int64 `json:"tagIDs"`
 
 	// team access policies
-	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
+	TeamAccessPolicies PortainerTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
 
 	// Require TLS to connect against this environment(endpoint)
 	// Example: true
@@ -97,7 +97,7 @@ type EndpointsEndpointUpdatePayload struct {
 	URL string `json:"url,omitempty"`
 
 	// user access policies
-	UserAccessPolicies PortainereeUserAccessPolicies `json:"userAccessPolicies,omitempty"`
+	UserAccessPolicies PortainerUserAccessPolicies `json:"userAccessPolicies,omitempty"`
 }
 
 // Validate validates this endpoints endpoint update payload
@@ -590,7 +590,7 @@ type EndpointsEndpointUpdatePayloadStatusMessage struct {
 	// Example: scale
 	Operation string `json:"operation,omitempty"`
 
-	// '', 'error', 'processing'
+	// ,processing,error
 	// Example: error
 	OperationStatus string `json:"operationStatus,omitempty"`
 }

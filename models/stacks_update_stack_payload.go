@@ -20,7 +20,7 @@ import (
 type StacksUpdateStackPayload struct {
 
 	// A list of environment(endpoint) variables used during stack deployment
-	Env []*PortainereePair `json:"env"`
+	Env []*PortainerPair `json:"env"`
 
 	// Prune services that are no longer referenced (only available for Swarm stacks)
 	// Example: true

@@ -6,11 +6,14 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/portainer/client-api-go/v2/models"
 )
 
 // CreateKubernetesNamespaceReader is a Reader for the CreateKubernetesNamespace structure.
@@ -33,6 +36,24 @@ func (o *CreateKubernetesNamespaceReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
+	case 401:
+		result := NewCreateKubernetesNamespaceUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewCreateKubernetesNamespaceForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewCreateKubernetesNamespaceConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewCreateKubernetesNamespaceInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -40,7 +61,7 @@ func (o *CreateKubernetesNamespaceReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/namespaces/{namespace}] createKubernetesNamespace", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/namespaces] CreateKubernetesNamespace", response, response.Code())
 	}
 }
 
@@ -55,7 +76,7 @@ CreateKubernetesNamespaceOK describes a response with status code 200, with defa
 Success
 */
 type CreateKubernetesNamespaceOK struct {
-	Payload string
+	Payload *models.PortainerK8sNamespaceInfo
 }
 
 // IsSuccess returns true when this create kubernetes namespace o k response has a 2xx status code
@@ -89,21 +110,25 @@ func (o *CreateKubernetesNamespaceOK) Code() int {
 }
 
 func (o *CreateKubernetesNamespaceOK) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}][%d] createKubernetesNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceOK %s", 200, payload)
 }
 
 func (o *CreateKubernetesNamespaceOK) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}][%d] createKubernetesNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceOK %s", 200, payload)
 }
 
-func (o *CreateKubernetesNamespaceOK) GetPayload() string {
+func (o *CreateKubernetesNamespaceOK) GetPayload() *models.PortainerK8sNamespaceInfo {
 	return o.Payload
 }
 
 func (o *CreateKubernetesNamespaceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.PortainerK8sNamespaceInfo)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -118,7 +143,7 @@ func NewCreateKubernetesNamespaceBadRequest() *CreateKubernetesNamespaceBadReque
 /*
 CreateKubernetesNamespaceBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type CreateKubernetesNamespaceBadRequest struct {
 }
@@ -154,14 +179,182 @@ func (o *CreateKubernetesNamespaceBadRequest) Code() int {
 }
 
 func (o *CreateKubernetesNamespaceBadRequest) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}][%d] createKubernetesNamespaceBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceBadRequest", 400)
 }
 
 func (o *CreateKubernetesNamespaceBadRequest) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}][%d] createKubernetesNamespaceBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceBadRequest", 400)
 }
 
 func (o *CreateKubernetesNamespaceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesNamespaceUnauthorized creates a CreateKubernetesNamespaceUnauthorized with default headers values
+func NewCreateKubernetesNamespaceUnauthorized() *CreateKubernetesNamespaceUnauthorized {
+	return &CreateKubernetesNamespaceUnauthorized{}
+}
+
+/*
+CreateKubernetesNamespaceUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type CreateKubernetesNamespaceUnauthorized struct {
+}
+
+// IsSuccess returns true when this create kubernetes namespace unauthorized response has a 2xx status code
+func (o *CreateKubernetesNamespaceUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes namespace unauthorized response has a 3xx status code
+func (o *CreateKubernetesNamespaceUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes namespace unauthorized response has a 4xx status code
+func (o *CreateKubernetesNamespaceUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes namespace unauthorized response has a 5xx status code
+func (o *CreateKubernetesNamespaceUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes namespace unauthorized response a status code equal to that given
+func (o *CreateKubernetesNamespaceUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create kubernetes namespace unauthorized response
+func (o *CreateKubernetesNamespaceUnauthorized) Code() int {
+	return 401
+}
+
+func (o *CreateKubernetesNamespaceUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceUnauthorized", 401)
+}
+
+func (o *CreateKubernetesNamespaceUnauthorized) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceUnauthorized", 401)
+}
+
+func (o *CreateKubernetesNamespaceUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesNamespaceForbidden creates a CreateKubernetesNamespaceForbidden with default headers values
+func NewCreateKubernetesNamespaceForbidden() *CreateKubernetesNamespaceForbidden {
+	return &CreateKubernetesNamespaceForbidden{}
+}
+
+/*
+CreateKubernetesNamespaceForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type CreateKubernetesNamespaceForbidden struct {
+}
+
+// IsSuccess returns true when this create kubernetes namespace forbidden response has a 2xx status code
+func (o *CreateKubernetesNamespaceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes namespace forbidden response has a 3xx status code
+func (o *CreateKubernetesNamespaceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes namespace forbidden response has a 4xx status code
+func (o *CreateKubernetesNamespaceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes namespace forbidden response has a 5xx status code
+func (o *CreateKubernetesNamespaceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes namespace forbidden response a status code equal to that given
+func (o *CreateKubernetesNamespaceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create kubernetes namespace forbidden response
+func (o *CreateKubernetesNamespaceForbidden) Code() int {
+	return 403
+}
+
+func (o *CreateKubernetesNamespaceForbidden) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceForbidden", 403)
+}
+
+func (o *CreateKubernetesNamespaceForbidden) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceForbidden", 403)
+}
+
+func (o *CreateKubernetesNamespaceForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateKubernetesNamespaceConflict creates a CreateKubernetesNamespaceConflict with default headers values
+func NewCreateKubernetesNamespaceConflict() *CreateKubernetesNamespaceConflict {
+	return &CreateKubernetesNamespaceConflict{}
+}
+
+/*
+CreateKubernetesNamespaceConflict describes a response with status code 409, with default header values.
+
+Conflict - the namespace already exists.
+*/
+type CreateKubernetesNamespaceConflict struct {
+}
+
+// IsSuccess returns true when this create kubernetes namespace conflict response has a 2xx status code
+func (o *CreateKubernetesNamespaceConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create kubernetes namespace conflict response has a 3xx status code
+func (o *CreateKubernetesNamespaceConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create kubernetes namespace conflict response has a 4xx status code
+func (o *CreateKubernetesNamespaceConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create kubernetes namespace conflict response has a 5xx status code
+func (o *CreateKubernetesNamespaceConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create kubernetes namespace conflict response a status code equal to that given
+func (o *CreateKubernetesNamespaceConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create kubernetes namespace conflict response
+func (o *CreateKubernetesNamespaceConflict) Code() int {
+	return 409
+}
+
+func (o *CreateKubernetesNamespaceConflict) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceConflict", 409)
+}
+
+func (o *CreateKubernetesNamespaceConflict) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceConflict", 409)
+}
+
+func (o *CreateKubernetesNamespaceConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -174,7 +367,7 @@ func NewCreateKubernetesNamespaceInternalServerError() *CreateKubernetesNamespac
 /*
 CreateKubernetesNamespaceInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to create the namespace.
 */
 type CreateKubernetesNamespaceInternalServerError struct {
 }
@@ -210,11 +403,11 @@ func (o *CreateKubernetesNamespaceInternalServerError) Code() int {
 }
 
 func (o *CreateKubernetesNamespaceInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}][%d] createKubernetesNamespaceInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceInternalServerError", 500)
 }
 
 func (o *CreateKubernetesNamespaceInternalServerError) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces/{namespace}][%d] createKubernetesNamespaceInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/namespaces][%d] createKubernetesNamespaceInternalServerError", 500)
 }
 
 func (o *CreateKubernetesNamespaceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

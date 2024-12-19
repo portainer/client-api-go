@@ -20,14 +20,32 @@ type DeleteKubernetesServicesReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *DeleteKubernetesServicesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewDeleteKubernetesServicesOK()
+	case 204:
+		result := NewDeleteKubernetesServicesNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
 	case 400:
 		result := NewDeleteKubernetesServicesBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewDeleteKubernetesServicesUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewDeleteKubernetesServicesForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewDeleteKubernetesServicesNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -39,62 +57,62 @@ func (o *DeleteKubernetesServicesReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/services/delete] deleteKubernetesServices", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/services/delete] DeleteKubernetesServices", response, response.Code())
 	}
 }
 
-// NewDeleteKubernetesServicesOK creates a DeleteKubernetesServicesOK with default headers values
-func NewDeleteKubernetesServicesOK() *DeleteKubernetesServicesOK {
-	return &DeleteKubernetesServicesOK{}
+// NewDeleteKubernetesServicesNoContent creates a DeleteKubernetesServicesNoContent with default headers values
+func NewDeleteKubernetesServicesNoContent() *DeleteKubernetesServicesNoContent {
+	return &DeleteKubernetesServicesNoContent{}
 }
 
 /*
-DeleteKubernetesServicesOK describes a response with status code 200, with default header values.
+DeleteKubernetesServicesNoContent describes a response with status code 204, with default header values.
 
 Success
 */
-type DeleteKubernetesServicesOK struct {
+type DeleteKubernetesServicesNoContent struct {
 }
 
-// IsSuccess returns true when this delete kubernetes services o k response has a 2xx status code
-func (o *DeleteKubernetesServicesOK) IsSuccess() bool {
+// IsSuccess returns true when this delete kubernetes services no content response has a 2xx status code
+func (o *DeleteKubernetesServicesNoContent) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this delete kubernetes services o k response has a 3xx status code
-func (o *DeleteKubernetesServicesOK) IsRedirect() bool {
+// IsRedirect returns true when this delete kubernetes services no content response has a 3xx status code
+func (o *DeleteKubernetesServicesNoContent) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this delete kubernetes services o k response has a 4xx status code
-func (o *DeleteKubernetesServicesOK) IsClientError() bool {
+// IsClientError returns true when this delete kubernetes services no content response has a 4xx status code
+func (o *DeleteKubernetesServicesNoContent) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this delete kubernetes services o k response has a 5xx status code
-func (o *DeleteKubernetesServicesOK) IsServerError() bool {
+// IsServerError returns true when this delete kubernetes services no content response has a 5xx status code
+func (o *DeleteKubernetesServicesNoContent) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this delete kubernetes services o k response a status code equal to that given
-func (o *DeleteKubernetesServicesOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this delete kubernetes services no content response a status code equal to that given
+func (o *DeleteKubernetesServicesNoContent) IsCode(code int) bool {
+	return code == 204
 }
 
-// Code gets the status code for the delete kubernetes services o k response
-func (o *DeleteKubernetesServicesOK) Code() int {
-	return 200
+// Code gets the status code for the delete kubernetes services no content response
+func (o *DeleteKubernetesServicesNoContent) Code() int {
+	return 204
 }
 
-func (o *DeleteKubernetesServicesOK) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesOK ", 200)
+func (o *DeleteKubernetesServicesNoContent) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesNoContent", 204)
 }
 
-func (o *DeleteKubernetesServicesOK) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesOK ", 200)
+func (o *DeleteKubernetesServicesNoContent) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesNoContent", 204)
 }
 
-func (o *DeleteKubernetesServicesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *DeleteKubernetesServicesNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -107,7 +125,7 @@ func NewDeleteKubernetesServicesBadRequest() *DeleteKubernetesServicesBadRequest
 /*
 DeleteKubernetesServicesBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type DeleteKubernetesServicesBadRequest struct {
 }
@@ -143,14 +161,182 @@ func (o *DeleteKubernetesServicesBadRequest) Code() int {
 }
 
 func (o *DeleteKubernetesServicesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesBadRequest", 400)
 }
 
 func (o *DeleteKubernetesServicesBadRequest) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesBadRequest", 400)
 }
 
 func (o *DeleteKubernetesServicesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteKubernetesServicesUnauthorized creates a DeleteKubernetesServicesUnauthorized with default headers values
+func NewDeleteKubernetesServicesUnauthorized() *DeleteKubernetesServicesUnauthorized {
+	return &DeleteKubernetesServicesUnauthorized{}
+}
+
+/*
+DeleteKubernetesServicesUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type DeleteKubernetesServicesUnauthorized struct {
+}
+
+// IsSuccess returns true when this delete kubernetes services unauthorized response has a 2xx status code
+func (o *DeleteKubernetesServicesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete kubernetes services unauthorized response has a 3xx status code
+func (o *DeleteKubernetesServicesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete kubernetes services unauthorized response has a 4xx status code
+func (o *DeleteKubernetesServicesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete kubernetes services unauthorized response has a 5xx status code
+func (o *DeleteKubernetesServicesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete kubernetes services unauthorized response a status code equal to that given
+func (o *DeleteKubernetesServicesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete kubernetes services unauthorized response
+func (o *DeleteKubernetesServicesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteKubernetesServicesUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesUnauthorized", 401)
+}
+
+func (o *DeleteKubernetesServicesUnauthorized) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesUnauthorized", 401)
+}
+
+func (o *DeleteKubernetesServicesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteKubernetesServicesForbidden creates a DeleteKubernetesServicesForbidden with default headers values
+func NewDeleteKubernetesServicesForbidden() *DeleteKubernetesServicesForbidden {
+	return &DeleteKubernetesServicesForbidden{}
+}
+
+/*
+DeleteKubernetesServicesForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type DeleteKubernetesServicesForbidden struct {
+}
+
+// IsSuccess returns true when this delete kubernetes services forbidden response has a 2xx status code
+func (o *DeleteKubernetesServicesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete kubernetes services forbidden response has a 3xx status code
+func (o *DeleteKubernetesServicesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete kubernetes services forbidden response has a 4xx status code
+func (o *DeleteKubernetesServicesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete kubernetes services forbidden response has a 5xx status code
+func (o *DeleteKubernetesServicesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete kubernetes services forbidden response a status code equal to that given
+func (o *DeleteKubernetesServicesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete kubernetes services forbidden response
+func (o *DeleteKubernetesServicesForbidden) Code() int {
+	return 403
+}
+
+func (o *DeleteKubernetesServicesForbidden) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesForbidden", 403)
+}
+
+func (o *DeleteKubernetesServicesForbidden) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesForbidden", 403)
+}
+
+func (o *DeleteKubernetesServicesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteKubernetesServicesNotFound creates a DeleteKubernetesServicesNotFound with default headers values
+func NewDeleteKubernetesServicesNotFound() *DeleteKubernetesServicesNotFound {
+	return &DeleteKubernetesServicesNotFound{}
+}
+
+/*
+DeleteKubernetesServicesNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier or unable to find a specific service.
+*/
+type DeleteKubernetesServicesNotFound struct {
+}
+
+// IsSuccess returns true when this delete kubernetes services not found response has a 2xx status code
+func (o *DeleteKubernetesServicesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete kubernetes services not found response has a 3xx status code
+func (o *DeleteKubernetesServicesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete kubernetes services not found response has a 4xx status code
+func (o *DeleteKubernetesServicesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete kubernetes services not found response has a 5xx status code
+func (o *DeleteKubernetesServicesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete kubernetes services not found response a status code equal to that given
+func (o *DeleteKubernetesServicesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete kubernetes services not found response
+func (o *DeleteKubernetesServicesNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteKubernetesServicesNotFound) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesNotFound", 404)
+}
+
+func (o *DeleteKubernetesServicesNotFound) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesNotFound", 404)
+}
+
+func (o *DeleteKubernetesServicesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -163,7 +349,7 @@ func NewDeleteKubernetesServicesInternalServerError() *DeleteKubernetesServicesI
 /*
 DeleteKubernetesServicesInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to delete services.
 */
 type DeleteKubernetesServicesInternalServerError struct {
 }
@@ -199,11 +385,11 @@ func (o *DeleteKubernetesServicesInternalServerError) Code() int {
 }
 
 func (o *DeleteKubernetesServicesInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesInternalServerError", 500)
 }
 
 func (o *DeleteKubernetesServicesInternalServerError) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/services/delete][%d] deleteKubernetesServicesInternalServerError", 500)
 }
 
 func (o *DeleteKubernetesServicesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

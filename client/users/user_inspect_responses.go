@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *UserInspectOK) Code() int {
 }
 
 func (o *UserInspectOK) Error() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectOK %s", 200, payload)
 }
 
 func (o *UserInspectOK) String() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectOK %s", 200, payload)
 }
 
 func (o *UserInspectOK) GetPayload() *models.PortainereeUser {
@@ -170,11 +173,11 @@ func (o *UserInspectBadRequest) Code() int {
 }
 
 func (o *UserInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectBadRequest", 400)
 }
 
 func (o *UserInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectBadRequest", 400)
 }
 
 func (o *UserInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *UserInspectForbidden) Code() int {
 }
 
 func (o *UserInspectForbidden) Error() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectForbidden", 403)
 }
 
 func (o *UserInspectForbidden) String() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectForbidden", 403)
 }
 
 func (o *UserInspectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *UserInspectNotFound) Code() int {
 }
 
 func (o *UserInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectNotFound", 404)
 }
 
 func (o *UserInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectNotFound", 404)
 }
 
 func (o *UserInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *UserInspectInternalServerError) Code() int {
 }
 
 func (o *UserInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectInternalServerError", 500)
 }
 
 func (o *UserInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /users/{id}][%d] userInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}][%d] userInspectInternalServerError", 500)
 }
 
 func (o *UserInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

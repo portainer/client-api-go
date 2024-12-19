@@ -71,6 +71,12 @@ type EdgeConfigUpdateParams struct {
 	// EdgeGroupIDs.
 	EdgeGroupIDs []int64
 
+	/* ID.
+
+	   Edge configuration identifier
+	*/
+	ID int64
+
 	// Type.
 	Type *string
 
@@ -149,6 +155,17 @@ func (o *EdgeConfigUpdateParams) SetEdgeGroupIDs(edgeGroupIDs []int64) {
 	o.EdgeGroupIDs = edgeGroupIDs
 }
 
+// WithID adds the id to the edge config update params
+func (o *EdgeConfigUpdateParams) WithID(id int64) *EdgeConfigUpdateParams {
+	o.SetID(id)
+	return o
+}
+
+// SetID adds the id to the edge config update params
+func (o *EdgeConfigUpdateParams) SetID(id int64) {
+	o.ID = id
+}
+
 // WithType adds the typeVar to the edge config update params
 func (o *EdgeConfigUpdateParams) WithType(typeVar *string) *EdgeConfigUpdateParams {
 	o.SetType(typeVar)
@@ -181,6 +198,11 @@ func (o *EdgeConfigUpdateParams) WriteToRequest(r runtime.ClientRequest, reg str
 		if err := r.SetFormParam("edgeGroupIDs", joinedEdgeGroupIDs...); err != nil {
 			return err
 		}
+	}
+
+	// path param id
+	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
+		return err
 	}
 
 	if o.Type != nil {

@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -29,8 +30,8 @@ func (o *GetKubernetesMetricsForAllNodesReader) ReadResponse(response runtime.Cl
 			return nil, err
 		}
 		return result, nil
-	case 400:
-		result := NewGetKubernetesMetricsForAllNodesBadRequest()
+	case 401:
+		result := NewGetKubernetesMetricsForAllNodesUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -42,7 +43,7 @@ func (o *GetKubernetesMetricsForAllNodesReader) ReadResponse(response runtime.Cl
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/metrics/nodes] getKubernetesMetricsForAllNodes", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/metrics/nodes] GetKubernetesMetricsForAllNodes", response, response.Code())
 	}
 }
 
@@ -91,11 +92,13 @@ func (o *GetKubernetesMetricsForAllNodesOK) Code() int {
 }
 
 func (o *GetKubernetesMetricsForAllNodesOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesOK %s", 200, payload)
 }
 
 func (o *GetKubernetesMetricsForAllNodesOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesOK %s", 200, payload)
 }
 
 func (o *GetKubernetesMetricsForAllNodesOK) GetPayload() *models.V1beta1NodeMetricsList {
@@ -114,58 +117,58 @@ func (o *GetKubernetesMetricsForAllNodesOK) readResponse(response runtime.Client
 	return nil
 }
 
-// NewGetKubernetesMetricsForAllNodesBadRequest creates a GetKubernetesMetricsForAllNodesBadRequest with default headers values
-func NewGetKubernetesMetricsForAllNodesBadRequest() *GetKubernetesMetricsForAllNodesBadRequest {
-	return &GetKubernetesMetricsForAllNodesBadRequest{}
+// NewGetKubernetesMetricsForAllNodesUnauthorized creates a GetKubernetesMetricsForAllNodesUnauthorized with default headers values
+func NewGetKubernetesMetricsForAllNodesUnauthorized() *GetKubernetesMetricsForAllNodesUnauthorized {
+	return &GetKubernetesMetricsForAllNodesUnauthorized{}
 }
 
 /*
-GetKubernetesMetricsForAllNodesBadRequest describes a response with status code 400, with default header values.
+GetKubernetesMetricsForAllNodesUnauthorized describes a response with status code 401, with default header values.
 
-Invalid request
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
 */
-type GetKubernetesMetricsForAllNodesBadRequest struct {
+type GetKubernetesMetricsForAllNodesUnauthorized struct {
 }
 
-// IsSuccess returns true when this get kubernetes metrics for all nodes bad request response has a 2xx status code
-func (o *GetKubernetesMetricsForAllNodesBadRequest) IsSuccess() bool {
+// IsSuccess returns true when this get kubernetes metrics for all nodes unauthorized response has a 2xx status code
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this get kubernetes metrics for all nodes bad request response has a 3xx status code
-func (o *GetKubernetesMetricsForAllNodesBadRequest) IsRedirect() bool {
+// IsRedirect returns true when this get kubernetes metrics for all nodes unauthorized response has a 3xx status code
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this get kubernetes metrics for all nodes bad request response has a 4xx status code
-func (o *GetKubernetesMetricsForAllNodesBadRequest) IsClientError() bool {
+// IsClientError returns true when this get kubernetes metrics for all nodes unauthorized response has a 4xx status code
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this get kubernetes metrics for all nodes bad request response has a 5xx status code
-func (o *GetKubernetesMetricsForAllNodesBadRequest) IsServerError() bool {
+// IsServerError returns true when this get kubernetes metrics for all nodes unauthorized response has a 5xx status code
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this get kubernetes metrics for all nodes bad request response a status code equal to that given
-func (o *GetKubernetesMetricsForAllNodesBadRequest) IsCode(code int) bool {
-	return code == 400
+// IsCode returns true when this get kubernetes metrics for all nodes unauthorized response a status code equal to that given
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) IsCode(code int) bool {
+	return code == 401
 }
 
-// Code gets the status code for the get kubernetes metrics for all nodes bad request response
-func (o *GetKubernetesMetricsForAllNodesBadRequest) Code() int {
-	return 400
+// Code gets the status code for the get kubernetes metrics for all nodes unauthorized response
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) Code() int {
+	return 401
 }
 
-func (o *GetKubernetesMetricsForAllNodesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesBadRequest ", 400)
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesUnauthorized", 401)
 }
 
-func (o *GetKubernetesMetricsForAllNodesBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesBadRequest ", 400)
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesUnauthorized", 401)
 }
 
-func (o *GetKubernetesMetricsForAllNodesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *GetKubernetesMetricsForAllNodesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -178,7 +181,7 @@ func NewGetKubernetesMetricsForAllNodesInternalServerError() *GetKubernetesMetri
 /*
 GetKubernetesMetricsForAllNodesInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to retrieve the list of nodes with their live metrics.
 */
 type GetKubernetesMetricsForAllNodesInternalServerError struct {
 }
@@ -214,11 +217,11 @@ func (o *GetKubernetesMetricsForAllNodesInternalServerError) Code() int {
 }
 
 func (o *GetKubernetesMetricsForAllNodesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesInternalServerError", 500)
 }
 
 func (o *GetKubernetesMetricsForAllNodesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes][%d] getKubernetesMetricsForAllNodesInternalServerError", 500)
 }
 
 func (o *GetKubernetesMetricsForAllNodesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

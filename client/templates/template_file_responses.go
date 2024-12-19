@@ -6,6 +6,7 @@ package templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -42,7 +43,7 @@ func (o *TemplateFileReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /templates/file] TemplateFile", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /templates/{id}/file] TemplateFile", response, response.Code())
 	}
 }
 
@@ -91,11 +92,13 @@ func (o *TemplateFileOK) Code() int {
 }
 
 func (o *TemplateFileOK) Error() string {
-	return fmt.Sprintf("[POST /templates/file][%d] templateFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /templates/{id}/file][%d] templateFileOK %s", 200, payload)
 }
 
 func (o *TemplateFileOK) String() string {
-	return fmt.Sprintf("[POST /templates/file][%d] templateFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /templates/{id}/file][%d] templateFileOK %s", 200, payload)
 }
 
 func (o *TemplateFileOK) GetPayload() *models.TemplatesFileResponse {
@@ -158,11 +161,11 @@ func (o *TemplateFileBadRequest) Code() int {
 }
 
 func (o *TemplateFileBadRequest) Error() string {
-	return fmt.Sprintf("[POST /templates/file][%d] templateFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /templates/{id}/file][%d] templateFileBadRequest", 400)
 }
 
 func (o *TemplateFileBadRequest) String() string {
-	return fmt.Sprintf("[POST /templates/file][%d] templateFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /templates/{id}/file][%d] templateFileBadRequest", 400)
 }
 
 func (o *TemplateFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *TemplateFileInternalServerError) Code() int {
 }
 
 func (o *TemplateFileInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /templates/file][%d] templateFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /templates/{id}/file][%d] templateFileInternalServerError", 500)
 }
 
 func (o *TemplateFileInternalServerError) String() string {
-	return fmt.Sprintf("[POST /templates/file][%d] templateFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /templates/{id}/file][%d] templateFileInternalServerError", 500)
 }
 
 func (o *TemplateFileInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

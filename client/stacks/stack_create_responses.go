@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *StackCreateOK) Code() int {
 }
 
 func (o *StackCreateOK) Error() string {
-	return fmt.Sprintf("[POST /stacks][%d] stackCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks][%d] stackCreateOK %s", 200, payload)
 }
 
 func (o *StackCreateOK) String() string {
-	return fmt.Sprintf("[POST /stacks][%d] stackCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks][%d] stackCreateOK %s", 200, payload)
 }
 
 func (o *StackCreateOK) GetPayload() *models.PortainereeStack {
@@ -158,11 +161,11 @@ func (o *StackCreateBadRequest) Code() int {
 }
 
 func (o *StackCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks][%d] stackCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks][%d] stackCreateBadRequest", 400)
 }
 
 func (o *StackCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks][%d] stackCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks][%d] stackCreateBadRequest", 400)
 }
 
 func (o *StackCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *StackCreateInternalServerError) Code() int {
 }
 
 func (o *StackCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks][%d] stackCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks][%d] stackCreateInternalServerError", 500)
 }
 
 func (o *StackCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks][%d] stackCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks][%d] stackCreateInternalServerError", 500)
 }
 
 func (o *StackCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

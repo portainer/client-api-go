@@ -6,6 +6,7 @@ package edge_update_schedules
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *AgentVersionsOK) Code() int {
 }
 
 func (o *AgentVersionsOK) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsOK %s", 200, payload)
 }
 
 func (o *AgentVersionsOK) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsOK %s", 200, payload)
 }
 
 func (o *AgentVersionsOK) GetPayload() []string {
@@ -154,11 +157,11 @@ func (o *AgentVersionsBadRequest) Code() int {
 }
 
 func (o *AgentVersionsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsBadRequest", 400)
 }
 
 func (o *AgentVersionsBadRequest) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsBadRequest", 400)
 }
 
 func (o *AgentVersionsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -210,11 +213,11 @@ func (o *AgentVersionsInternalServerError) Code() int {
 }
 
 func (o *AgentVersionsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsInternalServerError", 500)
 }
 
 func (o *AgentVersionsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_update_schedules/agent_versions][%d] agentVersionsInternalServerError", 500)
 }
 
 func (o *AgentVersionsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

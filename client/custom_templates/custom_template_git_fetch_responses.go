@@ -6,6 +6,7 @@ package custom_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *CustomTemplateGitFetchOK) Code() int {
 }
 
 func (o *CustomTemplateGitFetchOK) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchOK %s", 200, payload)
 }
 
 func (o *CustomTemplateGitFetchOK) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchOK %s", 200, payload)
 }
 
 func (o *CustomTemplateGitFetchOK) GetPayload() *models.CustomtemplatesFileResponse {
@@ -164,11 +167,11 @@ func (o *CustomTemplateGitFetchBadRequest) Code() int {
 }
 
 func (o *CustomTemplateGitFetchBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchBadRequest ", 400)
+	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchBadRequest", 400)
 }
 
 func (o *CustomTemplateGitFetchBadRequest) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchBadRequest ", 400)
+	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchBadRequest", 400)
 }
 
 func (o *CustomTemplateGitFetchBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *CustomTemplateGitFetchNotFound) Code() int {
 }
 
 func (o *CustomTemplateGitFetchNotFound) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchNotFound ", 404)
+	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchNotFound", 404)
 }
 
 func (o *CustomTemplateGitFetchNotFound) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchNotFound ", 404)
+	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchNotFound", 404)
 }
 
 func (o *CustomTemplateGitFetchNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *CustomTemplateGitFetchInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateGitFetchInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchInternalServerError", 500)
 }
 
 func (o *CustomTemplateGitFetchInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /custom_templates/{id}/git_fetch][%d] customTemplateGitFetchInternalServerError", 500)
 }
 
 func (o *CustomTemplateGitFetchInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

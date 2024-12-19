@@ -6,6 +6,7 @@ package helm
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -95,11 +96,13 @@ func (o *HelmShowOK) Code() int {
 }
 
 func (o *HelmShowOK) Error() string {
-	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowOK %s", 200, payload)
 }
 
 func (o *HelmShowOK) String() string {
-	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowOK %s", 200, payload)
 }
 
 func (o *HelmShowOK) GetPayload() string {
@@ -160,11 +163,11 @@ func (o *HelmShowUnauthorized) Code() int {
 }
 
 func (o *HelmShowUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowUnauthorized ", 401)
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowUnauthorized", 401)
 }
 
 func (o *HelmShowUnauthorized) String() string {
-	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowUnauthorized ", 401)
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowUnauthorized", 401)
 }
 
 func (o *HelmShowUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -216,11 +219,11 @@ func (o *HelmShowNotFound) Code() int {
 }
 
 func (o *HelmShowNotFound) Error() string {
-	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowNotFound ", 404)
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowNotFound", 404)
 }
 
 func (o *HelmShowNotFound) String() string {
-	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowNotFound ", 404)
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowNotFound", 404)
 }
 
 func (o *HelmShowNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -272,11 +275,11 @@ func (o *HelmShowInternalServerError) Code() int {
 }
 
 func (o *HelmShowInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowInternalServerError ", 500)
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowInternalServerError", 500)
 }
 
 func (o *HelmShowInternalServerError) String() string {
-	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowInternalServerError ", 500)
+	return fmt.Sprintf("[GET /templates/helm/{command}][%d] helmShowInternalServerError", 500)
 }
 
 func (o *HelmShowInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

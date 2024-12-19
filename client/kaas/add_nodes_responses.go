@@ -99,11 +99,11 @@ func (o *AddNodesOK) Code() int {
 }
 
 func (o *AddNodesOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesOK", 200)
 }
 
 func (o *AddNodesOK) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesOK", 200)
 }
 
 func (o *AddNodesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *AddNodesBadRequest) Code() int {
 }
 
 func (o *AddNodesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesBadRequest", 400)
 }
 
 func (o *AddNodesBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesBadRequest", 400)
 }
 
 func (o *AddNodesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *AddNodesForbidden) Code() int {
 }
 
 func (o *AddNodesForbidden) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesForbidden", 403)
 }
 
 func (o *AddNodesForbidden) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesForbidden", 403)
 }
 
 func (o *AddNodesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *AddNodesInternalServerError) Code() int {
 }
 
 func (o *AddNodesInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesInternalServerError", 500)
 }
 
 func (o *AddNodesInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesInternalServerError", 500)
 }
 
 func (o *AddNodesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *AddNodesServiceUnavailable) Code() int {
 }
 
 func (o *AddNodesServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesServiceUnavailable", 503)
 }
 
 func (o *AddNodesServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/add][%d] addNodesServiceUnavailable", 503)
 }
 
 func (o *AddNodesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

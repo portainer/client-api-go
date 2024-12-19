@@ -68,6 +68,18 @@ type CustomTemplateCreateFileParams struct {
 	*/
 	Description string
 
+	/* EdgeSettings.
+
+	   A json object of edge config
+	*/
+	EdgeSettings *string
+
+	/* EdgeTemplate.
+
+	   Indicates if this template purpose for Edge Stack
+	*/
+	EdgeTemplate *bool
+
 	/* File.
 
 	   File
@@ -174,6 +186,28 @@ func (o *CustomTemplateCreateFileParams) SetDescription(description string) {
 	o.Description = description
 }
 
+// WithEdgeSettings adds the edgeSettings to the custom template create file params
+func (o *CustomTemplateCreateFileParams) WithEdgeSettings(edgeSettings *string) *CustomTemplateCreateFileParams {
+	o.SetEdgeSettings(edgeSettings)
+	return o
+}
+
+// SetEdgeSettings adds the edgeSettings to the custom template create file params
+func (o *CustomTemplateCreateFileParams) SetEdgeSettings(edgeSettings *string) {
+	o.EdgeSettings = edgeSettings
+}
+
+// WithEdgeTemplate adds the edgeTemplate to the custom template create file params
+func (o *CustomTemplateCreateFileParams) WithEdgeTemplate(edgeTemplate *bool) *CustomTemplateCreateFileParams {
+	o.SetEdgeTemplate(edgeTemplate)
+	return o
+}
+
+// SetEdgeTemplate adds the edgeTemplate to the custom template create file params
+func (o *CustomTemplateCreateFileParams) SetEdgeTemplate(edgeTemplate *bool) {
+	o.EdgeTemplate = edgeTemplate
+}
+
 // WithFile adds the file to the custom template create file params
 func (o *CustomTemplateCreateFileParams) WithFile(file runtime.NamedReadCloser) *CustomTemplateCreateFileParams {
 	o.SetFile(file)
@@ -265,6 +299,36 @@ func (o *CustomTemplateCreateFileParams) WriteToRequest(r runtime.ClientRequest,
 	if fDescription != "" {
 		if err := r.SetFormParam("Description", fDescription); err != nil {
 			return err
+		}
+	}
+
+	if o.EdgeSettings != nil {
+
+		// form param EdgeSettings
+		var frEdgeSettings string
+		if o.EdgeSettings != nil {
+			frEdgeSettings = *o.EdgeSettings
+		}
+		fEdgeSettings := frEdgeSettings
+		if fEdgeSettings != "" {
+			if err := r.SetFormParam("EdgeSettings", fEdgeSettings); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.EdgeTemplate != nil {
+
+		// form param EdgeTemplate
+		var frEdgeTemplate bool
+		if o.EdgeTemplate != nil {
+			frEdgeTemplate = *o.EdgeTemplate
+		}
+		fEdgeTemplate := swag.FormatBool(frEdgeTemplate)
+		if fEdgeTemplate != "" {
+			if err := r.SetFormParam("EdgeTemplate", fEdgeTemplate); err != nil {
+				return err
+			}
 		}
 	}
 	// form file param File

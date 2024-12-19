@@ -6,6 +6,7 @@ package gitops
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GitOperationRepoFilePreviewOK) Code() int {
 }
 
 func (o *GitOperationRepoFilePreviewOK) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewOK %s", 200, payload)
 }
 
 func (o *GitOperationRepoFilePreviewOK) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewOK %s", 200, payload)
 }
 
 func (o *GitOperationRepoFilePreviewOK) GetPayload() *models.GitopsFileResponse {
@@ -158,11 +161,11 @@ func (o *GitOperationRepoFilePreviewBadRequest) Code() int {
 }
 
 func (o *GitOperationRepoFilePreviewBadRequest) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewBadRequest ", 400)
+	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewBadRequest", 400)
 }
 
 func (o *GitOperationRepoFilePreviewBadRequest) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewBadRequest ", 400)
+	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewBadRequest", 400)
 }
 
 func (o *GitOperationRepoFilePreviewBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *GitOperationRepoFilePreviewInternalServerError) Code() int {
 }
 
 func (o *GitOperationRepoFilePreviewInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewInternalServerError ", 500)
+	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewInternalServerError", 500)
 }
 
 func (o *GitOperationRepoFilePreviewInternalServerError) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewInternalServerError ", 500)
+	return fmt.Sprintf("[POST /gitops/repo/file/preview][%d] gitOperationRepoFilePreviewInternalServerError", 500)
 }
 
 func (o *GitOperationRepoFilePreviewInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

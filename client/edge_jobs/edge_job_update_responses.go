@@ -6,6 +6,7 @@ package edge_jobs
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *EdgeJobUpdateReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /edge_jobs/{id}] EdgeJobUpdate", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /edge_jobs/{id}] EdgeJobUpdate", response, response.Code())
 	}
 }
 
@@ -63,7 +64,7 @@ EdgeJobUpdateOK describes a response with status code 200, with default header v
 OK
 */
 type EdgeJobUpdateOK struct {
-	Payload *models.PortainereeEdgeJob
+	Payload *models.PortainerEdgeJob
 }
 
 // IsSuccess returns true when this edge job update o k response has a 2xx status code
@@ -97,20 +98,22 @@ func (o *EdgeJobUpdateOK) Code() int {
 }
 
 func (o *EdgeJobUpdateOK) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge_jobs/{id}][%d] edgeJobUpdateOK %s", 200, payload)
 }
 
 func (o *EdgeJobUpdateOK) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge_jobs/{id}][%d] edgeJobUpdateOK %s", 200, payload)
 }
 
-func (o *EdgeJobUpdateOK) GetPayload() *models.PortainereeEdgeJob {
+func (o *EdgeJobUpdateOK) GetPayload() *models.PortainerEdgeJob {
 	return o.Payload
 }
 
 func (o *EdgeJobUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEdgeJob)
+	o.Payload = new(models.PortainerEdgeJob)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -164,11 +167,11 @@ func (o *EdgeJobUpdateBadRequest) Code() int {
 }
 
 func (o *EdgeJobUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_jobs/{id}][%d] edgeJobUpdateBadRequest", 400)
 }
 
 func (o *EdgeJobUpdateBadRequest) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_jobs/{id}][%d] edgeJobUpdateBadRequest", 400)
 }
 
 func (o *EdgeJobUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EdgeJobUpdateInternalServerError) Code() int {
 }
 
 func (o *EdgeJobUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_jobs/{id}][%d] edgeJobUpdateInternalServerError", 500)
 }
 
 func (o *EdgeJobUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_jobs/{id}][%d] edgeJobUpdateInternalServerError", 500)
 }
 
 func (o *EdgeJobUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EdgeJobUpdateServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobUpdateServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateServiceUnavailable ", 503)
+	return fmt.Sprintf("[PUT /edge_jobs/{id}][%d] edgeJobUpdateServiceUnavailable", 503)
 }
 
 func (o *EdgeJobUpdateServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}][%d] edgeJobUpdateServiceUnavailable ", 503)
+	return fmt.Sprintf("[PUT /edge_jobs/{id}][%d] edgeJobUpdateServiceUnavailable", 503)
 }
 
 func (o *EdgeJobUpdateServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -22,7 +22,7 @@ type StacksKubernetesGitDeploymentPayload struct {
 	AdditionalFiles []string `json:"additionalFiles"`
 
 	// auto update
-	AutoUpdate *PortainereeAutoUpdateSettings `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainerAutoUpdateSettings `json:"autoUpdate,omitempty"`
 
 	// compose format
 	ComposeFormat bool `json:"composeFormat,omitempty"`

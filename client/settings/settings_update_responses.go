@@ -6,6 +6,7 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -31,6 +32,12 @@ func (o *SettingsUpdateReader) ReadResponse(response runtime.ClientResponse, con
 		return result, nil
 	case 400:
 		result := NewSettingsUpdateBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewSettingsUpdateConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -91,11 +98,13 @@ func (o *SettingsUpdateOK) Code() int {
 }
 
 func (o *SettingsUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateOK %s", 200, payload)
 }
 
 func (o *SettingsUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateOK %s", 200, payload)
 }
 
 func (o *SettingsUpdateOK) GetPayload() *models.PortainereeSettings {
@@ -158,14 +167,70 @@ func (o *SettingsUpdateBadRequest) Code() int {
 }
 
 func (o *SettingsUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateBadRequest", 400)
 }
 
 func (o *SettingsUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateBadRequest", 400)
 }
 
 func (o *SettingsUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewSettingsUpdateConflict creates a SettingsUpdateConflict with default headers values
+func NewSettingsUpdateConflict() *SettingsUpdateConflict {
+	return &SettingsUpdateConflict{}
+}
+
+/*
+SettingsUpdateConflict describes a response with status code 409, with default header values.
+
+Edge Compute features cannot be disabled while they are in use
+*/
+type SettingsUpdateConflict struct {
+}
+
+// IsSuccess returns true when this settings update conflict response has a 2xx status code
+func (o *SettingsUpdateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this settings update conflict response has a 3xx status code
+func (o *SettingsUpdateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this settings update conflict response has a 4xx status code
+func (o *SettingsUpdateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this settings update conflict response has a 5xx status code
+func (o *SettingsUpdateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this settings update conflict response a status code equal to that given
+func (o *SettingsUpdateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the settings update conflict response
+func (o *SettingsUpdateConflict) Code() int {
+	return 409
+}
+
+func (o *SettingsUpdateConflict) Error() string {
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateConflict", 409)
+}
+
+func (o *SettingsUpdateConflict) String() string {
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateConflict", 409)
+}
+
+func (o *SettingsUpdateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -214,11 +279,11 @@ func (o *SettingsUpdateInternalServerError) Code() int {
 }
 
 func (o *SettingsUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateInternalServerError", 500)
 }
 
 func (o *SettingsUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /settings][%d] settingsUpdateInternalServerError", 500)
 }
 
 func (o *SettingsUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

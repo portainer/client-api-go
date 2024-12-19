@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new stacks API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new stacks API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new stacks API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,8 +51,32 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithContentType allows the client to force the Content-Type header
+// to negotiate a specific Consumer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithContentType(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ConsumesMediaTypes = []string{mime}
+	}
+}
+
+// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
+func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/json"}
+}
+
+// WithContentTypeMultipartFormData sets the Content-Type header to "multipart/form-data".
+func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"multipart/form-data"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -56,6 +106,8 @@ type ClientService interface {
 
 	StackDelete(params *StackDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackDeleteNoContent, error)
 
+	StackDeleteKubernetesByName(params *StackDeleteKubernetesByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackDeleteKubernetesByNameNoContent, error)
+
 	StackFileInspect(params *StackFileInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackFileInspectOK, error)
 
 	StackGitRedeploy(params *StackGitRedeployParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackGitRedeployOK, error)
@@ -75,6 +127,8 @@ type ClientService interface {
 	StackUpdateGit(params *StackUpdateGitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackUpdateGitOK, error)
 
 	StacksWebhookInvoke(params *StacksWebhookInvokeParams, opts ...ClientOption) (*StacksWebhookInvokeOK, error)
+
+	StackImagesStatus(params *StackImagesStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackImagesStatusOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -634,6 +688,49 @@ func (a *Client) StackDelete(params *StackDeleteParams, authInfo runtime.ClientA
 }
 
 /*
+	StackDeleteKubernetesByName removes kubernetes stacks by name
+
+	Remove a stack.
+
+**Access policy**: restricted
+*/
+func (a *Client) StackDeleteKubernetesByName(params *StackDeleteKubernetesByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackDeleteKubernetesByNameNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackDeleteKubernetesByNameParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "StackDeleteKubernetesByName",
+		Method:             "DELETE",
+		PathPattern:        "/stacks/name/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackDeleteKubernetesByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackDeleteKubernetesByNameNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StackDeleteKubernetesByName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	StackFileInspect retrieves the content of the stack file for the specified stack
 
 	Get Stack file content.
@@ -769,6 +866,7 @@ func (a *Client) StackInspect(params *StackInspectParams, authInfo runtime.Clien
 
 Will return all stacks if using an administrator account otherwise it
 will only return the list of stacks the user have access to.
+Limited stacks will not be returned by this endpoint.
 **Access policy**: authenticated
 */
 func (a *Client) StackList(params *StackListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackListOK, *StackListNoContent, error) {
@@ -1060,6 +1158,47 @@ func (a *Client) StacksWebhookInvoke(params *StacksWebhookInvokeParams, opts ...
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for StacksWebhookInvoke: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StackImagesStatus fetches image status for stack
+
+**Access policy**:
+*/
+func (a *Client) StackImagesStatus(params *StackImagesStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackImagesStatusOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStackImagesStatusParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "stackImagesStatus",
+		Method:             "GET",
+		PathPattern:        "/stacks/{id}/images_status",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StackImagesStatusReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StackImagesStatusOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for stackImagesStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

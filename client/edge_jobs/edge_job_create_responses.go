@@ -6,6 +6,7 @@ package edge_jobs
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *EdgeJobCreateOK) Code() int {
 }
 
 func (o *EdgeJobCreateOK) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateOK %s", 200, payload)
 }
 
 func (o *EdgeJobCreateOK) String() string {
-	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateOK %s", 200, payload)
 }
 
 func (o *EdgeJobCreateOK) GetPayload() *models.PortainereeEdgeGroup {
@@ -158,11 +161,11 @@ func (o *EdgeJobCreateInternalServerError) Code() int {
 }
 
 func (o *EdgeJobCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateInternalServerError", 500)
 }
 
 func (o *EdgeJobCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateInternalServerError", 500)
 }
 
 func (o *EdgeJobCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *EdgeJobCreateServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobCreateServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateServiceUnavailable", 503)
 }
 
 func (o *EdgeJobCreateServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_jobs][%d] edgeJobCreateServiceUnavailable", 503)
 }
 
 func (o *EdgeJobCreateServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

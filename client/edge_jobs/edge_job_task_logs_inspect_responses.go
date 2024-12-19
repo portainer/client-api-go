@@ -6,6 +6,7 @@ package edge_jobs
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EdgeJobTaskLogsInspectOK) Code() int {
 }
 
 func (o *EdgeJobTaskLogsInspectOK) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectOK %s", 200, payload)
 }
 
 func (o *EdgeJobTaskLogsInspectOK) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectOK %s", 200, payload)
 }
 
 func (o *EdgeJobTaskLogsInspectOK) GetPayload() *models.EdgejobsFileResponse {
@@ -164,11 +167,11 @@ func (o *EdgeJobTaskLogsInspectBadRequest) Code() int {
 }
 
 func (o *EdgeJobTaskLogsInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectBadRequest", 400)
 }
 
 func (o *EdgeJobTaskLogsInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectBadRequest", 400)
 }
 
 func (o *EdgeJobTaskLogsInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EdgeJobTaskLogsInspectInternalServerError) Code() int {
 }
 
 func (o *EdgeJobTaskLogsInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectInternalServerError", 500)
 }
 
 func (o *EdgeJobTaskLogsInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectInternalServerError", 500)
 }
 
 func (o *EdgeJobTaskLogsInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EdgeJobTaskLogsInspectServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobTaskLogsInspectServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectServiceUnavailable", 503)
 }
 
 func (o *EdgeJobTaskLogsInspectServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTaskLogsInspectServiceUnavailable", 503)
 }
 
 func (o *EdgeJobTaskLogsInspectServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

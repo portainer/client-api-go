@@ -93,11 +93,11 @@ func (o *EdgeStackWebhookInvokeOK) Code() int {
 }
 
 func (o *EdgeStackWebhookInvokeOK) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeOK ", 200)
+	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeOK", 200)
 }
 
 func (o *EdgeStackWebhookInvokeOK) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeOK ", 200)
+	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeOK", 200)
 }
 
 func (o *EdgeStackWebhookInvokeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EdgeStackWebhookInvokeBadRequest) Code() int {
 }
 
 func (o *EdgeStackWebhookInvokeBadRequest) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeBadRequest", 400)
 }
 
 func (o *EdgeStackWebhookInvokeBadRequest) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeBadRequest", 400)
 }
 
 func (o *EdgeStackWebhookInvokeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EdgeStackWebhookInvokeConflict) Code() int {
 }
 
 func (o *EdgeStackWebhookInvokeConflict) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeConflict ", 409)
+	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeConflict", 409)
 }
 
 func (o *EdgeStackWebhookInvokeConflict) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeConflict ", 409)
+	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeConflict", 409)
 }
 
 func (o *EdgeStackWebhookInvokeConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EdgeStackWebhookInvokeInternalServerError) Code() int {
 }
 
 func (o *EdgeStackWebhookInvokeInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeInternalServerError", 500)
 }
 
 func (o *EdgeStackWebhookInvokeInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_stacks/webhooks/{webhookID}][%d] edgeStackWebhookInvokeInternalServerError", 500)
 }
 
 func (o *EdgeStackWebhookInvokeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

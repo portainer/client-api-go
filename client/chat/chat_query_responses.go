@@ -6,6 +6,7 @@ package chat
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *ChatQueryOK) Code() int {
 }
 
 func (o *ChatQueryOK) Error() string {
-	return fmt.Sprintf("[POST /chat][%d] chatQueryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /chat][%d] chatQueryOK %s", 200, payload)
 }
 
 func (o *ChatQueryOK) String() string {
-	return fmt.Sprintf("[POST /chat][%d] chatQueryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /chat][%d] chatQueryOK %s", 200, payload)
 }
 
 func (o *ChatQueryOK) GetPayload() *models.ChatChatQueryResponse {
@@ -152,11 +155,11 @@ func (o *ChatQueryInternalServerError) Code() int {
 }
 
 func (o *ChatQueryInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /chat][%d] chatQueryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /chat][%d] chatQueryInternalServerError", 500)
 }
 
 func (o *ChatQueryInternalServerError) String() string {
-	return fmt.Sprintf("[POST /chat][%d] chatQueryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /chat][%d] chatQueryInternalServerError", 500)
 }
 
 func (o *ChatQueryInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

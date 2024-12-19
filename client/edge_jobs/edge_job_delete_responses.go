@@ -93,11 +93,11 @@ func (o *EdgeJobDeleteNoContent) Code() int {
 }
 
 func (o *EdgeJobDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteNoContent", 204)
 }
 
 func (o *EdgeJobDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteNoContent", 204)
 }
 
 func (o *EdgeJobDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EdgeJobDeleteBadRequest) Code() int {
 }
 
 func (o *EdgeJobDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteBadRequest", 400)
 }
 
 func (o *EdgeJobDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteBadRequest", 400)
 }
 
 func (o *EdgeJobDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EdgeJobDeleteInternalServerError) Code() int {
 }
 
 func (o *EdgeJobDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteInternalServerError", 500)
 }
 
 func (o *EdgeJobDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteInternalServerError", 500)
 }
 
 func (o *EdgeJobDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EdgeJobDeleteServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobDeleteServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteServiceUnavailable", 503)
 }
 
 func (o *EdgeJobDeleteServiceUnavailable) String() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}][%d] edgeJobDeleteServiceUnavailable", 503)
 }
 
 func (o *EdgeJobDeleteServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

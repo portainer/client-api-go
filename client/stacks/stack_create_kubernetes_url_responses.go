@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *StackCreateKubernetesURLOK) Code() int {
 }
 
 func (o *StackCreateKubernetesURLOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlOK %s", 200, payload)
 }
 
 func (o *StackCreateKubernetesURLOK) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlOK %s", 200, payload)
 }
 
 func (o *StackCreateKubernetesURLOK) GetPayload() *models.PortainereeStack {
@@ -158,11 +161,11 @@ func (o *StackCreateKubernetesURLBadRequest) Code() int {
 }
 
 func (o *StackCreateKubernetesURLBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlBadRequest", 400)
 }
 
 func (o *StackCreateKubernetesURLBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlBadRequest", 400)
 }
 
 func (o *StackCreateKubernetesURLBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *StackCreateKubernetesURLInternalServerError) Code() int {
 }
 
 func (o *StackCreateKubernetesURLInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlInternalServerError", 500)
 }
 
 func (o *StackCreateKubernetesURLInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/url][%d] stackCreateKubernetesUrlInternalServerError", 500)
 }
 
 func (o *StackCreateKubernetesURLInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

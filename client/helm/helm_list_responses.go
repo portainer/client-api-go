@@ -6,6 +6,7 @@ package helm
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *HelmListOK) Code() int {
 }
 
 func (o *HelmListOK) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListOK %s", 200, payload)
 }
 
 func (o *HelmListOK) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListOK %s", 200, payload)
 }
 
 func (o *HelmListOK) GetPayload() []*models.ReleaseReleaseElement {
@@ -168,11 +171,11 @@ func (o *HelmListBadRequest) Code() int {
 }
 
 func (o *HelmListBadRequest) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListBadRequest", 400)
 }
 
 func (o *HelmListBadRequest) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListBadRequest", 400)
 }
 
 func (o *HelmListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -224,11 +227,11 @@ func (o *HelmListUnauthorized) Code() int {
 }
 
 func (o *HelmListUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListUnauthorized ", 401)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListUnauthorized", 401)
 }
 
 func (o *HelmListUnauthorized) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListUnauthorized ", 401)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListUnauthorized", 401)
 }
 
 func (o *HelmListUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -280,11 +283,11 @@ func (o *HelmListNotFound) Code() int {
 }
 
 func (o *HelmListNotFound) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListNotFound", 404)
 }
 
 func (o *HelmListNotFound) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListNotFound", 404)
 }
 
 func (o *HelmListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -336,11 +339,11 @@ func (o *HelmListInternalServerError) Code() int {
 }
 
 func (o *HelmListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListInternalServerError", 500)
 }
 
 func (o *HelmListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}/kubernetes/helm][%d] helmListInternalServerError", 500)
 }
 
 func (o *HelmListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

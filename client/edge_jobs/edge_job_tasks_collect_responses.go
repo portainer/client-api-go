@@ -93,11 +93,11 @@ func (o *EdgeJobTasksCollectNoContent) Code() int {
 }
 
 func (o *EdgeJobTasksCollectNoContent) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectNoContent ", 204)
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectNoContent", 204)
 }
 
 func (o *EdgeJobTasksCollectNoContent) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectNoContent ", 204)
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectNoContent", 204)
 }
 
 func (o *EdgeJobTasksCollectNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EdgeJobTasksCollectBadRequest) Code() int {
 }
 
 func (o *EdgeJobTasksCollectBadRequest) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectBadRequest", 400)
 }
 
 func (o *EdgeJobTasksCollectBadRequest) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectBadRequest", 400)
 }
 
 func (o *EdgeJobTasksCollectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EdgeJobTasksCollectInternalServerError) Code() int {
 }
 
 func (o *EdgeJobTasksCollectInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectInternalServerError", 500)
 }
 
 func (o *EdgeJobTasksCollectInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectInternalServerError", 500)
 }
 
 func (o *EdgeJobTasksCollectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EdgeJobTasksCollectServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobTasksCollectServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectServiceUnavailable", 503)
 }
 
 func (o *EdgeJobTasksCollectServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksCollectServiceUnavailable", 503)
 }
 
 func (o *EdgeJobTasksCollectServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

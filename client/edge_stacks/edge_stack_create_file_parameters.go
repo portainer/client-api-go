@@ -64,7 +64,7 @@ type EdgeStackCreateFileParams struct {
 
 	/* DeploymentType.
 
-	   deploy type 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
+	   deploy type 0 - 'compose', 1 - 'kubernetes'
 	*/
 	DeploymentType int64
 
@@ -82,7 +82,7 @@ type EdgeStackCreateFileParams struct {
 
 	/* Name.
 
-	   Name of the stack
+	   Name of the stack. it must only consist of lowercase alphanumeric characters, hyphens, or underscores as well as start with a letter or number
 	*/
 	Name string
 
@@ -104,11 +104,29 @@ type EdgeStackCreateFileParams struct {
 	*/
 	RetryDeploy *bool
 
+	/* RetryPeriod.
+
+	   Duration, in seconds, for which the agent should continue attempting to deploy the stack after a failure
+	*/
+	RetryPeriod *int64
+
+	/* StaggerConfig.
+
+	   JSON stringified object of stagger config
+	*/
+	StaggerConfig *string
+
 	/* UseManifestNamespaces.
 
 	   Uses the manifest's namespaces instead of the default one, relevant only for kube environments
 	*/
 	UseManifestNamespaces *bool
+
+	/* Webhook.
+
+	   unique webhook id
+	*/
+	Webhook string
 
 	/* Dryrun.
 
@@ -252,6 +270,28 @@ func (o *EdgeStackCreateFileParams) SetRetryDeploy(retryDeploy *bool) {
 	o.RetryDeploy = retryDeploy
 }
 
+// WithRetryPeriod adds the retryPeriod to the edge stack create file params
+func (o *EdgeStackCreateFileParams) WithRetryPeriod(retryPeriod *int64) *EdgeStackCreateFileParams {
+	o.SetRetryPeriod(retryPeriod)
+	return o
+}
+
+// SetRetryPeriod adds the retryPeriod to the edge stack create file params
+func (o *EdgeStackCreateFileParams) SetRetryPeriod(retryPeriod *int64) {
+	o.RetryPeriod = retryPeriod
+}
+
+// WithStaggerConfig adds the staggerConfig to the edge stack create file params
+func (o *EdgeStackCreateFileParams) WithStaggerConfig(staggerConfig *string) *EdgeStackCreateFileParams {
+	o.SetStaggerConfig(staggerConfig)
+	return o
+}
+
+// SetStaggerConfig adds the staggerConfig to the edge stack create file params
+func (o *EdgeStackCreateFileParams) SetStaggerConfig(staggerConfig *string) {
+	o.StaggerConfig = staggerConfig
+}
+
 // WithUseManifestNamespaces adds the useManifestNamespaces to the edge stack create file params
 func (o *EdgeStackCreateFileParams) WithUseManifestNamespaces(useManifestNamespaces *bool) *EdgeStackCreateFileParams {
 	o.SetUseManifestNamespaces(useManifestNamespaces)
@@ -261,6 +301,17 @@ func (o *EdgeStackCreateFileParams) WithUseManifestNamespaces(useManifestNamespa
 // SetUseManifestNamespaces adds the useManifestNamespaces to the edge stack create file params
 func (o *EdgeStackCreateFileParams) SetUseManifestNamespaces(useManifestNamespaces *bool) {
 	o.UseManifestNamespaces = useManifestNamespaces
+}
+
+// WithWebhook adds the webhook to the edge stack create file params
+func (o *EdgeStackCreateFileParams) WithWebhook(webhook string) *EdgeStackCreateFileParams {
+	o.SetWebhook(webhook)
+	return o
+}
+
+// SetWebhook adds the webhook to the edge stack create file params
+func (o *EdgeStackCreateFileParams) SetWebhook(webhook string) {
+	o.Webhook = webhook
 }
 
 // WithDryrun adds the dryrun to the edge stack create file params
@@ -380,6 +431,36 @@ func (o *EdgeStackCreateFileParams) WriteToRequest(r runtime.ClientRequest, reg 
 		}
 	}
 
+	if o.RetryPeriod != nil {
+
+		// form param RetryPeriod
+		var frRetryPeriod int64
+		if o.RetryPeriod != nil {
+			frRetryPeriod = *o.RetryPeriod
+		}
+		fRetryPeriod := swag.FormatInt64(frRetryPeriod)
+		if fRetryPeriod != "" {
+			if err := r.SetFormParam("RetryPeriod", fRetryPeriod); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.StaggerConfig != nil {
+
+		// form param StaggerConfig
+		var frStaggerConfig string
+		if o.StaggerConfig != nil {
+			frStaggerConfig = *o.StaggerConfig
+		}
+		fStaggerConfig := frStaggerConfig
+		if fStaggerConfig != "" {
+			if err := r.SetFormParam("StaggerConfig", fStaggerConfig); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.UseManifestNamespaces != nil {
 
 		// form param UseManifestNamespaces
@@ -392,6 +473,15 @@ func (o *EdgeStackCreateFileParams) WriteToRequest(r runtime.ClientRequest, reg 
 			if err := r.SetFormParam("UseManifestNamespaces", fUseManifestNamespaces); err != nil {
 				return err
 			}
+		}
+	}
+
+	// form param Webhook
+	frWebhook := o.Webhook
+	fWebhook := frWebhook
+	if fWebhook != "" {
+		if err := r.SetFormParam("Webhook", fWebhook); err != nil {
+			return err
 		}
 	}
 

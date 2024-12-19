@@ -99,11 +99,11 @@ func (o *UserRemoveAPIKeyNoContent) Code() int {
 }
 
 func (o *UserRemoveAPIKeyNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNoContent ", 204)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNoContent", 204)
 }
 
 func (o *UserRemoveAPIKeyNoContent) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNoContent ", 204)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNoContent", 204)
 }
 
 func (o *UserRemoveAPIKeyNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *UserRemoveAPIKeyBadRequest) Code() int {
 }
 
 func (o *UserRemoveAPIKeyBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyBadRequest", 400)
 }
 
 func (o *UserRemoveAPIKeyBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyBadRequest", 400)
 }
 
 func (o *UserRemoveAPIKeyBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *UserRemoveAPIKeyForbidden) Code() int {
 }
 
 func (o *UserRemoveAPIKeyForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyForbidden ", 403)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyForbidden", 403)
 }
 
 func (o *UserRemoveAPIKeyForbidden) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyForbidden ", 403)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyForbidden", 403)
 }
 
 func (o *UserRemoveAPIKeyForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *UserRemoveAPIKeyNotFound) Code() int {
 }
 
 func (o *UserRemoveAPIKeyNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNotFound ", 404)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNotFound", 404)
 }
 
 func (o *UserRemoveAPIKeyNotFound) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNotFound ", 404)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyNotFound", 404)
 }
 
 func (o *UserRemoveAPIKeyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *UserRemoveAPIKeyInternalServerError) Code() int {
 }
 
 func (o *UserRemoveAPIKeyInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyInternalServerError", 500)
 }
 
 func (o *UserRemoveAPIKeyInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /users/{id}/tokens/{keyID}][%d] userRemoveApiKeyInternalServerError", 500)
 }
 
 func (o *UserRemoveAPIKeyInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

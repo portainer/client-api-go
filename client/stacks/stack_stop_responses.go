@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *StackStopOK) Code() int {
 }
 
 func (o *StackStopOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopOK %s", 200, payload)
 }
 
 func (o *StackStopOK) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopOK %s", 200, payload)
 }
 
 func (o *StackStopOK) GetPayload() *models.PortainereeStack {
@@ -170,11 +173,11 @@ func (o *StackStopBadRequest) Code() int {
 }
 
 func (o *StackStopBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopBadRequest", 400)
 }
 
 func (o *StackStopBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopBadRequest", 400)
 }
 
 func (o *StackStopBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *StackStopForbidden) Code() int {
 }
 
 func (o *StackStopForbidden) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopForbidden", 403)
 }
 
 func (o *StackStopForbidden) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopForbidden", 403)
 }
 
 func (o *StackStopForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *StackStopNotFound) Code() int {
 }
 
 func (o *StackStopNotFound) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopNotFound", 404)
 }
 
 func (o *StackStopNotFound) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopNotFound", 404)
 }
 
 func (o *StackStopNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *StackStopInternalServerError) Code() int {
 }
 
 func (o *StackStopInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopInternalServerError", 500)
 }
 
 func (o *StackStopInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/stop][%d] stackStopInternalServerError", 500)
 }
 
 func (o *StackStopInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

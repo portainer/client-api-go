@@ -6,10 +6,14 @@ package docker
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/portainer/client-api-go/v2/models"
 )
 
 // ContainerImageStatusReader is a Reader for the ContainerImageStatus structure.
@@ -54,6 +58,7 @@ ContainerImageStatusOK describes a response with status code 200, with default h
 Success
 */
 type ContainerImageStatusOK struct {
+	Payload *models.ImagesStatusResponse
 }
 
 // IsSuccess returns true when this container image status o k response has a 2xx status code
@@ -87,14 +92,27 @@ func (o *ContainerImageStatusOK) Code() int {
 }
 
 func (o *ContainerImageStatusOK) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusOK ", 200)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusOK %s", 200, payload)
 }
 
 func (o *ContainerImageStatusOK) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusOK ", 200)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusOK %s", 200, payload)
+}
+
+func (o *ContainerImageStatusOK) GetPayload() *models.ImagesStatusResponse {
+	return o.Payload
 }
 
 func (o *ContainerImageStatusOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ImagesStatusResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -143,11 +161,11 @@ func (o *ContainerImageStatusBadRequest) Code() int {
 }
 
 func (o *ContainerImageStatusBadRequest) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusBadRequest ", 400)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusBadRequest", 400)
 }
 
 func (o *ContainerImageStatusBadRequest) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusBadRequest ", 400)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusBadRequest", 400)
 }
 
 func (o *ContainerImageStatusBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +217,11 @@ func (o *ContainerImageStatusInternalServerError) Code() int {
 }
 
 func (o *ContainerImageStatusInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusInternalServerError ", 500)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusInternalServerError", 500)
 }
 
 func (o *ContainerImageStatusInternalServerError) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusInternalServerError ", 500)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/image_status][%d] containerImageStatusInternalServerError", 500)
 }
 
 func (o *ContainerImageStatusInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

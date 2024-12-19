@@ -22,6 +22,9 @@ type PortainerEdgeStack struct {
 	// StatusArray    map[EndpointID][]EdgeStackStatus `json:"StatusArray"`
 	CreationDate int64 `json:"CreationDate,omitempty"`
 
+	// deployment type
+	DeploymentType int64 `json:"DeploymentType,omitempty"`
+
 	// edge groups
 	EdgeGroups []int64 `json:"EdgeGroups"`
 
@@ -32,6 +35,9 @@ type PortainerEdgeStack struct {
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
+	// manifest path
+	ManifestPath string `json:"ManifestPath,omitempty"`
+
 	// name
 	Name string `json:"Name,omitempty"`
 
@@ -41,20 +47,11 @@ type PortainerEdgeStack struct {
 	// project path
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
-	// Deprecated
-	Prune bool `json:"Prune,omitempty"`
-
 	// status
 	Status map[string]PortainerEdgeStackStatus `json:"Status,omitempty"`
 
 	// version
 	Version int64 `json:"Version,omitempty"`
-
-	// deployment type
-	DeploymentType int64 `json:"deploymentType,omitempty"`
-
-	// manifest path
-	ManifestPath string `json:"manifestPath,omitempty"`
 
 	// Uses the manifest's namespaces instead of the default one
 	UseManifestNamespaces bool `json:"useManifestNamespaces,omitempty"`

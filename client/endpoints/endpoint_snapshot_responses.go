@@ -93,11 +93,11 @@ func (o *EndpointSnapshotNoContent) Code() int {
 }
 
 func (o *EndpointSnapshotNoContent) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNoContent ", 204)
+	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNoContent", 204)
 }
 
 func (o *EndpointSnapshotNoContent) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNoContent ", 204)
+	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNoContent", 204)
 }
 
 func (o *EndpointSnapshotNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EndpointSnapshotBadRequest) Code() int {
 }
 
 func (o *EndpointSnapshotBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotBadRequest", 400)
 }
 
 func (o *EndpointSnapshotBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotBadRequest", 400)
 }
 
 func (o *EndpointSnapshotBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EndpointSnapshotNotFound) Code() int {
 }
 
 func (o *EndpointSnapshotNotFound) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNotFound ", 404)
+	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNotFound", 404)
 }
 
 func (o *EndpointSnapshotNotFound) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNotFound ", 404)
+	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotNotFound", 404)
 }
 
 func (o *EndpointSnapshotNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EndpointSnapshotInternalServerError) Code() int {
 }
 
 func (o *EndpointSnapshotInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotInternalServerError", 500)
 }
 
 func (o *EndpointSnapshotInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/{id}/snapshot][%d] endpointSnapshotInternalServerError", 500)
 }
 
 func (o *EndpointSnapshotInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

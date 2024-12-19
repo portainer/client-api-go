@@ -99,11 +99,11 @@ func (o *UpgradeOK) Code() int {
 }
 
 func (o *UpgradeOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeOK", 200)
 }
 
 func (o *UpgradeOK) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeOK", 200)
 }
 
 func (o *UpgradeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *UpgradeBadRequest) Code() int {
 }
 
 func (o *UpgradeBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeBadRequest", 400)
 }
 
 func (o *UpgradeBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeBadRequest", 400)
 }
 
 func (o *UpgradeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *UpgradeForbidden) Code() int {
 }
 
 func (o *UpgradeForbidden) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeForbidden", 403)
 }
 
 func (o *UpgradeForbidden) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeForbidden", 403)
 }
 
 func (o *UpgradeForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *UpgradeInternalServerError) Code() int {
 }
 
 func (o *UpgradeInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeInternalServerError", 500)
 }
 
 func (o *UpgradeInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeInternalServerError", 500)
 }
 
 func (o *UpgradeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *UpgradeServiceUnavailable) Code() int {
 }
 
 func (o *UpgradeServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeServiceUnavailable", 503)
 }
 
 func (o *UpgradeServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/upgrade][%d] upgradeServiceUnavailable", 503)
 }
 
 func (o *UpgradeServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

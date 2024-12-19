@@ -22,7 +22,7 @@ type UsersThemePayload struct {
 
 	// Color represents the color theme of the UI
 	// Example: dark
-	// Enum: [dark light highcontrast auto]
+	// Enum: ["dark","light","highcontrast","auto"]
 	Color string `json:"color,omitempty"`
 
 	// SubtleUpgradeButton indicates if the upgrade banner should be displayed in a subtle way

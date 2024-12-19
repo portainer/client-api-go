@@ -99,11 +99,11 @@ func (o *GetWebsocketAttachOK) Code() int {
 }
 
 func (o *GetWebsocketAttachOK) Error() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachOK ", 200)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachOK", 200)
 }
 
 func (o *GetWebsocketAttachOK) String() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachOK ", 200)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachOK", 200)
 }
 
 func (o *GetWebsocketAttachOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *GetWebsocketAttachBadRequest) Code() int {
 }
 
 func (o *GetWebsocketAttachBadRequest) Error() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachBadRequest", 400)
 }
 
 func (o *GetWebsocketAttachBadRequest) String() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachBadRequest", 400)
 }
 
 func (o *GetWebsocketAttachBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *GetWebsocketAttachForbidden) Code() int {
 }
 
 func (o *GetWebsocketAttachForbidden) Error() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachForbidden ", 403)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachForbidden", 403)
 }
 
 func (o *GetWebsocketAttachForbidden) String() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachForbidden ", 403)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachForbidden", 403)
 }
 
 func (o *GetWebsocketAttachForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *GetWebsocketAttachNotFound) Code() int {
 }
 
 func (o *GetWebsocketAttachNotFound) Error() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachNotFound ", 404)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachNotFound", 404)
 }
 
 func (o *GetWebsocketAttachNotFound) String() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachNotFound ", 404)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachNotFound", 404)
 }
 
 func (o *GetWebsocketAttachNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *GetWebsocketAttachInternalServerError) Code() int {
 }
 
 func (o *GetWebsocketAttachInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachInternalServerError", 500)
 }
 
 func (o *GetWebsocketAttachInternalServerError) String() string {
-	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/attach][%d] getWebsocketAttachInternalServerError", 500)
 }
 
 func (o *GetWebsocketAttachInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

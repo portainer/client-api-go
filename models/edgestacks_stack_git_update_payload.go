@@ -25,15 +25,14 @@ type EdgestacksStackGitUpdatePayload struct {
 	Authentication *GittypesGitAuthentication `json:"authentication,omitempty"`
 
 	// auto update
-	AutoUpdate *PortainereeAutoUpdateSettings `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainerAutoUpdateSettings `json:"autoUpdate,omitempty"`
 
 	// Deployment type to deploy this stack
-	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
+	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
 	// compose is enabled only for docker environments
 	// kubernetes is enabled only for kubernetes environments
-	// nomad is enabled only for nomad environments
 	// Example: 0
-	// Enum: [0 1 2]
+	// Enum: [0,1]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// env vars
@@ -42,11 +41,20 @@ type EdgestacksStackGitUpdatePayload struct {
 	// group ids
 	GroupIds []int64 `json:"groupIds"`
 
+	// pre pull image
+	PrePullImage bool `json:"prePullImage,omitempty"`
+
 	// ref name
 	RefName string `json:"refName,omitempty"`
 
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
+
+	// retry deploy
+	RetryDeploy bool `json:"retryDeploy,omitempty"`
+
+	// RetryPeriod specifies the duration, in seconds, for which the agent should continue attempting to deploy the stack after a failure
+	RetryPeriod int64 `json:"retryPeriod,omitempty"`
 
 	// Configuration for stagger updates
 	StaggerConfig *PortainereeEdgeStaggerConfig `json:"staggerConfig,omitempty"`
@@ -129,7 +137,7 @@ var edgestacksStackGitUpdatePayloadTypeDeploymentTypePropEnum []interface{}
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[0,1]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

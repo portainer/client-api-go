@@ -6,6 +6,7 @@ package edge_groups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *EgeGroupUpdateOK) Code() int {
 }
 
 func (o *EgeGroupUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateOK %s", 200, payload)
 }
 
 func (o *EgeGroupUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateOK %s", 200, payload)
 }
 
 func (o *EgeGroupUpdateOK) GetPayload() *models.PortainereeEdgeGroup {
@@ -158,11 +161,11 @@ func (o *EgeGroupUpdateInternalServerError) Code() int {
 }
 
 func (o *EgeGroupUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateInternalServerError", 500)
 }
 
 func (o *EgeGroupUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateInternalServerError", 500)
 }
 
 func (o *EgeGroupUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *EgeGroupUpdateServiceUnavailable) Code() int {
 }
 
 func (o *EgeGroupUpdateServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateServiceUnavailable ", 503)
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateServiceUnavailable", 503)
 }
 
 func (o *EgeGroupUpdateServiceUnavailable) String() string {
-	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateServiceUnavailable ", 503)
+	return fmt.Sprintf("[PUT /edge_groups/{id}][%d] egeGroupUpdateServiceUnavailable", 503)
 }
 
 func (o *EgeGroupUpdateServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

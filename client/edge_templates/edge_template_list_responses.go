@@ -6,6 +6,7 @@ package edge_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -51,7 +52,7 @@ EdgeTemplateListOK describes a response with status code 200, with default heade
 OK
 */
 type EdgeTemplateListOK struct {
-	Payload []*models.PortainereeTemplate
+	Payload []*models.PortainerTemplate
 }
 
 // IsSuccess returns true when this edge template list o k response has a 2xx status code
@@ -85,14 +86,16 @@ func (o *EdgeTemplateListOK) Code() int {
 }
 
 func (o *EdgeTemplateListOK) Error() string {
-	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListOK %s", 200, payload)
 }
 
 func (o *EdgeTemplateListOK) String() string {
-	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListOK %s", 200, payload)
 }
 
-func (o *EdgeTemplateListOK) GetPayload() []*models.PortainereeTemplate {
+func (o *EdgeTemplateListOK) GetPayload() []*models.PortainerTemplate {
 	return o.Payload
 }
 
@@ -150,11 +153,11 @@ func (o *EdgeTemplateListInternalServerError) Code() int {
 }
 
 func (o *EdgeTemplateListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListInternalServerError", 500)
 }
 
 func (o *EdgeTemplateListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_templates][%d] edgeTemplateListInternalServerError", 500)
 }
 
 func (o *EdgeTemplateListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

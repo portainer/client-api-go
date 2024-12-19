@@ -48,13 +48,27 @@ type PortainereeSettings struct {
 	AuthenticationMethod int64 `json:"AuthenticationMethod,omitempty"`
 
 	// A list of label name & value that will be used to hide containers when querying containers
-	BlackListedLabels []*PortainereePair `json:"BlackListedLabels"`
+	BlackListedLabels []*PortainerPair `json:"BlackListedLabels"`
 
 	// CloudAPIKeys
 	CloudAPIKeys *PortainereeCloudAPIKeys `json:"CloudApiKeys,omitempty"`
 
 	// The content in plaintext used to display in the login page. Will hide when value is empty string
 	CustomLoginBanner string `json:"CustomLoginBanner,omitempty"`
+
+	// DisableKubeShell will disable the kube shell feature for non-admin users
+	// Example: false
+	DisableKubeShell bool `json:"DisableKubeShell,omitempty"`
+
+	// DisableKubeconfigDownload will disable the download of kubeconfig files for non-admin users
+	// Example: false
+	DisableKubeconfigDownload bool `json:"DisableKubeconfigDownload,omitempty"`
+
+	// Deprecated fields
+	DisplayDonationHeader bool `json:"DisplayDonationHeader,omitempty"`
+
+	// display external contributors
+	DisplayExternalContributors bool `json:"DisplayExternalContributors,omitempty"`
 
 	// edge
 	Edge *PortainereeEdge `json:"Edge,omitempty"`
@@ -83,6 +97,9 @@ type PortainereeSettings struct {
 	// Experimental features
 	ExperimentalFeatures *PortainereeExperimentalFeatures `json:"ExperimentalFeatures,omitempty"`
 
+	// feature flag settings
+	FeatureFlagSettings map[string]bool `json:"FeatureFlagSettings,omitempty"`
+
 	// Deployment options for encouraging git ops workflows
 	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
 
@@ -91,7 +108,7 @@ type PortainereeSettings struct {
 	HelmRepositoryURL string `json:"HelmRepositoryURL,omitempty"`
 
 	// internal auth settings
-	InternalAuthSettings *PortainereeInternalAuthSettings `json:"InternalAuthSettings,omitempty"`
+	InternalAuthSettings *PortainerInternalAuthSettings `json:"InternalAuthSettings,omitempty"`
 
 	// is docker desktop extension
 	IsDockerDesktopExtension bool `json:"IsDockerDesktopExtension,omitempty"`
@@ -114,10 +131,6 @@ type PortainereeSettings struct {
 	// o auth settings
 	OAuthSettings *PortainereeOAuthSettings `json:"OAuthSettings,omitempty"`
 
-	// Show the Kompose build option (discontinued in 2.18)
-	// Example: false
-	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
-
 	// The interval in which environment(endpoint) snapshots are created
 	// Example: 5m
 	SnapshotInterval string `json:"SnapshotInterval,omitempty"`
@@ -136,15 +149,6 @@ type PortainereeSettings struct {
 
 	// default registry
 	DefaultRegistry *PortainereeSettingsDefaultRegistry `json:"defaultRegistry,omitempty"`
-
-	// Deprecated fields
-	DisplayDonationHeader bool `json:"displayDonationHeader,omitempty"`
-
-	// display external contributors
-	DisplayExternalContributors bool `json:"displayExternalContributors,omitempty"`
-
-	// fdo configuration
-	FdoConfiguration *PortainereeFDOConfiguration `json:"fdoConfiguration,omitempty"`
 
 	// open a m t configuration
 	OpenAMTConfiguration *PortainerOpenAMTConfiguration `json:"openAMTConfiguration,omitempty"`
@@ -187,10 +191,6 @@ func (m *PortainereeSettings) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateDefaultRegistry(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateFdoConfiguration(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -382,25 +382,6 @@ func (m *PortainereeSettings) validateDefaultRegistry(formats strfmt.Registry) e
 	return nil
 }
 
-func (m *PortainereeSettings) validateFdoConfiguration(formats strfmt.Registry) error {
-	if swag.IsZero(m.FdoConfiguration) { // not required
-		return nil
-	}
-
-	if m.FdoConfiguration != nil {
-		if err := m.FdoConfiguration.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("fdoConfiguration")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("fdoConfiguration")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *PortainereeSettings) validateOpenAMTConfiguration(formats strfmt.Registry) error {
 	if swag.IsZero(m.OpenAMTConfiguration) { // not required
 		return nil
@@ -457,10 +438,6 @@ func (m *PortainereeSettings) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidateDefaultRegistry(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateFdoConfiguration(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -667,27 +644,6 @@ func (m *PortainereeSettings) contextValidateDefaultRegistry(ctx context.Context
 	return nil
 }
 
-func (m *PortainereeSettings) contextValidateFdoConfiguration(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.FdoConfiguration != nil {
-
-		if swag.IsZero(m.FdoConfiguration) { // not required
-			return nil
-		}
-
-		if err := m.FdoConfiguration.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("fdoConfiguration")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("fdoConfiguration")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *PortainereeSettings) contextValidateOpenAMTConfiguration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OpenAMTConfiguration != nil {
@@ -727,7 +683,7 @@ func (m *PortainereeSettings) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// PortainereeSettingsDefaultRegistry the default builtin registry now is anonymous docker hub registry
+// PortainereeSettingsDefaultRegistry The default builtin registry now is anonymous docker hub registry
 //
 // swagger:model PortainereeSettingsDefaultRegistry
 type PortainereeSettingsDefaultRegistry struct {

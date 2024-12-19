@@ -99,11 +99,11 @@ func (o *EndpointRegistryAccessNoContent) Code() int {
 }
 
 func (o *EndpointRegistryAccessNoContent) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNoContent ", 204)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNoContent", 204)
 }
 
 func (o *EndpointRegistryAccessNoContent) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNoContent ", 204)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNoContent", 204)
 }
 
 func (o *EndpointRegistryAccessNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *EndpointRegistryAccessBadRequest) Code() int {
 }
 
 func (o *EndpointRegistryAccessBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessBadRequest", 400)
 }
 
 func (o *EndpointRegistryAccessBadRequest) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessBadRequest", 400)
 }
 
 func (o *EndpointRegistryAccessBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *EndpointRegistryAccessForbidden) Code() int {
 }
 
 func (o *EndpointRegistryAccessForbidden) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessForbidden ", 403)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessForbidden", 403)
 }
 
 func (o *EndpointRegistryAccessForbidden) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessForbidden ", 403)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessForbidden", 403)
 }
 
 func (o *EndpointRegistryAccessForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *EndpointRegistryAccessNotFound) Code() int {
 }
 
 func (o *EndpointRegistryAccessNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNotFound", 404)
 }
 
 func (o *EndpointRegistryAccessNotFound) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessNotFound", 404)
 }
 
 func (o *EndpointRegistryAccessNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *EndpointRegistryAccessInternalServerError) Code() int {
 }
 
 func (o *EndpointRegistryAccessInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessInternalServerError", 500)
 }
 
 func (o *EndpointRegistryAccessInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/registries/{registryId}][%d] endpointRegistryAccessInternalServerError", 500)
 }
 
 func (o *EndpointRegistryAccessInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -87,11 +87,11 @@ func (o *UpdateS3SettingsOK) Code() int {
 }
 
 func (o *UpdateS3SettingsOK) Error() string {
-	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsOK ", 200)
+	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsOK", 200)
 }
 
 func (o *UpdateS3SettingsOK) String() string {
-	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsOK ", 200)
+	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsOK", 200)
 }
 
 func (o *UpdateS3SettingsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *UpdateS3SettingsBadRequest) Code() int {
 }
 
 func (o *UpdateS3SettingsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsBadRequest ", 400)
+	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsBadRequest", 400)
 }
 
 func (o *UpdateS3SettingsBadRequest) String() string {
-	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsBadRequest ", 400)
+	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsBadRequest", 400)
 }
 
 func (o *UpdateS3SettingsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *UpdateS3SettingsInternalServerError) Code() int {
 }
 
 func (o *UpdateS3SettingsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsInternalServerError", 500)
 }
 
 func (o *UpdateS3SettingsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /backup/s3/settings][%d] updateS3SettingsInternalServerError", 500)
 }
 
 func (o *UpdateS3SettingsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

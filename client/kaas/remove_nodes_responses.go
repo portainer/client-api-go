@@ -99,11 +99,11 @@ func (o *RemoveNodesOK) Code() int {
 }
 
 func (o *RemoveNodesOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesOK", 200)
 }
 
 func (o *RemoveNodesOK) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesOK ", 200)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesOK", 200)
 }
 
 func (o *RemoveNodesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *RemoveNodesBadRequest) Code() int {
 }
 
 func (o *RemoveNodesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesBadRequest", 400)
 }
 
 func (o *RemoveNodesBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesBadRequest", 400)
 }
 
 func (o *RemoveNodesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *RemoveNodesForbidden) Code() int {
 }
 
 func (o *RemoveNodesForbidden) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesForbidden", 403)
 }
 
 func (o *RemoveNodesForbidden) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesForbidden ", 403)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesForbidden", 403)
 }
 
 func (o *RemoveNodesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *RemoveNodesInternalServerError) Code() int {
 }
 
 func (o *RemoveNodesInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesInternalServerError", 500)
 }
 
 func (o *RemoveNodesInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesInternalServerError", 500)
 }
 
 func (o *RemoveNodesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *RemoveNodesServiceUnavailable) Code() int {
 }
 
 func (o *RemoveNodesServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesServiceUnavailable", 503)
 }
 
 func (o *RemoveNodesServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/endpoints/{environmentId}/nodes/remove][%d] removeNodesServiceUnavailable", 503)
 }
 
 func (o *RemoveNodesServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

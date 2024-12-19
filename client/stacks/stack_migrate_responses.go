@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -43,6 +44,12 @@ func (o *StackMigrateReader) ReadResponse(response runtime.ClientResponse, consu
 		return nil, result
 	case 404:
 		result := NewStackMigrateNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewStackMigrateConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -103,11 +110,13 @@ func (o *StackMigrateOK) Code() int {
 }
 
 func (o *StackMigrateOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateOK %s", 200, payload)
 }
 
 func (o *StackMigrateOK) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateOK %s", 200, payload)
 }
 
 func (o *StackMigrateOK) GetPayload() *models.PortainereeStack {
@@ -170,11 +179,11 @@ func (o *StackMigrateBadRequest) Code() int {
 }
 
 func (o *StackMigrateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateBadRequest", 400)
 }
 
 func (o *StackMigrateBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateBadRequest", 400)
 }
 
 func (o *StackMigrateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +235,11 @@ func (o *StackMigrateForbidden) Code() int {
 }
 
 func (o *StackMigrateForbidden) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateForbidden", 403)
 }
 
 func (o *StackMigrateForbidden) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateForbidden", 403)
 }
 
 func (o *StackMigrateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,14 +291,70 @@ func (o *StackMigrateNotFound) Code() int {
 }
 
 func (o *StackMigrateNotFound) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateNotFound", 404)
 }
 
 func (o *StackMigrateNotFound) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateNotFound", 404)
 }
 
 func (o *StackMigrateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewStackMigrateConflict creates a StackMigrateConflict with default headers values
+func NewStackMigrateConflict() *StackMigrateConflict {
+	return &StackMigrateConflict{}
+}
+
+/*
+StackMigrateConflict describes a response with status code 409, with default header values.
+
+A stack with the same name is already running on the target environment(endpoint)
+*/
+type StackMigrateConflict struct {
+}
+
+// IsSuccess returns true when this stack migrate conflict response has a 2xx status code
+func (o *StackMigrateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack migrate conflict response has a 3xx status code
+func (o *StackMigrateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack migrate conflict response has a 4xx status code
+func (o *StackMigrateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack migrate conflict response has a 5xx status code
+func (o *StackMigrateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack migrate conflict response a status code equal to that given
+func (o *StackMigrateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the stack migrate conflict response
+func (o *StackMigrateConflict) Code() int {
+	return 409
+}
+
+func (o *StackMigrateConflict) Error() string {
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateConflict", 409)
+}
+
+func (o *StackMigrateConflict) String() string {
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateConflict", 409)
+}
+
+func (o *StackMigrateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -338,11 +403,11 @@ func (o *StackMigrateInternalServerError) Code() int {
 }
 
 func (o *StackMigrateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateInternalServerError", 500)
 }
 
 func (o *StackMigrateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/migrate][%d] stackMigrateInternalServerError", 500)
 }
 
 func (o *StackMigrateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

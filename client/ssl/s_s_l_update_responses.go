@@ -93,11 +93,11 @@ func (o *SSLUpdateNoContent) Code() int {
 }
 
 func (o *SSLUpdateNoContent) Error() string {
-	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateNoContent", 204)
 }
 
 func (o *SSLUpdateNoContent) String() string {
-	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateNoContent", 204)
 }
 
 func (o *SSLUpdateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *SSLUpdateBadRequest) Code() int {
 }
 
 func (o *SSLUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateBadRequest", 400)
 }
 
 func (o *SSLUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateBadRequest", 400)
 }
 
 func (o *SSLUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *SSLUpdateForbidden) Code() int {
 }
 
 func (o *SSLUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateForbidden", 403)
 }
 
 func (o *SSLUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateForbidden", 403)
 }
 
 func (o *SSLUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *SSLUpdateInternalServerError) Code() int {
 }
 
 func (o *SSLUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateInternalServerError", 500)
 }
 
 func (o *SSLUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /ssl][%d] sSLUpdateInternalServerError", 500)
 }
 
 func (o *SSLUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

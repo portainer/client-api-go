@@ -29,7 +29,7 @@ type LicensesLicenseInfo struct {
 	// nodes
 	Nodes int64 `json:"nodes,omitempty"`
 
-	// unix timestamp when node usage exceeded avaiable license limit
+	// unix timestamp when node usage exceeded available license limit
 	OveruseStartedTimestamp int64 `json:"overuseStartedTimestamp,omitempty"`
 
 	// type

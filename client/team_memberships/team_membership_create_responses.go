@@ -6,6 +6,7 @@ package team_memberships
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -75,7 +76,7 @@ TeamMembershipCreateOK describes a response with status code 200, with default h
 Success
 */
 type TeamMembershipCreateOK struct {
-	Payload *models.PortainereeTeamMembership
+	Payload *models.PortainerTeamMembership
 }
 
 // IsSuccess returns true when this team membership create o k response has a 2xx status code
@@ -109,20 +110,22 @@ func (o *TeamMembershipCreateOK) Code() int {
 }
 
 func (o *TeamMembershipCreateOK) Error() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateOK %s", 200, payload)
 }
 
 func (o *TeamMembershipCreateOK) String() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateOK %s", 200, payload)
 }
 
-func (o *TeamMembershipCreateOK) GetPayload() *models.PortainereeTeamMembership {
+func (o *TeamMembershipCreateOK) GetPayload() *models.PortainerTeamMembership {
 	return o.Payload
 }
 
 func (o *TeamMembershipCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTeamMembership)
+	o.Payload = new(models.PortainerTeamMembership)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -176,11 +179,11 @@ func (o *TeamMembershipCreateNoContent) Code() int {
 }
 
 func (o *TeamMembershipCreateNoContent) Error() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateNoContent ", 204)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateNoContent", 204)
 }
 
 func (o *TeamMembershipCreateNoContent) String() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateNoContent ", 204)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateNoContent", 204)
 }
 
 func (o *TeamMembershipCreateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *TeamMembershipCreateBadRequest) Code() int {
 }
 
 func (o *TeamMembershipCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateBadRequest", 400)
 }
 
 func (o *TeamMembershipCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateBadRequest", 400)
 }
 
 func (o *TeamMembershipCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *TeamMembershipCreateForbidden) Code() int {
 }
 
 func (o *TeamMembershipCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateForbidden", 403)
 }
 
 func (o *TeamMembershipCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateForbidden", 403)
 }
 
 func (o *TeamMembershipCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *TeamMembershipCreateConflict) Code() int {
 }
 
 func (o *TeamMembershipCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateConflict ", 409)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateConflict", 409)
 }
 
 func (o *TeamMembershipCreateConflict) String() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateConflict ", 409)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateConflict", 409)
 }
 
 func (o *TeamMembershipCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *TeamMembershipCreateInternalServerError) Code() int {
 }
 
 func (o *TeamMembershipCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateInternalServerError", 500)
 }
 
 func (o *TeamMembershipCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateInternalServerError", 500)
 }
 
 func (o *TeamMembershipCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

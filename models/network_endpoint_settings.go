@@ -18,8 +18,12 @@ import (
 // swagger:model network.EndpointSettings
 type NetworkEndpointSettings struct {
 
-	// aliases
+	// Aliases holds the list of extra, user-specified DNS names for this endpoint.
 	Aliases []string `json:"aliases"`
+
+	// DNSNames holds all the (non fully qualified) DNS names associated to this endpoint. First entry is used to
+	// generate PTR records.
+	Dnsnames []string `json:"dnsnames"`
 
 	// driver opts
 	DriverOpts map[string]string `json:"driverOpts,omitempty"`
@@ -51,7 +55,9 @@ type NetworkEndpointSettings struct {
 	// links
 	Links []string `json:"links"`
 
-	// mac address
+	// MacAddress may be used to specify a MAC address when the container is created.
+	// Once the container is running, it becomes operational data (it may contain a
+	// generated address).
 	MacAddress string `json:"macAddress,omitempty"`
 
 	// Operational data

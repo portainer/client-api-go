@@ -87,11 +87,11 @@ func (o *PostEndpointsIDDockerV2BrowsePutNoContent) Code() int {
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutNoContent) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutNoContent ", 204)
+	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutNoContent", 204)
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutNoContent) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutNoContent ", 204)
+	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutNoContent", 204)
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *PostEndpointsIDDockerV2BrowsePutBadRequest) Code() int {
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutBadRequest", 400)
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutBadRequest", 400)
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *PostEndpointsIDDockerV2BrowsePutInternalServerError) Code() int {
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutInternalServerError", 500)
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/{id}/docker/v2/browse/put][%d] postEndpointsIdDockerV2BrowsePutInternalServerError", 500)
 }
 
 func (o *PostEndpointsIDDockerV2BrowsePutInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

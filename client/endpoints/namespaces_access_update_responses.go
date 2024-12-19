@@ -99,11 +99,11 @@ func (o *NamespacesAccessUpdateNoContent) Code() int {
 }
 
 func (o *NamespacesAccessUpdateNoContent) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNoContent", 204)
 }
 
 func (o *NamespacesAccessUpdateNoContent) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNoContent", 204)
 }
 
 func (o *NamespacesAccessUpdateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *NamespacesAccessUpdateBadRequest) Code() int {
 }
 
 func (o *NamespacesAccessUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateBadRequest", 400)
 }
 
 func (o *NamespacesAccessUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateBadRequest", 400)
 }
 
 func (o *NamespacesAccessUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *NamespacesAccessUpdateForbidden) Code() int {
 }
 
 func (o *NamespacesAccessUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateForbidden", 403)
 }
 
 func (o *NamespacesAccessUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateForbidden", 403)
 }
 
 func (o *NamespacesAccessUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *NamespacesAccessUpdateNotFound) Code() int {
 }
 
 func (o *NamespacesAccessUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNotFound", 404)
 }
 
 func (o *NamespacesAccessUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateNotFound", 404)
 }
 
 func (o *NamespacesAccessUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *NamespacesAccessUpdateInternalServerError) Code() int {
 }
 
 func (o *NamespacesAccessUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateInternalServerError", 500)
 }
 
 func (o *NamespacesAccessUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/pools/{rpn}/access][%d] namespacesAccessUpdateInternalServerError", 500)
 }
 
 func (o *NamespacesAccessUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -51,7 +51,7 @@ type PortainereeCustomTemplate struct {
 	// Platform associated to the template.
 	// Valid values are: 1 - 'linux', 2 - 'windows'
 	// Example: 1
-	// Enum: [1 2]
+	// Enum: [1,2]
 	Platform int64 `json:"Platform,omitempty"`
 
 	// Path on disk to the repository hosting the Stack file
@@ -59,7 +59,7 @@ type PortainereeCustomTemplate struct {
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
 	// resource control
-	ResourceControl *PortainereeResourceControl `json:"ResourceControl,omitempty"`
+	ResourceControl *PortainerResourceControl `json:"ResourceControl,omitempty"`
 
 	// Title of the template
 	// Example: Nginx
@@ -70,15 +70,22 @@ type PortainereeCustomTemplate struct {
 	// * 2 - compose
 	// * 3 - kubernetes
 	// Example: 1
-	// Enum: [1 2 3]
+	// Enum: [1,2,3]
 	Type int64 `json:"Type,omitempty"`
+
+	// edge settings
+	EdgeSettings *PortainereeCustomTemplateEdgeSettings `json:"edgeSettings,omitempty"`
+
+	// EdgeTemplate indicates if this template purpose for Edge Stack
+	// Example: false
+	EdgeTemplate bool `json:"edgeTemplate,omitempty"`
 
 	// IsComposeFormat indicates if the Kubernetes template is created from a Docker Compose file
 	// Example: false
 	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
 
 	// variables
-	Variables []*PortainereeCustomTemplateVariableDefinition `json:"variables"`
+	Variables []*PortainerCustomTemplateVariableDefinition `json:"variables"`
 }
 
 // Validate validates this portaineree custom template
@@ -98,6 +105,10 @@ func (m *PortainereeCustomTemplate) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEdgeSettings(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -215,6 +226,25 @@ func (m *PortainereeCustomTemplate) validateType(formats strfmt.Registry) error 
 	return nil
 }
 
+func (m *PortainereeCustomTemplate) validateEdgeSettings(formats strfmt.Registry) error {
+	if swag.IsZero(m.EdgeSettings) { // not required
+		return nil
+	}
+
+	if m.EdgeSettings != nil {
+		if err := m.EdgeSettings.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edgeSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edgeSettings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainereeCustomTemplate) validateVariables(formats strfmt.Registry) error {
 	if swag.IsZero(m.Variables) { // not required
 		return nil
@@ -250,6 +280,10 @@ func (m *PortainereeCustomTemplate) ContextValidate(ctx context.Context, formats
 	}
 
 	if err := m.contextValidateResourceControl(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateEdgeSettings(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -297,6 +331,27 @@ func (m *PortainereeCustomTemplate) contextValidateResourceControl(ctx context.C
 				return ve.ValidateName("ResourceControl")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ResourceControl")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PortainereeCustomTemplate) contextValidateEdgeSettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.EdgeSettings != nil {
+
+		if swag.IsZero(m.EdgeSettings) { // not required
+			return nil
+		}
+
+		if err := m.EdgeSettings.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("edgeSettings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("edgeSettings")
 			}
 			return err
 		}

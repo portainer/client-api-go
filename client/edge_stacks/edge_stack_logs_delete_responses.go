@@ -87,11 +87,11 @@ func (o *EdgeStackLogsDeleteNoContent) Code() int {
 }
 
 func (o *EdgeStackLogsDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteNoContent", 204)
 }
 
 func (o *EdgeStackLogsDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteNoContent", 204)
 }
 
 func (o *EdgeStackLogsDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *EdgeStackLogsDeleteBadRequest) Code() int {
 }
 
 func (o *EdgeStackLogsDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteBadRequest", 400)
 }
 
 func (o *EdgeStackLogsDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteBadRequest", 400)
 }
 
 func (o *EdgeStackLogsDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *EdgeStackLogsDeleteServiceUnavailable) Code() int {
 }
 
 func (o *EdgeStackLogsDeleteServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteServiceUnavailable", 503)
 }
 
 func (o *EdgeStackLogsDeleteServiceUnavailable) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsDeleteServiceUnavailable", 503)
 }
 
 func (o *EdgeStackLogsDeleteServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

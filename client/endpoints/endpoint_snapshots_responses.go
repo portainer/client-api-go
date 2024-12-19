@@ -81,11 +81,11 @@ func (o *EndpointSnapshotsNoContent) Code() int {
 }
 
 func (o *EndpointSnapshotsNoContent) Error() string {
-	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsNoContent ", 204)
+	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsNoContent", 204)
 }
 
 func (o *EndpointSnapshotsNoContent) String() string {
-	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsNoContent ", 204)
+	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsNoContent", 204)
 }
 
 func (o *EndpointSnapshotsNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,11 +137,11 @@ func (o *EndpointSnapshotsInternalServerError) Code() int {
 }
 
 func (o *EndpointSnapshotsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsInternalServerError", 500)
 }
 
 func (o *EndpointSnapshotsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/snapshot][%d] endpointSnapshotsInternalServerError", 500)
 }
 
 func (o *EndpointSnapshotsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

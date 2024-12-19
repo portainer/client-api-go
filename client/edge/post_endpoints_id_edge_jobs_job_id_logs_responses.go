@@ -87,11 +87,11 @@ func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) Code() int {
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsOK ", 200)
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsOK", 200)
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsOK ", 200)
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsOK", 200)
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) Code() int {
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsBadRequest", 400)
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsBadRequest", 400)
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) Code() int {
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsInternalServerError", 500)
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/{id}/edge/jobs/{jobID}/logs][%d] postEndpointsIdEdgeJobsJobIdLogsInternalServerError", 500)
 }
 
 func (o *PostEndpointsIDEdgeJobsJobIDLogsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

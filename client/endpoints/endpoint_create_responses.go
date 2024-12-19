@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -31,6 +32,12 @@ func (o *EndpointCreateReader) ReadResponse(response runtime.ClientResponse, con
 		return result, nil
 	case 400:
 		result := NewEndpointCreateBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewEndpointCreateConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -91,11 +98,13 @@ func (o *EndpointCreateOK) Code() int {
 }
 
 func (o *EndpointCreateOK) Error() string {
-	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateOK %s", 200, payload)
 }
 
 func (o *EndpointCreateOK) String() string {
-	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateOK %s", 200, payload)
 }
 
 func (o *EndpointCreateOK) GetPayload() *models.PortainereeEndpoint {
@@ -158,14 +167,70 @@ func (o *EndpointCreateBadRequest) Code() int {
 }
 
 func (o *EndpointCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateBadRequest", 400)
 }
 
 func (o *EndpointCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateBadRequest", 400)
 }
 
 func (o *EndpointCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewEndpointCreateConflict creates a EndpointCreateConflict with default headers values
+func NewEndpointCreateConflict() *EndpointCreateConflict {
+	return &EndpointCreateConflict{}
+}
+
+/*
+EndpointCreateConflict describes a response with status code 409, with default header values.
+
+Name is not unique
+*/
+type EndpointCreateConflict struct {
+}
+
+// IsSuccess returns true when this endpoint create conflict response has a 2xx status code
+func (o *EndpointCreateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this endpoint create conflict response has a 3xx status code
+func (o *EndpointCreateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this endpoint create conflict response has a 4xx status code
+func (o *EndpointCreateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this endpoint create conflict response has a 5xx status code
+func (o *EndpointCreateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this endpoint create conflict response a status code equal to that given
+func (o *EndpointCreateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the endpoint create conflict response
+func (o *EndpointCreateConflict) Code() int {
+	return 409
+}
+
+func (o *EndpointCreateConflict) Error() string {
+	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateConflict", 409)
+}
+
+func (o *EndpointCreateConflict) String() string {
+	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateConflict", 409)
+}
+
+func (o *EndpointCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -214,11 +279,11 @@ func (o *EndpointCreateInternalServerError) Code() int {
 }
 
 func (o *EndpointCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateInternalServerError", 500)
 }
 
 func (o *EndpointCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints][%d] endpointCreateInternalServerError", 500)
 }
 
 func (o *EndpointCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -19,6 +19,10 @@ import (
 // swagger:model gitops.repositoryFileSearchPayload
 type GitopsRepositoryFileSearchPayload struct {
 
+	// Mandatory container/stack fields
+	// Template Identifier
+	CreatedFromCustomTemplateID int64 `json:"createdFromCustomTemplateID,omitempty"`
+
 	// DirOnly List directories only
 	// Example: false
 	DirOnly bool `json:"dirOnly,omitempty"`

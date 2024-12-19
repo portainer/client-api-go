@@ -6,6 +6,7 @@ package cloud_credentials
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *GenerateOK) Code() int {
 }
 
 func (o *GenerateOK) Error() string {
-	return fmt.Sprintf("[POST /sshkeygen][%d] generateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /sshkeygen][%d] generateOK %s", 200, payload)
 }
 
 func (o *GenerateOK) String() string {
-	return fmt.Sprintf("[POST /sshkeygen][%d] generateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /sshkeygen][%d] generateOK %s", 200, payload)
 }
 
 func (o *GenerateOK) GetPayload() *models.ModelsSSHKeyPair {
@@ -152,11 +155,11 @@ func (o *GenerateInternalServerError) Code() int {
 }
 
 func (o *GenerateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /sshkeygen][%d] generateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /sshkeygen][%d] generateInternalServerError", 500)
 }
 
 func (o *GenerateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /sshkeygen][%d] generateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /sshkeygen][%d] generateInternalServerError", 500)
 }
 
 func (o *GenerateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

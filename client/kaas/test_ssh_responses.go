@@ -6,6 +6,7 @@ package kaas
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *TestSSHOK) Code() int {
 }
 
 func (o *TestSSHOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshOK %s", 200, payload)
 }
 
 func (o *TestSSHOK) String() string {
-	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshOK %s", 200, payload)
 }
 
 func (o *TestSSHOK) GetPayload() []*models.SshtestSSHTestResult {
@@ -162,11 +165,11 @@ func (o *TestSSHBadRequest) Code() int {
 }
 
 func (o *TestSSHBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshBadRequest", 400)
 }
 
 func (o *TestSSHBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshBadRequest", 400)
 }
 
 func (o *TestSSHBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -218,11 +221,11 @@ func (o *TestSSHInternalServerError) Code() int {
 }
 
 func (o *TestSSHInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshInternalServerError", 500)
 }
 
 func (o *TestSSHInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshInternalServerError", 500)
 }
 
 func (o *TestSSHInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -274,11 +277,11 @@ func (o *TestSSHServiceUnavailable) Code() int {
 }
 
 func (o *TestSSHServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshServiceUnavailable", 503)
 }
 
 func (o *TestSSHServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /cloud/testssh][%d] testSshServiceUnavailable", 503)
 }
 
 func (o *TestSSHServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

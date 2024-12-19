@@ -23,10 +23,10 @@ type PortainereeKubernetesData struct {
 	Configuration *PortainereeKubernetesConfiguration `json:"Configuration,omitempty"`
 
 	// flags
-	Flags *PortainereeKubernetesFlags `json:"Flags,omitempty"`
+	Flags *PortainerKubernetesFlags `json:"Flags,omitempty"`
 
 	// snapshots
-	Snapshots []*PortainereeKubernetesSnapshot `json:"Snapshots"`
+	Snapshots []*PortainerKubernetesSnapshot `json:"Snapshots"`
 }
 
 // Validate validates this portaineree kubernetes data

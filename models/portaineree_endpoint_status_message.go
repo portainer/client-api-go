@@ -30,6 +30,9 @@ type PortainereeEndpointStatusMessage struct {
 
 	// summary
 	Summary string `json:"summary,omitempty"`
+
+	// warnings
+	Warnings []string `json:"warnings"`
 }
 
 // Validate validates this portaineree endpoint status message

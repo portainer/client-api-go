@@ -93,11 +93,11 @@ func (o *EndpointGroupAddEndpointNoContent) Code() int {
 }
 
 func (o *EndpointGroupAddEndpointNoContent) Error() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNoContent ", 204)
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNoContent", 204)
 }
 
 func (o *EndpointGroupAddEndpointNoContent) String() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNoContent ", 204)
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNoContent", 204)
 }
 
 func (o *EndpointGroupAddEndpointNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EndpointGroupAddEndpointBadRequest) Code() int {
 }
 
 func (o *EndpointGroupAddEndpointBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointBadRequest", 400)
 }
 
 func (o *EndpointGroupAddEndpointBadRequest) String() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointBadRequest", 400)
 }
 
 func (o *EndpointGroupAddEndpointBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EndpointGroupAddEndpointNotFound) Code() int {
 }
 
 func (o *EndpointGroupAddEndpointNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNotFound", 404)
 }
 
 func (o *EndpointGroupAddEndpointNotFound) String() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointNotFound", 404)
 }
 
 func (o *EndpointGroupAddEndpointNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EndpointGroupAddEndpointInternalServerError) Code() int {
 }
 
 func (o *EndpointGroupAddEndpointInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointInternalServerError", 500)
 }
 
 func (o *EndpointGroupAddEndpointInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoint_groups/{id}/endpoints/{endpointId}][%d] endpointGroupAddEndpointInternalServerError", 500)
 }
 
 func (o *EndpointGroupAddEndpointInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

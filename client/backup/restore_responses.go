@@ -87,11 +87,11 @@ func (o *RestoreOK) Code() int {
 }
 
 func (o *RestoreOK) Error() string {
-	return fmt.Sprintf("[POST /restore][%d] restoreOK ", 200)
+	return fmt.Sprintf("[POST /restore][%d] restoreOK", 200)
 }
 
 func (o *RestoreOK) String() string {
-	return fmt.Sprintf("[POST /restore][%d] restoreOK ", 200)
+	return fmt.Sprintf("[POST /restore][%d] restoreOK", 200)
 }
 
 func (o *RestoreOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *RestoreBadRequest) Code() int {
 }
 
 func (o *RestoreBadRequest) Error() string {
-	return fmt.Sprintf("[POST /restore][%d] restoreBadRequest ", 400)
+	return fmt.Sprintf("[POST /restore][%d] restoreBadRequest", 400)
 }
 
 func (o *RestoreBadRequest) String() string {
-	return fmt.Sprintf("[POST /restore][%d] restoreBadRequest ", 400)
+	return fmt.Sprintf("[POST /restore][%d] restoreBadRequest", 400)
 }
 
 func (o *RestoreBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *RestoreInternalServerError) Code() int {
 }
 
 func (o *RestoreInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /restore][%d] restoreInternalServerError ", 500)
+	return fmt.Sprintf("[POST /restore][%d] restoreInternalServerError", 500)
 }
 
 func (o *RestoreInternalServerError) String() string {
-	return fmt.Sprintf("[POST /restore][%d] restoreInternalServerError ", 500)
+	return fmt.Sprintf("[POST /restore][%d] restoreInternalServerError", 500)
 }
 
 func (o *RestoreInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

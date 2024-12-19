@@ -20,6 +20,10 @@ import (
 // swagger:model types.UpdateSchedule
 type TypesUpdateSchedule struct {
 
+	// Name of the agent image, does not include the registry
+	// Example: portainer/agent:latest
+	AgentImage string `json:"agentImage,omitempty"`
+
 	// Created timestamp
 	// Example: 1564897200
 	Created int64 `json:"created,omitempty"`
@@ -57,10 +61,14 @@ type TypesUpdateSchedule struct {
 
 	// Type of the update (1 - update, 2 - rollback)
 	// Example: 1
-	// Enum: [1 2]
+	// Enum: [1,2]
 	Type int64 `json:"type,omitempty"`
 
-	// version
+	// Name of the updater image, does not include the registry but must include a tag
+	// Example: portainer/portainer-updater:latest
+	UpdaterImage string `json:"updaterImage,omitempty"`
+
+	// Deprecated
 	// Example: 1.0.0
 	Version string `json:"version,omitempty"`
 }

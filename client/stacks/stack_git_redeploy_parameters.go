@@ -66,7 +66,7 @@ type StackGitRedeployParams struct {
 
 	/* Body.
 
-	   Git configs for pull and redeploy a stack
+	   Git configs for pull and redeploy of a stack. **StackName** may only be populated for Kuberenetes stacks, and if specified with a blank string, it will be set to blank
 	*/
 	Body *models.StacksStackGitRedployPayload
 

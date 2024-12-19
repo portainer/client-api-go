@@ -6,6 +6,7 @@ package edge_jobs
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EdgeJobTasksListOK) Code() int {
 }
 
 func (o *EdgeJobTasksListOK) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListOK %s", 200, payload)
 }
 
 func (o *EdgeJobTasksListOK) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListOK %s", 200, payload)
 }
 
 func (o *EdgeJobTasksListOK) GetPayload() []*models.EdgejobsTaskContainer {
@@ -162,11 +165,11 @@ func (o *EdgeJobTasksListBadRequest) Code() int {
 }
 
 func (o *EdgeJobTasksListBadRequest) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListBadRequest", 400)
 }
 
 func (o *EdgeJobTasksListBadRequest) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListBadRequest", 400)
 }
 
 func (o *EdgeJobTasksListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -218,11 +221,11 @@ func (o *EdgeJobTasksListInternalServerError) Code() int {
 }
 
 func (o *EdgeJobTasksListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListInternalServerError", 500)
 }
 
 func (o *EdgeJobTasksListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListInternalServerError", 500)
 }
 
 func (o *EdgeJobTasksListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -274,11 +277,11 @@ func (o *EdgeJobTasksListServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobTasksListServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListServiceUnavailable", 503)
 }
 
 func (o *EdgeJobTasksListServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/tasks][%d] edgeJobTasksListServiceUnavailable", 503)
 }
 
 func (o *EdgeJobTasksListServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

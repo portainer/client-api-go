@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *EndpointListOK) Code() int {
 }
 
 func (o *EndpointListOK) Error() string {
-	return fmt.Sprintf("[GET /endpoints][%d] endpointListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints][%d] endpointListOK %s", 200, payload)
 }
 
 func (o *EndpointListOK) String() string {
-	return fmt.Sprintf("[GET /endpoints][%d] endpointListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints][%d] endpointListOK %s", 200, payload)
 }
 
 func (o *EndpointListOK) GetPayload() []*models.PortainereeEndpoint {
@@ -150,11 +153,11 @@ func (o *EndpointListInternalServerError) Code() int {
 }
 
 func (o *EndpointListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoints][%d] endpointListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints][%d] endpointListInternalServerError", 500)
 }
 
 func (o *EndpointListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /endpoints][%d] endpointListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints][%d] endpointListInternalServerError", 500)
 }
 
 func (o *EndpointListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

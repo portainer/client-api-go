@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -31,6 +32,12 @@ func (o *StackCreateKubernetesGitReader) ReadResponse(response runtime.ClientRes
 		return result, nil
 	case 400:
 		result := NewStackCreateKubernetesGitBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewStackCreateKubernetesGitConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -91,11 +98,13 @@ func (o *StackCreateKubernetesGitOK) Code() int {
 }
 
 func (o *StackCreateKubernetesGitOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitOK %s", 200, payload)
 }
 
 func (o *StackCreateKubernetesGitOK) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitOK %s", 200, payload)
 }
 
 func (o *StackCreateKubernetesGitOK) GetPayload() *models.PortainereeStack {
@@ -158,14 +167,70 @@ func (o *StackCreateKubernetesGitBadRequest) Code() int {
 }
 
 func (o *StackCreateKubernetesGitBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitBadRequest", 400)
 }
 
 func (o *StackCreateKubernetesGitBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitBadRequest", 400)
 }
 
 func (o *StackCreateKubernetesGitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewStackCreateKubernetesGitConflict creates a StackCreateKubernetesGitConflict with default headers values
+func NewStackCreateKubernetesGitConflict() *StackCreateKubernetesGitConflict {
+	return &StackCreateKubernetesGitConflict{}
+}
+
+/*
+StackCreateKubernetesGitConflict describes a response with status code 409, with default header values.
+
+Webhook ID already exists
+*/
+type StackCreateKubernetesGitConflict struct {
+}
+
+// IsSuccess returns true when this stack create kubernetes git conflict response has a 2xx status code
+func (o *StackCreateKubernetesGitConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack create kubernetes git conflict response has a 3xx status code
+func (o *StackCreateKubernetesGitConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack create kubernetes git conflict response has a 4xx status code
+func (o *StackCreateKubernetesGitConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack create kubernetes git conflict response has a 5xx status code
+func (o *StackCreateKubernetesGitConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack create kubernetes git conflict response a status code equal to that given
+func (o *StackCreateKubernetesGitConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the stack create kubernetes git conflict response
+func (o *StackCreateKubernetesGitConflict) Code() int {
+	return 409
+}
+
+func (o *StackCreateKubernetesGitConflict) Error() string {
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitConflict", 409)
+}
+
+func (o *StackCreateKubernetesGitConflict) String() string {
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitConflict", 409)
+}
+
+func (o *StackCreateKubernetesGitConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -214,11 +279,11 @@ func (o *StackCreateKubernetesGitInternalServerError) Code() int {
 }
 
 func (o *StackCreateKubernetesGitInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitInternalServerError", 500)
 }
 
 func (o *StackCreateKubernetesGitInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/kubernetes/repository][%d] stackCreateKubernetesGitInternalServerError", 500)
 }
 
 func (o *StackCreateKubernetesGitInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *SettingsPublicOK) Code() int {
 }
 
 func (o *SettingsPublicOK) Error() string {
-	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicOK %s", 200, payload)
 }
 
 func (o *SettingsPublicOK) String() string {
-	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicOK %s", 200, payload)
 }
 
 func (o *SettingsPublicOK) GetPayload() *models.SettingsPublicSettingsResponse {
@@ -152,11 +155,11 @@ func (o *SettingsPublicInternalServerError) Code() int {
 }
 
 func (o *SettingsPublicInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicInternalServerError ", 500)
+	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicInternalServerError", 500)
 }
 
 func (o *SettingsPublicInternalServerError) String() string {
-	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicInternalServerError ", 500)
+	return fmt.Sprintf("[GET /settings/public][%d] settingsPublicInternalServerError", 500)
 }
 
 func (o *SettingsPublicInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

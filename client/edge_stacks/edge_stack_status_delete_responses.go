@@ -6,6 +6,7 @@ package edge_stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *EdgeStackStatusDeleteOK) Code() int {
 }
 
 func (o *EdgeStackStatusDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteOK %s", 200, payload)
 }
 
 func (o *EdgeStackStatusDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteOK %s", 200, payload)
 }
 
 func (o *EdgeStackStatusDeleteOK) GetPayload() *models.PortainerEdgeStack {
@@ -170,11 +173,11 @@ func (o *EdgeStackStatusDeleteBadRequest) Code() int {
 }
 
 func (o *EdgeStackStatusDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteBadRequest", 400)
 }
 
 func (o *EdgeStackStatusDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteBadRequest", 400)
 }
 
 func (o *EdgeStackStatusDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *EdgeStackStatusDeleteForbidden) Code() int {
 }
 
 func (o *EdgeStackStatusDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteForbidden", 403)
 }
 
 func (o *EdgeStackStatusDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteForbidden", 403)
 }
 
 func (o *EdgeStackStatusDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *EdgeStackStatusDeleteNotFound) Code() int {
 }
 
 func (o *EdgeStackStatusDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteNotFound", 404)
 }
 
 func (o *EdgeStackStatusDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteNotFound", 404)
 }
 
 func (o *EdgeStackStatusDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *EdgeStackStatusDeleteInternalServerError) Code() int {
 }
 
 func (o *EdgeStackStatusDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteInternalServerError", 500)
 }
 
 func (o *EdgeStackStatusDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}/status/{environmentId}][%d] edgeStackStatusDeleteInternalServerError", 500)
 }
 
 func (o *EdgeStackStatusDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

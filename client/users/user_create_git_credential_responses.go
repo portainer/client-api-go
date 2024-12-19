@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *UserCreateGitCredentialCreated) Code() int {
 }
 
 func (o *UserCreateGitCredentialCreated) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialCreated %s", 201, payload)
 }
 
 func (o *UserCreateGitCredentialCreated) String() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialCreated %s", 201, payload)
 }
 
 func (o *UserCreateGitCredentialCreated) GetPayload() *models.UsersGitCredentialResponse {
@@ -170,11 +173,11 @@ func (o *UserCreateGitCredentialBadRequest) Code() int {
 }
 
 func (o *UserCreateGitCredentialBadRequest) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialBadRequest ", 400)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialBadRequest", 400)
 }
 
 func (o *UserCreateGitCredentialBadRequest) String() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialBadRequest ", 400)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialBadRequest", 400)
 }
 
 func (o *UserCreateGitCredentialBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *UserCreateGitCredentialUnauthorized) Code() int {
 }
 
 func (o *UserCreateGitCredentialUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialUnauthorized ", 401)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialUnauthorized", 401)
 }
 
 func (o *UserCreateGitCredentialUnauthorized) String() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialUnauthorized ", 401)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialUnauthorized", 401)
 }
 
 func (o *UserCreateGitCredentialUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *UserCreateGitCredentialForbidden) Code() int {
 }
 
 func (o *UserCreateGitCredentialForbidden) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialForbidden ", 403)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialForbidden", 403)
 }
 
 func (o *UserCreateGitCredentialForbidden) String() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialForbidden ", 403)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialForbidden", 403)
 }
 
 func (o *UserCreateGitCredentialForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *UserCreateGitCredentialInternalServerError) Code() int {
 }
 
 func (o *UserCreateGitCredentialInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialInternalServerError", 500)
 }
 
 func (o *UserCreateGitCredentialInternalServerError) String() string {
-	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users/{id}/gitcredentials][%d] userCreateGitCredentialInternalServerError", 500)
 }
 
 func (o *UserCreateGitCredentialInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

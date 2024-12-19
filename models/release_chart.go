@@ -36,7 +36,7 @@ type ReleaseChart struct {
 	Templates []*ReleaseFile `json:"templates"`
 
 	// Values are default config for this chart.
-	Values interface{} `json:"values,omitempty"`
+	Values map[string]interface{} `json:"values,omitempty"`
 }
 
 // Validate validates this release chart

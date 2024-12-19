@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *UserListOK) Code() int {
 }
 
 func (o *UserListOK) Error() string {
-	return fmt.Sprintf("[GET /users][%d] userListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users][%d] userListOK %s", 200, payload)
 }
 
 func (o *UserListOK) String() string {
-	return fmt.Sprintf("[GET /users][%d] userListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users][%d] userListOK %s", 200, payload)
 }
 
 func (o *UserListOK) GetPayload() []*models.PortainereeUser {
@@ -156,11 +159,11 @@ func (o *UserListBadRequest) Code() int {
 }
 
 func (o *UserListBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users][%d] userListBadRequest ", 400)
+	return fmt.Sprintf("[GET /users][%d] userListBadRequest", 400)
 }
 
 func (o *UserListBadRequest) String() string {
-	return fmt.Sprintf("[GET /users][%d] userListBadRequest ", 400)
+	return fmt.Sprintf("[GET /users][%d] userListBadRequest", 400)
 }
 
 func (o *UserListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -212,11 +215,11 @@ func (o *UserListInternalServerError) Code() int {
 }
 
 func (o *UserListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /users][%d] userListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users][%d] userListInternalServerError", 500)
 }
 
 func (o *UserListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /users][%d] userListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users][%d] userListInternalServerError", 500)
 }
 
 func (o *UserListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -81,11 +81,11 @@ func (o *LogoutNoContent) Code() int {
 }
 
 func (o *LogoutNoContent) Error() string {
-	return fmt.Sprintf("[POST /auth/logout][%d] logoutNoContent ", 204)
+	return fmt.Sprintf("[POST /auth/logout][%d] logoutNoContent", 204)
 }
 
 func (o *LogoutNoContent) String() string {
-	return fmt.Sprintf("[POST /auth/logout][%d] logoutNoContent ", 204)
+	return fmt.Sprintf("[POST /auth/logout][%d] logoutNoContent", 204)
 }
 
 func (o *LogoutNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,11 +137,11 @@ func (o *LogoutInternalServerError) Code() int {
 }
 
 func (o *LogoutInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /auth/logout][%d] logoutInternalServerError ", 500)
+	return fmt.Sprintf("[POST /auth/logout][%d] logoutInternalServerError", 500)
 }
 
 func (o *LogoutInternalServerError) String() string {
-	return fmt.Sprintf("[POST /auth/logout][%d] logoutInternalServerError ", 500)
+	return fmt.Sprintf("[POST /auth/logout][%d] logoutInternalServerError", 500)
 }
 
 func (o *LogoutInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

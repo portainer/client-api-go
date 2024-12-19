@@ -81,11 +81,11 @@ func (o *LogsCSVOK) Code() int {
 }
 
 func (o *LogsCSVOK) Error() string {
-	return fmt.Sprintf("[GET /useractivity/logs.csv][%d] logsCSVOK ", 200)
+	return fmt.Sprintf("[GET /useractivity/logs.csv][%d] logsCSVOK", 200)
 }
 
 func (o *LogsCSVOK) String() string {
-	return fmt.Sprintf("[GET /useractivity/logs.csv][%d] logsCSVOK ", 200)
+	return fmt.Sprintf("[GET /useractivity/logs.csv][%d] logsCSVOK", 200)
 }
 
 func (o *LogsCSVOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,11 +137,11 @@ func (o *LogsCSVInternalServerError) Code() int {
 }
 
 func (o *LogsCSVInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /useractivity/logs.csv][%d] logsCSVInternalServerError ", 500)
+	return fmt.Sprintf("[GET /useractivity/logs.csv][%d] logsCSVInternalServerError", 500)
 }
 
 func (o *LogsCSVInternalServerError) String() string {
-	return fmt.Sprintf("[GET /useractivity/logs.csv][%d] logsCSVInternalServerError ", 500)
+	return fmt.Sprintf("[GET /useractivity/logs.csv][%d] logsCSVInternalServerError", 500)
 }
 
 func (o *LogsCSVInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

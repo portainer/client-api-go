@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -35,6 +36,24 @@ func (o *GetKubernetesNamespacesReader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return nil, result
+	case 401:
+		result := NewGetKubernetesNamespacesUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetKubernetesNamespacesForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetKubernetesNamespacesNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewGetKubernetesNamespacesInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -42,7 +61,7 @@ func (o *GetKubernetesNamespacesReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/namespaces] getKubernetesNamespaces", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/namespaces] GetKubernetesNamespaces", response, response.Code())
 	}
 }
 
@@ -57,7 +76,7 @@ GetKubernetesNamespacesOK describes a response with status code 200, with defaul
 Success
 */
 type GetKubernetesNamespacesOK struct {
-	Payload map[string]models.PortainereeK8sNamespaceInfo
+	Payload []*models.PortainerK8sNamespaceInfo
 }
 
 // IsSuccess returns true when this get kubernetes namespaces o k response has a 2xx status code
@@ -91,14 +110,16 @@ func (o *GetKubernetesNamespacesOK) Code() int {
 }
 
 func (o *GetKubernetesNamespacesOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesOK %s", 200, payload)
 }
 
 func (o *GetKubernetesNamespacesOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesOK %s", 200, payload)
 }
 
-func (o *GetKubernetesNamespacesOK) GetPayload() map[string]models.PortainereeK8sNamespaceInfo {
+func (o *GetKubernetesNamespacesOK) GetPayload() []*models.PortainerK8sNamespaceInfo {
 	return o.Payload
 }
 
@@ -120,7 +141,7 @@ func NewGetKubernetesNamespacesBadRequest() *GetKubernetesNamespacesBadRequest {
 /*
 GetKubernetesNamespacesBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type GetKubernetesNamespacesBadRequest struct {
 }
@@ -156,14 +177,182 @@ func (o *GetKubernetesNamespacesBadRequest) Code() int {
 }
 
 func (o *GetKubernetesNamespacesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesBadRequest", 400)
 }
 
 func (o *GetKubernetesNamespacesBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesBadRequest", 400)
 }
 
 func (o *GetKubernetesNamespacesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesNamespacesUnauthorized creates a GetKubernetesNamespacesUnauthorized with default headers values
+func NewGetKubernetesNamespacesUnauthorized() *GetKubernetesNamespacesUnauthorized {
+	return &GetKubernetesNamespacesUnauthorized{}
+}
+
+/*
+GetKubernetesNamespacesUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type GetKubernetesNamespacesUnauthorized struct {
+}
+
+// IsSuccess returns true when this get kubernetes namespaces unauthorized response has a 2xx status code
+func (o *GetKubernetesNamespacesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes namespaces unauthorized response has a 3xx status code
+func (o *GetKubernetesNamespacesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes namespaces unauthorized response has a 4xx status code
+func (o *GetKubernetesNamespacesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes namespaces unauthorized response has a 5xx status code
+func (o *GetKubernetesNamespacesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes namespaces unauthorized response a status code equal to that given
+func (o *GetKubernetesNamespacesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get kubernetes namespaces unauthorized response
+func (o *GetKubernetesNamespacesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetKubernetesNamespacesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesUnauthorized", 401)
+}
+
+func (o *GetKubernetesNamespacesUnauthorized) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesUnauthorized", 401)
+}
+
+func (o *GetKubernetesNamespacesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesNamespacesForbidden creates a GetKubernetesNamespacesForbidden with default headers values
+func NewGetKubernetesNamespacesForbidden() *GetKubernetesNamespacesForbidden {
+	return &GetKubernetesNamespacesForbidden{}
+}
+
+/*
+GetKubernetesNamespacesForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type GetKubernetesNamespacesForbidden struct {
+}
+
+// IsSuccess returns true when this get kubernetes namespaces forbidden response has a 2xx status code
+func (o *GetKubernetesNamespacesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes namespaces forbidden response has a 3xx status code
+func (o *GetKubernetesNamespacesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes namespaces forbidden response has a 4xx status code
+func (o *GetKubernetesNamespacesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes namespaces forbidden response has a 5xx status code
+func (o *GetKubernetesNamespacesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes namespaces forbidden response a status code equal to that given
+func (o *GetKubernetesNamespacesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get kubernetes namespaces forbidden response
+func (o *GetKubernetesNamespacesForbidden) Code() int {
+	return 403
+}
+
+func (o *GetKubernetesNamespacesForbidden) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesForbidden", 403)
+}
+
+func (o *GetKubernetesNamespacesForbidden) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesForbidden", 403)
+}
+
+func (o *GetKubernetesNamespacesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesNamespacesNotFound creates a GetKubernetesNamespacesNotFound with default headers values
+func NewGetKubernetesNamespacesNotFound() *GetKubernetesNamespacesNotFound {
+	return &GetKubernetesNamespacesNotFound{}
+}
+
+/*
+GetKubernetesNamespacesNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier.
+*/
+type GetKubernetesNamespacesNotFound struct {
+}
+
+// IsSuccess returns true when this get kubernetes namespaces not found response has a 2xx status code
+func (o *GetKubernetesNamespacesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes namespaces not found response has a 3xx status code
+func (o *GetKubernetesNamespacesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes namespaces not found response has a 4xx status code
+func (o *GetKubernetesNamespacesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes namespaces not found response has a 5xx status code
+func (o *GetKubernetesNamespacesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes namespaces not found response a status code equal to that given
+func (o *GetKubernetesNamespacesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get kubernetes namespaces not found response
+func (o *GetKubernetesNamespacesNotFound) Code() int {
+	return 404
+}
+
+func (o *GetKubernetesNamespacesNotFound) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesNotFound", 404)
+}
+
+func (o *GetKubernetesNamespacesNotFound) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesNotFound", 404)
+}
+
+func (o *GetKubernetesNamespacesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -176,7 +365,7 @@ func NewGetKubernetesNamespacesInternalServerError() *GetKubernetesNamespacesInt
 /*
 GetKubernetesNamespacesInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to retrieve the list of namespaces.
 */
 type GetKubernetesNamespacesInternalServerError struct {
 }
@@ -212,11 +401,11 @@ func (o *GetKubernetesNamespacesInternalServerError) Code() int {
 }
 
 func (o *GetKubernetesNamespacesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesInternalServerError", 500)
 }
 
 func (o *GetKubernetesNamespacesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces][%d] getKubernetesNamespacesInternalServerError", 500)
 }
 
 func (o *GetKubernetesNamespacesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *UserAdminInitOK) Code() int {
 }
 
 func (o *UserAdminInitOK) Error() string {
-	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitOK %s", 200, payload)
 }
 
 func (o *UserAdminInitOK) String() string {
-	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitOK %s", 200, payload)
 }
 
 func (o *UserAdminInitOK) GetPayload() *models.PortainereeUser {
@@ -164,11 +167,11 @@ func (o *UserAdminInitBadRequest) Code() int {
 }
 
 func (o *UserAdminInitBadRequest) Error() string {
-	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitBadRequest ", 400)
+	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitBadRequest", 400)
 }
 
 func (o *UserAdminInitBadRequest) String() string {
-	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitBadRequest ", 400)
+	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitBadRequest", 400)
 }
 
 func (o *UserAdminInitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *UserAdminInitConflict) Code() int {
 }
 
 func (o *UserAdminInitConflict) Error() string {
-	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitConflict ", 409)
+	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitConflict", 409)
 }
 
 func (o *UserAdminInitConflict) String() string {
-	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitConflict ", 409)
+	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitConflict", 409)
 }
 
 func (o *UserAdminInitConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *UserAdminInitInternalServerError) Code() int {
 }
 
 func (o *UserAdminInitInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitInternalServerError", 500)
 }
 
 func (o *UserAdminInitInternalServerError) String() string {
-	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users/admin/init][%d] userAdminInitInternalServerError", 500)
 }
 
 func (o *UserAdminInitInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

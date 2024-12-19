@@ -22,19 +22,22 @@ import (
 type EdgestacksEdgeStackFromGitRepositoryPayload struct {
 
 	// Optional GitOps update configuration
-	AutoUpdate *PortainereeAutoUpdateSettings `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainerAutoUpdateSettings `json:"autoUpdate,omitempty"`
+
+	// CreatedFromCustomTemplateID used to determine whether the edge stack is created from a custom template
+	CreatedFromCustomTemplateID int64 `json:"createdFromCustomTemplateID,omitempty"`
 
 	// Deployment type to deploy this stack
-	// Valid values are: 0 - 'compose', 1 - 'kubernetes', 2 - 'nomad'
+	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
 	// compose is enabled only for docker environments
 	// kubernetes is enabled only for kubernetes environments
-	// nomad is enabled only for nomad environments
 	// Example: 0
-	// Enum: [0 1 2]
+	// Enum: [0,1]
 	DeploymentType int64 `json:"deploymentType,omitempty"`
 
 	// List of identifiers of EdgeGroups
 	// Example: [1]
+	// Required: true
 	EdgeGroups []int64 `json:"edgeGroups"`
 
 	// List of environment variables
@@ -49,13 +52,22 @@ type EdgestacksEdgeStackFromGitRepositoryPayload struct {
 	FilesystemPath string `json:"filesystemPath,omitempty"`
 
 	// Name of the stack
-	// Example: myStack
+	// Max length: 255
+	// Name must only contains lowercase characters, numbers, hyphens, or underscores
+	// Name must start with a lowercase character or number
+	// Example: stack-name or stack_123 or stackName
+	// Example: stack-name
 	// Required: true
 	Name *string `json:"name"`
 
+	// Per device configs group match type
+	// Example: file
+	// Enum: ["file"," dir"]
+	PerDeviceConfigsGroupMatchType string `json:"perDeviceConfigsGroupMatchType,omitempty"`
+
 	// Per device configs match type
 	// Example: file
-	// Enum: [file  dir]
+	// Enum: ["file"," dir"]
 	PerDeviceConfigsMatchType string `json:"perDeviceConfigsMatchType,omitempty"`
 
 	// Per device configs path
@@ -98,6 +110,9 @@ type EdgestacksEdgeStackFromGitRepositoryPayload struct {
 	// Example: false
 	RetryDeploy bool `json:"retryDeploy,omitempty"`
 
+	// Retry period specifies the duration, in seconds, for which the agent should continue attempting to deploy the stack after a failure
+	RetryPeriod int64 `json:"retryPeriod,omitempty"`
+
 	// Configuration for stagger updates
 	StaggerConfig *PortainereeEdgeStaggerConfig `json:"staggerConfig,omitempty"`
 
@@ -129,11 +144,19 @@ func (m *EdgestacksEdgeStackFromGitRepositoryPayload) Validate(formats strfmt.Re
 		res = append(res, err)
 	}
 
+	if err := m.validateEdgeGroups(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEnvVars(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePerDeviceConfigsGroupMatchType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -178,7 +201,7 @@ var edgestacksEdgeStackFromGitRepositoryPayloadTypeDeploymentTypePropEnum []inte
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[0,1,2]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[0,1]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -201,6 +224,15 @@ func (m *EdgestacksEdgeStackFromGitRepositoryPayload) validateDeploymentType(for
 
 	// value enum
 	if err := m.validateDeploymentTypeEnum("deploymentType", "body", m.DeploymentType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EdgestacksEdgeStackFromGitRepositoryPayload) validateEdgeGroups(formats strfmt.Registry) error {
+
+	if err := validate.Required("edgeGroups", "body", m.EdgeGroups); err != nil {
 		return err
 	}
 
@@ -236,6 +268,48 @@ func (m *EdgestacksEdgeStackFromGitRepositoryPayload) validateEnvVars(formats st
 func (m *EdgestacksEdgeStackFromGitRepositoryPayload) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var edgestacksEdgeStackFromGitRepositoryPayloadTypePerDeviceConfigsGroupMatchTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["file"," dir"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		edgestacksEdgeStackFromGitRepositoryPayloadTypePerDeviceConfigsGroupMatchTypePropEnum = append(edgestacksEdgeStackFromGitRepositoryPayloadTypePerDeviceConfigsGroupMatchTypePropEnum, v)
+	}
+}
+
+const (
+
+	// EdgestacksEdgeStackFromGitRepositoryPayloadPerDeviceConfigsGroupMatchTypeFile captures enum value "file"
+	EdgestacksEdgeStackFromGitRepositoryPayloadPerDeviceConfigsGroupMatchTypeFile string = "file"
+
+	// EdgestacksEdgeStackFromGitRepositoryPayloadPerDeviceConfigsGroupMatchTypeDir captures enum value " dir"
+	EdgestacksEdgeStackFromGitRepositoryPayloadPerDeviceConfigsGroupMatchTypeDir string = " dir"
+)
+
+// prop value enum
+func (m *EdgestacksEdgeStackFromGitRepositoryPayload) validatePerDeviceConfigsGroupMatchTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, edgestacksEdgeStackFromGitRepositoryPayloadTypePerDeviceConfigsGroupMatchTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *EdgestacksEdgeStackFromGitRepositoryPayload) validatePerDeviceConfigsGroupMatchType(formats strfmt.Registry) error {
+	if swag.IsZero(m.PerDeviceConfigsGroupMatchType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validatePerDeviceConfigsGroupMatchTypeEnum("perDeviceConfigsGroupMatchType", "body", m.PerDeviceConfigsGroupMatchType); err != nil {
 		return err
 	}
 

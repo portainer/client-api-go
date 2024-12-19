@@ -22,20 +22,24 @@ type SettingsSettingsUpdatePayload struct {
 	// EdgePortainerURL is the URL that is exposed to edge agents
 	EdgePortainerURL string `json:"EdgePortainerURL,omitempty"`
 
-	// Show the Kompose build option (discontinued in 2.18)
-	// Example: false
-	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
-
 	// Active authentication method for the Portainer instance. Valid values are: 1 for internal, 2 for LDAP, or 3 for oauth
 	// Example: 1
 	AuthenticationMethod int64 `json:"authenticationMethod,omitempty"`
 
 	// A list of label name & value that will be used to hide containers when querying containers
-	BlackListedLabels []*PortainereePair `json:"blackListedLabels"`
+	BlackListedLabels []*PortainerPair `json:"blackListedLabels"`
 
 	// The content in plaintext used to display in the login page. Will hide when value is empty string
 	// Example: notice or agreement
 	CustomLoginBanner string `json:"customLoginBanner,omitempty"`
+
+	// Whether to disable kubeshell access for non-admin users
+	// Example: false
+	DisableKubeShell bool `json:"disableKubeShell,omitempty"`
+
+	// Whether to disable kubeconfig download for non-admin users
+	// Example: false
+	DisableKubeconfigDownload bool `json:"disableKubeconfigDownload,omitempty"`
 
 	// edge
 	Edge *SettingsSettingsUpdatePayloadEdge `json:"edge,omitempty"`
@@ -64,7 +68,7 @@ type SettingsSettingsUpdatePayload struct {
 	HelmRepositoryURL string `json:"helmRepositoryURL,omitempty"`
 
 	// internal auth settings
-	InternalAuthSettings *PortainereeInternalAuthSettings `json:"internalAuthSettings,omitempty"`
+	InternalAuthSettings *PortainerInternalAuthSettings `json:"internalAuthSettings,omitempty"`
 
 	// The expiry of a Kubeconfig
 	// Example: 24h

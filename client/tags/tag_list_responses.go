@@ -6,6 +6,7 @@ package tags
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -51,7 +52,7 @@ TagListOK describes a response with status code 200, with default header values.
 Success
 */
 type TagListOK struct {
-	Payload []*models.PortainereeTag
+	Payload []*models.PortainerTag
 }
 
 // IsSuccess returns true when this tag list o k response has a 2xx status code
@@ -85,14 +86,16 @@ func (o *TagListOK) Code() int {
 }
 
 func (o *TagListOK) Error() string {
-	return fmt.Sprintf("[GET /tags][%d] tagListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tags][%d] tagListOK %s", 200, payload)
 }
 
 func (o *TagListOK) String() string {
-	return fmt.Sprintf("[GET /tags][%d] tagListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tags][%d] tagListOK %s", 200, payload)
 }
 
-func (o *TagListOK) GetPayload() []*models.PortainereeTag {
+func (o *TagListOK) GetPayload() []*models.PortainerTag {
 	return o.Payload
 }
 
@@ -150,11 +153,11 @@ func (o *TagListInternalServerError) Code() int {
 }
 
 func (o *TagListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /tags][%d] tagListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /tags][%d] tagListInternalServerError", 500)
 }
 
 func (o *TagListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /tags][%d] tagListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /tags][%d] tagListInternalServerError", 500)
 }
 
 func (o *TagListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

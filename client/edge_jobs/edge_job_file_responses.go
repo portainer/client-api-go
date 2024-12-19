@@ -6,6 +6,7 @@ package edge_jobs
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EdgeJobFileOK) Code() int {
 }
 
 func (o *EdgeJobFileOK) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileOK %s", 200, payload)
 }
 
 func (o *EdgeJobFileOK) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileOK %s", 200, payload)
 }
 
 func (o *EdgeJobFileOK) GetPayload() *models.EdgejobsEdgeJobFileResponse {
@@ -164,11 +167,11 @@ func (o *EdgeJobFileBadRequest) Code() int {
 }
 
 func (o *EdgeJobFileBadRequest) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileBadRequest", 400)
 }
 
 func (o *EdgeJobFileBadRequest) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileBadRequest", 400)
 }
 
 func (o *EdgeJobFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EdgeJobFileInternalServerError) Code() int {
 }
 
 func (o *EdgeJobFileInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileInternalServerError", 500)
 }
 
 func (o *EdgeJobFileInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileInternalServerError", 500)
 }
 
 func (o *EdgeJobFileInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EdgeJobFileServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobFileServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileServiceUnavailable", 503)
 }
 
 func (o *EdgeJobFileServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_jobs/{id}/file][%d] edgeJobFileServiceUnavailable", 503)
 }
 
 func (o *EdgeJobFileServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

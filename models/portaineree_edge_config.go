@@ -21,6 +21,9 @@ type PortainereeEdgeConfig struct {
 	// base dir
 	BaseDir string `json:"baseDir,omitempty"`
 
+	// category
+	Category string `json:"category,omitempty"`
+
 	// created
 	Created int64 `json:"created,omitempty"`
 
