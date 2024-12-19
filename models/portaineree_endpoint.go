@@ -30,7 +30,7 @@ type PortainereeEndpoint struct {
 	AuthorizedUsers []int64 `json:"AuthorizedUsers"`
 
 	// azure credentials
-	AzureCredentials *PortainereeAzureCredentials `json:"AzureCredentials,omitempty"`
+	AzureCredentials *PortainerAzureCredentials `json:"AzureCredentials,omitempty"`
 
 	// GitOps update change window restriction for stacks and apps
 	ChangeWindow *PortainereeEndpointChangeWindow `json:"ChangeWindow,omitempty"`
@@ -42,6 +42,10 @@ type PortainereeEndpoint struct {
 	// Maximum version of docker-compose
 	// Example: 3.8
 	ComposeSyntaxMaxVersion string `json:"ComposeSyntaxMaxVersion,omitempty"`
+
+	// ContainerEngine represents the container engine type. This can be 'docker' or 'podman' when interacting directly with these environmentes, otherwise '' for kubernetes environments.
+	// Example: docker
+	ContainerEngine string `json:"ContainerEngine,omitempty"`
 
 	// Hide manual deployment forms for an environment
 	DeploymentOptions *PortainereeDeploymentOptions `json:"DeploymentOptions,omitempty"`
@@ -63,7 +67,7 @@ type PortainereeEndpoint struct {
 	EnableImageNotification bool `json:"EnableImageNotification,omitempty"`
 
 	// gpus
-	Gpus []*PortainereePair `json:"Gpus"`
+	Gpus []*PortainerPair `json:"Gpus"`
 
 	// Environment(Endpoint) group identifier
 	// Example: 1
@@ -77,15 +81,15 @@ type PortainereeEndpoint struct {
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
+	// Deprecated v2.18
+	IsEdgeDevice bool `json:"IsEdgeDevice,omitempty"`
+
 	// Associated Kubernetes data
 	Kubernetes *PortainereeKubernetesData `json:"Kubernetes,omitempty"`
 
 	// Environment(Endpoint) name
 	// Example: my-environment
 	Name string `json:"Name,omitempty"`
-
-	// Associated Nomad data
-	Nomad *PortainereeNomadData `json:"Nomad,omitempty"`
 
 	// Whether we need to run any "post init migrations".
 	PostInitMigrations *PortainereeEndpointPostInitMigrations `json:"PostInitMigrations,omitempty"`
@@ -97,8 +101,7 @@ type PortainereeEndpoint struct {
 	// List of snapshots
 	Snapshots []*PortainerDockerSnapshot `json:"Snapshots"`
 
-	// The status of the environment(endpoint) (1 - up, 2 - down, 3 -
-	// provisioning, 4 - error)
+	// The status of the environment(endpoint) (1 - up, 2 - down)
 	// Example: 1
 	Status int64 `json:"Status,omitempty"`
 
@@ -117,7 +120,7 @@ type PortainereeEndpoint struct {
 	TLSCert string `json:"TLSCert,omitempty"`
 
 	// TLS config
-	TLSConfig *PortainereeTLSConfiguration `json:"TLSConfig,omitempty"`
+	TLSConfig *PortainerTLSConfiguration `json:"TLSConfig,omitempty"`
 
 	// TLS key
 	TLSKey string `json:"TLSKey,omitempty"`
@@ -129,7 +132,7 @@ type PortainereeEndpoint struct {
 	Tags []string `json:"Tags"`
 
 	// List of team identifiers authorized to connect to this environment(endpoint)
-	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
+	TeamAccessPolicies PortainerTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
 
 	// Environment(Endpoint) environment(endpoint) type. 1 for a Docker environment(endpoint), 2 for an agent on Docker environment(endpoint) or 3 for an Azure environment(endpoint).
 	// Example: 1
@@ -140,16 +143,16 @@ type PortainereeEndpoint struct {
 	URL string `json:"URL,omitempty"`
 
 	// List of user identifiers authorized to connect to this environment(endpoint)
-	UserAccessPolicies PortainereeUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
+	UserAccessPolicies PortainerUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
+
+	// Whether the device has been trusted or not by the user
+	UserTrusted bool `json:"UserTrusted,omitempty"`
 
 	// agent
 	Agent *PortainereeEnvironmentAgentData `json:"agent,omitempty"`
 
 	// edge
-	Edge *PortainereeEnvironmentEdgeSettings `json:"edge,omitempty"`
-
-	// Deprecated v2.18
-	IsEdgeDevice bool `json:"isEdgeDevice,omitempty"`
+	Edge *PortainerEnvironmentEdgeSettings `json:"edge,omitempty"`
 
 	// LastCheckInDate mark last check-in date on checkin
 	LastCheckInDate int64 `json:"lastCheckInDate,omitempty"`
@@ -161,10 +164,7 @@ type PortainereeEndpoint struct {
 	QueryDate int64 `json:"queryDate,omitempty"`
 
 	// Environment(Endpoint) specific security settings
-	SecuritySettings *PortainereeEndpointSecuritySettings `json:"securitySettings,omitempty"`
-
-	// Whether the device has been trusted or not by the user
-	UserTrusted bool `json:"userTrusted,omitempty"`
+	SecuritySettings *PortainerEndpointSecuritySettings `json:"securitySettings,omitempty"`
 }
 
 // Validate validates this portaineree endpoint
@@ -192,10 +192,6 @@ func (m *PortainereeEndpoint) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateKubernetes(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateNomad(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -354,25 +350,6 @@ func (m *PortainereeEndpoint) validateKubernetes(formats strfmt.Registry) error 
 				return ve.ValidateName("Kubernetes")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Kubernetes")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PortainereeEndpoint) validateNomad(formats strfmt.Registry) error {
-	if swag.IsZero(m.Nomad) { // not required
-		return nil
-	}
-
-	if m.Nomad != nil {
-		if err := m.Nomad.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Nomad")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Nomad")
 			}
 			return err
 		}
@@ -587,10 +564,6 @@ func (m *PortainereeEndpoint) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateNomad(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidatePostInitMigrations(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -755,27 +728,6 @@ func (m *PortainereeEndpoint) contextValidateKubernetes(ctx context.Context, for
 				return ve.ValidateName("Kubernetes")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("Kubernetes")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *PortainereeEndpoint) contextValidateNomad(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Nomad != nil {
-
-		if swag.IsZero(m.Nomad) { // not required
-			return nil
-		}
-
-		if err := m.Nomad.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("Nomad")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("Nomad")
 			}
 			return err
 		}

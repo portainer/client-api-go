@@ -99,11 +99,11 @@ func (o *UserUpdatePasswordNoContent) Code() int {
 }
 
 func (o *UserUpdatePasswordNoContent) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNoContent ", 204)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNoContent", 204)
 }
 
 func (o *UserUpdatePasswordNoContent) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNoContent ", 204)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNoContent", 204)
 }
 
 func (o *UserUpdatePasswordNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *UserUpdatePasswordBadRequest) Code() int {
 }
 
 func (o *UserUpdatePasswordBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordBadRequest ", 400)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordBadRequest", 400)
 }
 
 func (o *UserUpdatePasswordBadRequest) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordBadRequest ", 400)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordBadRequest", 400)
 }
 
 func (o *UserUpdatePasswordBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *UserUpdatePasswordForbidden) Code() int {
 }
 
 func (o *UserUpdatePasswordForbidden) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordForbidden ", 403)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordForbidden", 403)
 }
 
 func (o *UserUpdatePasswordForbidden) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordForbidden ", 403)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordForbidden", 403)
 }
 
 func (o *UserUpdatePasswordForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *UserUpdatePasswordNotFound) Code() int {
 }
 
 func (o *UserUpdatePasswordNotFound) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNotFound ", 404)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNotFound", 404)
 }
 
 func (o *UserUpdatePasswordNotFound) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNotFound ", 404)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordNotFound", 404)
 }
 
 func (o *UserUpdatePasswordNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *UserUpdatePasswordInternalServerError) Code() int {
 }
 
 func (o *UserUpdatePasswordInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordInternalServerError", 500)
 }
 
 func (o *UserUpdatePasswordInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /users/{id}/passwd][%d] userUpdatePasswordInternalServerError", 500)
 }
 
 func (o *UserUpdatePasswordInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

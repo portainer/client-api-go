@@ -6,6 +6,7 @@ package edge_configs
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -101,11 +102,13 @@ func (o *EdgeConfigFilesOK) Code() int {
 }
 
 func (o *EdgeConfigFilesOK) Error() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesOK %s", 200, payload)
 }
 
 func (o *EdgeConfigFilesOK) String() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesOK %s", 200, payload)
 }
 
 func (o *EdgeConfigFilesOK) GetPayload() string {
@@ -166,11 +169,11 @@ func (o *EdgeConfigFilesBadRequest) Code() int {
 }
 
 func (o *EdgeConfigFilesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesBadRequest", 400)
 }
 
 func (o *EdgeConfigFilesBadRequest) String() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesBadRequest", 400)
 }
 
 func (o *EdgeConfigFilesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -222,11 +225,11 @@ func (o *EdgeConfigFilesForbidden) Code() int {
 }
 
 func (o *EdgeConfigFilesForbidden) Error() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesForbidden ", 403)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesForbidden", 403)
 }
 
 func (o *EdgeConfigFilesForbidden) String() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesForbidden ", 403)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesForbidden", 403)
 }
 
 func (o *EdgeConfigFilesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -278,11 +281,11 @@ func (o *EdgeConfigFilesNotFound) Code() int {
 }
 
 func (o *EdgeConfigFilesNotFound) Error() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesNotFound ", 404)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesNotFound", 404)
 }
 
 func (o *EdgeConfigFilesNotFound) String() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesNotFound ", 404)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesNotFound", 404)
 }
 
 func (o *EdgeConfigFilesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -334,11 +337,11 @@ func (o *EdgeConfigFilesInternalServerError) Code() int {
 }
 
 func (o *EdgeConfigFilesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesInternalServerError", 500)
 }
 
 func (o *EdgeConfigFilesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_configurations/{id}/files][%d] edgeConfigFilesInternalServerError", 500)
 }
 
 func (o *EdgeConfigFilesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

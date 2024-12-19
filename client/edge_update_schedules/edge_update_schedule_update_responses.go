@@ -6,10 +6,14 @@ package edge_update_schedules
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/portainer/client-api-go/v2/models"
 )
 
 // EdgeUpdateScheduleUpdateReader is a Reader for the EdgeUpdateScheduleUpdate structure.
@@ -26,6 +30,30 @@ func (o *EdgeUpdateScheduleUpdateReader) ReadResponse(response runtime.ClientRes
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewEdgeUpdateScheduleUpdateBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewEdgeUpdateScheduleUpdateForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewEdgeUpdateScheduleUpdateNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewEdgeUpdateScheduleUpdateConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewEdgeUpdateScheduleUpdateInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -45,9 +73,10 @@ func NewEdgeUpdateScheduleUpdateNoContent() *EdgeUpdateScheduleUpdateNoContent {
 /*
 EdgeUpdateScheduleUpdateNoContent describes a response with status code 204, with default header values.
 
-No Content
+Remote update procedure successfully updated
 */
 type EdgeUpdateScheduleUpdateNoContent struct {
+	Payload *models.TypesUpdateSchedule
 }
 
 // IsSuccess returns true when this edge update schedule update no content response has a 2xx status code
@@ -81,14 +110,251 @@ func (o *EdgeUpdateScheduleUpdateNoContent) Code() int {
 }
 
 func (o *EdgeUpdateScheduleUpdateNoContent) Error() string {
-	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateNoContent ", 204)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateNoContent %s", 204, payload)
 }
 
 func (o *EdgeUpdateScheduleUpdateNoContent) String() string {
-	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateNoContent ", 204)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateNoContent %s", 204, payload)
+}
+
+func (o *EdgeUpdateScheduleUpdateNoContent) GetPayload() *models.TypesUpdateSchedule {
+	return o.Payload
 }
 
 func (o *EdgeUpdateScheduleUpdateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.TypesUpdateSchedule)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewEdgeUpdateScheduleUpdateBadRequest creates a EdgeUpdateScheduleUpdateBadRequest with default headers values
+func NewEdgeUpdateScheduleUpdateBadRequest() *EdgeUpdateScheduleUpdateBadRequest {
+	return &EdgeUpdateScheduleUpdateBadRequest{}
+}
+
+/*
+EdgeUpdateScheduleUpdateBadRequest describes a response with status code 400, with default header values.
+
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
+*/
+type EdgeUpdateScheduleUpdateBadRequest struct {
+}
+
+// IsSuccess returns true when this edge update schedule update bad request response has a 2xx status code
+func (o *EdgeUpdateScheduleUpdateBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge update schedule update bad request response has a 3xx status code
+func (o *EdgeUpdateScheduleUpdateBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge update schedule update bad request response has a 4xx status code
+func (o *EdgeUpdateScheduleUpdateBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge update schedule update bad request response has a 5xx status code
+func (o *EdgeUpdateScheduleUpdateBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge update schedule update bad request response a status code equal to that given
+func (o *EdgeUpdateScheduleUpdateBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the edge update schedule update bad request response
+func (o *EdgeUpdateScheduleUpdateBadRequest) Code() int {
+	return 400
+}
+
+func (o *EdgeUpdateScheduleUpdateBadRequest) Error() string {
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateBadRequest", 400)
+}
+
+func (o *EdgeUpdateScheduleUpdateBadRequest) String() string {
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateBadRequest", 400)
+}
+
+func (o *EdgeUpdateScheduleUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewEdgeUpdateScheduleUpdateForbidden creates a EdgeUpdateScheduleUpdateForbidden with default headers values
+func NewEdgeUpdateScheduleUpdateForbidden() *EdgeUpdateScheduleUpdateForbidden {
+	return &EdgeUpdateScheduleUpdateForbidden{}
+}
+
+/*
+EdgeUpdateScheduleUpdateForbidden describes a response with status code 403, with default header values.
+
+Unauthorized access or operation not allowed.
+*/
+type EdgeUpdateScheduleUpdateForbidden struct {
+}
+
+// IsSuccess returns true when this edge update schedule update forbidden response has a 2xx status code
+func (o *EdgeUpdateScheduleUpdateForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge update schedule update forbidden response has a 3xx status code
+func (o *EdgeUpdateScheduleUpdateForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge update schedule update forbidden response has a 4xx status code
+func (o *EdgeUpdateScheduleUpdateForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge update schedule update forbidden response has a 5xx status code
+func (o *EdgeUpdateScheduleUpdateForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge update schedule update forbidden response a status code equal to that given
+func (o *EdgeUpdateScheduleUpdateForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the edge update schedule update forbidden response
+func (o *EdgeUpdateScheduleUpdateForbidden) Code() int {
+	return 403
+}
+
+func (o *EdgeUpdateScheduleUpdateForbidden) Error() string {
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateForbidden", 403)
+}
+
+func (o *EdgeUpdateScheduleUpdateForbidden) String() string {
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateForbidden", 403)
+}
+
+func (o *EdgeUpdateScheduleUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewEdgeUpdateScheduleUpdateNotFound creates a EdgeUpdateScheduleUpdateNotFound with default headers values
+func NewEdgeUpdateScheduleUpdateNotFound() *EdgeUpdateScheduleUpdateNotFound {
+	return &EdgeUpdateScheduleUpdateNotFound{}
+}
+
+/*
+EdgeUpdateScheduleUpdateNotFound describes a response with status code 404, with default header values.
+
+Unable to find an Edge Update with the specified identifier inside the database
+*/
+type EdgeUpdateScheduleUpdateNotFound struct {
+}
+
+// IsSuccess returns true when this edge update schedule update not found response has a 2xx status code
+func (o *EdgeUpdateScheduleUpdateNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge update schedule update not found response has a 3xx status code
+func (o *EdgeUpdateScheduleUpdateNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge update schedule update not found response has a 4xx status code
+func (o *EdgeUpdateScheduleUpdateNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge update schedule update not found response has a 5xx status code
+func (o *EdgeUpdateScheduleUpdateNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge update schedule update not found response a status code equal to that given
+func (o *EdgeUpdateScheduleUpdateNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the edge update schedule update not found response
+func (o *EdgeUpdateScheduleUpdateNotFound) Code() int {
+	return 404
+}
+
+func (o *EdgeUpdateScheduleUpdateNotFound) Error() string {
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateNotFound", 404)
+}
+
+func (o *EdgeUpdateScheduleUpdateNotFound) String() string {
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateNotFound", 404)
+}
+
+func (o *EdgeUpdateScheduleUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewEdgeUpdateScheduleUpdateConflict creates a EdgeUpdateScheduleUpdateConflict with default headers values
+func NewEdgeUpdateScheduleUpdateConflict() *EdgeUpdateScheduleUpdateConflict {
+	return &EdgeUpdateScheduleUpdateConflict{}
+}
+
+/*
+EdgeUpdateScheduleUpdateConflict describes a response with status code 409, with default header values.
+
+Edge update schedule name already in use.
+*/
+type EdgeUpdateScheduleUpdateConflict struct {
+}
+
+// IsSuccess returns true when this edge update schedule update conflict response has a 2xx status code
+func (o *EdgeUpdateScheduleUpdateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge update schedule update conflict response has a 3xx status code
+func (o *EdgeUpdateScheduleUpdateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge update schedule update conflict response has a 4xx status code
+func (o *EdgeUpdateScheduleUpdateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge update schedule update conflict response has a 5xx status code
+func (o *EdgeUpdateScheduleUpdateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge update schedule update conflict response a status code equal to that given
+func (o *EdgeUpdateScheduleUpdateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the edge update schedule update conflict response
+func (o *EdgeUpdateScheduleUpdateConflict) Code() int {
+	return 409
+}
+
+func (o *EdgeUpdateScheduleUpdateConflict) Error() string {
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateConflict", 409)
+}
+
+func (o *EdgeUpdateScheduleUpdateConflict) String() string {
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateConflict", 409)
+}
+
+func (o *EdgeUpdateScheduleUpdateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -101,7 +367,7 @@ func NewEdgeUpdateScheduleUpdateInternalServerError() *EdgeUpdateScheduleUpdateI
 /*
 EdgeUpdateScheduleUpdateInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+Server error occurred while attempting to update the remote update procedure.
 */
 type EdgeUpdateScheduleUpdateInternalServerError struct {
 }
@@ -137,11 +403,11 @@ func (o *EdgeUpdateScheduleUpdateInternalServerError) Code() int {
 }
 
 func (o *EdgeUpdateScheduleUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateInternalServerError", 500)
 }
 
 func (o *EdgeUpdateScheduleUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_update_schedules/{id}][%d] edgeUpdateScheduleUpdateInternalServerError", 500)
 }
 
 func (o *EdgeUpdateScheduleUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

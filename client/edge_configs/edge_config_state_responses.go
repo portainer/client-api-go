@@ -99,11 +99,11 @@ func (o *EdgeConfigStateNoContent) Code() int {
 }
 
 func (o *EdgeConfigStateNoContent) Error() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNoContent ", 204)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNoContent", 204)
 }
 
 func (o *EdgeConfigStateNoContent) String() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNoContent ", 204)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNoContent", 204)
 }
 
 func (o *EdgeConfigStateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *EdgeConfigStateBadRequest) Code() int {
 }
 
 func (o *EdgeConfigStateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateBadRequest", 400)
 }
 
 func (o *EdgeConfigStateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateBadRequest", 400)
 }
 
 func (o *EdgeConfigStateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *EdgeConfigStateForbidden) Code() int {
 }
 
 func (o *EdgeConfigStateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateForbidden ", 403)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateForbidden", 403)
 }
 
 func (o *EdgeConfigStateForbidden) String() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateForbidden ", 403)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateForbidden", 403)
 }
 
 func (o *EdgeConfigStateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *EdgeConfigStateNotFound) Code() int {
 }
 
 func (o *EdgeConfigStateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNotFound ", 404)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNotFound", 404)
 }
 
 func (o *EdgeConfigStateNotFound) String() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNotFound ", 404)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateNotFound", 404)
 }
 
 func (o *EdgeConfigStateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *EdgeConfigStateInternalServerError) Code() int {
 }
 
 func (o *EdgeConfigStateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateInternalServerError", 500)
 }
 
 func (o *EdgeConfigStateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}/{state}][%d] edgeConfigStateInternalServerError", 500)
 }
 
 func (o *EdgeConfigStateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

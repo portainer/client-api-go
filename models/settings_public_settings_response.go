@@ -26,6 +26,14 @@ type SettingsPublicSettingsResponse struct {
 	// Example: notice or agreement
 	CustomLoginBanner string `json:"CustomLoginBanner,omitempty"`
 
+	// DisableKubeShell will disable the kube shell feature for non-admin users
+	// Example: false
+	DisableKubeShell bool `json:"DisableKubeShell,omitempty"`
+
+	// DisableKubeconfigDownload will disable the download of kubeconfig files for non-admin users
+	// Example: false
+	DisableKubeconfigDownload bool `json:"DisableKubeconfigDownload,omitempty"`
+
 	// Whether edge compute features are enabled
 	// Example: true
 	EnableEdgeComputeFeatures bool `json:"EnableEdgeComputeFeatures,omitempty"`
@@ -60,10 +68,6 @@ type SettingsPublicSettingsResponse struct {
 	// Example: 1
 	RequiredPasswordLength int64 `json:"RequiredPasswordLength,omitempty"`
 
-	// Show the Kompose build option (discontinued in 2.18)
-	// Example: false
-	ShowKomposeBuildOption bool `json:"ShowKomposeBuildOption,omitempty"`
-
 	// Whether team sync is enabled
 	// Example: true
 	TeamSync bool `json:"TeamSync,omitempty"`
@@ -76,9 +80,6 @@ type SettingsPublicSettingsResponse struct {
 
 	// Whether AMT is enabled
 	IsAMTEnabled bool `json:"isAMTEnabled,omitempty"`
-
-	// Whether FDO is enabled
-	IsFDOEnabled bool `json:"isFDOEnabled,omitempty"`
 
 	// The expiry of a Kubeconfig
 	// Example: 24h

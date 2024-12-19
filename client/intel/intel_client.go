@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new intel API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new intel API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new intel API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,7 +51,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -40,27 +66,7 @@ type ClientService interface {
 
 	OpenAMTHostInfo(params *OpenAMTHostInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAMTHostInfoOK, error)
 
-	CreateProfile(params *CreateProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProfileOK, error)
-
-	DeleteProfile(params *DeleteProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProfileOK, error)
-
-	Duplicate(params *DuplicateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DuplicateOK, error)
-
-	FdoConfigure(params *FdoConfigureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoConfigureNoContent, error)
-
-	FdoConfigureDevice(params *FdoConfigureDeviceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoConfigureDeviceOK, error)
-
-	FdoListAll(params *FdoListAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoListAllOK, error)
-
-	FdoProfileInspect(params *FdoProfileInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoProfileInspectOK, error)
-
-	FdoProfileList(params *FdoProfileListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoProfileListOK, error)
-
-	FdoRegisterDevice(params *FdoRegisterDeviceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoRegisterDeviceOK, error)
-
 	OpenAMTActivate(params *OpenAMTActivateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*OpenAMTActivateOK, error)
-
-	UpdateProfile(params *UpdateProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProfileOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -281,393 +287,6 @@ func (a *Client) OpenAMTHostInfo(params *OpenAMTHostInfoParams, authInfo runtime
 }
 
 /*
-	CreateProfile creates a new f d o profile
-
-	creates a new FDO Profile
-
-**Access policy**: administrator
-*/
-func (a *Client) CreateProfile(params *CreateProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProfileOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateProfileParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "createProfile",
-		Method:             "POST",
-		PathPattern:        "/fdo/profiles",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &CreateProfileReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateProfileOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for createProfile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	DeleteProfile deletes a f d o profile
-
-	deletes a FDO Profile
-
-**Access policy**: administrator
-*/
-func (a *Client) DeleteProfile(params *DeleteProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProfileOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteProfileParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteProfile",
-		Method:             "DELETE",
-		PathPattern:        "/fdo/profiles/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &DeleteProfileReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteProfileOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteProfile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	Duplicate duplicateds an existing f d o profile
-
-	duplicated an existing FDO Profile
-
-**Access policy**: administrator
-*/
-func (a *Client) Duplicate(params *DuplicateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DuplicateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDuplicateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "duplicate",
-		Method:             "POST",
-		PathPattern:        "/fdo/profiles/{id}/duplicate",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &DuplicateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DuplicateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for duplicate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	FdoConfigure enables portainer s f d o capabilities
-
-	Enable Portainer's FDO capabilities
-
-**Access policy**: administrator
-*/
-func (a *Client) FdoConfigure(params *FdoConfigureParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoConfigureNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewFdoConfigureParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "fdoConfigure",
-		Method:             "POST",
-		PathPattern:        "/fdo",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &FdoConfigureReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*FdoConfigureNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for fdoConfigure: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	FdoConfigureDevice configures an f d o device
-
-	configures an FDO device
-
-**Access policy**: administrator
-*/
-func (a *Client) FdoConfigureDevice(params *FdoConfigureDeviceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoConfigureDeviceOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewFdoConfigureDeviceParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "fdoConfigureDevice",
-		Method:             "POST",
-		PathPattern:        "/fdo/configure/{guid}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &FdoConfigureDeviceReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*FdoConfigureDeviceOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for fdoConfigureDevice: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	FdoListAll lists all known f d o vouchers
-
-	List all known FDO vouchers
-
-**Access policy**: administrator
-*/
-func (a *Client) FdoListAll(params *FdoListAllParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoListAllOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewFdoListAllParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "fdoListAll",
-		Method:             "GET",
-		PathPattern:        "/fdo/list",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &FdoListAllReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*FdoListAllOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for fdoListAll: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	FdoProfileInspect retrieves a given f d o profile information and content
-
-	retrieves a given FDO profile information and content
-
-**Access policy**: administrator
-*/
-func (a *Client) FdoProfileInspect(params *FdoProfileInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoProfileInspectOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewFdoProfileInspectParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "fdoProfileInspect",
-		Method:             "GET",
-		PathPattern:        "/fdo/profiles/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &FdoProfileInspectReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*FdoProfileInspectOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for fdoProfileInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	FdoProfileList retrieves all f d o profiles
-
-	retrieves all FDO profiles
-
-**Access policy**: administrator
-*/
-func (a *Client) FdoProfileList(params *FdoProfileListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoProfileListOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewFdoProfileListParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "fdoProfileList",
-		Method:             "GET",
-		PathPattern:        "/fdo/profiles",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &FdoProfileListReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*FdoProfileListOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for fdoProfileList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	FdoRegisterDevice registers an f d o device
-
-	register an FDO device
-
-**Access policy**: administrator
-*/
-func (a *Client) FdoRegisterDevice(params *FdoRegisterDeviceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*FdoRegisterDeviceOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewFdoRegisterDeviceParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "fdoRegisterDevice",
-		Method:             "POST",
-		PathPattern:        "/fdo/register",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &FdoRegisterDeviceReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*FdoRegisterDeviceOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for fdoRegisterDevice: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 	OpenAMTActivate activates open a m t device and associate to agent endpoint
 
 	Activate OpenAMT device and associate to agent endpoint
@@ -707,49 +326,6 @@ func (a *Client) OpenAMTActivate(params *OpenAMTActivateParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for openAMTActivate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	UpdateProfile updates an existing f d o profile
-
-	updates an existing FDO Profile
-
-**Access policy**: administrator
-*/
-func (a *Client) UpdateProfile(params *UpdateProfileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProfileOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateProfileParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "updateProfile",
-		Method:             "PUT",
-		PathPattern:        "/fdo/profiles/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &UpdateProfileReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateProfileOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for updateProfile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -25,6 +25,10 @@ type PortainereeGlobalDeploymentOptions struct {
 	// Example: false
 	HideFileUpload bool `json:"hideFileUpload,omitempty"`
 
+	// hide stacks functionality
+	// Example: false
+	HideStacksFunctionality bool `json:"hideStacksFunctionality,omitempty"`
+
 	// Hide the webeditor in the remaining visible forms
 	// Example: false
 	HideWebEditor bool `json:"hideWebEditor,omitempty"`

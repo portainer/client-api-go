@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EndpointAssociationDeleteOK) Code() int {
 }
 
 func (o *EndpointAssociationDeleteOK) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteOK %s", 200, payload)
 }
 
 func (o *EndpointAssociationDeleteOK) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteOK %s", 200, payload)
 }
 
 func (o *EndpointAssociationDeleteOK) GetPayload() *models.PortainereeEndpoint {
@@ -164,11 +167,11 @@ func (o *EndpointAssociationDeleteBadRequest) Code() int {
 }
 
 func (o *EndpointAssociationDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteBadRequest", 400)
 }
 
 func (o *EndpointAssociationDeleteBadRequest) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteBadRequest", 400)
 }
 
 func (o *EndpointAssociationDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EndpointAssociationDeleteNotFound) Code() int {
 }
 
 func (o *EndpointAssociationDeleteNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNotFound", 404)
 }
 
 func (o *EndpointAssociationDeleteNotFound) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteNotFound", 404)
 }
 
 func (o *EndpointAssociationDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EndpointAssociationDeleteInternalServerError) Code() int {
 }
 
 func (o *EndpointAssociationDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteInternalServerError", 500)
 }
 
 func (o *EndpointAssociationDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/association][%d] endpointAssociationDeleteInternalServerError", 500)
 }
 
 func (o *EndpointAssociationDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

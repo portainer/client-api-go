@@ -6,6 +6,7 @@ package custom_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -42,7 +43,7 @@ func (o *CustomTemplateCreateStringReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /custom_templates/string] CustomTemplateCreateString", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /custom_templates/create/string] CustomTemplateCreateString", response, response.Code())
 	}
 }
 
@@ -91,11 +92,13 @@ func (o *CustomTemplateCreateStringOK) Code() int {
 }
 
 func (o *CustomTemplateCreateStringOK) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/string][%d] customTemplateCreateStringOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /custom_templates/create/string][%d] customTemplateCreateStringOK %s", 200, payload)
 }
 
 func (o *CustomTemplateCreateStringOK) String() string {
-	return fmt.Sprintf("[POST /custom_templates/string][%d] customTemplateCreateStringOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /custom_templates/create/string][%d] customTemplateCreateStringOK %s", 200, payload)
 }
 
 func (o *CustomTemplateCreateStringOK) GetPayload() *models.PortainereeCustomTemplate {
@@ -158,11 +161,11 @@ func (o *CustomTemplateCreateStringBadRequest) Code() int {
 }
 
 func (o *CustomTemplateCreateStringBadRequest) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/string][%d] customTemplateCreateStringBadRequest ", 400)
+	return fmt.Sprintf("[POST /custom_templates/create/string][%d] customTemplateCreateStringBadRequest", 400)
 }
 
 func (o *CustomTemplateCreateStringBadRequest) String() string {
-	return fmt.Sprintf("[POST /custom_templates/string][%d] customTemplateCreateStringBadRequest ", 400)
+	return fmt.Sprintf("[POST /custom_templates/create/string][%d] customTemplateCreateStringBadRequest", 400)
 }
 
 func (o *CustomTemplateCreateStringBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *CustomTemplateCreateStringInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateCreateStringInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/string][%d] customTemplateCreateStringInternalServerError ", 500)
+	return fmt.Sprintf("[POST /custom_templates/create/string][%d] customTemplateCreateStringInternalServerError", 500)
 }
 
 func (o *CustomTemplateCreateStringInternalServerError) String() string {
-	return fmt.Sprintf("[POST /custom_templates/string][%d] customTemplateCreateStringInternalServerError ", 500)
+	return fmt.Sprintf("[POST /custom_templates/create/string][%d] customTemplateCreateStringInternalServerError", 500)
 }
 
 func (o *CustomTemplateCreateStringInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

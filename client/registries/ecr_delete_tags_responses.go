@@ -99,11 +99,11 @@ func (o *EcrDeleteTagsNoContent) Code() int {
 }
 
 func (o *EcrDeleteTagsNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNoContent ", 204)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNoContent", 204)
 }
 
 func (o *EcrDeleteTagsNoContent) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNoContent ", 204)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNoContent", 204)
 }
 
 func (o *EcrDeleteTagsNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *EcrDeleteTagsBadRequest) Code() int {
 }
 
 func (o *EcrDeleteTagsBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsBadRequest", 400)
 }
 
 func (o *EcrDeleteTagsBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsBadRequest", 400)
 }
 
 func (o *EcrDeleteTagsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *EcrDeleteTagsForbidden) Code() int {
 }
 
 func (o *EcrDeleteTagsForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsForbidden ", 403)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsForbidden", 403)
 }
 
 func (o *EcrDeleteTagsForbidden) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsForbidden ", 403)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsForbidden", 403)
 }
 
 func (o *EcrDeleteTagsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *EcrDeleteTagsNotFound) Code() int {
 }
 
 func (o *EcrDeleteTagsNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNotFound ", 404)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNotFound", 404)
 }
 
 func (o *EcrDeleteTagsNotFound) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNotFound ", 404)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsNotFound", 404)
 }
 
 func (o *EcrDeleteTagsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *EcrDeleteTagsInternalServerError) Code() int {
 }
 
 func (o *EcrDeleteTagsInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsInternalServerError", 500)
 }
 
 func (o *EcrDeleteTagsInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /registries/{id}/ecr/repositories/{repositoryName}/tags][%d] ecrDeleteTagsInternalServerError", 500)
 }
 
 func (o *EcrDeleteTagsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

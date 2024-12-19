@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *EndpointEdgeAsyncOK) Code() int {
 }
 
 func (o *EndpointEdgeAsyncOK) Error() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncOK %s", 200, payload)
 }
 
 func (o *EndpointEdgeAsyncOK) String() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncOK %s", 200, payload)
 }
 
 func (o *EndpointEdgeAsyncOK) GetPayload() *models.EndpointedgeEdgeAsyncResponse {
@@ -170,11 +173,11 @@ func (o *EndpointEdgeAsyncBadRequest) Code() int {
 }
 
 func (o *EndpointEdgeAsyncBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncBadRequest", 400)
 }
 
 func (o *EndpointEdgeAsyncBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncBadRequest", 400)
 }
 
 func (o *EndpointEdgeAsyncBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *EndpointEdgeAsyncForbidden) Code() int {
 }
 
 func (o *EndpointEdgeAsyncForbidden) Error() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncForbidden ", 403)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncForbidden", 403)
 }
 
 func (o *EndpointEdgeAsyncForbidden) String() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncForbidden ", 403)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncForbidden", 403)
 }
 
 func (o *EndpointEdgeAsyncForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *EndpointEdgeAsyncNotFound) Code() int {
 }
 
 func (o *EndpointEdgeAsyncNotFound) Error() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncNotFound ", 404)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncNotFound", 404)
 }
 
 func (o *EndpointEdgeAsyncNotFound) String() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncNotFound ", 404)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncNotFound", 404)
 }
 
 func (o *EndpointEdgeAsyncNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *EndpointEdgeAsyncInternalServerError) Code() int {
 }
 
 func (o *EndpointEdgeAsyncInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncInternalServerError", 500)
 }
 
 func (o *EndpointEdgeAsyncInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/edge/async][%d] endpointEdgeAsyncInternalServerError", 500)
 }
 
 func (o *EndpointEdgeAsyncInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

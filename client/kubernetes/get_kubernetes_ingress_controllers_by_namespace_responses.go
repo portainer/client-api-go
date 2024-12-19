@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -35,6 +36,24 @@ func (o *GetKubernetesIngressControllersByNamespaceReader) ReadResponse(response
 			return nil, err
 		}
 		return nil, result
+	case 401:
+		result := NewGetKubernetesIngressControllersByNamespaceUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewGetKubernetesIngressControllersByNamespaceForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewGetKubernetesIngressControllersByNamespaceNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewGetKubernetesIngressControllersByNamespaceInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -42,7 +61,7 @@ func (o *GetKubernetesIngressControllersByNamespaceReader) ReadResponse(response
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers] getKubernetesIngressControllersByNamespace", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers] GetKubernetesIngressControllersByNamespace", response, response.Code())
 	}
 }
 
@@ -57,7 +76,7 @@ GetKubernetesIngressControllersByNamespaceOK describes a response with status co
 Success
 */
 type GetKubernetesIngressControllersByNamespaceOK struct {
-	Payload []*models.ModelsK8sIngressController
+	Payload []*models.KubernetesK8sIngressController
 }
 
 // IsSuccess returns true when this get kubernetes ingress controllers by namespace o k response has a 2xx status code
@@ -91,14 +110,16 @@ func (o *GetKubernetesIngressControllersByNamespaceOK) Code() int {
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceOK %s", 200, payload)
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceOK %s", 200, payload)
 }
 
-func (o *GetKubernetesIngressControllersByNamespaceOK) GetPayload() []*models.ModelsK8sIngressController {
+func (o *GetKubernetesIngressControllersByNamespaceOK) GetPayload() []*models.KubernetesK8sIngressController {
 	return o.Payload
 }
 
@@ -120,7 +141,7 @@ func NewGetKubernetesIngressControllersByNamespaceBadRequest() *GetKubernetesIng
 /*
 GetKubernetesIngressControllersByNamespaceBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type GetKubernetesIngressControllersByNamespaceBadRequest struct {
 }
@@ -156,14 +177,182 @@ func (o *GetKubernetesIngressControllersByNamespaceBadRequest) Code() int {
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceBadRequest", 400)
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceBadRequest", 400)
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesIngressControllersByNamespaceUnauthorized creates a GetKubernetesIngressControllersByNamespaceUnauthorized with default headers values
+func NewGetKubernetesIngressControllersByNamespaceUnauthorized() *GetKubernetesIngressControllersByNamespaceUnauthorized {
+	return &GetKubernetesIngressControllersByNamespaceUnauthorized{}
+}
+
+/*
+GetKubernetesIngressControllersByNamespaceUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type GetKubernetesIngressControllersByNamespaceUnauthorized struct {
+}
+
+// IsSuccess returns true when this get kubernetes ingress controllers by namespace unauthorized response has a 2xx status code
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes ingress controllers by namespace unauthorized response has a 3xx status code
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes ingress controllers by namespace unauthorized response has a 4xx status code
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes ingress controllers by namespace unauthorized response has a 5xx status code
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes ingress controllers by namespace unauthorized response a status code equal to that given
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get kubernetes ingress controllers by namespace unauthorized response
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceUnauthorized", 401)
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceUnauthorized", 401)
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesIngressControllersByNamespaceForbidden creates a GetKubernetesIngressControllersByNamespaceForbidden with default headers values
+func NewGetKubernetesIngressControllersByNamespaceForbidden() *GetKubernetesIngressControllersByNamespaceForbidden {
+	return &GetKubernetesIngressControllersByNamespaceForbidden{}
+}
+
+/*
+GetKubernetesIngressControllersByNamespaceForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type GetKubernetesIngressControllersByNamespaceForbidden struct {
+}
+
+// IsSuccess returns true when this get kubernetes ingress controllers by namespace forbidden response has a 2xx status code
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes ingress controllers by namespace forbidden response has a 3xx status code
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes ingress controllers by namespace forbidden response has a 4xx status code
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes ingress controllers by namespace forbidden response has a 5xx status code
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes ingress controllers by namespace forbidden response a status code equal to that given
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get kubernetes ingress controllers by namespace forbidden response
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) Code() int {
+	return 403
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceForbidden", 403)
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceForbidden", 403)
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesIngressControllersByNamespaceNotFound creates a GetKubernetesIngressControllersByNamespaceNotFound with default headers values
+func NewGetKubernetesIngressControllersByNamespaceNotFound() *GetKubernetesIngressControllersByNamespaceNotFound {
+	return &GetKubernetesIngressControllersByNamespaceNotFound{}
+}
+
+/*
+GetKubernetesIngressControllersByNamespaceNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier or a namespace with the specified name.
+*/
+type GetKubernetesIngressControllersByNamespaceNotFound struct {
+}
+
+// IsSuccess returns true when this get kubernetes ingress controllers by namespace not found response has a 2xx status code
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes ingress controllers by namespace not found response has a 3xx status code
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes ingress controllers by namespace not found response has a 4xx status code
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes ingress controllers by namespace not found response has a 5xx status code
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes ingress controllers by namespace not found response a status code equal to that given
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get kubernetes ingress controllers by namespace not found response
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) Code() int {
+	return 404
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceNotFound", 404)
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceNotFound", 404)
+}
+
+func (o *GetKubernetesIngressControllersByNamespaceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -176,7 +365,7 @@ func NewGetKubernetesIngressControllersByNamespaceInternalServerError() *GetKube
 /*
 GetKubernetesIngressControllersByNamespaceInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to retrieve ingress controllers by a namespace
 */
 type GetKubernetesIngressControllersByNamespaceInternalServerError struct {
 }
@@ -212,11 +401,11 @@ func (o *GetKubernetesIngressControllersByNamespaceInternalServerError) Code() i
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceInternalServerError", 500)
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceInternalServerError) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/namespaces/{namespace}/ingresscontrollers][%d] getKubernetesIngressControllersByNamespaceInternalServerError", 500)
 }
 
 func (o *GetKubernetesIngressControllersByNamespaceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

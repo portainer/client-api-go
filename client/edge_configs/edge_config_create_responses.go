@@ -81,11 +81,11 @@ func (o *EdgeConfigCreateNoContent) Code() int {
 }
 
 func (o *EdgeConfigCreateNoContent) Error() string {
-	return fmt.Sprintf("[POST /edge_configurations][%d] edgeConfigCreateNoContent ", 204)
+	return fmt.Sprintf("[POST /edge_configurations][%d] edgeConfigCreateNoContent", 204)
 }
 
 func (o *EdgeConfigCreateNoContent) String() string {
-	return fmt.Sprintf("[POST /edge_configurations][%d] edgeConfigCreateNoContent ", 204)
+	return fmt.Sprintf("[POST /edge_configurations][%d] edgeConfigCreateNoContent", 204)
 }
 
 func (o *EdgeConfigCreateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,11 +137,11 @@ func (o *EdgeConfigCreateBadRequest) Code() int {
 }
 
 func (o *EdgeConfigCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /edge_configurations][%d] edgeConfigCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_configurations][%d] edgeConfigCreateBadRequest", 400)
 }
 
 func (o *EdgeConfigCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /edge_configurations][%d] edgeConfigCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_configurations][%d] edgeConfigCreateBadRequest", 400)
 }
 
 func (o *EdgeConfigCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package status
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,11 +80,13 @@ func (o *StatusInspectOK) Code() int {
 }
 
 func (o *StatusInspectOK) Error() string {
-	return fmt.Sprintf("[GET /status][%d] statusInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /status][%d] statusInspectOK %s", 200, payload)
 }
 
 func (o *StatusInspectOK) String() string {
-	return fmt.Sprintf("[GET /status][%d] statusInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /status][%d] statusInspectOK %s", 200, payload)
 }
 
 func (o *StatusInspectOK) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus {

@@ -93,11 +93,11 @@ func (o *EdgeStackLogsStatusGetOK) Code() int {
 }
 
 func (o *EdgeStackLogsStatusGetOK) Error() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetOK ", 200)
+	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetOK", 200)
 }
 
 func (o *EdgeStackLogsStatusGetOK) String() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetOK ", 200)
+	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetOK", 200)
 }
 
 func (o *EdgeStackLogsStatusGetOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EdgeStackLogsStatusGetBadRequest) Code() int {
 }
 
 func (o *EdgeStackLogsStatusGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetBadRequest", 400)
 }
 
 func (o *EdgeStackLogsStatusGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetBadRequest", 400)
 }
 
 func (o *EdgeStackLogsStatusGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EdgeStackLogsStatusGetInternalServerError) Code() int {
 }
 
 func (o *EdgeStackLogsStatusGetInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetInternalServerError", 500)
 }
 
 func (o *EdgeStackLogsStatusGetInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetInternalServerError", 500)
 }
 
 func (o *EdgeStackLogsStatusGetInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EdgeStackLogsStatusGetServiceUnavailable) Code() int {
 }
 
 func (o *EdgeStackLogsStatusGetServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetServiceUnavailable", 503)
 }
 
 func (o *EdgeStackLogsStatusGetServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsStatusGetServiceUnavailable", 503)
 }
 
 func (o *EdgeStackLogsStatusGetServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

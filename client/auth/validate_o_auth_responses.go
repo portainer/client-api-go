@@ -6,6 +6,7 @@ package auth
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *ValidateOAuthOK) Code() int {
 }
 
 func (o *ValidateOAuthOK) Error() string {
-	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthOK %s", 200, payload)
 }
 
 func (o *ValidateOAuthOK) String() string {
-	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthOK %s", 200, payload)
 }
 
 func (o *ValidateOAuthOK) GetPayload() *models.AuthAuthenticateResponse {
@@ -164,11 +167,11 @@ func (o *ValidateOAuthBadRequest) Code() int {
 }
 
 func (o *ValidateOAuthBadRequest) Error() string {
-	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthBadRequest ", 400)
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthBadRequest", 400)
 }
 
 func (o *ValidateOAuthBadRequest) String() string {
-	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthBadRequest ", 400)
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthBadRequest", 400)
 }
 
 func (o *ValidateOAuthBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *ValidateOAuthUnprocessableEntity) Code() int {
 }
 
 func (o *ValidateOAuthUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthUnprocessableEntity", 422)
 }
 
 func (o *ValidateOAuthUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthUnprocessableEntity", 422)
 }
 
 func (o *ValidateOAuthUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *ValidateOAuthInternalServerError) Code() int {
 }
 
 func (o *ValidateOAuthInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthInternalServerError ", 500)
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthInternalServerError", 500)
 }
 
 func (o *ValidateOAuthInternalServerError) String() string {
-	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthInternalServerError ", 500)
+	return fmt.Sprintf("[POST /auth/oauth/validate][%d] validateOAuthInternalServerError", 500)
 }
 
 func (o *ValidateOAuthInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

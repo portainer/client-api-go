@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *UserNamespacesOK) Code() int {
 }
 
 func (o *UserNamespacesOK) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesOK %s", 200, payload)
 }
 
 func (o *UserNamespacesOK) String() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesOK %s", 200, payload)
 }
 
 func (o *UserNamespacesOK) GetPayload() models.UsersNamespaceMapping {
@@ -168,11 +171,11 @@ func (o *UserNamespacesBadRequest) Code() int {
 }
 
 func (o *UserNamespacesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesBadRequest", 400)
 }
 
 func (o *UserNamespacesBadRequest) String() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesBadRequest", 400)
 }
 
 func (o *UserNamespacesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -224,11 +227,11 @@ func (o *UserNamespacesForbidden) Code() int {
 }
 
 func (o *UserNamespacesForbidden) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesForbidden", 403)
 }
 
 func (o *UserNamespacesForbidden) String() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesForbidden", 403)
 }
 
 func (o *UserNamespacesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -280,11 +283,11 @@ func (o *UserNamespacesNotFound) Code() int {
 }
 
 func (o *UserNamespacesNotFound) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesNotFound", 404)
 }
 
 func (o *UserNamespacesNotFound) String() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesNotFound", 404)
 }
 
 func (o *UserNamespacesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -336,11 +339,11 @@ func (o *UserNamespacesInternalServerError) Code() int {
 }
 
 func (o *UserNamespacesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesInternalServerError", 500)
 }
 
 func (o *UserNamespacesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}/namespaces][%d] userNamespacesInternalServerError", 500)
 }
 
 func (o *UserNamespacesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

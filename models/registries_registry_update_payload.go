@@ -29,7 +29,7 @@ type RegistriesRegistryUpdatePayload struct {
 	BaseURL string `json:"baseURL,omitempty"`
 
 	// ecr
-	Ecr *PortainereeEcrData `json:"ecr,omitempty"`
+	Ecr *PortainerEcrData `json:"ecr,omitempty"`
 
 	// github
 	Github *PortainereeGithubRegistryData `json:"github,omitempty"`
@@ -44,10 +44,10 @@ type RegistriesRegistryUpdatePayload struct {
 	Password string `json:"password,omitempty"`
 
 	// quay
-	Quay *PortainereeQuayRegistryData `json:"quay,omitempty"`
+	Quay *PortainerQuayRegistryData `json:"quay,omitempty"`
 
 	// registry accesses
-	RegistryAccesses PortainereeRegistryAccesses `json:"registryAccesses,omitempty"`
+	RegistryAccesses PortainerRegistryAccesses `json:"registryAccesses,omitempty"`
 
 	// url
 	// Example: registry.mydomain.tld:2375/feed

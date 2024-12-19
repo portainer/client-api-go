@@ -6,6 +6,7 @@ package system
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,11 +80,13 @@ func (o *SystemUpdateNoContent) Code() int {
 }
 
 func (o *SystemUpdateNoContent) Error() string {
-	return fmt.Sprintf("[POST /system/update][%d] systemUpdateNoContent  %+v", 204, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /system/update][%d] systemUpdateNoContent %s", 204, payload)
 }
 
 func (o *SystemUpdateNoContent) String() string {
-	return fmt.Sprintf("[POST /system/update][%d] systemUpdateNoContent  %+v", 204, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /system/update][%d] systemUpdateNoContent %s", 204, payload)
 }
 
 func (o *SystemUpdateNoContent) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemStatus {

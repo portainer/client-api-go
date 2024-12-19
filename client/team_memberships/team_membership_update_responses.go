@@ -6,6 +6,7 @@ package team_memberships
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -69,7 +70,7 @@ TeamMembershipUpdateOK describes a response with status code 200, with default h
 Success
 */
 type TeamMembershipUpdateOK struct {
-	Payload *models.PortainereeTeamMembership
+	Payload *models.PortainerTeamMembership
 }
 
 // IsSuccess returns true when this team membership update o k response has a 2xx status code
@@ -103,20 +104,22 @@ func (o *TeamMembershipUpdateOK) Code() int {
 }
 
 func (o *TeamMembershipUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateOK %s", 200, payload)
 }
 
 func (o *TeamMembershipUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateOK %s", 200, payload)
 }
 
-func (o *TeamMembershipUpdateOK) GetPayload() *models.PortainereeTeamMembership {
+func (o *TeamMembershipUpdateOK) GetPayload() *models.PortainerTeamMembership {
 	return o.Payload
 }
 
 func (o *TeamMembershipUpdateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTeamMembership)
+	o.Payload = new(models.PortainerTeamMembership)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -170,11 +173,11 @@ func (o *TeamMembershipUpdateBadRequest) Code() int {
 }
 
 func (o *TeamMembershipUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateBadRequest", 400)
 }
 
 func (o *TeamMembershipUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateBadRequest", 400)
 }
 
 func (o *TeamMembershipUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *TeamMembershipUpdateForbidden) Code() int {
 }
 
 func (o *TeamMembershipUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateForbidden", 403)
 }
 
 func (o *TeamMembershipUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateForbidden", 403)
 }
 
 func (o *TeamMembershipUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *TeamMembershipUpdateNotFound) Code() int {
 }
 
 func (o *TeamMembershipUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateNotFound", 404)
 }
 
 func (o *TeamMembershipUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateNotFound", 404)
 }
 
 func (o *TeamMembershipUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *TeamMembershipUpdateInternalServerError) Code() int {
 }
 
 func (o *TeamMembershipUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateInternalServerError", 500)
 }
 
 func (o *TeamMembershipUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /team_memberships/{id}][%d] teamMembershipUpdateInternalServerError", 500)
 }
 
 func (o *TeamMembershipUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

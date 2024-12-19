@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewGetWebhooksParams creates a new GetWebhooksParams object,
@@ -62,11 +61,11 @@ GetWebhooksParams contains all the parameters to send to the API endpoint
 */
 type GetWebhooksParams struct {
 
-	// EndpointID.
-	EndpointID int64
+	/* Filters.
 
-	// ResourceID.
-	ResourceID string
+	   Filters (json-string)
+	*/
+	Filters *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -121,26 +120,15 @@ func (o *GetWebhooksParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithEndpointID adds the endpointID to the get webhooks params
-func (o *GetWebhooksParams) WithEndpointID(endpointID int64) *GetWebhooksParams {
-	o.SetEndpointID(endpointID)
+// WithFilters adds the filters to the get webhooks params
+func (o *GetWebhooksParams) WithFilters(filters *string) *GetWebhooksParams {
+	o.SetFilters(filters)
 	return o
 }
 
-// SetEndpointID adds the endpointId to the get webhooks params
-func (o *GetWebhooksParams) SetEndpointID(endpointID int64) {
-	o.EndpointID = endpointID
-}
-
-// WithResourceID adds the resourceID to the get webhooks params
-func (o *GetWebhooksParams) WithResourceID(resourceID string) *GetWebhooksParams {
-	o.SetResourceID(resourceID)
-	return o
-}
-
-// SetResourceID adds the resourceId to the get webhooks params
-func (o *GetWebhooksParams) SetResourceID(resourceID string) {
-	o.ResourceID = resourceID
+// SetFilters adds the filters to the get webhooks params
+func (o *GetWebhooksParams) SetFilters(filters *string) {
+	o.Filters = filters
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -151,23 +139,20 @@ func (o *GetWebhooksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	}
 	var res []error
 
-	// query param EndpointID
-	qrEndpointID := o.EndpointID
-	qEndpointID := swag.FormatInt64(qrEndpointID)
-	if qEndpointID != "" {
+	if o.Filters != nil {
 
-		if err := r.SetQueryParam("EndpointID", qEndpointID); err != nil {
-			return err
+		// query param filters
+		var qrFilters string
+
+		if o.Filters != nil {
+			qrFilters = *o.Filters
 		}
-	}
+		qFilters := qrFilters
+		if qFilters != "" {
 
-	// query param ResourceID
-	qrResourceID := o.ResourceID
-	qResourceID := qrResourceID
-	if qResourceID != "" {
-
-		if err := r.SetQueryParam("ResourceID", qResourceID); err != nil {
-			return err
+			if err := r.SetQueryParam("filters", qFilters); err != nil {
+				return err
+			}
 		}
 	}
 

@@ -6,6 +6,7 @@ package edge_stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EdgeStackInspectOK) Code() int {
 }
 
 func (o *EdgeStackInspectOK) Error() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectOK %s", 200, payload)
 }
 
 func (o *EdgeStackInspectOK) String() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectOK %s", 200, payload)
 }
 
 func (o *EdgeStackInspectOK) GetPayload() *models.PortainereeEdgeStack {
@@ -164,11 +167,11 @@ func (o *EdgeStackInspectBadRequest) Code() int {
 }
 
 func (o *EdgeStackInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectBadRequest", 400)
 }
 
 func (o *EdgeStackInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectBadRequest", 400)
 }
 
 func (o *EdgeStackInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EdgeStackInspectInternalServerError) Code() int {
 }
 
 func (o *EdgeStackInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectInternalServerError", 500)
 }
 
 func (o *EdgeStackInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectInternalServerError", 500)
 }
 
 func (o *EdgeStackInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EdgeStackInspectServiceUnavailable) Code() int {
 }
 
 func (o *EdgeStackInspectServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectServiceUnavailable", 503)
 }
 
 func (o *EdgeStackInspectServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_stacks/{id}][%d] edgeStackInspectServiceUnavailable", 503)
 }
 
 func (o *EdgeStackInspectServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

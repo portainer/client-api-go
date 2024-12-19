@@ -81,11 +81,11 @@ func (o *UserAdminCheckNoContent) Code() int {
 }
 
 func (o *UserAdminCheckNoContent) Error() string {
-	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNoContent ", 204)
+	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNoContent", 204)
 }
 
 func (o *UserAdminCheckNoContent) String() string {
-	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNoContent ", 204)
+	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNoContent", 204)
 }
 
 func (o *UserAdminCheckNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,11 +137,11 @@ func (o *UserAdminCheckNotFound) Code() int {
 }
 
 func (o *UserAdminCheckNotFound) Error() string {
-	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNotFound ", 404)
+	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNotFound", 404)
 }
 
 func (o *UserAdminCheckNotFound) String() string {
-	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNotFound ", 404)
+	return fmt.Sprintf("[GET /users/admin/check][%d] userAdminCheckNotFound", 404)
 }
 
 func (o *UserAdminCheckNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

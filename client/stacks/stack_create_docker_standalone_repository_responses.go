@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *StackCreateDockerStandaloneRepositoryOK) Code() int {
 }
 
 func (o *StackCreateDockerStandaloneRepositoryOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryOK %s", 200, payload)
 }
 
 func (o *StackCreateDockerStandaloneRepositoryOK) String() string {
-	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryOK %s", 200, payload)
 }
 
 func (o *StackCreateDockerStandaloneRepositoryOK) GetPayload() *models.PortainereeStack {
@@ -158,11 +161,11 @@ func (o *StackCreateDockerStandaloneRepositoryBadRequest) Code() int {
 }
 
 func (o *StackCreateDockerStandaloneRepositoryBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryBadRequest", 400)
 }
 
 func (o *StackCreateDockerStandaloneRepositoryBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryBadRequest", 400)
 }
 
 func (o *StackCreateDockerStandaloneRepositoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *StackCreateDockerStandaloneRepositoryInternalServerError) Code() int {
 }
 
 func (o *StackCreateDockerStandaloneRepositoryInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryInternalServerError", 500)
 }
 
 func (o *StackCreateDockerStandaloneRepositoryInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/standalone/repository][%d] stackCreateDockerStandaloneRepositoryInternalServerError", 500)
 }
 
 func (o *StackCreateDockerStandaloneRepositoryInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

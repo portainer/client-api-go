@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -69,7 +70,7 @@ UserGetAPIKeysOK describes a response with status code 200, with default header 
 Success
 */
 type UserGetAPIKeysOK struct {
-	Payload []*models.PortainereeAPIKey
+	Payload []*models.PortainerAPIKey
 }
 
 // IsSuccess returns true when this user get Api keys o k response has a 2xx status code
@@ -103,14 +104,16 @@ func (o *UserGetAPIKeysOK) Code() int {
 }
 
 func (o *UserGetAPIKeysOK) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysOK %s", 200, payload)
 }
 
 func (o *UserGetAPIKeysOK) String() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysOK %s", 200, payload)
 }
 
-func (o *UserGetAPIKeysOK) GetPayload() []*models.PortainereeAPIKey {
+func (o *UserGetAPIKeysOK) GetPayload() []*models.PortainerAPIKey {
 	return o.Payload
 }
 
@@ -168,11 +171,11 @@ func (o *UserGetAPIKeysBadRequest) Code() int {
 }
 
 func (o *UserGetAPIKeysBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysBadRequest", 400)
 }
 
 func (o *UserGetAPIKeysBadRequest) String() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysBadRequest", 400)
 }
 
 func (o *UserGetAPIKeysBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -224,11 +227,11 @@ func (o *UserGetAPIKeysForbidden) Code() int {
 }
 
 func (o *UserGetAPIKeysForbidden) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysForbidden", 403)
 }
 
 func (o *UserGetAPIKeysForbidden) String() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysForbidden", 403)
 }
 
 func (o *UserGetAPIKeysForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -280,11 +283,11 @@ func (o *UserGetAPIKeysNotFound) Code() int {
 }
 
 func (o *UserGetAPIKeysNotFound) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysNotFound", 404)
 }
 
 func (o *UserGetAPIKeysNotFound) String() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysNotFound", 404)
 }
 
 func (o *UserGetAPIKeysNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -336,11 +339,11 @@ func (o *UserGetAPIKeysInternalServerError) Code() int {
 }
 
 func (o *UserGetAPIKeysInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysInternalServerError", 500)
 }
 
 func (o *UserGetAPIKeysInternalServerError) String() string {
-	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}/tokens][%d] userGetApiKeysInternalServerError", 500)
 }
 
 func (o *UserGetAPIKeysInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

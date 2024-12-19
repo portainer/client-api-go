@@ -68,6 +68,12 @@ type ServiceImageStatusParams struct {
 	*/
 	EnvironmentID int64
 
+	/* Refresh.
+
+	   Refresh will force a refresh of the image status cache
+	*/
+	Refresh *bool
+
 	/* ServiceID.
 
 	   Service identifier
@@ -138,6 +144,17 @@ func (o *ServiceImageStatusParams) SetEnvironmentID(environmentID int64) {
 	o.EnvironmentID = environmentID
 }
 
+// WithRefresh adds the refresh to the service image status params
+func (o *ServiceImageStatusParams) WithRefresh(refresh *bool) *ServiceImageStatusParams {
+	o.SetRefresh(refresh)
+	return o
+}
+
+// SetRefresh adds the refresh to the service image status params
+func (o *ServiceImageStatusParams) SetRefresh(refresh *bool) {
+	o.Refresh = refresh
+}
+
 // WithServiceID adds the serviceID to the service image status params
 func (o *ServiceImageStatusParams) WithServiceID(serviceID int64) *ServiceImageStatusParams {
 	o.SetServiceID(serviceID)
@@ -160,6 +177,23 @@ func (o *ServiceImageStatusParams) WriteToRequest(r runtime.ClientRequest, reg s
 	// path param environmentId
 	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
 		return err
+	}
+
+	if o.Refresh != nil {
+
+		// query param refresh
+		var qrRefresh bool
+
+		if o.Refresh != nil {
+			qrRefresh = *o.Refresh
+		}
+		qRefresh := swag.FormatBool(qrRefresh)
+		if qRefresh != "" {
+
+			if err := r.SetQueryParam("refresh", qRefresh); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param serviceId

@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *EndpointEdgeStatusInspectOK) Code() int {
 }
 
 func (o *EndpointEdgeStatusInspectOK) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectOK %s", 200, payload)
 }
 
 func (o *EndpointEdgeStatusInspectOK) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectOK %s", 200, payload)
 }
 
 func (o *EndpointEdgeStatusInspectOK) GetPayload() *models.EndpointedgeEndpointEdgeStatusInspectResponse {
@@ -170,11 +173,11 @@ func (o *EndpointEdgeStatusInspectBadRequest) Code() int {
 }
 
 func (o *EndpointEdgeStatusInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectBadRequest", 400)
 }
 
 func (o *EndpointEdgeStatusInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectBadRequest", 400)
 }
 
 func (o *EndpointEdgeStatusInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *EndpointEdgeStatusInspectForbidden) Code() int {
 }
 
 func (o *EndpointEdgeStatusInspectForbidden) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectForbidden", 403)
 }
 
 func (o *EndpointEdgeStatusInspectForbidden) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectForbidden", 403)
 }
 
 func (o *EndpointEdgeStatusInspectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *EndpointEdgeStatusInspectNotFound) Code() int {
 }
 
 func (o *EndpointEdgeStatusInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectNotFound", 404)
 }
 
 func (o *EndpointEdgeStatusInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectNotFound", 404)
 }
 
 func (o *EndpointEdgeStatusInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *EndpointEdgeStatusInspectInternalServerError) Code() int {
 }
 
 func (o *EndpointEdgeStatusInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectInternalServerError", 500)
 }
 
 func (o *EndpointEdgeStatusInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}/edge/status][%d] endpointEdgeStatusInspectInternalServerError", 500)
 }
 
 func (o *EndpointEdgeStatusInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

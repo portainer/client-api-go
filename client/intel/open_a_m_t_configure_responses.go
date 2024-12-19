@@ -93,11 +93,11 @@ func (o *OpenAMTConfigureNoContent) Code() int {
 }
 
 func (o *OpenAMTConfigureNoContent) Error() string {
-	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureNoContent ", 204)
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureNoContent", 204)
 }
 
 func (o *OpenAMTConfigureNoContent) String() string {
-	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureNoContent ", 204)
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureNoContent", 204)
 }
 
 func (o *OpenAMTConfigureNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *OpenAMTConfigureBadRequest) Code() int {
 }
 
 func (o *OpenAMTConfigureBadRequest) Error() string {
-	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureBadRequest ", 400)
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureBadRequest", 400)
 }
 
 func (o *OpenAMTConfigureBadRequest) String() string {
-	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureBadRequest ", 400)
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureBadRequest", 400)
 }
 
 func (o *OpenAMTConfigureBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *OpenAMTConfigureForbidden) Code() int {
 }
 
 func (o *OpenAMTConfigureForbidden) Error() string {
-	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureForbidden ", 403)
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureForbidden", 403)
 }
 
 func (o *OpenAMTConfigureForbidden) String() string {
-	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureForbidden ", 403)
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureForbidden", 403)
 }
 
 func (o *OpenAMTConfigureForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *OpenAMTConfigureInternalServerError) Code() int {
 }
 
 func (o *OpenAMTConfigureInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureInternalServerError ", 500)
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureInternalServerError", 500)
 }
 
 func (o *OpenAMTConfigureInternalServerError) String() string {
-	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureInternalServerError ", 500)
+	return fmt.Sprintf("[POST /open_amt][%d] openAMTConfigureInternalServerError", 500)
 }
 
 func (o *OpenAMTConfigureInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

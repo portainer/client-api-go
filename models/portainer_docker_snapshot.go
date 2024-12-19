@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,6 +17,12 @@ import (
 //
 // swagger:model portainer.DockerSnapshot
 type PortainerDockerSnapshot struct {
+
+	// container count
+	ContainerCount int64 `json:"ContainerCount,omitempty"`
+
+	// diagnostics data
+	DiagnosticsData *PortainerDiagnosticsData `json:"DiagnosticsData,omitempty"`
 
 	// docker snapshot raw
 	DockerSnapshotRaw PortainerDockerSnapshotRaw `json:"DockerSnapshotRaw,omitempty"`
@@ -34,6 +41,9 @@ type PortainerDockerSnapshot struct {
 
 	// image count
 	ImageCount int64 `json:"ImageCount,omitempty"`
+
+	// is podman
+	IsPodman bool `json:"IsPodman,omitempty"`
 
 	// node count
 	NodeCount int64 `json:"NodeCount,omitempty"`
@@ -71,11 +81,69 @@ type PortainerDockerSnapshot struct {
 
 // Validate validates this portainer docker snapshot
 func (m *PortainerDockerSnapshot) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateDiagnosticsData(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this portainer docker snapshot based on context it is used
+func (m *PortainerDockerSnapshot) validateDiagnosticsData(formats strfmt.Registry) error {
+	if swag.IsZero(m.DiagnosticsData) { // not required
+		return nil
+	}
+
+	if m.DiagnosticsData != nil {
+		if err := m.DiagnosticsData.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DiagnosticsData")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DiagnosticsData")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this portainer docker snapshot based on the context it is used
 func (m *PortainerDockerSnapshot) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDiagnosticsData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PortainerDockerSnapshot) contextValidateDiagnosticsData(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DiagnosticsData != nil {
+
+		if swag.IsZero(m.DiagnosticsData) { // not required
+			return nil
+		}
+
+		if err := m.DiagnosticsData.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("DiagnosticsData")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("DiagnosticsData")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

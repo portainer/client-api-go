@@ -6,6 +6,7 @@ package custom_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *CustomTemplateCreateOK) Code() int {
 }
 
 func (o *CustomTemplateCreateOK) Error() string {
-	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateOK %s", 200, payload)
 }
 
 func (o *CustomTemplateCreateOK) String() string {
-	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateOK %s", 200, payload)
 }
 
 func (o *CustomTemplateCreateOK) GetPayload() *models.PortainereeCustomTemplate {
@@ -158,11 +161,11 @@ func (o *CustomTemplateCreateBadRequest) Code() int {
 }
 
 func (o *CustomTemplateCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateBadRequest", 400)
 }
 
 func (o *CustomTemplateCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateBadRequest", 400)
 }
 
 func (o *CustomTemplateCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *CustomTemplateCreateInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateInternalServerError", 500)
 }
 
 func (o *CustomTemplateCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /custom_templates][%d] customTemplateCreateInternalServerError", 500)
 }
 
 func (o *CustomTemplateCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

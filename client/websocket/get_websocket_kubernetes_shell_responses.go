@@ -93,11 +93,11 @@ func (o *GetWebsocketKubernetesShellOK) Code() int {
 }
 
 func (o *GetWebsocketKubernetesShellOK) Error() string {
-	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellOK ", 200)
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellOK", 200)
 }
 
 func (o *GetWebsocketKubernetesShellOK) String() string {
-	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellOK ", 200)
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellOK", 200)
 }
 
 func (o *GetWebsocketKubernetesShellOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *GetWebsocketKubernetesShellBadRequest) Code() int {
 }
 
 func (o *GetWebsocketKubernetesShellBadRequest) Error() string {
-	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellBadRequest", 400)
 }
 
 func (o *GetWebsocketKubernetesShellBadRequest) String() string {
-	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellBadRequest", 400)
 }
 
 func (o *GetWebsocketKubernetesShellBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *GetWebsocketKubernetesShellForbidden) Code() int {
 }
 
 func (o *GetWebsocketKubernetesShellForbidden) Error() string {
-	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellForbidden ", 403)
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellForbidden", 403)
 }
 
 func (o *GetWebsocketKubernetesShellForbidden) String() string {
-	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellForbidden ", 403)
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellForbidden", 403)
 }
 
 func (o *GetWebsocketKubernetesShellForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *GetWebsocketKubernetesShellInternalServerError) Code() int {
 }
 
 func (o *GetWebsocketKubernetesShellInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellInternalServerError", 500)
 }
 
 func (o *GetWebsocketKubernetesShellInternalServerError) String() string {
-	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/kubernetes-shell][%d] getWebsocketKubernetesShellInternalServerError", 500)
 }
 
 func (o *GetWebsocketKubernetesShellInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

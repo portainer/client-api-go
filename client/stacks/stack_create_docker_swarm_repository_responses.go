@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -31,6 +32,12 @@ func (o *StackCreateDockerSwarmRepositoryReader) ReadResponse(response runtime.C
 		return result, nil
 	case 400:
 		result := NewStackCreateDockerSwarmRepositoryBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewStackCreateDockerSwarmRepositoryConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -91,11 +98,13 @@ func (o *StackCreateDockerSwarmRepositoryOK) Code() int {
 }
 
 func (o *StackCreateDockerSwarmRepositoryOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryOK %s", 200, payload)
 }
 
 func (o *StackCreateDockerSwarmRepositoryOK) String() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryOK %s", 200, payload)
 }
 
 func (o *StackCreateDockerSwarmRepositoryOK) GetPayload() *models.PortainereeStack {
@@ -158,14 +167,70 @@ func (o *StackCreateDockerSwarmRepositoryBadRequest) Code() int {
 }
 
 func (o *StackCreateDockerSwarmRepositoryBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryBadRequest", 400)
 }
 
 func (o *StackCreateDockerSwarmRepositoryBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryBadRequest", 400)
 }
 
 func (o *StackCreateDockerSwarmRepositoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewStackCreateDockerSwarmRepositoryConflict creates a StackCreateDockerSwarmRepositoryConflict with default headers values
+func NewStackCreateDockerSwarmRepositoryConflict() *StackCreateDockerSwarmRepositoryConflict {
+	return &StackCreateDockerSwarmRepositoryConflict{}
+}
+
+/*
+StackCreateDockerSwarmRepositoryConflict describes a response with status code 409, with default header values.
+
+Stack name or webhook id is not unique
+*/
+type StackCreateDockerSwarmRepositoryConflict struct {
+}
+
+// IsSuccess returns true when this stack create docker swarm repository conflict response has a 2xx status code
+func (o *StackCreateDockerSwarmRepositoryConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack create docker swarm repository conflict response has a 3xx status code
+func (o *StackCreateDockerSwarmRepositoryConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack create docker swarm repository conflict response has a 4xx status code
+func (o *StackCreateDockerSwarmRepositoryConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack create docker swarm repository conflict response has a 5xx status code
+func (o *StackCreateDockerSwarmRepositoryConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack create docker swarm repository conflict response a status code equal to that given
+func (o *StackCreateDockerSwarmRepositoryConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the stack create docker swarm repository conflict response
+func (o *StackCreateDockerSwarmRepositoryConflict) Code() int {
+	return 409
+}
+
+func (o *StackCreateDockerSwarmRepositoryConflict) Error() string {
+	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryConflict", 409)
+}
+
+func (o *StackCreateDockerSwarmRepositoryConflict) String() string {
+	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryConflict", 409)
+}
+
+func (o *StackCreateDockerSwarmRepositoryConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -214,11 +279,11 @@ func (o *StackCreateDockerSwarmRepositoryInternalServerError) Code() int {
 }
 
 func (o *StackCreateDockerSwarmRepositoryInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryInternalServerError", 500)
 }
 
 func (o *StackCreateDockerSwarmRepositoryInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/swarm/repository][%d] stackCreateDockerSwarmRepositoryInternalServerError", 500)
 }
 
 func (o *StackCreateDockerSwarmRepositoryInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

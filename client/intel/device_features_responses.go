@@ -93,11 +93,11 @@ func (o *DeviceFeaturesNoContent) Code() int {
 }
 
 func (o *DeviceFeaturesNoContent) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesNoContent ", 204)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesNoContent", 204)
 }
 
 func (o *DeviceFeaturesNoContent) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesNoContent ", 204)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesNoContent", 204)
 }
 
 func (o *DeviceFeaturesNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *DeviceFeaturesBadRequest) Code() int {
 }
 
 func (o *DeviceFeaturesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesBadRequest ", 400)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesBadRequest", 400)
 }
 
 func (o *DeviceFeaturesBadRequest) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesBadRequest ", 400)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesBadRequest", 400)
 }
 
 func (o *DeviceFeaturesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *DeviceFeaturesForbidden) Code() int {
 }
 
 func (o *DeviceFeaturesForbidden) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesForbidden ", 403)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesForbidden", 403)
 }
 
 func (o *DeviceFeaturesForbidden) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesForbidden ", 403)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesForbidden", 403)
 }
 
 func (o *DeviceFeaturesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *DeviceFeaturesInternalServerError) Code() int {
 }
 
 func (o *DeviceFeaturesInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesInternalServerError", 500)
 }
 
 func (o *DeviceFeaturesInternalServerError) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices_features/{deviceId}][%d] deviceFeaturesInternalServerError", 500)
 }
 
 func (o *DeviceFeaturesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

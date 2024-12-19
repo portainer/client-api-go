@@ -87,11 +87,11 @@ func (o *SettingsExperimentalUpdateNoContent) Code() int {
 }
 
 func (o *SettingsExperimentalUpdateNoContent) Error() string {
-	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateNoContent", 204)
 }
 
 func (o *SettingsExperimentalUpdateNoContent) String() string {
-	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateNoContent", 204)
 }
 
 func (o *SettingsExperimentalUpdateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *SettingsExperimentalUpdateBadRequest) Code() int {
 }
 
 func (o *SettingsExperimentalUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateBadRequest", 400)
 }
 
 func (o *SettingsExperimentalUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateBadRequest", 400)
 }
 
 func (o *SettingsExperimentalUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *SettingsExperimentalUpdateInternalServerError) Code() int {
 }
 
 func (o *SettingsExperimentalUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateInternalServerError", 500)
 }
 
 func (o *SettingsExperimentalUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /settings/experimental][%d] settingsExperimentalUpdateInternalServerError", 500)
 }
 
 func (o *SettingsExperimentalUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

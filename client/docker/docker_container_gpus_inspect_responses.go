@@ -6,6 +6,7 @@ package docker
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *DockerContainerGpusInspectOK) Code() int {
 }
 
 func (o *DockerContainerGpusInspectOK) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectOK %s", 200, payload)
 }
 
 func (o *DockerContainerGpusInspectOK) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectOK %s", 200, payload)
 }
 
 func (o *DockerContainerGpusInspectOK) GetPayload() *models.ContainersContainerGpusResponse {
@@ -164,11 +167,11 @@ func (o *DockerContainerGpusInspectBadRequest) Code() int {
 }
 
 func (o *DockerContainerGpusInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectBadRequest", 400)
 }
 
 func (o *DockerContainerGpusInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectBadRequest", 400)
 }
 
 func (o *DockerContainerGpusInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *DockerContainerGpusInspectNotFound) Code() int {
 }
 
 func (o *DockerContainerGpusInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectNotFound", 404)
 }
 
 func (o *DockerContainerGpusInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectNotFound", 404)
 }
 
 func (o *DockerContainerGpusInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *DockerContainerGpusInspectInternalServerError) Code() int {
 }
 
 func (o *DockerContainerGpusInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectInternalServerError", 500)
 }
 
 func (o *DockerContainerGpusInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /docker/{environmentId}/containers/{containerId}/gpus][%d] dockerContainerGpusInspectInternalServerError", 500)
 }
 
 func (o *DockerContainerGpusInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -51,7 +51,7 @@ func (o *Microk8sGetNodeStatusReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus] microk8sGetNodeStatus", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus] microk8sGetNodeStatus", response, response.Code())
 	}
 }
 
@@ -99,11 +99,11 @@ func (o *Microk8sGetNodeStatusOK) Code() int {
 }
 
 func (o *Microk8sGetNodeStatusOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusOK ", 200)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusOK", 200)
 }
 
 func (o *Microk8sGetNodeStatusOK) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusOK ", 200)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusOK", 200)
 }
 
 func (o *Microk8sGetNodeStatusOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *Microk8sGetNodeStatusBadRequest) Code() int {
 }
 
 func (o *Microk8sGetNodeStatusBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusBadRequest", 400)
 }
 
 func (o *Microk8sGetNodeStatusBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusBadRequest", 400)
 }
 
 func (o *Microk8sGetNodeStatusBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *Microk8sGetNodeStatusForbidden) Code() int {
 }
 
 func (o *Microk8sGetNodeStatusForbidden) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusForbidden", 403)
 }
 
 func (o *Microk8sGetNodeStatusForbidden) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusForbidden ", 403)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusForbidden", 403)
 }
 
 func (o *Microk8sGetNodeStatusForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *Microk8sGetNodeStatusInternalServerError) Code() int {
 }
 
 func (o *Microk8sGetNodeStatusInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusInternalServerError", 500)
 }
 
 func (o *Microk8sGetNodeStatusInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusInternalServerError", 500)
 }
 
 func (o *Microk8sGetNodeStatusInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *Microk8sGetNodeStatusServiceUnavailable) Code() int {
 }
 
 func (o *Microk8sGetNodeStatusServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusServiceUnavailable", 503)
 }
 
 func (o *Microk8sGetNodeStatusServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /cloud/endpoints/{endpointid}/nodes/nodestatus][%d] microk8sGetNodeStatusServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/endpoints/{environmentId}/nodes/nodestatus][%d] microk8sGetNodeStatusServiceUnavailable", 503)
 }
 
 func (o *Microk8sGetNodeStatusServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

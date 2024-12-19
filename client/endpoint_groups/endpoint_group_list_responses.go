@@ -6,6 +6,7 @@ package endpoint_groups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -51,7 +52,7 @@ EndpointGroupListOK describes a response with status code 200, with default head
 Environment(Endpoint) group
 */
 type EndpointGroupListOK struct {
-	Payload []*models.PortainereeEndpointGroup
+	Payload []*models.PortainerEndpointGroup
 }
 
 // IsSuccess returns true when this endpoint group list o k response has a 2xx status code
@@ -85,14 +86,16 @@ func (o *EndpointGroupListOK) Code() int {
 }
 
 func (o *EndpointGroupListOK) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListOK %s", 200, payload)
 }
 
 func (o *EndpointGroupListOK) String() string {
-	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListOK %s", 200, payload)
 }
 
-func (o *EndpointGroupListOK) GetPayload() []*models.PortainereeEndpointGroup {
+func (o *EndpointGroupListOK) GetPayload() []*models.PortainerEndpointGroup {
 	return o.Payload
 }
 
@@ -150,11 +153,11 @@ func (o *EndpointGroupListInternalServerError) Code() int {
 }
 
 func (o *EndpointGroupListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListInternalServerError", 500)
 }
 
 func (o *EndpointGroupListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoint_groups][%d] endpointGroupListInternalServerError", 500)
 }
 
 func (o *EndpointGroupListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

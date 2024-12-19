@@ -20,6 +20,9 @@ type EdgeconfigsEdgeConfigCreatePayload struct {
 	// base dir
 	BaseDir string `json:"baseDir,omitempty"`
 
+	// category
+	Category string `json:"category,omitempty"`
+
 	// edge group i ds
 	EdgeGroupIDs []int64 `json:"edgeGroupIDs"`
 

@@ -6,6 +6,7 @@ package cloud_credentials
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *CloudCredsUpdateOK) Code() int {
 }
 
 func (o *CloudCredsUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateOK %s", 200, payload)
 }
 
 func (o *CloudCredsUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateOK %s", 200, payload)
 }
 
 func (o *CloudCredsUpdateOK) GetPayload() *models.ModelsCloudCredential {
@@ -158,11 +161,11 @@ func (o *CloudCredsUpdateBadRequest) Code() int {
 }
 
 func (o *CloudCredsUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateBadRequest", 400)
 }
 
 func (o *CloudCredsUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateBadRequest", 400)
 }
 
 func (o *CloudCredsUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *CloudCredsUpdateInternalServerError) Code() int {
 }
 
 func (o *CloudCredsUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateInternalServerError", 500)
 }
 
 func (o *CloudCredsUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /cloud/credentials/{id}][%d] cloudCredsUpdateInternalServerError", 500)
 }
 
 func (o *CloudCredsUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

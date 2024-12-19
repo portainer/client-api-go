@@ -81,11 +81,11 @@ func (o *EdgeUpdateScheduleDeleteNoContent) Code() int {
 }
 
 func (o *EdgeUpdateScheduleDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /edge_update_schedules/{id}][%d] edgeUpdateScheduleDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_update_schedules/{id}][%d] edgeUpdateScheduleDeleteNoContent", 204)
 }
 
 func (o *EdgeUpdateScheduleDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /edge_update_schedules/{id}][%d] edgeUpdateScheduleDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_update_schedules/{id}][%d] edgeUpdateScheduleDeleteNoContent", 204)
 }
 
 func (o *EdgeUpdateScheduleDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,11 +137,11 @@ func (o *EdgeUpdateScheduleDeleteInternalServerError) Code() int {
 }
 
 func (o *EdgeUpdateScheduleDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /edge_update_schedules/{id}][%d] edgeUpdateScheduleDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_update_schedules/{id}][%d] edgeUpdateScheduleDeleteInternalServerError", 500)
 }
 
 func (o *EdgeUpdateScheduleDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /edge_update_schedules/{id}][%d] edgeUpdateScheduleDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_update_schedules/{id}][%d] edgeUpdateScheduleDeleteInternalServerError", 500)
 }
 
 func (o *EdgeUpdateScheduleDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

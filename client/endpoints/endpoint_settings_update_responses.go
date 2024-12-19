@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EndpointSettingsUpdateOK) Code() int {
 }
 
 func (o *EndpointSettingsUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateOK %s", 200, payload)
 }
 
 func (o *EndpointSettingsUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateOK %s", 200, payload)
 }
 
 func (o *EndpointSettingsUpdateOK) GetPayload() *models.PortainereeEndpoint {
@@ -164,11 +167,11 @@ func (o *EndpointSettingsUpdateBadRequest) Code() int {
 }
 
 func (o *EndpointSettingsUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateBadRequest", 400)
 }
 
 func (o *EndpointSettingsUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateBadRequest", 400)
 }
 
 func (o *EndpointSettingsUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EndpointSettingsUpdateNotFound) Code() int {
 }
 
 func (o *EndpointSettingsUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateNotFound", 404)
 }
 
 func (o *EndpointSettingsUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateNotFound", 404)
 }
 
 func (o *EndpointSettingsUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EndpointSettingsUpdateInternalServerError) Code() int {
 }
 
 func (o *EndpointSettingsUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateInternalServerError", 500)
 }
 
 func (o *EndpointSettingsUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/{id}/settings][%d] endpointSettingsUpdateInternalServerError", 500)
 }
 
 func (o *EndpointSettingsUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

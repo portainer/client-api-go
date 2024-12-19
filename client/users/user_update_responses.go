@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *UserUpdateOK) Code() int {
 }
 
 func (o *UserUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateOK %s", 200, payload)
 }
 
 func (o *UserUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateOK %s", 200, payload)
 }
 
 func (o *UserUpdateOK) GetPayload() *models.PortainereeUser {
@@ -176,11 +179,11 @@ func (o *UserUpdateBadRequest) Code() int {
 }
 
 func (o *UserUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateBadRequest", 400)
 }
 
 func (o *UserUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateBadRequest", 400)
 }
 
 func (o *UserUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *UserUpdateForbidden) Code() int {
 }
 
 func (o *UserUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateForbidden", 403)
 }
 
 func (o *UserUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateForbidden", 403)
 }
 
 func (o *UserUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *UserUpdateNotFound) Code() int {
 }
 
 func (o *UserUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateNotFound", 404)
 }
 
 func (o *UserUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateNotFound", 404)
 }
 
 func (o *UserUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -308,7 +311,7 @@ func NewUserUpdateConflict() *UserUpdateConflict {
 /*
 UserUpdateConflict describes a response with status code 409, with default header values.
 
-Username already exist
+Username already exist or Edge Compute features are not enabled
 */
 type UserUpdateConflict struct {
 }
@@ -344,11 +347,11 @@ func (o *UserUpdateConflict) Code() int {
 }
 
 func (o *UserUpdateConflict) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateConflict ", 409)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateConflict", 409)
 }
 
 func (o *UserUpdateConflict) String() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateConflict ", 409)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateConflict", 409)
 }
 
 func (o *UserUpdateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *UserUpdateInternalServerError) Code() int {
 }
 
 func (o *UserUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateInternalServerError", 500)
 }
 
 func (o *UserUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /users/{id}][%d] userUpdateInternalServerError", 500)
 }
 
 func (o *UserUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

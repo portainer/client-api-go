@@ -6,6 +6,7 @@ package custom_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *CustomTemplateListOK) Code() int {
 }
 
 func (o *CustomTemplateListOK) Error() string {
-	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListOK %s", 200, payload)
 }
 
 func (o *CustomTemplateListOK) String() string {
-	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListOK %s", 200, payload)
 }
 
 func (o *CustomTemplateListOK) GetPayload() []*models.PortainereeCustomTemplate {
@@ -150,11 +153,11 @@ func (o *CustomTemplateListInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListInternalServerError", 500)
 }
 
 func (o *CustomTemplateListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /custom_templates][%d] customTemplateListInternalServerError", 500)
 }
 
 func (o *CustomTemplateListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

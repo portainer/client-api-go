@@ -29,7 +29,7 @@ type PortainereeKubernetesConfiguration struct {
 	IngressAvailabilityPerNamespace bool `json:"IngressAvailabilityPerNamespace,omitempty"`
 
 	// ingress classes
-	IngressClasses []*PortainereeKubernetesIngressClassConfig `json:"IngressClasses"`
+	IngressClasses []*PortainerKubernetesIngressClassConfig `json:"IngressClasses"`
 
 	// resource over commit percentage
 	ResourceOverCommitPercentage int64 `json:"ResourceOverCommitPercentage,omitempty"`
@@ -37,11 +37,14 @@ type PortainereeKubernetesConfiguration struct {
 	// restrict default namespace
 	RestrictDefaultNamespace bool `json:"RestrictDefaultNamespace,omitempty"`
 
+	// restrict secrets
+	RestrictSecrets bool `json:"RestrictSecrets,omitempty"`
+
 	// restrict standard user ingress w
 	RestrictStandardUserIngressW bool `json:"RestrictStandardUserIngressW,omitempty"`
 
 	// storage classes
-	StorageClasses []*PortainereeKubernetesStorageClassConfig `json:"StorageClasses"`
+	StorageClasses []*PortainerKubernetesStorageClassConfig `json:"StorageClasses"`
 
 	// use load balancer
 	UseLoadBalancer bool `json:"UseLoadBalancer,omitempty"`

@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new endpoints API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new endpoints API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new endpoints API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,8 +51,32 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithContentType allows the client to force the Content-Type header
+// to negotiate a specific Consumer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithContentType(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ConsumesMediaTypes = []string{mime}
+	}
+}
+
+// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
+func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/json"}
+}
+
+// WithContentTypeMultipartFormData sets the Content-Type header to "multipart/form-data".
+func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"multipart/form-data"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -37,6 +87,8 @@ type ClientService interface {
 	EndpointCreateGlobalKey(params *EndpointCreateGlobalKeyParams, opts ...ClientOption) (*EndpointCreateGlobalKeyOK, error)
 
 	EndpointDelete(params *EndpointDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteNoContent, error)
+
+	EndpointDeleteBatch(params *EndpointDeleteBatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteBatchNoContent, *EndpointDeleteBatchMultiStatus, error)
 
 	EndpointEdgeStatusInspect(params *EndpointEdgeStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointEdgeStatusInspectOK, error)
 
@@ -55,6 +107,10 @@ type ClientService interface {
 	EndpointUpdateRelations(params *EndpointUpdateRelationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointUpdateRelationsNoContent, error)
 
 	PostEndpointsIDDockerV2BrowsePut(params *PostEndpointsIDDockerV2BrowsePutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEndpointsIDDockerV2BrowsePutNoContent, error)
+
+	TrustEdgeEndpoint(params *TrustEdgeEndpointParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TrustEdgeEndpointNoContent, error)
+
+	TrustEdgeEndpoints(params *TrustEdgeEndpointsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TrustEdgeEndpointsNoContent, error)
 
 	EndpointDockerhubStatus(params *EndpointDockerhubStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDockerhubStatusOK, error)
 
@@ -202,11 +258,11 @@ func (a *Client) EndpointCreateGlobalKey(params *EndpointCreateGlobalKeyParams, 
 }
 
 /*
-	EndpointDelete removes an environment endpoint
+	EndpointDelete removes an environment
 
-	Remove an environment(endpoint).
+	Remove the environment associated to the specified identifier and optionally clean-up associated resources.
 
-**Access policy**: administrator
+**Access policy**: Administrator only.
 */
 func (a *Client) EndpointDelete(params *EndpointDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -241,6 +297,50 @@ func (a *Client) EndpointDelete(params *EndpointDeleteParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for EndpointDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	EndpointDeleteBatch removes multiple environments
+
+	Remove multiple environments and optionally clean-up associated resources.
+
+**Access policy**: Administrator only.
+*/
+func (a *Client) EndpointDeleteBatch(params *EndpointDeleteBatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteBatchNoContent, *EndpointDeleteBatchMultiStatus, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEndpointDeleteBatchParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EndpointDeleteBatch",
+		Method:             "DELETE",
+		PathPattern:        "/endpoints",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EndpointDeleteBatchReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, nil, err
+	}
+	switch value := result.(type) {
+	case *EndpointDeleteBatchNoContent:
+		return value, nil, nil
+	case *EndpointDeleteBatchMultiStatus:
+		return nil, value, nil
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for endpoints: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -423,7 +523,7 @@ func (a *Client) EndpointSettingsUpdate(params *EndpointSettingsUpdateParams, au
 
 	Snapshots an environment(endpoint)
 
-**Access policy**: administrator
+**Access policy**: authenticated
 */
 func (a *Client) EndpointSnapshot(params *EndpointSnapshotParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointSnapshotNoContent, error) {
 	// TODO: Validate the params before sending
@@ -632,6 +732,92 @@ func (a *Client) PostEndpointsIDDockerV2BrowsePut(params *PostEndpointsIDDockerV
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostEndpointsIDDockerV2BrowsePut: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	TrustEdgeEndpoint associates an edge environment in the waiting room to an environment
+
+	This API endpoint is deprecated. Please use /endpoints/edge/trust instead.
+
+**Access policy**: Administrator only.
+*/
+func (a *Client) TrustEdgeEndpoint(params *TrustEdgeEndpointParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TrustEdgeEndpointNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewTrustEdgeEndpointParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "TrustEdgeEndpoint",
+		Method:             "POST",
+		PathPattern:        "/endpoints/{id}/edge/trust",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &TrustEdgeEndpointReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*TrustEdgeEndpointNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for TrustEdgeEndpoint: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	TrustEdgeEndpoints associates one or more edge environments in the waiting room to environments
+
+	Associate one or more Edge environments, currently in the waiting room, with Portainer environments. This action effectively grants trust to these environments.
+
+**Access policy**: Administrator only.
+*/
+func (a *Client) TrustEdgeEndpoints(params *TrustEdgeEndpointsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TrustEdgeEndpointsNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewTrustEdgeEndpointsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "TrustEdgeEndpoints",
+		Method:             "POST",
+		PathPattern:        "/endpoints/edge/trust",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &TrustEdgeEndpointsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*TrustEdgeEndpointsNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for TrustEdgeEndpoints: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

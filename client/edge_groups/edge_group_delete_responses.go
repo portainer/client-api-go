@@ -26,6 +26,12 @@ func (o *EdgeGroupDeleteReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return result, nil
+	case 409:
+		result := NewEdgeGroupDeleteConflict()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewEdgeGroupDeleteInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -87,14 +93,70 @@ func (o *EdgeGroupDeleteNoContent) Code() int {
 }
 
 func (o *EdgeGroupDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteNoContent", 204)
 }
 
 func (o *EdgeGroupDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteNoContent", 204)
 }
 
 func (o *EdgeGroupDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewEdgeGroupDeleteConflict creates a EdgeGroupDeleteConflict with default headers values
+func NewEdgeGroupDeleteConflict() *EdgeGroupDeleteConflict {
+	return &EdgeGroupDeleteConflict{}
+}
+
+/*
+EdgeGroupDeleteConflict describes a response with status code 409, with default header values.
+
+Edge group is in use by an Edge stack, Edge job or Edge config
+*/
+type EdgeGroupDeleteConflict struct {
+}
+
+// IsSuccess returns true when this edge group delete conflict response has a 2xx status code
+func (o *EdgeGroupDeleteConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge group delete conflict response has a 3xx status code
+func (o *EdgeGroupDeleteConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge group delete conflict response has a 4xx status code
+func (o *EdgeGroupDeleteConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge group delete conflict response has a 5xx status code
+func (o *EdgeGroupDeleteConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge group delete conflict response a status code equal to that given
+func (o *EdgeGroupDeleteConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the edge group delete conflict response
+func (o *EdgeGroupDeleteConflict) Code() int {
+	return 409
+}
+
+func (o *EdgeGroupDeleteConflict) Error() string {
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteConflict", 409)
+}
+
+func (o *EdgeGroupDeleteConflict) String() string {
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteConflict", 409)
+}
+
+func (o *EdgeGroupDeleteConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -107,7 +169,7 @@ func NewEdgeGroupDeleteInternalServerError() *EdgeGroupDeleteInternalServerError
 /*
 EdgeGroupDeleteInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+Server error
 */
 type EdgeGroupDeleteInternalServerError struct {
 }
@@ -143,11 +205,11 @@ func (o *EdgeGroupDeleteInternalServerError) Code() int {
 }
 
 func (o *EdgeGroupDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteInternalServerError", 500)
 }
 
 func (o *EdgeGroupDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteInternalServerError", 500)
 }
 
 func (o *EdgeGroupDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +261,11 @@ func (o *EdgeGroupDeleteServiceUnavailable) Code() int {
 }
 
 func (o *EdgeGroupDeleteServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteServiceUnavailable", 503)
 }
 
 func (o *EdgeGroupDeleteServiceUnavailable) String() string {
-	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_groups/{id}][%d] edgeGroupDeleteServiceUnavailable", 503)
 }
 
 func (o *EdgeGroupDeleteServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

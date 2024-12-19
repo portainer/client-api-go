@@ -6,6 +6,7 @@ package registries
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -31,6 +32,12 @@ func (o *RegistryCreateReader) ReadResponse(response runtime.ClientResponse, con
 		return result, nil
 	case 400:
 		result := NewRegistryCreateBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewRegistryCreateConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -91,11 +98,13 @@ func (o *RegistryCreateOK) Code() int {
 }
 
 func (o *RegistryCreateOK) Error() string {
-	return fmt.Sprintf("[POST /registries][%d] registryCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /registries][%d] registryCreateOK %s", 200, payload)
 }
 
 func (o *RegistryCreateOK) String() string {
-	return fmt.Sprintf("[POST /registries][%d] registryCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /registries][%d] registryCreateOK %s", 200, payload)
 }
 
 func (o *RegistryCreateOK) GetPayload() *models.PortainereeRegistry {
@@ -158,14 +167,70 @@ func (o *RegistryCreateBadRequest) Code() int {
 }
 
 func (o *RegistryCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /registries][%d] registryCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /registries][%d] registryCreateBadRequest", 400)
 }
 
 func (o *RegistryCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /registries][%d] registryCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /registries][%d] registryCreateBadRequest", 400)
 }
 
 func (o *RegistryCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewRegistryCreateConflict creates a RegistryCreateConflict with default headers values
+func NewRegistryCreateConflict() *RegistryCreateConflict {
+	return &RegistryCreateConflict{}
+}
+
+/*
+RegistryCreateConflict describes a response with status code 409, with default header values.
+
+Another registry with either the same name or same URL & credeintials already exists
+*/
+type RegistryCreateConflict struct {
+}
+
+// IsSuccess returns true when this registry create conflict response has a 2xx status code
+func (o *RegistryCreateConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this registry create conflict response has a 3xx status code
+func (o *RegistryCreateConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this registry create conflict response has a 4xx status code
+func (o *RegistryCreateConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this registry create conflict response has a 5xx status code
+func (o *RegistryCreateConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this registry create conflict response a status code equal to that given
+func (o *RegistryCreateConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the registry create conflict response
+func (o *RegistryCreateConflict) Code() int {
+	return 409
+}
+
+func (o *RegistryCreateConflict) Error() string {
+	return fmt.Sprintf("[POST /registries][%d] registryCreateConflict", 409)
+}
+
+func (o *RegistryCreateConflict) String() string {
+	return fmt.Sprintf("[POST /registries][%d] registryCreateConflict", 409)
+}
+
+func (o *RegistryCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -214,11 +279,11 @@ func (o *RegistryCreateInternalServerError) Code() int {
 }
 
 func (o *RegistryCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /registries][%d] registryCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /registries][%d] registryCreateInternalServerError", 500)
 }
 
 func (o *RegistryCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /registries][%d] registryCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /registries][%d] registryCreateInternalServerError", 500)
 }
 
 func (o *RegistryCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

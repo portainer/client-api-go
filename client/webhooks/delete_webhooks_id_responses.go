@@ -87,11 +87,11 @@ func (o *DeleteWebhooksIDAccepted) Code() int {
 }
 
 func (o *DeleteWebhooksIDAccepted) Error() string {
-	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdAccepted ", 202)
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdAccepted", 202)
 }
 
 func (o *DeleteWebhooksIDAccepted) String() string {
-	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdAccepted ", 202)
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdAccepted", 202)
 }
 
 func (o *DeleteWebhooksIDAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *DeleteWebhooksIDBadRequest) Code() int {
 }
 
 func (o *DeleteWebhooksIDBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdBadRequest", 400)
 }
 
 func (o *DeleteWebhooksIDBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdBadRequest", 400)
 }
 
 func (o *DeleteWebhooksIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *DeleteWebhooksIDInternalServerError) Code() int {
 }
 
 func (o *DeleteWebhooksIDInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdInternalServerError", 500)
 }
 
 func (o *DeleteWebhooksIDInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /webhooks/{id}][%d] deleteWebhooksIdInternalServerError", 500)
 }
 
 func (o *DeleteWebhooksIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

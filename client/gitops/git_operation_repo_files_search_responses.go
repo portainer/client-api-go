@@ -6,6 +6,7 @@ package gitops
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *GitOperationRepoFilesSearchOK) Code() int {
 }
 
 func (o *GitOperationRepoFilesSearchOK) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchOK %s", 200, payload)
 }
 
 func (o *GitOperationRepoFilesSearchOK) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchOK %s", 200, payload)
 }
 
 func (o *GitOperationRepoFilesSearchOK) GetPayload() []string {
@@ -154,11 +157,11 @@ func (o *GitOperationRepoFilesSearchBadRequest) Code() int {
 }
 
 func (o *GitOperationRepoFilesSearchBadRequest) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchBadRequest ", 400)
+	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchBadRequest", 400)
 }
 
 func (o *GitOperationRepoFilesSearchBadRequest) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchBadRequest ", 400)
+	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchBadRequest", 400)
 }
 
 func (o *GitOperationRepoFilesSearchBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -210,11 +213,11 @@ func (o *GitOperationRepoFilesSearchInternalServerError) Code() int {
 }
 
 func (o *GitOperationRepoFilesSearchInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchInternalServerError ", 500)
+	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchInternalServerError", 500)
 }
 
 func (o *GitOperationRepoFilesSearchInternalServerError) String() string {
-	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchInternalServerError ", 500)
+	return fmt.Sprintf("[POST /gitops/repo/files/search][%d] gitOperationRepoFilesSearchInternalServerError", 500)
 }
 
 func (o *GitOperationRepoFilesSearchInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

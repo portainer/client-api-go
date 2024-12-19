@@ -99,11 +99,11 @@ func (o *EdgeStackLogsCollectNoContent) Code() int {
 }
 
 func (o *EdgeStackLogsCollectNoContent) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectNoContent ", 204)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectNoContent", 204)
 }
 
 func (o *EdgeStackLogsCollectNoContent) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectNoContent ", 204)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectNoContent", 204)
 }
 
 func (o *EdgeStackLogsCollectNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *EdgeStackLogsCollectBadRequest) Code() int {
 }
 
 func (o *EdgeStackLogsCollectBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectBadRequest", 400)
 }
 
 func (o *EdgeStackLogsCollectBadRequest) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectBadRequest", 400)
 }
 
 func (o *EdgeStackLogsCollectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *EdgeStackLogsCollectNotFound) Code() int {
 }
 
 func (o *EdgeStackLogsCollectNotFound) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectNotFound ", 404)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectNotFound", 404)
 }
 
 func (o *EdgeStackLogsCollectNotFound) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectNotFound ", 404)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectNotFound", 404)
 }
 
 func (o *EdgeStackLogsCollectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *EdgeStackLogsCollectInternalServerError) Code() int {
 }
 
 func (o *EdgeStackLogsCollectInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectInternalServerError", 500)
 }
 
 func (o *EdgeStackLogsCollectInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectInternalServerError", 500)
 }
 
 func (o *EdgeStackLogsCollectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *EdgeStackLogsCollectServiceUnavailable) Code() int {
 }
 
 func (o *EdgeStackLogsCollectServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectServiceUnavailable ", 503)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectServiceUnavailable", 503)
 }
 
 func (o *EdgeStackLogsCollectServiceUnavailable) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectServiceUnavailable ", 503)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/logs/{endpoint_id}][%d] edgeStackLogsCollectServiceUnavailable", 503)
 }
 
 func (o *EdgeStackLogsCollectServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

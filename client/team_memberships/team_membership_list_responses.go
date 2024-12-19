@@ -6,6 +6,7 @@ package team_memberships
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -63,7 +64,7 @@ TeamMembershipListOK describes a response with status code 200, with default hea
 Success
 */
 type TeamMembershipListOK struct {
-	Payload []*models.PortainereeTeamMembership
+	Payload []*models.PortainerTeamMembership
 }
 
 // IsSuccess returns true when this team membership list o k response has a 2xx status code
@@ -97,14 +98,16 @@ func (o *TeamMembershipListOK) Code() int {
 }
 
 func (o *TeamMembershipListOK) Error() string {
-	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListOK %s", 200, payload)
 }
 
 func (o *TeamMembershipListOK) String() string {
-	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListOK %s", 200, payload)
 }
 
-func (o *TeamMembershipListOK) GetPayload() []*models.PortainereeTeamMembership {
+func (o *TeamMembershipListOK) GetPayload() []*models.PortainerTeamMembership {
 	return o.Payload
 }
 
@@ -162,11 +165,11 @@ func (o *TeamMembershipListBadRequest) Code() int {
 }
 
 func (o *TeamMembershipListBadRequest) Error() string {
-	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListBadRequest ", 400)
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListBadRequest", 400)
 }
 
 func (o *TeamMembershipListBadRequest) String() string {
-	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListBadRequest ", 400)
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListBadRequest", 400)
 }
 
 func (o *TeamMembershipListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -218,11 +221,11 @@ func (o *TeamMembershipListForbidden) Code() int {
 }
 
 func (o *TeamMembershipListForbidden) Error() string {
-	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListForbidden ", 403)
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListForbidden", 403)
 }
 
 func (o *TeamMembershipListForbidden) String() string {
-	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListForbidden ", 403)
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListForbidden", 403)
 }
 
 func (o *TeamMembershipListForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -274,11 +277,11 @@ func (o *TeamMembershipListInternalServerError) Code() int {
 }
 
 func (o *TeamMembershipListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListInternalServerError", 500)
 }
 
 func (o *TeamMembershipListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /team_memberships][%d] teamMembershipListInternalServerError", 500)
 }
 
 func (o *TeamMembershipListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

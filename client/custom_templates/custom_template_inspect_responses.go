@@ -6,6 +6,7 @@ package custom_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *CustomTemplateInspectOK) Code() int {
 }
 
 func (o *CustomTemplateInspectOK) Error() string {
-	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectOK %s", 200, payload)
 }
 
 func (o *CustomTemplateInspectOK) String() string {
-	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectOK %s", 200, payload)
 }
 
 func (o *CustomTemplateInspectOK) GetPayload() *models.PortainereeCustomTemplate {
@@ -164,11 +167,11 @@ func (o *CustomTemplateInspectBadRequest) Code() int {
 }
 
 func (o *CustomTemplateInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectBadRequest", 400)
 }
 
 func (o *CustomTemplateInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectBadRequest", 400)
 }
 
 func (o *CustomTemplateInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *CustomTemplateInspectNotFound) Code() int {
 }
 
 func (o *CustomTemplateInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectNotFound", 404)
 }
 
 func (o *CustomTemplateInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectNotFound", 404)
 }
 
 func (o *CustomTemplateInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *CustomTemplateInspectInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectInternalServerError", 500)
 }
 
 func (o *CustomTemplateInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /custom_templates/{id}][%d] customTemplateInspectInternalServerError", 500)
 }
 
 func (o *CustomTemplateInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

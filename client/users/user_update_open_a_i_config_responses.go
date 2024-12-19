@@ -99,11 +99,11 @@ func (o *UserUpdateOpenAIConfigNoContent) Code() int {
 }
 
 func (o *UserUpdateOpenAIConfigNoContent) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNoContent ", 204)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNoContent", 204)
 }
 
 func (o *UserUpdateOpenAIConfigNoContent) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNoContent ", 204)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNoContent", 204)
 }
 
 func (o *UserUpdateOpenAIConfigNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *UserUpdateOpenAIConfigBadRequest) Code() int {
 }
 
 func (o *UserUpdateOpenAIConfigBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigBadRequest ", 400)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigBadRequest", 400)
 }
 
 func (o *UserUpdateOpenAIConfigBadRequest) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigBadRequest ", 400)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigBadRequest", 400)
 }
 
 func (o *UserUpdateOpenAIConfigBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *UserUpdateOpenAIConfigForbidden) Code() int {
 }
 
 func (o *UserUpdateOpenAIConfigForbidden) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigForbidden ", 403)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigForbidden", 403)
 }
 
 func (o *UserUpdateOpenAIConfigForbidden) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigForbidden ", 403)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigForbidden", 403)
 }
 
 func (o *UserUpdateOpenAIConfigForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *UserUpdateOpenAIConfigNotFound) Code() int {
 }
 
 func (o *UserUpdateOpenAIConfigNotFound) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNotFound ", 404)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNotFound", 404)
 }
 
 func (o *UserUpdateOpenAIConfigNotFound) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNotFound ", 404)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigNotFound", 404)
 }
 
 func (o *UserUpdateOpenAIConfigNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *UserUpdateOpenAIConfigInternalServerError) Code() int {
 }
 
 func (o *UserUpdateOpenAIConfigInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigInternalServerError", 500)
 }
 
 func (o *UserUpdateOpenAIConfigInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /users/{id}/openai][%d] userUpdateOpenAIConfigInternalServerError", 500)
 }
 
 func (o *UserUpdateOpenAIConfigInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

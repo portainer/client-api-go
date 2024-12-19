@@ -66,7 +66,7 @@ type HelmUserRepositoryCreateParams struct {
 
 	/* ID.
 
-	   Environment(Endpoint) identifier
+	   User identifier
 	*/
 	ID int64
 
@@ -74,7 +74,7 @@ type HelmUserRepositoryCreateParams struct {
 
 	   Helm Repository
 	*/
-	Payload *models.HelmAddHelmRepoURLPayload
+	Payload *models.UsersAddHelmRepoURLPayload
 
 	timeout    time.Duration
 	Context    context.Context
@@ -141,13 +141,13 @@ func (o *HelmUserRepositoryCreateParams) SetID(id int64) {
 }
 
 // WithPayload adds the payload to the helm user repository create params
-func (o *HelmUserRepositoryCreateParams) WithPayload(payload *models.HelmAddHelmRepoURLPayload) *HelmUserRepositoryCreateParams {
+func (o *HelmUserRepositoryCreateParams) WithPayload(payload *models.UsersAddHelmRepoURLPayload) *HelmUserRepositoryCreateParams {
 	o.SetPayload(payload)
 	return o
 }
 
 // SetPayload adds the payload to the helm user repository create params
-func (o *HelmUserRepositoryCreateParams) SetPayload(payload *models.HelmAddHelmRepoURLPayload) {
+func (o *HelmUserRepositoryCreateParams) SetPayload(payload *models.UsersAddHelmRepoURLPayload) {
 	o.Payload = payload
 }
 

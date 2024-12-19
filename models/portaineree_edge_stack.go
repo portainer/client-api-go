@@ -22,9 +22,9 @@ import (
 type PortainereeEdgeStack struct {
 
 	// The GitOps update settings of a git stack
-	AutoUpdate *PortainereeAutoUpdateSettings `json:"AutoUpdate,omitempty"`
+	AutoUpdate *PortainerAutoUpdateSettings `json:"AutoUpdate,omitempty"`
 
-	// creation date
+	// StatusArray    map[EndpointID][]EdgeStackStatus `json:"StatusArray"`
 	CreationDate int64 `json:"CreationDate,omitempty"`
 
 	// deployment type
@@ -58,9 +58,6 @@ type PortainereeEdgeStack struct {
 	// project path
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
-	// Deprecated
-	Prune bool `json:"Prune,omitempty"`
-
 	// Re-Pull Image
 	RePullImage bool `json:"RePullImage,omitempty"`
 
@@ -77,6 +74,9 @@ type PortainereeEdgeStack struct {
 	// version
 	Version int64 `json:"Version,omitempty"`
 
+	// Options to control the Deployer behaviour
+	DeployerOptions *PortainereeEdgeStackDeployerOptions `json:"deployerOptions,omitempty"`
+
 	// EdgeUpdateID represents the parent update ID, will be zero if this stack is not part of an update
 	EdgeUpdateID int64 `json:"edgeUpdateID,omitempty"`
 
@@ -90,9 +90,14 @@ type PortainereeEdgeStack struct {
 	// The git configuration of a git stack
 	GitConfig *GittypesRepoConfig `json:"gitConfig,omitempty"`
 
+	// Per device configs group match type
+	// Example: file
+	// Enum: ["file"," dir"]
+	PerDeviceConfigsGroupMatchType string `json:"perDeviceConfigsGroupMatchType,omitempty"`
+
 	// Per device configs match type
 	// Example: file
-	// Enum: [file  dir]
+	// Enum: ["file"," dir"]
 	PerDeviceConfigsMatchType string `json:"perDeviceConfigsMatchType,omitempty"`
 
 	// Per device configs path
@@ -102,6 +107,9 @@ type PortainereeEdgeStack struct {
 	// Retry deploy
 	// Example: false
 	RetryDeploy bool `json:"retryDeploy,omitempty"`
+
+	// RetryPeriod specifies the duration, in seconds, for which the agent should continue attempting to deploy the stack after a failure
+	RetryPeriod int64 `json:"retryPeriod,omitempty"`
 
 	// Schedule represents the schedule of the Edge stack (optional, format - 'YYYY-MM-DD HH:mm:ss')
 	// Example: 2020-11-13 14:53:00
@@ -142,11 +150,19 @@ func (m *PortainereeEdgeStack) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDeployerOptions(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEnvVars(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateGitConfig(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePerDeviceConfigsGroupMatchType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -228,6 +244,25 @@ func (m *PortainereeEdgeStack) validateStatus(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *PortainereeEdgeStack) validateDeployerOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeployerOptions) { // not required
+		return nil
+	}
+
+	if m.DeployerOptions != nil {
+		if err := m.DeployerOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deployerOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deployerOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainereeEdgeStack) validateEnvVars(formats strfmt.Registry) error {
 	if swag.IsZero(m.EnvVars) { // not required
 		return nil
@@ -268,6 +303,48 @@ func (m *PortainereeEdgeStack) validateGitConfig(formats strfmt.Registry) error 
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+var portainereeEdgeStackTypePerDeviceConfigsGroupMatchTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["file"," dir"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		portainereeEdgeStackTypePerDeviceConfigsGroupMatchTypePropEnum = append(portainereeEdgeStackTypePerDeviceConfigsGroupMatchTypePropEnum, v)
+	}
+}
+
+const (
+
+	// PortainereeEdgeStackPerDeviceConfigsGroupMatchTypeFile captures enum value "file"
+	PortainereeEdgeStackPerDeviceConfigsGroupMatchTypeFile string = "file"
+
+	// PortainereeEdgeStackPerDeviceConfigsGroupMatchTypeDir captures enum value " dir"
+	PortainereeEdgeStackPerDeviceConfigsGroupMatchTypeDir string = " dir"
+)
+
+// prop value enum
+func (m *PortainereeEdgeStack) validatePerDeviceConfigsGroupMatchTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, portainereeEdgeStackTypePerDeviceConfigsGroupMatchTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *PortainereeEdgeStack) validatePerDeviceConfigsGroupMatchType(formats strfmt.Registry) error {
+	if swag.IsZero(m.PerDeviceConfigsGroupMatchType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validatePerDeviceConfigsGroupMatchTypeEnum("perDeviceConfigsGroupMatchType", "body", m.PerDeviceConfigsGroupMatchType); err != nil {
+		return err
 	}
 
 	return nil
@@ -350,6 +427,10 @@ func (m *PortainereeEdgeStack) ContextValidate(ctx context.Context, formats strf
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDeployerOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEnvVars(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -420,6 +501,27 @@ func (m *PortainereeEdgeStack) contextValidateStatus(ctx context.Context, format
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *PortainereeEdgeStack) contextValidateDeployerOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DeployerOptions != nil {
+
+		if swag.IsZero(m.DeployerOptions) { // not required
+			return nil
+		}
+
+		if err := m.DeployerOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deployerOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deployerOptions")
+			}
+			return err
+		}
 	}
 
 	return nil

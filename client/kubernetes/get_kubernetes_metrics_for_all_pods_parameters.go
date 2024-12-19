@@ -64,7 +64,7 @@ type GetKubernetesMetricsForAllPodsParams struct {
 
 	/* ID.
 
-	   Environment (Endpoint) identifier
+	   Environment identifier
 	*/
 	ID int64
 

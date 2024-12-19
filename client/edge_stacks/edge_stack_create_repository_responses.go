@@ -6,6 +6,7 @@ package edge_stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -31,6 +32,12 @@ func (o *EdgeStackCreateRepositoryReader) ReadResponse(response runtime.ClientRe
 		return result, nil
 	case 400:
 		result := NewEdgeStackCreateRepositoryBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewEdgeStackCreateRepositoryConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -97,11 +104,13 @@ func (o *EdgeStackCreateRepositoryOK) Code() int {
 }
 
 func (o *EdgeStackCreateRepositoryOK) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryOK %s", 200, payload)
 }
 
 func (o *EdgeStackCreateRepositoryOK) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryOK %s", 200, payload)
 }
 
 func (o *EdgeStackCreateRepositoryOK) GetPayload() *models.PortainereeEdgeStack {
@@ -164,14 +173,70 @@ func (o *EdgeStackCreateRepositoryBadRequest) Code() int {
 }
 
 func (o *EdgeStackCreateRepositoryBadRequest) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryBadRequest", 400)
 }
 
 func (o *EdgeStackCreateRepositoryBadRequest) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryBadRequest", 400)
 }
 
 func (o *EdgeStackCreateRepositoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewEdgeStackCreateRepositoryConflict creates a EdgeStackCreateRepositoryConflict with default headers values
+func NewEdgeStackCreateRepositoryConflict() *EdgeStackCreateRepositoryConflict {
+	return &EdgeStackCreateRepositoryConflict{}
+}
+
+/*
+EdgeStackCreateRepositoryConflict describes a response with status code 409, with default header values.
+
+Webhook ID already exists
+*/
+type EdgeStackCreateRepositoryConflict struct {
+}
+
+// IsSuccess returns true when this edge stack create repository conflict response has a 2xx status code
+func (o *EdgeStackCreateRepositoryConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this edge stack create repository conflict response has a 3xx status code
+func (o *EdgeStackCreateRepositoryConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this edge stack create repository conflict response has a 4xx status code
+func (o *EdgeStackCreateRepositoryConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this edge stack create repository conflict response has a 5xx status code
+func (o *EdgeStackCreateRepositoryConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this edge stack create repository conflict response a status code equal to that given
+func (o *EdgeStackCreateRepositoryConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the edge stack create repository conflict response
+func (o *EdgeStackCreateRepositoryConflict) Code() int {
+	return 409
+}
+
+func (o *EdgeStackCreateRepositoryConflict) Error() string {
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryConflict", 409)
+}
+
+func (o *EdgeStackCreateRepositoryConflict) String() string {
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryConflict", 409)
+}
+
+func (o *EdgeStackCreateRepositoryConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -220,11 +285,11 @@ func (o *EdgeStackCreateRepositoryInternalServerError) Code() int {
 }
 
 func (o *EdgeStackCreateRepositoryInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryInternalServerError", 500)
 }
 
 func (o *EdgeStackCreateRepositoryInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryInternalServerError", 500)
 }
 
 func (o *EdgeStackCreateRepositoryInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +341,11 @@ func (o *EdgeStackCreateRepositoryServiceUnavailable) Code() int {
 }
 
 func (o *EdgeStackCreateRepositoryServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryServiceUnavailable", 503)
 }
 
 func (o *EdgeStackCreateRepositoryServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_stacks/create/repository][%d] edgeStackCreateRepositoryServiceUnavailable", 503)
 }
 
 func (o *EdgeStackCreateRepositoryServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

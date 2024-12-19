@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *StackAssociateOK) Code() int {
 }
 
 func (o *StackAssociateOK) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateOK %s", 200, payload)
 }
 
 func (o *StackAssociateOK) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateOK %s", 200, payload)
 }
 
 func (o *StackAssociateOK) GetPayload() *models.PortainereeStack {
@@ -170,11 +173,11 @@ func (o *StackAssociateBadRequest) Code() int {
 }
 
 func (o *StackAssociateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateBadRequest", 400)
 }
 
 func (o *StackAssociateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateBadRequest", 400)
 }
 
 func (o *StackAssociateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *StackAssociateForbidden) Code() int {
 }
 
 func (o *StackAssociateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateForbidden ", 403)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateForbidden", 403)
 }
 
 func (o *StackAssociateForbidden) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateForbidden ", 403)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateForbidden", 403)
 }
 
 func (o *StackAssociateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *StackAssociateNotFound) Code() int {
 }
 
 func (o *StackAssociateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateNotFound ", 404)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateNotFound", 404)
 }
 
 func (o *StackAssociateNotFound) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateNotFound ", 404)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateNotFound", 404)
 }
 
 func (o *StackAssociateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *StackAssociateInternalServerError) Code() int {
 }
 
 func (o *StackAssociateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateInternalServerError", 500)
 }
 
 func (o *StackAssociateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /stacks/{id}/associate][%d] stackAssociateInternalServerError", 500)
 }
 
 func (o *StackAssociateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

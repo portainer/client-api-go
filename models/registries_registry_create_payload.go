@@ -30,13 +30,13 @@ type RegistriesRegistryCreatePayload struct {
 	BaseURL string `json:"baseURL,omitempty"`
 
 	// ECR specific details, required when type = 7
-	Ecr *PortainereeEcrData `json:"ecr,omitempty"`
+	Ecr *PortainerEcrData `json:"ecr,omitempty"`
 
 	// Github specific details, required when type = 8
 	Github *PortainereeGithubRegistryData `json:"github,omitempty"`
 
 	// Gitlab specific details, required when type = 4
-	Gitlab *PortainereeGitlabRegistryData `json:"gitlab,omitempty"`
+	Gitlab *PortainerGitlabRegistryData `json:"gitlab,omitempty"`
 
 	// Name that will be used to identify this registry
 	// Example: my-registry
@@ -48,7 +48,7 @@ type RegistriesRegistryCreatePayload struct {
 	Password string `json:"password,omitempty"`
 
 	// Quay specific details, required when type = 1
-	Quay *PortainereeQuayRegistryData `json:"quay,omitempty"`
+	Quay *PortainerQuayRegistryData `json:"quay,omitempty"`
 
 	// Registry Type. Valid values are:
 	// 	1 (Quay.io),
@@ -61,7 +61,7 @@ type RegistriesRegistryCreatePayload struct {
 	// 	8 (Github registry)
 	// Example: 1
 	// Required: true
-	// Enum: [1 2 3 4 5 6 7 8]
+	// Enum: [1,2,3,4,5,6,7,8]
 	Type *int64 `json:"type"`
 
 	// URL or IP address of the Docker registry

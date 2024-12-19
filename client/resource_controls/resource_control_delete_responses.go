@@ -93,11 +93,11 @@ func (o *ResourceControlDeleteNoContent) Code() int {
 }
 
 func (o *ResourceControlDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNoContent", 204)
 }
 
 func (o *ResourceControlDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNoContent", 204)
 }
 
 func (o *ResourceControlDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *ResourceControlDeleteBadRequest) Code() int {
 }
 
 func (o *ResourceControlDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteBadRequest", 400)
 }
 
 func (o *ResourceControlDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteBadRequest", 400)
 }
 
 func (o *ResourceControlDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *ResourceControlDeleteNotFound) Code() int {
 }
 
 func (o *ResourceControlDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNotFound", 404)
 }
 
 func (o *ResourceControlDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteNotFound", 404)
 }
 
 func (o *ResourceControlDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *ResourceControlDeleteInternalServerError) Code() int {
 }
 
 func (o *ResourceControlDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteInternalServerError", 500)
 }
 
 func (o *ResourceControlDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /resource_controls/{id}][%d] resourceControlDeleteInternalServerError", 500)
 }
 
 func (o *ResourceControlDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

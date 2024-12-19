@@ -93,11 +93,11 @@ func (o *StacksWebhookInvokeOK) Code() int {
 }
 
 func (o *StacksWebhookInvokeOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeOK ", 200)
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeOK", 200)
 }
 
 func (o *StacksWebhookInvokeOK) String() string {
-	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeOK ", 200)
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeOK", 200)
 }
 
 func (o *StacksWebhookInvokeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *StacksWebhookInvokeBadRequest) Code() int {
 }
 
 func (o *StacksWebhookInvokeBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeBadRequest", 400)
 }
 
 func (o *StacksWebhookInvokeBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeBadRequest", 400)
 }
 
 func (o *StacksWebhookInvokeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -169,7 +169,7 @@ func NewStacksWebhookInvokeConflict() *StacksWebhookInvokeConflict {
 /*
 StacksWebhookInvokeConflict describes a response with status code 409, with default header values.
 
-Conflict
+Autoupdate for the stack isn't available
 */
 type StacksWebhookInvokeConflict struct {
 }
@@ -205,11 +205,11 @@ func (o *StacksWebhookInvokeConflict) Code() int {
 }
 
 func (o *StacksWebhookInvokeConflict) Error() string {
-	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeConflict ", 409)
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeConflict", 409)
 }
 
 func (o *StacksWebhookInvokeConflict) String() string {
-	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeConflict ", 409)
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeConflict", 409)
 }
 
 func (o *StacksWebhookInvokeConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *StacksWebhookInvokeInternalServerError) Code() int {
 }
 
 func (o *StacksWebhookInvokeInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeInternalServerError", 500)
 }
 
 func (o *StacksWebhookInvokeInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/webhooks/{webhookID}][%d] stacksWebhookInvokeInternalServerError", 500)
 }
 
 func (o *StacksWebhookInvokeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewEdgeUpdateScheduleListParams creates a new EdgeUpdateScheduleListParams object,
@@ -60,6 +61,13 @@ EdgeUpdateScheduleListParams contains all the parameters to send to the API endp
 	Typically these are written to a http.Request.
 */
 type EdgeUpdateScheduleListParams struct {
+
+	/* IncludeEdgeStacks.
+
+	   Include Edge Stacks in the response
+	*/
+	IncludeEdgeStacks *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +121,17 @@ func (o *EdgeUpdateScheduleListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithIncludeEdgeStacks adds the includeEdgeStacks to the edge update schedule list params
+func (o *EdgeUpdateScheduleListParams) WithIncludeEdgeStacks(includeEdgeStacks *bool) *EdgeUpdateScheduleListParams {
+	o.SetIncludeEdgeStacks(includeEdgeStacks)
+	return o
+}
+
+// SetIncludeEdgeStacks adds the includeEdgeStacks to the edge update schedule list params
+func (o *EdgeUpdateScheduleListParams) SetIncludeEdgeStacks(includeEdgeStacks *bool) {
+	o.IncludeEdgeStacks = includeEdgeStacks
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *EdgeUpdateScheduleListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +139,23 @@ func (o *EdgeUpdateScheduleListParams) WriteToRequest(r runtime.ClientRequest, r
 		return err
 	}
 	var res []error
+
+	if o.IncludeEdgeStacks != nil {
+
+		// query param includeEdgeStacks
+		var qrIncludeEdgeStacks bool
+
+		if o.IncludeEdgeStacks != nil {
+			qrIncludeEdgeStacks = *o.IncludeEdgeStacks
+		}
+		qIncludeEdgeStacks := swag.FormatBool(qrIncludeEdgeStacks)
+		if qIncludeEdgeStacks != "" {
+
+			if err := r.SetQueryParam("includeEdgeStacks", qIncludeEdgeStacks); err != nil {
+				return err
+			}
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

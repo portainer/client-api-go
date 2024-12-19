@@ -6,6 +6,7 @@ package teams
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -63,7 +64,7 @@ TeamCreateOK describes a response with status code 200, with default header valu
 Success
 */
 type TeamCreateOK struct {
-	Payload *models.PortainereeTeam
+	Payload *models.PortainerTeam
 }
 
 // IsSuccess returns true when this team create o k response has a 2xx status code
@@ -97,20 +98,22 @@ func (o *TeamCreateOK) Code() int {
 }
 
 func (o *TeamCreateOK) Error() string {
-	return fmt.Sprintf("[POST /teams][%d] teamCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateOK %s", 200, payload)
 }
 
 func (o *TeamCreateOK) String() string {
-	return fmt.Sprintf("[POST /teams][%d] teamCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateOK %s", 200, payload)
 }
 
-func (o *TeamCreateOK) GetPayload() *models.PortainereeTeam {
+func (o *TeamCreateOK) GetPayload() *models.PortainerTeam {
 	return o.Payload
 }
 
 func (o *TeamCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTeam)
+	o.Payload = new(models.PortainerTeam)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -164,11 +167,11 @@ func (o *TeamCreateBadRequest) Code() int {
 }
 
 func (o *TeamCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /teams][%d] teamCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateBadRequest", 400)
 }
 
 func (o *TeamCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /teams][%d] teamCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateBadRequest", 400)
 }
 
 func (o *TeamCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -184,7 +187,7 @@ func NewTeamCreateConflict() *TeamCreateConflict {
 /*
 TeamCreateConflict describes a response with status code 409, with default header values.
 
-Team already exists
+A team with the same name already exists
 */
 type TeamCreateConflict struct {
 }
@@ -220,11 +223,11 @@ func (o *TeamCreateConflict) Code() int {
 }
 
 func (o *TeamCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /teams][%d] teamCreateConflict ", 409)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateConflict", 409)
 }
 
 func (o *TeamCreateConflict) String() string {
-	return fmt.Sprintf("[POST /teams][%d] teamCreateConflict ", 409)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateConflict", 409)
 }
 
 func (o *TeamCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *TeamCreateInternalServerError) Code() int {
 }
 
 func (o *TeamCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /teams][%d] teamCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateInternalServerError", 500)
 }
 
 func (o *TeamCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /teams][%d] teamCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /teams][%d] teamCreateInternalServerError", 500)
 }
 
 func (o *TeamCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

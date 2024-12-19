@@ -19,6 +19,9 @@ import (
 // swagger:model edge.StackPayload
 type EdgeStackPayload struct {
 
+	// deployer options payload
+	DeployerOptionsPayload *EdgeDeployerOptionsPayload `json:"deployerOptionsPayload,omitempty"`
+
 	// Content of stack folder
 	DirEntries []*FilesystemDirEntry `json:"dirEntries"`
 
@@ -45,21 +48,29 @@ type EdgeStackPayload struct {
 	// Namespace to use for kubernetes stack. Keep empty to use the manifest namespace.
 	Namespace string `json:"namespace,omitempty"`
 
-	// PrePullImage is a flag indicating if the agent should pull the image before deploying the stack.
+	// PrePullImage is a flag indicating if the agent must pull the image before deploying the stack.
 	// Used only for EE
 	PrePullImage bool `json:"prePullImage,omitempty"`
 
-	// RePullImage is a flag indicating if the agent should pull the image if it is already present on the node.
+	// RePullImage is a flag indicating if the agent must pull the image if it is already present on the node.
 	// Used only for EE
 	RePullImage bool `json:"rePullImage,omitempty"`
+
+	// Used only for EE async edge agent
+	// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+	ReadyRePullImage bool `json:"readyRePullImage,omitempty"`
 
 	// RegistryCredentials holds the credentials for a Docker registry.
 	// Used only for EE
 	RegistryCredentials []*EdgeRegistryCredentials `json:"registryCredentials"`
 
-	// RetryDeploy is a flag indicating if the agent should retry to deploy the stack if it fails.
+	// RetryDeploy is a flag indicating if the agent must retry to deploy the stack if it fails.
 	// Used only for EE
 	RetryDeploy bool `json:"retryDeploy,omitempty"`
+
+	// RetryPeriod specifies the duration, in seconds, for which the agent should continue attempting to deploy the stack after a failure
+	// Used only for EE
+	RetryPeriod int64 `json:"retryPeriod,omitempty"`
 
 	// RollbackTo specifies the stack file version to rollback to (only support to rollback to the last version currently)
 	RollbackTo int64 `json:"rollbackTo,omitempty"`
@@ -78,6 +89,10 @@ type EdgeStackPayload struct {
 func (m *EdgeStackPayload) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDeployerOptionsPayload(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateDirEntries(formats); err != nil {
 		res = append(res, err)
 	}
@@ -93,6 +108,25 @@ func (m *EdgeStackPayload) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EdgeStackPayload) validateDeployerOptionsPayload(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeployerOptionsPayload) { // not required
+		return nil
+	}
+
+	if m.DeployerOptionsPayload != nil {
+		if err := m.DeployerOptionsPayload.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deployerOptionsPayload")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deployerOptionsPayload")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -178,6 +212,10 @@ func (m *EdgeStackPayload) validateRegistryCredentials(formats strfmt.Registry) 
 func (m *EdgeStackPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateDeployerOptionsPayload(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateDirEntries(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -193,6 +231,27 @@ func (m *EdgeStackPayload) ContextValidate(ctx context.Context, formats strfmt.R
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *EdgeStackPayload) contextValidateDeployerOptionsPayload(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DeployerOptionsPayload != nil {
+
+		if swag.IsZero(m.DeployerOptionsPayload) { // not required
+			return nil
+		}
+
+		if err := m.DeployerOptionsPayload.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deployerOptionsPayload")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deployerOptionsPayload")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

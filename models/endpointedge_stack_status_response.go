@@ -21,6 +21,10 @@ type EndpointedgeStackStatusResponse struct {
 	// Example: 1
 	ID int64 `json:"id,omitempty"`
 
+	// ReadyRePullImage indicates whether the stack is ready to re-pull image
+	// Example: true
+	ReadyRePullImage bool `json:"readyRePullImage,omitempty"`
+
 	// Version of this stack
 	// Example: 3
 	Version int64 `json:"version,omitempty"`

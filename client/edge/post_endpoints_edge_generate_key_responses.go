@@ -87,11 +87,11 @@ func (o *PostEndpointsEdgeGenerateKeyOK) Code() int {
 }
 
 func (o *PostEndpointsEdgeGenerateKeyOK) Error() string {
-	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyOK ", 200)
+	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyOK", 200)
 }
 
 func (o *PostEndpointsEdgeGenerateKeyOK) String() string {
-	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyOK ", 200)
+	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyOK", 200)
 }
 
 func (o *PostEndpointsEdgeGenerateKeyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *PostEndpointsEdgeGenerateKeyBadRequest) Code() int {
 }
 
 func (o *PostEndpointsEdgeGenerateKeyBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyBadRequest", 400)
 }
 
 func (o *PostEndpointsEdgeGenerateKeyBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyBadRequest", 400)
 }
 
 func (o *PostEndpointsEdgeGenerateKeyBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *PostEndpointsEdgeGenerateKeyInternalServerError) Code() int {
 }
 
 func (o *PostEndpointsEdgeGenerateKeyInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyInternalServerError", 500)
 }
 
 func (o *PostEndpointsEdgeGenerateKeyInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/edge/generate-key][%d] postEndpointsEdgeGenerateKeyInternalServerError", 500)
 }
 
 func (o *PostEndpointsEdgeGenerateKeyInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

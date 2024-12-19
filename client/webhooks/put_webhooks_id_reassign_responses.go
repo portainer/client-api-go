@@ -6,6 +6,7 @@ package webhooks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -69,7 +70,7 @@ PutWebhooksIDReassignOK describes a response with status code 200, with default 
 OK
 */
 type PutWebhooksIDReassignOK struct {
-	Payload *models.PortainereeWebhook
+	Payload *models.PortainerWebhook
 }
 
 // IsSuccess returns true when this put webhooks Id reassign o k response has a 2xx status code
@@ -103,20 +104,22 @@ func (o *PutWebhooksIDReassignOK) Code() int {
 }
 
 func (o *PutWebhooksIDReassignOK) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignOK %s", 200, payload)
 }
 
 func (o *PutWebhooksIDReassignOK) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignOK %s", 200, payload)
 }
 
-func (o *PutWebhooksIDReassignOK) GetPayload() *models.PortainereeWebhook {
+func (o *PutWebhooksIDReassignOK) GetPayload() *models.PortainerWebhook {
 	return o.Payload
 }
 
 func (o *PutWebhooksIDReassignOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeWebhook)
+	o.Payload = new(models.PortainerWebhook)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -170,11 +173,11 @@ func (o *PutWebhooksIDReassignNoContent) Code() int {
 }
 
 func (o *PutWebhooksIDReassignNoContent) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNoContent ", 204)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNoContent", 204)
 }
 
 func (o *PutWebhooksIDReassignNoContent) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNoContent ", 204)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNoContent", 204)
 }
 
 func (o *PutWebhooksIDReassignNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *PutWebhooksIDReassignBadRequest) Code() int {
 }
 
 func (o *PutWebhooksIDReassignBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignBadRequest ", 400)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignBadRequest", 400)
 }
 
 func (o *PutWebhooksIDReassignBadRequest) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignBadRequest ", 400)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignBadRequest", 400)
 }
 
 func (o *PutWebhooksIDReassignBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *PutWebhooksIDReassignNotFound) Code() int {
 }
 
 func (o *PutWebhooksIDReassignNotFound) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNotFound ", 404)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNotFound", 404)
 }
 
 func (o *PutWebhooksIDReassignNotFound) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNotFound ", 404)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignNotFound", 404)
 }
 
 func (o *PutWebhooksIDReassignNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *PutWebhooksIDReassignInternalServerError) Code() int {
 }
 
 func (o *PutWebhooksIDReassignInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignInternalServerError", 500)
 }
 
 func (o *PutWebhooksIDReassignInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /webhooks/{id}/reassign][%d] putWebhooksIdReassignInternalServerError", 500)
 }
 
 func (o *PutWebhooksIDReassignInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

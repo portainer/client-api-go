@@ -93,11 +93,11 @@ func (o *EdgeStackDeleteNoContent) Code() int {
 }
 
 func (o *EdgeStackDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteNoContent", 204)
 }
 
 func (o *EdgeStackDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteNoContent", 204)
 }
 
 func (o *EdgeStackDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EdgeStackDeleteBadRequest) Code() int {
 }
 
 func (o *EdgeStackDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteBadRequest", 400)
 }
 
 func (o *EdgeStackDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteBadRequest", 400)
 }
 
 func (o *EdgeStackDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EdgeStackDeleteInternalServerError) Code() int {
 }
 
 func (o *EdgeStackDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteInternalServerError", 500)
 }
 
 func (o *EdgeStackDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteInternalServerError", 500)
 }
 
 func (o *EdgeStackDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EdgeStackDeleteServiceUnavailable) Code() int {
 }
 
 func (o *EdgeStackDeleteServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteServiceUnavailable", 503)
 }
 
 func (o *EdgeStackDeleteServiceUnavailable) String() string {
-	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_stacks/{id}][%d] edgeStackDeleteServiceUnavailable", 503)
 }
 
 func (o *EdgeStackDeleteServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

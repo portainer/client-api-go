@@ -23,7 +23,7 @@ type PortainereeStack struct {
 	AdditionalFiles []string `json:"AdditionalFiles"`
 
 	// The GitOps update settings of a git stack
-	AutoUpdate *PortainereeAutoUpdateSettings `json:"AutoUpdate,omitempty"`
+	AutoUpdate *PortainerAutoUpdateSettings `json:"AutoUpdate,omitempty"`
 
 	// Environment(Endpoint) identifier. Reference the environment(endpoint) that will be used for deployment
 	// Example: 1
@@ -34,7 +34,7 @@ type PortainereeStack struct {
 	EntryPoint string `json:"EntryPoint,omitempty"`
 
 	// A list of environment(endpoint) variables used during stack deployment
-	Env []*PortainereePair `json:"Env"`
+	Env []*PortainerPair `json:"Env"`
 
 	// Stack Identifier
 	// Example: 1
@@ -45,13 +45,13 @@ type PortainereeStack struct {
 	Name string `json:"Name,omitempty"`
 
 	// The stack deployment option
-	Option *PortainereeStackOption `json:"Option,omitempty"`
+	Option *PortainerStackOption `json:"Option,omitempty"`
 
 	// The previous deployment info of the stack
 	PreviousDeploymentInfo *PortainerStackDeploymentInfo `json:"PreviousDeploymentInfo,omitempty"`
 
 	// resource control
-	ResourceControl *PortainereeResourceControl `json:"ResourceControl,omitempty"`
+	ResourceControl *PortainerResourceControl `json:"ResourceControl,omitempty"`
 
 	// Stack status (1 - active, 2 - inactive)
 	// Example: 1
@@ -61,13 +61,17 @@ type PortainereeStack struct {
 	// Example: jpofkc0i9uo9wtx1zesuk649w
 	SwarmID string `json:"SwarmId,omitempty"`
 
-	// Stack type. 1 for a Swarm stack, 2 for a Compose stack, 3 for a Kubernetes stack
+	// Stack type. 1 for a Swarm stack, 2 for a Compose stack
 	// Example: 2
 	Type int64 `json:"Type,omitempty"`
 
 	// The username which created this stack
 	// Example: admin
 	CreatedBy string `json:"createdBy,omitempty"`
+
+	// The username id which created this stack
+	// Example: 1
+	CreatedByUserID string `json:"createdByUserId,omitempty"`
 
 	// The date in unix time when stack was created
 	// Example: 1587399600
@@ -81,12 +85,8 @@ type PortainereeStack struct {
 	// Example: false
 	FromAppTemplate bool `json:"fromAppTemplate,omitempty"`
 
-	// The git configuration of a git stack
+	// The git config of this stack
 	GitConfig *GittypesRepoConfig `json:"gitConfig,omitempty"`
-
-	// IsComposeFormat indicates if the Kubernetes stack is created from a Docker Compose file
-	// Example: false
-	IsComposeFormat bool `json:"isComposeFormat,omitempty"`
 
 	// Whether the stack is detached from git
 	// Example: false

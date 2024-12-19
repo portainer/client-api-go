@@ -99,11 +99,11 @@ func (o *EdgeStackUpdateFromGitNoContent) Code() int {
 }
 
 func (o *EdgeStackUpdateFromGitNoContent) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNoContent ", 204)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNoContent", 204)
 }
 
 func (o *EdgeStackUpdateFromGitNoContent) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNoContent ", 204)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNoContent", 204)
 }
 
 func (o *EdgeStackUpdateFromGitNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *EdgeStackUpdateFromGitBadRequest) Code() int {
 }
 
 func (o *EdgeStackUpdateFromGitBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitBadRequest", 400)
 }
 
 func (o *EdgeStackUpdateFromGitBadRequest) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitBadRequest", 400)
 }
 
 func (o *EdgeStackUpdateFromGitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *EdgeStackUpdateFromGitForbidden) Code() int {
 }
 
 func (o *EdgeStackUpdateFromGitForbidden) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitForbidden ", 403)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitForbidden", 403)
 }
 
 func (o *EdgeStackUpdateFromGitForbidden) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitForbidden ", 403)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitForbidden", 403)
 }
 
 func (o *EdgeStackUpdateFromGitForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *EdgeStackUpdateFromGitNotFound) Code() int {
 }
 
 func (o *EdgeStackUpdateFromGitNotFound) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNotFound ", 404)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNotFound", 404)
 }
 
 func (o *EdgeStackUpdateFromGitNotFound) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNotFound ", 404)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitNotFound", 404)
 }
 
 func (o *EdgeStackUpdateFromGitNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *EdgeStackUpdateFromGitInternalServerError) Code() int {
 }
 
 func (o *EdgeStackUpdateFromGitInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitInternalServerError", 500)
 }
 
 func (o *EdgeStackUpdateFromGitInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/git][%d] edgeStackUpdateFromGitInternalServerError", 500)
 }
 
 func (o *EdgeStackUpdateFromGitInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *StackUpdateGitOK) Code() int {
 }
 
 func (o *StackUpdateGitOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitOK %s", 200, payload)
 }
 
 func (o *StackUpdateGitOK) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitOK %s", 200, payload)
 }
 
 func (o *StackUpdateGitOK) GetPayload() *models.PortainereeStack {
@@ -170,11 +173,11 @@ func (o *StackUpdateGitBadRequest) Code() int {
 }
 
 func (o *StackUpdateGitBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitBadRequest", 400)
 }
 
 func (o *StackUpdateGitBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitBadRequest", 400)
 }
 
 func (o *StackUpdateGitBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *StackUpdateGitForbidden) Code() int {
 }
 
 func (o *StackUpdateGitForbidden) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitForbidden", 403)
 }
 
 func (o *StackUpdateGitForbidden) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitForbidden", 403)
 }
 
 func (o *StackUpdateGitForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *StackUpdateGitNotFound) Code() int {
 }
 
 func (o *StackUpdateGitNotFound) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitNotFound", 404)
 }
 
 func (o *StackUpdateGitNotFound) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitNotFound", 404)
 }
 
 func (o *StackUpdateGitNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *StackUpdateGitInternalServerError) Code() int {
 }
 
 func (o *StackUpdateGitInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitInternalServerError", 500)
 }
 
 func (o *StackUpdateGitInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/git][%d] stackUpdateGitInternalServerError", 500)
 }
 
 func (o *StackUpdateGitInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

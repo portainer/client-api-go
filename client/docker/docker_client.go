@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new docker API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new docker API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new docker API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,7 +51,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -34,9 +60,17 @@ type ClientService interface {
 
 	ContainerImageStatus(params *ContainerImageStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainerImageStatusOK, error)
 
+	ContainersImageStatusClear(params *ContainersImageStatusClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainersImageStatusClearNoContent, error)
+
 	DockerContainerGpusInspect(params *DockerContainerGpusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DockerContainerGpusInspectOK, error)
 
-	StackImagesStatus(params *StackImagesStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackImagesStatusOK, error)
+	DockerDashboard(params *DockerDashboardParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DockerDashboardOK, error)
+
+	DockerImagesList(params *DockerImagesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DockerImagesListOK, error)
+
+	ServiceImageStatusClear(params *ServiceImageStatusClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServiceImageStatusClearNoContent, error)
+
+	StacksImageStatusClear(params *StacksImageStatusClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StacksImageStatusClearNoContent, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -124,6 +158,49 @@ func (a *Client) ContainerImageStatus(params *ContainerImageStatusParams, authIn
 }
 
 /*
+	ContainersImageStatusClear clears container image status cache
+
+	Clear the image status cache for all containers in the environment
+
+**Access policy**:
+*/
+func (a *Client) ContainersImageStatusClear(params *ContainersImageStatusClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ContainersImageStatusClearNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewContainersImageStatusClearParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "containersImageStatusClear",
+		Method:             "POST",
+		PathPattern:        "/docker/{environmentId}/containers/image_status/clear",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ContainersImageStatusClearReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ContainersImageStatusClearNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for containersImageStatusClear: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 DockerContainerGpusInspect fetches container gpus data
 
 **Access policy**:
@@ -165,24 +242,24 @@ func (a *Client) DockerContainerGpusInspect(params *DockerContainerGpusInspectPa
 }
 
 /*
-StackImagesStatus fetches image status for stack
+DockerDashboard gets counters for the dashboard
 
-**Access policy**:
+**Access policy**: restricted
 */
-func (a *Client) StackImagesStatus(params *StackImagesStatusParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StackImagesStatusOK, error) {
+func (a *Client) DockerDashboard(params *DockerDashboardParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DockerDashboardOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewStackImagesStatusParams()
+		params = NewDockerDashboardParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "stackImagesStatus",
-		Method:             "GET",
-		PathPattern:        "/docker/{environmentId}/stacks/{id}/images_status",
+		ID:                 "dockerDashboard",
+		Method:             "POST",
+		PathPattern:        "/docker/{environmentId}/dashboard",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &StackImagesStatusReader{formats: a.formats},
+		Reader:             &DockerDashboardReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -195,13 +272,140 @@ func (a *Client) StackImagesStatus(params *StackImagesStatusParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*StackImagesStatusOK)
+	success, ok := result.(*DockerDashboardOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for stackImagesStatus: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for dockerDashboard: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DockerImagesList fetches images
+
+**Access policy**:
+*/
+func (a *Client) DockerImagesList(params *DockerImagesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DockerImagesListOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDockerImagesListParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "dockerImagesList",
+		Method:             "GET",
+		PathPattern:        "/docker/{environmentId}/images",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DockerImagesListReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DockerImagesListOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for dockerImagesList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	ServiceImageStatusClear clears service image status cache
+
+	Clear the image status cache for all services in the environment
+
+**Access policy**:
+*/
+func (a *Client) ServiceImageStatusClear(params *ServiceImageStatusClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ServiceImageStatusClearNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewServiceImageStatusClearParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "serviceImageStatusClear",
+		Method:             "POST",
+		PathPattern:        "/docker/{environmentId}/services/image_status/clear",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ServiceImageStatusClearReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ServiceImageStatusClearNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for serviceImageStatusClear: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	StacksImageStatusClear clears stack image status cache
+
+	Clear the image status cache for all stacks in the environment
+
+**Access policy**:
+*/
+func (a *Client) StacksImageStatusClear(params *StacksImageStatusClearParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*StacksImageStatusClearNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewStacksImageStatusClearParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "stacksImageStatusClear",
+		Method:             "POST",
+		PathPattern:        "/stacks/image_status/clear",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StacksImageStatusClearReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*StacksImageStatusClearNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for stacksImageStatusClear: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

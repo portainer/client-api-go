@@ -6,6 +6,7 @@ package helm
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *HelmUserRepositoryCreateReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /endpoints/{id}/kubernetes/helm/repositories] HelmUserRepositoryCreate", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /users/{id}/helm/repositories] HelmUserRepositoryCreate", response, response.Code())
 	}
 }
 
@@ -63,7 +64,7 @@ HelmUserRepositoryCreateOK describes a response with status code 200, with defau
 Success
 */
 type HelmUserRepositoryCreateOK struct {
-	Payload *models.PortainereeHelmUserRepository
+	Payload *models.PortainerHelmUserRepository
 }
 
 // IsSuccess returns true when this helm user repository create o k response has a 2xx status code
@@ -97,20 +98,22 @@ func (o *HelmUserRepositoryCreateOK) Code() int {
 }
 
 func (o *HelmUserRepositoryCreateOK) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users/{id}/helm/repositories][%d] helmUserRepositoryCreateOK %s", 200, payload)
 }
 
 func (o *HelmUserRepositoryCreateOK) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users/{id}/helm/repositories][%d] helmUserRepositoryCreateOK %s", 200, payload)
 }
 
-func (o *HelmUserRepositoryCreateOK) GetPayload() *models.PortainereeHelmUserRepository {
+func (o *HelmUserRepositoryCreateOK) GetPayload() *models.PortainerHelmUserRepository {
 	return o.Payload
 }
 
 func (o *HelmUserRepositoryCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeHelmUserRepository)
+	o.Payload = new(models.PortainerHelmUserRepository)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -164,11 +167,11 @@ func (o *HelmUserRepositoryCreateBadRequest) Code() int {
 }
 
 func (o *HelmUserRepositoryCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /users/{id}/helm/repositories][%d] helmUserRepositoryCreateBadRequest", 400)
 }
 
 func (o *HelmUserRepositoryCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /users/{id}/helm/repositories][%d] helmUserRepositoryCreateBadRequest", 400)
 }
 
 func (o *HelmUserRepositoryCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *HelmUserRepositoryCreateForbidden) Code() int {
 }
 
 func (o *HelmUserRepositoryCreateForbidden) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /users/{id}/helm/repositories][%d] helmUserRepositoryCreateForbidden", 403)
 }
 
 func (o *HelmUserRepositoryCreateForbidden) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateForbidden ", 403)
+	return fmt.Sprintf("[POST /users/{id}/helm/repositories][%d] helmUserRepositoryCreateForbidden", 403)
 }
 
 func (o *HelmUserRepositoryCreateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *HelmUserRepositoryCreateInternalServerError) Code() int {
 }
 
 func (o *HelmUserRepositoryCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users/{id}/helm/repositories][%d] helmUserRepositoryCreateInternalServerError", 500)
 }
 
 func (o *HelmUserRepositoryCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm/repositories][%d] helmUserRepositoryCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users/{id}/helm/repositories][%d] helmUserRepositoryCreateInternalServerError", 500)
 }
 
 func (o *HelmUserRepositoryCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

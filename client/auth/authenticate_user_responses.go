@@ -6,6 +6,7 @@ package auth
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *AuthenticateUserOK) Code() int {
 }
 
 func (o *AuthenticateUserOK) Error() string {
-	return fmt.Sprintf("[POST /auth][%d] authenticateUserOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserOK %s", 200, payload)
 }
 
 func (o *AuthenticateUserOK) String() string {
-	return fmt.Sprintf("[POST /auth][%d] authenticateUserOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserOK %s", 200, payload)
 }
 
 func (o *AuthenticateUserOK) GetPayload() *models.AuthAuthenticateResponse {
@@ -164,11 +167,11 @@ func (o *AuthenticateUserBadRequest) Code() int {
 }
 
 func (o *AuthenticateUserBadRequest) Error() string {
-	return fmt.Sprintf("[POST /auth][%d] authenticateUserBadRequest ", 400)
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserBadRequest", 400)
 }
 
 func (o *AuthenticateUserBadRequest) String() string {
-	return fmt.Sprintf("[POST /auth][%d] authenticateUserBadRequest ", 400)
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserBadRequest", 400)
 }
 
 func (o *AuthenticateUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *AuthenticateUserUnprocessableEntity) Code() int {
 }
 
 func (o *AuthenticateUserUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /auth][%d] authenticateUserUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserUnprocessableEntity", 422)
 }
 
 func (o *AuthenticateUserUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /auth][%d] authenticateUserUnprocessableEntity ", 422)
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserUnprocessableEntity", 422)
 }
 
 func (o *AuthenticateUserUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *AuthenticateUserInternalServerError) Code() int {
 }
 
 func (o *AuthenticateUserInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /auth][%d] authenticateUserInternalServerError ", 500)
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserInternalServerError", 500)
 }
 
 func (o *AuthenticateUserInternalServerError) String() string {
-	return fmt.Sprintf("[POST /auth][%d] authenticateUserInternalServerError ", 500)
+	return fmt.Sprintf("[POST /auth][%d] authenticateUserInternalServerError", 500)
 }
 
 func (o *AuthenticateUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

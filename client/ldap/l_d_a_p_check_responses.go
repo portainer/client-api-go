@@ -87,11 +87,11 @@ func (o *LDAPCheckNoContent) Code() int {
 }
 
 func (o *LDAPCheckNoContent) Error() string {
-	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckNoContent ", 204)
+	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckNoContent", 204)
 }
 
 func (o *LDAPCheckNoContent) String() string {
-	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckNoContent ", 204)
+	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckNoContent", 204)
 }
 
 func (o *LDAPCheckNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *LDAPCheckBadRequest) Code() int {
 }
 
 func (o *LDAPCheckBadRequest) Error() string {
-	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckBadRequest ", 400)
+	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckBadRequest", 400)
 }
 
 func (o *LDAPCheckBadRequest) String() string {
-	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckBadRequest ", 400)
+	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckBadRequest", 400)
 }
 
 func (o *LDAPCheckBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *LDAPCheckInternalServerError) Code() int {
 }
 
 func (o *LDAPCheckInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckInternalServerError ", 500)
+	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckInternalServerError", 500)
 }
 
 func (o *LDAPCheckInternalServerError) String() string {
-	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckInternalServerError ", 500)
+	return fmt.Sprintf("[POST /ldap/check][%d] lDAPCheckInternalServerError", 500)
 }
 
 func (o *LDAPCheckInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

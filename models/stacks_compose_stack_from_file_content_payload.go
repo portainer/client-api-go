@@ -21,7 +21,7 @@ import (
 type StacksComposeStackFromFileContentPayload struct {
 
 	// A list of environment variables used during stack deployment
-	Env []*PortainereePair `json:"env"`
+	Env []*PortainerPair `json:"env"`
 
 	// Whether the stack is from a app template
 	// Example: false

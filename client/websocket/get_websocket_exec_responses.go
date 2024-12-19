@@ -93,11 +93,11 @@ func (o *GetWebsocketExecOK) Code() int {
 }
 
 func (o *GetWebsocketExecOK) Error() string {
-	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecOK ", 200)
+	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecOK", 200)
 }
 
 func (o *GetWebsocketExecOK) String() string {
-	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecOK ", 200)
+	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecOK", 200)
 }
 
 func (o *GetWebsocketExecOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *GetWebsocketExecBadRequest) Code() int {
 }
 
 func (o *GetWebsocketExecBadRequest) Error() string {
-	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecBadRequest", 400)
 }
 
 func (o *GetWebsocketExecBadRequest) String() string {
-	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecBadRequest", 400)
 }
 
 func (o *GetWebsocketExecBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *GetWebsocketExecConflict) Code() int {
 }
 
 func (o *GetWebsocketExecConflict) Error() string {
-	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecConflict ", 409)
+	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecConflict", 409)
 }
 
 func (o *GetWebsocketExecConflict) String() string {
-	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecConflict ", 409)
+	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecConflict", 409)
 }
 
 func (o *GetWebsocketExecConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *GetWebsocketExecInternalServerError) Code() int {
 }
 
 func (o *GetWebsocketExecInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecInternalServerError", 500)
 }
 
 func (o *GetWebsocketExecInternalServerError) String() string {
-	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/exec][%d] getWebsocketExecInternalServerError", 500)
 }
 
 func (o *GetWebsocketExecInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new edge stacks API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new edge stacks API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new edge stacks API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,8 +51,32 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
+
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithContentType allows the client to force the Content-Type header
+// to negotiate a specific Consumer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithContentType(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ConsumesMediaTypes = []string{mime}
+	}
+}
+
+// WithContentTypeApplicationJSON sets the Content-Type header to "application/json".
+func WithContentTypeApplicationJSON(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"application/json"}
+}
+
+// WithContentTypeMultipartFormData sets the Content-Type header to "multipart/form-data".
+func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
+	r.ConsumesMediaTypes = []string{"multipart/form-data"}
+}
 
 // ClientService is the interface for Client methods
 type ClientService interface {
@@ -50,7 +100,11 @@ type ClientService interface {
 
 	EdgeStackLogsDelete(params *EdgeStackLogsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsDeleteNoContent, error)
 
+	EdgeStackLogsDownload(params *EdgeStackLogsDownloadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsDownloadOK, error)
+
 	EdgeStackLogsStatusGet(params *EdgeStackLogsStatusGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsStatusGetOK, error)
+
+	EdgeStackParseRegistries(params *EdgeStackParseRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackParseRegistriesOK, error)
 
 	EdgeStackStaggerStatusInspect(params *EdgeStackStaggerStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackStaggerStatusInspectOK, error)
 
@@ -476,6 +530,47 @@ func (a *Client) EdgeStackLogsDelete(params *EdgeStackLogsDeleteParams, authInfo
 }
 
 /*
+EdgeStackLogsDownload downloads the available logs for a given edge stack and endpoint
+
+**Access policy**: administrator
+*/
+func (a *Client) EdgeStackLogsDownload(params *EdgeStackLogsDownloadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackLogsDownloadOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEdgeStackLogsDownloadParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EdgeStackLogsDownload",
+		Method:             "GET",
+		PathPattern:        "/edge_stacks/{id}/logs/{endpoint_id}/file",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EdgeStackLogsDownloadReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EdgeStackLogsDownloadOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EdgeStackLogsDownload: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 EdgeStackLogsStatusGet gets the status of the log collection for a given edgestack and environment
 
 **Access policy**: administrator
@@ -513,6 +608,47 @@ func (a *Client) EdgeStackLogsStatusGet(params *EdgeStackLogsStatusGetParams, au
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for EdgeStackLogsStatusGet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+EdgeStackParseRegistries parses registries from a stack file
+
+**Access policy**: authenticated
+*/
+func (a *Client) EdgeStackParseRegistries(params *EdgeStackParseRegistriesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackParseRegistriesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEdgeStackParseRegistriesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EdgeStackParseRegistries",
+		Method:             "POST",
+		PathPattern:        "/edge_stacks/parse_registries",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"multipart/form-data"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EdgeStackParseRegistriesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*EdgeStackParseRegistriesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for EdgeStackParseRegistries: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

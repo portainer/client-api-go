@@ -6,6 +6,7 @@ package backup
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *BackupSettingsFetchOK) Code() int {
 }
 
 func (o *BackupSettingsFetchOK) Error() string {
-	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchOK %s", 200, payload)
 }
 
 func (o *BackupSettingsFetchOK) String() string {
-	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchOK %s", 200, payload)
 }
 
 func (o *BackupSettingsFetchOK) GetPayload() *models.PortainereeS3BackupSettings {
@@ -158,11 +161,11 @@ func (o *BackupSettingsFetchUnauthorized) Code() int {
 }
 
 func (o *BackupSettingsFetchUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchUnauthorized ", 401)
+	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchUnauthorized", 401)
 }
 
 func (o *BackupSettingsFetchUnauthorized) String() string {
-	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchUnauthorized ", 401)
+	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchUnauthorized", 401)
 }
 
 func (o *BackupSettingsFetchUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *BackupSettingsFetchInternalServerError) Code() int {
 }
 
 func (o *BackupSettingsFetchInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchInternalServerError ", 500)
+	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchInternalServerError", 500)
 }
 
 func (o *BackupSettingsFetchInternalServerError) String() string {
-	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchInternalServerError ", 500)
+	return fmt.Sprintf("[GET /backup/s3/settings][%d] backupSettingsFetchInternalServerError", 500)
 }
 
 func (o *BackupSettingsFetchInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

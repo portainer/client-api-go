@@ -6,6 +6,7 @@ package webhooks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -63,7 +64,7 @@ PostWebhooksOK describes a response with status code 200, with default header va
 OK
 */
 type PostWebhooksOK struct {
-	Payload *models.PortainereeWebhook
+	Payload *models.PortainerWebhook
 }
 
 // IsSuccess returns true when this post webhooks o k response has a 2xx status code
@@ -97,20 +98,22 @@ func (o *PostWebhooksOK) Code() int {
 }
 
 func (o *PostWebhooksOK) Error() string {
-	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksOK %s", 200, payload)
 }
 
 func (o *PostWebhooksOK) String() string {
-	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksOK %s", 200, payload)
 }
 
-func (o *PostWebhooksOK) GetPayload() *models.PortainereeWebhook {
+func (o *PostWebhooksOK) GetPayload() *models.PortainerWebhook {
 	return o.Payload
 }
 
 func (o *PostWebhooksOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeWebhook)
+	o.Payload = new(models.PortainerWebhook)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -128,7 +131,7 @@ func NewPostWebhooksBadRequest() *PostWebhooksBadRequest {
 /*
 PostWebhooksBadRequest describes a response with status code 400, with default header values.
 
-Bad Request
+Invalid request
 */
 type PostWebhooksBadRequest struct {
 }
@@ -164,11 +167,11 @@ func (o *PostWebhooksBadRequest) Code() int {
 }
 
 func (o *PostWebhooksBadRequest) Error() string {
-	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksBadRequest ", 400)
+	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksBadRequest", 400)
 }
 
 func (o *PostWebhooksBadRequest) String() string {
-	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksBadRequest ", 400)
+	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksBadRequest", 400)
 }
 
 func (o *PostWebhooksBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -184,7 +187,7 @@ func NewPostWebhooksConflict() *PostWebhooksConflict {
 /*
 PostWebhooksConflict describes a response with status code 409, with default header values.
 
-Conflict
+A webhook for this resource already exists
 */
 type PostWebhooksConflict struct {
 }
@@ -220,11 +223,11 @@ func (o *PostWebhooksConflict) Code() int {
 }
 
 func (o *PostWebhooksConflict) Error() string {
-	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksConflict ", 409)
+	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksConflict", 409)
 }
 
 func (o *PostWebhooksConflict) String() string {
-	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksConflict ", 409)
+	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksConflict", 409)
 }
 
 func (o *PostWebhooksConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -240,7 +243,7 @@ func NewPostWebhooksInternalServerError() *PostWebhooksInternalServerError {
 /*
 PostWebhooksInternalServerError describes a response with status code 500, with default header values.
 
-Internal Server Error
+Server error
 */
 type PostWebhooksInternalServerError struct {
 }
@@ -276,11 +279,11 @@ func (o *PostWebhooksInternalServerError) Code() int {
 }
 
 func (o *PostWebhooksInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksInternalServerError ", 500)
+	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksInternalServerError", 500)
 }
 
 func (o *PostWebhooksInternalServerError) String() string {
-	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksInternalServerError ", 500)
+	return fmt.Sprintf("[POST /webhooks][%d] postWebhooksInternalServerError", 500)
 }
 
 func (o *PostWebhooksInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

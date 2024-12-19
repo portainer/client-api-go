@@ -99,11 +99,11 @@ func (o *GetWebsocketPodOK) Code() int {
 }
 
 func (o *GetWebsocketPodOK) Error() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodOK ", 200)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodOK", 200)
 }
 
 func (o *GetWebsocketPodOK) String() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodOK ", 200)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodOK", 200)
 }
 
 func (o *GetWebsocketPodOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *GetWebsocketPodBadRequest) Code() int {
 }
 
 func (o *GetWebsocketPodBadRequest) Error() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodBadRequest", 400)
 }
 
 func (o *GetWebsocketPodBadRequest) String() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodBadRequest", 400)
 }
 
 func (o *GetWebsocketPodBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *GetWebsocketPodForbidden) Code() int {
 }
 
 func (o *GetWebsocketPodForbidden) Error() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodForbidden ", 403)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodForbidden", 403)
 }
 
 func (o *GetWebsocketPodForbidden) String() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodForbidden ", 403)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodForbidden", 403)
 }
 
 func (o *GetWebsocketPodForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *GetWebsocketPodNotFound) Code() int {
 }
 
 func (o *GetWebsocketPodNotFound) Error() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodNotFound ", 404)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodNotFound", 404)
 }
 
 func (o *GetWebsocketPodNotFound) String() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodNotFound ", 404)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodNotFound", 404)
 }
 
 func (o *GetWebsocketPodNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *GetWebsocketPodInternalServerError) Code() int {
 }
 
 func (o *GetWebsocketPodInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodInternalServerError", 500)
 }
 
 func (o *GetWebsocketPodInternalServerError) String() string {
-	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/pod][%d] getWebsocketPodInternalServerError", 500)
 }
 
 func (o *GetWebsocketPodInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

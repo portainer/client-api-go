@@ -6,6 +6,7 @@ package ldap
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -57,7 +58,7 @@ LDAPGroupsOK describes a response with status code 200, with default header valu
 Success
 */
 type LDAPGroupsOK struct {
-	Payload []*models.PortainereeLDAPUser
+	Payload []*models.PortainerLDAPUser
 }
 
 // IsSuccess returns true when this l d a p groups o k response has a 2xx status code
@@ -91,14 +92,16 @@ func (o *LDAPGroupsOK) Code() int {
 }
 
 func (o *LDAPGroupsOK) Error() string {
-	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsOK %s", 200, payload)
 }
 
 func (o *LDAPGroupsOK) String() string {
-	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsOK %s", 200, payload)
 }
 
-func (o *LDAPGroupsOK) GetPayload() []*models.PortainereeLDAPUser {
+func (o *LDAPGroupsOK) GetPayload() []*models.PortainerLDAPUser {
 	return o.Payload
 }
 
@@ -156,11 +159,11 @@ func (o *LDAPGroupsBadRequest) Code() int {
 }
 
 func (o *LDAPGroupsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsBadRequest ", 400)
+	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsBadRequest", 400)
 }
 
 func (o *LDAPGroupsBadRequest) String() string {
-	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsBadRequest ", 400)
+	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsBadRequest", 400)
 }
 
 func (o *LDAPGroupsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -212,11 +215,11 @@ func (o *LDAPGroupsInternalServerError) Code() int {
 }
 
 func (o *LDAPGroupsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsInternalServerError", 500)
 }
 
 func (o *LDAPGroupsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /ldap/groups][%d] lDAPGroupsInternalServerError", 500)
 }
 
 func (o *LDAPGroupsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

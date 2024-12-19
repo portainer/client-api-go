@@ -15,7 +15,7 @@ import (
 // UsersNamespaceMapping users namespace mapping
 //
 // swagger:model users.namespaceMapping
-type UsersNamespaceMapping map[string]map[string]PortainereeAuthorizations
+type UsersNamespaceMapping map[string]map[string]PortainerAuthorizations
 
 // Validate validates this users namespace mapping
 func (m UsersNamespaceMapping) Validate(formats strfmt.Registry) error {

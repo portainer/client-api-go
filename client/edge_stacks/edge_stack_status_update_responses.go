@@ -6,6 +6,7 @@ package edge_stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *EdgeStackStatusUpdateOK) Code() int {
 }
 
 func (o *EdgeStackStatusUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateOK %s", 200, payload)
 }
 
 func (o *EdgeStackStatusUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateOK %s", 200, payload)
 }
 
 func (o *EdgeStackStatusUpdateOK) GetPayload() *models.PortainereeEdgeStack {
@@ -170,11 +173,11 @@ func (o *EdgeStackStatusUpdateBadRequest) Code() int {
 }
 
 func (o *EdgeStackStatusUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateBadRequest", 400)
 }
 
 func (o *EdgeStackStatusUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateBadRequest", 400)
 }
 
 func (o *EdgeStackStatusUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *EdgeStackStatusUpdateForbidden) Code() int {
 }
 
 func (o *EdgeStackStatusUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateForbidden", 403)
 }
 
 func (o *EdgeStackStatusUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateForbidden", 403)
 }
 
 func (o *EdgeStackStatusUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *EdgeStackStatusUpdateNotFound) Code() int {
 }
 
 func (o *EdgeStackStatusUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateNotFound", 404)
 }
 
 func (o *EdgeStackStatusUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateNotFound", 404)
 }
 
 func (o *EdgeStackStatusUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *EdgeStackStatusUpdateInternalServerError) Code() int {
 }
 
 func (o *EdgeStackStatusUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateInternalServerError", 500)
 }
 
 func (o *EdgeStackStatusUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /edge_stacks/{id}/status][%d] edgeStackStatusUpdateInternalServerError", 500)
 }
 
 func (o *EdgeStackStatusUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -25,6 +25,9 @@ type PortainereeEndpointPostInitMigrations struct {
 
 	// migrate ingresses
 	MigrateIngresses bool `json:"MigrateIngresses,omitempty"`
+
+	// migrate secret owners
+	MigrateSecretOwners bool `json:"MigrateSecretOwners,omitempty"`
 }
 
 // Validate validates this portaineree endpoint post init migrations

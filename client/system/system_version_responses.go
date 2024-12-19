@@ -6,6 +6,7 @@ package system
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -79,11 +80,13 @@ func (o *SystemVersionOK) Code() int {
 }
 
 func (o *SystemVersionOK) Error() string {
-	return fmt.Sprintf("[GET /system/version][%d] systemVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /system/version][%d] systemVersionOK %s", 200, payload)
 }
 
 func (o *SystemVersionOK) String() string {
-	return fmt.Sprintf("[GET /system/version][%d] systemVersionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /system/version][%d] systemVersionOK %s", 200, payload)
 }
 
 func (o *SystemVersionOK) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemVersionResponse {

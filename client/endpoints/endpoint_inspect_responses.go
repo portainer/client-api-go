@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *EndpointInspectOK) Code() int {
 }
 
 func (o *EndpointInspectOK) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectOK %s", 200, payload)
 }
 
 func (o *EndpointInspectOK) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectOK %s", 200, payload)
 }
 
 func (o *EndpointInspectOK) GetPayload() *models.PortainereeEndpoint {
@@ -164,11 +167,11 @@ func (o *EndpointInspectBadRequest) Code() int {
 }
 
 func (o *EndpointInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectBadRequest", 400)
 }
 
 func (o *EndpointInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectBadRequest", 400)
 }
 
 func (o *EndpointInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *EndpointInspectNotFound) Code() int {
 }
 
 func (o *EndpointInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectNotFound", 404)
 }
 
 func (o *EndpointInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectNotFound", 404)
 }
 
 func (o *EndpointInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *EndpointInspectInternalServerError) Code() int {
 }
 
 func (o *EndpointInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectInternalServerError", 500)
 }
 
 func (o *EndpointInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}][%d] endpointInspectInternalServerError", 500)
 }
 
 func (o *EndpointInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -7,7 +7,6 @@ package kubernetes
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -21,14 +20,32 @@ type UpdateKubernetesIngressReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *UpdateKubernetesIngressReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewUpdateKubernetesIngressOK()
+	case 204:
+		result := NewUpdateKubernetesIngressNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
 	case 400:
 		result := NewUpdateKubernetesIngressBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewUpdateKubernetesIngressUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewUpdateKubernetesIngressForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewUpdateKubernetesIngressNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -40,72 +57,62 @@ func (o *UpdateKubernetesIngressReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses] updateKubernetesIngress", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses] UpdateKubernetesIngress", response, response.Code())
 	}
 }
 
-// NewUpdateKubernetesIngressOK creates a UpdateKubernetesIngressOK with default headers values
-func NewUpdateKubernetesIngressOK() *UpdateKubernetesIngressOK {
-	return &UpdateKubernetesIngressOK{}
+// NewUpdateKubernetesIngressNoContent creates a UpdateKubernetesIngressNoContent with default headers values
+func NewUpdateKubernetesIngressNoContent() *UpdateKubernetesIngressNoContent {
+	return &UpdateKubernetesIngressNoContent{}
 }
 
 /*
-UpdateKubernetesIngressOK describes a response with status code 200, with default header values.
+UpdateKubernetesIngressNoContent describes a response with status code 204, with default header values.
 
 Success
 */
-type UpdateKubernetesIngressOK struct {
-	Payload string
+type UpdateKubernetesIngressNoContent struct {
 }
 
-// IsSuccess returns true when this update kubernetes ingress o k response has a 2xx status code
-func (o *UpdateKubernetesIngressOK) IsSuccess() bool {
+// IsSuccess returns true when this update kubernetes ingress no content response has a 2xx status code
+func (o *UpdateKubernetesIngressNoContent) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this update kubernetes ingress o k response has a 3xx status code
-func (o *UpdateKubernetesIngressOK) IsRedirect() bool {
+// IsRedirect returns true when this update kubernetes ingress no content response has a 3xx status code
+func (o *UpdateKubernetesIngressNoContent) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this update kubernetes ingress o k response has a 4xx status code
-func (o *UpdateKubernetesIngressOK) IsClientError() bool {
+// IsClientError returns true when this update kubernetes ingress no content response has a 4xx status code
+func (o *UpdateKubernetesIngressNoContent) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this update kubernetes ingress o k response has a 5xx status code
-func (o *UpdateKubernetesIngressOK) IsServerError() bool {
+// IsServerError returns true when this update kubernetes ingress no content response has a 5xx status code
+func (o *UpdateKubernetesIngressNoContent) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this update kubernetes ingress o k response a status code equal to that given
-func (o *UpdateKubernetesIngressOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this update kubernetes ingress no content response a status code equal to that given
+func (o *UpdateKubernetesIngressNoContent) IsCode(code int) bool {
+	return code == 204
 }
 
-// Code gets the status code for the update kubernetes ingress o k response
-func (o *UpdateKubernetesIngressOK) Code() int {
-	return 200
+// Code gets the status code for the update kubernetes ingress no content response
+func (o *UpdateKubernetesIngressNoContent) Code() int {
+	return 204
 }
 
-func (o *UpdateKubernetesIngressOK) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressOK  %+v", 200, o.Payload)
+func (o *UpdateKubernetesIngressNoContent) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressNoContent", 204)
 }
 
-func (o *UpdateKubernetesIngressOK) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressOK  %+v", 200, o.Payload)
+func (o *UpdateKubernetesIngressNoContent) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressNoContent", 204)
 }
 
-func (o *UpdateKubernetesIngressOK) GetPayload() string {
-	return o.Payload
-}
-
-func (o *UpdateKubernetesIngressOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
+func (o *UpdateKubernetesIngressNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -118,7 +125,7 @@ func NewUpdateKubernetesIngressBadRequest() *UpdateKubernetesIngressBadRequest {
 /*
 UpdateKubernetesIngressBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type UpdateKubernetesIngressBadRequest struct {
 }
@@ -154,14 +161,182 @@ func (o *UpdateKubernetesIngressBadRequest) Code() int {
 }
 
 func (o *UpdateKubernetesIngressBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressBadRequest ", 400)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressBadRequest", 400)
 }
 
 func (o *UpdateKubernetesIngressBadRequest) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressBadRequest ", 400)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressBadRequest", 400)
 }
 
 func (o *UpdateKubernetesIngressBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewUpdateKubernetesIngressUnauthorized creates a UpdateKubernetesIngressUnauthorized with default headers values
+func NewUpdateKubernetesIngressUnauthorized() *UpdateKubernetesIngressUnauthorized {
+	return &UpdateKubernetesIngressUnauthorized{}
+}
+
+/*
+UpdateKubernetesIngressUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type UpdateKubernetesIngressUnauthorized struct {
+}
+
+// IsSuccess returns true when this update kubernetes ingress unauthorized response has a 2xx status code
+func (o *UpdateKubernetesIngressUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update kubernetes ingress unauthorized response has a 3xx status code
+func (o *UpdateKubernetesIngressUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update kubernetes ingress unauthorized response has a 4xx status code
+func (o *UpdateKubernetesIngressUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update kubernetes ingress unauthorized response has a 5xx status code
+func (o *UpdateKubernetesIngressUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update kubernetes ingress unauthorized response a status code equal to that given
+func (o *UpdateKubernetesIngressUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update kubernetes ingress unauthorized response
+func (o *UpdateKubernetesIngressUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateKubernetesIngressUnauthorized) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressUnauthorized", 401)
+}
+
+func (o *UpdateKubernetesIngressUnauthorized) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressUnauthorized", 401)
+}
+
+func (o *UpdateKubernetesIngressUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewUpdateKubernetesIngressForbidden creates a UpdateKubernetesIngressForbidden with default headers values
+func NewUpdateKubernetesIngressForbidden() *UpdateKubernetesIngressForbidden {
+	return &UpdateKubernetesIngressForbidden{}
+}
+
+/*
+UpdateKubernetesIngressForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type UpdateKubernetesIngressForbidden struct {
+}
+
+// IsSuccess returns true when this update kubernetes ingress forbidden response has a 2xx status code
+func (o *UpdateKubernetesIngressForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update kubernetes ingress forbidden response has a 3xx status code
+func (o *UpdateKubernetesIngressForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update kubernetes ingress forbidden response has a 4xx status code
+func (o *UpdateKubernetesIngressForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update kubernetes ingress forbidden response has a 5xx status code
+func (o *UpdateKubernetesIngressForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update kubernetes ingress forbidden response a status code equal to that given
+func (o *UpdateKubernetesIngressForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the update kubernetes ingress forbidden response
+func (o *UpdateKubernetesIngressForbidden) Code() int {
+	return 403
+}
+
+func (o *UpdateKubernetesIngressForbidden) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressForbidden", 403)
+}
+
+func (o *UpdateKubernetesIngressForbidden) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressForbidden", 403)
+}
+
+func (o *UpdateKubernetesIngressForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewUpdateKubernetesIngressNotFound creates a UpdateKubernetesIngressNotFound with default headers values
+func NewUpdateKubernetesIngressNotFound() *UpdateKubernetesIngressNotFound {
+	return &UpdateKubernetesIngressNotFound{}
+}
+
+/*
+UpdateKubernetesIngressNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier or unable to find the specified ingress.
+*/
+type UpdateKubernetesIngressNotFound struct {
+}
+
+// IsSuccess returns true when this update kubernetes ingress not found response has a 2xx status code
+func (o *UpdateKubernetesIngressNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update kubernetes ingress not found response has a 3xx status code
+func (o *UpdateKubernetesIngressNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update kubernetes ingress not found response has a 4xx status code
+func (o *UpdateKubernetesIngressNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update kubernetes ingress not found response has a 5xx status code
+func (o *UpdateKubernetesIngressNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update kubernetes ingress not found response a status code equal to that given
+func (o *UpdateKubernetesIngressNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update kubernetes ingress not found response
+func (o *UpdateKubernetesIngressNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateKubernetesIngressNotFound) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressNotFound", 404)
+}
+
+func (o *UpdateKubernetesIngressNotFound) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressNotFound", 404)
+}
+
+func (o *UpdateKubernetesIngressNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -174,7 +349,7 @@ func NewUpdateKubernetesIngressInternalServerError() *UpdateKubernetesIngressInt
 /*
 UpdateKubernetesIngressInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to update the specified ingress.
 */
 type UpdateKubernetesIngressInternalServerError struct {
 }
@@ -210,11 +385,11 @@ func (o *UpdateKubernetesIngressInternalServerError) Code() int {
 }
 
 func (o *UpdateKubernetesIngressInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressInternalServerError", 500)
 }
 
 func (o *UpdateKubernetesIngressInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}/ingresses][%d] updateKubernetesIngressInternalServerError", 500)
 }
 
 func (o *UpdateKubernetesIngressInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -23,8 +24,8 @@ type UserGenerateAPIKeyReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *UserGenerateAPIKeyReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 201:
-		result := NewUserGenerateAPIKeyCreated()
+	case 200:
+		result := NewUserGenerateAPIKeyOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -64,63 +65,65 @@ func (o *UserGenerateAPIKeyReader) ReadResponse(response runtime.ClientResponse,
 	}
 }
 
-// NewUserGenerateAPIKeyCreated creates a UserGenerateAPIKeyCreated with default headers values
-func NewUserGenerateAPIKeyCreated() *UserGenerateAPIKeyCreated {
-	return &UserGenerateAPIKeyCreated{}
+// NewUserGenerateAPIKeyOK creates a UserGenerateAPIKeyOK with default headers values
+func NewUserGenerateAPIKeyOK() *UserGenerateAPIKeyOK {
+	return &UserGenerateAPIKeyOK{}
 }
 
 /*
-UserGenerateAPIKeyCreated describes a response with status code 201, with default header values.
+UserGenerateAPIKeyOK describes a response with status code 200, with default header values.
 
 Created
 */
-type UserGenerateAPIKeyCreated struct {
+type UserGenerateAPIKeyOK struct {
 	Payload *models.UsersAccessTokenResponse
 }
 
-// IsSuccess returns true when this user generate Api key created response has a 2xx status code
-func (o *UserGenerateAPIKeyCreated) IsSuccess() bool {
+// IsSuccess returns true when this user generate Api key o k response has a 2xx status code
+func (o *UserGenerateAPIKeyOK) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this user generate Api key created response has a 3xx status code
-func (o *UserGenerateAPIKeyCreated) IsRedirect() bool {
+// IsRedirect returns true when this user generate Api key o k response has a 3xx status code
+func (o *UserGenerateAPIKeyOK) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this user generate Api key created response has a 4xx status code
-func (o *UserGenerateAPIKeyCreated) IsClientError() bool {
+// IsClientError returns true when this user generate Api key o k response has a 4xx status code
+func (o *UserGenerateAPIKeyOK) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this user generate Api key created response has a 5xx status code
-func (o *UserGenerateAPIKeyCreated) IsServerError() bool {
+// IsServerError returns true when this user generate Api key o k response has a 5xx status code
+func (o *UserGenerateAPIKeyOK) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this user generate Api key created response a status code equal to that given
-func (o *UserGenerateAPIKeyCreated) IsCode(code int) bool {
-	return code == 201
+// IsCode returns true when this user generate Api key o k response a status code equal to that given
+func (o *UserGenerateAPIKeyOK) IsCode(code int) bool {
+	return code == 200
 }
 
-// Code gets the status code for the user generate Api key created response
-func (o *UserGenerateAPIKeyCreated) Code() int {
-	return 201
+// Code gets the status code for the user generate Api key o k response
+func (o *UserGenerateAPIKeyOK) Code() int {
+	return 200
 }
 
-func (o *UserGenerateAPIKeyCreated) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyCreated  %+v", 201, o.Payload)
+func (o *UserGenerateAPIKeyOK) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyOK %s", 200, payload)
 }
 
-func (o *UserGenerateAPIKeyCreated) String() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyCreated  %+v", 201, o.Payload)
+func (o *UserGenerateAPIKeyOK) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyOK %s", 200, payload)
 }
 
-func (o *UserGenerateAPIKeyCreated) GetPayload() *models.UsersAccessTokenResponse {
+func (o *UserGenerateAPIKeyOK) GetPayload() *models.UsersAccessTokenResponse {
 	return o.Payload
 }
 
-func (o *UserGenerateAPIKeyCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *UserGenerateAPIKeyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.UsersAccessTokenResponse)
 
@@ -176,11 +179,11 @@ func (o *UserGenerateAPIKeyBadRequest) Code() int {
 }
 
 func (o *UserGenerateAPIKeyBadRequest) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyBadRequest ", 400)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyBadRequest", 400)
 }
 
 func (o *UserGenerateAPIKeyBadRequest) String() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyBadRequest ", 400)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyBadRequest", 400)
 }
 
 func (o *UserGenerateAPIKeyBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +235,11 @@ func (o *UserGenerateAPIKeyUnauthorized) Code() int {
 }
 
 func (o *UserGenerateAPIKeyUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyUnauthorized ", 401)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyUnauthorized", 401)
 }
 
 func (o *UserGenerateAPIKeyUnauthorized) String() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyUnauthorized ", 401)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyUnauthorized", 401)
 }
 
 func (o *UserGenerateAPIKeyUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -288,11 +291,11 @@ func (o *UserGenerateAPIKeyForbidden) Code() int {
 }
 
 func (o *UserGenerateAPIKeyForbidden) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyForbidden ", 403)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyForbidden", 403)
 }
 
 func (o *UserGenerateAPIKeyForbidden) String() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyForbidden ", 403)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyForbidden", 403)
 }
 
 func (o *UserGenerateAPIKeyForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -344,11 +347,11 @@ func (o *UserGenerateAPIKeyNotFound) Code() int {
 }
 
 func (o *UserGenerateAPIKeyNotFound) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyNotFound ", 404)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyNotFound", 404)
 }
 
 func (o *UserGenerateAPIKeyNotFound) String() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyNotFound ", 404)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyNotFound", 404)
 }
 
 func (o *UserGenerateAPIKeyNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -400,11 +403,11 @@ func (o *UserGenerateAPIKeyInternalServerError) Code() int {
 }
 
 func (o *UserGenerateAPIKeyInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyInternalServerError", 500)
 }
 
 func (o *UserGenerateAPIKeyInternalServerError) String() string {
-	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyInternalServerError ", 500)
+	return fmt.Sprintf("[POST /users/{id}/tokens][%d] userGenerateApiKeyInternalServerError", 500)
 }
 
 func (o *UserGenerateAPIKeyInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

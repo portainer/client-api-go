@@ -70,7 +70,7 @@ type ProviderInfoParams struct {
 
 	/* Provider.
 
-	   The cloud provider to get information about.
+	   Provider
 	*/
 	Provider string
 

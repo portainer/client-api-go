@@ -74,6 +74,12 @@ type ContainerImageStatusParams struct {
 	*/
 	EnvironmentID int64
 
+	/* Refresh.
+
+	   Refresh will force a refresh of the image status cache
+	*/
+	Refresh *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -149,6 +155,17 @@ func (o *ContainerImageStatusParams) SetEnvironmentID(environmentID int64) {
 	o.EnvironmentID = environmentID
 }
 
+// WithRefresh adds the refresh to the container image status params
+func (o *ContainerImageStatusParams) WithRefresh(refresh *bool) *ContainerImageStatusParams {
+	o.SetRefresh(refresh)
+	return o
+}
+
+// SetRefresh adds the refresh to the container image status params
+func (o *ContainerImageStatusParams) SetRefresh(refresh *bool) {
+	o.Refresh = refresh
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ContainerImageStatusParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -165,6 +182,23 @@ func (o *ContainerImageStatusParams) WriteToRequest(r runtime.ClientRequest, reg
 	// path param environmentId
 	if err := r.SetPathParam("environmentId", swag.FormatInt64(o.EnvironmentID)); err != nil {
 		return err
+	}
+
+	if o.Refresh != nil {
+
+		// query param refresh
+		var qrRefresh bool
+
+		if o.Refresh != nil {
+			qrRefresh = *o.Refresh
+		}
+		qRefresh := swag.FormatBool(qrRefresh)
+		if qRefresh != "" {
+
+			if err := r.SetQueryParam("refresh", qRefresh); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

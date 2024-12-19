@@ -6,6 +6,7 @@ package resource_controls
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -63,7 +64,7 @@ ResourceControlCreateOK describes a response with status code 200, with default 
 Success
 */
 type ResourceControlCreateOK struct {
-	Payload *models.PortainereeResourceControl
+	Payload *models.PortainerResourceControl
 }
 
 // IsSuccess returns true when this resource control create o k response has a 2xx status code
@@ -97,20 +98,22 @@ func (o *ResourceControlCreateOK) Code() int {
 }
 
 func (o *ResourceControlCreateOK) Error() string {
-	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateOK %s", 200, payload)
 }
 
 func (o *ResourceControlCreateOK) String() string {
-	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateOK %s", 200, payload)
 }
 
-func (o *ResourceControlCreateOK) GetPayload() *models.PortainereeResourceControl {
+func (o *ResourceControlCreateOK) GetPayload() *models.PortainerResourceControl {
 	return o.Payload
 }
 
 func (o *ResourceControlCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeResourceControl)
+	o.Payload = new(models.PortainerResourceControl)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -164,11 +167,11 @@ func (o *ResourceControlCreateBadRequest) Code() int {
 }
 
 func (o *ResourceControlCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateBadRequest", 400)
 }
 
 func (o *ResourceControlCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateBadRequest", 400)
 }
 
 func (o *ResourceControlCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -184,7 +187,7 @@ func NewResourceControlCreateConflict() *ResourceControlCreateConflict {
 /*
 ResourceControlCreateConflict describes a response with status code 409, with default header values.
 
-Resource control already exists
+A resource control is already associated to this resource
 */
 type ResourceControlCreateConflict struct {
 }
@@ -220,11 +223,11 @@ func (o *ResourceControlCreateConflict) Code() int {
 }
 
 func (o *ResourceControlCreateConflict) Error() string {
-	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateConflict ", 409)
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateConflict", 409)
 }
 
 func (o *ResourceControlCreateConflict) String() string {
-	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateConflict ", 409)
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateConflict", 409)
 }
 
 func (o *ResourceControlCreateConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *ResourceControlCreateInternalServerError) Code() int {
 }
 
 func (o *ResourceControlCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateInternalServerError", 500)
 }
 
 func (o *ResourceControlCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /resource_controls][%d] resourceControlCreateInternalServerError", 500)
 }
 
 func (o *ResourceControlCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

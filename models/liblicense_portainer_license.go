@@ -44,6 +44,12 @@ type LiblicensePortainerLicense struct {
 	// license key
 	LicenseKey string `json:"licenseKey,omitempty"`
 
+	// multi checkin count
+	MultiCheckinCount int64 `json:"multiCheckinCount,omitempty"`
+
+	// multiuse instances count
+	MultiuseInstancesCount int64 `json:"multiuseInstancesCount,omitempty"`
+
 	// nodes
 	Nodes int64 `json:"nodes,omitempty"`
 

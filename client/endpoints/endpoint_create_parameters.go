@@ -80,6 +80,12 @@ type EndpointCreateParams struct {
 	*/
 	AzureTenantID *string
 
+	/* ContainerEngine.
+
+	   Container engine used by the environment(endpoint). Value must be one of: 'docker' or 'podman'
+	*/
+	ContainerEngine *string
+
 	/* EdgeAsyncMode.
 
 	   Enable async mode for edge agent
@@ -260,6 +266,17 @@ func (o *EndpointCreateParams) WithAzureTenantID(azureTenantID *string) *Endpoin
 // SetAzureTenantID adds the azureTenantId to the endpoint create params
 func (o *EndpointCreateParams) SetAzureTenantID(azureTenantID *string) {
 	o.AzureTenantID = azureTenantID
+}
+
+// WithContainerEngine adds the containerEngine to the endpoint create params
+func (o *EndpointCreateParams) WithContainerEngine(containerEngine *string) *EndpointCreateParams {
+	o.SetContainerEngine(containerEngine)
+	return o
+}
+
+// SetContainerEngine adds the containerEngine to the endpoint create params
+func (o *EndpointCreateParams) SetContainerEngine(containerEngine *string) {
+	o.ContainerEngine = containerEngine
 }
 
 // WithEdgeAsyncMode adds the edgeAsyncMode to the endpoint create params
@@ -486,6 +503,21 @@ func (o *EndpointCreateParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		fAzureTenantID := frAzureTenantID
 		if fAzureTenantID != "" {
 			if err := r.SetFormParam("AzureTenantID", fAzureTenantID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ContainerEngine != nil {
+
+		// form param ContainerEngine
+		var frContainerEngine string
+		if o.ContainerEngine != nil {
+			frContainerEngine = *o.ContainerEngine
+		}
+		fContainerEngine := frContainerEngine
+		if fContainerEngine != "" {
+			if err := r.SetFormParam("ContainerEngine", fContainerEngine); err != nil {
 				return err
 			}
 		}

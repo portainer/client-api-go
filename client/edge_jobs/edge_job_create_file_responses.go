@@ -6,6 +6,7 @@ package edge_jobs
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *EdgeJobCreateFileOK) Code() int {
 }
 
 func (o *EdgeJobCreateFileOK) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileOK %s", 200, payload)
 }
 
 func (o *EdgeJobCreateFileOK) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileOK %s", 200, payload)
 }
 
 func (o *EdgeJobCreateFileOK) GetPayload() *models.PortainereeEdgeGroup {
@@ -158,11 +161,11 @@ func (o *EdgeJobCreateFileInternalServerError) Code() int {
 }
 
 func (o *EdgeJobCreateFileInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileInternalServerError", 500)
 }
 
 func (o *EdgeJobCreateFileInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileInternalServerError", 500)
 }
 
 func (o *EdgeJobCreateFileInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *EdgeJobCreateFileServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobCreateFileServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileServiceUnavailable", 503)
 }
 
 func (o *EdgeJobCreateFileServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_jobs/create/file][%d] edgeJobCreateFileServiceUnavailable", 503)
 }
 
 func (o *EdgeJobCreateFileServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

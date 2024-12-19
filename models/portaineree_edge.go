@@ -18,6 +18,10 @@ import (
 // swagger:model portaineree.Edge
 type PortainereeEdge struct {
 
+	// Deprecated 2.18
+	// Example: false
+	AsyncMode bool `json:"AsyncMode,omitempty"`
+
 	// The command list interval for edge agent - used in edge async mode (in seconds)
 	// Example: 5
 	CommandInterval int64 `json:"CommandInterval,omitempty"`
@@ -33,9 +37,6 @@ type PortainereeEdge struct {
 	// The address where the tunneling server can be reached by Edge agents
 	// Example: portainer.domain.tld
 	TunnelServerAddress string `json:"TunnelServerAddress,omitempty"`
-
-	// Deprecated 2.18
-	AsyncMode bool `json:"asyncMode,omitempty"`
 
 	// mtls
 	Mtls *PortainereeMTLSSettings `json:"mtls,omitempty"`

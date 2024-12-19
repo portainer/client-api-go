@@ -6,6 +6,7 @@ package edge_groups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *EdgeGroupCreateOK) Code() int {
 }
 
 func (o *EdgeGroupCreateOK) Error() string {
-	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateOK %s", 200, payload)
 }
 
 func (o *EdgeGroupCreateOK) String() string {
-	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateOK %s", 200, payload)
 }
 
 func (o *EdgeGroupCreateOK) GetPayload() *models.PortainereeEdgeGroup {
@@ -158,11 +161,11 @@ func (o *EdgeGroupCreateInternalServerError) Code() int {
 }
 
 func (o *EdgeGroupCreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateInternalServerError", 500)
 }
 
 func (o *EdgeGroupCreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateInternalServerError", 500)
 }
 
 func (o *EdgeGroupCreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *EdgeGroupCreateServiceUnavailable) Code() int {
 }
 
 func (o *EdgeGroupCreateServiceUnavailable) Error() string {
-	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateServiceUnavailable", 503)
 }
 
 func (o *EdgeGroupCreateServiceUnavailable) String() string {
-	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateServiceUnavailable ", 503)
+	return fmt.Sprintf("[POST /edge_groups][%d] edgeGroupCreateServiceUnavailable", 503)
 }
 
 func (o *EdgeGroupCreateServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

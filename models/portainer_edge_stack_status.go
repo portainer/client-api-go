@@ -34,6 +34,9 @@ type PortainerEdgeStackStatus struct {
 	// Deprecated
 	Error string `json:"error,omitempty"`
 
+	// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+	ReadyRePullImage bool `json:"readyRePullImage,omitempty"`
+
 	// status
 	Status []*PortainerEdgeStackDeploymentStatus `json:"status"`
 }

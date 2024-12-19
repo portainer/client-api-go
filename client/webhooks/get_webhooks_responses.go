@@ -6,6 +6,7 @@ package webhooks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -57,7 +58,7 @@ GetWebhooksOK describes a response with status code 200, with default header val
 OK
 */
 type GetWebhooksOK struct {
-	Payload []*models.PortainereeWebhook
+	Payload []*models.PortainerWebhook
 }
 
 // IsSuccess returns true when this get webhooks o k response has a 2xx status code
@@ -91,14 +92,16 @@ func (o *GetWebhooksOK) Code() int {
 }
 
 func (o *GetWebhooksOK) Error() string {
-	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksOK %s", 200, payload)
 }
 
 func (o *GetWebhooksOK) String() string {
-	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksOK %s", 200, payload)
 }
 
-func (o *GetWebhooksOK) GetPayload() []*models.PortainereeWebhook {
+func (o *GetWebhooksOK) GetPayload() []*models.PortainerWebhook {
 	return o.Payload
 }
 
@@ -156,11 +159,11 @@ func (o *GetWebhooksBadRequest) Code() int {
 }
 
 func (o *GetWebhooksBadRequest) Error() string {
-	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksBadRequest ", 400)
+	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksBadRequest", 400)
 }
 
 func (o *GetWebhooksBadRequest) String() string {
-	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksBadRequest ", 400)
+	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksBadRequest", 400)
 }
 
 func (o *GetWebhooksBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -212,11 +215,11 @@ func (o *GetWebhooksInternalServerError) Code() int {
 }
 
 func (o *GetWebhooksInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksInternalServerError ", 500)
+	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksInternalServerError", 500)
 }
 
 func (o *GetWebhooksInternalServerError) String() string {
-	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksInternalServerError ", 500)
+	return fmt.Sprintf("[GET /webhooks][%d] getWebhooksInternalServerError", 500)
 }
 
 func (o *GetWebhooksInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

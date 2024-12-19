@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *StackInspectOK) Code() int {
 }
 
 func (o *StackInspectOK) Error() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectOK %s", 200, payload)
 }
 
 func (o *StackInspectOK) String() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectOK %s", 200, payload)
 }
 
 func (o *StackInspectOK) GetPayload() *models.PortainereeStack {
@@ -170,11 +173,11 @@ func (o *StackInspectBadRequest) Code() int {
 }
 
 func (o *StackInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectBadRequest", 400)
 }
 
 func (o *StackInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectBadRequest", 400)
 }
 
 func (o *StackInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *StackInspectForbidden) Code() int {
 }
 
 func (o *StackInspectForbidden) Error() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectForbidden", 403)
 }
 
 func (o *StackInspectForbidden) String() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectForbidden", 403)
 }
 
 func (o *StackInspectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *StackInspectNotFound) Code() int {
 }
 
 func (o *StackInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectNotFound", 404)
 }
 
 func (o *StackInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectNotFound", 404)
 }
 
 func (o *StackInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *StackInspectInternalServerError) Code() int {
 }
 
 func (o *StackInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectInternalServerError", 500)
 }
 
 func (o *StackInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /stacks/{id}][%d] stackInspectInternalServerError", 500)
 }
 
 func (o *StackInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

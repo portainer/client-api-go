@@ -87,11 +87,11 @@ func (o *BackupOK) Code() int {
 }
 
 func (o *BackupOK) Error() string {
-	return fmt.Sprintf("[POST /backup][%d] backupOK ", 200)
+	return fmt.Sprintf("[POST /backup][%d] backupOK", 200)
 }
 
 func (o *BackupOK) String() string {
-	return fmt.Sprintf("[POST /backup][%d] backupOK ", 200)
+	return fmt.Sprintf("[POST /backup][%d] backupOK", 200)
 }
 
 func (o *BackupOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *BackupBadRequest) Code() int {
 }
 
 func (o *BackupBadRequest) Error() string {
-	return fmt.Sprintf("[POST /backup][%d] backupBadRequest ", 400)
+	return fmt.Sprintf("[POST /backup][%d] backupBadRequest", 400)
 }
 
 func (o *BackupBadRequest) String() string {
-	return fmt.Sprintf("[POST /backup][%d] backupBadRequest ", 400)
+	return fmt.Sprintf("[POST /backup][%d] backupBadRequest", 400)
 }
 
 func (o *BackupBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *BackupInternalServerError) Code() int {
 }
 
 func (o *BackupInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /backup][%d] backupInternalServerError ", 500)
+	return fmt.Sprintf("[POST /backup][%d] backupInternalServerError", 500)
 }
 
 func (o *BackupInternalServerError) String() string {
-	return fmt.Sprintf("[POST /backup][%d] backupInternalServerError ", 500)
+	return fmt.Sprintf("[POST /backup][%d] backupInternalServerError", 500)
 }
 
 func (o *BackupInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

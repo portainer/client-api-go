@@ -68,11 +68,11 @@ type UpdateKubernetesServiceParams struct {
 
 	   Service definition
 	*/
-	Body *models.ModelsK8sServiceInfo
+	Body *models.KubernetesK8sServiceInfo
 
 	/* ID.
 
-	   Environment (Endpoint) identifier
+	   Environment identifier
 	*/
 	ID int64
 
@@ -136,13 +136,13 @@ func (o *UpdateKubernetesServiceParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the update kubernetes service params
-func (o *UpdateKubernetesServiceParams) WithBody(body *models.ModelsK8sServiceInfo) *UpdateKubernetesServiceParams {
+func (o *UpdateKubernetesServiceParams) WithBody(body *models.KubernetesK8sServiceInfo) *UpdateKubernetesServiceParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update kubernetes service params
-func (o *UpdateKubernetesServiceParams) SetBody(body *models.ModelsK8sServiceInfo) {
+func (o *UpdateKubernetesServiceParams) SetBody(body *models.KubernetesK8sServiceInfo) {
 	o.Body = body
 }
 

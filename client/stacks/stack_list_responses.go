@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *StackListOK) Code() int {
 }
 
 func (o *StackListOK) Error() string {
-	return fmt.Sprintf("[GET /stacks][%d] stackListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /stacks][%d] stackListOK %s", 200, payload)
 }
 
 func (o *StackListOK) String() string {
-	return fmt.Sprintf("[GET /stacks][%d] stackListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /stacks][%d] stackListOK %s", 200, payload)
 }
 
 func (o *StackListOK) GetPayload() []*models.PortainereeStack {
@@ -162,11 +165,11 @@ func (o *StackListNoContent) Code() int {
 }
 
 func (o *StackListNoContent) Error() string {
-	return fmt.Sprintf("[GET /stacks][%d] stackListNoContent ", 204)
+	return fmt.Sprintf("[GET /stacks][%d] stackListNoContent", 204)
 }
 
 func (o *StackListNoContent) String() string {
-	return fmt.Sprintf("[GET /stacks][%d] stackListNoContent ", 204)
+	return fmt.Sprintf("[GET /stacks][%d] stackListNoContent", 204)
 }
 
 func (o *StackListNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -218,11 +221,11 @@ func (o *StackListBadRequest) Code() int {
 }
 
 func (o *StackListBadRequest) Error() string {
-	return fmt.Sprintf("[GET /stacks][%d] stackListBadRequest ", 400)
+	return fmt.Sprintf("[GET /stacks][%d] stackListBadRequest", 400)
 }
 
 func (o *StackListBadRequest) String() string {
-	return fmt.Sprintf("[GET /stacks][%d] stackListBadRequest ", 400)
+	return fmt.Sprintf("[GET /stacks][%d] stackListBadRequest", 400)
 }
 
 func (o *StackListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -274,11 +277,11 @@ func (o *StackListInternalServerError) Code() int {
 }
 
 func (o *StackListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /stacks][%d] stackListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /stacks][%d] stackListInternalServerError", 500)
 }
 
 func (o *StackListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /stacks][%d] stackListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /stacks][%d] stackListInternalServerError", 500)
 }
 
 func (o *StackListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

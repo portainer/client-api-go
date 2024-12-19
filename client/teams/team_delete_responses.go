@@ -99,11 +99,11 @@ func (o *TeamDeleteNoContent) Code() int {
 }
 
 func (o *TeamDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNoContent", 204)
 }
 
 func (o *TeamDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNoContent", 204)
 }
 
 func (o *TeamDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *TeamDeleteBadRequest) Code() int {
 }
 
 func (o *TeamDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteBadRequest", 400)
 }
 
 func (o *TeamDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteBadRequest", 400)
 }
 
 func (o *TeamDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *TeamDeleteForbidden) Code() int {
 }
 
 func (o *TeamDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteForbidden", 403)
 }
 
 func (o *TeamDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteForbidden", 403)
 }
 
 func (o *TeamDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *TeamDeleteNotFound) Code() int {
 }
 
 func (o *TeamDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNotFound", 404)
 }
 
 func (o *TeamDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteNotFound", 404)
 }
 
 func (o *TeamDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *TeamDeleteInternalServerError) Code() int {
 }
 
 func (o *TeamDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteInternalServerError", 500)
 }
 
 func (o *TeamDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /teams/{id}][%d] teamDeleteInternalServerError", 500)
 }
 
 func (o *TeamDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package helm
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -101,11 +102,13 @@ func (o *HelmRepoSearchOK) Code() int {
 }
 
 func (o *HelmRepoSearchOK) Error() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchOK %s", 200, payload)
 }
 
 func (o *HelmRepoSearchOK) String() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchOK %s", 200, payload)
 }
 
 func (o *HelmRepoSearchOK) GetPayload() string {
@@ -166,11 +169,11 @@ func (o *HelmRepoSearchBadRequest) Code() int {
 }
 
 func (o *HelmRepoSearchBadRequest) Error() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchBadRequest ", 400)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchBadRequest", 400)
 }
 
 func (o *HelmRepoSearchBadRequest) String() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchBadRequest ", 400)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchBadRequest", 400)
 }
 
 func (o *HelmRepoSearchBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -222,11 +225,11 @@ func (o *HelmRepoSearchUnauthorized) Code() int {
 }
 
 func (o *HelmRepoSearchUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchUnauthorized ", 401)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchUnauthorized", 401)
 }
 
 func (o *HelmRepoSearchUnauthorized) String() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchUnauthorized ", 401)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchUnauthorized", 401)
 }
 
 func (o *HelmRepoSearchUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -278,11 +281,11 @@ func (o *HelmRepoSearchNotFound) Code() int {
 }
 
 func (o *HelmRepoSearchNotFound) Error() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchNotFound ", 404)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchNotFound", 404)
 }
 
 func (o *HelmRepoSearchNotFound) String() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchNotFound ", 404)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchNotFound", 404)
 }
 
 func (o *HelmRepoSearchNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -334,11 +337,11 @@ func (o *HelmRepoSearchInternalServerError) Code() int {
 }
 
 func (o *HelmRepoSearchInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchInternalServerError ", 500)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchInternalServerError", 500)
 }
 
 func (o *HelmRepoSearchInternalServerError) String() string {
-	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchInternalServerError ", 500)
+	return fmt.Sprintf("[GET /templates/helm][%d] helmRepoSearchInternalServerError", 500)
 }
 
 func (o *HelmRepoSearchInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -25,14 +25,14 @@ type StacksComposeStackFromGitRepositoryPayload struct {
 	AdditionalFiles []string `json:"additionalFiles"`
 
 	// Optional GitOps update configuration
-	AutoUpdate *PortainereeAutoUpdateSettings `json:"autoUpdate,omitempty"`
+	AutoUpdate *PortainerAutoUpdateSettings `json:"autoUpdate,omitempty"`
 
 	// Path to the Stack file inside the Git repository
 	// Example: docker-compose.yml
 	ComposeFile *string `json:"composeFile,omitempty"`
 
 	// A list of environment variables used during stack deployment
-	Env []*PortainereePair `json:"env"`
+	Env []*PortainerPair `json:"env"`
 
 	// Local filesystem path
 	// Example: /tmp

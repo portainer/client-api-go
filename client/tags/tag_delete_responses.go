@@ -99,11 +99,11 @@ func (o *TagDeleteNoContent) Code() int {
 }
 
 func (o *TagDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNoContent", 204)
 }
 
 func (o *TagDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNoContent", 204)
 }
 
 func (o *TagDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *TagDeleteBadRequest) Code() int {
 }
 
 func (o *TagDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteBadRequest", 400)
 }
 
 func (o *TagDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteBadRequest", 400)
 }
 
 func (o *TagDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *TagDeleteForbidden) Code() int {
 }
 
 func (o *TagDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteForbidden", 403)
 }
 
 func (o *TagDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteForbidden", 403)
 }
 
 func (o *TagDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *TagDeleteNotFound) Code() int {
 }
 
 func (o *TagDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNotFound", 404)
 }
 
 func (o *TagDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteNotFound", 404)
 }
 
 func (o *TagDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *TagDeleteInternalServerError) Code() int {
 }
 
 func (o *TagDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteInternalServerError", 500)
 }
 
 func (o *TagDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /tags/{id}][%d] tagDeleteInternalServerError", 500)
 }
 
 func (o *TagDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -99,11 +99,11 @@ func (o *EndpointUpdateRelationsNoContent) Code() int {
 }
 
 func (o *EndpointUpdateRelationsNoContent) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNoContent ", 204)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNoContent", 204)
 }
 
 func (o *EndpointUpdateRelationsNoContent) String() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNoContent ", 204)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNoContent", 204)
 }
 
 func (o *EndpointUpdateRelationsNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *EndpointUpdateRelationsBadRequest) Code() int {
 }
 
 func (o *EndpointUpdateRelationsBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsBadRequest", 400)
 }
 
 func (o *EndpointUpdateRelationsBadRequest) String() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsBadRequest ", 400)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsBadRequest", 400)
 }
 
 func (o *EndpointUpdateRelationsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *EndpointUpdateRelationsUnauthorized) Code() int {
 }
 
 func (o *EndpointUpdateRelationsUnauthorized) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsUnauthorized ", 401)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsUnauthorized", 401)
 }
 
 func (o *EndpointUpdateRelationsUnauthorized) String() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsUnauthorized ", 401)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsUnauthorized", 401)
 }
 
 func (o *EndpointUpdateRelationsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *EndpointUpdateRelationsNotFound) Code() int {
 }
 
 func (o *EndpointUpdateRelationsNotFound) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNotFound", 404)
 }
 
 func (o *EndpointUpdateRelationsNotFound) String() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNotFound ", 404)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsNotFound", 404)
 }
 
 func (o *EndpointUpdateRelationsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *EndpointUpdateRelationsInternalServerError) Code() int {
 }
 
 func (o *EndpointUpdateRelationsInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsInternalServerError", 500)
 }
 
 func (o *EndpointUpdateRelationsInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /endpoints/relations][%d] endpointUpdateRelationsInternalServerError", 500)
 }
 
 func (o *EndpointUpdateRelationsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package endpoint_groups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -57,7 +58,7 @@ PostEndpointGroupsOK describes a response with status code 200, with default hea
 Success
 */
 type PostEndpointGroupsOK struct {
-	Payload *models.PortainereeEndpointGroup
+	Payload *models.PortainerEndpointGroup
 }
 
 // IsSuccess returns true when this post endpoint groups o k response has a 2xx status code
@@ -91,20 +92,22 @@ func (o *PostEndpointGroupsOK) Code() int {
 }
 
 func (o *PostEndpointGroupsOK) Error() string {
-	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsOK %s", 200, payload)
 }
 
 func (o *PostEndpointGroupsOK) String() string {
-	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsOK %s", 200, payload)
 }
 
-func (o *PostEndpointGroupsOK) GetPayload() *models.PortainereeEndpointGroup {
+func (o *PostEndpointGroupsOK) GetPayload() *models.PortainerEndpointGroup {
 	return o.Payload
 }
 
 func (o *PostEndpointGroupsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeEndpointGroup)
+	o.Payload = new(models.PortainerEndpointGroup)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -158,11 +161,11 @@ func (o *PostEndpointGroupsBadRequest) Code() int {
 }
 
 func (o *PostEndpointGroupsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsBadRequest", 400)
 }
 
 func (o *PostEndpointGroupsBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsBadRequest", 400)
 }
 
 func (o *PostEndpointGroupsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *PostEndpointGroupsInternalServerError) Code() int {
 }
 
 func (o *PostEndpointGroupsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsInternalServerError", 500)
 }
 
 func (o *PostEndpointGroupsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoint_groups][%d] postEndpointGroupsInternalServerError", 500)
 }
 
 func (o *PostEndpointGroupsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

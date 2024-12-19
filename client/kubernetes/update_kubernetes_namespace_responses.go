@@ -6,11 +6,14 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/portainer/client-api-go/v2/models"
 )
 
 // UpdateKubernetesNamespaceReader is a Reader for the UpdateKubernetesNamespace structure.
@@ -33,6 +36,24 @@ func (o *UpdateKubernetesNamespaceReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
+	case 401:
+		result := NewUpdateKubernetesNamespaceUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewUpdateKubernetesNamespaceForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewUpdateKubernetesNamespaceNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewUpdateKubernetesNamespaceInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -40,7 +61,7 @@ func (o *UpdateKubernetesNamespaceReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /kubernetes/{id}/namespaces/{namespace}] updateKubernetesNamespace", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /kubernetes/{id}/namespaces/{namespace}] UpdateKubernetesNamespace", response, response.Code())
 	}
 }
 
@@ -55,7 +76,7 @@ UpdateKubernetesNamespaceOK describes a response with status code 200, with defa
 Success
 */
 type UpdateKubernetesNamespaceOK struct {
-	Payload string
+	Payload *models.PortainerK8sNamespaceInfo
 }
 
 // IsSuccess returns true when this update kubernetes namespace o k response has a 2xx status code
@@ -89,21 +110,25 @@ func (o *UpdateKubernetesNamespaceOK) Code() int {
 }
 
 func (o *UpdateKubernetesNamespaceOK) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceOK %s", 200, payload)
 }
 
 func (o *UpdateKubernetesNamespaceOK) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceOK %s", 200, payload)
 }
 
-func (o *UpdateKubernetesNamespaceOK) GetPayload() string {
+func (o *UpdateKubernetesNamespaceOK) GetPayload() *models.PortainerK8sNamespaceInfo {
 	return o.Payload
 }
 
 func (o *UpdateKubernetesNamespaceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.PortainerK8sNamespaceInfo)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -118,7 +143,7 @@ func NewUpdateKubernetesNamespaceBadRequest() *UpdateKubernetesNamespaceBadReque
 /*
 UpdateKubernetesNamespaceBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type UpdateKubernetesNamespaceBadRequest struct {
 }
@@ -154,14 +179,182 @@ func (o *UpdateKubernetesNamespaceBadRequest) Code() int {
 }
 
 func (o *UpdateKubernetesNamespaceBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceBadRequest ", 400)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceBadRequest", 400)
 }
 
 func (o *UpdateKubernetesNamespaceBadRequest) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceBadRequest ", 400)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceBadRequest", 400)
 }
 
 func (o *UpdateKubernetesNamespaceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewUpdateKubernetesNamespaceUnauthorized creates a UpdateKubernetesNamespaceUnauthorized with default headers values
+func NewUpdateKubernetesNamespaceUnauthorized() *UpdateKubernetesNamespaceUnauthorized {
+	return &UpdateKubernetesNamespaceUnauthorized{}
+}
+
+/*
+UpdateKubernetesNamespaceUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type UpdateKubernetesNamespaceUnauthorized struct {
+}
+
+// IsSuccess returns true when this update kubernetes namespace unauthorized response has a 2xx status code
+func (o *UpdateKubernetesNamespaceUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update kubernetes namespace unauthorized response has a 3xx status code
+func (o *UpdateKubernetesNamespaceUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update kubernetes namespace unauthorized response has a 4xx status code
+func (o *UpdateKubernetesNamespaceUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update kubernetes namespace unauthorized response has a 5xx status code
+func (o *UpdateKubernetesNamespaceUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update kubernetes namespace unauthorized response a status code equal to that given
+func (o *UpdateKubernetesNamespaceUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update kubernetes namespace unauthorized response
+func (o *UpdateKubernetesNamespaceUnauthorized) Code() int {
+	return 401
+}
+
+func (o *UpdateKubernetesNamespaceUnauthorized) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceUnauthorized", 401)
+}
+
+func (o *UpdateKubernetesNamespaceUnauthorized) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceUnauthorized", 401)
+}
+
+func (o *UpdateKubernetesNamespaceUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewUpdateKubernetesNamespaceForbidden creates a UpdateKubernetesNamespaceForbidden with default headers values
+func NewUpdateKubernetesNamespaceForbidden() *UpdateKubernetesNamespaceForbidden {
+	return &UpdateKubernetesNamespaceForbidden{}
+}
+
+/*
+UpdateKubernetesNamespaceForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type UpdateKubernetesNamespaceForbidden struct {
+}
+
+// IsSuccess returns true when this update kubernetes namespace forbidden response has a 2xx status code
+func (o *UpdateKubernetesNamespaceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update kubernetes namespace forbidden response has a 3xx status code
+func (o *UpdateKubernetesNamespaceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update kubernetes namespace forbidden response has a 4xx status code
+func (o *UpdateKubernetesNamespaceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update kubernetes namespace forbidden response has a 5xx status code
+func (o *UpdateKubernetesNamespaceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update kubernetes namespace forbidden response a status code equal to that given
+func (o *UpdateKubernetesNamespaceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the update kubernetes namespace forbidden response
+func (o *UpdateKubernetesNamespaceForbidden) Code() int {
+	return 403
+}
+
+func (o *UpdateKubernetesNamespaceForbidden) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceForbidden", 403)
+}
+
+func (o *UpdateKubernetesNamespaceForbidden) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceForbidden", 403)
+}
+
+func (o *UpdateKubernetesNamespaceForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewUpdateKubernetesNamespaceNotFound creates a UpdateKubernetesNamespaceNotFound with default headers values
+func NewUpdateKubernetesNamespaceNotFound() *UpdateKubernetesNamespaceNotFound {
+	return &UpdateKubernetesNamespaceNotFound{}
+}
+
+/*
+UpdateKubernetesNamespaceNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier or unable to find a specific namespace.
+*/
+type UpdateKubernetesNamespaceNotFound struct {
+}
+
+// IsSuccess returns true when this update kubernetes namespace not found response has a 2xx status code
+func (o *UpdateKubernetesNamespaceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update kubernetes namespace not found response has a 3xx status code
+func (o *UpdateKubernetesNamespaceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update kubernetes namespace not found response has a 4xx status code
+func (o *UpdateKubernetesNamespaceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update kubernetes namespace not found response has a 5xx status code
+func (o *UpdateKubernetesNamespaceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update kubernetes namespace not found response a status code equal to that given
+func (o *UpdateKubernetesNamespaceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update kubernetes namespace not found response
+func (o *UpdateKubernetesNamespaceNotFound) Code() int {
+	return 404
+}
+
+func (o *UpdateKubernetesNamespaceNotFound) Error() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceNotFound", 404)
+}
+
+func (o *UpdateKubernetesNamespaceNotFound) String() string {
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceNotFound", 404)
+}
+
+func (o *UpdateKubernetesNamespaceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -174,7 +367,7 @@ func NewUpdateKubernetesNamespaceInternalServerError() *UpdateKubernetesNamespac
 /*
 UpdateKubernetesNamespaceInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to update the namespace.
 */
 type UpdateKubernetesNamespaceInternalServerError struct {
 }
@@ -210,11 +403,11 @@ func (o *UpdateKubernetesNamespaceInternalServerError) Code() int {
 }
 
 func (o *UpdateKubernetesNamespaceInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceInternalServerError", 500)
 }
 
 func (o *UpdateKubernetesNamespaceInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /kubernetes/{id}/namespaces/{namespace}][%d] updateKubernetesNamespaceInternalServerError", 500)
 }
 
 func (o *UpdateKubernetesNamespaceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

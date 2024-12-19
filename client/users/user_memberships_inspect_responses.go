@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -63,7 +64,7 @@ UserMembershipsInspectOK describes a response with status code 200, with default
 Success
 */
 type UserMembershipsInspectOK struct {
-	Payload *models.PortainereeTeamMembership
+	Payload *models.PortainerTeamMembership
 }
 
 // IsSuccess returns true when this user memberships inspect o k response has a 2xx status code
@@ -97,20 +98,22 @@ func (o *UserMembershipsInspectOK) Code() int {
 }
 
 func (o *UserMembershipsInspectOK) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectOK %s", 200, payload)
 }
 
 func (o *UserMembershipsInspectOK) String() string {
-	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectOK %s", 200, payload)
 }
 
-func (o *UserMembershipsInspectOK) GetPayload() *models.PortainereeTeamMembership {
+func (o *UserMembershipsInspectOK) GetPayload() *models.PortainerTeamMembership {
 	return o.Payload
 }
 
 func (o *UserMembershipsInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.PortainereeTeamMembership)
+	o.Payload = new(models.PortainerTeamMembership)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -164,11 +167,11 @@ func (o *UserMembershipsInspectBadRequest) Code() int {
 }
 
 func (o *UserMembershipsInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectBadRequest", 400)
 }
 
 func (o *UserMembershipsInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectBadRequest", 400)
 }
 
 func (o *UserMembershipsInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *UserMembershipsInspectForbidden) Code() int {
 }
 
 func (o *UserMembershipsInspectForbidden) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectForbidden", 403)
 }
 
 func (o *UserMembershipsInspectForbidden) String() string {
-	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectForbidden", 403)
 }
 
 func (o *UserMembershipsInspectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *UserMembershipsInspectInternalServerError) Code() int {
 }
 
 func (o *UserMembershipsInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectInternalServerError", 500)
 }
 
 func (o *UserMembershipsInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}/memberships][%d] userMembershipsInspectInternalServerError", 500)
 }
 
 func (o *UserMembershipsInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

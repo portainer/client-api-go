@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -31,6 +32,12 @@ func (o *StackCreateDockerSwarmFileReader) ReadResponse(response runtime.ClientR
 		return result, nil
 	case 400:
 		result := NewStackCreateDockerSwarmFileBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewStackCreateDockerSwarmFileConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -91,11 +98,13 @@ func (o *StackCreateDockerSwarmFileOK) Code() int {
 }
 
 func (o *StackCreateDockerSwarmFileOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileOK %s", 200, payload)
 }
 
 func (o *StackCreateDockerSwarmFileOK) String() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileOK %s", 200, payload)
 }
 
 func (o *StackCreateDockerSwarmFileOK) GetPayload() *models.PortainereeStack {
@@ -158,14 +167,70 @@ func (o *StackCreateDockerSwarmFileBadRequest) Code() int {
 }
 
 func (o *StackCreateDockerSwarmFileBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileBadRequest", 400)
 }
 
 func (o *StackCreateDockerSwarmFileBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileBadRequest", 400)
 }
 
 func (o *StackCreateDockerSwarmFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewStackCreateDockerSwarmFileConflict creates a StackCreateDockerSwarmFileConflict with default headers values
+func NewStackCreateDockerSwarmFileConflict() *StackCreateDockerSwarmFileConflict {
+	return &StackCreateDockerSwarmFileConflict{}
+}
+
+/*
+StackCreateDockerSwarmFileConflict describes a response with status code 409, with default header values.
+
+Stack name or webhook id is not unique
+*/
+type StackCreateDockerSwarmFileConflict struct {
+}
+
+// IsSuccess returns true when this stack create docker swarm file conflict response has a 2xx status code
+func (o *StackCreateDockerSwarmFileConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack create docker swarm file conflict response has a 3xx status code
+func (o *StackCreateDockerSwarmFileConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack create docker swarm file conflict response has a 4xx status code
+func (o *StackCreateDockerSwarmFileConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack create docker swarm file conflict response has a 5xx status code
+func (o *StackCreateDockerSwarmFileConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack create docker swarm file conflict response a status code equal to that given
+func (o *StackCreateDockerSwarmFileConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the stack create docker swarm file conflict response
+func (o *StackCreateDockerSwarmFileConflict) Code() int {
+	return 409
+}
+
+func (o *StackCreateDockerSwarmFileConflict) Error() string {
+	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileConflict", 409)
+}
+
+func (o *StackCreateDockerSwarmFileConflict) String() string {
+	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileConflict", 409)
+}
+
+func (o *StackCreateDockerSwarmFileConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -214,11 +279,11 @@ func (o *StackCreateDockerSwarmFileInternalServerError) Code() int {
 }
 
 func (o *StackCreateDockerSwarmFileInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileInternalServerError", 500)
 }
 
 func (o *StackCreateDockerSwarmFileInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/create/swarm/file][%d] stackCreateDockerSwarmFileInternalServerError", 500)
 }
 
 func (o *StackCreateDockerSwarmFileInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

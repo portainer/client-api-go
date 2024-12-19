@@ -87,11 +87,11 @@ func (o *UploadTLSNoContent) Code() int {
 }
 
 func (o *UploadTLSNoContent) Error() string {
-	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsNoContent ", 204)
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsNoContent", 204)
 }
 
 func (o *UploadTLSNoContent) String() string {
-	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsNoContent ", 204)
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsNoContent", 204)
 }
 
 func (o *UploadTLSNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *UploadTLSBadRequest) Code() int {
 }
 
 func (o *UploadTLSBadRequest) Error() string {
-	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsBadRequest ", 400)
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsBadRequest", 400)
 }
 
 func (o *UploadTLSBadRequest) String() string {
-	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsBadRequest ", 400)
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsBadRequest", 400)
 }
 
 func (o *UploadTLSBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *UploadTLSInternalServerError) Code() int {
 }
 
 func (o *UploadTLSInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsInternalServerError", 500)
 }
 
 func (o *UploadTLSInternalServerError) String() string {
-	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /upload/tls/{certificate}][%d] uploadTlsInternalServerError", 500)
 }
 
 func (o *UploadTLSInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

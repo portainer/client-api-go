@@ -33,7 +33,7 @@ func (o *EdgeConfigUpdateReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[PUT /edge_configurations] EdgeConfigUpdate", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /edge_configurations/{id}] EdgeConfigUpdate", response, response.Code())
 	}
 }
 
@@ -81,11 +81,11 @@ func (o *EdgeConfigUpdateNoContent) Code() int {
 }
 
 func (o *EdgeConfigUpdateNoContent) Error() string {
-	return fmt.Sprintf("[PUT /edge_configurations][%d] edgeConfigUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}][%d] edgeConfigUpdateNoContent", 204)
 }
 
 func (o *EdgeConfigUpdateNoContent) String() string {
-	return fmt.Sprintf("[PUT /edge_configurations][%d] edgeConfigUpdateNoContent ", 204)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}][%d] edgeConfigUpdateNoContent", 204)
 }
 
 func (o *EdgeConfigUpdateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -137,11 +137,11 @@ func (o *EdgeConfigUpdateBadRequest) Code() int {
 }
 
 func (o *EdgeConfigUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /edge_configurations][%d] edgeConfigUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}][%d] edgeConfigUpdateBadRequest", 400)
 }
 
 func (o *EdgeConfigUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /edge_configurations][%d] edgeConfigUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /edge_configurations/{id}][%d] edgeConfigUpdateBadRequest", 400)
 }
 
 func (o *EdgeConfigUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

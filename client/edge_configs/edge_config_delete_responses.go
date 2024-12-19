@@ -93,11 +93,11 @@ func (o *EdgeConfigDeleteNoContent) Code() int {
 }
 
 func (o *EdgeConfigDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNoContent", 204)
 }
 
 func (o *EdgeConfigDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNoContent", 204)
 }
 
 func (o *EdgeConfigDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EdgeConfigDeleteBadRequest) Code() int {
 }
 
 func (o *EdgeConfigDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteBadRequest", 400)
 }
 
 func (o *EdgeConfigDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteBadRequest", 400)
 }
 
 func (o *EdgeConfigDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EdgeConfigDeleteNotFound) Code() int {
 }
 
 func (o *EdgeConfigDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNotFound", 404)
 }
 
 func (o *EdgeConfigDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteNotFound", 404)
 }
 
 func (o *EdgeConfigDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EdgeConfigDeleteInternalServerError) Code() int {
 }
 
 func (o *EdgeConfigDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteInternalServerError", 500)
 }
 
 func (o *EdgeConfigDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_configurations/{id}][%d] edgeConfigDeleteInternalServerError", 500)
 }
 
 func (o *EdgeConfigDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

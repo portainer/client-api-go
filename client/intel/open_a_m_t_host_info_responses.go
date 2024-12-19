@@ -93,11 +93,11 @@ func (o *OpenAMTHostInfoOK) Code() int {
 }
 
 func (o *OpenAMTHostInfoOK) Error() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoOK ", 200)
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoOK", 200)
 }
 
 func (o *OpenAMTHostInfoOK) String() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoOK ", 200)
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoOK", 200)
 }
 
 func (o *OpenAMTHostInfoOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *OpenAMTHostInfoBadRequest) Code() int {
 }
 
 func (o *OpenAMTHostInfoBadRequest) Error() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoBadRequest ", 400)
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoBadRequest", 400)
 }
 
 func (o *OpenAMTHostInfoBadRequest) String() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoBadRequest ", 400)
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoBadRequest", 400)
 }
 
 func (o *OpenAMTHostInfoBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *OpenAMTHostInfoForbidden) Code() int {
 }
 
 func (o *OpenAMTHostInfoForbidden) Error() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoForbidden ", 403)
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoForbidden", 403)
 }
 
 func (o *OpenAMTHostInfoForbidden) String() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoForbidden ", 403)
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoForbidden", 403)
 }
 
 func (o *OpenAMTHostInfoForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *OpenAMTHostInfoInternalServerError) Code() int {
 }
 
 func (o *OpenAMTHostInfoInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoInternalServerError ", 500)
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoInternalServerError", 500)
 }
 
 func (o *OpenAMTHostInfoInternalServerError) String() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoInternalServerError ", 500)
+	return fmt.Sprintf("[GET /open_amt/{id}/info][%d] openAMTHostInfoInternalServerError", 500)
 }
 
 func (o *OpenAMTHostInfoInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

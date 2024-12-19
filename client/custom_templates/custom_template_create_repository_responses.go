@@ -6,6 +6,7 @@ package custom_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -42,7 +43,7 @@ func (o *CustomTemplateCreateRepositoryReader) ReadResponse(response runtime.Cli
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /custom_templates/repository] CustomTemplateCreateRepository", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /custom_templates/create/repository] CustomTemplateCreateRepository", response, response.Code())
 	}
 }
 
@@ -91,11 +92,13 @@ func (o *CustomTemplateCreateRepositoryOK) Code() int {
 }
 
 func (o *CustomTemplateCreateRepositoryOK) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/repository][%d] customTemplateCreateRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /custom_templates/create/repository][%d] customTemplateCreateRepositoryOK %s", 200, payload)
 }
 
 func (o *CustomTemplateCreateRepositoryOK) String() string {
-	return fmt.Sprintf("[POST /custom_templates/repository][%d] customTemplateCreateRepositoryOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /custom_templates/create/repository][%d] customTemplateCreateRepositoryOK %s", 200, payload)
 }
 
 func (o *CustomTemplateCreateRepositoryOK) GetPayload() *models.PortainereeCustomTemplate {
@@ -158,11 +161,11 @@ func (o *CustomTemplateCreateRepositoryBadRequest) Code() int {
 }
 
 func (o *CustomTemplateCreateRepositoryBadRequest) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/repository][%d] customTemplateCreateRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /custom_templates/create/repository][%d] customTemplateCreateRepositoryBadRequest", 400)
 }
 
 func (o *CustomTemplateCreateRepositoryBadRequest) String() string {
-	return fmt.Sprintf("[POST /custom_templates/repository][%d] customTemplateCreateRepositoryBadRequest ", 400)
+	return fmt.Sprintf("[POST /custom_templates/create/repository][%d] customTemplateCreateRepositoryBadRequest", 400)
 }
 
 func (o *CustomTemplateCreateRepositoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *CustomTemplateCreateRepositoryInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateCreateRepositoryInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/repository][%d] customTemplateCreateRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /custom_templates/create/repository][%d] customTemplateCreateRepositoryInternalServerError", 500)
 }
 
 func (o *CustomTemplateCreateRepositoryInternalServerError) String() string {
-	return fmt.Sprintf("[POST /custom_templates/repository][%d] customTemplateCreateRepositoryInternalServerError ", 500)
+	return fmt.Sprintf("[POST /custom_templates/create/repository][%d] customTemplateCreateRepositoryInternalServerError", 500)
 }
 
 func (o *CustomTemplateCreateRepositoryInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

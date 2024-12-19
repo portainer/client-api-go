@@ -93,11 +93,11 @@ func (o *GetWebsocketMicrok8sShellOK) Code() int {
 }
 
 func (o *GetWebsocketMicrok8sShellOK) Error() string {
-	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellOK ", 200)
+	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellOK", 200)
 }
 
 func (o *GetWebsocketMicrok8sShellOK) String() string {
-	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellOK ", 200)
+	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellOK", 200)
 }
 
 func (o *GetWebsocketMicrok8sShellOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *GetWebsocketMicrok8sShellBadRequest) Code() int {
 }
 
 func (o *GetWebsocketMicrok8sShellBadRequest) Error() string {
-	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellBadRequest", 400)
 }
 
 func (o *GetWebsocketMicrok8sShellBadRequest) String() string {
-	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellBadRequest ", 400)
+	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellBadRequest", 400)
 }
 
 func (o *GetWebsocketMicrok8sShellBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *GetWebsocketMicrok8sShellConflict) Code() int {
 }
 
 func (o *GetWebsocketMicrok8sShellConflict) Error() string {
-	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellConflict ", 409)
+	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellConflict", 409)
 }
 
 func (o *GetWebsocketMicrok8sShellConflict) String() string {
-	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellConflict ", 409)
+	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellConflict", 409)
 }
 
 func (o *GetWebsocketMicrok8sShellConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *GetWebsocketMicrok8sShellInternalServerError) Code() int {
 }
 
 func (o *GetWebsocketMicrok8sShellInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellInternalServerError", 500)
 }
 
 func (o *GetWebsocketMicrok8sShellInternalServerError) String() string {
-	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellInternalServerError ", 500)
+	return fmt.Sprintf("[GET /websocket/microk8s-shell][%d] getWebsocketMicrok8sShellInternalServerError", 500)
 }
 
 func (o *GetWebsocketMicrok8sShellInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

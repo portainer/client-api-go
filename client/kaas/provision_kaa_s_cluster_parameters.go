@@ -14,7 +14,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 )
 
 // NewProvisionKaaSClusterParams creates a new ProvisionKaaSClusterParams object,
@@ -72,7 +71,7 @@ type ProvisionKaaSClusterParams struct {
 
 	   Provider
 	*/
-	Provider int64
+	Provider string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -139,13 +138,13 @@ func (o *ProvisionKaaSClusterParams) SetBody(body interface{}) {
 }
 
 // WithProvider adds the provider to the provision kaa s cluster params
-func (o *ProvisionKaaSClusterParams) WithProvider(provider int64) *ProvisionKaaSClusterParams {
+func (o *ProvisionKaaSClusterParams) WithProvider(provider string) *ProvisionKaaSClusterParams {
 	o.SetProvider(provider)
 	return o
 }
 
 // SetProvider adds the provider to the provision kaa s cluster params
-func (o *ProvisionKaaSClusterParams) SetProvider(provider int64) {
+func (o *ProvisionKaaSClusterParams) SetProvider(provider string) {
 	o.Provider = provider
 }
 
@@ -163,7 +162,7 @@ func (o *ProvisionKaaSClusterParams) WriteToRequest(r runtime.ClientRequest, reg
 	}
 
 	// path param provider
-	if err := r.SetPathParam("provider", swag.FormatInt64(o.Provider)); err != nil {
+	if err := r.SetPathParam("provider", o.Provider); err != nil {
 		return err
 	}
 

@@ -75,11 +75,11 @@ func (o *LicensesDeleteOK) Code() int {
 }
 
 func (o *LicensesDeleteOK) Error() string {
-	return fmt.Sprintf("[POST /licenses/remove][%d] licensesDeleteOK ", 200)
+	return fmt.Sprintf("[POST /licenses/remove][%d] licensesDeleteOK", 200)
 }
 
 func (o *LicensesDeleteOK) String() string {
-	return fmt.Sprintf("[POST /licenses/remove][%d] licensesDeleteOK ", 200)
+	return fmt.Sprintf("[POST /licenses/remove][%d] licensesDeleteOK", 200)
 }
 
 func (o *LicensesDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

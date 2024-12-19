@@ -6,6 +6,7 @@ package registries
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *RegistryInspectOK) Code() int {
 }
 
 func (o *RegistryInspectOK) Error() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectOK %s", 200, payload)
 }
 
 func (o *RegistryInspectOK) String() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectOK %s", 200, payload)
 }
 
 func (o *RegistryInspectOK) GetPayload() *models.PortainereeRegistry {
@@ -170,11 +173,11 @@ func (o *RegistryInspectBadRequest) Code() int {
 }
 
 func (o *RegistryInspectBadRequest) Error() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectBadRequest", 400)
 }
 
 func (o *RegistryInspectBadRequest) String() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectBadRequest ", 400)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectBadRequest", 400)
 }
 
 func (o *RegistryInspectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *RegistryInspectForbidden) Code() int {
 }
 
 func (o *RegistryInspectForbidden) Error() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectForbidden", 403)
 }
 
 func (o *RegistryInspectForbidden) String() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectForbidden ", 403)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectForbidden", 403)
 }
 
 func (o *RegistryInspectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *RegistryInspectNotFound) Code() int {
 }
 
 func (o *RegistryInspectNotFound) Error() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectNotFound", 404)
 }
 
 func (o *RegistryInspectNotFound) String() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectNotFound ", 404)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectNotFound", 404)
 }
 
 func (o *RegistryInspectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *RegistryInspectInternalServerError) Code() int {
 }
 
 func (o *RegistryInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectInternalServerError", 500)
 }
 
 func (o *RegistryInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /registries/{id}][%d] registryInspectInternalServerError", 500)
 }
 
 func (o *RegistryInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

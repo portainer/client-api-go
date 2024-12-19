@@ -63,7 +63,7 @@ func NewEndpointDeleteNoContent() *EndpointDeleteNoContent {
 /*
 EndpointDeleteNoContent describes a response with status code 204, with default header values.
 
-Success
+Environment successfully deleted.
 */
 type EndpointDeleteNoContent struct {
 }
@@ -99,11 +99,11 @@ func (o *EndpointDeleteNoContent) Code() int {
 }
 
 func (o *EndpointDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNoContent", 204)
 }
 
 func (o *EndpointDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNoContent", 204)
 }
 
 func (o *EndpointDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -119,7 +119,7 @@ func NewEndpointDeleteBadRequest() *EndpointDeleteBadRequest {
 /*
 EndpointDeleteBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type EndpointDeleteBadRequest struct {
 }
@@ -155,11 +155,11 @@ func (o *EndpointDeleteBadRequest) Code() int {
 }
 
 func (o *EndpointDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteBadRequest", 400)
 }
 
 func (o *EndpointDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteBadRequest", 400)
 }
 
 func (o *EndpointDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -175,7 +175,7 @@ func NewEndpointDeleteForbidden() *EndpointDeleteForbidden {
 /*
 EndpointDeleteForbidden describes a response with status code 403, with default header values.
 
-Permission denied
+Unauthorized access or operation not allowed.
 */
 type EndpointDeleteForbidden struct {
 }
@@ -211,11 +211,11 @@ func (o *EndpointDeleteForbidden) Code() int {
 }
 
 func (o *EndpointDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteForbidden", 403)
 }
 
 func (o *EndpointDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteForbidden", 403)
 }
 
 func (o *EndpointDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -231,7 +231,7 @@ func NewEndpointDeleteNotFound() *EndpointDeleteNotFound {
 /*
 EndpointDeleteNotFound describes a response with status code 404, with default header values.
 
-Environment(Endpoint) not found
+Unable to find the environment with the specified identifier inside the database.
 */
 type EndpointDeleteNotFound struct {
 }
@@ -267,11 +267,11 @@ func (o *EndpointDeleteNotFound) Code() int {
 }
 
 func (o *EndpointDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNotFound", 404)
 }
 
 func (o *EndpointDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteNotFound", 404)
 }
 
 func (o *EndpointDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -287,7 +287,7 @@ func NewEndpointDeleteInternalServerError() *EndpointDeleteInternalServerError {
 /*
 EndpointDeleteInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to delete the environment.
 */
 type EndpointDeleteInternalServerError struct {
 }
@@ -323,11 +323,11 @@ func (o *EndpointDeleteInternalServerError) Code() int {
 }
 
 func (o *EndpointDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteInternalServerError", 500)
 }
 
 func (o *EndpointDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /endpoints/{id}][%d] endpointDeleteInternalServerError", 500)
 }
 
 func (o *EndpointDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

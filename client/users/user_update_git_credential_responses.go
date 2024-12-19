@@ -99,11 +99,11 @@ func (o *UserUpdateGitCredentialNoContent) Code() int {
 }
 
 func (o *UserUpdateGitCredentialNoContent) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNoContent ", 204)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNoContent", 204)
 }
 
 func (o *UserUpdateGitCredentialNoContent) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNoContent ", 204)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNoContent", 204)
 }
 
 func (o *UserUpdateGitCredentialNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *UserUpdateGitCredentialBadRequest) Code() int {
 }
 
 func (o *UserUpdateGitCredentialBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialBadRequest ", 400)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialBadRequest", 400)
 }
 
 func (o *UserUpdateGitCredentialBadRequest) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialBadRequest ", 400)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialBadRequest", 400)
 }
 
 func (o *UserUpdateGitCredentialBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *UserUpdateGitCredentialForbidden) Code() int {
 }
 
 func (o *UserUpdateGitCredentialForbidden) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialForbidden ", 403)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialForbidden", 403)
 }
 
 func (o *UserUpdateGitCredentialForbidden) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialForbidden ", 403)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialForbidden", 403)
 }
 
 func (o *UserUpdateGitCredentialForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *UserUpdateGitCredentialNotFound) Code() int {
 }
 
 func (o *UserUpdateGitCredentialNotFound) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNotFound ", 404)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNotFound", 404)
 }
 
 func (o *UserUpdateGitCredentialNotFound) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNotFound ", 404)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialNotFound", 404)
 }
 
 func (o *UserUpdateGitCredentialNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *UserUpdateGitCredentialInternalServerError) Code() int {
 }
 
 func (o *UserUpdateGitCredentialInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialInternalServerError", 500)
 }
 
 func (o *UserUpdateGitCredentialInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /users/{id}/gitcredentials/{credentialID}][%d] userUpdateGitCredentialInternalServerError", 500)
 }
 
 func (o *UserUpdateGitCredentialInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

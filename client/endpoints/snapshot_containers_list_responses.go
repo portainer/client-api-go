@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *SnapshotContainersListOK) Code() int {
 }
 
 func (o *SnapshotContainersListOK) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListOK %s", 200, payload)
 }
 
 func (o *SnapshotContainersListOK) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListOK %s", 200, payload)
 }
 
 func (o *SnapshotContainersListOK) GetPayload() *models.PortainerDockerContainerSnapshot {
@@ -152,11 +155,11 @@ func (o *SnapshotContainersListNotFound) Code() int {
 }
 
 func (o *SnapshotContainersListNotFound) Error() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListNotFound ", 404)
+	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListNotFound", 404)
 }
 
 func (o *SnapshotContainersListNotFound) String() string {
-	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListNotFound ", 404)
+	return fmt.Sprintf("[GET /docker/{environmentId}/snapshot/containers][%d] snapshotContainersListNotFound", 404)
 }
 
 func (o *SnapshotContainersListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

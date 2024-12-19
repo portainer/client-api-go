@@ -93,11 +93,11 @@ func (o *OpenAMTActivateOK) Code() int {
 }
 
 func (o *OpenAMTActivateOK) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateOK ", 200)
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateOK", 200)
 }
 
 func (o *OpenAMTActivateOK) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateOK ", 200)
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateOK", 200)
 }
 
 func (o *OpenAMTActivateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *OpenAMTActivateBadRequest) Code() int {
 }
 
 func (o *OpenAMTActivateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateBadRequest ", 400)
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateBadRequest", 400)
 }
 
 func (o *OpenAMTActivateBadRequest) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateBadRequest ", 400)
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateBadRequest", 400)
 }
 
 func (o *OpenAMTActivateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *OpenAMTActivateForbidden) Code() int {
 }
 
 func (o *OpenAMTActivateForbidden) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateForbidden ", 403)
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateForbidden", 403)
 }
 
 func (o *OpenAMTActivateForbidden) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateForbidden ", 403)
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateForbidden", 403)
 }
 
 func (o *OpenAMTActivateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *OpenAMTActivateInternalServerError) Code() int {
 }
 
 func (o *OpenAMTActivateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateInternalServerError", 500)
 }
 
 func (o *OpenAMTActivateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateInternalServerError ", 500)
+	return fmt.Sprintf("[POST /open_amt/{id}/activate][%d] openAMTActivateInternalServerError", 500)
 }
 
 func (o *OpenAMTActivateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

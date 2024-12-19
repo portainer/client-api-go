@@ -6,6 +6,7 @@ package templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *TemplateListOK) Code() int {
 }
 
 func (o *TemplateListOK) Error() string {
-	return fmt.Sprintf("[GET /templates][%d] templateListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /templates][%d] templateListOK %s", 200, payload)
 }
 
 func (o *TemplateListOK) String() string {
-	return fmt.Sprintf("[GET /templates][%d] templateListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /templates][%d] templateListOK %s", 200, payload)
 }
 
 func (o *TemplateListOK) GetPayload() *models.TemplatesListResponse {
@@ -152,11 +155,11 @@ func (o *TemplateListInternalServerError) Code() int {
 }
 
 func (o *TemplateListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /templates][%d] templateListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /templates][%d] templateListInternalServerError", 500)
 }
 
 func (o *TemplateListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /templates][%d] templateListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /templates][%d] templateListInternalServerError", 500)
 }
 
 func (o *TemplateListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -68,11 +68,11 @@ type DeleteKubernetesIngressesParams struct {
 
 	   Ingress details
 	*/
-	Body models.ModelsK8sIngressDeleteRequests
+	Body models.KubernetesK8sIngressDeleteRequests
 
 	/* ID.
 
-	   Environment (Endpoint) identifier
+	   Environment identifier
 	*/
 	ID int64
 
@@ -130,13 +130,13 @@ func (o *DeleteKubernetesIngressesParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the delete kubernetes ingresses params
-func (o *DeleteKubernetesIngressesParams) WithBody(body models.ModelsK8sIngressDeleteRequests) *DeleteKubernetesIngressesParams {
+func (o *DeleteKubernetesIngressesParams) WithBody(body models.KubernetesK8sIngressDeleteRequests) *DeleteKubernetesIngressesParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the delete kubernetes ingresses params
-func (o *DeleteKubernetesIngressesParams) SetBody(body models.ModelsK8sIngressDeleteRequests) {
+func (o *DeleteKubernetesIngressesParams) SetBody(body models.KubernetesK8sIngressDeleteRequests) {
 	o.Body = body
 }
 

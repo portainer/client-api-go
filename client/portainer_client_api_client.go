@@ -33,8 +33,6 @@ import (
 	"github.com/portainer/client-api-go/v2/client/ldap"
 	"github.com/portainer/client-api-go/v2/client/license"
 	"github.com/portainer/client-api-go/v2/client/motd"
-	"github.com/portainer/client-api-go/v2/client/nomad"
-	"github.com/portainer/client-api-go/v2/client/rbac_enabled"
 	"github.com/portainer/client-api-go/v2/client/registries"
 	"github.com/portainer/client-api-go/v2/client/resource_controls"
 	"github.com/portainer/client-api-go/v2/client/roles"
@@ -42,6 +40,7 @@ import (
 	"github.com/portainer/client-api-go/v2/client/ssl"
 	"github.com/portainer/client-api-go/v2/client/stacks"
 	"github.com/portainer/client-api-go/v2/client/status"
+	"github.com/portainer/client-api-go/v2/client/support"
 	"github.com/portainer/client-api-go/v2/client/system"
 	"github.com/portainer/client-api-go/v2/client/tags"
 	"github.com/portainer/client-api-go/v2/client/team_memberships"
@@ -119,8 +118,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.Ldap = ldap.New(transport, formats)
 	cli.License = license.New(transport, formats)
 	cli.Motd = motd.New(transport, formats)
-	cli.Nomad = nomad.New(transport, formats)
-	cli.RbacEnabled = rbac_enabled.New(transport, formats)
 	cli.Registries = registries.New(transport, formats)
 	cli.ResourceControls = resource_controls.New(transport, formats)
 	cli.Roles = roles.New(transport, formats)
@@ -128,6 +125,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.Ssl = ssl.New(transport, formats)
 	cli.Stacks = stacks.New(transport, formats)
 	cli.Status = status.New(transport, formats)
+	cli.Support = support.New(transport, formats)
 	cli.System = system.New(transport, formats)
 	cli.Tags = tags.New(transport, formats)
 	cli.TeamMemberships = team_memberships.New(transport, formats)
@@ -228,10 +226,6 @@ type PortainerClientAPI struct {
 
 	Motd motd.ClientService
 
-	Nomad nomad.ClientService
-
-	RbacEnabled rbac_enabled.ClientService
-
 	Registries registries.ClientService
 
 	ResourceControls resource_controls.ClientService
@@ -245,6 +239,8 @@ type PortainerClientAPI struct {
 	Stacks stacks.ClientService
 
 	Status status.ClientService
+
+	Support support.ClientService
 
 	System system.ClientService
 
@@ -295,8 +291,6 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Ldap.SetTransport(transport)
 	c.License.SetTransport(transport)
 	c.Motd.SetTransport(transport)
-	c.Nomad.SetTransport(transport)
-	c.RbacEnabled.SetTransport(transport)
 	c.Registries.SetTransport(transport)
 	c.ResourceControls.SetTransport(transport)
 	c.Roles.SetTransport(transport)
@@ -304,6 +298,7 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Ssl.SetTransport(transport)
 	c.Stacks.SetTransport(transport)
 	c.Status.SetTransport(transport)
+	c.Support.SetTransport(transport)
 	c.System.SetTransport(transport)
 	c.Tags.SetTransport(transport)
 	c.TeamMemberships.SetTransport(transport)

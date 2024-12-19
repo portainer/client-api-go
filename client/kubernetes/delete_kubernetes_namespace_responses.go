@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -33,6 +34,12 @@ func (o *DeleteKubernetesNamespaceReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
+	case 403:
+		result := NewDeleteKubernetesNamespaceForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewDeleteKubernetesNamespaceInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -40,7 +47,7 @@ func (o *DeleteKubernetesNamespaceReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /kubernetes/{id}/namespaces/{namespace}] deleteKubernetesNamespace", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /kubernetes/{id}/namespaces] DeleteKubernetesNamespace", response, response.Code())
 	}
 }
 
@@ -89,11 +96,13 @@ func (o *DeleteKubernetesNamespaceOK) Code() int {
 }
 
 func (o *DeleteKubernetesNamespaceOK) Error() string {
-	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces/{namespace}][%d] deleteKubernetesNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces][%d] deleteKubernetesNamespaceOK %s", 200, payload)
 }
 
 func (o *DeleteKubernetesNamespaceOK) String() string {
-	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces/{namespace}][%d] deleteKubernetesNamespaceOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces][%d] deleteKubernetesNamespaceOK %s", 200, payload)
 }
 
 func (o *DeleteKubernetesNamespaceOK) GetPayload() string {
@@ -118,7 +127,7 @@ func NewDeleteKubernetesNamespaceBadRequest() *DeleteKubernetesNamespaceBadReque
 /*
 DeleteKubernetesNamespaceBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type DeleteKubernetesNamespaceBadRequest struct {
 }
@@ -154,14 +163,70 @@ func (o *DeleteKubernetesNamespaceBadRequest) Code() int {
 }
 
 func (o *DeleteKubernetesNamespaceBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces/{namespace}][%d] deleteKubernetesNamespaceBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces][%d] deleteKubernetesNamespaceBadRequest", 400)
 }
 
 func (o *DeleteKubernetesNamespaceBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces/{namespace}][%d] deleteKubernetesNamespaceBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces][%d] deleteKubernetesNamespaceBadRequest", 400)
 }
 
 func (o *DeleteKubernetesNamespaceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteKubernetesNamespaceForbidden creates a DeleteKubernetesNamespaceForbidden with default headers values
+func NewDeleteKubernetesNamespaceForbidden() *DeleteKubernetesNamespaceForbidden {
+	return &DeleteKubernetesNamespaceForbidden{}
+}
+
+/*
+DeleteKubernetesNamespaceForbidden describes a response with status code 403, with default header values.
+
+Unauthorized access or operation not allowed.
+*/
+type DeleteKubernetesNamespaceForbidden struct {
+}
+
+// IsSuccess returns true when this delete kubernetes namespace forbidden response has a 2xx status code
+func (o *DeleteKubernetesNamespaceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete kubernetes namespace forbidden response has a 3xx status code
+func (o *DeleteKubernetesNamespaceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete kubernetes namespace forbidden response has a 4xx status code
+func (o *DeleteKubernetesNamespaceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete kubernetes namespace forbidden response has a 5xx status code
+func (o *DeleteKubernetesNamespaceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete kubernetes namespace forbidden response a status code equal to that given
+func (o *DeleteKubernetesNamespaceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete kubernetes namespace forbidden response
+func (o *DeleteKubernetesNamespaceForbidden) Code() int {
+	return 403
+}
+
+func (o *DeleteKubernetesNamespaceForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces][%d] deleteKubernetesNamespaceForbidden", 403)
+}
+
+func (o *DeleteKubernetesNamespaceForbidden) String() string {
+	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces][%d] deleteKubernetesNamespaceForbidden", 403)
+}
+
+func (o *DeleteKubernetesNamespaceForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -174,7 +239,7 @@ func NewDeleteKubernetesNamespaceInternalServerError() *DeleteKubernetesNamespac
 /*
 DeleteKubernetesNamespaceInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to delete the namespace.
 */
 type DeleteKubernetesNamespaceInternalServerError struct {
 }
@@ -210,11 +275,11 @@ func (o *DeleteKubernetesNamespaceInternalServerError) Code() int {
 }
 
 func (o *DeleteKubernetesNamespaceInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces/{namespace}][%d] deleteKubernetesNamespaceInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces][%d] deleteKubernetesNamespaceInternalServerError", 500)
 }
 
 func (o *DeleteKubernetesNamespaceInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces/{namespace}][%d] deleteKubernetesNamespaceInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /kubernetes/{id}/namespaces][%d] deleteKubernetesNamespaceInternalServerError", 500)
 }
 
 func (o *DeleteKubernetesNamespaceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

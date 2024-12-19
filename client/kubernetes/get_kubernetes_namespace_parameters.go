@@ -64,15 +64,21 @@ type GetKubernetesNamespaceParams struct {
 
 	/* ID.
 
-	   Environment (Endpoint) identifier
+	   Environment identifier
 	*/
 	ID int64
 
 	/* Namespace.
 
-	   Namespace
+	   The namespace name to get details for
 	*/
 	Namespace string
+
+	/* WithResourceQuota.
+
+	   When set to true, include the resource quota information as part of the Namespace information. Default is false
+	*/
+	WithResourceQuota bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -149,6 +155,17 @@ func (o *GetKubernetesNamespaceParams) SetNamespace(namespace string) {
 	o.Namespace = namespace
 }
 
+// WithWithResourceQuota adds the withResourceQuota to the get kubernetes namespace params
+func (o *GetKubernetesNamespaceParams) WithWithResourceQuota(withResourceQuota bool) *GetKubernetesNamespaceParams {
+	o.SetWithResourceQuota(withResourceQuota)
+	return o
+}
+
+// SetWithResourceQuota adds the withResourceQuota to the get kubernetes namespace params
+func (o *GetKubernetesNamespaceParams) SetWithResourceQuota(withResourceQuota bool) {
+	o.WithResourceQuota = withResourceQuota
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetKubernetesNamespaceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -165,6 +182,16 @@ func (o *GetKubernetesNamespaceParams) WriteToRequest(r runtime.ClientRequest, r
 	// path param namespace
 	if err := r.SetPathParam("namespace", o.Namespace); err != nil {
 		return err
+	}
+
+	// query param withResourceQuota
+	qrWithResourceQuota := o.WithResourceQuota
+	qWithResourceQuota := swag.FormatBool(qrWithResourceQuota)
+	if qWithResourceQuota != "" {
+
+		if err := r.SetQueryParam("withResourceQuota", qWithResourceQuota); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {

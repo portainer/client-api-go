@@ -71,6 +71,9 @@ type EdgeConfigCreateParams struct {
 	// BaseDir.
 	BaseDir *string
 
+	// Category.
+	Category *string
+
 	// EdgeGroupIDs.
 	EdgeGroupIDs []int64
 
@@ -155,6 +158,17 @@ func (o *EdgeConfigCreateParams) SetBaseDir(baseDir *string) {
 	o.BaseDir = baseDir
 }
 
+// WithCategory adds the category to the edge config create params
+func (o *EdgeConfigCreateParams) WithCategory(category *string) *EdgeConfigCreateParams {
+	o.SetCategory(category)
+	return o
+}
+
+// SetCategory adds the category to the edge config create params
+func (o *EdgeConfigCreateParams) SetCategory(category *string) {
+	o.Category = category
+}
+
 // WithEdgeGroupIDs adds the edgeGroupIDs to the edge config create params
 func (o *EdgeConfigCreateParams) WithEdgeGroupIDs(edgeGroupIDs []int64) *EdgeConfigCreateParams {
 	o.SetEdgeGroupIDs(edgeGroupIDs)
@@ -210,6 +224,21 @@ func (o *EdgeConfigCreateParams) WriteToRequest(r runtime.ClientRequest, reg str
 		fBaseDir := frBaseDir
 		if fBaseDir != "" {
 			if err := r.SetFormParam("baseDir", fBaseDir); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Category != nil {
+
+		// form param category
+		var frCategory string
+		if o.Category != nil {
+			frCategory = *o.Category
+		}
+		fCategory := frCategory
+		if fCategory != "" {
+			if err := r.SetFormParam("category", fCategory); err != nil {
 				return err
 			}
 		}

@@ -64,15 +64,9 @@ type DeleteKubernetesNamespaceParams struct {
 
 	/* ID.
 
-	   Environment (Endpoint) identifier
+	   Environment identifier
 	*/
 	ID int64
-
-	/* Namespace.
-
-	   Namespace
-	*/
-	Namespace string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -138,17 +132,6 @@ func (o *DeleteKubernetesNamespaceParams) SetID(id int64) {
 	o.ID = id
 }
 
-// WithNamespace adds the namespace to the delete kubernetes namespace params
-func (o *DeleteKubernetesNamespaceParams) WithNamespace(namespace string) *DeleteKubernetesNamespaceParams {
-	o.SetNamespace(namespace)
-	return o
-}
-
-// SetNamespace adds the namespace to the delete kubernetes namespace params
-func (o *DeleteKubernetesNamespaceParams) SetNamespace(namespace string) {
-	o.Namespace = namespace
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *DeleteKubernetesNamespaceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -159,11 +142,6 @@ func (o *DeleteKubernetesNamespaceParams) WriteToRequest(r runtime.ClientRequest
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
-		return err
-	}
-
-	// path param namespace
-	if err := r.SetPathParam("namespace", o.Namespace); err != nil {
 		return err
 	}
 

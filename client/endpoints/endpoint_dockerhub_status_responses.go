@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *EndpointDockerhubStatusOK) Code() int {
 }
 
 func (o *EndpointDockerhubStatusOK) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusOK %s", 200, payload)
 }
 
 func (o *EndpointDockerhubStatusOK) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusOK %s", 200, payload)
 }
 
 func (o *EndpointDockerhubStatusOK) GetPayload() *models.EndpointsDockerhubStatusResponse {
@@ -170,11 +173,11 @@ func (o *EndpointDockerhubStatusBadRequest) Code() int {
 }
 
 func (o *EndpointDockerhubStatusBadRequest) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusBadRequest", 400)
 }
 
 func (o *EndpointDockerhubStatusBadRequest) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusBadRequest ", 400)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusBadRequest", 400)
 }
 
 func (o *EndpointDockerhubStatusBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *EndpointDockerhubStatusForbidden) Code() int {
 }
 
 func (o *EndpointDockerhubStatusForbidden) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusForbidden ", 403)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusForbidden", 403)
 }
 
 func (o *EndpointDockerhubStatusForbidden) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusForbidden ", 403)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusForbidden", 403)
 }
 
 func (o *EndpointDockerhubStatusForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *EndpointDockerhubStatusNotFound) Code() int {
 }
 
 func (o *EndpointDockerhubStatusNotFound) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusNotFound", 404)
 }
 
 func (o *EndpointDockerhubStatusNotFound) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusNotFound ", 404)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusNotFound", 404)
 }
 
 func (o *EndpointDockerhubStatusNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *EndpointDockerhubStatusInternalServerError) Code() int {
 }
 
 func (o *EndpointDockerhubStatusInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusInternalServerError", 500)
 }
 
 func (o *EndpointDockerhubStatusInternalServerError) String() string {
-	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusInternalServerError ", 500)
+	return fmt.Sprintf("[GET /endpoints/{id}/dockerhub/{registryId}][%d] endpointDockerhubStatusInternalServerError", 500)
 }
 
 func (o *EndpointDockerhubStatusInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -35,6 +36,12 @@ func (o *GetKubernetesMetricsForAllPodsReader) ReadResponse(response runtime.Cli
 			return nil, err
 		}
 		return nil, result
+	case 401:
+		result := NewGetKubernetesMetricsForAllPodsUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewGetKubernetesMetricsForAllPodsInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -42,7 +49,7 @@ func (o *GetKubernetesMetricsForAllPodsReader) ReadResponse(response runtime.Cli
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/metrics/pods/{namespace}] getKubernetesMetricsForAllPods", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/metrics/pods/{namespace}] GetKubernetesMetricsForAllPods", response, response.Code())
 	}
 }
 
@@ -91,11 +98,13 @@ func (o *GetKubernetesMetricsForAllPodsOK) Code() int {
 }
 
 func (o *GetKubernetesMetricsForAllPodsOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsOK %s", 200, payload)
 }
 
 func (o *GetKubernetesMetricsForAllPodsOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsOK %s", 200, payload)
 }
 
 func (o *GetKubernetesMetricsForAllPodsOK) GetPayload() *models.V1beta1PodMetricsList {
@@ -122,7 +131,7 @@ func NewGetKubernetesMetricsForAllPodsBadRequest() *GetKubernetesMetricsForAllPo
 /*
 GetKubernetesMetricsForAllPodsBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type GetKubernetesMetricsForAllPodsBadRequest struct {
 }
@@ -158,14 +167,70 @@ func (o *GetKubernetesMetricsForAllPodsBadRequest) Code() int {
 }
 
 func (o *GetKubernetesMetricsForAllPodsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsBadRequest", 400)
 }
 
 func (o *GetKubernetesMetricsForAllPodsBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsBadRequest", 400)
 }
 
 func (o *GetKubernetesMetricsForAllPodsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesMetricsForAllPodsUnauthorized creates a GetKubernetesMetricsForAllPodsUnauthorized with default headers values
+func NewGetKubernetesMetricsForAllPodsUnauthorized() *GetKubernetesMetricsForAllPodsUnauthorized {
+	return &GetKubernetesMetricsForAllPodsUnauthorized{}
+}
+
+/*
+GetKubernetesMetricsForAllPodsUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type GetKubernetesMetricsForAllPodsUnauthorized struct {
+}
+
+// IsSuccess returns true when this get kubernetes metrics for all pods unauthorized response has a 2xx status code
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes metrics for all pods unauthorized response has a 3xx status code
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes metrics for all pods unauthorized response has a 4xx status code
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes metrics for all pods unauthorized response has a 5xx status code
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes metrics for all pods unauthorized response a status code equal to that given
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get kubernetes metrics for all pods unauthorized response
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsUnauthorized", 401)
+}
+
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsUnauthorized", 401)
+}
+
+func (o *GetKubernetesMetricsForAllPodsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -178,7 +243,7 @@ func NewGetKubernetesMetricsForAllPodsInternalServerError() *GetKubernetesMetric
 /*
 GetKubernetesMetricsForAllPodsInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to retrieve the list of pods with their live metrics.
 */
 type GetKubernetesMetricsForAllPodsInternalServerError struct {
 }
@@ -214,11 +279,11 @@ func (o *GetKubernetesMetricsForAllPodsInternalServerError) Code() int {
 }
 
 func (o *GetKubernetesMetricsForAllPodsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsInternalServerError", 500)
 }
 
 func (o *GetKubernetesMetricsForAllPodsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/pods/{namespace}][%d] getKubernetesMetricsForAllPodsInternalServerError", 500)
 }
 
 func (o *GetKubernetesMetricsForAllPodsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -64,7 +64,7 @@ type HelmUserRepositoriesListParams struct {
 
 	/* ID.
 
-	   Environment(Endpoint) identifier
+	   User identifier
 	*/
 	ID int64
 

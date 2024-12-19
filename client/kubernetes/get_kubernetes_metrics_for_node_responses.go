@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -35,6 +36,12 @@ func (o *GetKubernetesMetricsForNodeReader) ReadResponse(response runtime.Client
 			return nil, err
 		}
 		return nil, result
+	case 401:
+		result := NewGetKubernetesMetricsForNodeUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewGetKubernetesMetricsForNodeInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -42,7 +49,7 @@ func (o *GetKubernetesMetricsForNodeReader) ReadResponse(response runtime.Client
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/metrics/nodes/{name}] getKubernetesMetricsForNode", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/metrics/nodes/{name}] GetKubernetesMetricsForNode", response, response.Code())
 	}
 }
 
@@ -57,7 +64,7 @@ GetKubernetesMetricsForNodeOK describes a response with status code 200, with de
 Success
 */
 type GetKubernetesMetricsForNodeOK struct {
-	Payload []*models.ModelsK8sIngressController
+	Payload *models.V1beta1NodeMetrics
 }
 
 // IsSuccess returns true when this get kubernetes metrics for node o k response has a 2xx status code
@@ -91,21 +98,25 @@ func (o *GetKubernetesMetricsForNodeOK) Code() int {
 }
 
 func (o *GetKubernetesMetricsForNodeOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeOK %s", 200, payload)
 }
 
 func (o *GetKubernetesMetricsForNodeOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeOK %s", 200, payload)
 }
 
-func (o *GetKubernetesMetricsForNodeOK) GetPayload() []*models.ModelsK8sIngressController {
+func (o *GetKubernetesMetricsForNodeOK) GetPayload() *models.V1beta1NodeMetrics {
 	return o.Payload
 }
 
 func (o *GetKubernetesMetricsForNodeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.V1beta1NodeMetrics)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -120,7 +131,7 @@ func NewGetKubernetesMetricsForNodeBadRequest() *GetKubernetesMetricsForNodeBadR
 /*
 GetKubernetesMetricsForNodeBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type GetKubernetesMetricsForNodeBadRequest struct {
 }
@@ -156,14 +167,70 @@ func (o *GetKubernetesMetricsForNodeBadRequest) Code() int {
 }
 
 func (o *GetKubernetesMetricsForNodeBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeBadRequest", 400)
 }
 
 func (o *GetKubernetesMetricsForNodeBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeBadRequest", 400)
 }
 
 func (o *GetKubernetesMetricsForNodeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGetKubernetesMetricsForNodeUnauthorized creates a GetKubernetesMetricsForNodeUnauthorized with default headers values
+func NewGetKubernetesMetricsForNodeUnauthorized() *GetKubernetesMetricsForNodeUnauthorized {
+	return &GetKubernetesMetricsForNodeUnauthorized{}
+}
+
+/*
+GetKubernetesMetricsForNodeUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type GetKubernetesMetricsForNodeUnauthorized struct {
+}
+
+// IsSuccess returns true when this get kubernetes metrics for node unauthorized response has a 2xx status code
+func (o *GetKubernetesMetricsForNodeUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubernetes metrics for node unauthorized response has a 3xx status code
+func (o *GetKubernetesMetricsForNodeUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubernetes metrics for node unauthorized response has a 4xx status code
+func (o *GetKubernetesMetricsForNodeUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubernetes metrics for node unauthorized response has a 5xx status code
+func (o *GetKubernetesMetricsForNodeUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubernetes metrics for node unauthorized response a status code equal to that given
+func (o *GetKubernetesMetricsForNodeUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get kubernetes metrics for node unauthorized response
+func (o *GetKubernetesMetricsForNodeUnauthorized) Code() int {
+	return 401
+}
+
+func (o *GetKubernetesMetricsForNodeUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeUnauthorized", 401)
+}
+
+func (o *GetKubernetesMetricsForNodeUnauthorized) String() string {
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeUnauthorized", 401)
+}
+
+func (o *GetKubernetesMetricsForNodeUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -176,7 +243,7 @@ func NewGetKubernetesMetricsForNodeInternalServerError() *GetKubernetesMetricsFo
 /*
 GetKubernetesMetricsForNodeInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to retrieve the live metrics for the specified node.
 */
 type GetKubernetesMetricsForNodeInternalServerError struct {
 }
@@ -212,11 +279,11 @@ func (o *GetKubernetesMetricsForNodeInternalServerError) Code() int {
 }
 
 func (o *GetKubernetesMetricsForNodeInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeInternalServerError", 500)
 }
 
 func (o *GetKubernetesMetricsForNodeInternalServerError) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/metrics/nodes/{name}][%d] getKubernetesMetricsForNodeInternalServerError", 500)
 }
 
 func (o *GetKubernetesMetricsForNodeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

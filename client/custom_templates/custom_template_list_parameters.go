@@ -62,6 +62,12 @@ CustomTemplateListParams contains all the parameters to send to the API endpoint
 */
 type CustomTemplateListParams struct {
 
+	/* Edge.
+
+	   Filter by edge templates
+	*/
+	Edge *bool
+
 	/* Type.
 
 	   Template types
@@ -121,6 +127,17 @@ func (o *CustomTemplateListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEdge adds the edge to the custom template list params
+func (o *CustomTemplateListParams) WithEdge(edge *bool) *CustomTemplateListParams {
+	o.SetEdge(edge)
+	return o
+}
+
+// SetEdge adds the edge to the custom template list params
+func (o *CustomTemplateListParams) SetEdge(edge *bool) {
+	o.Edge = edge
+}
+
 // WithType adds the typeVar to the custom template list params
 func (o *CustomTemplateListParams) WithType(typeVar []int64) *CustomTemplateListParams {
 	o.SetType(typeVar)
@@ -139,6 +156,23 @@ func (o *CustomTemplateListParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
+
+	if o.Edge != nil {
+
+		// query param edge
+		var qrEdge bool
+
+		if o.Edge != nil {
+			qrEdge = *o.Edge
+		}
+		qEdge := swag.FormatBool(qrEdge)
+		if qEdge != "" {
+
+			if err := r.SetQueryParam("edge", qEdge); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.Type != nil {
 

@@ -6,6 +6,7 @@ package ldap
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -89,11 +90,13 @@ func (o *LDAPAdminGroupsOK) Code() int {
 }
 
 func (o *LDAPAdminGroupsOK) Error() string {
-	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsOK %s", 200, payload)
 }
 
 func (o *LDAPAdminGroupsOK) String() string {
-	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsOK %s", 200, payload)
 }
 
 func (o *LDAPAdminGroupsOK) GetPayload() []string {
@@ -154,11 +157,11 @@ func (o *LDAPAdminGroupsBadRequest) Code() int {
 }
 
 func (o *LDAPAdminGroupsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsBadRequest ", 400)
+	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsBadRequest", 400)
 }
 
 func (o *LDAPAdminGroupsBadRequest) String() string {
-	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsBadRequest ", 400)
+	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsBadRequest", 400)
 }
 
 func (o *LDAPAdminGroupsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -210,11 +213,11 @@ func (o *LDAPAdminGroupsInternalServerError) Code() int {
 }
 
 func (o *LDAPAdminGroupsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsInternalServerError", 500)
 }
 
 func (o *LDAPAdminGroupsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsInternalServerError ", 500)
+	return fmt.Sprintf("[POST /ldap/admin-groups][%d] lDAPAdminGroupsInternalServerError", 500)
 }
 
 func (o *LDAPAdminGroupsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

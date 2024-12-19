@@ -75,12 +75,6 @@ type EdgeStackCreateRepositoryParams struct {
 	*/
 	Dryrun *string
 
-	/* Method.
-
-	   Creation Method
-	*/
-	Method string
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -156,17 +150,6 @@ func (o *EdgeStackCreateRepositoryParams) SetDryrun(dryrun *string) {
 	o.Dryrun = dryrun
 }
 
-// WithMethod adds the method to the edge stack create repository params
-func (o *EdgeStackCreateRepositoryParams) WithMethod(method string) *EdgeStackCreateRepositoryParams {
-	o.SetMethod(method)
-	return o
-}
-
-// SetMethod adds the method to the edge stack create repository params
-func (o *EdgeStackCreateRepositoryParams) SetMethod(method string) {
-	o.Method = method
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *EdgeStackCreateRepositoryParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -194,16 +177,6 @@ func (o *EdgeStackCreateRepositoryParams) WriteToRequest(r runtime.ClientRequest
 			if err := r.SetQueryParam("dryrun", qDryrun); err != nil {
 				return err
 			}
-		}
-	}
-
-	// query param method
-	qrMethod := o.Method
-	qMethod := qrMethod
-	if qMethod != "" {
-
-		if err := r.SetQueryParam("method", qMethod); err != nil {
-			return err
 		}
 	}
 

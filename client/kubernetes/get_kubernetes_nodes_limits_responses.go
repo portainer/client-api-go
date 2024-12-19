@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -60,7 +61,7 @@ func (o *GetKubernetesNodesLimitsReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/nodes_limits] getKubernetesNodesLimits", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /kubernetes/{id}/nodes_limits] GetKubernetesNodesLimits", response, response.Code())
 	}
 }
 
@@ -75,7 +76,7 @@ GetKubernetesNodesLimitsOK describes a response with status code 200, with defau
 Success
 */
 type GetKubernetesNodesLimitsOK struct {
-	Payload models.PortainereeK8sNodesLimits
+	Payload models.PortainerK8sNodesLimits
 }
 
 // IsSuccess returns true when this get kubernetes nodes limits o k response has a 2xx status code
@@ -109,14 +110,16 @@ func (o *GetKubernetesNodesLimitsOK) Code() int {
 }
 
 func (o *GetKubernetesNodesLimitsOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsOK %s", 200, payload)
 }
 
 func (o *GetKubernetesNodesLimitsOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsOK %s", 200, payload)
 }
 
-func (o *GetKubernetesNodesLimitsOK) GetPayload() models.PortainereeK8sNodesLimits {
+func (o *GetKubernetesNodesLimitsOK) GetPayload() models.PortainerK8sNodesLimits {
 	return o.Payload
 }
 
@@ -174,11 +177,11 @@ func (o *GetKubernetesNodesLimitsBadRequest) Code() int {
 }
 
 func (o *GetKubernetesNodesLimitsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsBadRequest", 400)
 }
 
 func (o *GetKubernetesNodesLimitsBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsBadRequest", 400)
 }
 
 func (o *GetKubernetesNodesLimitsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -194,7 +197,7 @@ func NewGetKubernetesNodesLimitsUnauthorized() *GetKubernetesNodesLimitsUnauthor
 /*
 GetKubernetesNodesLimitsUnauthorized describes a response with status code 401, with default header values.
 
-Unauthorized
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
 */
 type GetKubernetesNodesLimitsUnauthorized struct {
 }
@@ -230,11 +233,11 @@ func (o *GetKubernetesNodesLimitsUnauthorized) Code() int {
 }
 
 func (o *GetKubernetesNodesLimitsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsUnauthorized", 401)
 }
 
 func (o *GetKubernetesNodesLimitsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsUnauthorized", 401)
 }
 
 func (o *GetKubernetesNodesLimitsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -250,7 +253,7 @@ func NewGetKubernetesNodesLimitsForbidden() *GetKubernetesNodesLimitsForbidden {
 /*
 GetKubernetesNodesLimitsForbidden describes a response with status code 403, with default header values.
 
-Permission denied
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
 */
 type GetKubernetesNodesLimitsForbidden struct {
 }
@@ -286,11 +289,11 @@ func (o *GetKubernetesNodesLimitsForbidden) Code() int {
 }
 
 func (o *GetKubernetesNodesLimitsForbidden) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsForbidden ", 403)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsForbidden", 403)
 }
 
 func (o *GetKubernetesNodesLimitsForbidden) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsForbidden ", 403)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsForbidden", 403)
 }
 
 func (o *GetKubernetesNodesLimitsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -306,7 +309,7 @@ func NewGetKubernetesNodesLimitsNotFound() *GetKubernetesNodesLimitsNotFound {
 /*
 GetKubernetesNodesLimitsNotFound describes a response with status code 404, with default header values.
 
-Environment(Endpoint) not found
+Unable to find an environment with the specified identifier.
 */
 type GetKubernetesNodesLimitsNotFound struct {
 }
@@ -342,11 +345,11 @@ func (o *GetKubernetesNodesLimitsNotFound) Code() int {
 }
 
 func (o *GetKubernetesNodesLimitsNotFound) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsNotFound ", 404)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsNotFound", 404)
 }
 
 func (o *GetKubernetesNodesLimitsNotFound) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsNotFound ", 404)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsNotFound", 404)
 }
 
 func (o *GetKubernetesNodesLimitsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -362,7 +365,7 @@ func NewGetKubernetesNodesLimitsInternalServerError() *GetKubernetesNodesLimitsI
 /*
 GetKubernetesNodesLimitsInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to retrieve nodes limits.
 */
 type GetKubernetesNodesLimitsInternalServerError struct {
 }
@@ -398,11 +401,11 @@ func (o *GetKubernetesNodesLimitsInternalServerError) Code() int {
 }
 
 func (o *GetKubernetesNodesLimitsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsInternalServerError", 500)
 }
 
 func (o *GetKubernetesNodesLimitsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /kubernetes/{id}/nodes_limits][%d] getKubernetesNodesLimitsInternalServerError", 500)
 }
 
 func (o *GetKubernetesNodesLimitsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

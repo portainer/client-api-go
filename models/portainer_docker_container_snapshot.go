@@ -325,6 +325,9 @@ func (m *PortainerDockerContainerSnapshot) UnmarshalBinary(b []byte) error {
 // swagger:model PortainerDockerContainerSnapshotHostConfig
 type PortainerDockerContainerSnapshotHostConfig struct {
 
+	// annotations
+	Annotations map[string]string `json:"annotations,omitempty"`
+
 	// network mode
 	NetworkMode string `json:"networkMode,omitempty"`
 }

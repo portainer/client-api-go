@@ -6,6 +6,7 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *SettingsInspectOK) Code() int {
 }
 
 func (o *SettingsInspectOK) Error() string {
-	return fmt.Sprintf("[GET /settings][%d] settingsInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /settings][%d] settingsInspectOK %s", 200, payload)
 }
 
 func (o *SettingsInspectOK) String() string {
-	return fmt.Sprintf("[GET /settings][%d] settingsInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /settings][%d] settingsInspectOK %s", 200, payload)
 }
 
 func (o *SettingsInspectOK) GetPayload() *models.PortainereeSettings {
@@ -152,11 +155,11 @@ func (o *SettingsInspectInternalServerError) Code() int {
 }
 
 func (o *SettingsInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /settings][%d] settingsInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /settings][%d] settingsInspectInternalServerError", 500)
 }
 
 func (o *SettingsInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /settings][%d] settingsInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /settings][%d] settingsInspectInternalServerError", 500)
 }
 
 func (o *SettingsInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

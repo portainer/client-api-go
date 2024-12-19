@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -43,6 +44,12 @@ func (o *StackStartReader) ReadResponse(response runtime.ClientResponse, consume
 		return nil, result
 	case 404:
 		result := NewStackStartNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 409:
+		result := NewStackStartConflict()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -103,11 +110,13 @@ func (o *StackStartOK) Code() int {
 }
 
 func (o *StackStartOK) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartOK %s", 200, payload)
 }
 
 func (o *StackStartOK) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartOK %s", 200, payload)
 }
 
 func (o *StackStartOK) GetPayload() *models.PortainereeStack {
@@ -170,11 +179,11 @@ func (o *StackStartBadRequest) Code() int {
 }
 
 func (o *StackStartBadRequest) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartBadRequest", 400)
 }
 
 func (o *StackStartBadRequest) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartBadRequest ", 400)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartBadRequest", 400)
 }
 
 func (o *StackStartBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +235,11 @@ func (o *StackStartForbidden) Code() int {
 }
 
 func (o *StackStartForbidden) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartForbidden", 403)
 }
 
 func (o *StackStartForbidden) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartForbidden ", 403)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartForbidden", 403)
 }
 
 func (o *StackStartForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,14 +291,70 @@ func (o *StackStartNotFound) Code() int {
 }
 
 func (o *StackStartNotFound) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartNotFound", 404)
 }
 
 func (o *StackStartNotFound) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartNotFound ", 404)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartNotFound", 404)
 }
 
 func (o *StackStartNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewStackStartConflict creates a StackStartConflict with default headers values
+func NewStackStartConflict() *StackStartConflict {
+	return &StackStartConflict{}
+}
+
+/*
+StackStartConflict describes a response with status code 409, with default header values.
+
+Stack name is not unique
+*/
+type StackStartConflict struct {
+}
+
+// IsSuccess returns true when this stack start conflict response has a 2xx status code
+func (o *StackStartConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stack start conflict response has a 3xx status code
+func (o *StackStartConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stack start conflict response has a 4xx status code
+func (o *StackStartConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stack start conflict response has a 5xx status code
+func (o *StackStartConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stack start conflict response a status code equal to that given
+func (o *StackStartConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the stack start conflict response
+func (o *StackStartConflict) Code() int {
+	return 409
+}
+
+func (o *StackStartConflict) Error() string {
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartConflict", 409)
+}
+
+func (o *StackStartConflict) String() string {
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartConflict", 409)
+}
+
+func (o *StackStartConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -338,11 +403,11 @@ func (o *StackStartInternalServerError) Code() int {
 }
 
 func (o *StackStartInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartInternalServerError", 500)
 }
 
 func (o *StackStartInternalServerError) String() string {
-	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartInternalServerError ", 500)
+	return fmt.Sprintf("[POST /stacks/{id}/start][%d] stackStartInternalServerError", 500)
 }
 
 func (o *StackStartInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

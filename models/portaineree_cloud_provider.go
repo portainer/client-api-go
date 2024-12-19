@@ -53,6 +53,9 @@ type PortainereeCloudProvider struct {
 	// node volume size
 	NodeVolumeSize int64 `json:"NodeVolumeSize,omitempty"`
 
+	// offline install
+	OfflineInstall bool `json:"OfflineInstall,omitempty"`
+
 	// provider
 	Provider string `json:"Provider,omitempty"`
 

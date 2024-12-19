@@ -6,6 +6,7 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *UserGetGitCredentialsOK) Code() int {
 }
 
 func (o *UserGetGitCredentialsOK) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsOK %s", 200, payload)
 }
 
 func (o *UserGetGitCredentialsOK) String() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsOK %s", 200, payload)
 }
 
 func (o *UserGetGitCredentialsOK) GetPayload() []*models.PortainereeGitCredential {
@@ -168,11 +171,11 @@ func (o *UserGetGitCredentialsBadRequest) Code() int {
 }
 
 func (o *UserGetGitCredentialsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsBadRequest", 400)
 }
 
 func (o *UserGetGitCredentialsBadRequest) String() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsBadRequest ", 400)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsBadRequest", 400)
 }
 
 func (o *UserGetGitCredentialsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -224,11 +227,11 @@ func (o *UserGetGitCredentialsForbidden) Code() int {
 }
 
 func (o *UserGetGitCredentialsForbidden) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsForbidden", 403)
 }
 
 func (o *UserGetGitCredentialsForbidden) String() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsForbidden ", 403)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsForbidden", 403)
 }
 
 func (o *UserGetGitCredentialsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -280,11 +283,11 @@ func (o *UserGetGitCredentialsNotFound) Code() int {
 }
 
 func (o *UserGetGitCredentialsNotFound) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsNotFound", 404)
 }
 
 func (o *UserGetGitCredentialsNotFound) String() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsNotFound ", 404)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsNotFound", 404)
 }
 
 func (o *UserGetGitCredentialsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -336,11 +339,11 @@ func (o *UserGetGitCredentialsInternalServerError) Code() int {
 }
 
 func (o *UserGetGitCredentialsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsInternalServerError", 500)
 }
 
 func (o *UserGetGitCredentialsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsInternalServerError ", 500)
+	return fmt.Sprintf("[GET /users/{id}/gitcredentials][%d] userGetGitCredentialsInternalServerError", 500)
 }
 
 func (o *UserGetGitCredentialsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

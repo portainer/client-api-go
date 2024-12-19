@@ -6,6 +6,7 @@ package custom_templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -42,7 +43,7 @@ func (o *CustomTemplateCreateFileReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /custom_templates/file] CustomTemplateCreateFile", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /custom_templates/create/file] CustomTemplateCreateFile", response, response.Code())
 	}
 }
 
@@ -91,11 +92,13 @@ func (o *CustomTemplateCreateFileOK) Code() int {
 }
 
 func (o *CustomTemplateCreateFileOK) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/file][%d] customTemplateCreateFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /custom_templates/create/file][%d] customTemplateCreateFileOK %s", 200, payload)
 }
 
 func (o *CustomTemplateCreateFileOK) String() string {
-	return fmt.Sprintf("[POST /custom_templates/file][%d] customTemplateCreateFileOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /custom_templates/create/file][%d] customTemplateCreateFileOK %s", 200, payload)
 }
 
 func (o *CustomTemplateCreateFileOK) GetPayload() *models.PortainereeCustomTemplate {
@@ -158,11 +161,11 @@ func (o *CustomTemplateCreateFileBadRequest) Code() int {
 }
 
 func (o *CustomTemplateCreateFileBadRequest) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/file][%d] customTemplateCreateFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /custom_templates/create/file][%d] customTemplateCreateFileBadRequest", 400)
 }
 
 func (o *CustomTemplateCreateFileBadRequest) String() string {
-	return fmt.Sprintf("[POST /custom_templates/file][%d] customTemplateCreateFileBadRequest ", 400)
+	return fmt.Sprintf("[POST /custom_templates/create/file][%d] customTemplateCreateFileBadRequest", 400)
 }
 
 func (o *CustomTemplateCreateFileBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *CustomTemplateCreateFileInternalServerError) Code() int {
 }
 
 func (o *CustomTemplateCreateFileInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /custom_templates/file][%d] customTemplateCreateFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /custom_templates/create/file][%d] customTemplateCreateFileInternalServerError", 500)
 }
 
 func (o *CustomTemplateCreateFileInternalServerError) String() string {
-	return fmt.Sprintf("[POST /custom_templates/file][%d] customTemplateCreateFileInternalServerError ", 500)
+	return fmt.Sprintf("[POST /custom_templates/create/file][%d] customTemplateCreateFileInternalServerError", 500)
 }
 
 func (o *CustomTemplateCreateFileInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -24,7 +24,7 @@ type PortainereeLDAPSettings struct {
 	AdminAutoPopulate bool `json:"AdminAutoPopulate,omitempty"`
 
 	// admin group search settings
-	AdminGroupSearchSettings []*PortainereeLDAPGroupSearchSettings `json:"AdminGroupSearchSettings"`
+	AdminGroupSearchSettings []*PortainerLDAPGroupSearchSettings `json:"AdminGroupSearchSettings"`
 
 	// Saved admin group list, the user will be populated as an admin role if any user group matches the record in the list
 	// Example: ["['manager'","'operator']"]
@@ -39,7 +39,7 @@ type PortainereeLDAPSettings struct {
 	AutoCreateUsers bool `json:"AutoCreateUsers,omitempty"`
 
 	// group search settings
-	GroupSearchSettings []*PortainereeLDAPGroupSearchSettings `json:"GroupSearchSettings"`
+	GroupSearchSettings []*PortainerLDAPGroupSearchSettings `json:"GroupSearchSettings"`
 
 	// Password of the account that will be used to search users
 	// Example: readonly-password
@@ -50,7 +50,7 @@ type PortainereeLDAPSettings struct {
 	ReaderDN string `json:"ReaderDN,omitempty"`
 
 	// search settings
-	SearchSettings []*PortainereeLDAPSearchSettings `json:"SearchSettings"`
+	SearchSettings []*PortainerLDAPSearchSettings `json:"SearchSettings"`
 
 	// server type
 	// Example: 1
@@ -61,7 +61,7 @@ type PortainereeLDAPSettings struct {
 	StartTLS bool `json:"StartTLS,omitempty"`
 
 	// TLS config
-	TLSConfig *PortainereeTLSConfiguration `json:"TLSConfig,omitempty"`
+	TLSConfig *PortainerTLSConfiguration `json:"TLSConfig,omitempty"`
 
 	// Deprecated
 	URL string `json:"URL,omitempty"`

@@ -6,6 +6,7 @@ package endpoints
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *EndpointCreateGlobalKeyOK) Code() int {
 }
 
 func (o *EndpointCreateGlobalKeyOK) Error() string {
-	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyOK %s", 200, payload)
 }
 
 func (o *EndpointCreateGlobalKeyOK) String() string {
-	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyOK %s", 200, payload)
 }
 
 func (o *EndpointCreateGlobalKeyOK) GetPayload() *models.EndpointsEndpointCreateGlobalKeyResponse {
@@ -158,11 +161,11 @@ func (o *EndpointCreateGlobalKeyBadRequest) Code() int {
 }
 
 func (o *EndpointCreateGlobalKeyBadRequest) Error() string {
-	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyBadRequest", 400)
 }
 
 func (o *EndpointCreateGlobalKeyBadRequest) String() string {
-	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyBadRequest ", 400)
+	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyBadRequest", 400)
 }
 
 func (o *EndpointCreateGlobalKeyBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *EndpointCreateGlobalKeyInternalServerError) Code() int {
 }
 
 func (o *EndpointCreateGlobalKeyInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyInternalServerError", 500)
 }
 
 func (o *EndpointCreateGlobalKeyInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/global-key][%d] endpointCreateGlobalKeyInternalServerError", 500)
 }
 
 func (o *EndpointCreateGlobalKeyInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

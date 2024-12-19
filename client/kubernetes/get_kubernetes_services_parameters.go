@@ -64,21 +64,15 @@ type GetKubernetesServicesParams struct {
 
 	/* ID.
 
-	   Environment (Endpoint) identifier
+	   Environment identifier
 	*/
 	ID int64
 
-	/* Lookupapplications.
+	/* WithApplications.
 
 	   Lookup applications associated with each service
 	*/
-	Lookupapplications *bool
-
-	/* Namespace.
-
-	   Namespace name
-	*/
-	Namespace string
+	WithApplications *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -144,26 +138,15 @@ func (o *GetKubernetesServicesParams) SetID(id int64) {
 	o.ID = id
 }
 
-// WithLookupapplications adds the lookupapplications to the get kubernetes services params
-func (o *GetKubernetesServicesParams) WithLookupapplications(lookupapplications *bool) *GetKubernetesServicesParams {
-	o.SetLookupapplications(lookupapplications)
+// WithWithApplications adds the withApplications to the get kubernetes services params
+func (o *GetKubernetesServicesParams) WithWithApplications(withApplications *bool) *GetKubernetesServicesParams {
+	o.SetWithApplications(withApplications)
 	return o
 }
 
-// SetLookupapplications adds the lookupapplications to the get kubernetes services params
-func (o *GetKubernetesServicesParams) SetLookupapplications(lookupapplications *bool) {
-	o.Lookupapplications = lookupapplications
-}
-
-// WithNamespace adds the namespace to the get kubernetes services params
-func (o *GetKubernetesServicesParams) WithNamespace(namespace string) *GetKubernetesServicesParams {
-	o.SetNamespace(namespace)
-	return o
-}
-
-// SetNamespace adds the namespace to the get kubernetes services params
-func (o *GetKubernetesServicesParams) SetNamespace(namespace string) {
-	o.Namespace = namespace
+// SetWithApplications adds the withApplications to the get kubernetes services params
+func (o *GetKubernetesServicesParams) SetWithApplications(withApplications *bool) {
+	o.WithApplications = withApplications
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -179,26 +162,21 @@ func (o *GetKubernetesServicesParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 
-	if o.Lookupapplications != nil {
+	if o.WithApplications != nil {
 
-		// query param lookupapplications
-		var qrLookupapplications bool
+		// query param withApplications
+		var qrWithApplications bool
 
-		if o.Lookupapplications != nil {
-			qrLookupapplications = *o.Lookupapplications
+		if o.WithApplications != nil {
+			qrWithApplications = *o.WithApplications
 		}
-		qLookupapplications := swag.FormatBool(qrLookupapplications)
-		if qLookupapplications != "" {
+		qWithApplications := swag.FormatBool(qrWithApplications)
+		if qWithApplications != "" {
 
-			if err := r.SetQueryParam("lookupapplications", qLookupapplications); err != nil {
+			if err := r.SetQueryParam("withApplications", qWithApplications); err != nil {
 				return err
 			}
 		}
-	}
-
-	// path param namespace
-	if err := r.SetPathParam("namespace", o.Namespace); err != nil {
-		return err
 	}
 
 	if len(res) > 0 {

@@ -21,7 +21,7 @@ type PortainereeRole struct {
 
 	// Authorizations associated to a role
 	// Required: true
-	Authorizations PortainereeAuthorizations `json:"Authorizations"`
+	Authorizations PortainerAuthorizations `json:"Authorizations"`
 
 	// Role description
 	// Example: Read-only access of all resources in an environment(endpoint)

@@ -93,11 +93,11 @@ func (o *DeviceActionNoContent) Code() int {
 }
 
 func (o *DeviceActionNoContent) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionNoContent ", 204)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionNoContent", 204)
 }
 
 func (o *DeviceActionNoContent) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionNoContent ", 204)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionNoContent", 204)
 }
 
 func (o *DeviceActionNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *DeviceActionBadRequest) Code() int {
 }
 
 func (o *DeviceActionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionBadRequest ", 400)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionBadRequest", 400)
 }
 
 func (o *DeviceActionBadRequest) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionBadRequest ", 400)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionBadRequest", 400)
 }
 
 func (o *DeviceActionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *DeviceActionForbidden) Code() int {
 }
 
 func (o *DeviceActionForbidden) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionForbidden ", 403)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionForbidden", 403)
 }
 
 func (o *DeviceActionForbidden) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionForbidden ", 403)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionForbidden", 403)
 }
 
 func (o *DeviceActionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *DeviceActionInternalServerError) Code() int {
 }
 
 func (o *DeviceActionInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionInternalServerError ", 500)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionInternalServerError", 500)
 }
 
 func (o *DeviceActionInternalServerError) String() string {
-	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionInternalServerError ", 500)
+	return fmt.Sprintf("[POST /open_amt/{id}/devices/{deviceId}/action][%d] deviceActionInternalServerError", 500)
 }
 
 func (o *DeviceActionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

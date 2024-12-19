@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *StackUpdateOK) Code() int {
 }
 
 func (o *StackUpdateOK) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateOK %s", 200, payload)
 }
 
 func (o *StackUpdateOK) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateOK %s", 200, payload)
 }
 
 func (o *StackUpdateOK) GetPayload() *models.PortainereeStack {
@@ -170,11 +173,11 @@ func (o *StackUpdateBadRequest) Code() int {
 }
 
 func (o *StackUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateBadRequest", 400)
 }
 
 func (o *StackUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateBadRequest", 400)
 }
 
 func (o *StackUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *StackUpdateForbidden) Code() int {
 }
 
 func (o *StackUpdateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateForbidden", 403)
 }
 
 func (o *StackUpdateForbidden) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateForbidden ", 403)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateForbidden", 403)
 }
 
 func (o *StackUpdateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *StackUpdateNotFound) Code() int {
 }
 
 func (o *StackUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateNotFound", 404)
 }
 
 func (o *StackUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateNotFound", 404)
 }
 
 func (o *StackUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *StackUpdateInternalServerError) Code() int {
 }
 
 func (o *StackUpdateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateInternalServerError", 500)
 }
 
 func (o *StackUpdateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /stacks/{id}][%d] stackUpdateInternalServerError", 500)
 }
 
 func (o *StackUpdateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -41,20 +41,20 @@ type PortainereeRegistry struct {
 	BaseURL string `json:"BaseURL,omitempty"`
 
 	// ecr
-	Ecr *PortainereeEcrData `json:"Ecr,omitempty"`
+	Ecr *PortainerEcrData `json:"Ecr,omitempty"`
 
 	// github
 	Github *PortainereeGithubRegistryData `json:"Github,omitempty"`
 
 	// gitlab
-	Gitlab *PortainereeGitlabRegistryData `json:"Gitlab,omitempty"`
+	Gitlab *PortainerGitlabRegistryData `json:"Gitlab,omitempty"`
 
 	// Registry Identifier
 	// Example: 1
 	ID int64 `json:"Id,omitempty"`
 
 	// management configuration
-	ManagementConfiguration *PortainereeRegistryManagementConfiguration `json:"ManagementConfiguration,omitempty"`
+	ManagementConfiguration *PortainerRegistryManagementConfiguration `json:"ManagementConfiguration,omitempty"`
 
 	// Registry Name
 	// Example: my-registry
@@ -65,25 +65,25 @@ type PortainereeRegistry struct {
 	Password string `json:"Password,omitempty"`
 
 	// quay
-	Quay *PortainereeQuayRegistryData `json:"Quay,omitempty"`
+	Quay *PortainerQuayRegistryData `json:"Quay,omitempty"`
 
 	// registry accesses
-	RegistryAccesses PortainereeRegistryAccesses `json:"RegistryAccesses,omitempty"`
+	RegistryAccesses PortainerRegistryAccesses `json:"RegistryAccesses,omitempty"`
 
 	// Deprecated in DBVersion == 31
-	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
+	TeamAccessPolicies PortainerTeamAccessPolicies `json:"TeamAccessPolicies,omitempty"`
 
-	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR, 8 - Github)
-	// Enum: [1 2 3 4 5 6 7 8]
+	// Registry Type (1 - Quay, 2 - Azure, 3 - Custom, 4 - Gitlab, 5 - ProGet, 6 - DockerHub, 7 - ECR)
+	// Enum: [1,2,3,4,5,6,7]
 	Type int64 `json:"Type,omitempty"`
 
 	// URL or IP address of the Docker registry
-	// Example: registry.mydomain.tld:2375/feed-name
+	// Example: registry.mydomain.tld:2375
 	URL string `json:"URL,omitempty"`
 
 	// Deprecated fields
 	// Deprecated in DBVersion == 31
-	UserAccessPolicies PortainereeUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
+	UserAccessPolicies PortainerUserAccessPolicies `json:"UserAccessPolicies,omitempty"`
 
 	// Username or AccessKeyID used to authenticate against this registry
 	// Example: registry user
@@ -273,7 +273,7 @@ var portainereeRegistryTypeTypePropEnum []interface{}
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7,8]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[1,2,3,4,5,6,7]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

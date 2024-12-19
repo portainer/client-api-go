@@ -87,11 +87,11 @@ func (o *BackupToS3NoContent) Code() int {
 }
 
 func (o *BackupToS3NoContent) Error() string {
-	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3NoContent ", 204)
+	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3NoContent", 204)
 }
 
 func (o *BackupToS3NoContent) String() string {
-	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3NoContent ", 204)
+	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3NoContent", 204)
 }
 
 func (o *BackupToS3NoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *BackupToS3BadRequest) Code() int {
 }
 
 func (o *BackupToS3BadRequest) Error() string {
-	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3BadRequest ", 400)
+	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3BadRequest", 400)
 }
 
 func (o *BackupToS3BadRequest) String() string {
-	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3BadRequest ", 400)
+	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3BadRequest", 400)
 }
 
 func (o *BackupToS3BadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -199,11 +199,11 @@ func (o *BackupToS3InternalServerError) Code() int {
 }
 
 func (o *BackupToS3InternalServerError) Error() string {
-	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3InternalServerError ", 500)
+	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3InternalServerError", 500)
 }
 
 func (o *BackupToS3InternalServerError) String() string {
-	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3InternalServerError ", 500)
+	return fmt.Sprintf("[POST /backup/s3/execute][%d] backupToS3InternalServerError", 500)
 }
 
 func (o *BackupToS3InternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

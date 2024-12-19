@@ -68,11 +68,11 @@ type UpdateKubernetesIngressControllersByNamespaceParams struct {
 
 	   Ingress controllers
 	*/
-	Body [][]*models.ModelsK8sIngressController
+	Body []*models.KubernetesK8sIngressController
 
 	/* ID.
 
-	   Environment (Endpoint) identifier
+	   Environment identifier
 	*/
 	ID int64
 
@@ -136,13 +136,13 @@ func (o *UpdateKubernetesIngressControllersByNamespaceParams) SetHTTPClient(clie
 }
 
 // WithBody adds the body to the update kubernetes ingress controllers by namespace params
-func (o *UpdateKubernetesIngressControllersByNamespaceParams) WithBody(body [][]*models.ModelsK8sIngressController) *UpdateKubernetesIngressControllersByNamespaceParams {
+func (o *UpdateKubernetesIngressControllersByNamespaceParams) WithBody(body []*models.KubernetesK8sIngressController) *UpdateKubernetesIngressControllersByNamespaceParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the update kubernetes ingress controllers by namespace params
-func (o *UpdateKubernetesIngressControllersByNamespaceParams) SetBody(body [][]*models.ModelsK8sIngressController) {
+func (o *UpdateKubernetesIngressControllersByNamespaceParams) SetBody(body []*models.KubernetesK8sIngressController) {
 	o.Body = body
 }
 

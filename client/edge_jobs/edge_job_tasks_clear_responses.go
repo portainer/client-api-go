@@ -93,11 +93,11 @@ func (o *EdgeJobTasksClearNoContent) Code() int {
 }
 
 func (o *EdgeJobTasksClearNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearNoContent", 204)
 }
 
 func (o *EdgeJobTasksClearNoContent) String() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearNoContent ", 204)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearNoContent", 204)
 }
 
 func (o *EdgeJobTasksClearNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *EdgeJobTasksClearBadRequest) Code() int {
 }
 
 func (o *EdgeJobTasksClearBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearBadRequest", 400)
 }
 
 func (o *EdgeJobTasksClearBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearBadRequest", 400)
 }
 
 func (o *EdgeJobTasksClearBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *EdgeJobTasksClearInternalServerError) Code() int {
 }
 
 func (o *EdgeJobTasksClearInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearInternalServerError", 500)
 }
 
 func (o *EdgeJobTasksClearInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearInternalServerError", 500)
 }
 
 func (o *EdgeJobTasksClearInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *EdgeJobTasksClearServiceUnavailable) Code() int {
 }
 
 func (o *EdgeJobTasksClearServiceUnavailable) Error() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearServiceUnavailable", 503)
 }
 
 func (o *EdgeJobTasksClearServiceUnavailable) String() string {
-	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearServiceUnavailable ", 503)
+	return fmt.Sprintf("[DELETE /edge_jobs/{id}/tasks/{taskID}/logs][%d] edgeJobTasksClearServiceUnavailable", 503)
 }
 
 func (o *EdgeJobTasksClearServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

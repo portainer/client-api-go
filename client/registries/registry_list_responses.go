@@ -6,6 +6,7 @@ package registries
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *RegistryListOK) Code() int {
 }
 
 func (o *RegistryListOK) Error() string {
-	return fmt.Sprintf("[GET /registries][%d] registryListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /registries][%d] registryListOK %s", 200, payload)
 }
 
 func (o *RegistryListOK) String() string {
-	return fmt.Sprintf("[GET /registries][%d] registryListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /registries][%d] registryListOK %s", 200, payload)
 }
 
 func (o *RegistryListOK) GetPayload() []*models.PortainereeRegistry {
@@ -150,11 +153,11 @@ func (o *RegistryListInternalServerError) Code() int {
 }
 
 func (o *RegistryListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /registries][%d] registryListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /registries][%d] registryListInternalServerError", 500)
 }
 
 func (o *RegistryListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /registries][%d] registryListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /registries][%d] registryListInternalServerError", 500)
 }
 
 func (o *RegistryListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

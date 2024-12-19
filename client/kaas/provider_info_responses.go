@@ -93,11 +93,11 @@ func (o *ProviderInfoOK) Code() int {
 }
 
 func (o *ProviderInfoOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoOK ", 200)
+	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoOK", 200)
 }
 
 func (o *ProviderInfoOK) String() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoOK ", 200)
+	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoOK", 200)
 }
 
 func (o *ProviderInfoOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *ProviderInfoBadRequest) Code() int {
 }
 
 func (o *ProviderInfoBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoBadRequest", 400)
 }
 
 func (o *ProviderInfoBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoBadRequest", 400)
 }
 
 func (o *ProviderInfoBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *ProviderInfoInternalServerError) Code() int {
 }
 
 func (o *ProviderInfoInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoInternalServerError", 500)
 }
 
 func (o *ProviderInfoInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoInternalServerError", 500)
 }
 
 func (o *ProviderInfoInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *ProviderInfoServiceUnavailable) Code() int {
 }
 
 func (o *ProviderInfoServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoServiceUnavailable", 503)
 }
 
 func (o *ProviderInfoServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /cloud/{provider}/info][%d] providerInfoServiceUnavailable", 503)
 }
 
 func (o *ProviderInfoServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

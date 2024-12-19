@@ -72,15 +72,9 @@ type CreateKubernetesNamespaceParams struct {
 
 	/* ID.
 
-	   Environment (Endpoint) identifier
+	   Environment identifier
 	*/
 	ID int64
-
-	/* Namespace.
-
-	   Namespace
-	*/
-	Namespace string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -157,17 +151,6 @@ func (o *CreateKubernetesNamespaceParams) SetID(id int64) {
 	o.ID = id
 }
 
-// WithNamespace adds the namespace to the create kubernetes namespace params
-func (o *CreateKubernetesNamespaceParams) WithNamespace(namespace string) *CreateKubernetesNamespaceParams {
-	o.SetNamespace(namespace)
-	return o
-}
-
-// SetNamespace adds the namespace to the create kubernetes namespace params
-func (o *CreateKubernetesNamespaceParams) SetNamespace(namespace string) {
-	o.Namespace = namespace
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *CreateKubernetesNamespaceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -183,11 +166,6 @@ func (o *CreateKubernetesNamespaceParams) WriteToRequest(r runtime.ClientRequest
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
-		return err
-	}
-
-	// path param namespace
-	if err := r.SetPathParam("namespace", o.Namespace); err != nil {
 		return err
 	}
 

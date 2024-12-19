@@ -6,6 +6,7 @@ package kubernetes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *GetKubernetesPodSecurityRuleOK) Code() int {
 }
 
 func (o *GetKubernetesPodSecurityRuleOK) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleOK %s", 200, payload)
 }
 
 func (o *GetKubernetesPodSecurityRuleOK) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleOK %s", 200, payload)
 }
 
 func (o *GetKubernetesPodSecurityRuleOK) GetPayload() *models.PodsecurityPodSecurityRule {
@@ -152,11 +155,11 @@ func (o *GetKubernetesPodSecurityRuleBadRequest) Code() int {
 }
 
 func (o *GetKubernetesPodSecurityRuleBadRequest) Error() string {
-	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleBadRequest", 400)
 }
 
 func (o *GetKubernetesPodSecurityRuleBadRequest) String() string {
-	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleBadRequest ", 400)
+	return fmt.Sprintf("[GET /kubernetes/{environmentId}/opa][%d] getKubernetesPodSecurityRuleBadRequest", 400)
 }
 
 func (o *GetKubernetesPodSecurityRuleBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -6,6 +6,7 @@ package edge_groups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *EdgeGroupInspectOK) Code() int {
 }
 
 func (o *EdgeGroupInspectOK) Error() string {
-	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectOK %s", 200, payload)
 }
 
 func (o *EdgeGroupInspectOK) String() string {
-	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectOK %s", 200, payload)
 }
 
 func (o *EdgeGroupInspectOK) GetPayload() *models.PortainereeEdgeGroup {
@@ -158,11 +161,11 @@ func (o *EdgeGroupInspectInternalServerError) Code() int {
 }
 
 func (o *EdgeGroupInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectInternalServerError", 500)
 }
 
 func (o *EdgeGroupInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectInternalServerError", 500)
 }
 
 func (o *EdgeGroupInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *EdgeGroupInspectServiceUnavailable) Code() int {
 }
 
 func (o *EdgeGroupInspectServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectServiceUnavailable", 503)
 }
 
 func (o *EdgeGroupInspectServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_groups/{id}][%d] edgeGroupInspectServiceUnavailable", 503)
 }
 
 func (o *EdgeGroupInspectServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

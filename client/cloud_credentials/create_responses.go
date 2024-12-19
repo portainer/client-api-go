@@ -6,6 +6,7 @@ package cloud_credentials
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *CreateOK) Code() int {
 }
 
 func (o *CreateOK) Error() string {
-	return fmt.Sprintf("[POST /cloud/credentials][%d] createOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] createOK %s", 200, payload)
 }
 
 func (o *CreateOK) String() string {
-	return fmt.Sprintf("[POST /cloud/credentials][%d] createOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] createOK %s", 200, payload)
 }
 
 func (o *CreateOK) GetPayload() *models.ModelsCloudCredential {
@@ -158,11 +161,11 @@ func (o *CreateBadRequest) Code() int {
 }
 
 func (o *CreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /cloud/credentials][%d] createBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] createBadRequest", 400)
 }
 
 func (o *CreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /cloud/credentials][%d] createBadRequest ", 400)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] createBadRequest", 400)
 }
 
 func (o *CreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *CreateInternalServerError) Code() int {
 }
 
 func (o *CreateInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /cloud/credentials][%d] createInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] createInternalServerError", 500)
 }
 
 func (o *CreateInternalServerError) String() string {
-	return fmt.Sprintf("[POST /cloud/credentials][%d] createInternalServerError ", 500)
+	return fmt.Sprintf("[POST /cloud/credentials][%d] createInternalServerError", 500)
 }
 
 func (o *CreateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

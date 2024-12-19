@@ -6,6 +6,7 @@ package cloud_credentials
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetAllOK) Code() int {
 }
 
 func (o *GetAllOK) Error() string {
-	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllOK %s", 200, payload)
 }
 
 func (o *GetAllOK) String() string {
-	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllOK %s", 200, payload)
 }
 
 func (o *GetAllOK) GetPayload() *models.ModelsCloudCredential {
@@ -158,11 +161,11 @@ func (o *GetAllBadRequest) Code() int {
 }
 
 func (o *GetAllBadRequest) Error() string {
-	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllBadRequest", 400)
 }
 
 func (o *GetAllBadRequest) String() string {
-	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllBadRequest ", 400)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllBadRequest", 400)
 }
 
 func (o *GetAllBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -214,11 +217,11 @@ func (o *GetAllInternalServerError) Code() int {
 }
 
 func (o *GetAllInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllInternalServerError", 500)
 }
 
 func (o *GetAllInternalServerError) String() string {
-	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllInternalServerError ", 500)
+	return fmt.Sprintf("[GET /cloud/credentials][%d] getAllInternalServerError", 500)
 }
 
 func (o *GetAllInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

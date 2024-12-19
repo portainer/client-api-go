@@ -30,14 +30,22 @@ type UsersUserUpdatePayload struct {
 	// Required: true
 	Password *string `json:"password"`
 
-	// User role (1 for administrator account and 2 for regular account)
+	// User role
+	// 1 = administrator account
+	// 2 = regular account
+	// 3 = edge administrator account
 	// Example: 2
 	// Required: true
-	// Enum: [1 2]
+	// Enum: [1,2,3]
 	Role *int64 `json:"role"`
 
 	// theme
 	Theme *UsersThemePayload `json:"theme,omitempty"`
+
+	// use cache
+	// Example: true
+	// Required: true
+	UseCache *bool `json:"useCache"`
 
 	// username
 	// Example: bob
@@ -62,6 +70,10 @@ func (m *UsersUserUpdatePayload) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTheme(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUseCache(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -97,7 +109,7 @@ var usersUserUpdatePayloadTypeRolePropEnum []interface{}
 
 func init() {
 	var res []int64
-	if err := json.Unmarshal([]byte(`[1,2]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`[1,2,3]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -141,6 +153,15 @@ func (m *UsersUserUpdatePayload) validateTheme(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *UsersUserUpdatePayload) validateUseCache(formats strfmt.Registry) error {
+
+	if err := validate.Required("useCache", "body", m.UseCache); err != nil {
+		return err
 	}
 
 	return nil

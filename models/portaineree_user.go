@@ -19,7 +19,7 @@ import (
 type PortainereeUser struct {
 
 	// endpoint authorizations
-	EndpointAuthorizations PortainereeEndpointAuthorizations `json:"EndpointAuthorizations,omitempty"`
+	EndpointAuthorizations PortainerEndpointAuthorizations `json:"EndpointAuthorizations,omitempty"`
 
 	// User Identifier
 	// Example: 1
@@ -30,26 +30,30 @@ type PortainereeUser struct {
 	OpenAIAPIKey string `json:"OpenAIApiKey,omitempty"`
 
 	// portainer authorizations
-	PortainerAuthorizations PortainereeAuthorizations `json:"PortainerAuthorizations,omitempty"`
+	PortainerAuthorizations PortainerAuthorizations `json:"PortainerAuthorizations,omitempty"`
 
 	// User role (1 for administrator account and 2 for regular account)
 	// Example: 1
 	Role int64 `json:"Role,omitempty"`
 
+	// theme settings
+	ThemeSettings *PortainereeUserThemeSettings `json:"ThemeSettings,omitempty"`
+
 	// token issue at
 	// Example: 1639408208
 	TokenIssueAt int64 `json:"TokenIssueAt,omitempty"`
 
-	// username
-	// Example: bob
-	Username string `json:"Username,omitempty"`
-
-	// theme settings
-	ThemeSettings *PortainereeUserThemeSettings `json:"themeSettings,omitempty"`
+	// use cache
+	// Example: true
+	UseCache bool `json:"UseCache,omitempty"`
 
 	// Deprecated
 	// Example: dark
-	UserTheme string `json:"userTheme,omitempty"`
+	UserTheme string `json:"UserTheme,omitempty"`
+
+	// username
+	// Example: bob
+	Username string `json:"Username,omitempty"`
 }
 
 // Validate validates this portaineree user
@@ -120,9 +124,9 @@ func (m *PortainereeUser) validateThemeSettings(formats strfmt.Registry) error {
 	if m.ThemeSettings != nil {
 		if err := m.ThemeSettings.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("themeSettings")
+				return ve.ValidateName("ThemeSettings")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("themeSettings")
+				return ce.ValidateName("ThemeSettings")
 			}
 			return err
 		}
@@ -199,9 +203,9 @@ func (m *PortainereeUser) contextValidateThemeSettings(ctx context.Context, form
 
 		if err := m.ThemeSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("themeSettings")
+				return ve.ValidateName("ThemeSettings")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("themeSettings")
+				return ce.ValidateName("ThemeSettings")
 			}
 			return err
 		}

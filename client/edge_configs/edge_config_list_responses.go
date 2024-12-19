@@ -6,6 +6,7 @@ package edge_configs
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *EdgeConfigListOK) Code() int {
 }
 
 func (o *EdgeConfigListOK) Error() string {
-	return fmt.Sprintf("[GET /edge_configurations][%d] edgeConfigListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_configurations][%d] edgeConfigListOK %s", 200, payload)
 }
 
 func (o *EdgeConfigListOK) String() string {
-	return fmt.Sprintf("[GET /edge_configurations][%d] edgeConfigListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_configurations][%d] edgeConfigListOK %s", 200, payload)
 }
 
 func (o *EdgeConfigListOK) GetPayload() []*models.PortainereeEdgeConfig {
@@ -150,11 +153,11 @@ func (o *EdgeConfigListInternalServerError) Code() int {
 }
 
 func (o *EdgeConfigListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_configurations][%d] edgeConfigListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_configurations][%d] edgeConfigListInternalServerError", 500)
 }
 
 func (o *EdgeConfigListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_configurations][%d] edgeConfigListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_configurations][%d] edgeConfigListInternalServerError", 500)
 }
 
 func (o *EdgeConfigListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

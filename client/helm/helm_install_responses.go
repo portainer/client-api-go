@@ -6,6 +6,7 @@ package helm
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *HelmInstallCreated) Code() int {
 }
 
 func (o *HelmInstallCreated) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallCreated %s", 201, payload)
 }
 
 func (o *HelmInstallCreated) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallCreated %s", 201, payload)
 }
 
 func (o *HelmInstallCreated) GetPayload() *models.ReleaseRelease {
@@ -164,11 +167,11 @@ func (o *HelmInstallUnauthorized) Code() int {
 }
 
 func (o *HelmInstallUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallUnauthorized ", 401)
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallUnauthorized", 401)
 }
 
 func (o *HelmInstallUnauthorized) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallUnauthorized ", 401)
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallUnauthorized", 401)
 }
 
 func (o *HelmInstallUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -220,11 +223,11 @@ func (o *HelmInstallNotFound) Code() int {
 }
 
 func (o *HelmInstallNotFound) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallNotFound ", 404)
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallNotFound", 404)
 }
 
 func (o *HelmInstallNotFound) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallNotFound ", 404)
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallNotFound", 404)
 }
 
 func (o *HelmInstallNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -276,11 +279,11 @@ func (o *HelmInstallInternalServerError) Code() int {
 }
 
 func (o *HelmInstallInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallInternalServerError", 500)
 }
 
 func (o *HelmInstallInternalServerError) String() string {
-	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallInternalServerError ", 500)
+	return fmt.Sprintf("[POST /endpoints/{id}/kubernetes/helm][%d] helmInstallInternalServerError", 500)
 }
 
 func (o *HelmInstallInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

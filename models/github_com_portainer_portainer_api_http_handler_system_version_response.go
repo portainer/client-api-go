@@ -22,15 +22,29 @@ type GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse struct {
 	// Example: 2.0.0
 	LatestVersion string `json:"LatestVersion,omitempty"`
 
+	// server edition
+	// Example: CE/EE
+	ServerEdition string `json:"ServerEdition,omitempty"`
+
 	// Whether portainer has an update available
 	// Example: false
 	UpdateAvailable bool `json:"UpdateAvailable,omitempty"`
 
+	// version support
+	// Example: STS/LTS
+	VersionSupport string `json:"VersionSupport,omitempty"`
+
 	// build
-	Build *GithubComPortainerPortainerAPIHTTPHandlerSystemBuildInfo `json:"build,omitempty"`
+	Build *BuildBuildInfo `json:"build,omitempty"`
 
 	// database version
 	DatabaseVersion string `json:"databaseVersion,omitempty"`
+
+	// dependencies
+	Dependencies *BuildDependenciesInfo `json:"dependencies,omitempty"`
+
+	// runtime
+	Runtime *BuildRuntimeInfo `json:"runtime,omitempty"`
 
 	// server version
 	ServerVersion string `json:"serverVersion,omitempty"`
@@ -41,6 +55,14 @@ func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse) Validat
 	var res []error
 
 	if err := m.validateBuild(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDependencies(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRuntime(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -69,11 +91,57 @@ func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse) validat
 	return nil
 }
 
+func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse) validateDependencies(formats strfmt.Registry) error {
+	if swag.IsZero(m.Dependencies) { // not required
+		return nil
+	}
+
+	if m.Dependencies != nil {
+		if err := m.Dependencies.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dependencies")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dependencies")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse) validateRuntime(formats strfmt.Registry) error {
+	if swag.IsZero(m.Runtime) { // not required
+		return nil
+	}
+
+	if m.Runtime != nil {
+		if err := m.Runtime.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runtime")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runtime")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this github com portainer portainer api http handler system version response based on the context it is used
 func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateBuild(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDependencies(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateRuntime(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -96,6 +164,48 @@ func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse) context
 				return ve.ValidateName("build")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("build")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse) contextValidateDependencies(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Dependencies != nil {
+
+		if swag.IsZero(m.Dependencies) { // not required
+			return nil
+		}
+
+		if err := m.Dependencies.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dependencies")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dependencies")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *GithubComPortainerPortainerAPIHTTPHandlerSystemVersionResponse) contextValidateRuntime(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Runtime != nil {
+
+		if swag.IsZero(m.Runtime) { // not required
+			return nil
+		}
+
+		if err := m.Runtime.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("runtime")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("runtime")
 			}
 			return err
 		}

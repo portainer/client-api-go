@@ -7,7 +7,6 @@ package kubernetes
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -21,14 +20,32 @@ type DeleteKubernetesIngressesReader struct {
 // ReadResponse reads a server response into the received o.
 func (o *DeleteKubernetesIngressesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
-	case 200:
-		result := NewDeleteKubernetesIngressesOK()
+	case 204:
+		result := NewDeleteKubernetesIngressesNoContent()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
 	case 400:
 		result := NewDeleteKubernetesIngressesBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 401:
+		result := NewDeleteKubernetesIngressesUnauthorized()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewDeleteKubernetesIngressesForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 404:
+		result := NewDeleteKubernetesIngressesNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -40,72 +57,62 @@ func (o *DeleteKubernetesIngressesReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/ingresses/delete] deleteKubernetesIngresses", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /kubernetes/{id}/ingresses/delete] DeleteKubernetesIngresses", response, response.Code())
 	}
 }
 
-// NewDeleteKubernetesIngressesOK creates a DeleteKubernetesIngressesOK with default headers values
-func NewDeleteKubernetesIngressesOK() *DeleteKubernetesIngressesOK {
-	return &DeleteKubernetesIngressesOK{}
+// NewDeleteKubernetesIngressesNoContent creates a DeleteKubernetesIngressesNoContent with default headers values
+func NewDeleteKubernetesIngressesNoContent() *DeleteKubernetesIngressesNoContent {
+	return &DeleteKubernetesIngressesNoContent{}
 }
 
 /*
-DeleteKubernetesIngressesOK describes a response with status code 200, with default header values.
+DeleteKubernetesIngressesNoContent describes a response with status code 204, with default header values.
 
 Success
 */
-type DeleteKubernetesIngressesOK struct {
-	Payload string
+type DeleteKubernetesIngressesNoContent struct {
 }
 
-// IsSuccess returns true when this delete kubernetes ingresses o k response has a 2xx status code
-func (o *DeleteKubernetesIngressesOK) IsSuccess() bool {
+// IsSuccess returns true when this delete kubernetes ingresses no content response has a 2xx status code
+func (o *DeleteKubernetesIngressesNoContent) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this delete kubernetes ingresses o k response has a 3xx status code
-func (o *DeleteKubernetesIngressesOK) IsRedirect() bool {
+// IsRedirect returns true when this delete kubernetes ingresses no content response has a 3xx status code
+func (o *DeleteKubernetesIngressesNoContent) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this delete kubernetes ingresses o k response has a 4xx status code
-func (o *DeleteKubernetesIngressesOK) IsClientError() bool {
+// IsClientError returns true when this delete kubernetes ingresses no content response has a 4xx status code
+func (o *DeleteKubernetesIngressesNoContent) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this delete kubernetes ingresses o k response has a 5xx status code
-func (o *DeleteKubernetesIngressesOK) IsServerError() bool {
+// IsServerError returns true when this delete kubernetes ingresses no content response has a 5xx status code
+func (o *DeleteKubernetesIngressesNoContent) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this delete kubernetes ingresses o k response a status code equal to that given
-func (o *DeleteKubernetesIngressesOK) IsCode(code int) bool {
-	return code == 200
+// IsCode returns true when this delete kubernetes ingresses no content response a status code equal to that given
+func (o *DeleteKubernetesIngressesNoContent) IsCode(code int) bool {
+	return code == 204
 }
 
-// Code gets the status code for the delete kubernetes ingresses o k response
-func (o *DeleteKubernetesIngressesOK) Code() int {
-	return 200
+// Code gets the status code for the delete kubernetes ingresses no content response
+func (o *DeleteKubernetesIngressesNoContent) Code() int {
+	return 204
 }
 
-func (o *DeleteKubernetesIngressesOK) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesOK  %+v", 200, o.Payload)
+func (o *DeleteKubernetesIngressesNoContent) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesNoContent", 204)
 }
 
-func (o *DeleteKubernetesIngressesOK) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesOK  %+v", 200, o.Payload)
+func (o *DeleteKubernetesIngressesNoContent) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesNoContent", 204)
 }
 
-func (o *DeleteKubernetesIngressesOK) GetPayload() string {
-	return o.Payload
-}
-
-func (o *DeleteKubernetesIngressesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
+func (o *DeleteKubernetesIngressesNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -118,7 +125,7 @@ func NewDeleteKubernetesIngressesBadRequest() *DeleteKubernetesIngressesBadReque
 /*
 DeleteKubernetesIngressesBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type DeleteKubernetesIngressesBadRequest struct {
 }
@@ -154,14 +161,182 @@ func (o *DeleteKubernetesIngressesBadRequest) Code() int {
 }
 
 func (o *DeleteKubernetesIngressesBadRequest) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesBadRequest", 400)
 }
 
 func (o *DeleteKubernetesIngressesBadRequest) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesBadRequest ", 400)
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesBadRequest", 400)
 }
 
 func (o *DeleteKubernetesIngressesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteKubernetesIngressesUnauthorized creates a DeleteKubernetesIngressesUnauthorized with default headers values
+func NewDeleteKubernetesIngressesUnauthorized() *DeleteKubernetesIngressesUnauthorized {
+	return &DeleteKubernetesIngressesUnauthorized{}
+}
+
+/*
+DeleteKubernetesIngressesUnauthorized describes a response with status code 401, with default header values.
+
+Unauthorized access - the user is not authenticated or does not have the necessary permissions. Ensure that you have provided a valid API key or JWT token, and that you have the required permissions.
+*/
+type DeleteKubernetesIngressesUnauthorized struct {
+}
+
+// IsSuccess returns true when this delete kubernetes ingresses unauthorized response has a 2xx status code
+func (o *DeleteKubernetesIngressesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete kubernetes ingresses unauthorized response has a 3xx status code
+func (o *DeleteKubernetesIngressesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete kubernetes ingresses unauthorized response has a 4xx status code
+func (o *DeleteKubernetesIngressesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete kubernetes ingresses unauthorized response has a 5xx status code
+func (o *DeleteKubernetesIngressesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete kubernetes ingresses unauthorized response a status code equal to that given
+func (o *DeleteKubernetesIngressesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete kubernetes ingresses unauthorized response
+func (o *DeleteKubernetesIngressesUnauthorized) Code() int {
+	return 401
+}
+
+func (o *DeleteKubernetesIngressesUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesUnauthorized", 401)
+}
+
+func (o *DeleteKubernetesIngressesUnauthorized) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesUnauthorized", 401)
+}
+
+func (o *DeleteKubernetesIngressesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteKubernetesIngressesForbidden creates a DeleteKubernetesIngressesForbidden with default headers values
+func NewDeleteKubernetesIngressesForbidden() *DeleteKubernetesIngressesForbidden {
+	return &DeleteKubernetesIngressesForbidden{}
+}
+
+/*
+DeleteKubernetesIngressesForbidden describes a response with status code 403, with default header values.
+
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
+*/
+type DeleteKubernetesIngressesForbidden struct {
+}
+
+// IsSuccess returns true when this delete kubernetes ingresses forbidden response has a 2xx status code
+func (o *DeleteKubernetesIngressesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete kubernetes ingresses forbidden response has a 3xx status code
+func (o *DeleteKubernetesIngressesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete kubernetes ingresses forbidden response has a 4xx status code
+func (o *DeleteKubernetesIngressesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete kubernetes ingresses forbidden response has a 5xx status code
+func (o *DeleteKubernetesIngressesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete kubernetes ingresses forbidden response a status code equal to that given
+func (o *DeleteKubernetesIngressesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete kubernetes ingresses forbidden response
+func (o *DeleteKubernetesIngressesForbidden) Code() int {
+	return 403
+}
+
+func (o *DeleteKubernetesIngressesForbidden) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesForbidden", 403)
+}
+
+func (o *DeleteKubernetesIngressesForbidden) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesForbidden", 403)
+}
+
+func (o *DeleteKubernetesIngressesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewDeleteKubernetesIngressesNotFound creates a DeleteKubernetesIngressesNotFound with default headers values
+func NewDeleteKubernetesIngressesNotFound() *DeleteKubernetesIngressesNotFound {
+	return &DeleteKubernetesIngressesNotFound{}
+}
+
+/*
+DeleteKubernetesIngressesNotFound describes a response with status code 404, with default header values.
+
+Unable to find an environment with the specified identifier or unable to find a specific ingress.
+*/
+type DeleteKubernetesIngressesNotFound struct {
+}
+
+// IsSuccess returns true when this delete kubernetes ingresses not found response has a 2xx status code
+func (o *DeleteKubernetesIngressesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete kubernetes ingresses not found response has a 3xx status code
+func (o *DeleteKubernetesIngressesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete kubernetes ingresses not found response has a 4xx status code
+func (o *DeleteKubernetesIngressesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete kubernetes ingresses not found response has a 5xx status code
+func (o *DeleteKubernetesIngressesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete kubernetes ingresses not found response a status code equal to that given
+func (o *DeleteKubernetesIngressesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete kubernetes ingresses not found response
+func (o *DeleteKubernetesIngressesNotFound) Code() int {
+	return 404
+}
+
+func (o *DeleteKubernetesIngressesNotFound) Error() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesNotFound", 404)
+}
+
+func (o *DeleteKubernetesIngressesNotFound) String() string {
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesNotFound", 404)
+}
+
+func (o *DeleteKubernetesIngressesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
@@ -174,7 +349,7 @@ func NewDeleteKubernetesIngressesInternalServerError() *DeleteKubernetesIngresse
 /*
 DeleteKubernetesIngressesInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to delete specified ingresses.
 */
 type DeleteKubernetesIngressesInternalServerError struct {
 }
@@ -210,11 +385,11 @@ func (o *DeleteKubernetesIngressesInternalServerError) Code() int {
 }
 
 func (o *DeleteKubernetesIngressesInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesInternalServerError", 500)
 }
 
 func (o *DeleteKubernetesIngressesInternalServerError) String() string {
-	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesInternalServerError ", 500)
+	return fmt.Sprintf("[POST /kubernetes/{id}/ingresses/delete][%d] deleteKubernetesIngressesInternalServerError", 500)
 }
 
 func (o *DeleteKubernetesIngressesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

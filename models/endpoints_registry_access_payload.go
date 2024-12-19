@@ -22,10 +22,10 @@ type EndpointsRegistryAccessPayload struct {
 	Namespaces []string `json:"namespaces"`
 
 	// team access policies
-	TeamAccessPolicies PortainereeTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
+	TeamAccessPolicies PortainerTeamAccessPolicies `json:"teamAccessPolicies,omitempty"`
 
 	// user access policies
-	UserAccessPolicies PortainereeUserAccessPolicies `json:"userAccessPolicies,omitempty"`
+	UserAccessPolicies PortainerUserAccessPolicies `json:"userAccessPolicies,omitempty"`
 }
 
 // Validate validates this endpoints registry access payload

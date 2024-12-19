@@ -6,6 +6,7 @@ package edge_groups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *EdgeGroupListOK) Code() int {
 }
 
 func (o *EdgeGroupListOK) Error() string {
-	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListOK %s", 200, payload)
 }
 
 func (o *EdgeGroupListOK) String() string {
-	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListOK %s", 200, payload)
 }
 
 func (o *EdgeGroupListOK) GetPayload() []*models.EdgegroupsDecoratedEdgeGroup {
@@ -156,11 +159,11 @@ func (o *EdgeGroupListInternalServerError) Code() int {
 }
 
 func (o *EdgeGroupListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListInternalServerError", 500)
 }
 
 func (o *EdgeGroupListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListInternalServerError ", 500)
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListInternalServerError", 500)
 }
 
 func (o *EdgeGroupListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -212,11 +215,11 @@ func (o *EdgeGroupListServiceUnavailable) Code() int {
 }
 
 func (o *EdgeGroupListServiceUnavailable) Error() string {
-	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListServiceUnavailable", 503)
 }
 
 func (o *EdgeGroupListServiceUnavailable) String() string {
-	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListServiceUnavailable ", 503)
+	return fmt.Sprintf("[GET /edge_groups][%d] edgeGroupListServiceUnavailable", 503)
 }
 
 func (o *EdgeGroupListServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

@@ -93,11 +93,11 @@ func (o *OpenAMTDevicesOK) Code() int {
 }
 
 func (o *OpenAMTDevicesOK) Error() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesOK ", 200)
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesOK", 200)
 }
 
 func (o *OpenAMTDevicesOK) String() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesOK ", 200)
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesOK", 200)
 }
 
 func (o *OpenAMTDevicesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *OpenAMTDevicesBadRequest) Code() int {
 }
 
 func (o *OpenAMTDevicesBadRequest) Error() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesBadRequest ", 400)
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesBadRequest", 400)
 }
 
 func (o *OpenAMTDevicesBadRequest) String() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesBadRequest ", 400)
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesBadRequest", 400)
 }
 
 func (o *OpenAMTDevicesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *OpenAMTDevicesForbidden) Code() int {
 }
 
 func (o *OpenAMTDevicesForbidden) Error() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesForbidden ", 403)
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesForbidden", 403)
 }
 
 func (o *OpenAMTDevicesForbidden) String() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesForbidden ", 403)
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesForbidden", 403)
 }
 
 func (o *OpenAMTDevicesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *OpenAMTDevicesInternalServerError) Code() int {
 }
 
 func (o *OpenAMTDevicesInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesInternalServerError", 500)
 }
 
 func (o *OpenAMTDevicesInternalServerError) String() string {
-	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesInternalServerError ", 500)
+	return fmt.Sprintf("[GET /open_amt/{id}/devices][%d] openAMTDevicesInternalServerError", 500)
 }
 
 func (o *OpenAMTDevicesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

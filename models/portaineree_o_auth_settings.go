@@ -21,6 +21,9 @@ type PortainereeOAuthSettings struct {
 	// access token URI
 	AccessTokenURI string `json:"AccessTokenURI,omitempty"`
 
+	// auth style
+	AuthStyle int64 `json:"AuthStyle,omitempty"`
+
 	// authorization URI
 	AuthorizationURI string `json:"AuthorizationURI,omitempty"`
 

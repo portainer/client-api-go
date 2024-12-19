@@ -6,6 +6,7 @@ package stacks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *StackGitRedeployOK) Code() int {
 }
 
 func (o *StackGitRedeployOK) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployOK %s", 200, payload)
 }
 
 func (o *StackGitRedeployOK) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployOK %s", 200, payload)
 }
 
 func (o *StackGitRedeployOK) GetPayload() *models.PortainereeStack {
@@ -170,11 +173,11 @@ func (o *StackGitRedeployBadRequest) Code() int {
 }
 
 func (o *StackGitRedeployBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployBadRequest ", 400)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployBadRequest", 400)
 }
 
 func (o *StackGitRedeployBadRequest) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployBadRequest ", 400)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployBadRequest", 400)
 }
 
 func (o *StackGitRedeployBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -226,11 +229,11 @@ func (o *StackGitRedeployForbidden) Code() int {
 }
 
 func (o *StackGitRedeployForbidden) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployForbidden ", 403)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployForbidden", 403)
 }
 
 func (o *StackGitRedeployForbidden) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployForbidden ", 403)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployForbidden", 403)
 }
 
 func (o *StackGitRedeployForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -282,11 +285,11 @@ func (o *StackGitRedeployNotFound) Code() int {
 }
 
 func (o *StackGitRedeployNotFound) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployNotFound ", 404)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployNotFound", 404)
 }
 
 func (o *StackGitRedeployNotFound) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployNotFound ", 404)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployNotFound", 404)
 }
 
 func (o *StackGitRedeployNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -338,11 +341,11 @@ func (o *StackGitRedeployInternalServerError) Code() int {
 }
 
 func (o *StackGitRedeployInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployInternalServerError", 500)
 }
 
 func (o *StackGitRedeployInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployInternalServerError ", 500)
+	return fmt.Sprintf("[PUT /stacks/{id}/git/redeploy][%d] stackGitRedeployInternalServerError", 500)
 }
 
 func (o *StackGitRedeployInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

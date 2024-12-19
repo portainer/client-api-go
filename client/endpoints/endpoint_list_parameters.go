@@ -140,12 +140,6 @@ type EndpointListParams struct {
 	*/
 	Search *string
 
-	/* Sort.
-
-	   Sort results by this value
-	*/
-	Sort *int64
-
 	/* Start.
 
 	   Start searching from
@@ -370,17 +364,6 @@ func (o *EndpointListParams) WithSearch(search *string) *EndpointListParams {
 // SetSearch adds the search to the endpoint list params
 func (o *EndpointListParams) SetSearch(search *string) {
 	o.Search = search
-}
-
-// WithSort adds the sort to the endpoint list params
-func (o *EndpointListParams) WithSort(sort *int64) *EndpointListParams {
-	o.SetSort(sort)
-	return o
-}
-
-// SetSort adds the sort to the endpoint list params
-func (o *EndpointListParams) SetSort(sort *int64) {
-	o.Sort = sort
 }
 
 // WithStart adds the start to the endpoint list params
@@ -644,23 +627,6 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qSearch != "" {
 
 			if err := r.SetQueryParam("search", qSearch); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Sort != nil {
-
-		// query param sort
-		var qrSort int64
-
-		if o.Sort != nil {
-			qrSort = *o.Sort
-		}
-		qSort := swag.FormatInt64(qrSort)
-		if qSort != "" {
-
-			if err := r.SetQueryParam("sort", qSort); err != nil {
 				return err
 			}
 		}

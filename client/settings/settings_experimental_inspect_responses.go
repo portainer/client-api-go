@@ -6,6 +6,7 @@ package settings
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *SettingsExperimentalInspectOK) Code() int {
 }
 
 func (o *SettingsExperimentalInspectOK) Error() string {
-	return fmt.Sprintf("[GET /settings/experimental][%d] settingsExperimentalInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /settings/experimental][%d] settingsExperimentalInspectOK %s", 200, payload)
 }
 
 func (o *SettingsExperimentalInspectOK) String() string {
-	return fmt.Sprintf("[GET /settings/experimental][%d] settingsExperimentalInspectOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /settings/experimental][%d] settingsExperimentalInspectOK %s", 200, payload)
 }
 
 func (o *SettingsExperimentalInspectOK) GetPayload() *models.SettingsSettingsExperimentalInspectResponse {
@@ -152,11 +155,11 @@ func (o *SettingsExperimentalInspectInternalServerError) Code() int {
 }
 
 func (o *SettingsExperimentalInspectInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /settings/experimental][%d] settingsExperimentalInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /settings/experimental][%d] settingsExperimentalInspectInternalServerError", 500)
 }
 
 func (o *SettingsExperimentalInspectInternalServerError) String() string {
-	return fmt.Sprintf("[GET /settings/experimental][%d] settingsExperimentalInspectInternalServerError ", 500)
+	return fmt.Sprintf("[GET /settings/experimental][%d] settingsExperimentalInspectInternalServerError", 500)
 }
 
 func (o *SettingsExperimentalInspectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

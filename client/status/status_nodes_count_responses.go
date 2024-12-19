@@ -6,6 +6,7 @@ package status
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *StatusNodesCountOK) Code() int {
 }
 
 func (o *StatusNodesCountOK) Error() string {
-	return fmt.Sprintf("[GET /status/nodes][%d] statusNodesCountOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /status/nodes][%d] statusNodesCountOK %s", 200, payload)
 }
 
 func (o *StatusNodesCountOK) String() string {
-	return fmt.Sprintf("[GET /status/nodes][%d] statusNodesCountOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /status/nodes][%d] statusNodesCountOK %s", 200, payload)
 }
 
 func (o *StatusNodesCountOK) GetPayload() *models.GithubComPortainerPortainerEeAPIHTTPHandlerSystemNodesCountResponse {
@@ -152,11 +155,11 @@ func (o *StatusNodesCountInternalServerError) Code() int {
 }
 
 func (o *StatusNodesCountInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /status/nodes][%d] statusNodesCountInternalServerError ", 500)
+	return fmt.Sprintf("[GET /status/nodes][%d] statusNodesCountInternalServerError", 500)
 }
 
 func (o *StatusNodesCountInternalServerError) String() string {
-	return fmt.Sprintf("[GET /status/nodes][%d] statusNodesCountInternalServerError ", 500)
+	return fmt.Sprintf("[GET /status/nodes][%d] statusNodesCountInternalServerError", 500)
 }
 
 func (o *StatusNodesCountInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

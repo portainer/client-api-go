@@ -93,11 +93,11 @@ func (o *RegistryDeleteNoContent) Code() int {
 }
 
 func (o *RegistryDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNoContent", 204)
 }
 
 func (o *RegistryDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNoContent", 204)
 }
 
 func (o *RegistryDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -149,11 +149,11 @@ func (o *RegistryDeleteBadRequest) Code() int {
 }
 
 func (o *RegistryDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteBadRequest", 400)
 }
 
 func (o *RegistryDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteBadRequest", 400)
 }
 
 func (o *RegistryDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,11 +205,11 @@ func (o *RegistryDeleteNotFound) Code() int {
 }
 
 func (o *RegistryDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNotFound", 404)
 }
 
 func (o *RegistryDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteNotFound", 404)
 }
 
 func (o *RegistryDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -261,11 +261,11 @@ func (o *RegistryDeleteInternalServerError) Code() int {
 }
 
 func (o *RegistryDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteInternalServerError", 500)
 }
 
 func (o *RegistryDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /registries/{id}][%d] registryDeleteInternalServerError", 500)
 }
 
 func (o *RegistryDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

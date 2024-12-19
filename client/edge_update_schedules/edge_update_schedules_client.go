@@ -9,12 +9,38 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new edge update schedules API client.
 func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
+}
+
+// New creates a new edge update schedules API client with basic auth credentials.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - user: user for basic authentication header.
+// - password: password for basic authentication header.
+func NewClientWithBasicAuth(host, basePath, scheme, user, password string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BasicAuth(user, password)
+	return &Client{transport: transport, formats: strfmt.Default}
+}
+
+// New creates a new edge update schedules API client with a bearer token for authentication.
+// It takes the following parameters:
+// - host: http host (github.com).
+// - basePath: any base path for the API client ("/v1", "/v3").
+// - scheme: http scheme ("http", "https").
+// - bearerToken: bearer token for Bearer authentication header.
+func NewClientWithBearerToken(host, basePath, scheme, bearerToken string) ClientService {
+	transport := httptransport.New(host, basePath, []string{scheme})
+	transport.DefaultAuthentication = httptransport.BearerToken(bearerToken)
+	return &Client{transport: transport, formats: strfmt.Default}
 }
 
 /*
@@ -25,7 +51,7 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
+// ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
@@ -143,7 +169,7 @@ func (a *Client) EdgeUpdateScheduleActiveSchedulesList(params *EdgeUpdateSchedul
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "EdgeUpdateScheduleActiveSchedulesList",
-		Method:             "GET",
+		Method:             "POST",
 		PathPattern:        "/edge_update_schedules/active",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
@@ -173,9 +199,11 @@ func (a *Client) EdgeUpdateScheduleActiveSchedulesList(params *EdgeUpdateSchedul
 }
 
 /*
-EdgeUpdateScheduleCreate creates a new edge update schedule
+	EdgeUpdateScheduleCreate creates a scheduled remote update procedure for edge agents
 
-**Access policy**: administrator
+	Creates a scheduled remote update process that will update or rollback the Edge agents in the specified Edge groups.
+
+**Access policy**: Administrator only.
 */
 func (a *Client) EdgeUpdateScheduleCreate(params *EdgeUpdateScheduleCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdateScheduleCreateOK, error) {
 	// TODO: Validate the params before sending
@@ -337,9 +365,11 @@ func (a *Client) EdgeUpdateScheduleList(params *EdgeUpdateScheduleListParams, au
 }
 
 /*
-EdgeUpdateScheduleUpdate updates an edge update schedule
+	EdgeUpdateScheduleUpdate updates a scheduled remote update procedure for edge agents
 
-**Access policy**: administrator
+	Creates a scheduled remote update process that will update or rollback the Edge agents in the specified Edge groups.
+
+**Access policy**: Administrator only.
 */
 func (a *Client) EdgeUpdateScheduleUpdate(params *EdgeUpdateScheduleUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeUpdateScheduleUpdateNoContent, error) {
 	// TODO: Validate the params before sending

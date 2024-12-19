@@ -99,11 +99,11 @@ func (o *StackDeleteNoContent) Code() int {
 }
 
 func (o *StackDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNoContent", 204)
 }
 
 func (o *StackDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNoContent", 204)
 }
 
 func (o *StackDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -155,11 +155,11 @@ func (o *StackDeleteBadRequest) Code() int {
 }
 
 func (o *StackDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteBadRequest", 400)
 }
 
 func (o *StackDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteBadRequest", 400)
 }
 
 func (o *StackDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -211,11 +211,11 @@ func (o *StackDeleteForbidden) Code() int {
 }
 
 func (o *StackDeleteForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteForbidden", 403)
 }
 
 func (o *StackDeleteForbidden) String() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteForbidden ", 403)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteForbidden", 403)
 }
 
 func (o *StackDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -267,11 +267,11 @@ func (o *StackDeleteNotFound) Code() int {
 }
 
 func (o *StackDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNotFound", 404)
 }
 
 func (o *StackDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteNotFound", 404)
 }
 
 func (o *StackDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -323,11 +323,11 @@ func (o *StackDeleteInternalServerError) Code() int {
 }
 
 func (o *StackDeleteInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteInternalServerError", 500)
 }
 
 func (o *StackDeleteInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteInternalServerError ", 500)
+	return fmt.Sprintf("[DELETE /stacks/{id}][%d] stackDeleteInternalServerError", 500)
 }
 
 func (o *StackDeleteInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
