@@ -80,6 +80,12 @@ type StackDeleteParams struct {
 	*/
 	ID int64
 
+	/* RemoveVolumes.
+
+	   Set to true to delete named volumes declared in the stack file and anonymous volumes attached to containers. Only affects Docker Standalone stacks.
+	*/
+	RemoveVolumes *bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -166,6 +172,17 @@ func (o *StackDeleteParams) SetID(id int64) {
 	o.ID = id
 }
 
+// WithRemoveVolumes adds the removeVolumes to the stack delete params
+func (o *StackDeleteParams) WithRemoveVolumes(removeVolumes *bool) *StackDeleteParams {
+	o.SetRemoveVolumes(removeVolumes)
+	return o
+}
+
+// SetRemoveVolumes adds the removeVolumes to the stack delete params
+func (o *StackDeleteParams) SetRemoveVolumes(removeVolumes *bool) {
+	o.RemoveVolumes = removeVolumes
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *StackDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -204,6 +221,23 @@ func (o *StackDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
+	}
+
+	if o.RemoveVolumes != nil {
+
+		// query param removeVolumes
+		var qrRemoveVolumes bool
+
+		if o.RemoveVolumes != nil {
+			qrRemoveVolumes = *o.RemoveVolumes
+		}
+		qRemoveVolumes := swag.FormatBool(qrRemoveVolumes)
+		if qRemoveVolumes != "" {
+
+			if err := r.SetQueryParam("removeVolumes", qRemoveVolumes); err != nil {
+				return err
+			}
+		}
 	}
 
 	if len(res) > 0 {

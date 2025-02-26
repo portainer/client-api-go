@@ -19,6 +19,9 @@ type EdgestacksDeployerOptionsPayload struct {
 
 	// prune
 	Prune bool `json:"prune,omitempty"`
+
+	// remove volumes
+	RemoveVolumes bool `json:"removeVolumes,omitempty"`
 }
 
 // Validate validates this edgestacks deployer options payload

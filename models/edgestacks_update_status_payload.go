@@ -31,6 +31,9 @@ type EdgestacksUpdateStatusPayload struct {
 
 	// time
 	Time int64 `json:"time,omitempty"`
+
+	// version
+	Version int64 `json:"version,omitempty"`
 }
 
 // Validate validates this edgestacks update status payload

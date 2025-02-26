@@ -27,6 +27,9 @@ type EdgestacksStackGitUpdatePayload struct {
 	// auto update
 	AutoUpdate *PortainerAutoUpdateSettings `json:"autoUpdate,omitempty"`
 
+	// Options to control the deployer behaviour
+	DeployerOptions *EdgestacksDeployerOptionsPayload `json:"deployerOptions,omitempty"`
+
 	// Deployment type to deploy this stack
 	// Valid values are: 0 - 'compose', 1 - 'kubernetes'
 	// compose is enabled only for docker environments
@@ -74,6 +77,10 @@ func (m *EdgestacksStackGitUpdatePayload) Validate(formats strfmt.Registry) erro
 	}
 
 	if err := m.validateAutoUpdate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDeployerOptions(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -125,6 +132,25 @@ func (m *EdgestacksStackGitUpdatePayload) validateAutoUpdate(formats strfmt.Regi
 				return ve.ValidateName("autoUpdate")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("autoUpdate")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EdgestacksStackGitUpdatePayload) validateDeployerOptions(formats strfmt.Registry) error {
+	if swag.IsZero(m.DeployerOptions) { // not required
+		return nil
+	}
+
+	if m.DeployerOptions != nil {
+		if err := m.DeployerOptions.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deployerOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deployerOptions")
 			}
 			return err
 		}
@@ -223,6 +249,10 @@ func (m *EdgestacksStackGitUpdatePayload) ContextValidate(ctx context.Context, f
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDeployerOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEnvVars(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -271,6 +301,27 @@ func (m *EdgestacksStackGitUpdatePayload) contextValidateAutoUpdate(ctx context.
 				return ve.ValidateName("autoUpdate")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("autoUpdate")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EdgestacksStackGitUpdatePayload) contextValidateDeployerOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DeployerOptions != nil {
+
+		if swag.IsZero(m.DeployerOptions) { // not required
+			return nil
+		}
+
+		if err := m.DeployerOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deployerOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deployerOptions")
 			}
 			return err
 		}

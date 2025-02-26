@@ -21,6 +21,7 @@ type V1LabelSelector struct {
 
 	// matchExpressions is a list of label selector requirements. The requirements are ANDed.
 	// +optional
+	// +listType=atomic
 	MatchExpressions []*V1LabelSelectorRequirement `json:"matchExpressions"`
 
 	// matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels

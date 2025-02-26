@@ -6,7 +6,19 @@ Swagger generated Client APIs in Golang
 
 ### Pre-requisites
 
-TBC
+### Install Swagger CLI
+
+```sh
+go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+```
+
+### Download Swagger file from SwaggerHub
+
+Replace version number with the appropriate version of the API.
+
+```sh
+curl -o swagger.yaml https://api.swaggerhub.com/apis/portainer/portainer-ee/2.27.0/swagger.yaml
+```
 
 ### Client Generation
 

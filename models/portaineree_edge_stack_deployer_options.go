@@ -17,8 +17,11 @@ import (
 // swagger:model portaineree.EdgeStackDeployerOptions
 type PortainereeEdgeStackDeployerOptions struct {
 
-	// Drives `compose --remove-orphans` and `stack --prune` options
+	// Drives `compose up --remove-orphans` and `stack up --prune` options
 	Prune bool `json:"prune,omitempty"`
+
+	// Drives `compose down --volumes` option
+	RemoveVolumes bool `json:"removeVolumes,omitempty"`
 }
 
 // Validate validates this portaineree edge stack deployer options

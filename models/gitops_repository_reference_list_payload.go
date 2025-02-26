@@ -19,8 +19,7 @@ import (
 // swagger:model gitops.repositoryReferenceListPayload
 type GitopsRepositoryReferenceListPayload struct {
 
-	// Mandatory container/stack fields
-	// Template Identifier
+	// created from custom template ID
 	CreatedFromCustomTemplateID int64 `json:"createdFromCustomTemplateID,omitempty"`
 
 	// git credential ID

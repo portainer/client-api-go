@@ -80,8 +80,6 @@ func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	EdgeStackCreate(params *EdgeStackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackCreateOK, error)
-
 	EdgeStackCreateFile(params *EdgeStackCreateFileParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackCreateFileOK, error)
 
 	EdgeStackCreateRepository(params *EdgeStackCreateRepositoryParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackCreateRepositoryOK, error)
@@ -108,8 +106,6 @@ type ClientService interface {
 
 	EdgeStackStaggerStatusInspect(params *EdgeStackStaggerStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackStaggerStatusInspectOK, error)
 
-	EdgeStackStatusDelete(params *EdgeStackStatusDeleteParams, opts ...ClientOption) (*EdgeStackStatusDeleteOK, error)
-
 	EdgeStackStatusUpdate(params *EdgeStackStatusUpdateParams, opts ...ClientOption) (*EdgeStackStatusUpdateOK, error)
 
 	EdgeStackUpdate(params *EdgeStackUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackUpdateOK, error)
@@ -117,47 +113,6 @@ type ClientService interface {
 	EdgeStackUpdateFromGit(params *EdgeStackUpdateFromGitParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackUpdateFromGitNoContent, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-EdgeStackCreate creates an edge stack
-
-**Access policy**: administrator
-*/
-func (a *Client) EdgeStackCreate(params *EdgeStackCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeStackCreateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeStackCreateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeStackCreate",
-		Method:             "POST",
-		PathPattern:        "/edge_stacks",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeStackCreateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeStackCreateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeStackCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -690,46 +645,6 @@ func (a *Client) EdgeStackStaggerStatusInspect(params *EdgeStackStaggerStatusIns
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for EdgeStackStaggerStatusInspect: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-EdgeStackStatusDelete deletes an edge stack status
-
-Authorized only if the request is done by an Edge Environment(Endpoint)
-*/
-func (a *Client) EdgeStackStatusDelete(params *EdgeStackStatusDeleteParams, opts ...ClientOption) (*EdgeStackStatusDeleteOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewEdgeStackStatusDeleteParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "EdgeStackStatusDelete",
-		Method:             "DELETE",
-		PathPattern:        "/edge_stacks/{id}/status/{environmentId}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &EdgeStackStatusDeleteReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*EdgeStackStatusDeleteOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EdgeStackStatusDelete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

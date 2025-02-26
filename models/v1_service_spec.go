@@ -80,6 +80,7 @@ type V1ServiceSpec struct {
 	// at a node with this IP.  A common example is external load-balancers
 	// that are not part of the Kubernetes system.
 	// +optional
+	// +listType=atomic
 	ExternalIPs []string `json:"externalIPs"`
 
 	// externalName is the external reference that discovery mechanisms will
@@ -186,6 +187,7 @@ type V1ServiceSpec struct {
 	// cloud-provider does not support the feature."
 	// More info: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
 	// +optional
+	// +listType=atomic
 	LoadBalancerSourceRanges []string `json:"loadBalancerSourceRanges"`
 
 	// The list of ports that are exposed by this service.
@@ -229,6 +231,17 @@ type V1ServiceSpec struct {
 	// sessionAffinityConfig contains the configurations of session affinity.
 	// +optional
 	SessionAffinityConfig *V1SessionAffinityConfig `json:"sessionAffinityConfig,omitempty"`
+
+	// TrafficDistribution offers a way to express preferences for how traffic is
+	// distributed to Service endpoints. Implementations can use this field as a
+	// hint, but are not required to guarantee strict adherence. If the field is
+	// not set, the implementation will apply its default routing strategy. If set
+	// to "PreferClose", implementations should prioritize endpoints that are
+	// topologically close (e.g., same zone).
+	// This is an alpha field and requires enabling ServiceTrafficDistribution feature.
+	// +featureGate=ServiceTrafficDistribution
+	// +optional
+	TrafficDistribution string `json:"trafficDistribution,omitempty"`
 
 	// type determines how the Service is exposed. Defaults to ClusterIP. Valid
 	// options are ExternalName, ClusterIP, NodePort, and LoadBalancer.

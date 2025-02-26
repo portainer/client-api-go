@@ -56,6 +56,10 @@ type PortainereeSettings struct {
 	// The content in plaintext used to display in the login page. Will hide when value is empty string
 	CustomLoginBanner string `json:"CustomLoginBanner,omitempty"`
 
+	// DisableKubeRolesSync will disable the sync of kube roles for all built-in roles
+	// Example: false
+	DisableKubeRolesSync bool `json:"DisableKubeRolesSync,omitempty"`
+
 	// DisableKubeShell will disable the kube shell feature for non-admin users
 	// Example: false
 	DisableKubeShell bool `json:"DisableKubeShell,omitempty"`
@@ -103,8 +107,7 @@ type PortainereeSettings struct {
 	// Deployment options for encouraging git ops workflows
 	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
 
-	// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
-	// Example: https://charts.bitnami.com/bitnami
+	// Helm repository URL, defaults to ""
 	HelmRepositoryURL string `json:"HelmRepositoryURL,omitempty"`
 
 	// internal auth settings

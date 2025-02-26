@@ -36,6 +36,12 @@ func (o *CloudCredsDeleteReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 403:
+		result := NewCloudCredsDeleteForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewCloudCredsDeleteInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -169,6 +175,62 @@ func (o *CloudCredsDeleteBadRequest) String() string {
 }
 
 func (o *CloudCredsDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCloudCredsDeleteForbidden creates a CloudCredsDeleteForbidden with default headers values
+func NewCloudCredsDeleteForbidden() *CloudCredsDeleteForbidden {
+	return &CloudCredsDeleteForbidden{}
+}
+
+/*
+CloudCredsDeleteForbidden describes a response with status code 403, with default header values.
+
+Forbidden: the requested credential is associated with endpoint(s)
+*/
+type CloudCredsDeleteForbidden struct {
+}
+
+// IsSuccess returns true when this cloud creds delete forbidden response has a 2xx status code
+func (o *CloudCredsDeleteForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this cloud creds delete forbidden response has a 3xx status code
+func (o *CloudCredsDeleteForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this cloud creds delete forbidden response has a 4xx status code
+func (o *CloudCredsDeleteForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this cloud creds delete forbidden response has a 5xx status code
+func (o *CloudCredsDeleteForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this cloud creds delete forbidden response a status code equal to that given
+func (o *CloudCredsDeleteForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the cloud creds delete forbidden response
+func (o *CloudCredsDeleteForbidden) Code() int {
+	return 403
+}
+
+func (o *CloudCredsDeleteForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /cloud/credentials/{id}][%d] cloudCredsDeleteForbidden", 403)
+}
+
+func (o *CloudCredsDeleteForbidden) String() string {
+	return fmt.Sprintf("[DELETE /cloud/credentials/{id}][%d] cloudCredsDeleteForbidden", 403)
+}
+
+func (o *CloudCredsDeleteForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

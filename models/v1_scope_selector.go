@@ -21,6 +21,7 @@ type V1ScopeSelector struct {
 
 	// A list of scope selector requirements by scope of the resources.
 	// +optional
+	// +listType=atomic
 	MatchExpressions []*V1ScopedResourceSelectorRequirement `json:"matchExpressions"`
 }
 

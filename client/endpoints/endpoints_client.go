@@ -90,6 +90,8 @@ type ClientService interface {
 
 	EndpointDeleteBatch(params *EndpointDeleteBatchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteBatchNoContent, *EndpointDeleteBatchMultiStatus, error)
 
+	EndpointDeleteBatchDeprecated(params *EndpointDeleteBatchDeprecatedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteBatchDeprecatedNoContent, *EndpointDeleteBatchDeprecatedMultiStatus, error)
+
 	EndpointEdgeStatusInspect(params *EndpointEdgeStatusInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointEdgeStatusInspectOK, error)
 
 	EndpointInspect(params *EndpointInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointInspectOK, error)
@@ -107,8 +109,6 @@ type ClientService interface {
 	EndpointUpdateRelations(params *EndpointUpdateRelationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointUpdateRelationsNoContent, error)
 
 	PostEndpointsIDDockerV2BrowsePut(params *PostEndpointsIDDockerV2BrowsePutParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostEndpointsIDDockerV2BrowsePutNoContent, error)
-
-	TrustEdgeEndpoint(params *TrustEdgeEndpointParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TrustEdgeEndpointNoContent, error)
 
 	TrustEdgeEndpoints(params *TrustEdgeEndpointsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TrustEdgeEndpointsNoContent, error)
 
@@ -314,8 +314,8 @@ func (a *Client) EndpointDeleteBatch(params *EndpointDeleteBatchParams, authInfo
 	}
 	op := &runtime.ClientOperation{
 		ID:                 "EndpointDeleteBatch",
-		Method:             "DELETE",
-		PathPattern:        "/endpoints",
+		Method:             "POST",
+		PathPattern:        "/endpoints/delete",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
@@ -337,6 +337,51 @@ func (a *Client) EndpointDeleteBatch(params *EndpointDeleteBatchParams, authInfo
 	case *EndpointDeleteBatchNoContent:
 		return value, nil, nil
 	case *EndpointDeleteBatchMultiStatus:
+		return nil, value, nil
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for endpoints: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	EndpointDeleteBatchDeprecated removes multiple environments
+
+	Deprecated: use the `POST` endpoint instead.
+
+Remove multiple environments and optionally clean-up associated resources.
+**Access policy**: Administrator only.
+*/
+func (a *Client) EndpointDeleteBatchDeprecated(params *EndpointDeleteBatchDeprecatedParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EndpointDeleteBatchDeprecatedNoContent, *EndpointDeleteBatchDeprecatedMultiStatus, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewEndpointDeleteBatchDeprecatedParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "EndpointDeleteBatchDeprecated",
+		Method:             "DELETE",
+		PathPattern:        "/endpoints",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &EndpointDeleteBatchDeprecatedReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, nil, err
+	}
+	switch value := result.(type) {
+	case *EndpointDeleteBatchDeprecatedNoContent:
+		return value, nil, nil
+	case *EndpointDeleteBatchDeprecatedMultiStatus:
 		return nil, value, nil
 	}
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
@@ -732,49 +777,6 @@ func (a *Client) PostEndpointsIDDockerV2BrowsePut(params *PostEndpointsIDDockerV
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for PostEndpointsIDDockerV2BrowsePut: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-	TrustEdgeEndpoint associates an edge environment in the waiting room to an environment
-
-	This API endpoint is deprecated. Please use /endpoints/edge/trust instead.
-
-**Access policy**: Administrator only.
-*/
-func (a *Client) TrustEdgeEndpoint(params *TrustEdgeEndpointParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TrustEdgeEndpointNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewTrustEdgeEndpointParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "TrustEdgeEndpoint",
-		Method:             "POST",
-		PathPattern:        "/endpoints/{id}/edge/trust",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &TrustEdgeEndpointReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*TrustEdgeEndpointNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for TrustEdgeEndpoint: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
