@@ -22,6 +22,7 @@ type V1LoadBalancerStatus struct {
 	// Ingress is a list containing ingress points for the load-balancer.
 	// Traffic intended for the service should be sent to these ingress points.
 	// +optional
+	// +listType=atomic
 	Ingress []*V1LoadBalancerIngress `json:"ingress"`
 }
 

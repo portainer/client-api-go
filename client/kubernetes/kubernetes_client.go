@@ -66,6 +66,10 @@ type ClientService interface {
 
 	DeleteClusterRoles(params *DeleteClusterRolesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterRolesNoContent, error)
 
+	DeleteCronJobs(params *DeleteCronJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCronJobsNoContent, error)
+
+	DeleteJobs(params *DeleteJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteJobsNoContent, error)
+
 	DeleteKubernetesIngresses(params *DeleteKubernetesIngressesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesIngressesNoContent, error)
 
 	DeleteKubernetesNamespace(params *DeleteKubernetesNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesNamespaceOK, error)
@@ -104,11 +108,15 @@ type ClientService interface {
 
 	GetKubernetesConfigMap(params *GetKubernetesConfigMapParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesConfigMapOK, error)
 
+	GetKubernetesCronJobs(params *GetKubernetesCronJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesCronJobsOK, error)
+
 	GetKubernetesDashboard(params *GetKubernetesDashboardParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesDashboardOK, error)
 
 	GetKubernetesIngress(params *GetKubernetesIngressParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesIngressOK, error)
 
 	GetKubernetesIngressControllersByNamespace(params *GetKubernetesIngressControllersByNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesIngressControllersByNamespaceOK, error)
+
+	GetKubernetesJobs(params *GetKubernetesJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesJobsOK, error)
 
 	GetKubernetesMaxResourceLimits(params *GetKubernetesMaxResourceLimitsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesMaxResourceLimitsOK, error)
 
@@ -389,6 +397,92 @@ func (a *Client) DeleteClusterRoles(params *DeleteClusterRolesParams, authInfo r
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteClusterRoles: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	DeleteCronJobs deletes cron jobs
+
+	Delete the provided list of Cron Jobs.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) DeleteCronJobs(params *DeleteCronJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCronJobsNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteCronJobsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteCronJobs",
+		Method:             "POST",
+		PathPattern:        "/kubernetes/{id}/cron_jobs/delete",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteCronJobsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteCronJobsNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteCronJobs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	DeleteJobs deletes jobs
+
+	Delete the provided list of Jobs.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) DeleteJobs(params *DeleteJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteJobsNoContent, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteJobsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteJobs",
+		Method:             "POST",
+		PathPattern:        "/kubernetes/{id}/jobs/delete",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteJobsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteJobsNoContent)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteJobs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -1210,6 +1304,49 @@ func (a *Client) GetKubernetesConfigMap(params *GetKubernetesConfigMapParams, au
 }
 
 /*
+	GetKubernetesCronJobs gets a list of kubernetes cron jobs
+
+	Get a list of kubernetes Cron Jobs that the user has access to.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetKubernetesCronJobs(params *GetKubernetesCronJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesCronJobsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesCronJobsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetKubernetesCronJobs",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/cron_jobs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesCronJobsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesCronJobsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetKubernetesCronJobs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	GetKubernetesDashboard gets the dashboard summary data
 
 	Get the dashboard summary data which is simply a count of a range of different commonly used kubernetes resources.
@@ -1335,6 +1472,49 @@ func (a *Client) GetKubernetesIngressControllersByNamespace(params *GetKubernete
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetKubernetesIngressControllersByNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesJobs gets a list of kubernetes jobs
+
+	Get a list of kubernetes Jobs that the user has access to.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetKubernetesJobs(params *GetKubernetesJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesJobsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesJobsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetKubernetesJobs",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/jobs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesJobsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesJobsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetKubernetesJobs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

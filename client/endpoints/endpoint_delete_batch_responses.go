@@ -55,7 +55,7 @@ func (o *EndpointDeleteBatchReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /endpoints] EndpointDeleteBatch", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /endpoints/delete] EndpointDeleteBatch", response, response.Code())
 	}
 }
 
@@ -103,11 +103,11 @@ func (o *EndpointDeleteBatchNoContent) Code() int {
 }
 
 func (o *EndpointDeleteBatchNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchNoContent", 204)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchNoContent", 204)
 }
 
 func (o *EndpointDeleteBatchNoContent) String() string {
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchNoContent", 204)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchNoContent", 204)
 }
 
 func (o *EndpointDeleteBatchNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -161,12 +161,12 @@ func (o *EndpointDeleteBatchMultiStatus) Code() int {
 
 func (o *EndpointDeleteBatchMultiStatus) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchMultiStatus %s", 207, payload)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchMultiStatus %s", 207, payload)
 }
 
 func (o *EndpointDeleteBatchMultiStatus) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchMultiStatus %s", 207, payload)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchMultiStatus %s", 207, payload)
 }
 
 func (o *EndpointDeleteBatchMultiStatus) GetPayload() *models.EndpointsEndpointDeleteBatchPartialResponse {
@@ -229,11 +229,11 @@ func (o *EndpointDeleteBatchBadRequest) Code() int {
 }
 
 func (o *EndpointDeleteBatchBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchBadRequest", 400)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchBadRequest", 400)
 }
 
 func (o *EndpointDeleteBatchBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchBadRequest", 400)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchBadRequest", 400)
 }
 
 func (o *EndpointDeleteBatchBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -285,11 +285,11 @@ func (o *EndpointDeleteBatchForbidden) Code() int {
 }
 
 func (o *EndpointDeleteBatchForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchForbidden", 403)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchForbidden", 403)
 }
 
 func (o *EndpointDeleteBatchForbidden) String() string {
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchForbidden", 403)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchForbidden", 403)
 }
 
 func (o *EndpointDeleteBatchForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -341,11 +341,11 @@ func (o *EndpointDeleteBatchInternalServerError) Code() int {
 }
 
 func (o *EndpointDeleteBatchInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchInternalServerError", 500)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchInternalServerError", 500)
 }
 
 func (o *EndpointDeleteBatchInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /endpoints][%d] endpointDeleteBatchInternalServerError", 500)
+	return fmt.Sprintf("[POST /endpoints/delete][%d] endpointDeleteBatchInternalServerError", 500)
 }
 
 func (o *EndpointDeleteBatchInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

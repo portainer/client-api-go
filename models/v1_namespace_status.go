@@ -23,6 +23,8 @@ type V1NamespaceStatus struct {
 	// +optional
 	// +patchMergeKey=type
 	// +patchStrategy=merge
+	// +listType=map
+	// +listMapKey=type
 	Conditions []*V1NamespaceCondition `json:"conditions"`
 
 	// Phase is the current lifecycle phase of the namespace.

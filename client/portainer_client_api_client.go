@@ -21,7 +21,6 @@ import (
 	"github.com/portainer/client-api-go/v2/client/edge_groups"
 	"github.com/portainer/client-api-go/v2/client/edge_jobs"
 	"github.com/portainer/client-api-go/v2/client/edge_stacks"
-	"github.com/portainer/client-api-go/v2/client/edge_templates"
 	"github.com/portainer/client-api-go/v2/client/edge_update_schedules"
 	"github.com/portainer/client-api-go/v2/client/endpoint_groups"
 	"github.com/portainer/client-api-go/v2/client/endpoints"
@@ -106,7 +105,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *PortainerC
 	cli.EdgeGroups = edge_groups.New(transport, formats)
 	cli.EdgeJobs = edge_jobs.New(transport, formats)
 	cli.EdgeStacks = edge_stacks.New(transport, formats)
-	cli.EdgeTemplates = edge_templates.New(transport, formats)
 	cli.EdgeUpdateSchedules = edge_update_schedules.New(transport, formats)
 	cli.EndpointGroups = endpoint_groups.New(transport, formats)
 	cli.Endpoints = endpoints.New(transport, formats)
@@ -202,8 +200,6 @@ type PortainerClientAPI struct {
 
 	EdgeStacks edge_stacks.ClientService
 
-	EdgeTemplates edge_templates.ClientService
-
 	EdgeUpdateSchedules edge_update_schedules.ClientService
 
 	EndpointGroups endpoint_groups.ClientService
@@ -279,7 +275,6 @@ func (c *PortainerClientAPI) SetTransport(transport runtime.ClientTransport) {
 	c.EdgeGroups.SetTransport(transport)
 	c.EdgeJobs.SetTransport(transport)
 	c.EdgeStacks.SetTransport(transport)
-	c.EdgeTemplates.SetTransport(transport)
 	c.EdgeUpdateSchedules.SetTransport(transport)
 	c.EndpointGroups.SetTransport(transport)
 	c.Endpoints.SetTransport(transport)

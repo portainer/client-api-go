@@ -87,6 +87,7 @@ type V1beta1NodeMetrics struct {
 	// are not vulnerable to ordering changes in the list.
 	// +optional
 	// +patchStrategy=merge
+	// +listType=set
 	Finalizers []string `json:"finalizers"`
 
 	// GenerateName is an optional prefix, used by the server, to generate a unique
@@ -133,6 +134,7 @@ type V1beta1NodeMetrics struct {
 	// workflow used when modifying the object.
 	//
 	// +optional
+	// +listType=atomic
 	ManagedFields []*V1ManagedFieldsEntry `json:"managedFields"`
 
 	// Name must be unique within a namespace. Is required when creating resources, although
@@ -162,6 +164,8 @@ type V1beta1NodeMetrics struct {
 	// +optional
 	// +patchMergeKey=uid
 	// +patchStrategy=merge
+	// +listType=map
+	// +listMapKey=uid
 	OwnerReferences []*V1OwnerReference `json:"ownerReferences"`
 
 	// An opaque value that represents the internal version of this object that can

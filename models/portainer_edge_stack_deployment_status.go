@@ -17,6 +17,9 @@ import (
 // swagger:model portainer.EdgeStackDeploymentStatus
 type PortainerEdgeStackDeploymentStatus struct {
 
+	// version
+	Version int64 `json:"Version,omitempty"`
+
 	// error
 	Error string `json:"error,omitempty"`
 

@@ -32,6 +32,7 @@ type V1ResourceQuotaSpec struct {
 	// A collection of filters that must match each object tracked by a quota.
 	// If not specified, the quota matches all objects.
 	// +optional
+	// +listType=atomic
 	Scopes []string `json:"scopes"`
 }
 

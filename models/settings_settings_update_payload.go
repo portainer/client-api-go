@@ -33,6 +33,10 @@ type SettingsSettingsUpdatePayload struct {
 	// Example: notice or agreement
 	CustomLoginBanner string `json:"customLoginBanner,omitempty"`
 
+	// Whether to disable kube roles sync for all built-in roles
+	// Example: false
+	DisableKubeRolesSync bool `json:"disableKubeRolesSync,omitempty"`
+
 	// Whether to disable kubeshell access for non-admin users
 	// Example: false
 	DisableKubeShell bool `json:"disableKubeShell,omitempty"`
@@ -64,7 +68,7 @@ type SettingsSettingsUpdatePayload struct {
 	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"globalDeploymentOptions,omitempty"`
 
 	// Helm repository URL
-	// Example: https://charts.bitnami.com/bitnami
+	// Example: https://kubernetes.github.io/ingress-nginx
 	HelmRepositoryURL string `json:"helmRepositoryURL,omitempty"`
 
 	// internal auth settings
