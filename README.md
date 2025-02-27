@@ -1,50 +1,89 @@
-# client-api
+# Portainer Client GO SDK
 
-Swagger generated Client APIs in Golang
+Swagger-generated client SDK in Golang for Portainer.
 
-## Technical Details
+## Installation
 
-### Pre-requisites
+Use the following command to install the SDK:
 
-### Install Swagger CLI
+```sh
+GOPRIVATE=github.com/portainer/* go get -u github.com/portainer/client-api-go/v2
+```
+
+## Using the Client SDK
+
+There are two ways to use the SDK:
+
+### 1. Using the Simple Client (Recommended)
+
+The simple client provides an easy-to-use interface to interact with the Portainer API. All the Portainer API operations are not supported yet.
+
+```go
+// Initialize client with API key
+portainer := client.NewPortainerClient(
+	"portainer.dev.local",   // Portainer host
+	"ptr_XXXYYYZZZ",         // Portainer API key
+	client.WithSkipTLSVerify(true),  // Optional: disables TLS certificate verification (default: false)
+	client.WithScheme("https"),      // Optional: defaults to "https"
+	client.WithBasePath("/api"),     // Optional: defaults to "/api"
+)
+
+// List all environments
+endpoints, err := portainer.ListEndpoints()
+if err != nil {
+	log.Fatalf("Failed to list Portainer environments: %v", err)
+}
+
+// Process endpoints as needed...
+```
+
+See the `example/simple/client.go` file for a complete example using the simple client.
+
+### 2. Using the Swagger-Generated Client (Advanced)
+
+The simple client is still a work in progress; if you need to access API operations that aren't yet supported by the simple client, you can use the underlying Swagger-generated client directly.
+
+```go
+// Create transport
+transport := httptransport.New(
+	"portainer.dev.local",
+	"/api",
+	[]string{"https"},
+)
+
+// Create client instance
+portainerClient := client.New(transport, strfmt.Default)
+
+// Set up API key authentication
+apiKeyAuth := runtime.ClientAuthInfoWriterFunc(func(r runtime.ClientRequest, _ strfmt.Registry) error {
+	return r.SetHeaderParam("x-api-key", "ptr_XXXYYYZZZ")
+})
+transport.DefaultAuthentication = apiKeyAuth
+
+// List all environments
+endpointsParams := endpoints.NewEndpointListParams()
+endpointsResp, err := portainerClient.Endpoints.EndpointList(endpointsParams, nil)
+if err != nil {
+	log.Fatalf("Failed to list Portainer environments: %v", err)
+}
+
+// Process endpoints as needed...
+```
+
+See the `example/swagger/client.go` file for a complete example using the Swagger-generated client directly.
+
+## Development
+
+To use the latest version of the Portainer API, you must regenerate the underlying API client using Swagger.
+
+1. Install the Swagger CLI:
 
 ```sh
 go install github.com/go-swagger/go-swagger/cmd/swagger@latest
 ```
 
-### Download Swagger file from SwaggerHub
-
-Replace version number with the appropriate version of the API.
+2. Generate the client (adjust the VERSION parameter as needed):
 
 ```sh
-curl -o swagger.yaml https://api.swaggerhub.com/apis/portainer/portainer-ee/2.27.0/swagger.yaml
-```
-
-### Client Generation
-
-Follow the steps below to generate Client APIs based on our `swagger.yaml` in Golang:
-
-```sh
-go mod init github.com/portainer/client-api-go
-swagger generate client -f swagger.yaml -A portainer-client-api --principal portainer --skip-validation
-go get -u ./...
-```
-
-Then, create a GitHub tag based on the Portainer repository's tag where the Swagger file is coming from.
-
-```sh
-git tag -a v1.24.0 -m "Portainer v1.24.0"
-git push origin v1.24.0
-```
-
-The whole process is going to be automated by GitHub Actions.
-
-### Release
-
-Create a GitHub tag based on the Portainer repository's tag where the Swagger file is coming from.
-
-## Utilising Client APIs
-
-```sh
-GOPRIVATE=github.com/portainer/client-api-go go get -u github.com/portainer/client-api-go/v2@v2.16.0
+make generate-client VERSION=2.27.1
 ```
