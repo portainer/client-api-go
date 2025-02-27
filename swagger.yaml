@@ -4980,6 +4980,8 @@ definitions:
       Kubernetes:
         $ref: '#/definitions/portaineree.KubernetesData'
         description: Associated Kubernetes data
+      MTLSStatus:
+        $ref: '#/definitions/portaineree.MTLSStatus'
       Name:
         description: Environment(Endpoint) name
         example: my-environment
@@ -5295,6 +5297,13 @@ definitions:
         description: KeyFile is the path to the mTLS key file
         type: string
       UseSeparateCert:
+        type: boolean
+    type: object
+  portaineree.MTLSStatus:
+    properties:
+      enabled:
+        type: boolean
+      ok:
         type: boolean
     type: object
   portaineree.MicroK8sAddon:
@@ -11445,7 +11454,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.27.0
+  version: 2.27.1
 paths:
   /auth:
     post:
