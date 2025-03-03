@@ -7,8 +7,6 @@ import (
 	"github.com/portainer/client-api-go/v2/pkg/models"
 )
 
-// Tag operations
-
 // ListTags lists all tags
 func (c *PortainerClient) ListTags() ([]*models.PortainerTag, error) {
 	params := tags.NewTagListParams()

@@ -7,8 +7,6 @@ import (
 	"github.com/portainer/client-api-go/v2/pkg/models"
 )
 
-// Endpoint operations
-
 // ListEndpoints lists all endpoints
 func (c *PortainerClient) ListEndpoints() ([]*models.PortainereeEndpoint, error) {
 	params := endpoints.NewEndpointListParams()
@@ -29,4 +27,12 @@ func (c *PortainerClient) GetEndpoint(id int64) (*models.PortainereeEndpoint, er
 	}
 
 	return resp.Payload, nil
+}
+
+func (c *PortainerClient) UpdateEndpoint(id int64, tagIds []int64) error {
+	params := endpoints.NewEndpointUpdateParams().WithID(id).WithBody(&models.EndpointsEndpointUpdatePayload{
+		TagIDs: tagIds,
+	})
+	_, err := c.cli.Endpoints.EndpointUpdate(params, nil)
+	return err
 }
