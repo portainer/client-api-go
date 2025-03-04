@@ -20,7 +20,7 @@ The simple client provides an easy-to-use interface to interact with the Portain
 
 ```go
 // Initialize client with API key
-portainer := client.NewPortainerClient(
+cli := client.NewPortainerClient(
 	"portainer.dev.local",   // Portainer host
 	"ptr_XXXYYYZZZ",         // Portainer API key
 	client.WithSkipTLSVerify(true),  // Optional: disables TLS certificate verification (default: false)
@@ -29,7 +29,7 @@ portainer := client.NewPortainerClient(
 )
 
 // List all environments
-endpoints, err := portainer.ListEndpoints()
+endpoints, err := cli.ListEndpoints()
 if err != nil {
 	log.Fatalf("Failed to list Portainer environments: %v", err)
 }
