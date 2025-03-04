@@ -19,14 +19,14 @@ func (c *PortainerClient) ListTags() ([]*models.PortainerTag, error) {
 }
 
 // CreateTag creates a new tag
-func (c *PortainerClient) CreateTag(name string) (*models.PortainerTag, error) {
+func (c *PortainerClient) CreateTag(name string) (int64, error) {
 	params := tags.NewTagCreateParams().WithBody(&models.TagsTagCreatePayload{
 		Name: &name,
 	})
 	resp, err := c.cli.Tags.TagCreate(params, nil)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create tag: %w", err)
+		return 0, fmt.Errorf("failed to create tag: %w", err)
 	}
 
-	return resp.Payload, nil
+	return resp.Payload.ID, nil
 }

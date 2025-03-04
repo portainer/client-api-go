@@ -19,18 +19,18 @@ func (c *PortainerClient) ListEdgeGroups() ([]*models.EdgegroupsDecoratedEdgeGro
 }
 
 // CreateEdgeGroup creates a new edge group
-func (c *PortainerClient) CreateEdgeGroup(name string, environmentIds []int64) error {
+func (c *PortainerClient) CreateEdgeGroup(name string, environmentIds []int64) (int64, error) {
 	params := edge_groups.NewEdgeGroupCreateParams().WithBody(&models.EdgegroupsEdgeGroupCreatePayload{
 		Name:      name,
 		Endpoints: environmentIds,
 		Dynamic:   false,
 	})
 
-	_, err := c.cli.EdgeGroups.EdgeGroupCreate(params, nil)
+	resp, err := c.cli.EdgeGroups.EdgeGroupCreate(params, nil)
 	if err != nil {
-		return fmt.Errorf("failed to create edge group: %w", err)
+		return 0, fmt.Errorf("failed to create edge group: %w", err)
 	}
-	return nil
+	return resp.Payload.ID, nil
 }
 
 // UpdateEdgeGroup updates an existing edge group

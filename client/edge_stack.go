@@ -19,7 +19,7 @@ func (c *PortainerClient) ListEdgeStacks() ([]*models.PortainereeEdgeStack, erro
 }
 
 // CreateEdgeStack creates a new edge stack
-func (c *PortainerClient) CreateEdgeStack(name string, file string, environmentGroupIds []int64) error {
+func (c *PortainerClient) CreateEdgeStack(name string, file string, environmentGroupIds []int64) (int64, error) {
 	params := edge_stacks.NewEdgeStackCreateStringParams().WithBody(&models.EdgestacksEdgeStackFromStringPayload{
 		Name:             &name,
 		StackFileContent: &file,
@@ -27,12 +27,12 @@ func (c *PortainerClient) CreateEdgeStack(name string, file string, environmentG
 		DeploymentType:   0,
 	})
 
-	_, err := c.cli.EdgeStacks.EdgeStackCreateString(params, nil)
+	resp, err := c.cli.EdgeStacks.EdgeStackCreateString(params, nil)
 	if err != nil {
-		return fmt.Errorf("failed to create edge stack: %w", err)
+		return 0, fmt.Errorf("failed to create edge stack: %w", err)
 	}
 
-	return nil
+	return resp.Payload.ID, nil
 }
 
 // UpdateEdgeStack updates an existing edge stack
