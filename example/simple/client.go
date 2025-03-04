@@ -9,14 +9,14 @@ import (
 
 func main() {
 	// Initialize client with API key
-	portainer := client.NewPortainerClient(
+	cli := client.NewPortainerClient(
 		"portainer.dev.local",
 		"ptr_XXXYYYZZZ",
 		client.WithSkipTLSVerify(true),
 	)
 
 	// List all tags
-	tags, err := portainer.ListTags()
+	tags, err := cli.ListTags()
 	if err != nil {
 		log.Fatalf("Failed to list tags: %v", err)
 	}
@@ -27,7 +27,7 @@ func main() {
 	}
 
 	// List all endpoints
-	endpoints, err := portainer.ListEndpoints()
+	endpoints, err := cli.ListEndpoints()
 	if err != nil {
 		log.Fatalf("Failed to list endpoints: %v", err)
 	}
