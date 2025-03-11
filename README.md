@@ -19,6 +19,8 @@ There are two ways to use the SDK:
 The simple client provides an easy-to-use interface to interact with the Portainer API. All the Portainer API operations are not supported yet.
 
 ```go
+import client "github.com/portainer/client-api-go/v2/client"
+
 // Initialize client with API key
 cli := client.NewPortainerClient(
 	"portainer.dev.local",   // Portainer host
@@ -44,6 +46,12 @@ See the `example/simple/client.go` file for a complete example using the simple 
 The simple client is still a work in progress; if you need to access API operations that aren't yet supported by the simple client, you can use the underlying Swagger-generated client directly.
 
 ```go
+import (
+	"github.com/go-openapi/runtime"
+	client "github.com/portainer/client-api-go/v2/pkg/client"
+	"github.com/portainer/client-api-go/v2/pkg/client/endpoints"
+)
+
 // Create transport
 transport := httptransport.New(
 	"portainer.dev.local",
