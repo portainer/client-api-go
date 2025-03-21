@@ -29,6 +29,7 @@ func (c *PortainerClient) GetEndpoint(id int64) (*models.PortainereeEndpoint, er
 	return resp.Payload, nil
 }
 
+// UpdateEndpoint updates the tags for an endpoint.
 func (c *PortainerClient) UpdateEndpoint(id int64, tagIds []int64) error {
 	params := endpoints.NewEndpointUpdateParams().WithID(id).WithBody(&models.EndpointsEndpointUpdatePayload{
 		TagIDs: tagIds,

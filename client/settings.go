@@ -7,6 +7,7 @@ import (
 	"github.com/portainer/client-api-go/v2/pkg/models"
 )
 
+// GetSettings retrieves the Portainer settings
 func (c *PortainerClient) GetSettings() (*models.PortainereeSettings, error) {
 	params := settings.NewSettingsInspectParams()
 	resp, err := c.cli.Settings.SettingsInspect(params, nil)
