@@ -30,9 +30,11 @@ func (c *PortainerClient) GetEndpoint(id int64) (*models.PortainereeEndpoint, er
 }
 
 // UpdateEndpoint updates the tags for an endpoint.
-func (c *PortainerClient) UpdateEndpoint(id int64, tagIds []int64) error {
+func (c *PortainerClient) UpdateEndpoint(id int64, tagIds []int64, userAccesses map[int64]string, teamAccesses map[int64]string) error {
 	params := endpoints.NewEndpointUpdateParams().WithID(id).WithBody(&models.EndpointsEndpointUpdatePayload{
-		TagIDs: tagIds,
+		TagIDs:             tagIds,
+		UserAccessPolicies: buildAccessPolicies[models.PortainerUserAccessPolicies](userAccesses),
+		TeamAccessPolicies: buildAccessPolicies[models.PortainerTeamAccessPolicies](teamAccesses),
 	})
 	_, err := c.cli.Endpoints.EndpointUpdate(params, nil)
 	return err
