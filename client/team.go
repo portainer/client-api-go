@@ -30,6 +30,22 @@ func (c *PortainerClient) ListTeamMemberships() ([]*models.PortainerTeamMembersh
 	return resp.Payload, nil
 }
 
+// CreateTeam creates a new team.
+//
+// Parameters:
+//   - name: The name of the team
+func (c *PortainerClient) CreateTeam(name string) (int64, error) {
+	params := teams.NewTeamCreateParams().WithBody(&models.TeamsTeamCreatePayload{
+		Name: &name,
+	})
+	resp, err := c.cli.Teams.TeamCreate(params, nil)
+	if err != nil {
+		return 0, fmt.Errorf("failed to create team: %w", err)
+	}
+
+	return resp.Payload.ID, nil
+}
+
 // UpdateTeam updates the name of a team.
 //
 // Parameters:
@@ -61,7 +77,10 @@ func (c *PortainerClient) DeleteTeamMembership(id int) error {
 func (c *PortainerClient) CreateTeamMembership(teamId int, userId int) error {
 	teamID := int64(teamId)
 	userID := int64(userId)
+	// Default to team member role
+	role := int64(2)
 	params := team_memberships.NewTeamMembershipCreateParams().WithBody(&models.TeammembershipsTeamMembershipCreatePayload{
+		Role:   &role,
 		TeamID: &teamID,
 		UserID: &userID,
 	})
