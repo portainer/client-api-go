@@ -40,6 +40,7 @@ func (c *PortainerClient) UpdateEdgeStack(id int64, file string, environmentGrou
 	params := edge_stacks.NewEdgeStackUpdateParams().WithID(id).WithBody(&models.EdgestacksUpdateEdgeStackPayload{
 		StackFileContent: file,
 		EdgeGroups:       environmentGroupIds,
+		UpdateVersion:    true,
 	})
 
 	_, err := c.cli.EdgeStacks.EdgeStackUpdate(params, nil)

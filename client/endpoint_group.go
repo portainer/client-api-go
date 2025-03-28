@@ -34,16 +34,38 @@ func (c *PortainerClient) CreateEndpointGroup(name string, associatedEndpoints [
 	return resp.Payload.ID, nil
 }
 
-// UpdateEndpointGroup updates an existing endpoint group
-// User and Team access policies are maps of user/team ID to role name.
-// Valid roles are environment_administrator, helpdesk_user, standard_user, readonly_user or operator_user.
+// UpdateEndpointGroup updates an existing endpoint group.
+//
+// Parameters:
+//   - id: The ID of the endpoint group to update
+//   - name: Optional. If provided, updates the group name. Use nil to keep existing name
+//   - userAccesses: Optional. If provided (including empty map), updates user access policies.
+//     Use nil to keep existing policies. Map of user ID to role name.
+//   - teamAccesses: Optional. If provided (including empty map), updates team access policies.
+//     Use nil to keep existing policies. Map of team ID to role name.
+//
+// Valid roles for access policies are:
+//   - environment_administrator
+//   - helpdesk_user
+//   - standard_user
+//   - readonly_user
+//   - operator_user
+//
 // Invalid roles are ignored.
-func (c *PortainerClient) UpdateEndpointGroup(id int64, name string, userAccesses map[int64]string, teamAccesses map[int64]string) error {
-	params := endpoint_groups.NewEndpointGroupUpdateParams().WithID(id).WithBody(&models.EndpointgroupsEndpointGroupUpdatePayload{
-		Name:               name,
-		TeamAccessPolicies: buildAccessPolicies[models.PortainerTeamAccessPolicies](teamAccesses),
-		UserAccessPolicies: buildAccessPolicies[models.PortainerUserAccessPolicies](userAccesses),
-	})
+// Returns an error if the update fails.
+func (c *PortainerClient) UpdateEndpointGroup(id int64, name *string, userAccesses *map[int64]string, teamAccesses *map[int64]string) error {
+	params := endpoint_groups.NewEndpointGroupUpdateParams().WithID(id).WithBody(&models.EndpointgroupsEndpointGroupUpdatePayload{})
+
+	if name != nil {
+		params.Body.Name = *name
+	}
+	if userAccesses != nil {
+		params.Body.UserAccessPolicies = buildAccessPolicies[models.PortainerUserAccessPolicies](*userAccesses)
+	}
+	if teamAccesses != nil {
+		params.Body.TeamAccessPolicies = buildAccessPolicies[models.PortainerTeamAccessPolicies](*teamAccesses)
+	}
+
 	_, err := c.cli.EndpointGroups.EndpointGroupUpdate(params, nil)
 	if err != nil {
 		return fmt.Errorf("failed to update endpoint group: %w", err)

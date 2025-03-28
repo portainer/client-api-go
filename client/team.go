@@ -46,12 +46,12 @@ func (c *PortainerClient) CreateTeam(name string) (int64, error) {
 	return resp.Payload.ID, nil
 }
 
-// UpdateTeam updates the name of a team.
+// UpdateTeamName updates the name of a team.
 //
 // Parameters:
 //   - id: The ID of the team to update
 //   - name: The new name for the team
-func (c *PortainerClient) UpdateTeam(id int, name string) error {
+func (c *PortainerClient) UpdateTeamName(id int, name string) error {
 	params := teams.NewTeamUpdateParams().WithID(int64(id)).WithBody(&models.TeamsTeamUpdatePayload{
 		Name: name,
 	})
