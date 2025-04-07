@@ -18,6 +18,22 @@ func (c *PortainerClient) ListTags() ([]*models.PortainerTag, error) {
 	return resp.Payload, nil
 }
 
+// GetTagByName returns the first tag that matches the specified name
+func (c *PortainerClient) GetTagByName(name string) (*models.PortainerTag, error) {
+	tags, err := c.ListTags()
+	if err != nil {
+		return nil, fmt.Errorf("failed to list tags: %w", err)
+	}
+
+	for _, tag := range tags {
+		if tag.Name == name {
+			return tag, nil
+		}
+	}
+
+	return nil, fmt.Errorf("tag not found")
+}
+
 // CreateTag creates a new tag
 func (c *PortainerClient) CreateTag(name string) (int64, error) {
 	params := tags.NewTagCreateParams().WithBody(&models.TagsTagCreatePayload{

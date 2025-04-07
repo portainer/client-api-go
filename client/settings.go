@@ -17,3 +17,16 @@ func (c *PortainerClient) GetSettings() (*models.PortainereeSettings, error) {
 
 	return resp.Payload, nil
 }
+
+// UpdateSettings updates the Portainer settings
+func (c *PortainerClient) UpdateSettings(enableEdgeComputeFeatures bool, edgePortainerURL, tunnelServerAddress string) error {
+	params := settings.NewSettingsUpdateParams().WithBody(&models.SettingsSettingsUpdatePayload{
+		EdgePortainerURL:          edgePortainerURL,
+		EnableEdgeComputeFeatures: enableEdgeComputeFeatures,
+		Edge: &models.SettingsSettingsUpdatePayloadEdge{
+			TunnelServerAddress: tunnelServerAddress,
+		},
+	})
+	_, err := c.cli.Settings.SettingsUpdate(params, nil)
+	return err
+}

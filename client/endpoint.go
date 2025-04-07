@@ -3,6 +3,7 @@ package client
 import (
 	"fmt"
 
+	"github.com/portainer/client-api-go/v2/client/utils"
 	"github.com/portainer/client-api-go/v2/pkg/client/endpoints"
 	"github.com/portainer/client-api-go/v2/pkg/models"
 )
@@ -58,13 +59,55 @@ func (c *PortainerClient) UpdateEndpoint(id int64, tagIds *[]int64, userAccesses
 	}
 
 	if userAccesses != nil {
-		params.Body.UserAccessPolicies = buildAccessPolicies[models.PortainerUserAccessPolicies](*userAccesses)
+		params.Body.UserAccessPolicies = utils.BuildAccessPolicies[models.PortainerUserAccessPolicies](*userAccesses)
 	}
 
 	if teamAccesses != nil {
-		params.Body.TeamAccessPolicies = buildAccessPolicies[models.PortainerTeamAccessPolicies](*teamAccesses)
+		params.Body.TeamAccessPolicies = utils.BuildAccessPolicies[models.PortainerTeamAccessPolicies](*teamAccesses)
 	}
 
 	_, err := c.cli.Endpoints.EndpointUpdate(params, nil)
 	return err
+}
+
+// CreateLocalDockerEndpoint creates a new local Docker endpoint
+//
+// Parameters:
+//   - name: The name of the endpoint
+//
+// Returns the ID of the created endpoint and an error if the creation fails
+func (c *PortainerClient) CreateLocalDockerEndpoint(name string) (int64, error) {
+	containerEngine := "docker"
+	params := endpoints.NewEndpointCreateParams()
+	params.Name = name
+	params.EndpointCreationType = 1
+	params.ContainerEngine = &containerEngine
+
+	resp, err := c.cli.Endpoints.EndpointCreate(params, nil)
+	if err != nil {
+		return 0, fmt.Errorf("failed to create endpoint: %w", err)
+	}
+
+	return resp.Payload.ID, nil
+}
+
+// CreateEdgeDockerEndpoint creates a new edge docker endpoint
+//
+// Parameters:
+//   - name: The name of the endpoint
+//
+// Returns the ID of the created endpoint and an error if the creation fails
+func (c *PortainerClient) CreateEdgeDockerEndpoint(name string) (int64, error) {
+	containerEngine := "docker"
+	params := endpoints.NewEndpointCreateParams()
+	params.Name = name
+	params.EndpointCreationType = 4
+	params.ContainerEngine = &containerEngine
+
+	resp, err := c.cli.Endpoints.EndpointCreate(params, nil)
+	if err != nil {
+		return 0, fmt.Errorf("failed to create endpoint: %w", err)
+	}
+
+	return resp.Payload.ID, nil
 }

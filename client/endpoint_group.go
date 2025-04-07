@@ -2,8 +2,8 @@ package client
 
 import (
 	"fmt"
-	"strconv"
 
+	"github.com/portainer/client-api-go/v2/client/utils"
 	"github.com/portainer/client-api-go/v2/pkg/client/endpoint_groups"
 	"github.com/portainer/client-api-go/v2/pkg/models"
 )
@@ -34,6 +34,33 @@ func (c *PortainerClient) CreateEndpointGroup(name string, associatedEndpoints [
 	return resp.Payload.ID, nil
 }
 
+// GetEndpointGroup returns an endpoint group by ID
+func (c *PortainerClient) GetEndpointGroup(id int64) (*models.PortainerEndpointGroup, error) {
+	params := endpoint_groups.NewGetEndpointGroupsIDParams().WithID(id)
+	resp, err := c.cli.EndpointGroups.GetEndpointGroupsID(params, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get endpoint group: %w", err)
+	}
+
+	return resp.Payload, nil
+}
+
+// GetEndpointGroupByName returns the first endpoint group that matches the specified name
+func (c *PortainerClient) GetEndpointGroupByName(name string) (*models.PortainerEndpointGroup, error) {
+	endpointGroups, err := c.ListEndpointGroups()
+	if err != nil {
+		return nil, fmt.Errorf("failed to list endpoint groups: %w", err)
+	}
+
+	for _, endpointGroup := range endpointGroups {
+		if endpointGroup.Name == name {
+			return endpointGroup, nil
+		}
+	}
+
+	return nil, fmt.Errorf("endpoint group not found")
+}
+
 // UpdateEndpointGroup updates an existing endpoint group.
 //
 // Parameters:
@@ -60,10 +87,10 @@ func (c *PortainerClient) UpdateEndpointGroup(id int64, name *string, userAccess
 		params.Body.Name = *name
 	}
 	if userAccesses != nil {
-		params.Body.UserAccessPolicies = buildAccessPolicies[models.PortainerUserAccessPolicies](*userAccesses)
+		params.Body.UserAccessPolicies = utils.BuildAccessPolicies[models.PortainerUserAccessPolicies](*userAccesses)
 	}
 	if teamAccesses != nil {
-		params.Body.TeamAccessPolicies = buildAccessPolicies[models.PortainerTeamAccessPolicies](*teamAccesses)
+		params.Body.TeamAccessPolicies = utils.BuildAccessPolicies[models.PortainerTeamAccessPolicies](*teamAccesses)
 	}
 
 	_, err := c.cli.EndpointGroups.EndpointGroupUpdate(params, nil)
@@ -71,36 +98,6 @@ func (c *PortainerClient) UpdateEndpointGroup(id int64, name *string, userAccess
 		return fmt.Errorf("failed to update endpoint group: %w", err)
 	}
 	return nil
-}
-
-func buildAccessPolicies[T models.PortainerTeamAccessPolicies | models.PortainerUserAccessPolicies](accesses map[int64]string) T {
-	policies := make(T)
-	for id, role := range accesses {
-		roleID := getRoleFromName(role)
-		if roleID != 0 {
-			policies[strconv.Itoa(int(id))] = models.PortainerAccessPolicy{
-				RoleID: roleID,
-			}
-		}
-	}
-	return policies
-}
-
-func getRoleFromName(roleName string) int64 {
-	switch roleName {
-	case "environment_administrator":
-		return 1
-	case "helpdesk_user":
-		return 2
-	case "standard_user":
-		return 3
-	case "readonly_user":
-		return 4
-	case "operator_user":
-		return 5
-	default:
-		return 0
-	}
 }
 
 // AddEnvironmentToEndpointGroup adds an environment to an endpoint group

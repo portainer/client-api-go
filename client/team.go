@@ -19,6 +19,33 @@ func (c *PortainerClient) ListTeams() ([]*models.PortainerTeam, error) {
 	return resp.Payload, nil
 }
 
+// GetTeamByName returns the first team that matches the specified name
+func (c *PortainerClient) GetTeamByName(name string) (*models.PortainerTeam, error) {
+	teams, err := c.ListTeams()
+	if err != nil {
+		return nil, fmt.Errorf("failed to list teams: %w", err)
+	}
+
+	for _, team := range teams {
+		if team.Name == name {
+			return team, nil
+		}
+	}
+
+	return nil, fmt.Errorf("team not found")
+}
+
+// GetTeam returns a team by ID
+func (c *PortainerClient) GetTeam(id int64) (*models.PortainerTeam, error) {
+	params := teams.NewTeamInspectParams().WithID(id)
+	resp, _, err := c.cli.Teams.TeamInspect(params, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get team: %w", err)
+	}
+
+	return resp.Payload, nil
+}
+
 // ListTeamMemberships lists all team memberships
 func (c *PortainerClient) ListTeamMemberships() ([]*models.PortainerTeamMembership, error) {
 	params := team_memberships.NewTeamMembershipListParams()
