@@ -19,7 +19,7 @@ go get -u github.com/portainer/client-api-go/v2@VERSION
 For example, to install version 2.27.1:
 
 ```sh
-go get -u github.com/portainer/client-api-go/v2@2.27.1
+go get -u github.com/portainer/client-api-go/v2@v2.27.1
 ```
 
 Available versions can be found at: https://github.com/portainer/client-api-go/tags
