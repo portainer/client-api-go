@@ -58,6 +58,10 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	DefaultRegistryUpdate(params *DefaultRegistryUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DefaultRegistryUpdateOK, error)
 
+	SettingsEdgeMTLSCACertificates(params *SettingsEdgeMTLSCACertificatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsEdgeMTLSCACertificatesOK, error)
+
+	SettingsEdgeMTLSCertificates(params *SettingsEdgeMTLSCertificatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsEdgeMTLSCertificatesOK, error)
+
 	SettingsExperimentalInspect(params *SettingsExperimentalInspectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsExperimentalInspectOK, error)
 
 	SettingsExperimentalUpdate(params *SettingsExperimentalUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsExperimentalUpdateNoContent, error)
@@ -111,6 +115,92 @@ func (a *Client) DefaultRegistryUpdate(params *DefaultRegistryUpdateParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DefaultRegistryUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	SettingsEdgeMTLSCACertificates retrieves portainer edge m TLS c a certificates
+
+	Retrieve Portainer Edge MTLS CA Certificates.
+
+**Access policy**: administrator
+*/
+func (a *Client) SettingsEdgeMTLSCACertificates(params *SettingsEdgeMTLSCACertificatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsEdgeMTLSCACertificatesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSettingsEdgeMTLSCACertificatesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "SettingsEdgeMTLSCACertificates",
+		Method:             "GET",
+		PathPattern:        "/settings/edge/mtls_ca_certificate",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &SettingsEdgeMTLSCACertificatesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SettingsEdgeMTLSCACertificatesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for SettingsEdgeMTLSCACertificates: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	SettingsEdgeMTLSCertificates retrieves portainer edge m TLS certificates
+
+	Retrieve Portainer Edge MTLS Certificates.
+
+**Access policy**: administrator
+*/
+func (a *Client) SettingsEdgeMTLSCertificates(params *SettingsEdgeMTLSCertificatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SettingsEdgeMTLSCertificatesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSettingsEdgeMTLSCertificatesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "SettingsEdgeMTLSCertificates",
+		Method:             "GET",
+		PathPattern:        "/settings/edge/mtls_certificate",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &SettingsEdgeMTLSCertificatesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SettingsEdgeMTLSCertificatesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for SettingsEdgeMTLSCertificates: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

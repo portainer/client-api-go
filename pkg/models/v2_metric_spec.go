@@ -23,7 +23,6 @@ type V2MetricSpec struct {
 	// each pod of the current scale target (e.g. CPU or memory). Such metrics are
 	// built in to Kubernetes, and have special scaling options on top of those
 	// available to normal per-pod metrics using the "pods" source.
-	// This is an alpha feature and can be enabled by the HPAContainerMetrics feature flag.
 	// +optional
 	ContainerResource *V2ContainerResourceMetricSource `json:"containerResource,omitempty"`
 
@@ -56,8 +55,6 @@ type V2MetricSpec struct {
 
 	// type is the type of metric source.  It should be one of "ContainerResource", "External",
 	// "Object", "Pods" or "Resource", each mapping to a matching field in the object.
-	// Note: "ContainerResource" type is available on when the feature-gate
-	// HPAContainerMetrics is enabled
 	Type string `json:"type,omitempty"`
 }
 

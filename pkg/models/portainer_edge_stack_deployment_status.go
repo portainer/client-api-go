@@ -17,14 +17,14 @@ import (
 // swagger:model portainer.EdgeStackDeploymentStatus
 type PortainerEdgeStackDeploymentStatus struct {
 
-	// version
-	Version int64 `json:"Version,omitempty"`
-
 	// error
-	Error string `json:"error,omitempty"`
+	Error string `json:"Error,omitempty"`
 
 	// EE only feature
-	RollbackTo int64 `json:"rollbackTo,omitempty"`
+	RollbackTo int64 `json:"RollbackTo,omitempty"`
+
+	// version
+	Version int64 `json:"Version,omitempty"`
 
 	// time
 	Time int64 `json:"time,omitempty"`

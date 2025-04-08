@@ -107,7 +107,8 @@ type PortainereeSettings struct {
 	// Deployment options for encouraging git ops workflows
 	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"GlobalDeploymentOptions,omitempty"`
 
-	// Helm repository URL, defaults to ""
+	// Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
+	// Example: https://charts.bitnami.com/bitnami
 	HelmRepositoryURL string `json:"HelmRepositoryURL,omitempty"`
 
 	// internal auth settings

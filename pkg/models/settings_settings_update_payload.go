@@ -68,7 +68,7 @@ type SettingsSettingsUpdatePayload struct {
 	GlobalDeploymentOptions *PortainereeGlobalDeploymentOptions `json:"globalDeploymentOptions,omitempty"`
 
 	// Helm repository URL
-	// Example: https://kubernetes.github.io/ingress-nginx
+	// Example: https://charts.bitnami.com/bitnami
 	HelmRepositoryURL string `json:"helmRepositoryURL,omitempty"`
 
 	// internal auth settings

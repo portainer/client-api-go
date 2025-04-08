@@ -80,12 +80,6 @@ type GetAllKubernetesApplicationsParams struct {
 	*/
 	NodeName string
 
-	/* WithDependencies.
-
-	   Include dependencies in the response
-	*/
-	WithDependencies *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -172,17 +166,6 @@ func (o *GetAllKubernetesApplicationsParams) SetNodeName(nodeName string) {
 	o.NodeName = nodeName
 }
 
-// WithWithDependencies adds the withDependencies to the get all kubernetes applications params
-func (o *GetAllKubernetesApplicationsParams) WithWithDependencies(withDependencies *bool) *GetAllKubernetesApplicationsParams {
-	o.SetWithDependencies(withDependencies)
-	return o
-}
-
-// SetWithDependencies adds the withDependencies to the get all kubernetes applications params
-func (o *GetAllKubernetesApplicationsParams) SetWithDependencies(withDependencies *bool) {
-	o.WithDependencies = withDependencies
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetAllKubernetesApplicationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -213,23 +196,6 @@ func (o *GetAllKubernetesApplicationsParams) WriteToRequest(r runtime.ClientRequ
 
 		if err := r.SetQueryParam("nodeName", qNodeName); err != nil {
 			return err
-		}
-	}
-
-	if o.WithDependencies != nil {
-
-		// query param withDependencies
-		var qrWithDependencies bool
-
-		if o.WithDependencies != nil {
-			qrWithDependencies = *o.WithDependencies
-		}
-		qWithDependencies := swag.FormatBool(qrWithDependencies)
-		if qWithDependencies != "" {
-
-			if err := r.SetQueryParam("withDependencies", qWithDependencies); err != nil {
-				return err
-			}
 		}
 	}
 

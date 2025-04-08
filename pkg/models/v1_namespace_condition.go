@@ -17,12 +17,15 @@ import (
 // swagger:model v1.NamespaceCondition
 type V1NamespaceCondition struct {
 
+	// Last time the condition transitioned from one status to another.
 	// +optional
 	LastTransitionTime string `json:"lastTransitionTime,omitempty"`
 
+	// Human-readable message indicating details about last transition.
 	// +optional
 	Message string `json:"message,omitempty"`
 
+	// Unique, one-word, CamelCase reason for the condition's last transition.
 	// +optional
 	Reason string `json:"reason,omitempty"`
 

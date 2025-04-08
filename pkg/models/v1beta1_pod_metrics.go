@@ -34,6 +34,7 @@ type V1beta1PodMetrics struct {
 	APIVersion string `json:"apiVersion,omitempty"`
 
 	// Metrics for all containers are collected within the same time window.
+	// +listType=atomic
 	Containers []*V1beta1ContainerMetrics `json:"containers"`
 
 	// CreationTimestamp is a timestamp representing the server time when this object was

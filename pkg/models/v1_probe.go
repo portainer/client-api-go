@@ -18,7 +18,7 @@ import (
 // swagger:model v1.Probe
 type V1Probe struct {
 
-	// Exec specifies the action to take.
+	// Exec specifies a command to execute in the container.
 	// +optional
 	Exec *V1ExecAction `json:"exec,omitempty"`
 
@@ -27,11 +27,11 @@ type V1Probe struct {
 	// +optional
 	FailureThreshold int64 `json:"failureThreshold,omitempty"`
 
-	// GRPC specifies an action involving a GRPC port.
+	// GRPC specifies a GRPC HealthCheckRequest.
 	// +optional
 	Grpc *V1GRPCAction `json:"grpc,omitempty"`
 
-	// HTTPGet specifies the http request to perform.
+	// HTTPGet specifies an HTTP GET request to perform.
 	// +optional
 	HTTPGet *V1HTTPGetAction `json:"httpGet,omitempty"`
 
@@ -50,7 +50,7 @@ type V1Probe struct {
 	// +optional
 	SuccessThreshold int64 `json:"successThreshold,omitempty"`
 
-	// TCPSocket specifies an action involving a TCP port.
+	// TCPSocket specifies a connection to a TCP port.
 	// +optional
 	TCPSocket *V1TCPSocketAction `json:"tcpSocket,omitempty"`
 

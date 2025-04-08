@@ -68,7 +68,7 @@ type KubernetesNamespacesToggleSystemParams struct {
 
 	   Update details
 	*/
-	Body *models.KubernetesNamespacesToggleSystemPayload
+	Body *models.GithubComPortainerPortainerEeAPIHTTPHandlerKubernetesNamespacesToggleSystemPayload
 
 	/* ID.
 
@@ -136,13 +136,13 @@ func (o *KubernetesNamespacesToggleSystemParams) SetHTTPClient(client *http.Clie
 }
 
 // WithBody adds the body to the kubernetes namespaces toggle system params
-func (o *KubernetesNamespacesToggleSystemParams) WithBody(body *models.KubernetesNamespacesToggleSystemPayload) *KubernetesNamespacesToggleSystemParams {
+func (o *KubernetesNamespacesToggleSystemParams) WithBody(body *models.GithubComPortainerPortainerEeAPIHTTPHandlerKubernetesNamespacesToggleSystemPayload) *KubernetesNamespacesToggleSystemParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the kubernetes namespaces toggle system params
-func (o *KubernetesNamespacesToggleSystemParams) SetBody(body *models.KubernetesNamespacesToggleSystemPayload) {
+func (o *KubernetesNamespacesToggleSystemParams) SetBody(body *models.GithubComPortainerPortainerEeAPIHTTPHandlerKubernetesNamespacesToggleSystemPayload) {
 	o.Body = body
 }
 

@@ -17,8 +17,8 @@ import (
 // swagger:model kubernetes.K8sServiceIngress
 type KubernetesK8sServiceIngress struct {
 
-	// host
-	Host string `json:"Host,omitempty"`
+	// hostname
+	Hostname string `json:"Hostname,omitempty"`
 
 	// IP
 	IP string `json:"IP,omitempty"`

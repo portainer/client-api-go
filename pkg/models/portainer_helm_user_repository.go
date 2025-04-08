@@ -22,7 +22,7 @@ type PortainerHelmUserRepository struct {
 	ID int64 `json:"Id,omitempty"`
 
 	// Helm repository URL
-	// Example: https://kubernetes.github.io/ingress-nginx
+	// Example: https://charts.bitnami.com/bitnami
 	URL string `json:"URL,omitempty"`
 
 	// User identifier

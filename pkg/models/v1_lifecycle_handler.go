@@ -18,22 +18,22 @@ import (
 // swagger:model v1.LifecycleHandler
 type V1LifecycleHandler struct {
 
-	// Exec specifies the action to take.
+	// Exec specifies a command to execute in the container.
 	// +optional
 	Exec *V1ExecAction `json:"exec,omitempty"`
 
-	// HTTPGet specifies the http request to perform.
+	// HTTPGet specifies an HTTP GET request to perform.
 	// +optional
 	HTTPGet *V1HTTPGetAction `json:"httpGet,omitempty"`
 
-	// Sleep represents the duration that the container should sleep before being terminated.
+	// Sleep represents a duration that the container should sleep.
 	// +featureGate=PodLifecycleSleepAction
 	// +optional
 	Sleep *V1SleepAction `json:"sleep,omitempty"`
 
 	// Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-	// for the backward compatibility. There are no validation of this field and
-	// lifecycle hooks will fail in runtime when tcp handler is specified.
+	// for backward compatibility. There is no validation of this field and
+	// lifecycle hooks will fail at runtime when it is specified.
 	// +optional
 	TCPSocket *V1TCPSocketAction `json:"tcpSocket,omitempty"`
 }

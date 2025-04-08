@@ -54,6 +54,30 @@ type Client struct {
 // ClientOption may be used to customize the behavior of Client methods.
 type ClientOption func(*runtime.ClientOperation)
 
+// This client is generated with a few options you might find useful for your swagger spec.
+//
+// Feel free to add you own set of options.
+
+// WithAccept allows the client to force the Accept header
+// to negotiate a specific Producer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithAccept(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ProducesMediaTypes = []string{mime}
+	}
+}
+
+// WithAcceptApplicationYaml sets the Accept header to " application/yaml".
+func WithAcceptApplicationYaml(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{" application/yaml"}
+}
+
+// WithAcceptApplicationJSON sets the Accept header to "application/json".
+func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/json"}
+}
+
 // ClientService is the interface for Client methods
 type ClientService interface {
 	CreateKubernetesIngress(params *CreateKubernetesIngressParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateKubernetesIngressNoContent, error)
@@ -105,6 +129,8 @@ type ClientService interface {
 	GetAllKubernetesVolumes(params *GetAllKubernetesVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesVolumesOK, error)
 
 	GetApplicationsResources(params *GetApplicationsResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetApplicationsResourcesOK, error)
+
+	GetKubernetesConfig(params *GetKubernetesConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesConfigOK, error)
 
 	GetKubernetesConfigMap(params *GetKubernetesConfigMapParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesConfigMapOK, error)
 
@@ -1257,6 +1283,49 @@ func (a *Client) GetApplicationsResources(params *GetApplicationsResourcesParams
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetApplicationsResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesConfig generates a kubeconfig file
+
+	Generate a kubeconfig file that allows a client to communicate with the Kubernetes API server
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetKubernetesConfig(params *GetKubernetesConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesConfigOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesConfigParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetKubernetesConfig",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/config",
+		ProducesMediaTypes: []string{"application/json", " application/yaml"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesConfigReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesConfigOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetKubernetesConfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

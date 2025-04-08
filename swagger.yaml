@@ -1718,6 +1718,13 @@ definitions:
       permissions:
         type: integer
     type: object
+  github.com_portainer_portainer-ee_api_http_handler_kubernetes.namespacesToggleSystemPayload:
+    properties:
+      system:
+        description: Toggle the system state of this namespace to true or false
+        example: true
+        type: boolean
+    type: object
   github.com_portainer_portainer-ee_api_http_handler_system.nodesCountResponse:
     properties:
       nodes:
@@ -1771,6 +1778,13 @@ definitions:
         $ref: '#/definitions/build.RuntimeInfo'
       serverVersion:
         type: string
+    type: object
+  github.com_portainer_portainer_api_http_handler_kubernetes.namespacesToggleSystemPayload:
+    properties:
+      system:
+        description: Toggle the system state of this namespace to true or false
+        example: true
+        type: boolean
     type: object
   github.com_portainer_portainer_api_http_handler_system.nodesCountResponse:
     properties:
@@ -2222,6 +2236,23 @@ definitions:
         type: string
       type: array
     type: object
+  kubernetes.K8sDashboard:
+    properties:
+      applicationsCount:
+        type: integer
+      configMapsCount:
+        type: integer
+      ingressesCount:
+        type: integer
+      namespacesCount:
+        type: integer
+      secretsCount:
+        type: integer
+      servicesCount:
+        type: integer
+      volumesCount:
+        type: integer
+    type: object
   kubernetes.K8sIngressController:
     properties:
       Availability:
@@ -2341,6 +2372,19 @@ definitions:
         type: string
       type: array
     type: object
+  kubernetes.K8sNamespaceDetails:
+    properties:
+      Annotations:
+        additionalProperties:
+          type: string
+        type: object
+      Name:
+        type: string
+      Owner:
+        type: string
+      ResourceQuota:
+        $ref: '#/definitions/kubernetes.K8sResourceQuota'
+    type: object
   kubernetes.K8sPersistentVolume:
     properties:
       accessModes:
@@ -2399,6 +2443,15 @@ definitions:
       volumeMode:
         type: string
       volumeName:
+        type: string
+    type: object
+  kubernetes.K8sResourceQuota:
+    properties:
+      cpu:
+        type: string
+      enabled:
+        type: boolean
+      memory:
         type: string
     type: object
   kubernetes.K8sRole:
@@ -2569,7 +2622,7 @@ definitions:
     type: object
   kubernetes.K8sServiceIngress:
     properties:
-      Host:
+      Hostname:
         type: string
       IP:
         type: string
@@ -2634,13 +2687,6 @@ definitions:
         items:
           type: string
         type: array
-    type: object
-  kubernetes.namespacesToggleSystemPayload:
-    properties:
-      system:
-        description: Toggle the system state of this namespace to true or false
-        example: true
-        type: boolean
     type: object
   ldap.adminGroupsPayload:
     properties:
@@ -3472,12 +3518,12 @@ definitions:
     type: object
   portainer.EdgeStackDeploymentStatus:
     properties:
-      Version:
-        type: integer
-      error:
+      Error:
         type: string
-      rollbackTo:
+      RollbackTo:
         description: EE only feature
+        type: integer
+      Version:
         type: integer
       time:
         type: integer
@@ -3486,24 +3532,24 @@ definitions:
     type: object
   portainer.EdgeStackStatus:
     properties:
+      Details:
+        $ref: '#/definitions/portainer.EdgeStackStatusDetails'
+        description: Deprecated
+      Error:
+        description: Deprecated
+        type: string
+      ReadyRePullImage:
+        description: ReadyRePullImage is a flag to indicate whether the auto update
+          is trigger to re-pull image
+        type: boolean
       Type:
         description: Deprecated
         type: integer
       deploymentInfo:
         $ref: '#/definitions/portainer.StackDeploymentInfo'
         description: EE only feature
-      details:
-        $ref: '#/definitions/portainer.EdgeStackStatusDetails'
-        description: Deprecated
       endpointID:
         type: integer
-      error:
-        description: Deprecated
-        type: string
-      readyRePullImage:
-        description: ReadyRePullImage is a flag to indicate whether the auto update
-          is trigger to re-pull image
-        type: boolean
       status:
         items:
           $ref: '#/definitions/portainer.EdgeStackDeploymentStatus'
@@ -3670,7 +3716,7 @@ definitions:
         type: integer
       URL:
         description: Helm repository URL
-        example: https://kubernetes.github.io/ingress-nginx
+        example: https://charts.bitnami.com/bitnami
         type: string
       UserId:
         description: User identifier
@@ -5602,7 +5648,8 @@ definitions:
         $ref: '#/definitions/portaineree.GlobalDeploymentOptions'
         description: Deployment options for encouraging git ops workflows
       HelmRepositoryURL:
-        description: Helm repository URL, defaults to ""
+        description: Helm repository URL, defaults to "https://charts.bitnami.com/bitnami"
+        example: https://charts.bitnami.com/bitnami
         type: string
       InternalAuthSettings:
         $ref: '#/definitions/portainer.InternalAuthSettings'
@@ -6547,6 +6594,105 @@ definitions:
           type: integer
         type: array
     type: object
+  settings.Certificate:
+    properties:
+      AuthorityKeyId:
+        type: string
+      CRLDistributionPoints:
+        items:
+          type: string
+        type: array
+      ExtendedKeyUsages:
+        items:
+          type: string
+        type: array
+      IsCertificateAuthority:
+        type: boolean
+      Issuer:
+        $ref: '#/definitions/settings.Name'
+      IssuingCertificateURLs:
+        items:
+          type: string
+        type: array
+      KeyUsages:
+        items:
+          type: string
+        type: array
+      OCSPServers:
+        items:
+          type: string
+        type: array
+      Policies:
+        items:
+          type: string
+        type: array
+      PublicKey:
+        $ref: '#/definitions/settings.PublicKey'
+      SHA1Fingerprint:
+        type: string
+      SHA256Fingerprint:
+        type: string
+      SerialNumber:
+        type: string
+      SignatureAlgorithm:
+        type: string
+      Subject:
+        $ref: '#/definitions/settings.Name'
+      SubjectAltDNSNames:
+        items:
+          type: string
+        type: array
+      SubjectAltEmailAddresses:
+        items:
+          type: string
+        type: array
+      SubjectAltIpAddresses:
+        items:
+          type: string
+        type: array
+      SubjectAltURIs:
+        items:
+          type: string
+        type: array
+      SubjectKeyId:
+        type: string
+      ValidNotAfter:
+        type: string
+      ValidNotBefore:
+        type: string
+      Version:
+        type: integer
+    type: object
+  settings.Name:
+    properties:
+      country:
+        items:
+          type: string
+        type: array
+      locality:
+        items:
+          type: string
+        type: array
+      serialNumber:
+        type: string
+      streetAddress:
+        items:
+          type: string
+        type: array
+    type: object
+  settings.PublicKey:
+    properties:
+      Algorithm:
+        type: string
+      Exponent:
+        type: string
+      Modulus:
+        type: string
+      Size:
+        type: integer
+      Value:
+        type: string
+    type: object
   settings.defaultRegistryUpdatePayload:
     properties:
       Hide:
@@ -6669,6 +6815,18 @@ definitions:
         example: 24h
         type: string
     type: object
+  settings.settingsCACertResponse:
+    properties:
+      MTLSCACertificate:
+        $ref: '#/definitions/settings.Certificate'
+        description: MTLSCACertificate is the X.509 Certificate of the MTLS CA Certificate
+    type: object
+  settings.settingsCertResponse:
+    properties:
+      MTLSCertificate:
+        $ref: '#/definitions/settings.Certificate'
+        description: MTLSCertificate is the X.509 Certificate of the MTLS Certificate
+    type: object
   settings.settingsExperimentalInspectResponse:
     properties:
       experimentalFeatures:
@@ -6765,7 +6923,7 @@ definitions:
         description: Deployment options for encouraging deployment as code
       helmRepositoryURL:
         description: Helm repository URL
-        example: https://kubernetes.github.io/ingress-nginx
+        example: https://charts.bitnami.com/bitnami
         type: string
       internalAuthSettings:
         $ref: '#/definitions/portainer.InternalAuthSettings'
@@ -7881,7 +8039,6 @@ definitions:
           This field is effectively required, but due to backwards compatibility is
           allowed to be empty. Instances of this type with an empty value here are
           almost certainly wrong.
-          TODO: Add other useful fields. apiVersion, kind, uid?
           More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
           +optional
           +default=""
@@ -7905,7 +8062,6 @@ definitions:
           This field is effectively required, but due to backwards compatibility is
           allowed to be empty. Instances of this type with an empty value here are
           almost certainly wrong.
-          TODO: Add other useful fields. apiVersion, kind, uid?
           More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
           +optional
           +default=""
@@ -8439,25 +8595,25 @@ definitions:
       exec:
         $ref: '#/definitions/v1.ExecAction'
         description: |-
-          Exec specifies the action to take.
+          Exec specifies a command to execute in the container.
           +optional
       httpGet:
         $ref: '#/definitions/v1.HTTPGetAction'
         description: |-
-          HTTPGet specifies the http request to perform.
+          HTTPGet specifies an HTTP GET request to perform.
           +optional
       sleep:
         $ref: '#/definitions/v1.SleepAction'
         description: |-
-          Sleep represents the duration that the container should sleep before being terminated.
+          Sleep represents a duration that the container should sleep.
           +featureGate=PodLifecycleSleepAction
           +optional
       tcpSocket:
         $ref: '#/definitions/v1.TCPSocketAction'
         description: |-
           Deprecated. TCPSocket is NOT supported as a LifecycleHandler and kept
-          for the backward compatibility. There are no validation of this field and
-          lifecycle hooks will fail in runtime when tcp handler is specified.
+          for backward compatibility. There is no validation of this field and
+          lifecycle hooks will fail at runtime when it is specified.
           +optional
     type: object
   v1.LoadBalancerIngress:
@@ -8556,13 +8712,19 @@ definitions:
   v1.NamespaceCondition:
     properties:
       lastTransitionTime:
-        description: +optional
+        description: |-
+          Last time the condition transitioned from one status to another.
+          +optional
         type: string
       message:
-        description: +optional
+        description: |-
+          Human-readable message indicating details about last transition.
+          +optional
         type: string
       reason:
-        description: +optional
+        description: |-
+          Unique, one-word, CamelCase reason for the condition's last transition.
+          +optional
         type: string
       status:
         description: Status of the condition, one of True, False, Unknown.
@@ -8722,7 +8884,7 @@ definitions:
       exec:
         $ref: '#/definitions/v1.ExecAction'
         description: |-
-          Exec specifies the action to take.
+          Exec specifies a command to execute in the container.
           +optional
       failureThreshold:
         description: |-
@@ -8733,12 +8895,12 @@ definitions:
       grpc:
         $ref: '#/definitions/v1.GRPCAction'
         description: |-
-          GRPC specifies an action involving a GRPC port.
+          GRPC specifies a GRPC HealthCheckRequest.
           +optional
       httpGet:
         $ref: '#/definitions/v1.HTTPGetAction'
         description: |-
-          HTTPGet specifies the http request to perform.
+          HTTPGet specifies an HTTP GET request to perform.
           +optional
       initialDelaySeconds:
         description: |-
@@ -8761,7 +8923,7 @@ definitions:
       tcpSocket:
         $ref: '#/definitions/v1.TCPSocketAction'
         description: |-
-          TCPSocket specifies an action involving a TCP port.
+          TCPSocket specifies a connection to a TCP port.
           +optional
       terminationGracePeriodSeconds:
         description: |-
@@ -9211,7 +9373,6 @@ definitions:
           This field is effectively required, but due to backwards compatibility is
           allowed to be empty. Instances of this type with an empty value here are
           almost certainly wrong.
-          TODO: Add other useful fields. apiVersion, kind, uid?
           More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
           +optional
           +default=""
@@ -9236,7 +9397,6 @@ definitions:
           This field is effectively required, but due to backwards compatibility is
           allowed to be empty. Instances of this type with an empty value here are
           almost certainly wrong.
-          TODO: Add other useful fields. apiVersion, kind, uid?
           More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
           +optional
           +default=""
@@ -9906,7 +10066,7 @@ definitions:
           not set, the implementation will apply its default routing strategy. If set
           to "PreferClose", implementations should prioritize endpoints that are
           topologically close (e.g., same zone).
-          This is an alpha field and requires enabling ServiceTrafficDistribution feature.
+          This is a beta field and requires enabling ServiceTrafficDistribution feature.
           +featureGate=ServiceTrafficDistribution
           +optional
         type: string
@@ -10416,8 +10576,9 @@ definitions:
           +optional
         type: string
       containers:
-        description: Metrics for all containers are collected within the same time
-          window.
+        description: |-
+          Metrics for all containers are collected within the same time window.
+          +listType=atomic
         items:
           $ref: '#/definitions/v1beta1.ContainerMetrics'
         type: array
@@ -11154,7 +11315,6 @@ definitions:
           each pod of the current scale target (e.g. CPU or memory). Such metrics are
           built in to Kubernetes, and have special scaling options on top of those
           available to normal per-pod metrics using the "pods" source.
-          This is an alpha feature and can be enabled by the HPAContainerMetrics feature flag.
           +optional
       external:
         $ref: '#/definitions/v2.ExternalMetricSource'
@@ -11191,8 +11351,6 @@ definitions:
         description: |-
           type is the type of metric source.  It should be one of "ContainerResource", "External",
           "Object", "Pods" or "Resource", each mapping to a matching field in the object.
-          Note: "ContainerResource" type is available on when the feature-gate
-          HPAContainerMetrics is enabled
         type: string
     type: object
   v2.MetricStatus:
@@ -11241,8 +11399,6 @@ definitions:
         description: |-
           type is the type of metric source.  It will be one of "ContainerResource", "External",
           "Object", "Pods" or "Resource", each corresponds to a matching field in the object.
-          Note: "ContainerResource" type is available on when the feature-gate
-          HPAContainerMetrics is enabled
         type: string
     type: object
   v2.MetricTarget:
@@ -11454,7 +11610,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.27.1
+  version: 2.28.1
 paths:
   /auth:
     post:
@@ -16094,10 +16250,6 @@ paths:
         name: nodeName
         required: true
         type: string
-      - description: Include dependencies in the response
-        in: query
-        name: withDependencies
-        type: boolean
       produces:
       - application/json
       responses:
@@ -18032,7 +18184,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/kubernetes.namespacesToggleSystemPayload'
+          $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_kubernetes.namespacesToggleSystemPayload'
       responses:
         "204":
           description: Success
@@ -18826,6 +18978,55 @@ paths:
         jwt: []
       summary: Get the total number of kubernetes volumes within the given Portainer
         environment.
+      tags:
+      - kubernetes
+  /kubernetes/config:
+    get:
+      description: |-
+        Generate a kubeconfig file that allows a client to communicate with the Kubernetes API server
+        **Access policy**: Authenticated user.
+      operationId: GetKubernetesConfig
+      parameters:
+      - description: will include only these environments(endpoints)
+        in: query
+        items:
+          type: integer
+        name: ids
+        type: array
+      - description: will exclude these environments(endpoints)
+        in: query
+        items:
+          type: integer
+        name: excludeIds
+        type: array
+      produces:
+      - application/json
+      - ' application/yaml'
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to generate the kubeconfig
+            file.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Generate a kubeconfig file
       tags:
       - kubernetes
   /ldap/admin-groups:
@@ -19789,6 +19990,48 @@ paths:
       - ApiKeyAuth: []
       - jwt: []
       summary: Update Portainer default registry settings
+      tags:
+      - settings
+  /settings/edge/mtls_ca_certificate:
+    get:
+      description: |-
+        Retrieve Portainer Edge MTLS CA Certificates.
+        **Access policy**: administrator
+      operationId: SettingsEdgeMTLSCACertificates
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/settings.settingsCACertResponse'
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Retrieve Portainer Edge MTLS CA Certificates
+      tags:
+      - settings
+  /settings/edge/mtls_certificate:
+    get:
+      description: |-
+        Retrieve Portainer Edge MTLS Certificates.
+        **Access policy**: administrator
+      operationId: SettingsEdgeMTLSCertificates
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/settings.settingsCertResponse'
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Retrieve Portainer Edge MTLS Certificates
       tags:
       - settings
   /settings/experimental:

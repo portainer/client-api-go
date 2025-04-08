@@ -4,11 +4,25 @@ Swagger-generated client SDK in Golang for Portainer.
 
 ## Installation
 
-Use the following command to install the SDK:
+Use the following command to install the latest version of the SDK:
 
 ```sh
-GOPRIVATE=github.com/portainer/* go get -u github.com/portainer/client-api-go/v2
+go get -u github.com/portainer/client-api-go/v2
 ```
+
+To install a specific version of the SDK (to target a specific Portainer server version):
+
+```sh
+go get -u github.com/portainer/client-api-go/v2@VERSION
+```
+
+For example, to install version 2.27.1:
+
+```sh
+go get -u github.com/portainer/client-api-go/v2@2.27.1
+```
+
+Available versions can be found at: https://github.com/portainer/client-api-go/tags
 
 ## Using the Client SDK
 
