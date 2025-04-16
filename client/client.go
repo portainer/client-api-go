@@ -14,18 +14,17 @@ import (
 // that uses API token authentication for all operations
 type PortainerClient struct {
 	cli      *client.PortainerClientAPI
-	proxyCfg ProxyConfiguration
+	proxyCli *ProxyClient
 }
 
-// ProxyConfiguration contains the configuration used to proxy requests via the Portainer API
-type ProxyConfiguration struct {
+// ProxyClient provides a wrapper around the http.Client that is used to proxy requests via the Portainer API
+type ProxyClient struct {
+	cli *http.Client
 	// Host is the host of the Portainer server
 	// It includes the hostname and port
-	Host string
+	host string
 	// Token is the API token used to authenticate to the Portainer server
-	Token string
-	// SkipTLSVerify is used to disable TLS verification for the proxy connection
-	SkipTLSVerify bool
+	token string
 }
 
 // ClientOption defines a functional option for configuring the Portainer client
@@ -95,10 +94,16 @@ func NewPortainerClient(host, apiKey string, opts ...ClientOption) *PortainerCli
 
 	return &PortainerClient{
 		cli: client.New(transport, nil),
-		proxyCfg: ProxyConfiguration{
-			Host:          options.host,
-			Token:         options.apiKey,
-			SkipTLSVerify: options.skipTLSVerify,
+		proxyCli: &ProxyClient{
+			cli: &http.Client{
+				Transport: &http.Transport{
+					TLSClientConfig: &tls.Config{
+						InsecureSkipVerify: options.skipTLSVerify,
+					},
+				},
+			},
+			host:  options.host,
+			token: options.apiKey,
 		},
 	}
 }
