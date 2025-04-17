@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewCurrentUserInspectParams creates a new CurrentUserInspectParams object,
@@ -60,6 +61,13 @@ CurrentUserInspectParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type CurrentUserInspectParams struct {
+
+	/* NoEndpointAuthorizations.
+
+	   Set to true to avoid including the environment authorizations in the response
+	*/
+	NoEndpointAuthorizations bool
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -113,6 +121,17 @@ func (o *CurrentUserInspectParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithNoEndpointAuthorizations adds the noEndpointAuthorizations to the current user inspect params
+func (o *CurrentUserInspectParams) WithNoEndpointAuthorizations(noEndpointAuthorizations bool) *CurrentUserInspectParams {
+	o.SetNoEndpointAuthorizations(noEndpointAuthorizations)
+	return o
+}
+
+// SetNoEndpointAuthorizations adds the noEndpointAuthorizations to the current user inspect params
+func (o *CurrentUserInspectParams) SetNoEndpointAuthorizations(noEndpointAuthorizations bool) {
+	o.NoEndpointAuthorizations = noEndpointAuthorizations
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *CurrentUserInspectParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +139,16 @@ func (o *CurrentUserInspectParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
+
+	// query param noEndpointAuthorizations
+	qrNoEndpointAuthorizations := o.NoEndpointAuthorizations
+	qNoEndpointAuthorizations := swag.FormatBool(qrNoEndpointAuthorizations)
+	if qNoEndpointAuthorizations != "" {
+
+		if err := r.SetQueryParam("noEndpointAuthorizations", qNoEndpointAuthorizations); err != nil {
+			return err
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

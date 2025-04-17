@@ -19,7 +19,7 @@ import (
 type SettingsSettingsCACertResponse struct {
 
 	// MTLSCACertificate is the X.509 Certificate of the MTLS CA Certificate
-	MTLSCACertificate *SettingsCertificate `json:"MTLSCACertificate,omitempty"`
+	MTLSCACertificate *SslCertificate `json:"MTLSCACertificate,omitempty"`
 }
 
 // Validate validates this settings settings c a cert response

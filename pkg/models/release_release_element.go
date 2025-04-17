@@ -18,7 +18,7 @@ import (
 type ReleaseReleaseElement struct {
 
 	// app version
-	AppVersion string `json:"app_version,omitempty"`
+	AppVersion string `json:"appVersion,omitempty"`
 
 	// chart
 	Chart string `json:"chart,omitempty"`

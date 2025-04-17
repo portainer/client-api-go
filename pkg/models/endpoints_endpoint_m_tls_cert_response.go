@@ -13,17 +13,17 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// SettingsSettingsCertResponse settings settings cert response
+// EndpointsEndpointMTLSCertResponse endpoints endpoint m TLS cert response
 //
-// swagger:model settings.settingsCertResponse
-type SettingsSettingsCertResponse struct {
+// swagger:model endpoints.endpointMTLSCertResponse
+type EndpointsEndpointMTLSCertResponse struct {
 
 	// MTLSCertificate is the X.509 Certificate of the MTLS Certificate
 	MTLSCertificate *SslCertificate `json:"MTLSCertificate,omitempty"`
 }
 
-// Validate validates this settings settings cert response
-func (m *SettingsSettingsCertResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this endpoints endpoint m TLS cert response
+func (m *EndpointsEndpointMTLSCertResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateMTLSCertificate(formats); err != nil {
@@ -36,7 +36,7 @@ func (m *SettingsSettingsCertResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *SettingsSettingsCertResponse) validateMTLSCertificate(formats strfmt.Registry) error {
+func (m *EndpointsEndpointMTLSCertResponse) validateMTLSCertificate(formats strfmt.Registry) error {
 	if swag.IsZero(m.MTLSCertificate) { // not required
 		return nil
 	}
@@ -55,8 +55,8 @@ func (m *SettingsSettingsCertResponse) validateMTLSCertificate(formats strfmt.Re
 	return nil
 }
 
-// ContextValidate validate this settings settings cert response based on the context it is used
-func (m *SettingsSettingsCertResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this endpoints endpoint m TLS cert response based on the context it is used
+func (m *EndpointsEndpointMTLSCertResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateMTLSCertificate(ctx, formats); err != nil {
@@ -69,7 +69,7 @@ func (m *SettingsSettingsCertResponse) ContextValidate(ctx context.Context, form
 	return nil
 }
 
-func (m *SettingsSettingsCertResponse) contextValidateMTLSCertificate(ctx context.Context, formats strfmt.Registry) error {
+func (m *EndpointsEndpointMTLSCertResponse) contextValidateMTLSCertificate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MTLSCertificate != nil {
 
@@ -91,7 +91,7 @@ func (m *SettingsSettingsCertResponse) contextValidateMTLSCertificate(ctx contex
 }
 
 // MarshalBinary interface implementation
-func (m *SettingsSettingsCertResponse) MarshalBinary() ([]byte, error) {
+func (m *EndpointsEndpointMTLSCertResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -99,8 +99,8 @@ func (m *SettingsSettingsCertResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *SettingsSettingsCertResponse) UnmarshalBinary(b []byte) error {
-	var res SettingsSettingsCertResponse
+func (m *EndpointsEndpointMTLSCertResponse) UnmarshalBinary(b []byte) error {
+	var res EndpointsEndpointMTLSCertResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -73,7 +73,7 @@ func NewUserGenerateAPIKeyOK() *UserGenerateAPIKeyOK {
 /*
 UserGenerateAPIKeyOK describes a response with status code 200, with default header values.
 
-Created
+Success
 */
 type UserGenerateAPIKeyOK struct {
 	Payload *models.UsersAccessTokenResponse

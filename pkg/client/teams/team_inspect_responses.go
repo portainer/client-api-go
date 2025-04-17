@@ -30,12 +30,6 @@ func (o *TeamInspectReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return result, nil
-	case 204:
-		result := NewTeamInspectNoContent()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return result, nil
 	case 400:
 		result := NewTeamInspectBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -131,62 +125,6 @@ func (o *TeamInspectOK) readResponse(response runtime.ClientResponse, consumer r
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
-
-	return nil
-}
-
-// NewTeamInspectNoContent creates a TeamInspectNoContent with default headers values
-func NewTeamInspectNoContent() *TeamInspectNoContent {
-	return &TeamInspectNoContent{}
-}
-
-/*
-TeamInspectNoContent describes a response with status code 204, with default header values.
-
-Success
-*/
-type TeamInspectNoContent struct {
-}
-
-// IsSuccess returns true when this team inspect no content response has a 2xx status code
-func (o *TeamInspectNoContent) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this team inspect no content response has a 3xx status code
-func (o *TeamInspectNoContent) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this team inspect no content response has a 4xx status code
-func (o *TeamInspectNoContent) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this team inspect no content response has a 5xx status code
-func (o *TeamInspectNoContent) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this team inspect no content response a status code equal to that given
-func (o *TeamInspectNoContent) IsCode(code int) bool {
-	return code == 204
-}
-
-// Code gets the status code for the team inspect no content response
-func (o *TeamInspectNoContent) Code() int {
-	return 204
-}
-
-func (o *TeamInspectNoContent) Error() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent", 204)
-}
-
-func (o *TeamInspectNoContent) String() string {
-	return fmt.Sprintf("[GET /teams/{id}][%d] teamInspectNoContent", 204)
-}
-
-func (o *TeamInspectNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

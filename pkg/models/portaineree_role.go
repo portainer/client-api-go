@@ -41,6 +41,10 @@ type PortainereeRole struct {
 	// priority
 	// Required: true
 	Priority *int64 `json:"Priority"`
+
+	// scope
+	// Required: true
+	Scope map[string][]string `json:"Scope"`
 }
 
 // Validate validates this portaineree role
@@ -64,6 +68,10 @@ func (m *PortainereeRole) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validatePriority(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateScope(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -123,6 +131,15 @@ func (m *PortainereeRole) validateName(formats strfmt.Registry) error {
 func (m *PortainereeRole) validatePriority(formats strfmt.Registry) error {
 
 	if err := validate.Required("Priority", "body", m.Priority); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *PortainereeRole) validateScope(formats strfmt.Registry) error {
+
+	if err := validate.Required("Scope", "body", m.Scope); err != nil {
 		return err
 	}
 

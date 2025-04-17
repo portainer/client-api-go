@@ -2,6 +2,10 @@ basePath: /api
 definitions:
   auth.authenticatePayload:
     properties:
+      apiKey:
+        description: API Key
+        example: "1234567890"
+        type: string
       password:
         description: Password
         example: mypassword
@@ -11,6 +15,7 @@ definitions:
         example: admin
         type: string
     required:
+    - apiKey
     - password
     - username
     type: object
@@ -1462,6 +1467,12 @@ definitions:
       id:
         type: integer
     type: object
+  endpoints.endpointMTLSCertResponse:
+    properties:
+      MTLSCertificate:
+        $ref: '#/definitions/ssl.Certificate'
+        description: MTLSCertificate is the X.509 Certificate of the MTLS Certificate
+    type: object
   endpoints.endpointSettingsUpdatePayload:
     properties:
       changeWindow:
@@ -1718,6 +1729,11 @@ definitions:
       permissions:
         type: integer
     type: object
+  github.com_portainer_portainer-ee_api_http_handler_kubernetes.describeResourceResponse:
+    properties:
+      describe:
+        type: string
+    type: object
   github.com_portainer_portainer-ee_api_http_handler_kubernetes.namespacesToggleSystemPayload:
     properties:
       system:
@@ -1777,6 +1793,11 @@ definitions:
       runtime:
         $ref: '#/definitions/build.RuntimeInfo'
       serverVersion:
+        type: string
+    type: object
+  github.com_portainer_portainer_api_http_handler_kubernetes.describeResourceResponse:
+    properties:
+      describe:
         type: string
     type: object
   github.com_portainer_portainer_api_http_handler_kubernetes.namespacesToggleSystemPayload:
@@ -2885,11 +2906,15 @@ definitions:
     type: object
   models.K8sResourceQuota:
     properties:
-      cpu:
+      cpuLimit:
+        type: string
+      cpuRequest:
         type: string
       enabled:
         type: boolean
-      memory:
+      memoryLimit:
+        type: string
+      memoryRequest:
         type: string
     type: object
   models.K8sStorageQuota:
@@ -5511,12 +5536,19 @@ definitions:
         type: string
       Priority:
         type: integer
+      Scope:
+        additionalProperties:
+          items:
+            type: string
+          type: array
+        type: object
     required:
     - Authorizations
     - Description
     - Id
     - Name
     - Priority
+    - Scope
     type: object
   portaineree.S3BackupSettings:
     properties:
@@ -6365,6 +6397,32 @@ definitions:
         description: StartedAt indicates the date/time this hook was started
         type: string
     type: object
+  release.Info:
+    properties:
+      deleted:
+        description: Deleted tracks when this object was deleted.
+        type: string
+      description:
+        description: Description is human-friendly "log entry" about this release.
+        type: string
+      first_deployed:
+        description: FirstDeployed is when the release was first deployed.
+        type: string
+      last_deployed:
+        description: LastDeployed is when the release was last deployed.
+        type: string
+      notes:
+        description: Contains the rendered templates/NOTES.txt if available
+        type: string
+      resources:
+        description: Resources is the list of resources that are part of the release
+        items:
+          $ref: '#/definitions/unstructured.Unstructured'
+        type: array
+      status:
+        description: Status is the current state of the release
+        type: string
+    type: object
   release.Lock:
     properties:
       dependencies:
@@ -6463,10 +6521,7 @@ definitions:
     properties:
       chart:
         $ref: '#/definitions/release.Chart'
-        description: |-
-          Info provides information about a release
-          Info *Info `json:"info,omitempty"`
-          Chart is the chart that was released.
+        description: Chart is the chart that was released.
       config:
         additionalProperties: {}
         description: |-
@@ -6478,6 +6533,9 @@ definitions:
         items:
           $ref: '#/definitions/release.Hook'
         type: array
+      info:
+        $ref: '#/definitions/release.Info'
+        description: Info provides information about a release
       manifest:
         description: Manifest is the string representation of the rendered template.
         type: string
@@ -6487,13 +6545,16 @@ definitions:
       namespace:
         description: Namespace is the kubernetes namespace of the release.
         type: string
+      values:
+        $ref: '#/definitions/release.Values'
+        description: Values are the values used to deploy the chart.
       version:
         description: Version is an int which represents the revision of the release.
         type: integer
     type: object
   release.ReleaseElement:
     properties:
-      app_version:
+      appVersion:
         type: string
       chart:
         type: string
@@ -6506,6 +6567,13 @@ definitions:
       status:
         type: string
       updated:
+        type: string
+    type: object
+  release.Values:
+    properties:
+      computedValues:
+        type: string
+      userSuppliedValues:
         type: string
     type: object
   resource.Quantity:
@@ -6593,105 +6661,6 @@ definitions:
         items:
           type: integer
         type: array
-    type: object
-  settings.Certificate:
-    properties:
-      AuthorityKeyId:
-        type: string
-      CRLDistributionPoints:
-        items:
-          type: string
-        type: array
-      ExtendedKeyUsages:
-        items:
-          type: string
-        type: array
-      IsCertificateAuthority:
-        type: boolean
-      Issuer:
-        $ref: '#/definitions/settings.Name'
-      IssuingCertificateURLs:
-        items:
-          type: string
-        type: array
-      KeyUsages:
-        items:
-          type: string
-        type: array
-      OCSPServers:
-        items:
-          type: string
-        type: array
-      Policies:
-        items:
-          type: string
-        type: array
-      PublicKey:
-        $ref: '#/definitions/settings.PublicKey'
-      SHA1Fingerprint:
-        type: string
-      SHA256Fingerprint:
-        type: string
-      SerialNumber:
-        type: string
-      SignatureAlgorithm:
-        type: string
-      Subject:
-        $ref: '#/definitions/settings.Name'
-      SubjectAltDNSNames:
-        items:
-          type: string
-        type: array
-      SubjectAltEmailAddresses:
-        items:
-          type: string
-        type: array
-      SubjectAltIpAddresses:
-        items:
-          type: string
-        type: array
-      SubjectAltURIs:
-        items:
-          type: string
-        type: array
-      SubjectKeyId:
-        type: string
-      ValidNotAfter:
-        type: string
-      ValidNotBefore:
-        type: string
-      Version:
-        type: integer
-    type: object
-  settings.Name:
-    properties:
-      country:
-        items:
-          type: string
-        type: array
-      locality:
-        items:
-          type: string
-        type: array
-      serialNumber:
-        type: string
-      streetAddress:
-        items:
-          type: string
-        type: array
-    type: object
-  settings.PublicKey:
-    properties:
-      Algorithm:
-        type: string
-      Exponent:
-        type: string
-      Modulus:
-        type: string
-      Size:
-        type: integer
-      Value:
-        type: string
     type: object
   settings.defaultRegistryUpdatePayload:
     properties:
@@ -6818,13 +6787,13 @@ definitions:
   settings.settingsCACertResponse:
     properties:
       MTLSCACertificate:
-        $ref: '#/definitions/settings.Certificate'
+        $ref: '#/definitions/ssl.Certificate'
         description: MTLSCACertificate is the X.509 Certificate of the MTLS CA Certificate
     type: object
   settings.settingsCertResponse:
     properties:
       MTLSCertificate:
-        $ref: '#/definitions/settings.Certificate'
+        $ref: '#/definitions/ssl.Certificate'
         description: MTLSCertificate is the X.509 Certificate of the MTLS Certificate
     type: object
   settings.settingsExperimentalInspectResponse:
@@ -6970,6 +6939,105 @@ definitions:
       address:
         type: string
       error:
+        type: string
+    type: object
+  ssl.Certificate:
+    properties:
+      AuthorityKeyId:
+        type: string
+      CRLDistributionPoints:
+        items:
+          type: string
+        type: array
+      ExtendedKeyUsages:
+        items:
+          type: string
+        type: array
+      IsCertificateAuthority:
+        type: boolean
+      Issuer:
+        $ref: '#/definitions/ssl.Name'
+      IssuingCertificateURLs:
+        items:
+          type: string
+        type: array
+      KeyUsages:
+        items:
+          type: string
+        type: array
+      OCSPServers:
+        items:
+          type: string
+        type: array
+      Policies:
+        items:
+          type: string
+        type: array
+      PublicKey:
+        $ref: '#/definitions/ssl.PublicKey'
+      SHA1Fingerprint:
+        type: string
+      SHA256Fingerprint:
+        type: string
+      SerialNumber:
+        type: string
+      SignatureAlgorithm:
+        type: string
+      Subject:
+        $ref: '#/definitions/ssl.Name'
+      SubjectAltDNSNames:
+        items:
+          type: string
+        type: array
+      SubjectAltEmailAddresses:
+        items:
+          type: string
+        type: array
+      SubjectAltIpAddresses:
+        items:
+          type: string
+        type: array
+      SubjectAltURIs:
+        items:
+          type: string
+        type: array
+      SubjectKeyId:
+        type: string
+      ValidNotAfter:
+        type: string
+      ValidNotBefore:
+        type: string
+      Version:
+        type: integer
+    type: object
+  ssl.Name:
+    properties:
+      country:
+        items:
+          type: string
+        type: array
+      locality:
+        items:
+          type: string
+        type: array
+      serialNumber:
+        type: string
+      streetAddress:
+        items:
+          type: string
+        type: array
+    type: object
+  ssl.PublicKey:
+    properties:
+      Algorithm:
+        type: string
+      Exponent:
+        type: string
+      Modulus:
+        type: string
+      Size:
+        type: integer
+      Value:
         type: string
     type: object
   ssl.sslUpdatePayload:
@@ -7664,6 +7732,16 @@ definitions:
         example: 1.0.0
         type: string
     type: object
+  unstructured.Unstructured:
+    properties:
+      object:
+        additionalProperties: true
+        description: |-
+          Object is a JSON compatible map with string, float, int, bool, []interface{}, or
+          map[string]interface{}
+          children.
+        type: object
+    type: object
   useractivity.logsListResponse:
     properties:
       logs:
@@ -7672,6 +7750,11 @@ definitions:
         type: array
       totalCount:
         type: integer
+    type: object
+  users.CurrentUserEndpointAuthResponse:
+    properties:
+      Authorizations:
+        $ref: '#/definitions/portainer.Authorizations'
     type: object
   users.accessTokenResponse:
     properties:
@@ -11610,7 +11693,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.28.1
+  version: 2.29.0
 paths:
   /auth:
     post:
@@ -13520,7 +13603,7 @@ paths:
       consumes:
       - application/json
       description: '**Access policy**: administrator'
-      operationId: EgeGroupUpdate
+      operationId: EdgeGroupUpdate
       parameters:
       - description: EdgeGroup Id
         in: path
@@ -14708,7 +14791,12 @@ paths:
         items:
           type: integer
         name: environmentIds
-        required: true
+        type: array
+      - description: Edge Group IDs
+        in: query
+        items:
+          type: integer
+        name: edgeGroupIds
         type: array
       produces:
       - application/json
@@ -15003,6 +15091,17 @@ paths:
         in: query
         name: order
         type: integer
+      - description: If true, an `X-Update-Available` header will be added to the
+          response to indicate if an update is available
+        in: query
+        name: updateInformation
+        type: boolean
+      - description: If true, an `X-K8S-Env-Admin` header will be added to the response
+          to indicate if the user is a K8S environment admin for any of the returned
+          environments
+        in: query
+        name: k8sEnvAdmin
+        type: boolean
       - description: Search query
         in: query
         name: search
@@ -15043,6 +15142,12 @@ paths:
           type: integer
         name: endpointIds
         type: array
+      - description: will exclude these environments(endpoints)
+        in: query
+        items:
+          type: integer
+        name: excludeIds
+        type: array
       - description: If true, will return environment(endpoint) that were provisioned
         in: query
         name: provisioned
@@ -15072,6 +15177,10 @@ paths:
         in: query
         name: excludeSnapshots
         type: boolean
+      - description: if true, the SnapshotRaw field won't be retrieved
+        in: query
+        name: excludeSnapshotRaw
+        type: boolean
       - description: will return only environments(endpoints) with this name
         in: query
         name: name
@@ -15081,6 +15190,18 @@ paths:
         in: query
         name: edgeStackStatus
         type: string
+      - description: List environments(endpoints) of these edge groups
+        in: query
+        items:
+          type: integer
+        name: edgeGroupIds
+        type: array
+      - description: Exclude environments(endpoints) of these edge groups
+        in: query
+        items:
+          type: integer
+        name: excludeEdgeGroupIds
+        type: array
       produces:
       - application/json
       responses:
@@ -15269,6 +15390,14 @@ paths:
         name: id
         required: true
         type: integer
+      - description: if true, the snapshot data won't be retrieved
+        in: query
+        name: excludeSnapshot
+        type: boolean
+      - description: if true, the SnapshotRaw field won't be retrieved
+        in: query
+        name: excludeSnapshotRaw
+        type: boolean
       produces:
       - application/json
       responses:
@@ -15662,6 +15791,63 @@ paths:
       summary: Install Helm Chart
       tags:
       - helm
+  /endpoints/{id}/kubernetes/helm/{name}:
+    get:
+      description: |-
+        Get details of a helm release by release name
+        **Access policy**: authenticated
+      operationId: HelmGet
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Helm release name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        type: string
+      - description: show resources of the release
+        in: query
+        name: showResources
+        type: boolean
+      - description: specify an optional revision
+        in: query
+        name: revision
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/release.Release'
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve the release.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a helm release
+      tags:
+      - helm
   /endpoints/{id}/kubernetes/helm/{release}:
     delete:
       description: '**Access policy**: authenticated'
@@ -15698,6 +15884,120 @@ paths:
       summary: Delete Helm Release
       tags:
       - helm
+  /endpoints/{id}/kubernetes/helm/{release}/history:
+    get:
+      description: |-
+        Get a historical list of releases by release name
+        **Access policy**: authenticated
+      operationId: HelmGetHistory
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Helm release name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/release.Release'
+            type: array
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve the historical
+            list of releases.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a historical list of releases
+      tags:
+      - helm
+  /endpoints/{id}/mtls_certificate:
+    get:
+      description: |-
+        Retrieve the mTLS certificate of an environment(endpoint).
+        **Access policy**: administrator
+      operationId: EndpointMTLSCertificate
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/endpoints.endpointMTLSCertResponse'
+        "400":
+          description: Invalid request
+        "404":
+          description: Environment(Endpoint) not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get an environment(endpoint) mTLS certificate
+      tags:
+      - endpoints
+  /endpoints/{id}/mtls_certificate_error:
+    get:
+      description: |-
+        Retrieve the mTLS certificate of an environment(endpoint).
+        **Access policy**: administrator
+      operationId: EndpointMTLSAgentCertificateError
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/endpoints.endpointMTLSCertResponse'
+        "400":
+          description: Invalid request
+        "404":
+          description: Environment(Endpoint) not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Get an agent(endpoint) mTLS certificate
+      tags:
+      - endpoints
   /endpoints/{id}/pools/{rpn}/access:
     put:
       consumes:
@@ -16701,6 +17001,61 @@ paths:
       - ApiKeyAuth: []
         jwt: []
       summary: Get the dashboard summary data
+      tags:
+      - kubernetes
+  /kubernetes/{id}/describe:
+    get:
+      description: |-
+        Get a description of a kubernetes resource.
+        **Access policy**: Authenticated user.
+      operationId: DescribeResource
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Resource name
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: Resource kind
+        in: query
+        name: kind
+        required: true
+        type: string
+      - description: Namespace
+        in: query
+        name: namespace
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/github.com_portainer_portainer-ee_api_http_handler_kubernetes.describeResourceResponse'
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve resource
+            description
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a description of a kubernetes resource
       tags:
       - kubernetes
   /kubernetes/{id}/ingresscontrollers:
@@ -21470,8 +21825,6 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/portainer.TeamMembership'
-        "204":
-          description: Success
         "400":
           description: Invalid request
         "403":
@@ -21668,8 +22021,6 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/portainer.Team'
-        "204":
-          description: Success
         "400":
           description: Invalid request
         "403":
@@ -21710,8 +22061,6 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/portainer.Team'
-        "204":
-          description: Success
         "400":
           description: Invalid request
         "403":
@@ -22781,7 +23130,7 @@ paths:
       - application/json
       responses:
         "200":
-          description: Created
+          description: Success
           schema:
             $ref: '#/definitions/users.accessTokenResponse'
         "400":
@@ -22882,10 +23231,17 @@ paths:
   /users/me:
     get:
       description: |-
-        Retrieve details about the current  user.
+        Retrieve details about the current user.
         User passwords are filtered out, and should never be accessible.
         **Access policy**: authenticated
       operationId: CurrentUserInspect
+      parameters:
+      - description: Set to true to avoid including the environment authorizations
+          in the response
+        in: query
+        name: noEndpointAuthorizations
+        required: true
+        type: boolean
       produces:
       - application/json
       responses:
@@ -22904,7 +23260,40 @@ paths:
       security:
       - ApiKeyAuth: []
       - jwt: []
-      summary: Inspect the current user user
+      summary: Inspect the current user
+      tags:
+      - users
+  /users/me/auth/{endpointID}:
+    get:
+      description: |-
+        Retrieve environment authorizations for the current  user.
+        **Access policy**: authenticated
+      operationId: CurrentUserEndpointAuthorizationsInspect
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: endpointID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/users.CurrentUserEndpointAuthResponse'
+        "400":
+          description: Invalid request
+        "403":
+          description: Permission denied
+        "404":
+          description: User not found
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Inspect environment authorizations for the current user
       tags:
       - users
   /webhooks:

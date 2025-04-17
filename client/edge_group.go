@@ -77,7 +77,7 @@ func (c *PortainerClient) CreateEdgeGroup(name string, environmentIds []int64) (
 //
 // Returns an error if the update fails.
 func (c *PortainerClient) UpdateEdgeGroup(id int64, name string, environmentIds *[]int64, tagIds *[]int64) error {
-	params := edge_groups.NewEgeGroupUpdateParams().WithID(id).WithBody(&models.EdgegroupsEdgeGroupUpdatePayload{
+	params := edge_groups.NewEdgeGroupUpdateParams().WithID(id).WithBody(&models.EdgegroupsEdgeGroupUpdatePayload{
 		Name: name,
 	})
 
@@ -90,7 +90,7 @@ func (c *PortainerClient) UpdateEdgeGroup(id int64, name string, environmentIds 
 		params.Body.Dynamic = true
 	}
 
-	_, err := c.cli.EdgeGroups.EgeGroupUpdate(params, nil)
+	_, err := c.cli.EdgeGroups.EdgeGroupUpdate(params, nil)
 	if err != nil {
 		return fmt.Errorf("failed to update edge group: %w", err)
 	}

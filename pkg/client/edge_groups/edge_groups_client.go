@@ -64,7 +64,7 @@ type ClientService interface {
 
 	EdgeGroupList(params *EdgeGroupListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupListOK, error)
 
-	EgeGroupUpdate(params *EgeGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EgeGroupUpdateOK, error)
+	EdgeGroupUpdate(params *EdgeGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupUpdateOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -234,24 +234,24 @@ func (a *Client) EdgeGroupList(params *EdgeGroupListParams, authInfo runtime.Cli
 }
 
 /*
-EgeGroupUpdate updates an edge group
+EdgeGroupUpdate updates an edge group
 
 **Access policy**: administrator
 */
-func (a *Client) EgeGroupUpdate(params *EgeGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EgeGroupUpdateOK, error) {
+func (a *Client) EdgeGroupUpdate(params *EdgeGroupUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EdgeGroupUpdateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewEgeGroupUpdateParams()
+		params = NewEdgeGroupUpdateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "EgeGroupUpdate",
+		ID:                 "EdgeGroupUpdate",
 		Method:             "PUT",
 		PathPattern:        "/edge_groups/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &EgeGroupUpdateReader{formats: a.formats},
+		Reader:             &EdgeGroupUpdateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -264,13 +264,13 @@ func (a *Client) EgeGroupUpdate(params *EgeGroupUpdateParams, authInfo runtime.C
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*EgeGroupUpdateOK)
+	success, ok := result.(*EdgeGroupUpdateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for EgeGroupUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for EdgeGroupUpdate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

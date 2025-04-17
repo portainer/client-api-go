@@ -38,7 +38,7 @@ func (c *PortainerClient) GetTeamByName(name string) (*models.PortainerTeam, err
 // GetTeam returns a team by ID
 func (c *PortainerClient) GetTeam(id int64) (*models.PortainerTeam, error) {
 	params := teams.NewTeamInspectParams().WithID(id)
-	resp, _, err := c.cli.Teams.TeamInspect(params, nil)
+	resp, err := c.cli.Teams.TeamInspect(params, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get team: %w", err)
 	}
@@ -82,7 +82,7 @@ func (c *PortainerClient) UpdateTeamName(id int, name string) error {
 	params := teams.NewTeamUpdateParams().WithID(int64(id)).WithBody(&models.TeamsTeamUpdatePayload{
 		Name: name,
 	})
-	_, _, err := c.cli.Teams.TeamUpdate(params, nil)
+	_, err := c.cli.Teams.TeamUpdate(params, nil)
 	return err
 }
 
@@ -112,6 +112,6 @@ func (c *PortainerClient) CreateTeamMembership(teamId int, userId int) error {
 		UserID: &userID,
 	})
 
-	_, _, err := c.cli.TeamMemberships.TeamMembershipCreate(params, nil)
+	_, err := c.cli.TeamMemberships.TeamMembershipCreate(params, nil)
 	return err
 }

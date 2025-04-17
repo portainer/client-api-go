@@ -19,6 +19,11 @@ import (
 // swagger:model auth.authenticatePayload
 type AuthAuthenticatePayload struct {
 
+	// API Key
+	// Example: 1234567890
+	// Required: true
+	APIKey *string `json:"apiKey"`
+
 	// Password
 	// Example: mypassword
 	// Required: true
@@ -34,6 +39,10 @@ type AuthAuthenticatePayload struct {
 func (m *AuthAuthenticatePayload) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAPIKey(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validatePassword(formats); err != nil {
 		res = append(res, err)
 	}
@@ -45,6 +54,15 @@ func (m *AuthAuthenticatePayload) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *AuthAuthenticatePayload) validateAPIKey(formats strfmt.Registry) error {
+
+	if err := validate.Required("apiKey", "body", m.APIKey); err != nil {
+		return err
+	}
+
 	return nil
 }
 

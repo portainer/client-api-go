@@ -17,14 +17,20 @@ import (
 // swagger:model models.K8sResourceQuota
 type ModelsK8sResourceQuota struct {
 
-	// cpu
-	CPU string `json:"cpu,omitempty"`
+	// cpu limit
+	CPULimit string `json:"cpuLimit,omitempty"`
+
+	// cpu request
+	CPURequest string `json:"cpuRequest,omitempty"`
 
 	// enabled
 	Enabled bool `json:"enabled,omitempty"`
 
-	// memory
-	Memory string `json:"memory,omitempty"`
+	// memory limit
+	MemoryLimit string `json:"memoryLimit,omitempty"`
+
+	// memory request
+	MemoryRequest string `json:"memoryRequest,omitempty"`
 }
 
 // Validate validates this models k8s resource quota

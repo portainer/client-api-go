@@ -30,12 +30,6 @@ func (o *TeamMembershipCreateReader) ReadResponse(response runtime.ClientRespons
 			return nil, err
 		}
 		return result, nil
-	case 204:
-		result := NewTeamMembershipCreateNoContent()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return result, nil
 	case 400:
 		result := NewTeamMembershipCreateBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -131,62 +125,6 @@ func (o *TeamMembershipCreateOK) readResponse(response runtime.ClientResponse, c
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
-
-	return nil
-}
-
-// NewTeamMembershipCreateNoContent creates a TeamMembershipCreateNoContent with default headers values
-func NewTeamMembershipCreateNoContent() *TeamMembershipCreateNoContent {
-	return &TeamMembershipCreateNoContent{}
-}
-
-/*
-TeamMembershipCreateNoContent describes a response with status code 204, with default header values.
-
-Success
-*/
-type TeamMembershipCreateNoContent struct {
-}
-
-// IsSuccess returns true when this team membership create no content response has a 2xx status code
-func (o *TeamMembershipCreateNoContent) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this team membership create no content response has a 3xx status code
-func (o *TeamMembershipCreateNoContent) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this team membership create no content response has a 4xx status code
-func (o *TeamMembershipCreateNoContent) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this team membership create no content response has a 5xx status code
-func (o *TeamMembershipCreateNoContent) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this team membership create no content response a status code equal to that given
-func (o *TeamMembershipCreateNoContent) IsCode(code int) bool {
-	return code == 204
-}
-
-// Code gets the status code for the team membership create no content response
-func (o *TeamMembershipCreateNoContent) Code() int {
-	return 204
-}
-
-func (o *TeamMembershipCreateNoContent) Error() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateNoContent", 204)
-}
-
-func (o *TeamMembershipCreateNoContent) String() string {
-	return fmt.Sprintf("[POST /team_memberships][%d] teamMembershipCreateNoContent", 204)
-}
-
-func (o *TeamMembershipCreateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

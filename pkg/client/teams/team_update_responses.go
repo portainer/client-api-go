@@ -30,12 +30,6 @@ func (o *TeamUpdateReader) ReadResponse(response runtime.ClientResponse, consume
 			return nil, err
 		}
 		return result, nil
-	case 204:
-		result := NewTeamUpdateNoContent()
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		return result, nil
 	case 400:
 		result := NewTeamUpdateBadRequest()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -131,62 +125,6 @@ func (o *TeamUpdateOK) readResponse(response runtime.ClientResponse, consumer ru
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
-
-	return nil
-}
-
-// NewTeamUpdateNoContent creates a TeamUpdateNoContent with default headers values
-func NewTeamUpdateNoContent() *TeamUpdateNoContent {
-	return &TeamUpdateNoContent{}
-}
-
-/*
-TeamUpdateNoContent describes a response with status code 204, with default header values.
-
-Success
-*/
-type TeamUpdateNoContent struct {
-}
-
-// IsSuccess returns true when this team update no content response has a 2xx status code
-func (o *TeamUpdateNoContent) IsSuccess() bool {
-	return true
-}
-
-// IsRedirect returns true when this team update no content response has a 3xx status code
-func (o *TeamUpdateNoContent) IsRedirect() bool {
-	return false
-}
-
-// IsClientError returns true when this team update no content response has a 4xx status code
-func (o *TeamUpdateNoContent) IsClientError() bool {
-	return false
-}
-
-// IsServerError returns true when this team update no content response has a 5xx status code
-func (o *TeamUpdateNoContent) IsServerError() bool {
-	return false
-}
-
-// IsCode returns true when this team update no content response a status code equal to that given
-func (o *TeamUpdateNoContent) IsCode(code int) bool {
-	return code == 204
-}
-
-// Code gets the status code for the team update no content response
-func (o *TeamUpdateNoContent) Code() int {
-	return 204
-}
-
-func (o *TeamUpdateNoContent) Error() string {
-	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateNoContent", 204)
-}
-
-func (o *TeamUpdateNoContent) String() string {
-	return fmt.Sprintf("[PUT /teams/{id}][%d] teamUpdateNoContent", 204)
-}
-
-func (o *TeamUpdateNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

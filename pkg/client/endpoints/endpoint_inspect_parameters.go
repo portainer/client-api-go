@@ -62,6 +62,18 @@ EndpointInspectParams contains all the parameters to send to the API endpoint
 */
 type EndpointInspectParams struct {
 
+	/* ExcludeSnapshot.
+
+	   if true, the snapshot data won't be retrieved
+	*/
+	ExcludeSnapshot *bool
+
+	/* ExcludeSnapshotRaw.
+
+	   if true, the SnapshotRaw field won't be retrieved
+	*/
+	ExcludeSnapshotRaw *bool
+
 	/* ID.
 
 	   Environment(Endpoint) identifier
@@ -121,6 +133,28 @@ func (o *EndpointInspectParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithExcludeSnapshot adds the excludeSnapshot to the endpoint inspect params
+func (o *EndpointInspectParams) WithExcludeSnapshot(excludeSnapshot *bool) *EndpointInspectParams {
+	o.SetExcludeSnapshot(excludeSnapshot)
+	return o
+}
+
+// SetExcludeSnapshot adds the excludeSnapshot to the endpoint inspect params
+func (o *EndpointInspectParams) SetExcludeSnapshot(excludeSnapshot *bool) {
+	o.ExcludeSnapshot = excludeSnapshot
+}
+
+// WithExcludeSnapshotRaw adds the excludeSnapshotRaw to the endpoint inspect params
+func (o *EndpointInspectParams) WithExcludeSnapshotRaw(excludeSnapshotRaw *bool) *EndpointInspectParams {
+	o.SetExcludeSnapshotRaw(excludeSnapshotRaw)
+	return o
+}
+
+// SetExcludeSnapshotRaw adds the excludeSnapshotRaw to the endpoint inspect params
+func (o *EndpointInspectParams) SetExcludeSnapshotRaw(excludeSnapshotRaw *bool) {
+	o.ExcludeSnapshotRaw = excludeSnapshotRaw
+}
+
 // WithID adds the id to the endpoint inspect params
 func (o *EndpointInspectParams) WithID(id int64) *EndpointInspectParams {
 	o.SetID(id)
@@ -139,6 +173,40 @@ func (o *EndpointInspectParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
+	if o.ExcludeSnapshot != nil {
+
+		// query param excludeSnapshot
+		var qrExcludeSnapshot bool
+
+		if o.ExcludeSnapshot != nil {
+			qrExcludeSnapshot = *o.ExcludeSnapshot
+		}
+		qExcludeSnapshot := swag.FormatBool(qrExcludeSnapshot)
+		if qExcludeSnapshot != "" {
+
+			if err := r.SetQueryParam("excludeSnapshot", qExcludeSnapshot); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ExcludeSnapshotRaw != nil {
+
+		// query param excludeSnapshotRaw
+		var qrExcludeSnapshotRaw bool
+
+		if o.ExcludeSnapshotRaw != nil {
+			qrExcludeSnapshotRaw = *o.ExcludeSnapshotRaw
+		}
+		qExcludeSnapshotRaw := swag.FormatBool(qrExcludeSnapshotRaw)
+		if qExcludeSnapshotRaw != "" {
+
+			if err := r.SetQueryParam("excludeSnapshotRaw", qExcludeSnapshotRaw); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {

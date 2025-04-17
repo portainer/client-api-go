@@ -62,6 +62,12 @@ EdgeUpdatePreviousVersionsParams contains all the parameters to send to the API 
 */
 type EdgeUpdatePreviousVersionsParams struct {
 
+	/* EdgeGroupIds.
+
+	   Edge Group IDs
+	*/
+	EdgeGroupIds []int64
+
 	/* EnvironmentIds.
 
 	   Environment IDs
@@ -121,6 +127,17 @@ func (o *EdgeUpdatePreviousVersionsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithEdgeGroupIds adds the edgeGroupIds to the edge update previous versions params
+func (o *EdgeUpdatePreviousVersionsParams) WithEdgeGroupIds(edgeGroupIds []int64) *EdgeUpdatePreviousVersionsParams {
+	o.SetEdgeGroupIds(edgeGroupIds)
+	return o
+}
+
+// SetEdgeGroupIds adds the edgeGroupIds to the edge update previous versions params
+func (o *EdgeUpdatePreviousVersionsParams) SetEdgeGroupIds(edgeGroupIds []int64) {
+	o.EdgeGroupIds = edgeGroupIds
+}
+
 // WithEnvironmentIds adds the environmentIds to the edge update previous versions params
 func (o *EdgeUpdatePreviousVersionsParams) WithEnvironmentIds(environmentIds []int64) *EdgeUpdatePreviousVersionsParams {
 	o.SetEnvironmentIds(environmentIds)
@@ -140,6 +157,17 @@ func (o *EdgeUpdatePreviousVersionsParams) WriteToRequest(r runtime.ClientReques
 	}
 	var res []error
 
+	if o.EdgeGroupIds != nil {
+
+		// binding items for edgeGroupIds
+		joinedEdgeGroupIds := o.bindParamEdgeGroupIds(reg)
+
+		// query array param edgeGroupIds
+		if err := r.SetQueryParam("edgeGroupIds", joinedEdgeGroupIds...); err != nil {
+			return err
+		}
+	}
+
 	if o.EnvironmentIds != nil {
 
 		// binding items for environmentIds
@@ -155,6 +183,23 @@ func (o *EdgeUpdatePreviousVersionsParams) WriteToRequest(r runtime.ClientReques
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamEdgeUpdatePreviousVersions binds the parameter edgeGroupIds
+func (o *EdgeUpdatePreviousVersionsParams) bindParamEdgeGroupIds(formats strfmt.Registry) []string {
+	edgeGroupIdsIR := o.EdgeGroupIds
+
+	var edgeGroupIdsIC []string
+	for _, edgeGroupIdsIIR := range edgeGroupIdsIR { // explode []int64
+
+		edgeGroupIdsIIV := swag.FormatInt64(edgeGroupIdsIIR) // int64 as string
+		edgeGroupIdsIC = append(edgeGroupIdsIC, edgeGroupIdsIIV)
+	}
+
+	// items.CollectionFormat: ""
+	edgeGroupIdsIS := swag.JoinByFormat(edgeGroupIdsIC, "")
+
+	return edgeGroupIdsIS
 }
 
 // bindParamEdgeUpdatePreviousVersions binds the parameter environmentIds

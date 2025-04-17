@@ -56,7 +56,7 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	TeamMembershipCreate(params *TeamMembershipCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipCreateOK, *TeamMembershipCreateNoContent, error)
+	TeamMembershipCreate(params *TeamMembershipCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipCreateOK, error)
 
 	TeamMembershipDelete(params *TeamMembershipDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipDeleteNoContent, error)
 
@@ -76,7 +76,7 @@ type ClientService interface {
 
 **Access policy**: administrator
 */
-func (a *Client) TeamMembershipCreate(params *TeamMembershipCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipCreateOK, *TeamMembershipCreateNoContent, error) {
+func (a *Client) TeamMembershipCreate(params *TeamMembershipCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TeamMembershipCreateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTeamMembershipCreateParams()
@@ -100,16 +100,15 @@ func (a *Client) TeamMembershipCreate(params *TeamMembershipCreateParams, authIn
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	switch value := result.(type) {
-	case *TeamMembershipCreateOK:
-		return value, nil, nil
-	case *TeamMembershipCreateNoContent:
-		return nil, value, nil
+	success, ok := result.(*TeamMembershipCreateOK)
+	if ok {
+		return success, nil
 	}
+	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for team_memberships: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for TeamMembershipCreate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

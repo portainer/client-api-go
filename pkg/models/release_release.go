@@ -19,8 +19,6 @@ import (
 // swagger:model release.Release
 type ReleaseRelease struct {
 
-	// Info provides information about a release
-	// Info *Info `json:"info,omitempty"`
 	// Chart is the chart that was released.
 	Chart *ReleaseChart `json:"chart,omitempty"`
 
@@ -31,6 +29,9 @@ type ReleaseRelease struct {
 	// Hooks are all of the hooks declared for this release.
 	Hooks []*ReleaseHook `json:"hooks"`
 
+	// Info provides information about a release
+	Info *ReleaseInfo `json:"info,omitempty"`
+
 	// Manifest is the string representation of the rendered template.
 	Manifest string `json:"manifest,omitempty"`
 
@@ -39,6 +40,9 @@ type ReleaseRelease struct {
 
 	// Namespace is the kubernetes namespace of the release.
 	Namespace string `json:"namespace,omitempty"`
+
+	// Values are the values used to deploy the chart.
+	Values *ReleaseValues `json:"values,omitempty"`
 
 	// Version is an int which represents the revision of the release.
 	Version int64 `json:"version,omitempty"`
@@ -53,6 +57,14 @@ func (m *ReleaseRelease) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateHooks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateInfo(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateValues(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -107,6 +119,44 @@ func (m *ReleaseRelease) validateHooks(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ReleaseRelease) validateInfo(formats strfmt.Registry) error {
+	if swag.IsZero(m.Info) { // not required
+		return nil
+	}
+
+	if m.Info != nil {
+		if err := m.Info.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("info")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("info")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReleaseRelease) validateValues(formats strfmt.Registry) error {
+	if swag.IsZero(m.Values) { // not required
+		return nil
+	}
+
+	if m.Values != nil {
+		if err := m.Values.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("values")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("values")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this release release based on the context it is used
 func (m *ReleaseRelease) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -116,6 +166,14 @@ func (m *ReleaseRelease) ContextValidate(ctx context.Context, formats strfmt.Reg
 	}
 
 	if err := m.contextValidateHooks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateInfo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateValues(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -166,6 +224,48 @@ func (m *ReleaseRelease) contextValidateHooks(ctx context.Context, formats strfm
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *ReleaseRelease) contextValidateInfo(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Info != nil {
+
+		if swag.IsZero(m.Info) { // not required
+			return nil
+		}
+
+		if err := m.Info.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("info")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("info")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReleaseRelease) contextValidateValues(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Values != nil {
+
+		if swag.IsZero(m.Values) { // not required
+			return nil
+		}
+
+		if err := m.Values.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("values")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("values")
+			}
+			return err
+		}
 	}
 
 	return nil

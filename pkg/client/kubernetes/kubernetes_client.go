@@ -106,6 +106,8 @@ type ClientService interface {
 
 	DeleteServiceAccounts(params *DeleteServiceAccountsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServiceAccountsNoContent, error)
 
+	DescribeResource(params *DescribeResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DescribeResourceOK, error)
+
 	GetAllKubernetesApplications(params *GetAllKubernetesApplicationsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesApplicationsOK, error)
 
 	GetAllKubernetesClusterIngresses(params *GetAllKubernetesClusterIngressesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesClusterIngressesOK, error)
@@ -767,6 +769,49 @@ func (a *Client) DeleteServiceAccounts(params *DeleteServiceAccountsParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for DeleteServiceAccounts: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	DescribeResource gets a description of a kubernetes resource
+
+	Get a description of a kubernetes resource.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) DescribeResource(params *DescribeResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DescribeResourceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDescribeResourceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DescribeResource",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/describe",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DescribeResourceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DescribeResourceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DescribeResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

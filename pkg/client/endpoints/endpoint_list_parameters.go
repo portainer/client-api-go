@@ -86,6 +86,12 @@ type EndpointListParams struct {
 	*/
 	EdgeDeviceUntrusted *bool
 
+	/* EdgeGroupIds.
+
+	   List environments(endpoints) of these edge groups
+	*/
+	EdgeGroupIds []int64
+
 	/* EdgeStackStatus.
 
 	   only applied when edgeStackId exists. Filter the returned environments based on their deployment status in the stack (not the environment status!)
@@ -98,6 +104,24 @@ type EndpointListParams struct {
 	*/
 	EndpointIds []int64
 
+	/* ExcludeEdgeGroupIds.
+
+	   Exclude environments(endpoints) of these edge groups
+	*/
+	ExcludeEdgeGroupIds []int64
+
+	/* ExcludeIds.
+
+	   will exclude these environments(endpoints)
+	*/
+	ExcludeIds []int64
+
+	/* ExcludeSnapshotRaw.
+
+	   if true, the SnapshotRaw field won't be retrieved
+	*/
+	ExcludeSnapshotRaw *bool
+
 	/* ExcludeSnapshots.
 
 	   if true, the snapshot data won't be retrieved
@@ -109,6 +133,12 @@ type EndpointListParams struct {
 	   List environments(endpoints) of these groups
 	*/
 	GroupIds []int64
+
+	/* K8sEnvAdmin.
+
+	   If true, an `X-K8S-Env-Admin` header will be added to the response to indicate if the user is a K8S environment admin for any of the returned environments
+	*/
+	K8sEnvAdmin *bool
 
 	/* Limit.
 
@@ -169,6 +199,12 @@ type EndpointListParams struct {
 	   List environments(endpoints) of this type
 	*/
 	Types []int64
+
+	/* UpdateInformation.
+
+	   If true, an `X-Update-Available` header will be added to the response to indicate if an update is available
+	*/
+	UpdateInformation *bool
 
 	timeout    time.Duration
 	Context    context.Context
@@ -267,6 +303,17 @@ func (o *EndpointListParams) SetEdgeDeviceUntrusted(edgeDeviceUntrusted *bool) {
 	o.EdgeDeviceUntrusted = edgeDeviceUntrusted
 }
 
+// WithEdgeGroupIds adds the edgeGroupIds to the endpoint list params
+func (o *EndpointListParams) WithEdgeGroupIds(edgeGroupIds []int64) *EndpointListParams {
+	o.SetEdgeGroupIds(edgeGroupIds)
+	return o
+}
+
+// SetEdgeGroupIds adds the edgeGroupIds to the endpoint list params
+func (o *EndpointListParams) SetEdgeGroupIds(edgeGroupIds []int64) {
+	o.EdgeGroupIds = edgeGroupIds
+}
+
 // WithEdgeStackStatus adds the edgeStackStatus to the endpoint list params
 func (o *EndpointListParams) WithEdgeStackStatus(edgeStackStatus *string) *EndpointListParams {
 	o.SetEdgeStackStatus(edgeStackStatus)
@@ -289,6 +336,39 @@ func (o *EndpointListParams) SetEndpointIds(endpointIds []int64) {
 	o.EndpointIds = endpointIds
 }
 
+// WithExcludeEdgeGroupIds adds the excludeEdgeGroupIds to the endpoint list params
+func (o *EndpointListParams) WithExcludeEdgeGroupIds(excludeEdgeGroupIds []int64) *EndpointListParams {
+	o.SetExcludeEdgeGroupIds(excludeEdgeGroupIds)
+	return o
+}
+
+// SetExcludeEdgeGroupIds adds the excludeEdgeGroupIds to the endpoint list params
+func (o *EndpointListParams) SetExcludeEdgeGroupIds(excludeEdgeGroupIds []int64) {
+	o.ExcludeEdgeGroupIds = excludeEdgeGroupIds
+}
+
+// WithExcludeIds adds the excludeIds to the endpoint list params
+func (o *EndpointListParams) WithExcludeIds(excludeIds []int64) *EndpointListParams {
+	o.SetExcludeIds(excludeIds)
+	return o
+}
+
+// SetExcludeIds adds the excludeIds to the endpoint list params
+func (o *EndpointListParams) SetExcludeIds(excludeIds []int64) {
+	o.ExcludeIds = excludeIds
+}
+
+// WithExcludeSnapshotRaw adds the excludeSnapshotRaw to the endpoint list params
+func (o *EndpointListParams) WithExcludeSnapshotRaw(excludeSnapshotRaw *bool) *EndpointListParams {
+	o.SetExcludeSnapshotRaw(excludeSnapshotRaw)
+	return o
+}
+
+// SetExcludeSnapshotRaw adds the excludeSnapshotRaw to the endpoint list params
+func (o *EndpointListParams) SetExcludeSnapshotRaw(excludeSnapshotRaw *bool) {
+	o.ExcludeSnapshotRaw = excludeSnapshotRaw
+}
+
 // WithExcludeSnapshots adds the excludeSnapshots to the endpoint list params
 func (o *EndpointListParams) WithExcludeSnapshots(excludeSnapshots *bool) *EndpointListParams {
 	o.SetExcludeSnapshots(excludeSnapshots)
@@ -309,6 +389,17 @@ func (o *EndpointListParams) WithGroupIds(groupIds []int64) *EndpointListParams 
 // SetGroupIds adds the groupIds to the endpoint list params
 func (o *EndpointListParams) SetGroupIds(groupIds []int64) {
 	o.GroupIds = groupIds
+}
+
+// WithK8sEnvAdmin adds the k8sEnvAdmin to the endpoint list params
+func (o *EndpointListParams) WithK8sEnvAdmin(k8sEnvAdmin *bool) *EndpointListParams {
+	o.SetK8sEnvAdmin(k8sEnvAdmin)
+	return o
+}
+
+// SetK8sEnvAdmin adds the k8sEnvAdmin to the endpoint list params
+func (o *EndpointListParams) SetK8sEnvAdmin(k8sEnvAdmin *bool) {
+	o.K8sEnvAdmin = k8sEnvAdmin
 }
 
 // WithLimit adds the limit to the endpoint list params
@@ -421,6 +512,17 @@ func (o *EndpointListParams) SetTypes(types []int64) {
 	o.Types = types
 }
 
+// WithUpdateInformation adds the updateInformation to the endpoint list params
+func (o *EndpointListParams) WithUpdateInformation(updateInformation *bool) *EndpointListParams {
+	o.SetUpdateInformation(updateInformation)
+	return o
+}
+
+// SetUpdateInformation adds the updateInformation to the endpoint list params
+func (o *EndpointListParams) SetUpdateInformation(updateInformation *bool) {
+	o.UpdateInformation = updateInformation
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -491,6 +593,17 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
+	if o.EdgeGroupIds != nil {
+
+		// binding items for edgeGroupIds
+		joinedEdgeGroupIds := o.bindParamEdgeGroupIds(reg)
+
+		// query array param edgeGroupIds
+		if err := r.SetQueryParam("edgeGroupIds", joinedEdgeGroupIds...); err != nil {
+			return err
+		}
+	}
+
 	if o.EdgeStackStatus != nil {
 
 		// query param edgeStackStatus
@@ -519,6 +632,45 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
+	if o.ExcludeEdgeGroupIds != nil {
+
+		// binding items for excludeEdgeGroupIds
+		joinedExcludeEdgeGroupIds := o.bindParamExcludeEdgeGroupIds(reg)
+
+		// query array param excludeEdgeGroupIds
+		if err := r.SetQueryParam("excludeEdgeGroupIds", joinedExcludeEdgeGroupIds...); err != nil {
+			return err
+		}
+	}
+
+	if o.ExcludeIds != nil {
+
+		// binding items for excludeIds
+		joinedExcludeIds := o.bindParamExcludeIds(reg)
+
+		// query array param excludeIds
+		if err := r.SetQueryParam("excludeIds", joinedExcludeIds...); err != nil {
+			return err
+		}
+	}
+
+	if o.ExcludeSnapshotRaw != nil {
+
+		// query param excludeSnapshotRaw
+		var qrExcludeSnapshotRaw bool
+
+		if o.ExcludeSnapshotRaw != nil {
+			qrExcludeSnapshotRaw = *o.ExcludeSnapshotRaw
+		}
+		qExcludeSnapshotRaw := swag.FormatBool(qrExcludeSnapshotRaw)
+		if qExcludeSnapshotRaw != "" {
+
+			if err := r.SetQueryParam("excludeSnapshotRaw", qExcludeSnapshotRaw); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.ExcludeSnapshots != nil {
 
 		// query param excludeSnapshots
@@ -544,6 +696,23 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		// query array param groupIds
 		if err := r.SetQueryParam("groupIds", joinedGroupIds...); err != nil {
 			return err
+		}
+	}
+
+	if o.K8sEnvAdmin != nil {
+
+		// query param k8sEnvAdmin
+		var qrK8sEnvAdmin bool
+
+		if o.K8sEnvAdmin != nil {
+			qrK8sEnvAdmin = *o.K8sEnvAdmin
+		}
+		qK8sEnvAdmin := swag.FormatBool(qrK8sEnvAdmin)
+		if qK8sEnvAdmin != "" {
+
+			if err := r.SetQueryParam("k8sEnvAdmin", qK8sEnvAdmin); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -699,6 +868,23 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
+	if o.UpdateInformation != nil {
+
+		// query param updateInformation
+		var qrUpdateInformation bool
+
+		if o.UpdateInformation != nil {
+			qrUpdateInformation = *o.UpdateInformation
+		}
+		qUpdateInformation := swag.FormatBool(qrUpdateInformation)
+		if qUpdateInformation != "" {
+
+			if err := r.SetQueryParam("updateInformation", qUpdateInformation); err != nil {
+				return err
+			}
+		}
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -722,6 +908,23 @@ func (o *EndpointListParams) bindParamAgentVersions(formats strfmt.Registry) []s
 	return agentVersionsIS
 }
 
+// bindParamEndpointList binds the parameter edgeGroupIds
+func (o *EndpointListParams) bindParamEdgeGroupIds(formats strfmt.Registry) []string {
+	edgeGroupIdsIR := o.EdgeGroupIds
+
+	var edgeGroupIdsIC []string
+	for _, edgeGroupIdsIIR := range edgeGroupIdsIR { // explode []int64
+
+		edgeGroupIdsIIV := swag.FormatInt64(edgeGroupIdsIIR) // int64 as string
+		edgeGroupIdsIC = append(edgeGroupIdsIC, edgeGroupIdsIIV)
+	}
+
+	// items.CollectionFormat: ""
+	edgeGroupIdsIS := swag.JoinByFormat(edgeGroupIdsIC, "")
+
+	return edgeGroupIdsIS
+}
+
 // bindParamEndpointList binds the parameter endpointIds
 func (o *EndpointListParams) bindParamEndpointIds(formats strfmt.Registry) []string {
 	endpointIdsIR := o.EndpointIds
@@ -737,6 +940,40 @@ func (o *EndpointListParams) bindParamEndpointIds(formats strfmt.Registry) []str
 	endpointIdsIS := swag.JoinByFormat(endpointIdsIC, "")
 
 	return endpointIdsIS
+}
+
+// bindParamEndpointList binds the parameter excludeEdgeGroupIds
+func (o *EndpointListParams) bindParamExcludeEdgeGroupIds(formats strfmt.Registry) []string {
+	excludeEdgeGroupIdsIR := o.ExcludeEdgeGroupIds
+
+	var excludeEdgeGroupIdsIC []string
+	for _, excludeEdgeGroupIdsIIR := range excludeEdgeGroupIdsIR { // explode []int64
+
+		excludeEdgeGroupIdsIIV := swag.FormatInt64(excludeEdgeGroupIdsIIR) // int64 as string
+		excludeEdgeGroupIdsIC = append(excludeEdgeGroupIdsIC, excludeEdgeGroupIdsIIV)
+	}
+
+	// items.CollectionFormat: ""
+	excludeEdgeGroupIdsIS := swag.JoinByFormat(excludeEdgeGroupIdsIC, "")
+
+	return excludeEdgeGroupIdsIS
+}
+
+// bindParamEndpointList binds the parameter excludeIds
+func (o *EndpointListParams) bindParamExcludeIds(formats strfmt.Registry) []string {
+	excludeIdsIR := o.ExcludeIds
+
+	var excludeIdsIC []string
+	for _, excludeIdsIIR := range excludeIdsIR { // explode []int64
+
+		excludeIdsIIV := swag.FormatInt64(excludeIdsIIR) // int64 as string
+		excludeIdsIC = append(excludeIdsIC, excludeIdsIIV)
+	}
+
+	// items.CollectionFormat: ""
+	excludeIdsIS := swag.JoinByFormat(excludeIdsIC, "")
+
+	return excludeIdsIS
 }
 
 // bindParamEndpointList binds the parameter groupIds
