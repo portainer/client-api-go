@@ -71,15 +71,17 @@ func (c *PortainerClient) CreateEdgeGroup(name string, environmentIds []int64) (
 //
 // Parameters:
 //   - id: The ID of the edge group to update
-//   - name: The name of the edge group, required
+//   - name: Optional. If provided, updates the name of the edge group. Use nil to keep existing name
 //   - environmentIds: Optional. If provided, updates the environments associated with the group. Use nil to keep existing environments
 //   - tagIds: Optional. If provided, updates the tags associated with the group. Use nil to keep existing tags
 //
 // Returns an error if the update fails.
-func (c *PortainerClient) UpdateEdgeGroup(id int64, name string, environmentIds *[]int64, tagIds *[]int64) error {
-	params := edge_groups.NewEdgeGroupUpdateParams().WithID(id).WithBody(&models.EdgegroupsEdgeGroupUpdatePayload{
-		Name: name,
-	})
+func (c *PortainerClient) UpdateEdgeGroup(id int64, name *string, environmentIds *[]int64, tagIds *[]int64) error {
+	params := edge_groups.NewEdgeGroupUpdateParams().WithID(id).WithBody(&models.EdgegroupsEdgeGroupUpdatePayload{})
+
+	if name != nil {
+		params.Body.Name = *name
+	}
 
 	if environmentIds != nil {
 		params.Body.Endpoints = *environmentIds
