@@ -92,7 +92,7 @@ type ClientService interface {
 /*
 	GetDebugLogStatus gets status of the global debug log
 
-	Checks if the global log level is is enabled
+	Checks if the global log level is enabled
 
 **Access policy**: administrator
 */

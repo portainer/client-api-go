@@ -72,6 +72,10 @@ type SettingsPublicSettingsResponse struct {
 	// Example: true
 	TeamSync bool `json:"TeamSync,omitempty"`
 
+	// The display name of the app
+	// Example: My Company
+	Whitelabel string `json:"Whitelabel,omitempty"`
+
 	// default registry
 	DefaultRegistry *SettingsPublicSettingsResponseDefaultRegistry `json:"defaultRegistry,omitempty"`
 

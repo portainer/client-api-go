@@ -92,6 +92,8 @@ type ClientService interface {
 
 	HelmRepoSearch(params *HelmRepoSearchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmRepoSearchOK, error)
 
+	HelmRollback(params *HelmRollbackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmRollbackOK, error)
+
 	HelmShow(params *HelmShowParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmShowOK, error)
 
 	HelmUserRepositoriesList(params *HelmUserRepositoriesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmUserRepositoriesListOK, error)
@@ -350,6 +352,49 @@ func (a *Client) HelmRepoSearch(params *HelmRepoSearchParams, authInfo runtime.C
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for HelmRepoSearch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	HelmRollback rollbacks a helm release
+
+	Rollback a helm release to a previous revision
+
+**Access policy**: authenticated
+*/
+func (a *Client) HelmRollback(params *HelmRollbackParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*HelmRollbackOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewHelmRollbackParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "HelmRollback",
+		Method:             "POST",
+		PathPattern:        "/endpoints/{id}/kubernetes/helm/{release}/rollback",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &HelmRollbackReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*HelmRollbackOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for HelmRollback: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

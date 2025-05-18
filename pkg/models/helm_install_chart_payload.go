@@ -17,6 +17,9 @@ import (
 // swagger:model helm.installChartPayload
 type HelmInstallChartPayload struct {
 
+	// atomic
+	Atomic bool `json:"atomic,omitempty"`
+
 	// chart
 	Chart string `json:"chart,omitempty"`
 
@@ -31,6 +34,9 @@ type HelmInstallChartPayload struct {
 
 	// values
 	Values string `json:"values,omitempty"`
+
+	// version
+	Version string `json:"version,omitempty"`
 }
 
 // Validate validates this helm install chart payload

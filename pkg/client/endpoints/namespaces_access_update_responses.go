@@ -63,7 +63,7 @@ func NewNamespacesAccessUpdateNoContent() *NamespacesAccessUpdateNoContent {
 /*
 NamespacesAccessUpdateNoContent describes a response with status code 204, with default header values.
 
-Success
+Success - Access permissions were successfully updated
 */
 type NamespacesAccessUpdateNoContent struct {
 }
@@ -119,7 +119,7 @@ func NewNamespacesAccessUpdateBadRequest() *NamespacesAccessUpdateBadRequest {
 /*
 NamespacesAccessUpdateBadRequest describes a response with status code 400, with default header values.
 
-Invalid request
+Invalid request payload, such as missing required fields or fields not meeting validation criteria.
 */
 type NamespacesAccessUpdateBadRequest struct {
 }
@@ -175,7 +175,7 @@ func NewNamespacesAccessUpdateForbidden() *NamespacesAccessUpdateForbidden {
 /*
 NamespacesAccessUpdateForbidden describes a response with status code 403, with default header values.
 
-Permission denied
+Permission denied - the user is authenticated but does not have the necessary permissions to access the requested resource or perform the specified operation. Check your user roles and permissions.
 */
 type NamespacesAccessUpdateForbidden struct {
 }
@@ -231,7 +231,7 @@ func NewNamespacesAccessUpdateNotFound() *NamespacesAccessUpdateNotFound {
 /*
 NamespacesAccessUpdateNotFound describes a response with status code 404, with default header values.
 
-Endpoint not found
+Unable to find an environment with the specified identifier.
 */
 type NamespacesAccessUpdateNotFound struct {
 }
@@ -287,7 +287,7 @@ func NewNamespacesAccessUpdateInternalServerError() *NamespacesAccessUpdateInter
 /*
 NamespacesAccessUpdateInternalServerError describes a response with status code 500, with default header values.
 
-Server error
+Server error occurred while attempting to update namespace access permissions.
 */
 type NamespacesAccessUpdateInternalServerError struct {
 }

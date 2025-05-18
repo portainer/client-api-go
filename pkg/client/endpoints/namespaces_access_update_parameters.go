@@ -66,19 +66,19 @@ type NamespacesAccessUpdateParams struct {
 
 	/* Body.
 
-	   details
+	   Payload containing lists of users and teams to add or remove access for
 	*/
 	Body *models.EndpointsResourcePoolUpdatePayload
 
 	/* ID.
 
-	   endpoint id
+	   Environment identifier
 	*/
 	ID int64
 
 	/* Rpn.
 
-	   namespace
+	   Namespace identifier
 	*/
 	Rpn int64
 

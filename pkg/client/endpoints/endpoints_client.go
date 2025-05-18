@@ -1127,11 +1127,11 @@ func (a *Client) EndpointRegistryAccess(params *EndpointRegistryAccessParams, au
 }
 
 /*
-	NamespacesAccessUpdate updates namespace access
+	NamespacesAccessUpdate updates namespace access for a given namespace
 
-	update the access on the namespace in the current environment
+	Update the access permissions on a namespace in the given environment. This endpoint allows adding or removing users and teams that can access the specified namespace. Please note that users or teams must be added to the environment before they can be added to the namespace.
 
-**Access policy**: restricted
+**Access policy**: Restricted. User must be an administrator or have appropriate permissions to modify namespace access.
 */
 func (a *Client) NamespacesAccessUpdate(params *NamespacesAccessUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NamespacesAccessUpdateNoContent, error) {
 	// TODO: Validate the params before sending

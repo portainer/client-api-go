@@ -1235,6 +1235,82 @@ definitions:
         example: 1.0.0
         type: string
     type: object
+  edgeupdateschedules.inspectResponse:
+    properties:
+      agentImage:
+        description: Name of the agent image, does not include the registry
+        example: portainer/agent:latest
+        type: string
+      created:
+        description: Created timestamp
+        example: 1564897200
+        type: integer
+      createdBy:
+        description: Created by user id
+        example: 1
+        type: integer
+      edgeGroupIds:
+        description: |-
+          EdgeGroups to be updated
+
+          There is some duplication here with EdgeStack.EdgeGroups
+          EdgeStack.EdgeGroup should have only one group which a temporary group, used only for the update
+          This field is saved only to show which groups the user chose when creating the schedule
+        example:
+        - 1
+        items:
+          description: EdgeGroup Identifier
+          example: 1
+          type: integer
+        type: array
+      edgeStackId:
+        description: EdgeStack Identifier
+        example: 1
+        type: integer
+      environmentIds:
+        items:
+          description: Environment(Endpoint) identifier. Reference the environment(endpoint)
+            that will be used for deployment
+          type: integer
+        type: array
+      environmentsPreviousVersions:
+        additionalProperties:
+          type: string
+        description: Deprecated - use Environment.Agent.PreviousVersion instead
+        type: object
+      id:
+        description: EdgeUpdateSchedule Identifier
+        example: 1
+        type: integer
+      isActive:
+        type: boolean
+      name:
+        description: Name of the schedule
+        example: Update Schedule
+        type: string
+      registryId:
+        description: ID of registry
+        example: 1
+        type: integer
+      scheduledTime:
+        type: string
+      type:
+        description: Type of the update (1 - update, 2 - rollback)
+        enum:
+        - 1
+        - 2
+        example: 1
+        type: integer
+      updaterImage:
+        description: Name of the updater image, does not include the registry but
+          must include a tag
+        example: portainer/portainer-updater:latest
+        type: string
+      version:
+        description: Deprecated
+        example: 1.0.0
+        type: string
+    type: object
   edgeupdateschedules.updatePayload:
     properties:
       agentImage:
@@ -1993,6 +2069,8 @@ definitions:
     type: object
   helm.installChartPayload:
     properties:
+      atomic:
+        type: boolean
       chart:
         type: string
       name:
@@ -2002,6 +2080,8 @@ definitions:
       repo:
         type: string
       values:
+        type: string
+      version:
         type: string
     type: object
   images.ImageResponse:
@@ -5293,6 +5373,19 @@ definitions:
           $ref: '#/definitions/portainer.KubernetesSnapshot'
         type: array
     type: object
+  portaineree.LDAPKerberosSettings:
+    properties:
+      Configuration:
+        type: string
+      Password:
+        type: string
+      Realm:
+        type: string
+      Service:
+        type: string
+      Username:
+        type: string
+    type: object
   portaineree.LDAPSettings:
     properties:
       AdminAutoPopulate:
@@ -5326,6 +5419,9 @@ definitions:
         items:
           $ref: '#/definitions/portainer.LDAPGroupSearchSettings'
         type: array
+      Kerberos:
+        $ref: '#/definitions/portaineree.LDAPKerberosSettings'
+        description: Kerberos settings
       Password:
         description: Password of the account that will be used to search users
         example: readonly-password
@@ -6744,6 +6840,10 @@ definitions:
         description: Whether team sync is enabled
         example: true
         type: boolean
+      Whitelabel:
+        description: The display name of the app
+        example: My Company
+        type: string
       defaultRegistry:
         properties:
           Hide:
@@ -11693,7 +11793,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.29.2
+  version: 2.30.0
 paths:
   /auth:
     post:
@@ -14249,6 +14349,18 @@ paths:
         in: query
         name: tail
         type: integer
+      - description: Container Id
+        in: query
+        name: container_id
+        type: string
+      - description: Start time to request for the logs
+        in: query
+        name: since
+        type: string
+      - description: End time to request for the logs
+        in: query
+        name: until
+        type: string
       responses:
         "204":
           description: No Content
@@ -14674,7 +14786,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/edgeupdateschedules.decoratedUpdateSchedule'
+            $ref: '#/definitions/edgeupdateschedules.inspectResponse'
         "500":
           description: Internal Server Error
       security:
@@ -15936,6 +16048,85 @@ paths:
       summary: Get a historical list of releases
       tags:
       - helm
+  /endpoints/{id}/kubernetes/helm/{release}/rollback:
+    post:
+      description: |-
+        Rollback a helm release to a previous revision
+        **Access policy**: authenticated
+      operationId: HelmRollback
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Helm release name
+        in: path
+        name: release
+        required: true
+        type: string
+      - description: specify an optional namespace
+        in: query
+        name: namespace
+        type: string
+      - description: specify the revision to rollback to (defaults to previous revision
+          if not specified)
+        in: query
+        name: revision
+        type: integer
+      - description: 'wait for resources to be ready (default: false)'
+        in: query
+        name: wait
+        type: boolean
+      - description: 'wait for jobs to complete before marking the release as successful
+          (default: false)'
+        in: query
+        name: waitForJobs
+        type: boolean
+      - description: 'performs pods restart for the resource if applicable (default:
+          true)'
+        in: query
+        name: recreate
+        type: boolean
+      - description: 'force resource update through delete/recreate if needed (default:
+          false)'
+        in: query
+        name: force
+        type: boolean
+      - description: 'time to wait for any individual Kubernetes operation in seconds
+          (default: 300)'
+        in: query
+        name: timeout
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/release.Release'
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier
+            or release name.
+        "500":
+          description: Server error occurred while attempting to rollback the release.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Rollback a helm release
+      tags:
+      - helm
   /endpoints/{id}/mtls_certificate:
     get:
       description: |-
@@ -16003,21 +16194,22 @@ paths:
       consumes:
       - application/json
       description: |-
-        update the access on the namespace in the current environment
-        **Access policy**: restricted
+        Update the access permissions on a namespace in the given environment. This endpoint allows adding or removing users and teams that can access the specified namespace. Please note that users or teams must be added to the environment before they can be added to the namespace.
+        **Access policy**: Restricted. User must be an administrator or have appropriate permissions to modify namespace access.
       operationId: namespacesAccessUpdate
       parameters:
-      - description: endpoint id
+      - description: Environment identifier
         in: path
         name: id
         required: true
         type: integer
-      - description: namespace
+      - description: Namespace identifier
         in: path
         name: rpn
         required: true
         type: integer
-      - description: details
+      - description: Payload containing lists of users and teams to add or remove
+          access for
         in: body
         name: body
         required: true
@@ -16025,19 +16217,23 @@ paths:
           $ref: '#/definitions/endpoints.resourcePoolUpdatePayload'
       responses:
         "204":
-          description: Success
+          description: Success - Access permissions were successfully updated
         "400":
-          description: Invalid request
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
         "403":
-          description: Permission denied
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
         "404":
-          description: Endpoint not found
+          description: Unable to find an environment with the specified identifier.
         "500":
-          description: Server error
+          description: Server error occurred while attempting to update namespace
+            access permissions.
       security:
       - ApiKeyAuth: []
-      - jwt: []
-      summary: update namespace access
+        jwt: []
+      summary: Update namespace access for a given namespace
       tags:
       - endpoints
   /endpoints/{id}/registries:
@@ -21512,7 +21708,7 @@ paths:
   /support/debug_log:
     get:
       description: |-
-        Checks if the global log level is is enabled
+        Checks if the global log level is enabled
         **Access policy**: administrator
       operationId: GetDebugLogStatus
       produces:

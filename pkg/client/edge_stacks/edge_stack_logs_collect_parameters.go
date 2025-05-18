@@ -62,6 +62,12 @@ EdgeStackLogsCollectParams contains all the parameters to send to the API endpoi
 */
 type EdgeStackLogsCollectParams struct {
 
+	/* ContainerID.
+
+	   Container Id
+	*/
+	ContainerID *string
+
 	/* EndpointID.
 
 	   Environment Id
@@ -74,11 +80,23 @@ type EdgeStackLogsCollectParams struct {
 	*/
 	ID int64
 
+	/* Since.
+
+	   Start time to request for the logs
+	*/
+	Since *string
+
 	/* Tail.
 
 	   Number of lines to request for the logs
 	*/
 	Tail *int64
+
+	/* Until.
+
+	   End time to request for the logs
+	*/
+	Until *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -133,6 +151,17 @@ func (o *EdgeStackLogsCollectParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithContainerID adds the containerID to the edge stack logs collect params
+func (o *EdgeStackLogsCollectParams) WithContainerID(containerID *string) *EdgeStackLogsCollectParams {
+	o.SetContainerID(containerID)
+	return o
+}
+
+// SetContainerID adds the containerId to the edge stack logs collect params
+func (o *EdgeStackLogsCollectParams) SetContainerID(containerID *string) {
+	o.ContainerID = containerID
+}
+
 // WithEndpointID adds the endpointID to the edge stack logs collect params
 func (o *EdgeStackLogsCollectParams) WithEndpointID(endpointID int64) *EdgeStackLogsCollectParams {
 	o.SetEndpointID(endpointID)
@@ -155,6 +184,17 @@ func (o *EdgeStackLogsCollectParams) SetID(id int64) {
 	o.ID = id
 }
 
+// WithSince adds the since to the edge stack logs collect params
+func (o *EdgeStackLogsCollectParams) WithSince(since *string) *EdgeStackLogsCollectParams {
+	o.SetSince(since)
+	return o
+}
+
+// SetSince adds the since to the edge stack logs collect params
+func (o *EdgeStackLogsCollectParams) SetSince(since *string) {
+	o.Since = since
+}
+
 // WithTail adds the tail to the edge stack logs collect params
 func (o *EdgeStackLogsCollectParams) WithTail(tail *int64) *EdgeStackLogsCollectParams {
 	o.SetTail(tail)
@@ -166,6 +206,17 @@ func (o *EdgeStackLogsCollectParams) SetTail(tail *int64) {
 	o.Tail = tail
 }
 
+// WithUntil adds the until to the edge stack logs collect params
+func (o *EdgeStackLogsCollectParams) WithUntil(until *string) *EdgeStackLogsCollectParams {
+	o.SetUntil(until)
+	return o
+}
+
+// SetUntil adds the until to the edge stack logs collect params
+func (o *EdgeStackLogsCollectParams) SetUntil(until *string) {
+	o.Until = until
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *EdgeStackLogsCollectParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -173,6 +224,23 @@ func (o *EdgeStackLogsCollectParams) WriteToRequest(r runtime.ClientRequest, reg
 		return err
 	}
 	var res []error
+
+	if o.ContainerID != nil {
+
+		// query param container_id
+		var qrContainerID string
+
+		if o.ContainerID != nil {
+			qrContainerID = *o.ContainerID
+		}
+		qContainerID := qrContainerID
+		if qContainerID != "" {
+
+			if err := r.SetQueryParam("container_id", qContainerID); err != nil {
+				return err
+			}
+		}
+	}
 
 	// path param endpoint_id
 	if err := r.SetPathParam("endpoint_id", swag.FormatInt64(o.EndpointID)); err != nil {
@@ -182,6 +250,23 @@ func (o *EdgeStackLogsCollectParams) WriteToRequest(r runtime.ClientRequest, reg
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {
 		return err
+	}
+
+	if o.Since != nil {
+
+		// query param since
+		var qrSince string
+
+		if o.Since != nil {
+			qrSince = *o.Since
+		}
+		qSince := qrSince
+		if qSince != "" {
+
+			if err := r.SetQueryParam("since", qSince); err != nil {
+				return err
+			}
+		}
 	}
 
 	if o.Tail != nil {
@@ -196,6 +281,23 @@ func (o *EdgeStackLogsCollectParams) WriteToRequest(r runtime.ClientRequest, reg
 		if qTail != "" {
 
 			if err := r.SetQueryParam("tail", qTail); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Until != nil {
+
+		// query param until
+		var qrUntil string
+
+		if o.Until != nil {
+			qrUntil = *o.Until
+		}
+		qUntil := qrUntil
+		if qUntil != "" {
+
+			if err := r.SetQueryParam("until", qUntil); err != nil {
 				return err
 			}
 		}

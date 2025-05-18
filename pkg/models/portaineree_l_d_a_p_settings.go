@@ -41,6 +41,9 @@ type PortainereeLDAPSettings struct {
 	// group search settings
 	GroupSearchSettings []*PortainerLDAPGroupSearchSettings `json:"GroupSearchSettings"`
 
+	// Kerberos settings
+	Kerberos *PortainereeLDAPKerberosSettings `json:"Kerberos,omitempty"`
+
 	// Password of the account that will be used to search users
 	// Example: readonly-password
 	Password string `json:"Password,omitempty"`
@@ -79,6 +82,10 @@ func (m *PortainereeLDAPSettings) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateGroupSearchSettings(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKerberos(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -148,6 +155,25 @@ func (m *PortainereeLDAPSettings) validateGroupSearchSettings(formats strfmt.Reg
 	return nil
 }
 
+func (m *PortainereeLDAPSettings) validateKerberos(formats strfmt.Registry) error {
+	if swag.IsZero(m.Kerberos) { // not required
+		return nil
+	}
+
+	if m.Kerberos != nil {
+		if err := m.Kerberos.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Kerberos")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Kerberos")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *PortainereeLDAPSettings) validateSearchSettings(formats strfmt.Registry) error {
 	if swag.IsZero(m.SearchSettings) { // not required
 		return nil
@@ -202,6 +228,10 @@ func (m *PortainereeLDAPSettings) ContextValidate(ctx context.Context, formats s
 	}
 
 	if err := m.contextValidateGroupSearchSettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateKerberos(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -264,6 +294,27 @@ func (m *PortainereeLDAPSettings) contextValidateGroupSearchSettings(ctx context
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *PortainereeLDAPSettings) contextValidateKerberos(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Kerberos != nil {
+
+		if swag.IsZero(m.Kerberos) { // not required
+			return nil
+		}
+
+		if err := m.Kerberos.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Kerberos")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Kerberos")
+			}
+			return err
+		}
 	}
 
 	return nil

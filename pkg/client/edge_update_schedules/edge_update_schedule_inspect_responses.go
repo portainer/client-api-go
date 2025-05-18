@@ -52,7 +52,7 @@ EdgeUpdateScheduleInspectOK describes a response with status code 200, with defa
 OK
 */
 type EdgeUpdateScheduleInspectOK struct {
-	Payload *models.EdgeupdateschedulesDecoratedUpdateSchedule
+	Payload *models.EdgeupdateschedulesInspectResponse
 }
 
 // IsSuccess returns true when this edge update schedule inspect o k response has a 2xx status code
@@ -95,13 +95,13 @@ func (o *EdgeUpdateScheduleInspectOK) String() string {
 	return fmt.Sprintf("[GET /edge_update_schedules/{id}][%d] edgeUpdateScheduleInspectOK %s", 200, payload)
 }
 
-func (o *EdgeUpdateScheduleInspectOK) GetPayload() *models.EdgeupdateschedulesDecoratedUpdateSchedule {
+func (o *EdgeUpdateScheduleInspectOK) GetPayload() *models.EdgeupdateschedulesInspectResponse {
 	return o.Payload
 }
 
 func (o *EdgeUpdateScheduleInspectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.EdgeupdateschedulesDecoratedUpdateSchedule)
+	o.Payload = new(models.EdgeupdateschedulesInspectResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

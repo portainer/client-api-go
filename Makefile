@@ -1,4 +1,4 @@
-VERSION := 2.27.1
+VERSION := 2.30.0
 
 .PHONY: help generate-client
 

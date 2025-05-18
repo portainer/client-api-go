@@ -16,10 +16,10 @@ To install a specific version of the SDK (to target a specific Portainer server 
 go get -u github.com/portainer/client-api-go/v2@VERSION
 ```
 
-For example, to install version 2.27.1:
+For example, to install version 2.30.0:
 
 ```sh
-go get -u github.com/portainer/client-api-go/v2@v2.27.1
+go get -u github.com/portainer/client-api-go/v2@v2.30.0
 ```
 
 Available versions can be found at: https://github.com/portainer/client-api-go/tags
@@ -107,5 +107,5 @@ go install github.com/go-swagger/go-swagger/cmd/swagger@latest
 2. Generate the client (adjust the VERSION parameter as needed):
 
 ```sh
-make generate-client VERSION=2.27.1
+make generate-client VERSION=2.30.0
 ```
