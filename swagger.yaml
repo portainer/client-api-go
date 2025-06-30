@@ -2208,6 +2208,15 @@ definitions:
       Kind:
         type: string
     type: object
+  kubernetes.CustomResourceMetadata:
+    properties:
+      apiVersion:
+        type: string
+      kind:
+        type: string
+      plural:
+        type: string
+    type: object
   kubernetes.IngressRule:
     properties:
       Host:
@@ -2236,6 +2245,8 @@ definitions:
         type: array
       CreationDate:
         type: string
+      CustomResourceMetadata:
+        $ref: '#/definitions/kubernetes.CustomResourceMetadata'
       DeploymentType:
         type: string
       HorizontalPodAutoscaler:
@@ -2886,7 +2897,25 @@ definitions:
     type: object
   kubernetes.Pod:
     properties:
+      ContainerName:
+        type: string
+      CreationDate:
+        type: string
+      Image:
+        type: string
+      ImagePullPolicy:
+        type: string
+      Name:
+        type: string
+      NodeName:
+        type: string
+      PodIP:
+        type: string
+      Resource:
+        $ref: '#/definitions/kubernetes.K8sApplicationResource'
       Status:
+        type: string
+      Uid:
         type: string
     type: object
   kubernetes.PublishedPort:
@@ -6740,6 +6769,9 @@ definitions:
     type: object
   release.Release:
     properties:
+      appVersion:
+        description: AppVersion is the app version of the release.
+        type: string
       chart:
         $ref: '#/definitions/release.Chart'
         description: Chart is the chart that was released.
@@ -11911,7 +11943,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.31.0
+  version: 2.31.2
 paths:
   /auth:
     post:
@@ -17284,6 +17316,73 @@ paths:
       summary: Delete Cron Jobs
       tags:
       - kubernetes
+  /kubernetes/{id}/customresource:
+    get:
+      description: |-
+        Get a list of kubernetes Custom Resources that the user has access to.
+        **Access policy**: Authenticated user.
+      operationId: getKubernetesCustomResource
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The namespace name to get details for
+        in: path
+        name: namespace
+        required: true
+        type: string
+      - description: The name of the custom resource, e.g. 'pg-cluster'
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: The API version of the custom resource, e.g. 'postgresql.cnpg.io/v1'
+        in: path
+        name: apiVersion
+        required: true
+        type: string
+      - description: The plural name of the custom resource, e.g. 'clusters'
+        in: path
+        name: plural
+        required: true
+        type: string
+      - description: The format of the custom resource, e.g. 'yaml' or 'json'
+        in: query
+        name: format
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/unstructured.Unstructured'
+            type: array
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve the custom
+            resource.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a list of kubernetes Custom Resources
+      tags:
+      - kubernetes
   /kubernetes/{id}/dashboard:
     get:
       consumes:
@@ -18314,6 +18413,62 @@ paths:
       - ApiKeyAuth: []
         jwt: []
       summary: Restart a Kubernetes application
+      tags:
+      - kubernetes
+  /kubernetes/{id}/namespaces/{namespace}/applications/{name}:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Get an application by name across all namespaces in the cluster.
+        **Access policy**: authenticated
+      operationId: GetAllKubernetesApplication
+      parameters:
+      - description: Environment(Endpoint) identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      - description: Application name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: The resource type to get the application for
+        in: query
+        name: resourceType
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/kubernetes.K8sApplication'
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve the application.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get an application by name across all namespaces in the cluster.
       tags:
       - kubernetes
   /kubernetes/{id}/namespaces/{namespace}/configmaps/{configmap}:

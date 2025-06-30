@@ -34,6 +34,9 @@ type KubernetesK8sApplication struct {
 	// creation date
 	CreationDate string `json:"CreationDate,omitempty"`
 
+	// custom resource metadata
+	CustomResourceMetadata *KubernetesCustomResourceMetadata `json:"CustomResourceMetadata,omitempty"`
+
 	// deployment type
 	DeploymentType string `json:"DeploymentType,omitempty"`
 
@@ -118,6 +121,10 @@ func (m *KubernetesK8sApplication) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCustomResourceMetadata(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateHorizontalPodAutoscaler(formats); err != nil {
 		res = append(res, err)
 	}
@@ -169,6 +176,25 @@ func (m *KubernetesK8sApplication) validateConfigurations(formats strfmt.Registr
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *KubernetesK8sApplication) validateCustomResourceMetadata(formats strfmt.Registry) error {
+	if swag.IsZero(m.CustomResourceMetadata) { // not required
+		return nil
+	}
+
+	if m.CustomResourceMetadata != nil {
+		if err := m.CustomResourceMetadata.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("CustomResourceMetadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("CustomResourceMetadata")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -317,6 +343,10 @@ func (m *KubernetesK8sApplication) ContextValidate(ctx context.Context, formats 
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCustomResourceMetadata(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateHorizontalPodAutoscaler(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -367,6 +397,27 @@ func (m *KubernetesK8sApplication) contextValidateConfigurations(ctx context.Con
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *KubernetesK8sApplication) contextValidateCustomResourceMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CustomResourceMetadata != nil {
+
+		if swag.IsZero(m.CustomResourceMetadata) { // not required
+			return nil
+		}
+
+		if err := m.CustomResourceMetadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("CustomResourceMetadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("CustomResourceMetadata")
+			}
+			return err
+		}
 	}
 
 	return nil
