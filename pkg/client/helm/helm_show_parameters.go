@@ -79,6 +79,12 @@ type HelmShowParams struct {
 	*/
 	Repo string
 
+	/* Version.
+
+	   Chart version
+	*/
+	Version string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -165,6 +171,17 @@ func (o *HelmShowParams) SetRepo(repo string) {
 	o.Repo = repo
 }
 
+// WithVersion adds the version to the helm show params
+func (o *HelmShowParams) WithVersion(version string) *HelmShowParams {
+	o.SetVersion(version)
+	return o
+}
+
+// SetVersion adds the version to the helm show params
+func (o *HelmShowParams) SetVersion(version string) {
+	o.Version = version
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *HelmShowParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -194,6 +211,16 @@ func (o *HelmShowParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 	if qRepo != "" {
 
 		if err := r.SetQueryParam("repo", qRepo); err != nil {
+			return err
+		}
+	}
+
+	// query param version
+	qrVersion := o.Version
+	qVersion := qrVersion
+	if qVersion != "" {
+
+		if err := r.SetQueryParam("version", qVersion); err != nil {
 			return err
 		}
 	}

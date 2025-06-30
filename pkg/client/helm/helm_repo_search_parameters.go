@@ -61,11 +61,23 @@ HelmRepoSearchParams contains all the parameters to send to the API endpoint
 */
 type HelmRepoSearchParams struct {
 
+	/* Chart.
+
+	   Helm chart name
+	*/
+	Chart *string
+
 	/* Repo.
 
 	   Helm repository URL
 	*/
 	Repo string
+
+	/* UseCache.
+
+	   If true will use cache to search
+	*/
+	UseCache *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -120,6 +132,17 @@ func (o *HelmRepoSearchParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithChart adds the chart to the helm repo search params
+func (o *HelmRepoSearchParams) WithChart(chart *string) *HelmRepoSearchParams {
+	o.SetChart(chart)
+	return o
+}
+
+// SetChart adds the chart to the helm repo search params
+func (o *HelmRepoSearchParams) SetChart(chart *string) {
+	o.Chart = chart
+}
+
 // WithRepo adds the repo to the helm repo search params
 func (o *HelmRepoSearchParams) WithRepo(repo string) *HelmRepoSearchParams {
 	o.SetRepo(repo)
@@ -131,6 +154,17 @@ func (o *HelmRepoSearchParams) SetRepo(repo string) {
 	o.Repo = repo
 }
 
+// WithUseCache adds the useCache to the helm repo search params
+func (o *HelmRepoSearchParams) WithUseCache(useCache *string) *HelmRepoSearchParams {
+	o.SetUseCache(useCache)
+	return o
+}
+
+// SetUseCache adds the useCache to the helm repo search params
+func (o *HelmRepoSearchParams) SetUseCache(useCache *string) {
+	o.UseCache = useCache
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *HelmRepoSearchParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -139,6 +173,23 @@ func (o *HelmRepoSearchParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	}
 	var res []error
 
+	if o.Chart != nil {
+
+		// query param chart
+		var qrChart string
+
+		if o.Chart != nil {
+			qrChart = *o.Chart
+		}
+		qChart := qrChart
+		if qChart != "" {
+
+			if err := r.SetQueryParam("chart", qChart); err != nil {
+				return err
+			}
+		}
+	}
+
 	// query param repo
 	qrRepo := o.Repo
 	qRepo := qrRepo
@@ -146,6 +197,23 @@ func (o *HelmRepoSearchParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 
 		if err := r.SetQueryParam("repo", qRepo); err != nil {
 			return err
+		}
+	}
+
+	if o.UseCache != nil {
+
+		// query param useCache
+		var qrUseCache string
+
+		if o.UseCache != nil {
+			qrUseCache = *o.UseCache
+		}
+		qUseCache := qrUseCache
+		if qUseCache != "" {
+
+			if err := r.SetQueryParam("useCache", qUseCache); err != nil {
+				return err
+			}
 		}
 	}
 

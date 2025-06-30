@@ -202,7 +202,11 @@ type ClientService interface {
 
 	GetAllKubernetesApplicationsCount(params *GetAllKubernetesApplicationsCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesApplicationsCountOK, error)
 
+	GetAllKubernetesEvents(params *GetAllKubernetesEventsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesEventsOK, error)
+
 	GetAllKubernetesVolumesCount(params *GetAllKubernetesVolumesCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesVolumesCountOK, error)
+
+	GetKubernetesEventsForNamespace(params *GetKubernetesEventsForNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesEventsForNamespaceOK, error)
 
 	GetKubernetesPodSecurityRule(params *GetKubernetesPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesPodSecurityRuleOK, error)
 
@@ -2837,6 +2841,49 @@ func (a *Client) GetAllKubernetesApplicationsCount(params *GetAllKubernetesAppli
 }
 
 /*
+	GetAllKubernetesEvents gets kubernetes events
+
+	Get events by query param resourceId
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetAllKubernetesEvents(params *GetAllKubernetesEventsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesEventsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllKubernetesEventsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getAllKubernetesEvents",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/events",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetAllKubernetesEventsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllKubernetesEventsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAllKubernetesEvents: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	GetAllKubernetesVolumesCount gets the total number of kubernetes volumes within the given portainer environment
 
 	Get the total number of kubernetes volumes within the given environment (Endpoint). The total count depends on the user's role and permissions. The Endpoint ID must be a valid Portainer environment identifier.
@@ -2876,6 +2923,49 @@ func (a *Client) GetAllKubernetesVolumesCount(params *GetAllKubernetesVolumesCou
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getAllKubernetesVolumesCount: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesEventsForNamespace gets kubernetes events for namespace
+
+	Get events by optional query param resourceId for a given namespace.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetKubernetesEventsForNamespace(params *GetKubernetesEventsForNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesEventsForNamespaceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetKubernetesEventsForNamespaceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesEventsForNamespace",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/namespaces/{namespace}/events",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesEventsForNamespaceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetKubernetesEventsForNamespaceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesEventsForNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

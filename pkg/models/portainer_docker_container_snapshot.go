@@ -25,6 +25,9 @@ type PortainerDockerContainerSnapshot struct {
 	// Id
 	ID string `json:"Id,omitempty"`
 
+	// image manifest descriptor
+	ImageManifestDescriptor *V1Descriptor `json:"ImageManifestDescriptor,omitempty"`
+
 	// command
 	Command string `json:"command,omitempty"`
 
@@ -44,16 +47,16 @@ type PortainerDockerContainerSnapshot struct {
 	Labels map[string]string `json:"labels,omitempty"`
 
 	// mounts
-	Mounts []*TypesMountPoint `json:"mounts"`
+	Mounts []*ContainerMountPoint `json:"mounts"`
 
 	// names
 	Names []string `json:"names"`
 
 	// network settings
-	NetworkSettings *TypesSummaryNetworkSettings `json:"networkSettings,omitempty"`
+	NetworkSettings *ContainerNetworkSettingsSummary `json:"networkSettings,omitempty"`
 
 	// ports
-	Ports []*TypesPort `json:"ports"`
+	Ports []*ContainerPort `json:"ports"`
 
 	// size root fs
 	SizeRootFs int64 `json:"sizeRootFs,omitempty"`
@@ -71,6 +74,10 @@ type PortainerDockerContainerSnapshot struct {
 // Validate validates this portainer docker container snapshot
 func (m *PortainerDockerContainerSnapshot) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateImageManifestDescriptor(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateHostConfig(formats); err != nil {
 		res = append(res, err)
@@ -91,6 +98,25 @@ func (m *PortainerDockerContainerSnapshot) Validate(formats strfmt.Registry) err
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PortainerDockerContainerSnapshot) validateImageManifestDescriptor(formats strfmt.Registry) error {
+	if swag.IsZero(m.ImageManifestDescriptor) { // not required
+		return nil
+	}
+
+	if m.ImageManifestDescriptor != nil {
+		if err := m.ImageManifestDescriptor.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ImageManifestDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ImageManifestDescriptor")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -188,6 +214,10 @@ func (m *PortainerDockerContainerSnapshot) validatePorts(formats strfmt.Registry
 func (m *PortainerDockerContainerSnapshot) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateImageManifestDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateHostConfig(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -207,6 +237,27 @@ func (m *PortainerDockerContainerSnapshot) ContextValidate(ctx context.Context, 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PortainerDockerContainerSnapshot) contextValidateImageManifestDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ImageManifestDescriptor != nil {
+
+		if swag.IsZero(m.ImageManifestDescriptor) { // not required
+			return nil
+		}
+
+		if err := m.ImageManifestDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ImageManifestDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ImageManifestDescriptor")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
