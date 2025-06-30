@@ -47,6 +47,9 @@ type EdgestacksStackGitUpdatePayload struct {
 	// pre pull image
 	PrePullImage bool `json:"prePullImage,omitempty"`
 
+	// re pull image
+	RePullImage bool `json:"rePullImage,omitempty"`
+
 	// ref name
 	RefName string `json:"refName,omitempty"`
 

@@ -40,6 +40,12 @@ type NetworkEndpointSettings struct {
 	// global IPv6 prefix len
 	GlobalIPV6PrefixLen int64 `json:"globalIPv6PrefixLen,omitempty"`
 
+	// GwPriority determines which endpoint will provide the default gateway
+	// for the container. The endpoint with the highest priority will be used.
+	// If multiple endpoints have the same priority, they are lexicographically
+	// sorted based on their network name, and the one that sorts first is picked.
+	GwPriority int64 `json:"gwPriority,omitempty"`
+
 	// ipaddress
 	Ipaddress string `json:"ipaddress,omitempty"`
 
