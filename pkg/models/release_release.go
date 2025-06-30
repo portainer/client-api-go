@@ -19,6 +19,9 @@ import (
 // swagger:model release.Release
 type ReleaseRelease struct {
 
+	// AppVersion is the app version of the release.
+	AppVersion string `json:"appVersion,omitempty"`
+
 	// Chart is the chart that was released.
 	Chart *ReleaseChart `json:"chart,omitempty"`
 

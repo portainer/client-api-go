@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -17,17 +18,102 @@ import (
 // swagger:model kubernetes.Pod
 type KubernetesPod struct {
 
+	// container name
+	ContainerName string `json:"ContainerName,omitempty"`
+
+	// creation date
+	CreationDate string `json:"CreationDate,omitempty"`
+
+	// image
+	Image string `json:"Image,omitempty"`
+
+	// image pull policy
+	ImagePullPolicy string `json:"ImagePullPolicy,omitempty"`
+
+	// name
+	Name string `json:"Name,omitempty"`
+
+	// node name
+	NodeName string `json:"NodeName,omitempty"`
+
+	// pod IP
+	PodIP string `json:"PodIP,omitempty"`
+
+	// resource
+	Resource *KubernetesK8sApplicationResource `json:"Resource,omitempty"`
+
 	// status
 	Status string `json:"Status,omitempty"`
+
+	// Uid
+	UID string `json:"Uid,omitempty"`
 }
 
 // Validate validates this kubernetes pod
 func (m *KubernetesPod) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateResource(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this kubernetes pod based on context it is used
+func (m *KubernetesPod) validateResource(formats strfmt.Registry) error {
+	if swag.IsZero(m.Resource) { // not required
+		return nil
+	}
+
+	if m.Resource != nil {
+		if err := m.Resource.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Resource")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Resource")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this kubernetes pod based on the context it is used
 func (m *KubernetesPod) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateResource(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *KubernetesPod) contextValidateResource(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Resource != nil {
+
+		if swag.IsZero(m.Resource) { // not required
+			return nil
+		}
+
+		if err := m.Resource.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("Resource")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Resource")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
