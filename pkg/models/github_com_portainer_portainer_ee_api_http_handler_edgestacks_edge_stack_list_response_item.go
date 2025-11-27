@@ -63,6 +63,7 @@ type GithubComPortainerPortainerEeAPIHTTPHandlerEdgestacksEdgeStackListResponseI
 	// project path
 	ProjectPath string `json:"ProjectPath,omitempty"`
 
+	// Deprecated(2.36): keep it for backward compatibility. To remove in future versions (2.44+)
 	// Re-Pull Image
 	RePullImage bool `json:"RePullImage,omitempty"`
 
@@ -82,6 +83,14 @@ type GithubComPortainerPortainerEeAPIHTTPHandlerEdgestacksEdgeStackListResponseI
 	// Whether the edge stack always clones the git repository for relative path
 	// Example: false
 	AlwaysCloneGitRepoForRelativePath bool `json:"alwaysCloneGitRepoForRelativePath,omitempty"`
+
+	// The username which created this stack
+	// Example: admin
+	CreatedBy string `json:"createdBy,omitempty"`
+
+	// The username id which created this stack
+	// Example: 1
+	CreatedByUserID string `json:"createdByUserId,omitempty"`
 
 	// Options to control the Deployer behaviour
 	DeployerOptions struct {

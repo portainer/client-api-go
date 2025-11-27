@@ -43,7 +43,8 @@ type EdgestacksStackGitUpdatePayload struct {
 	// pre pull image
 	PrePullImage bool `json:"prePullImage,omitempty"`
 
-	// re pull image
+	// Deprecated(2.36): to be removed in future versions (2.44+)
+	// Use RepullImageAndRedeploy instead
 	RePullImage bool `json:"rePullImage,omitempty"`
 
 	// ref name
@@ -51,6 +52,9 @@ type EdgestacksStackGitUpdatePayload struct {
 
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
+
+	// RepullImageAndRedeploy indicates whether the edge stack is manually forced to redeploy
+	RepullImageAndRedeploy bool `json:"repullImageAndRedeploy,omitempty"`
 
 	// retry deploy
 	RetryDeploy bool `json:"retryDeploy,omitempty"`
@@ -64,8 +68,8 @@ type EdgestacksStackGitUpdatePayload struct {
 	} `json:"staggerConfig,omitempty"`
 
 	// Update the stack file content from the git repository
-	// If this is set to true, it indicates that the stack is being redeployed,
-	// if it is false, it indicates that the stack is being updated
+	// If this is set to true, it indicates that the stack is being redeployed (Pull and update stack),
+	// if it is false, it indicates that the stack is being updated (Update settings)
 	UpdateVersion bool `json:"updateVersion,omitempty"`
 }
 

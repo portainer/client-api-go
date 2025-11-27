@@ -74,6 +74,12 @@ type LogsListParams struct {
 	*/
 	Before *int64
 
+	/* ContextFilter.
+
+	   Filter by context
+	*/
+	ContextFilter []string
+
 	/* Keyword.
 
 	   Query logs by this keyword
@@ -103,6 +109,12 @@ type LogsListParams struct {
 	   Sort order, if true will return results by descending order
 	*/
 	SortDesc *bool
+
+	/* Username.
+
+	   Filter by usernames
+	*/
+	Username []string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -179,6 +191,17 @@ func (o *LogsListParams) SetBefore(before *int64) {
 	o.Before = before
 }
 
+// WithContextFilter adds the context filter to the logs list params
+func (o *LogsListParams) WithContextFilter(contextFilter []string) *LogsListParams {
+	o.SetContextFilter(contextFilter)
+	return o
+}
+
+// SetContextFilter adds the context filter to the logs list params
+func (o *LogsListParams) SetContextFilter(contextFilter []string) {
+	o.ContextFilter = contextFilter
+}
+
 // WithKeyword adds the keyword to the logs list params
 func (o *LogsListParams) WithKeyword(keyword *string) *LogsListParams {
 	o.SetKeyword(keyword)
@@ -234,6 +257,17 @@ func (o *LogsListParams) SetSortDesc(sortDesc *bool) {
 	o.SortDesc = sortDesc
 }
 
+// WithUsername adds the username to the logs list params
+func (o *LogsListParams) WithUsername(username []string) *LogsListParams {
+	o.SetUsername(username)
+	return o
+}
+
+// SetUsername adds the username to the logs list params
+func (o *LogsListParams) SetUsername(username []string) {
+	o.Username = username
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *LogsListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -273,6 +307,17 @@ func (o *LogsListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 			if err := r.SetQueryParam("before", qBefore); err != nil {
 				return err
 			}
+		}
+	}
+
+	if o.ContextFilter != nil {
+
+		// binding items for context
+		joinedContext := o.bindParamContext(reg)
+
+		// query array param context
+		if err := r.SetQueryParam("context", joinedContext...); err != nil {
+			return err
 		}
 	}
 
@@ -361,8 +406,53 @@ func (o *LogsListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		}
 	}
 
+	if o.Username != nil {
+
+		// binding items for username
+		joinedUsername := o.bindParamUsername(reg)
+
+		// query array param username
+		if err := r.SetQueryParam("username", joinedUsername...); err != nil {
+			return err
+		}
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamLogsList binds the parameter context
+func (o *LogsListParams) bindParamContext(formats strfmt.Registry) []string {
+	contextIR := o.ContextFilter
+
+	var contextIC []string
+	for _, contextIIR := range contextIR { // explode []string
+
+		contextIIV := contextIIR // string as string
+		contextIC = append(contextIC, contextIIV)
+	}
+
+	// items.CollectionFormat: "csv"
+	contextIS := swag.JoinByFormat(contextIC, "csv")
+
+	return contextIS
+}
+
+// bindParamLogsList binds the parameter username
+func (o *LogsListParams) bindParamUsername(formats strfmt.Registry) []string {
+	usernameIR := o.Username
+
+	var usernameIC []string
+	for _, usernameIIR := range usernameIR { // explode []string
+
+		usernameIIV := usernameIIR // string as string
+		usernameIC = append(usernameIC, usernameIIV)
+	}
+
+	// items.CollectionFormat: "csv"
+	usernameIS := swag.JoinByFormat(usernameIC, "csv")
+
+	return usernameIS
 }

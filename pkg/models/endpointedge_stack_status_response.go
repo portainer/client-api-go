@@ -17,13 +17,23 @@ import (
 // swagger:model endpointedge.stackStatusResponse
 type EndpointedgeStackStatusResponse struct {
 
+	// Deprecated(2.36): use ForceRedeploy and RepullImage instead for cleaner responsibility
+	// But keep it for backward compatibility. To remove in future versions (2.44+)
+	// ReadyRePullImage indicates whether the stack is ready to re-pull image
+	// Example: true
+	ReadyRePullImage bool `json:"ReadyRePullImage,omitempty"`
+
+	// RepullImage indicates whether the stack's images should be repulled
+	// Example: true
+	RepullImage bool `json:"RepullImage,omitempty"`
+
+	// ForceRedeploy indicates whether the stack is force redeployed
+	// Example: true
+	ForceRedeploy bool `json:"forceRedeploy,omitempty"`
+
 	// EdgeStack Identifier
 	// Example: 1
 	ID int64 `json:"id,omitempty"`
-
-	// ReadyRePullImage indicates whether the stack is ready to re-pull image
-	// Example: true
-	ReadyRePullImage bool `json:"readyRePullImage,omitempty"`
 
 	// Version of this stack
 	// Example: 3

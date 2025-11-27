@@ -25,6 +25,14 @@ type EdgeStackPayload struct {
 	// Used only for EE
 	AlwaysCloneGitRepoForRelativePath bool `json:"alwaysCloneGitRepoForRelativePath,omitempty"`
 
+	// CreatedBy is the username that created this stack
+	// Used for adding labels to Kubernetes manifests
+	CreatedBy string `json:"createdBy,omitempty"`
+
+	// CreatedByUserId is the user ID that created this stack
+	// Used for adding labels to Kubernetes manifests
+	CreatedByUserID string `json:"createdByUserId,omitempty"`
+
 	// deployer options payload
 	DeployerOptionsPayload *EdgeDeployerOptionsPayload `json:"deployerOptionsPayload,omitempty"`
 
@@ -45,6 +53,10 @@ type EdgeStackPayload struct {
 	// Mount point for relative path
 	FilesystemPath string `json:"filesystemPath,omitempty"`
 
+	// ForceUpdate is a flag indicating if the agent must force the update of the stack.
+	// Used only for EE
+	ForceUpdate bool `json:"forceUpdate,omitempty"`
+
 	// ID of the stack
 	ID int64 `json:"id,omitempty"`
 
@@ -64,6 +76,7 @@ type EdgeStackPayload struct {
 
 	// Used only for EE async edge agent
 	// ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+	// Deprecated(2.36): use DeployerOptionsPayload.ForceRecreate instead
 	ReadyRePullImage bool `json:"readyRePullImage,omitempty"`
 
 	// RegistryCredentials holds the credentials for a Docker registry.

@@ -44,9 +44,6 @@ type KubernetesK8sApplication struct {
 	// deployment type
 	DeploymentType string `json:"DeploymentType,omitempty"`
 
-	// horizontal pod autoscaler
-	HorizontalPodAutoscaler *V2HorizontalPodAutoscaler `json:"HorizontalPodAutoscaler,omitempty"`
-
 	// Id
 	ID string `json:"Id,omitempty"`
 
@@ -98,11 +95,11 @@ type KubernetesK8sApplication struct {
 	// service type
 	ServiceType string `json:"ServiceType,omitempty"`
 
-	// services
-	Services []*V1Service `json:"Services"`
-
 	// stack Id
 	StackID string `json:"StackId,omitempty"`
+
+	// stack kind
+	StackKind string `json:"StackKind,omitempty"`
 
 	// stack name
 	StackName string `json:"StackName,omitempty"`
@@ -129,10 +126,6 @@ func (m *KubernetesK8sApplication) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateHorizontalPodAutoscaler(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateMetadata(formats); err != nil {
 		res = append(res, err)
 	}
@@ -146,10 +139,6 @@ func (m *KubernetesK8sApplication) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateResource(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateServices(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -203,29 +192,6 @@ func (m *KubernetesK8sApplication) validateCustomResourceMetadata(formats strfmt
 			ce := new(errors.CompositeError)
 			if stderrors.As(err, &ce) {
 				return ce.ValidateName("CustomResourceMetadata")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *KubernetesK8sApplication) validateHorizontalPodAutoscaler(formats strfmt.Registry) error {
-	if swag.IsZero(m.HorizontalPodAutoscaler) { // not required
-		return nil
-	}
-
-	if m.HorizontalPodAutoscaler != nil {
-		if err := m.HorizontalPodAutoscaler.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("HorizontalPodAutoscaler")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("HorizontalPodAutoscaler")
 			}
 
 			return err
@@ -341,36 +307,6 @@ func (m *KubernetesK8sApplication) validateResource(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *KubernetesK8sApplication) validateServices(formats strfmt.Registry) error {
-	if swag.IsZero(m.Services) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Services); i++ {
-		if swag.IsZero(m.Services[i]) { // not required
-			continue
-		}
-
-		if m.Services[i] != nil {
-			if err := m.Services[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
-					return ve.ValidateName("Services" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
-					return ce.ValidateName("Services" + "." + strconv.Itoa(i))
-				}
-
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 // ContextValidate validate this kubernetes k8s application based on the context it is used
 func (m *KubernetesK8sApplication) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -380,10 +316,6 @@ func (m *KubernetesK8sApplication) ContextValidate(ctx context.Context, formats 
 	}
 
 	if err := m.contextValidateCustomResourceMetadata(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateHorizontalPodAutoscaler(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -400,10 +332,6 @@ func (m *KubernetesK8sApplication) ContextValidate(ctx context.Context, formats 
 	}
 
 	if err := m.contextValidateResource(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateServices(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -458,31 +386,6 @@ func (m *KubernetesK8sApplication) contextValidateCustomResourceMetadata(ctx con
 			ce := new(errors.CompositeError)
 			if stderrors.As(err, &ce) {
 				return ce.ValidateName("CustomResourceMetadata")
-			}
-
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *KubernetesK8sApplication) contextValidateHorizontalPodAutoscaler(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.HorizontalPodAutoscaler != nil {
-
-		if swag.IsZero(m.HorizontalPodAutoscaler) { // not required
-			return nil
-		}
-
-		if err := m.HorizontalPodAutoscaler.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
-				return ve.ValidateName("HorizontalPodAutoscaler")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
-				return ce.ValidateName("HorizontalPodAutoscaler")
 			}
 
 			return err
@@ -595,35 +498,6 @@ func (m *KubernetesK8sApplication) contextValidateResource(ctx context.Context, 
 
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *KubernetesK8sApplication) contextValidateServices(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Services); i++ {
-
-		if m.Services[i] != nil {
-
-			if swag.IsZero(m.Services[i]) { // not required
-				return nil
-			}
-
-			if err := m.Services[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
-					return ve.ValidateName("Services" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
-					return ce.ValidateName("Services" + "." + strconv.Itoa(i))
-				}
-
-				return err
-			}
-		}
-
 	}
 
 	return nil

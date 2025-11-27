@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // EndpointsEndpointUpdateRelationsPayload endpoints endpoint update relations payload
@@ -20,7 +21,7 @@ import (
 type EndpointsEndpointUpdateRelationsPayload struct {
 
 	// relations
-	Relations map[string]EndpointsEndpointUpdateRelationsPayloadRelationsAnon `json:"relations,omitempty"`
+	Relations map[string]EndpointsEndpointUpdateRelation `json:"relations,omitempty"`
 }
 
 // Validate validates this endpoints endpoint update relations payload
@@ -44,8 +45,8 @@ func (m *EndpointsEndpointUpdateRelationsPayload) validateRelations(formats strf
 
 	for k := range m.Relations {
 
-		if swag.IsZero(m.Relations[k]) { // not required
-			continue
+		if err := validate.Required("relations"+"."+k, "body", m.Relations[k]); err != nil {
+			return err
 		}
 		if val, ok := m.Relations[k]; ok {
 			if err := val.Validate(formats); err != nil {
@@ -107,49 +108,6 @@ func (m *EndpointsEndpointUpdateRelationsPayload) MarshalBinary() ([]byte, error
 // UnmarshalBinary interface implementation
 func (m *EndpointsEndpointUpdateRelationsPayload) UnmarshalBinary(b []byte) error {
 	var res EndpointsEndpointUpdateRelationsPayload
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// EndpointsEndpointUpdateRelationsPayloadRelationsAnon endpoints endpoint update relations payload relations anon
-//
-// swagger:model EndpointsEndpointUpdateRelationsPayloadRelationsAnon
-type EndpointsEndpointUpdateRelationsPayloadRelationsAnon struct {
-
-	// edge groups
-	EdgeGroups []int64 `json:"edgeGroups"`
-
-	// group
-	Group int64 `json:"group,omitempty"`
-
-	// tags
-	Tags []int64 `json:"tags"`
-}
-
-// Validate validates this endpoints endpoint update relations payload relations anon
-func (m *EndpointsEndpointUpdateRelationsPayloadRelationsAnon) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this endpoints endpoint update relations payload relations anon based on context it is used
-func (m *EndpointsEndpointUpdateRelationsPayloadRelationsAnon) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *EndpointsEndpointUpdateRelationsPayloadRelationsAnon) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *EndpointsEndpointUpdateRelationsPayloadRelationsAnon) UnmarshalBinary(b []byte) error {
-	var res EndpointsEndpointUpdateRelationsPayloadRelationsAnon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

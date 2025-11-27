@@ -37,11 +37,14 @@ type GithubComPortainerPortainerEeAPIHTTPHandlerEdgestacksUpdateEdgeStackPayload
 	// pre pull image
 	PrePullImage bool `json:"prePullImage,omitempty"`
 
-	// re pull image
+	// Deprecated(2.36): use RepullImageAndRedeploy instead
 	RePullImage bool `json:"rePullImage,omitempty"`
 
 	// registries
 	Registries []int64 `json:"registries"`
+
+	// RepullImageAndRedeploy indicates whether the edge stack is manually forced to redeploy
+	RepullImageAndRedeploy bool `json:"repullImageAndRedeploy,omitempty"`
 
 	// retry deploy
 	RetryDeploy bool `json:"retryDeploy,omitempty"`

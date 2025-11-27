@@ -176,6 +176,12 @@ type ClientService interface {
 
 	UpdateKubernetesService(params *UpdateKubernetesServiceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateKubernetesServiceNoContent, error)
 
+	DeleteKubernetesClusterScopedCustomResource(params *DeleteKubernetesClusterScopedCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesClusterScopedCustomResourceNoContent, error)
+
+	DeleteKubernetesCustomResourceDefinition(params *DeleteKubernetesCustomResourceDefinitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesCustomResourceDefinitionNoContent, error)
+
+	DeleteKubernetesNamespacedCustomResource(params *DeleteKubernetesNamespacedCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesNamespacedCustomResourceNoContent, error)
+
 	DrainNode(params *DrainNodeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DrainNodeNoContent, error)
 
 	GetAllKubernetesApplicationsCount(params *GetAllKubernetesApplicationsCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesApplicationsCountOK, error)
@@ -184,9 +190,17 @@ type ClientService interface {
 
 	GetAllKubernetesVolumesCount(params *GetAllKubernetesVolumesCountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllKubernetesVolumesCountOK, error)
 
-	GetKubernetesCustomResource(params *GetKubernetesCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesCustomResourceOK, error)
+	GetKubernetesAllCustomResources(params *GetKubernetesAllCustomResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesAllCustomResourcesOK, error)
+
+	GetKubernetesClusterScopedCustomResource(params *GetKubernetesClusterScopedCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesClusterScopedCustomResourceOK, error)
+
+	GetKubernetesCustomResourceDefinition(params *GetKubernetesCustomResourceDefinitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesCustomResourceDefinitionOK, error)
+
+	GetKubernetesCustomResourceDefinitions(params *GetKubernetesCustomResourceDefinitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesCustomResourceDefinitionsOK, error)
 
 	GetKubernetesEventsForNamespace(params *GetKubernetesEventsForNamespaceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesEventsForNamespaceOK, error)
+
+	GetKubernetesNamespacedCustomResource(params *GetKubernetesNamespacedCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNamespacedCustomResourceOK, error)
 
 	GetKubernetesPodSecurityRule(params *GetKubernetesPodSecurityRuleParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesPodSecurityRuleOK, error)
 
@@ -3078,6 +3092,150 @@ func (a *Client) UpdateKubernetesService(params *UpdateKubernetesServiceParams, 
 }
 
 /*
+	DeleteKubernetesClusterScopedCustomResource deletes a cluster scoped kubernetes custom resource
+
+	Delete a cluster-scoped kubernetes Custom Resource that the user has access to.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) DeleteKubernetesClusterScopedCustomResource(params *DeleteKubernetesClusterScopedCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesClusterScopedCustomResourceNoContent, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewDeleteKubernetesClusterScopedCustomResourceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteKubernetesClusterScopedCustomResource",
+		Method:             "DELETE",
+		PathPattern:        "/kubernetes/{id}/customresources/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteKubernetesClusterScopedCustomResourceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*DeleteKubernetesClusterScopedCustomResourceNoContent)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteKubernetesClusterScopedCustomResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	DeleteKubernetesCustomResourceDefinition deletes a kubernetes custom resource definition
+
+	Delete a kubernetes Custom Resource Definition.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) DeleteKubernetesCustomResourceDefinition(params *DeleteKubernetesCustomResourceDefinitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesCustomResourceDefinitionNoContent, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewDeleteKubernetesCustomResourceDefinitionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteKubernetesCustomResourceDefinition",
+		Method:             "DELETE",
+		PathPattern:        "/kubernetes/{id}/customresourcedefinitions/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteKubernetesCustomResourceDefinitionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*DeleteKubernetesCustomResourceDefinitionNoContent)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteKubernetesCustomResourceDefinition: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	DeleteKubernetesNamespacedCustomResource deletes a namespaced kubernetes custom resource
+
+	Delete a namespaced kubernetes Custom Resource that the user has access to.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) DeleteKubernetesNamespacedCustomResource(params *DeleteKubernetesNamespacedCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteKubernetesNamespacedCustomResourceNoContent, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewDeleteKubernetesNamespacedCustomResourceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteKubernetesNamespacedCustomResource",
+		Method:             "DELETE",
+		PathPattern:        "/kubernetes/{id}/customresources/{namespace}/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteKubernetesNamespacedCustomResourceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*DeleteKubernetesNamespacedCustomResourceNoContent)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteKubernetesNamespacedCustomResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 	DrainNode drains a kubernetes node
 
 	Drain a Kubernetes node by safely evicting all pods from the node, preparing it for maintenance or removal
@@ -3270,26 +3428,26 @@ func (a *Client) GetAllKubernetesVolumesCount(params *GetAllKubernetesVolumesCou
 }
 
 /*
-	GetKubernetesCustomResource gets a list of kubernetes custom resources
+	GetKubernetesAllCustomResources gets a list of kubernetes custom resources
 
 	Get a list of kubernetes Custom Resources that the user has access to.
 
 **Access policy**: Authenticated user.
 */
-func (a *Client) GetKubernetesCustomResource(params *GetKubernetesCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesCustomResourceOK, error) {
+func (a *Client) GetKubernetesAllCustomResources(params *GetKubernetesAllCustomResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesAllCustomResourcesOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetKubernetesCustomResourceParams()
+		params = NewGetKubernetesAllCustomResourcesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getKubernetesCustomResource",
+		ID:                 "getKubernetesAllCustomResources",
 		Method:             "GET",
-		PathPattern:        "/kubernetes/{id}/customresource",
+		PathPattern:        "/kubernetes/{id}/customresources",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &GetKubernetesCustomResourceReader{formats: a.formats},
+		Reader:             &GetKubernetesAllCustomResourcesReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -3303,7 +3461,7 @@ func (a *Client) GetKubernetesCustomResource(params *GetKubernetesCustomResource
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetKubernetesCustomResourceOK)
+	success, ok := result.(*GetKubernetesAllCustomResourcesOK)
 	if ok {
 		return success, nil
 	}
@@ -3313,7 +3471,151 @@ func (a *Client) GetKubernetesCustomResource(params *GetKubernetesCustomResource
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getKubernetesCustomResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getKubernetesAllCustomResources: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesClusterScopedCustomResource gets a cluster scoped kubernetes custom resource
+
+	Get a cluster-scoped kubernetes Custom Resource that the user has access to.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetKubernetesClusterScopedCustomResource(params *GetKubernetesClusterScopedCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesClusterScopedCustomResourceOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetKubernetesClusterScopedCustomResourceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesClusterScopedCustomResource",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/customresources/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesClusterScopedCustomResourceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetKubernetesClusterScopedCustomResourceOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesClusterScopedCustomResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesCustomResourceDefinition gets a kubernetes custom resource definition
+
+	Get a kubernetes Custom Resource Definition.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetKubernetesCustomResourceDefinition(params *GetKubernetesCustomResourceDefinitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesCustomResourceDefinitionOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetKubernetesCustomResourceDefinitionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesCustomResourceDefinition",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/customresourcedefinitions/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesCustomResourceDefinitionReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetKubernetesCustomResourceDefinitionOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesCustomResourceDefinition: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesCustomResourceDefinitions gets a list of kubernetes custom resource definitions
+
+	Get a list of kubernetes Custom Resource Definitions that the user has access to.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetKubernetesCustomResourceDefinitions(params *GetKubernetesCustomResourceDefinitionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesCustomResourceDefinitionsOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetKubernetesCustomResourceDefinitionsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesCustomResourceDefinitions",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/customresourcedefinitions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesCustomResourceDefinitionsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetKubernetesCustomResourceDefinitionsOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesCustomResourceDefinitions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -3362,6 +3664,54 @@ func (a *Client) GetKubernetesEventsForNamespace(params *GetKubernetesEventsForN
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getKubernetesEventsForNamespace: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+	GetKubernetesNamespacedCustomResource gets a list of kubernetes custom resources
+
+	Get a list of kubernetes Custom Resources that the user has access to.
+
+**Access policy**: Authenticated user.
+*/
+func (a *Client) GetKubernetesNamespacedCustomResource(params *GetKubernetesNamespacedCustomResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubernetesNamespacedCustomResourceOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetKubernetesNamespacedCustomResourceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getKubernetesNamespacedCustomResource",
+		Method:             "GET",
+		PathPattern:        "/kubernetes/{id}/customresources/{namespace}/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetKubernetesNamespacedCustomResourceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetKubernetesNamespacedCustomResourceOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getKubernetesNamespacedCustomResource: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -27,6 +27,7 @@ type StacksStackGitRedployPayload struct {
 	// Example: false
 	Prune bool `json:"prune,omitempty"`
 
+	// Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility
 	// Force a pulling to current image with the original tag though the image is already the latest
 	// Example: false
 	PullImage bool `json:"pullImage,omitempty"`
@@ -48,6 +49,9 @@ type StacksStackGitRedployPayload struct {
 
 	// repository username
 	RepositoryUsername string `json:"repositoryUsername,omitempty"`
+
+	// RepullImageAndRedeploy indicates whether to force repulling images and redeploying the stack
+	RepullImageAndRedeploy bool `json:"repullImageAndRedeploy,omitempty"`
 
 	// stack name
 	StackName string `json:"stackName,omitempty"`

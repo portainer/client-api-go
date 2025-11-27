@@ -17,6 +17,14 @@ import (
 // swagger:model edge.DeployerOptionsPayload
 type EdgeDeployerOptionsPayload struct {
 
+	// ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
+	// This field is only used when the Force Redeployment is triggered.
+	// Once the stack is redeployed, this field will be reset to false.
+	// For standard edge agent, this field is used in agent side
+	// For async edge agent, this field is used in both agent side and server side.
+	// This flag drives `docker compose up --force-recreate` option
+	ForceRecreate bool `json:"forceRecreate,omitempty"`
+
 	// Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
 	// This flag drives `docker compose up --remove-orphans` and `docker stack up --prune` options
 	// Used only for EE

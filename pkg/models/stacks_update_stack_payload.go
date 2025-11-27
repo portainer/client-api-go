@@ -27,12 +27,16 @@ type StacksUpdateStackPayload struct {
 	// Example: true
 	Prune bool `json:"prune,omitempty"`
 
+	// Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility
 	// Force a pulling to current image with the original tag though the image is already the latest
 	// Example: false
 	PullImage bool `json:"pullImage,omitempty"`
 
 	// List of Registries to use for this stack
 	Registries []int64 `json:"registries"`
+
+	// RepullImageAndRedeploy indicates whether to force repulling images and redeploying the stack
+	RepullImageAndRedeploy bool `json:"repullImageAndRedeploy,omitempty"`
 
 	// RollbackTo specifies the stack file version to rollback to (only support to rollback to the last version currently)
 	RollbackTo int64 `json:"rollbackTo,omitempty"`

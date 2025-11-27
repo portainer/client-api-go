@@ -25,7 +25,9 @@ type PortainereeAlertingRule struct {
 
 	// condition operator
 	// Enum: ["\u003e","\u003c","=","\u003e=","\u003c="]
-	ConditionOperator string `json:"conditionOperator,omitempty"`
+	ConditionOperator struct {
+		PortainereeConditionOperator
+	} `json:"conditionOperator,omitempty"`
 
 	// created at
 	CreatedAt string `json:"createdAt,omitempty"`
@@ -111,7 +113,9 @@ func (m *PortainereeAlertingRule) Validate(formats strfmt.Registry) error {
 var portainereeAlertingRuleTypeConditionOperatorPropEnum []any
 
 func init() {
-	var res []string
+	var res []struct {
+		PortainereeConditionOperator
+	}
 	if err := json.Unmarshal([]byte(`["\u003e","\u003c","=","\u003e=","\u003c="]`), &res); err != nil {
 		panic(err)
 	}
@@ -120,26 +124,10 @@ func init() {
 	}
 }
 
-const (
-
-	// PortainereeAlertingRuleConditionOperatorGreaterThan captures enum value ">"
-	PortainereeAlertingRuleConditionOperatorGreaterThan string = ">"
-
-	// PortainereeAlertingRuleConditionOperatorLessThan captures enum value "<"
-	PortainereeAlertingRuleConditionOperatorLessThan string = "<"
-
-	// PortainereeAlertingRuleConditionOperatorEqualSign captures enum value "="
-	PortainereeAlertingRuleConditionOperatorEqualSign string = "="
-
-	// PortainereeAlertingRuleConditionOperatorGreaterThanOrEqual captures enum value ">="
-	PortainereeAlertingRuleConditionOperatorGreaterThanOrEqual string = ">="
-
-	// PortainereeAlertingRuleConditionOperatorLessThanOrEqual captures enum value "<="
-	PortainereeAlertingRuleConditionOperatorLessThanOrEqual string = "<="
-)
-
 // prop value enum
-func (m *PortainereeAlertingRule) validateConditionOperatorEnum(path, location string, value string) error {
+func (m *PortainereeAlertingRule) validateConditionOperatorEnum(path, location string, value *struct {
+	PortainereeConditionOperator
+}) error {
 	if err := validate.EnumCase(path, location, value, portainereeAlertingRuleTypeConditionOperatorPropEnum, true); err != nil {
 		return err
 	}
@@ -149,11 +137,6 @@ func (m *PortainereeAlertingRule) validateConditionOperatorEnum(path, location s
 func (m *PortainereeAlertingRule) validateConditionOperator(formats strfmt.Registry) error {
 	if swag.IsZero(m.ConditionOperator) { // not required
 		return nil
-	}
-
-	// value enum
-	if err := m.validateConditionOperatorEnum("conditionOperator", "body", m.ConditionOperator); err != nil {
-		return err
 	}
 
 	return nil
@@ -297,8 +280,22 @@ func (m *PortainereeAlertingRule) validateSupportedEnvironmentTypes(formats strf
 	return nil
 }
 
-// ContextValidate validates this portaineree alerting rule based on context it is used
+// ContextValidate validate this portaineree alerting rule based on the context it is used
 func (m *PortainereeAlertingRule) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateConditionOperator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PortainereeAlertingRule) contextValidateConditionOperator(ctx context.Context, formats strfmt.Registry) error {
+
 	return nil
 }
 

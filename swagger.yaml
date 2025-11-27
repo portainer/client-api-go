@@ -580,6 +580,15 @@ definitions:
     type: object
   edge.DeployerOptionsPayload:
     properties:
+      forceRecreate:
+        description: |-
+          ForceRecreate is a flag indicating if the agent must force the redeployment of the stack.
+          This field is only used when the Force Redeployment is triggered.
+          Once the stack is redeployed, this field will be reset to false.
+          For standard edge agent, this field is used in agent side
+          For async edge agent, this field is used in both agent side and server side.
+          This flag drives `docker compose up --force-recreate` option
+        type: boolean
       prune:
         description: |-
           Prune is a flag indicating if the agent must prune the containers or not when creating/updating an edge stack
@@ -611,6 +620,16 @@ definitions:
           This field is only valid when SupportRelativePath is true.
           Used only for EE
         type: boolean
+      createdBy:
+        description: |-
+          CreatedBy is the username that created this stack
+          Used for adding labels to Kubernetes manifests
+        type: string
+      createdByUserId:
+        description: |-
+          CreatedByUserId is the user ID that created this stack
+          Used for adding labels to Kubernetes manifests
+        type: string
       deployerOptionsPayload:
         $ref: '#/definitions/edge.DeployerOptionsPayload'
       dirEntries:
@@ -636,6 +655,11 @@ definitions:
       filesystemPath:
         description: Mount point for relative path
         type: string
+      forceUpdate:
+        description: |-
+          ForceUpdate is a flag indicating if the agent must force the update of the stack.
+          Used only for EE
+        type: boolean
       id:
         description: ID of the stack
         type: integer
@@ -660,6 +684,7 @@ definitions:
         description: |-
           Used only for EE async edge agent
           ReadyRePullImage is a flag to indicate whether the auto update is trigger to re-pull image
+          Deprecated(2.36): use DeployerOptionsPayload.ForceRecreate instead
         type: boolean
       registryCredentials:
         description: |-
@@ -899,6 +924,9 @@ definitions:
       prePullImage:
         type: boolean
       rePullImage:
+        description: |-
+          Deprecated(2.36): to be removed in future versions (2.44+)
+          Use RepullImageAndRedeploy instead
         type: boolean
       refName:
         type: string
@@ -907,6 +935,10 @@ definitions:
         items:
           type: integer
         type: array
+      repullImageAndRedeploy:
+        description: RepullImageAndRedeploy indicates whether the edge stack is manually
+          forced to redeploy
+        type: boolean
       retryDeploy:
         type: boolean
       retryPeriod:
@@ -920,8 +952,8 @@ definitions:
       updateVersion:
         description: |-
           Update the stack file content from the git repository
-          If this is set to true, it indicates that the stack is being redeployed,
-          if it is false, it indicates that the stack is being updated
+          If this is set to true, it indicates that the stack is being redeployed (Pull and update stack),
+          if it is false, it indicates that the stack is being updated (Update settings)
         type: boolean
     type: object
   edgeupdateschedules.activeSchedulePayload:
@@ -1201,12 +1233,29 @@ definitions:
         example: REQUIRED
         type: string
     type: object
+  endpointedge.endpointTrustUpdateRelation:
+    properties:
+      edgeGroups:
+        items:
+          type: integer
+        type: array
+      group:
+        type: integer
+      tags:
+        items:
+          type: integer
+        type: array
+    type: object
   endpointedge.endpointsTrustPayload:
     properties:
       endpointIDs:
         items:
           type: integer
         type: array
+      relations:
+        additionalProperties:
+          $ref: '#/definitions/endpointedge.endpointTrustUpdateRelation'
+        type: object
     type: object
   endpointedge.generateKeyResponse:
     properties:
@@ -1215,15 +1264,25 @@ definitions:
     type: object
   endpointedge.stackStatusResponse:
     properties:
+      ReadyRePullImage:
+        description: |-
+          Deprecated(2.36): use ForceRedeploy and RepullImage instead for cleaner responsibility
+          But keep it for backward compatibility. To remove in future versions (2.44+)
+          ReadyRePullImage indicates whether the stack is ready to re-pull image
+        example: true
+        type: boolean
+      RepullImage:
+        description: RepullImage indicates whether the stack's images should be repulled
+        example: true
+        type: boolean
+      forceRedeploy:
+        description: ForceRedeploy indicates whether the stack is force redeployed
+        example: true
+        type: boolean
       id:
         description: EdgeStack Identifier
         example: 1
         type: integer
-      readyRePullImage:
-        description: ReadyRePullImage indicates whether the stack is ready to re-pull
-          image
-        example: true
-        type: boolean
       version:
         description: Version of this stack
         example: 3
@@ -1516,22 +1575,24 @@ definitions:
       userAccessPolicies:
         $ref: '#/definitions/portainer.UserAccessPolicies'
     type: object
+  endpoints.endpointUpdateRelation:
+    properties:
+      edgeGroups:
+        items:
+          type: integer
+        type: array
+      group:
+        type: integer
+      tags:
+        items:
+          type: integer
+        type: array
+    type: object
   endpoints.endpointUpdateRelationsPayload:
     properties:
       relations:
         additionalProperties:
-          properties:
-            edgeGroups:
-              items:
-                type: integer
-              type: array
-            group:
-              type: integer
-            tags:
-              items:
-                type: integer
-              type: array
-          type: object
+          $ref: '#/definitions/endpoints.endpointUpdateRelation'
         type: object
     type: object
   endpoints.forceUpdateServicePayload:
@@ -1866,7 +1927,9 @@ definitions:
       ProjectPath:
         type: string
       RePullImage:
-        description: Re-Pull Image
+        description: |-
+          Deprecated(2.36): keep it for backward compatibility. To remove in future versions (2.44+)
+          Re-Pull Image
         type: boolean
       Registries:
         items:
@@ -1888,6 +1951,14 @@ definitions:
           path
         example: false
         type: boolean
+      createdBy:
+        description: The username which created this stack
+        example: admin
+        type: string
+      createdByUserId:
+        description: The username id which created this stack
+        example: "1"
+        type: string
       deployerOptions:
         allOf:
         - $ref: '#/definitions/portaineree.EdgeStackDeployerOptions'
@@ -2000,11 +2071,16 @@ definitions:
       prePullImage:
         type: boolean
       rePullImage:
+        description: 'Deprecated(2.36): use RepullImageAndRedeploy instead'
         type: boolean
       registries:
         items:
           type: integer
         type: array
+      repullImageAndRedeploy:
+        description: RepullImageAndRedeploy indicates whether the edge stack is manually
+          forced to redeploy
+        type: boolean
       retryDeploy:
         type: boolean
       retryPeriod:
@@ -2584,16 +2660,6 @@ definitions:
           +optional
         type: string
     type: object
-  k8s_io_apimachinery_pkg_apis_meta_v1.ConditionStatus:
-    enum:
-    - "True"
-    - "False"
-    - Unknown
-    type: string
-    x-enum-varnames:
-    - ConditionTrue
-    - ConditionFalse
-    - ConditionUnknown
   kubernetes.Configuration:
     properties:
       ConfigurationOwner:
@@ -2610,7 +2676,11 @@ definitions:
         type: string
       kind:
         type: string
+      name:
+        type: string
       plural:
+        type: string
+      scope:
         type: string
     type: object
   kubernetes.IngressRule:
@@ -2649,8 +2719,6 @@ definitions:
         $ref: '#/definitions/kubernetes.CustomResourceMetadata'
       DeploymentType:
         type: string
-      HorizontalPodAutoscaler:
-        $ref: '#/definitions/v2.HorizontalPodAutoscaler'
       Id:
         type: string
       Image:
@@ -2693,11 +2761,9 @@ definitions:
         type: string
       ServiceType:
         type: string
-      Services:
-        items:
-          $ref: '#/definitions/v1.Service'
-        type: array
       StackId:
+        type: string
+      StackKind:
         type: string
       StackName:
         type: string
@@ -3270,10 +3336,6 @@ definitions:
         type: string
       ServiceType:
         type: string
-      Services:
-        items:
-          $ref: '#/definitions/v1.Service'
-        type: array
       StackId:
         type: string
       StackName:
@@ -3336,6 +3398,36 @@ definitions:
       Name:
         type: string
       ResourceKind:
+        type: string
+    type: object
+  models.K8sCustomResource:
+    properties:
+      creationDate:
+        type: string
+      definitionName:
+        type: string
+      name:
+        type: string
+      namespace:
+        type: string
+      uid:
+        type: string
+    type: object
+  models.K8sCustomResourceDefinition:
+    properties:
+      creationDate:
+        type: string
+      group:
+        type: string
+      name:
+        type: string
+      releaseName:
+        type: string
+      releaseNamespace:
+        type: string
+      releaseVersion:
+        type: string
+      scope:
         type: string
     type: object
   models.K8sDashboard:
@@ -5835,13 +5927,14 @@ definitions:
       alertManagerID:
         type: integer
       conditionOperator:
+        allOf:
+        - $ref: '#/definitions/portaineree.ConditionOperator'
         enum:
         - '>'
         - <
         - =
         - '>='
         - <=
-        type: string
       createdAt:
         type: string
       createdBy:
@@ -6051,6 +6144,20 @@ definitions:
       tier:
         type: string
     type: object
+  portaineree.ConditionOperator:
+    enum:
+    - '>'
+    - <
+    - =
+    - '>='
+    - <=
+    type: string
+    x-enum-varnames:
+    - OperatorGreaterThan
+    - OperatorLessThan
+    - OperatorEqual
+    - OperatorGreaterThanOrEqual
+    - OperatorLessThanOrEqual
   portaineree.CustomTemplate:
     properties:
       CreatedByUserId:
@@ -6403,7 +6510,9 @@ definitions:
       ProjectPath:
         type: string
       RePullImage:
-        description: Re-Pull Image
+        description: |-
+          Deprecated(2.36): keep it for backward compatibility. To remove in future versions (2.44+)
+          Re-Pull Image
         type: boolean
       Registries:
         items:
@@ -6425,6 +6534,14 @@ definitions:
           path
         example: false
         type: boolean
+      createdBy:
+        description: The username which created this stack
+        example: admin
+        type: string
+      createdByUserId:
+        description: The username id which created this stack
+        example: "1"
+        type: string
       deployerOptions:
         allOf:
         - $ref: '#/definitions/portaineree.EdgeStackDeployerOptions'
@@ -7905,6 +8022,55 @@ definitions:
     - type
     - url
     type: object
+  registries.registryPingPayload:
+    properties:
+      password:
+        description: Password used to authenticate against this registry
+        example: registry_password
+        type: string
+      tls:
+        description: Use TLS
+        example: true
+        type: boolean
+      type:
+        allOf:
+        - $ref: '#/definitions/portainer.RegistryType'
+        description: "Registry Type. Valid values are:\n\t1 (Quay.io),\n\t2 (Azure
+          container registry),\n\t3 (custom registry),\n\t4 (Gitlab registry),\n\t5
+          (ProGet registry),\n\t6 (DockerHub)\n\t7 (ECR)\n\t8 (Github registry)"
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        example: 6
+      url:
+        description: URL or IP address of the Docker registry
+        example: registry-1.docker.io
+        type: string
+      username:
+        description: Username used to authenticate against this registry
+        example: registry_user
+        type: string
+    required:
+    - type
+    - url
+    type: object
+  registries.registryPingResponse:
+    properties:
+      message:
+        description: Message provides details about the connection test result
+        example: Registry connection successful
+        type: string
+      success:
+        description: Success indicates if the registry connection was successful
+        example: true
+        type: boolean
+    type: object
   registries.registryUpdatePayload:
     properties:
       authentication:
@@ -8917,8 +9083,9 @@ definitions:
         example: false
         type: boolean
       pullImage:
-        description: Force a pulling to current image with the original tag though
-          the image is already the latest
+        description: |-
+          Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility
+          Force a pulling to current image with the original tag though the image is already the latest
         example: false
         type: boolean
       repositoryAuthentication:
@@ -8933,6 +9100,10 @@ definitions:
         type: string
       repositoryUsername:
         type: string
+      repullImageAndRedeploy:
+        description: RepullImageAndRedeploy indicates whether to force repulling images
+          and redeploying the stack
+        type: boolean
       stackName:
         type: string
     type: object
@@ -9138,8 +9309,9 @@ definitions:
         example: true
         type: boolean
       pullImage:
-        description: Force a pulling to current image with the original tag though
-          the image is already the latest
+        description: |-
+          Deprecated(2.36): use RepullImageAndRedeploy instead for cleaner responsibility
+          Force a pulling to current image with the original tag though the image is already the latest
         example: false
         type: boolean
       registries:
@@ -9147,6 +9319,10 @@ definitions:
         items:
           type: integer
         type: array
+      repullImageAndRedeploy:
+        description: RepullImageAndRedeploy indicates whether to force repulling images
+          and redeploying the stack
+        type: boolean
       rollbackTo:
         description: RollbackTo specifies the stack file version to rollback to (only
           support to rollback to the last version currently)
@@ -9748,77 +9924,6 @@ definitions:
         items:
           type: string
         type: array
-    type: object
-  v1.ClientIPConfig:
-    properties:
-      timeoutSeconds:
-        description: |-
-          timeoutSeconds specifies the seconds of ClientIP type session sticky time.
-          The value must be >0 && <=86400(for 1 day) if ServiceAffinity == "ClientIP".
-          Default value is 10800(for 3 hours).
-          +optional
-        type: integer
-    type: object
-  v1.Condition:
-    properties:
-      lastTransitionTime:
-        description: |-
-          lastTransitionTime is the last time the condition transitioned from one status to another.
-          This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
-          +required
-          +kubebuilder:validation:Required
-          +kubebuilder:validation:Type=string
-          +kubebuilder:validation:Format=date-time
-        type: string
-      message:
-        description: |-
-          message is a human readable message indicating details about the transition.
-          This may be an empty string.
-          +required
-          +kubebuilder:validation:Required
-          +kubebuilder:validation:MaxLength=32768
-        type: string
-      observedGeneration:
-        description: |-
-          observedGeneration represents the .metadata.generation that the condition was set based upon.
-          For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
-          with respect to the current state of the instance.
-          +optional
-          +kubebuilder:validation:Minimum=0
-        type: integer
-      reason:
-        description: |-
-          reason contains a programmatic identifier indicating the reason for the condition's last transition.
-          Producers of specific condition types may define expected values and meanings for this field,
-          and whether the values are considered a guaranteed API.
-          The value should be a CamelCase string.
-          This field may not be empty.
-          +required
-          +kubebuilder:validation:Required
-          +kubebuilder:validation:MaxLength=1024
-          +kubebuilder:validation:MinLength=1
-          +kubebuilder:validation:Pattern=`^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$`
-        type: string
-      status:
-        allOf:
-        - $ref: '#/definitions/k8s_io_apimachinery_pkg_apis_meta_v1.ConditionStatus'
-        description: |-
-          status of the condition, one of True, False, Unknown.
-          +required
-          +kubebuilder:validation:Required
-          +kubebuilder:validation:Enum=True;False;Unknown
-      type:
-        description: |-
-          type of condition in CamelCase or in foo.example.com/CamelCase.
-          ---
-          Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be
-          useful (see .node.status.conditions), the ability to deconflict is important.
-          The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
-          +required
-          +kubebuilder:validation:Required
-          +kubebuilder:validation:Pattern=`^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$`
-          +kubebuilder:validation:MaxLength=316
-        type: string
     type: object
   v1.ConfigMapEnvSource:
     properties:
@@ -10523,81 +10628,6 @@ definitions:
         description: The header field value
         type: string
     type: object
-  v1.IPFamily:
-    enum:
-    - IPv4
-    - IPv6
-    - ""
-    type: string
-    x-enum-varnames:
-    - IPv4Protocol
-    - IPv6Protocol
-    - IPFamilyUnknown
-  v1.IPFamilyPolicy:
-    enum:
-    - SingleStack
-    - PreferDualStack
-    - RequireDualStack
-    type: string
-    x-enum-varnames:
-    - IPFamilyPolicySingleStack
-    - IPFamilyPolicyPreferDualStack
-    - IPFamilyPolicyRequireDualStack
-  v1.LabelSelector:
-    properties:
-      matchExpressions:
-        description: |-
-          matchExpressions is a list of label selector requirements. The requirements are ANDed.
-          +optional
-          +listType=atomic
-        items:
-          $ref: '#/definitions/v1.LabelSelectorRequirement'
-        type: array
-      matchLabels:
-        additionalProperties:
-          type: string
-        description: |-
-          matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-          map is equivalent to an element of matchExpressions, whose key field is "key", the
-          operator is "In", and the values array contains only "value". The requirements are ANDed.
-          +optional
-        type: object
-    type: object
-  v1.LabelSelectorOperator:
-    enum:
-    - In
-    - NotIn
-    - Exists
-    - DoesNotExist
-    type: string
-    x-enum-varnames:
-    - LabelSelectorOpIn
-    - LabelSelectorOpNotIn
-    - LabelSelectorOpExists
-    - LabelSelectorOpDoesNotExist
-  v1.LabelSelectorRequirement:
-    properties:
-      key:
-        description: key is the label key that the selector applies to.
-        type: string
-      operator:
-        allOf:
-        - $ref: '#/definitions/v1.LabelSelectorOperator'
-        description: |-
-          operator represents a key's relationship to a set of values.
-          Valid operators are In, NotIn, Exists and DoesNotExist.
-      values:
-        description: |-
-          values is an array of string values. If the operator is In or NotIn,
-          the values array must be non-empty. If the operator is Exists or DoesNotExist,
-          the values array must be empty. This array is replaced during a strategic
-          merge patch.
-          +optional
-          +listType=atomic
-        items:
-          type: string
-        type: array
-    type: object
   v1.Lifecycle:
     properties:
       postStart:
@@ -10702,61 +10732,6 @@ definitions:
           Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
           +optional
         type: string
-    type: object
-  v1.LoadBalancerIPMode:
-    enum:
-    - VIP
-    - Proxy
-    type: string
-    x-enum-varnames:
-    - LoadBalancerIPModeVIP
-    - LoadBalancerIPModeProxy
-  v1.LoadBalancerIngress:
-    properties:
-      hostname:
-        description: |-
-          Hostname is set for load-balancer ingress points that are DNS based
-          (typically AWS load-balancers)
-          +optional
-        type: string
-      ip:
-        description: |-
-          IP is set for load-balancer ingress points that are IP based
-          (typically GCE or OpenStack load-balancers)
-          +optional
-        type: string
-      ipMode:
-        allOf:
-        - $ref: '#/definitions/v1.LoadBalancerIPMode'
-        description: |-
-          IPMode specifies how the load-balancer IP behaves, and may only be specified when the ip field is specified.
-          Setting this to "VIP" indicates that traffic is delivered to the node with
-          the destination set to the load-balancer's IP and port.
-          Setting this to "Proxy" indicates that traffic is delivered to the node or pod with
-          the destination set to the node's IP and node port or the pod's IP and port.
-          Service implementations may use this information to adjust traffic routing.
-          +optional
-      ports:
-        description: |-
-          Ports is a list of records of service ports
-          If used, every port defined in the service should have an entry in it
-          +listType=atomic
-          +optional
-        items:
-          $ref: '#/definitions/v1.PortStatus'
-        type: array
-    type: object
-  v1.LoadBalancerStatus:
-    properties:
-      ingress:
-        description: |-
-          Ingress is a list containing ingress points for the load-balancer.
-          Traffic intended for the service should be sent to these ingress points.
-          +optional
-          +listType=atomic
-        items:
-          $ref: '#/definitions/v1.LoadBalancerIngress'
-        type: array
     type: object
   v1.ManagedFieldsEntry:
     properties:
@@ -11294,34 +11269,6 @@ definitions:
         items:
           type: string
         type: array
-    type: object
-  v1.PortStatus:
-    properties:
-      error:
-        description: |-
-          Error is to record the problem with the service port
-          The format of the error shall comply with the following rules:
-          - built-in error values shall be specified in this file and those shall use
-            CamelCase names
-          - cloud provider specific error values must have names that comply with the
-            format foo.example.com/CamelCase.
-          ---
-          The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
-          +optional
-          +kubebuilder:validation:Required
-          +kubebuilder:validation:Pattern=`^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$`
-          +kubebuilder:validation:MaxLength=316
-        type: string
-      port:
-        description: Port is the port number of the service port of which status is
-          recorded here
-        type: integer
-      protocol:
-        allOf:
-        - $ref: '#/definitions/v1.Protocol'
-        description: |-
-          Protocol is the protocol of the service port of which status is recorded here
-          The supported values are: "TCP", "UDP", "SCTP"
     type: object
   v1.Probe:
     properties:
@@ -11926,470 +11873,6 @@ definitions:
           Note that this field cannot be set when spec.os.name is linux.
           +optional
     type: object
-  v1.Service:
-    properties:
-      apiVersion:
-        description: |-
-          APIVersion defines the versioned schema of this representation of an object.
-          Servers should convert recognized schemas to the latest internal value, and
-          may reject unrecognized values.
-          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-          +optional
-        type: string
-      kind:
-        description: |-
-          Kind is a string value representing the REST resource this object represents.
-          Servers may infer this from the endpoint the client submits requests to.
-          Cannot be updated.
-          In CamelCase.
-          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-          +optional
-        type: string
-      metadata:
-        allOf:
-        - $ref: '#/definitions/v1.ObjectMeta'
-        description: |-
-          Standard object's metadata.
-          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-          +optional
-      spec:
-        allOf:
-        - $ref: '#/definitions/v1.ServiceSpec'
-        description: |-
-          Spec defines the behavior of a service.
-          https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-          +optional
-      status:
-        allOf:
-        - $ref: '#/definitions/v1.ServiceStatus'
-        description: |-
-          Most recently observed status of the service.
-          Populated by the system.
-          Read-only.
-          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-          +optional
-    type: object
-  v1.ServiceAffinity:
-    enum:
-    - ClientIP
-    - None
-    type: string
-    x-enum-varnames:
-    - ServiceAffinityClientIP
-    - ServiceAffinityNone
-  v1.ServiceExternalTrafficPolicy:
-    enum:
-    - Cluster
-    - Local
-    - Local
-    - Cluster
-    type: string
-    x-enum-varnames:
-    - ServiceExternalTrafficPolicyCluster
-    - ServiceExternalTrafficPolicyLocal
-    - ServiceExternalTrafficPolicyTypeLocal
-    - ServiceExternalTrafficPolicyTypeCluster
-  v1.ServiceInternalTrafficPolicy:
-    enum:
-    - Cluster
-    - Local
-    type: string
-    x-enum-varnames:
-    - ServiceInternalTrafficPolicyCluster
-    - ServiceInternalTrafficPolicyLocal
-  v1.ServicePort:
-    properties:
-      appProtocol:
-        description: |-
-          The application protocol for this port.
-          This is used as a hint for implementations to offer richer behavior for protocols that they understand.
-          This field follows standard Kubernetes label syntax.
-          Valid values are either:
-
-          * Un-prefixed protocol names - reserved for IANA standard service names (as per
-          RFC-6335 and https://www.iana.org/assignments/service-names).
-
-          * Kubernetes-defined prefixed names:
-            * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior-
-            * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
-            * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455
-
-          * Other protocols should use implementation-defined prefixed names such as
-          mycompany.com/my-custom-protocol.
-          +optional
-        type: string
-      name:
-        description: |-
-          The name of this port within the service. This must be a DNS_LABEL.
-          All ports within a ServiceSpec must have unique names. When considering
-          the endpoints for a Service, this must match the 'name' field in the
-          EndpointPort.
-          Optional if only one ServicePort is defined on this service.
-          +optional
-        type: string
-      nodePort:
-        description: |-
-          The port on each node on which this service is exposed when type is
-          NodePort or LoadBalancer.  Usually assigned by the system. If a value is
-          specified, in-range, and not in use it will be used, otherwise the
-          operation will fail.  If not specified, a port will be allocated if this
-          Service requires one.  If this field is specified when creating a
-          Service which does not need it, creation will fail. This field will be
-          wiped when updating a Service to no longer need it (e.g. changing type
-          from NodePort to ClusterIP).
-          More info: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
-          +optional
-        type: integer
-      port:
-        description: The port that will be exposed by this service.
-        type: integer
-      protocol:
-        allOf:
-        - $ref: '#/definitions/v1.Protocol'
-        description: |-
-          The IP protocol for this port. Supports "TCP", "UDP", and "SCTP".
-          Default is TCP.
-          +default="TCP"
-          +optional
-      targetPort:
-        allOf:
-        - $ref: '#/definitions/intstr.IntOrString'
-        description: |-
-          Number or name of the port to access on the pods targeted by the service.
-          Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
-          If this is a string, it will be looked up as a named port in the
-          target Pod's container ports. If this is not specified, the value
-          of the 'port' field is used (an identity map).
-          This field is ignored for services with clusterIP=None, and should be
-          omitted or set equal to the 'port' field.
-          More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
-          +optional
-    type: object
-  v1.ServiceSpec:
-    properties:
-      allocateLoadBalancerNodePorts:
-        description: |-
-          allocateLoadBalancerNodePorts defines if NodePorts will be automatically
-          allocated for services with type LoadBalancer.  Default is "true". It
-          may be set to "false" if the cluster load-balancer does not rely on
-          NodePorts.  If the caller requests specific NodePorts (by specifying a
-          value), those requests will be respected, regardless of this field.
-          This field may only be set for services with type LoadBalancer and will
-          be cleared if the type is changed to any other type.
-          +optional
-        type: boolean
-      clusterIP:
-        description: |-
-          clusterIP is the IP address of the service and is usually assigned
-          randomly. If an address is specified manually, is in-range (as per
-          system configuration), and is not in use, it will be allocated to the
-          service; otherwise creation of the service will fail. This field may not
-          be changed through updates unless the type field is also being changed
-          to ExternalName (which requires this field to be blank) or the type
-          field is being changed from ExternalName (in which case this field may
-          optionally be specified, as describe above).  Valid values are "None",
-          empty string (""), or a valid IP address. Setting this to "None" makes a
-          "headless service" (no virtual IP), which is useful when direct endpoint
-          connections are preferred and proxying is not required.  Only applies to
-          types ClusterIP, NodePort, and LoadBalancer. If this field is specified
-          when creating a Service of type ExternalName, creation will fail. This
-          field will be wiped when updating a Service to type ExternalName.
-          More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-          +optional
-        type: string
-      clusterIPs:
-        description: |-
-          ClusterIPs is a list of IP addresses assigned to this service, and are
-          usually assigned randomly.  If an address is specified manually, is
-          in-range (as per system configuration), and is not in use, it will be
-          allocated to the service; otherwise creation of the service will fail.
-          This field may not be changed through updates unless the type field is
-          also being changed to ExternalName (which requires this field to be
-          empty) or the type field is being changed from ExternalName (in which
-          case this field may optionally be specified, as describe above).  Valid
-          values are "None", empty string (""), or a valid IP address.  Setting
-          this to "None" makes a "headless service" (no virtual IP), which is
-          useful when direct endpoint connections are preferred and proxying is
-          not required.  Only applies to types ClusterIP, NodePort, and
-          LoadBalancer. If this field is specified when creating a Service of type
-          ExternalName, creation will fail. This field will be wiped when updating
-          a Service to type ExternalName.  If this field is not specified, it will
-          be initialized from the clusterIP field.  If this field is specified,
-          clients must ensure that clusterIPs[0] and clusterIP have the same
-          value.
-
-          This field may hold a maximum of two entries (dual-stack IPs, in either order).
-          These IPs must correspond to the values of the ipFamilies field. Both
-          clusterIPs and ipFamilies are governed by the ipFamilyPolicy field.
-          More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-          +listType=atomic
-          +optional
-        items:
-          type: string
-        type: array
-      externalIPs:
-        description: |-
-          externalIPs is a list of IP addresses for which nodes in the cluster
-          will also accept traffic for this service.  These IPs are not managed by
-          Kubernetes.  The user is responsible for ensuring that traffic arrives
-          at a node with this IP.  A common example is external load-balancers
-          that are not part of the Kubernetes system.
-          +optional
-          +listType=atomic
-        items:
-          type: string
-        type: array
-      externalName:
-        description: |-
-          externalName is the external reference that discovery mechanisms will
-          return as an alias for this service (e.g. a DNS CNAME record). No
-          proxying will be involved.  Must be a lowercase RFC-1123 hostname
-          (https://tools.ietf.org/html/rfc1123) and requires `type` to be "ExternalName".
-          +optional
-        type: string
-      externalTrafficPolicy:
-        allOf:
-        - $ref: '#/definitions/v1.ServiceExternalTrafficPolicy'
-        description: |-
-          externalTrafficPolicy describes how nodes distribute service traffic they
-          receive on one of the Service's "externally-facing" addresses (NodePorts,
-          ExternalIPs, and LoadBalancer IPs). If set to "Local", the proxy will configure
-          the service in a way that assumes that external load balancers will take care
-          of balancing the service traffic between nodes, and so each node will deliver
-          traffic only to the node-local endpoints of the service, without masquerading
-          the client source IP. (Traffic mistakenly sent to a node with no endpoints will
-          be dropped.) The default value, "Cluster", uses the standard behavior of
-          routing to all endpoints evenly (possibly modified by topology and other
-          features). Note that traffic sent to an External IP or LoadBalancer IP from
-          within the cluster will always get "Cluster" semantics, but clients sending to
-          a NodePort from within the cluster may need to take traffic policy into account
-          when picking a node.
-          +optional
-      healthCheckNodePort:
-        description: |-
-          healthCheckNodePort specifies the healthcheck nodePort for the service.
-          This only applies when type is set to LoadBalancer and
-          externalTrafficPolicy is set to Local. If a value is specified, is
-          in-range, and is not in use, it will be used.  If not specified, a value
-          will be automatically allocated.  External systems (e.g. load-balancers)
-          can use this port to determine if a given node holds endpoints for this
-          service or not.  If this field is specified when creating a Service
-          which does not need it, creation will fail. This field will be wiped
-          when updating a Service to no longer need it (e.g. changing type).
-          This field cannot be updated once set.
-          +optional
-        type: integer
-      internalTrafficPolicy:
-        allOf:
-        - $ref: '#/definitions/v1.ServiceInternalTrafficPolicy'
-        description: |-
-          InternalTrafficPolicy describes how nodes distribute service traffic they
-          receive on the ClusterIP. If set to "Local", the proxy will assume that pods
-          only want to talk to endpoints of the service on the same node as the pod,
-          dropping the traffic if there are no local endpoints. The default value,
-          "Cluster", uses the standard behavior of routing to all endpoints evenly
-          (possibly modified by topology and other features).
-          +optional
-      ipFamilies:
-        description: |-
-          IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this
-          service. This field is usually assigned automatically based on cluster
-          configuration and the ipFamilyPolicy field. If this field is specified
-          manually, the requested family is available in the cluster,
-          and ipFamilyPolicy allows it, it will be used; otherwise creation of
-          the service will fail. This field is conditionally mutable: it allows
-          for adding or removing a secondary IP family, but it does not allow
-          changing the primary IP family of the Service. Valid values are "IPv4"
-          and "IPv6".  This field only applies to Services of types ClusterIP,
-          NodePort, and LoadBalancer, and does apply to "headless" services.
-          This field will be wiped when updating a Service to type ExternalName.
-
-          This field may hold a maximum of two entries (dual-stack families, in
-          either order).  These families must correspond to the values of the
-          clusterIPs field, if specified. Both clusterIPs and ipFamilies are
-          governed by the ipFamilyPolicy field.
-          +listType=atomic
-          +optional
-        items:
-          $ref: '#/definitions/v1.IPFamily'
-        type: array
-      ipFamilyPolicy:
-        allOf:
-        - $ref: '#/definitions/v1.IPFamilyPolicy'
-        description: |-
-          IPFamilyPolicy represents the dual-stack-ness requested or required by
-          this Service. If there is no value provided, then this field will be set
-          to SingleStack. Services can be "SingleStack" (a single IP family),
-          "PreferDualStack" (two IP families on dual-stack configured clusters or
-          a single IP family on single-stack clusters), or "RequireDualStack"
-          (two IP families on dual-stack configured clusters, otherwise fail). The
-          ipFamilies and clusterIPs fields depend on the value of this field. This
-          field will be wiped when updating a service to type ExternalName.
-          +optional
-      loadBalancerClass:
-        description: |-
-          loadBalancerClass is the class of the load balancer implementation this Service belongs to.
-          If specified, the value of this field must be a label-style identifier, with an optional prefix,
-          e.g. "internal-vip" or "example.com/internal-vip". Unprefixed names are reserved for end-users.
-          This field can only be set when the Service type is 'LoadBalancer'. If not set, the default load
-          balancer implementation is used, today this is typically done through the cloud provider integration,
-          but should apply for any default implementation. If set, it is assumed that a load balancer
-          implementation is watching for Services with a matching class. Any default load balancer
-          implementation (e.g. cloud providers) should ignore Services that set this field.
-          This field can only be set when creating or updating a Service to type 'LoadBalancer'.
-          Once set, it can not be changed. This field will be wiped when a service is updated to a non 'LoadBalancer' type.
-          +optional
-        type: string
-      loadBalancerIP:
-        description: |-
-          Only applies to Service Type: LoadBalancer.
-          This feature depends on whether the underlying cloud-provider supports specifying
-          the loadBalancerIP when a load balancer is created.
-          This field will be ignored if the cloud-provider does not support the feature.
-          Deprecated: This field was under-specified and its meaning varies across implementations.
-          Using it is non-portable and it may not support dual-stack.
-          Users are encouraged to use implementation-specific annotations when available.
-          +optional
-        type: string
-      loadBalancerSourceRanges:
-        description: |-
-          If specified and supported by the platform, this will restrict traffic through the cloud-provider
-          load-balancer will be restricted to the specified client IPs. This field will be ignored if the
-          cloud-provider does not support the feature."
-          More info: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
-          +optional
-          +listType=atomic
-        items:
-          type: string
-        type: array
-      ports:
-        description: |-
-          The list of ports that are exposed by this service.
-          More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-          +patchMergeKey=port
-          +patchStrategy=merge
-          +listType=map
-          +listMapKey=port
-          +listMapKey=protocol
-        items:
-          $ref: '#/definitions/v1.ServicePort'
-        type: array
-      publishNotReadyAddresses:
-        description: |-
-          publishNotReadyAddresses indicates that any agent which deals with endpoints for this
-          Service should disregard any indications of ready/not-ready.
-          The primary use case for setting this field is for a StatefulSet's Headless Service to
-          propagate SRV DNS records for its Pods for the purpose of peer discovery.
-          The Kubernetes controllers that generate Endpoints and EndpointSlice resources for
-          Services interpret this to mean that all endpoints are considered "ready" even if the
-          Pods themselves are not. Agents which consume only Kubernetes generated endpoints
-          through the Endpoints or EndpointSlice resources can safely assume this behavior.
-          +optional
-        type: boolean
-      selector:
-        additionalProperties:
-          type: string
-        description: |-
-          Route service traffic to pods with label keys and values matching this
-          selector. If empty or not present, the service is assumed to have an
-          external process managing its endpoints, which Kubernetes will not
-          modify. Only applies to types ClusterIP, NodePort, and LoadBalancer.
-          Ignored if type is ExternalName.
-          More info: https://kubernetes.io/docs/concepts/services-networking/service/
-          +optional
-          +mapType=atomic
-        type: object
-      sessionAffinity:
-        allOf:
-        - $ref: '#/definitions/v1.ServiceAffinity'
-        description: |-
-          Supports "ClientIP" and "None". Used to maintain session affinity.
-          Enable client IP based session affinity.
-          Must be ClientIP or None.
-          Defaults to None.
-          More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-          +optional
-      sessionAffinityConfig:
-        allOf:
-        - $ref: '#/definitions/v1.SessionAffinityConfig'
-        description: |-
-          sessionAffinityConfig contains the configurations of session affinity.
-          +optional
-      trafficDistribution:
-        description: |-
-          TrafficDistribution offers a way to express preferences for how traffic
-          is distributed to Service endpoints. Implementations can use this field
-          as a hint, but are not required to guarantee strict adherence. If the
-          field is not set, the implementation will apply its default routing
-          strategy. If set to "PreferClose", implementations should prioritize
-          endpoints that are in the same zone.
-          +featureGate=ServiceTrafficDistribution
-          +optional
-        type: string
-      type:
-        allOf:
-        - $ref: '#/definitions/v1.ServiceType'
-        description: |-
-          type determines how the Service is exposed. Defaults to ClusterIP. Valid
-          options are ExternalName, ClusterIP, NodePort, and LoadBalancer.
-          "ClusterIP" allocates a cluster-internal IP address for load-balancing
-          to endpoints. Endpoints are determined by the selector or if that is not
-          specified, by manual construction of an Endpoints object or
-          EndpointSlice objects. If clusterIP is "None", no virtual IP is
-          allocated and the endpoints are published as a set of endpoints rather
-          than a virtual IP.
-          "NodePort" builds on ClusterIP and allocates a port on every node which
-          routes to the same endpoints as the clusterIP.
-          "LoadBalancer" builds on NodePort and creates an external load-balancer
-          (if supported in the current cloud) which routes to the same endpoints
-          as the clusterIP.
-          "ExternalName" aliases this service to the specified externalName.
-          Several other fields do not apply to ExternalName services.
-          More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
-          +optional
-    type: object
-  v1.ServiceStatus:
-    properties:
-      conditions:
-        description: |-
-          Current service state
-          +optional
-          +patchMergeKey=type
-          +patchStrategy=merge
-          +listType=map
-          +listMapKey=type
-        items:
-          $ref: '#/definitions/v1.Condition'
-        type: array
-      loadBalancer:
-        allOf:
-        - $ref: '#/definitions/v1.LoadBalancerStatus'
-        description: |-
-          LoadBalancer contains the current status of the load-balancer,
-          if one is present.
-          +optional
-    type: object
-  v1.ServiceType:
-    enum:
-    - ClusterIP
-    - NodePort
-    - LoadBalancer
-    - ExternalName
-    type: string
-    x-enum-varnames:
-    - ServiceTypeClusterIP
-    - ServiceTypeNodePort
-    - ServiceTypeLoadBalancer
-    - ServiceTypeExternalName
-  v1.SessionAffinityConfig:
-    properties:
-      clientIP:
-        allOf:
-        - $ref: '#/definitions/v1.ClientIPConfig'
-        description: |-
-          clientIP contains the configurations of Client IP based session affinity.
-          +optional
-    type: object
   v1.Signal:
     enum:
     - SIGABRT
@@ -12818,621 +12301,6 @@ definitions:
           Standard list metadata.
           More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
     type: object
-  v2.ContainerResourceMetricSource:
-    properties:
-      container:
-        description: container is the name of the container in the pods of the scaling
-          target
-        type: string
-      name:
-        allOf:
-        - $ref: '#/definitions/v1.ResourceName'
-        description: name is the name of the resource in question.
-      target:
-        allOf:
-        - $ref: '#/definitions/v2.MetricTarget'
-        description: target specifies the target value for the given metric
-    type: object
-  v2.ContainerResourceMetricStatus:
-    properties:
-      container:
-        description: container is the name of the container in the pods of the scaling
-          target
-        type: string
-      current:
-        allOf:
-        - $ref: '#/definitions/v2.MetricValueStatus'
-        description: current contains the current value for the given metric
-      name:
-        allOf:
-        - $ref: '#/definitions/v1.ResourceName'
-        description: name is the name of the resource in question.
-    type: object
-  v2.CrossVersionObjectReference:
-    properties:
-      apiVersion:
-        description: |-
-          apiVersion is the API version of the referent
-          +optional
-        type: string
-      kind:
-        description: 'kind is the kind of the referent; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-        type: string
-      name:
-        description: 'name is the name of the referent; More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-        type: string
-    type: object
-  v2.ExternalMetricSource:
-    properties:
-      metric:
-        allOf:
-        - $ref: '#/definitions/v2.MetricIdentifier'
-        description: metric identifies the target metric by name and selector
-      target:
-        allOf:
-        - $ref: '#/definitions/v2.MetricTarget'
-        description: target specifies the target value for the given metric
-    type: object
-  v2.ExternalMetricStatus:
-    properties:
-      current:
-        allOf:
-        - $ref: '#/definitions/v2.MetricValueStatus'
-        description: current contains the current value for the given metric
-      metric:
-        allOf:
-        - $ref: '#/definitions/v2.MetricIdentifier'
-        description: metric identifies the target metric by name and selector
-    type: object
-  v2.HPAScalingPolicy:
-    properties:
-      periodSeconds:
-        description: |-
-          periodSeconds specifies the window of time for which the policy should hold true.
-          PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
-        type: integer
-      type:
-        allOf:
-        - $ref: '#/definitions/v2.HPAScalingPolicyType'
-        description: type is used to specify the scaling policy.
-      value:
-        description: |-
-          value contains the amount of change which is permitted by the policy.
-          It must be greater than zero
-        type: integer
-    type: object
-  v2.HPAScalingPolicyType:
-    enum:
-    - Pods
-    - Percent
-    type: string
-    x-enum-varnames:
-    - PodsScalingPolicy
-    - PercentScalingPolicy
-  v2.HPAScalingRules:
-    properties:
-      policies:
-        description: |-
-          policies is a list of potential scaling polices which can be used during scaling.
-          If not set, use the default values:
-          - For scale up: allow doubling the number of pods, or an absolute change of 4 pods in a 15s window.
-          - For scale down: allow all pods to be removed in a 15s window.
-          +listType=atomic
-          +optional
-        items:
-          $ref: '#/definitions/v2.HPAScalingPolicy'
-        type: array
-      selectPolicy:
-        allOf:
-        - $ref: '#/definitions/v2.ScalingPolicySelect'
-        description: |-
-          selectPolicy is used to specify which policy should be used.
-          If not set, the default value Max is used.
-          +optional
-      stabilizationWindowSeconds:
-        description: |-
-          stabilizationWindowSeconds is the number of seconds for which past recommendations should be
-          considered while scaling up or scaling down.
-          StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour).
-          If not set, use the default values:
-          - For scale up: 0 (i.e. no stabilization is done).
-          - For scale down: 300 (i.e. the stabilization window is 300 seconds long).
-          +optional
-        type: integer
-      tolerance:
-        allOf:
-        - $ref: '#/definitions/resource.Quantity'
-        description: |-
-          tolerance is the tolerance on the ratio between the current and desired
-          metric value under which no updates are made to the desired number of
-          replicas (e.g. 0.01 for 1%). Must be greater than or equal to zero. If not
-          set, the default cluster-wide tolerance is applied (by default 10%).
-
-          For example, if autoscaling is configured with a memory consumption target of 100Mi,
-          and scale-down and scale-up tolerances of 5% and 1% respectively, scaling will be
-          triggered when the actual consumption falls below 95Mi or exceeds 101Mi.
-
-          This is an alpha field and requires enabling the HPAConfigurableTolerance
-          feature gate.
-
-          +featureGate=HPAConfigurableTolerance
-          +optional
-    type: object
-  v2.HorizontalPodAutoscaler:
-    properties:
-      apiVersion:
-        description: |-
-          APIVersion defines the versioned schema of this representation of an object.
-          Servers should convert recognized schemas to the latest internal value, and
-          may reject unrecognized values.
-          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-          +optional
-        type: string
-      kind:
-        description: |-
-          Kind is a string value representing the REST resource this object represents.
-          Servers may infer this from the endpoint the client submits requests to.
-          Cannot be updated.
-          In CamelCase.
-          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-          +optional
-        type: string
-      metadata:
-        allOf:
-        - $ref: '#/definitions/v1.ObjectMeta'
-        description: |-
-          metadata is the standard object metadata.
-          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-          +optional
-      spec:
-        allOf:
-        - $ref: '#/definitions/v2.HorizontalPodAutoscalerSpec'
-        description: |-
-          spec is the specification for the behaviour of the autoscaler.
-          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
-          +optional
-      status:
-        allOf:
-        - $ref: '#/definitions/v2.HorizontalPodAutoscalerStatus'
-        description: |-
-          status is the current information about the autoscaler.
-          +optional
-    type: object
-  v2.HorizontalPodAutoscalerBehavior:
-    properties:
-      scaleDown:
-        allOf:
-        - $ref: '#/definitions/v2.HPAScalingRules'
-        description: |-
-          scaleDown is scaling policy for scaling Down.
-          If not set, the default value is to allow to scale down to minReplicas pods, with a
-          300 second stabilization window (i.e., the highest recommendation for
-          the last 300sec is used).
-          +optional
-      scaleUp:
-        allOf:
-        - $ref: '#/definitions/v2.HPAScalingRules'
-        description: |-
-          scaleUp is scaling policy for scaling Up.
-          If not set, the default value is the higher of:
-            * increase no more than 4 pods per 60 seconds
-            * double the number of pods per 60 seconds
-          No stabilization is used.
-          +optional
-    type: object
-  v2.HorizontalPodAutoscalerCondition:
-    properties:
-      lastTransitionTime:
-        description: |-
-          lastTransitionTime is the last time the condition transitioned from
-          one status to another
-          +optional
-        type: string
-      message:
-        description: |-
-          message is a human-readable explanation containing details about
-          the transition
-          +optional
-        type: string
-      reason:
-        description: |-
-          reason is the reason for the condition's last transition.
-          +optional
-        type: string
-      status:
-        allOf:
-        - $ref: '#/definitions/k8s_io_api_core_v1.ConditionStatus'
-        description: status is the status of the condition (True, False, Unknown)
-      type:
-        allOf:
-        - $ref: '#/definitions/v2.HorizontalPodAutoscalerConditionType'
-        description: type describes the current condition
-    type: object
-  v2.HorizontalPodAutoscalerConditionType:
-    enum:
-    - ScalingActive
-    - AbleToScale
-    - ScalingLimited
-    type: string
-    x-enum-varnames:
-    - ScalingActive
-    - AbleToScale
-    - ScalingLimited
-  v2.HorizontalPodAutoscalerSpec:
-    properties:
-      behavior:
-        allOf:
-        - $ref: '#/definitions/v2.HorizontalPodAutoscalerBehavior'
-        description: |-
-          behavior configures the scaling behavior of the target
-          in both Up and Down directions (scaleUp and scaleDown fields respectively).
-          If not set, the default HPAScalingRules for scale up and scale down are used.
-          +optional
-      maxReplicas:
-        description: |-
-          maxReplicas is the upper limit for the number of replicas to which the autoscaler can scale up.
-          It cannot be less that minReplicas.
-        type: integer
-      metrics:
-        description: |-
-          metrics contains the specifications for which to use to calculate the
-          desired replica count (the maximum replica count across all metrics will
-          be used).  The desired replica count is calculated multiplying the
-          ratio between the target value and the current value by the current
-          number of pods.  Ergo, metrics used must decrease as the pod count is
-          increased, and vice-versa.  See the individual metric source types for
-          more information about how each type of metric must respond.
-          If not set, the default metric will be set to 80% average CPU utilization.
-          +listType=atomic
-          +optional
-        items:
-          $ref: '#/definitions/v2.MetricSpec'
-        type: array
-      minReplicas:
-        description: |-
-          minReplicas is the lower limit for the number of replicas to which the autoscaler
-          can scale down.  It defaults to 1 pod.  minReplicas is allowed to be 0 if the
-          alpha feature gate HPAScaleToZero is enabled and at least one Object or External
-          metric is configured.  Scaling is active as long as at least one metric value is
-          available.
-          +optional
-        type: integer
-      scaleTargetRef:
-        allOf:
-        - $ref: '#/definitions/v2.CrossVersionObjectReference'
-        description: |-
-          scaleTargetRef points to the target resource to scale, and is used to the pods for which metrics
-          should be collected, as well as to actually change the replica count.
-    type: object
-  v2.HorizontalPodAutoscalerStatus:
-    properties:
-      conditions:
-        description: |-
-          conditions is the set of conditions required for this autoscaler to scale its target,
-          and indicates whether or not those conditions are met.
-          +patchMergeKey=type
-          +patchStrategy=merge
-          +listType=map
-          +listMapKey=type
-          +optional
-        items:
-          $ref: '#/definitions/v2.HorizontalPodAutoscalerCondition'
-        type: array
-      currentMetrics:
-        description: |-
-          currentMetrics is the last read state of the metrics used by this autoscaler.
-          +listType=atomic
-          +optional
-        items:
-          $ref: '#/definitions/v2.MetricStatus'
-        type: array
-      currentReplicas:
-        description: |-
-          currentReplicas is current number of replicas of pods managed by this autoscaler,
-          as last seen by the autoscaler.
-          +optional
-        type: integer
-      desiredReplicas:
-        description: |-
-          desiredReplicas is the desired number of replicas of pods managed by this autoscaler,
-          as last calculated by the autoscaler.
-        type: integer
-      lastScaleTime:
-        description: |-
-          lastScaleTime is the last time the HorizontalPodAutoscaler scaled the number of pods,
-          used by the autoscaler to control how often the number of pods is changed.
-          +optional
-        type: string
-      observedGeneration:
-        description: |-
-          observedGeneration is the most recent generation observed by this autoscaler.
-          +optional
-        type: integer
-    type: object
-  v2.MetricIdentifier:
-    properties:
-      name:
-        description: name is the name of the given metric
-        type: string
-      selector:
-        allOf:
-        - $ref: '#/definitions/v1.LabelSelector'
-        description: |-
-          selector is the string-encoded form of a standard kubernetes label selector for the given metric
-          When set, it is passed as an additional parameter to the metrics server for more specific metrics scoping.
-          When unset, just the metricName will be used to gather metrics.
-          +optional
-    type: object
-  v2.MetricSourceType:
-    enum:
-    - Object
-    - Pods
-    - Resource
-    - ContainerResource
-    - External
-    type: string
-    x-enum-varnames:
-    - ObjectMetricSourceType
-    - PodsMetricSourceType
-    - ResourceMetricSourceType
-    - ContainerResourceMetricSourceType
-    - ExternalMetricSourceType
-  v2.MetricSpec:
-    properties:
-      containerResource:
-        allOf:
-        - $ref: '#/definitions/v2.ContainerResourceMetricSource'
-        description: |-
-          containerResource refers to a resource metric (such as those specified in
-          requests and limits) known to Kubernetes describing a single container in
-          each pod of the current scale target (e.g. CPU or memory). Such metrics are
-          built in to Kubernetes, and have special scaling options on top of those
-          available to normal per-pod metrics using the "pods" source.
-          +optional
-      external:
-        allOf:
-        - $ref: '#/definitions/v2.ExternalMetricSource'
-        description: |-
-          external refers to a global metric that is not associated
-          with any Kubernetes object. It allows autoscaling based on information
-          coming from components running outside of cluster
-          (for example length of queue in cloud messaging service, or
-          QPS from loadbalancer running outside of cluster).
-          +optional
-      object:
-        allOf:
-        - $ref: '#/definitions/v2.ObjectMetricSource'
-        description: |-
-          object refers to a metric describing a single kubernetes object
-          (for example, hits-per-second on an Ingress object).
-          +optional
-      pods:
-        allOf:
-        - $ref: '#/definitions/v2.PodsMetricSource'
-        description: |-
-          pods refers to a metric describing each pod in the current scale target
-          (for example, transactions-processed-per-second).  The values will be
-          averaged together before being compared to the target value.
-          +optional
-      resource:
-        allOf:
-        - $ref: '#/definitions/v2.ResourceMetricSource'
-        description: |-
-          resource refers to a resource metric (such as those specified in
-          requests and limits) known to Kubernetes describing each pod in the
-          current scale target (e.g. CPU or memory). Such metrics are built in to
-          Kubernetes, and have special scaling options on top of those available
-          to normal per-pod metrics using the "pods" source.
-          +optional
-      type:
-        allOf:
-        - $ref: '#/definitions/v2.MetricSourceType'
-        description: |-
-          type is the type of metric source.  It should be one of "ContainerResource", "External",
-          "Object", "Pods" or "Resource", each mapping to a matching field in the object.
-    type: object
-  v2.MetricStatus:
-    properties:
-      containerResource:
-        allOf:
-        - $ref: '#/definitions/v2.ContainerResourceMetricStatus'
-        description: |-
-          container resource refers to a resource metric (such as those specified in
-          requests and limits) known to Kubernetes describing a single container in each pod in the
-          current scale target (e.g. CPU or memory). Such metrics are built in to
-          Kubernetes, and have special scaling options on top of those available
-          to normal per-pod metrics using the "pods" source.
-          +optional
-      external:
-        allOf:
-        - $ref: '#/definitions/v2.ExternalMetricStatus'
-        description: |-
-          external refers to a global metric that is not associated
-          with any Kubernetes object. It allows autoscaling based on information
-          coming from components running outside of cluster
-          (for example length of queue in cloud messaging service, or
-          QPS from loadbalancer running outside of cluster).
-          +optional
-      object:
-        allOf:
-        - $ref: '#/definitions/v2.ObjectMetricStatus'
-        description: |-
-          object refers to a metric describing a single kubernetes object
-          (for example, hits-per-second on an Ingress object).
-          +optional
-      pods:
-        allOf:
-        - $ref: '#/definitions/v2.PodsMetricStatus'
-        description: |-
-          pods refers to a metric describing each pod in the current scale target
-          (for example, transactions-processed-per-second).  The values will be
-          averaged together before being compared to the target value.
-          +optional
-      resource:
-        allOf:
-        - $ref: '#/definitions/v2.ResourceMetricStatus'
-        description: |-
-          resource refers to a resource metric (such as those specified in
-          requests and limits) known to Kubernetes describing each pod in the
-          current scale target (e.g. CPU or memory). Such metrics are built in to
-          Kubernetes, and have special scaling options on top of those available
-          to normal per-pod metrics using the "pods" source.
-          +optional
-      type:
-        allOf:
-        - $ref: '#/definitions/v2.MetricSourceType'
-        description: |-
-          type is the type of metric source.  It will be one of "ContainerResource", "External",
-          "Object", "Pods" or "Resource", each corresponds to a matching field in the object.
-    type: object
-  v2.MetricTarget:
-    properties:
-      averageUtilization:
-        description: |-
-          averageUtilization is the target value of the average of the
-          resource metric across all relevant pods, represented as a percentage of
-          the requested value of the resource for the pods.
-          Currently only valid for Resource metric source type
-          +optional
-        type: integer
-      averageValue:
-        allOf:
-        - $ref: '#/definitions/resource.Quantity'
-        description: |-
-          averageValue is the target value of the average of the
-          metric across all relevant pods (as a quantity)
-          +optional
-      type:
-        allOf:
-        - $ref: '#/definitions/v2.MetricTargetType'
-        description: type represents whether the metric type is Utilization, Value,
-          or AverageValue
-      value:
-        allOf:
-        - $ref: '#/definitions/resource.Quantity'
-        description: |-
-          value is the target value of the metric (as a quantity).
-          +optional
-    type: object
-  v2.MetricTargetType:
-    enum:
-    - Utilization
-    - Value
-    - AverageValue
-    type: string
-    x-enum-varnames:
-    - UtilizationMetricType
-    - ValueMetricType
-    - AverageValueMetricType
-  v2.MetricValueStatus:
-    properties:
-      averageUtilization:
-        description: |-
-          currentAverageUtilization is the current value of the average of the
-          resource metric across all relevant pods, represented as a percentage of
-          the requested value of the resource for the pods.
-          +optional
-        type: integer
-      averageValue:
-        allOf:
-        - $ref: '#/definitions/resource.Quantity'
-        description: |-
-          averageValue is the current value of the average of the
-          metric across all relevant pods (as a quantity)
-          +optional
-      value:
-        allOf:
-        - $ref: '#/definitions/resource.Quantity'
-        description: |-
-          value is the current value of the metric (as a quantity).
-          +optional
-    type: object
-  v2.ObjectMetricSource:
-    properties:
-      describedObject:
-        allOf:
-        - $ref: '#/definitions/v2.CrossVersionObjectReference'
-        description: describedObject specifies the descriptions of a object,such as
-          kind,name apiVersion
-      metric:
-        allOf:
-        - $ref: '#/definitions/v2.MetricIdentifier'
-        description: metric identifies the target metric by name and selector
-      target:
-        allOf:
-        - $ref: '#/definitions/v2.MetricTarget'
-        description: target specifies the target value for the given metric
-    type: object
-  v2.ObjectMetricStatus:
-    properties:
-      current:
-        allOf:
-        - $ref: '#/definitions/v2.MetricValueStatus'
-        description: current contains the current value for the given metric
-      describedObject:
-        allOf:
-        - $ref: '#/definitions/v2.CrossVersionObjectReference'
-        description: DescribedObject specifies the descriptions of a object,such as
-          kind,name apiVersion
-      metric:
-        allOf:
-        - $ref: '#/definitions/v2.MetricIdentifier'
-        description: metric identifies the target metric by name and selector
-    type: object
-  v2.PodsMetricSource:
-    properties:
-      metric:
-        allOf:
-        - $ref: '#/definitions/v2.MetricIdentifier'
-        description: metric identifies the target metric by name and selector
-      target:
-        allOf:
-        - $ref: '#/definitions/v2.MetricTarget'
-        description: target specifies the target value for the given metric
-    type: object
-  v2.PodsMetricStatus:
-    properties:
-      current:
-        allOf:
-        - $ref: '#/definitions/v2.MetricValueStatus'
-        description: current contains the current value for the given metric
-      metric:
-        allOf:
-        - $ref: '#/definitions/v2.MetricIdentifier'
-        description: metric identifies the target metric by name and selector
-    type: object
-  v2.ResourceMetricSource:
-    properties:
-      name:
-        allOf:
-        - $ref: '#/definitions/v1.ResourceName'
-        description: name is the name of the resource in question.
-      target:
-        allOf:
-        - $ref: '#/definitions/v2.MetricTarget'
-        description: target specifies the target value for the given metric
-    type: object
-  v2.ResourceMetricStatus:
-    properties:
-      current:
-        allOf:
-        - $ref: '#/definitions/v2.MetricValueStatus'
-        description: current contains the current value for the given metric
-      name:
-        allOf:
-        - $ref: '#/definitions/v1.ResourceName'
-        description: name is the name of the resource in question.
-    type: object
-  v2.ScalingPolicySelect:
-    enum:
-    - Max
-    - Min
-    - Disabled
-    type: string
-    x-enum-varnames:
-    - MaxChangePolicySelect
-    - MinChangePolicySelect
-    - DisabledPolicySelect
   webhooks.webhookCreatePayload:
     properties:
       endpointID:
@@ -13529,7 +12397,7 @@ info:
 
     **NOTE**: You can find more information on how to query the Docker API in the [Docker official documentation](https://docs.docker.com/engine/api/v1.30/) as well as in [this Portainer example](https://documentation.portainer.io/api/api-examples/).
   title: PortainerEE API
-  version: 2.35.0
+  version: 2.36.0
 paths:
   /auth:
     post:
@@ -17180,10 +16048,6 @@ paths:
         in: query
         name: excludeSnapshots
         type: boolean
-      - description: if true, the SnapshotRaw field won't be retrieved
-        in: query
-        name: excludeSnapshotRaw
-        type: boolean
       - description: will return only environments(endpoints) with this name
         in: query
         name: name
@@ -17399,10 +16263,6 @@ paths:
       - description: if true, the snapshot data won't be retrieved
         in: query
         name: excludeSnapshot
-        type: boolean
-      - description: if true, the SnapshotRaw field won't be retrieved
-        in: query
-        name: excludeSnapshotRaw
         type: boolean
       produces:
       - application/json
@@ -19133,12 +17993,352 @@ paths:
       summary: Delete Cron Jobs
       tags:
       - kubernetes
-  /kubernetes/{id}/customresource:
+  /kubernetes/{id}/customresourcedefinitions:
+    get:
+      description: |-
+        Get a list of kubernetes Custom Resource Definitions that the user has access to.
+        **Access policy**: Authenticated user.
+      operationId: getKubernetesCustomResourceDefinitions
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/models.K8sCustomResourceDefinition'
+            type: array
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve the custom
+            resource definitions.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a list of kubernetes Custom Resource Definitions
+      tags:
+      - kubernetes
+  /kubernetes/{id}/customresourcedefinitions/{name}:
+    delete:
+      description: |-
+        Delete a kubernetes Custom Resource Definition.
+        **Access policy**: Authenticated user.
+      operationId: deleteKubernetesCustomResourceDefinition
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The name of the Custom Resource Definition to delete.
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No content.
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to delete the custom
+            resource definition.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Delete a kubernetes Custom Resource Definition
+      tags:
+      - kubernetes
+    get:
+      description: |-
+        Get a kubernetes Custom Resource Definition.
+        **Access policy**: Authenticated user.
+      operationId: getKubernetesCustomResourceDefinition
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The name of the Custom Resource Definition to get.
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/models.K8sCustomResourceDefinition'
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve the custom
+            resource definition.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a kubernetes Custom Resource Definition
+      tags:
+      - kubernetes
+  /kubernetes/{id}/customresources:
     get:
       description: |-
         Get a list of kubernetes Custom Resources that the user has access to.
         **Access policy**: Authenticated user.
-      operationId: getKubernetesCustomResource
+      operationId: getKubernetesAllCustomResources
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The CustomResourceDefinition name of the custom resource, e.g.
+          'clusters.postgresql.cnpg.io'
+        in: query
+        name: definition
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/models.K8sCustomResource'
+            type: array
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve the custom
+            resources.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a list of kubernetes Custom Resources
+      tags:
+      - kubernetes
+  /kubernetes/{id}/customresources/{name}:
+    delete:
+      description: |-
+        Delete a cluster-scoped kubernetes Custom Resource that the user has access to.
+        **Access policy**: Authenticated user.
+      operationId: deleteKubernetesClusterScopedCustomResource
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The name of the custom resource, e.g. 'pg-cluster'
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: The CustomResourceDefinition name of the custom resource, e.g.
+          'clusters.postgresql.cnpg.io'
+        in: query
+        name: definition
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to delete the custom
+            resource.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Delete a cluster-scoped kubernetes Custom Resource
+      tags:
+      - kubernetes
+    get:
+      description: |-
+        Get a cluster-scoped kubernetes Custom Resource that the user has access to.
+        **Access policy**: Authenticated user.
+      operationId: getKubernetesClusterScopedCustomResource
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The name of the custom resource, e.g. 'pg-cluster'
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: The CustomResourceDefinition name of the custom resource, e.g.
+          'clusters.postgresql.cnpg.io'
+        in: query
+        name: definition
+        required: true
+        type: string
+      - description: The format of the custom resource, e.g. 'yaml' or 'json'
+        in: query
+        name: format
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/unstructured.Unstructured'
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to retrieve the custom
+            resource.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Get a cluster-scoped kubernetes Custom Resource
+      tags:
+      - kubernetes
+  /kubernetes/{id}/customresources/{namespace}/{name}:
+    delete:
+      description: |-
+        Delete a namespaced kubernetes Custom Resource that the user has access to.
+        **Access policy**: Authenticated user.
+      operationId: deleteKubernetesNamespacedCustomResource
+      parameters:
+      - description: Environment identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: The namespace name to delete the custom resource from
+        in: path
+        name: namespace
+        required: true
+        type: string
+      - description: The name of the custom resource, e.g. 'pg-cluster'
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: The CustomResourceDefinition name of the custom resource, e.g.
+          'clusters.postgresql.cnpg.io'
+        in: query
+        name: definition
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Invalid request payload, such as missing required fields or
+            fields not meeting validation criteria.
+        "401":
+          description: Unauthorized access - the user is not authenticated or does
+            not have the necessary permissions. Ensure that you have provided a valid
+            API key or JWT token, and that you have the required permissions.
+        "403":
+          description: Permission denied - the user is authenticated but does not
+            have the necessary permissions to access the requested resource or perform
+            the specified operation. Check your user roles and permissions.
+        "404":
+          description: Unable to find an environment with the specified identifier.
+        "500":
+          description: Server error occurred while attempting to delete the custom
+            resource.
+      security:
+      - ApiKeyAuth: []
+        jwt: []
+      summary: Delete a namespaced kubernetes Custom Resource
+      tags:
+      - kubernetes
+    get:
+      description: |-
+        Get a list of kubernetes Custom Resources that the user has access to.
+        **Access policy**: Authenticated user.
+      operationId: getKubernetesNamespacedCustomResource
       parameters:
       - description: Environment identifier
         in: path
@@ -19155,14 +18355,10 @@ paths:
         name: name
         required: true
         type: string
-      - description: The API version of the custom resource, e.g. 'postgresql.cnpg.io/v1'
-        in: path
-        name: apiVersion
-        required: true
-        type: string
-      - description: The plural name of the custom resource, e.g. 'clusters'
-        in: path
-        name: plural
+      - description: The CustomResourceDefinition name of the custom resource, e.g.
+          'clusters.postgresql.cnpg.io'
+        in: query
+        name: definition
         required: true
         type: string
       - description: The format of the custom resource, e.g. 'yaml' or 'json'
@@ -22461,6 +21657,7 @@ paths:
     post:
       consumes:
       - application/json
+      deprecated: true
       description: |-
         Enable Portainer's OpenAMT capabilities
         **Access policy**: administrator
@@ -22490,6 +21687,7 @@ paths:
       - intel
   /open_amt/{id}/activate:
     post:
+      deprecated: true
       description: |-
         Activate OpenAMT device and associate to agent endpoint
         **Access policy**: administrator
@@ -22518,6 +21716,7 @@ paths:
       - intel
   /open_amt/{id}/devices:
     get:
+      deprecated: true
       description: |-
         Fetch OpenAMT managed devices information for endpoint
         **Access policy**: administrator
@@ -22548,6 +21747,7 @@ paths:
     post:
       consumes:
       - application/json
+      deprecated: true
       description: |-
         Execute out of band action on an AMT managed device
         **Access policy**: administrator
@@ -22589,6 +21789,7 @@ paths:
     post:
       consumes:
       - application/json
+      deprecated: true
       description: |-
         Enable features on an AMT managed device
         **Access policy**: administrator
@@ -22628,6 +21829,7 @@ paths:
       - intel
   /open_amt/{id}/info:
     get:
+      deprecated: true
       description: |-
         Request OpenAMT info from a node
         **Access policy**: administrator
@@ -22966,6 +22168,38 @@ paths:
       - ApiKeyAuth: []
         jwt: []
       summary: Delete repository tags
+      tags:
+      - registries
+  /registries/ping:
+    post:
+      consumes:
+      - application/json
+      description: |-
+        Test connection to a registry with provided credentials
+        **Access policy**: authenticated
+      operationId: RegistryPing
+      parameters:
+      - description: Registry credentials to test
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/registries.registryPingPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/registries.registryPingResponse'
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      security:
+      - ApiKeyAuth: []
+      - jwt: []
+      summary: Test registry connection
       tags:
       - registries
   /resource_controls:
@@ -25328,6 +24562,20 @@ paths:
         in: query
         name: keyword
         type: string
+      - collectionFormat: csv
+        description: Filter by context
+        in: query
+        items:
+          type: string
+        name: context
+        type: array
+      - collectionFormat: csv
+        description: Filter by usernames
+        in: query
+        items:
+          type: string
+        name: username
+        type: array
       produces:
       - application/json
       responses:

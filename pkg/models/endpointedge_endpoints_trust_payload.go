@@ -7,9 +7,12 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // EndpointedgeEndpointsTrustPayload endpointedge endpoints trust payload
@@ -19,15 +22,81 @@ type EndpointedgeEndpointsTrustPayload struct {
 
 	// endpoint i ds
 	EndpointIDs []int64 `json:"endpointIDs"`
+
+	// relations
+	Relations map[string]EndpointedgeEndpointTrustUpdateRelation `json:"relations,omitempty"`
 }
 
 // Validate validates this endpointedge endpoints trust payload
 func (m *EndpointedgeEndpointsTrustPayload) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateRelations(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this endpointedge endpoints trust payload based on context it is used
+func (m *EndpointedgeEndpointsTrustPayload) validateRelations(formats strfmt.Registry) error {
+	if swag.IsZero(m.Relations) { // not required
+		return nil
+	}
+
+	for k := range m.Relations {
+
+		if err := validate.Required("relations"+"."+k, "body", m.Relations[k]); err != nil {
+			return err
+		}
+		if val, ok := m.Relations[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("relations" + "." + k)
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("relations" + "." + k)
+				}
+
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this endpointedge endpoints trust payload based on the context it is used
 func (m *EndpointedgeEndpointsTrustPayload) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateRelations(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EndpointedgeEndpointsTrustPayload) contextValidateRelations(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.Relations {
+
+		if val, ok := m.Relations[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

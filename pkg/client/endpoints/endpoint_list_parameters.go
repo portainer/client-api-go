@@ -116,12 +116,6 @@ type EndpointListParams struct {
 	*/
 	ExcludeIds []int64
 
-	/* ExcludeSnapshotRaw.
-
-	   if true, the SnapshotRaw field won't be retrieved
-	*/
-	ExcludeSnapshotRaw *bool
-
 	/* ExcludeSnapshots.
 
 	   if true, the snapshot data won't be retrieved
@@ -362,17 +356,6 @@ func (o *EndpointListParams) WithExcludeIds(excludeIds []int64) *EndpointListPar
 // SetExcludeIds adds the excludeIds to the endpoint list params
 func (o *EndpointListParams) SetExcludeIds(excludeIds []int64) {
 	o.ExcludeIds = excludeIds
-}
-
-// WithExcludeSnapshotRaw adds the excludeSnapshotRaw to the endpoint list params
-func (o *EndpointListParams) WithExcludeSnapshotRaw(excludeSnapshotRaw *bool) *EndpointListParams {
-	o.SetExcludeSnapshotRaw(excludeSnapshotRaw)
-	return o
-}
-
-// SetExcludeSnapshotRaw adds the excludeSnapshotRaw to the endpoint list params
-func (o *EndpointListParams) SetExcludeSnapshotRaw(excludeSnapshotRaw *bool) {
-	o.ExcludeSnapshotRaw = excludeSnapshotRaw
 }
 
 // WithExcludeSnapshots adds the excludeSnapshots to the endpoint list params
@@ -668,23 +651,6 @@ func (o *EndpointListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		// query array param excludeIds
 		if err := r.SetQueryParam("excludeIds", joinedExcludeIds...); err != nil {
 			return err
-		}
-	}
-
-	if o.ExcludeSnapshotRaw != nil {
-
-		// query param excludeSnapshotRaw
-		var qrExcludeSnapshotRaw bool
-
-		if o.ExcludeSnapshotRaw != nil {
-			qrExcludeSnapshotRaw = *o.ExcludeSnapshotRaw
-		}
-		qExcludeSnapshotRaw := swag.FormatBool(qrExcludeSnapshotRaw)
-		if qExcludeSnapshotRaw != "" {
-
-			if err := r.SetQueryParam("excludeSnapshotRaw", qExcludeSnapshotRaw); err != nil {
-				return err
-			}
 		}
 	}
 

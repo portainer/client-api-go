@@ -92,9 +92,6 @@ type ModelsK8sApplication struct {
 	// service type
 	ServiceType string `json:"ServiceType,omitempty"`
 
-	// services
-	Services []*V1Service `json:"Services"`
-
 	// stack Id
 	StackID string `json:"StackId,omitempty"`
 
@@ -132,10 +129,6 @@ func (m *ModelsK8sApplication) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateResource(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateServices(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -281,36 +274,6 @@ func (m *ModelsK8sApplication) validateResource(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ModelsK8sApplication) validateServices(formats strfmt.Registry) error {
-	if swag.IsZero(m.Services) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Services); i++ {
-		if swag.IsZero(m.Services[i]) { // not required
-			continue
-		}
-
-		if m.Services[i] != nil {
-			if err := m.Services[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
-					return ve.ValidateName("Services" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
-					return ce.ValidateName("Services" + "." + strconv.Itoa(i))
-				}
-
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 // ContextValidate validate this models k8s application based on the context it is used
 func (m *ModelsK8sApplication) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -332,10 +295,6 @@ func (m *ModelsK8sApplication) ContextValidate(ctx context.Context, formats strf
 	}
 
 	if err := m.contextValidateResource(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateServices(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -477,35 +436,6 @@ func (m *ModelsK8sApplication) contextValidateResource(ctx context.Context, form
 
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *ModelsK8sApplication) contextValidateServices(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Services); i++ {
-
-		if m.Services[i] != nil {
-
-			if swag.IsZero(m.Services[i]) { // not required
-				return nil
-			}
-
-			if err := m.Services[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
-					return ve.ValidateName("Services" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
-					return ce.ValidateName("Services" + "." + strconv.Itoa(i))
-				}
-
-				return err
-			}
-		}
-
 	}
 
 	return nil

@@ -23,8 +23,14 @@ type KubernetesCustomResourceMetadata struct {
 	// kind
 	Kind string `json:"kind,omitempty"`
 
+	// name
+	Name string `json:"name,omitempty"`
+
 	// plural
 	Plural string `json:"plural,omitempty"`
+
+	// scope
+	Scope string `json:"scope,omitempty"`
 }
 
 // Validate validates this kubernetes custom resource metadata

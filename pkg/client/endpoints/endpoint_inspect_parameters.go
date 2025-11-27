@@ -68,12 +68,6 @@ type EndpointInspectParams struct {
 	*/
 	ExcludeSnapshot *bool
 
-	/* ExcludeSnapshotRaw.
-
-	   if true, the SnapshotRaw field won't be retrieved
-	*/
-	ExcludeSnapshotRaw *bool
-
 	/* ID.
 
 	   Environment(Endpoint) identifier
@@ -144,17 +138,6 @@ func (o *EndpointInspectParams) SetExcludeSnapshot(excludeSnapshot *bool) {
 	o.ExcludeSnapshot = excludeSnapshot
 }
 
-// WithExcludeSnapshotRaw adds the excludeSnapshotRaw to the endpoint inspect params
-func (o *EndpointInspectParams) WithExcludeSnapshotRaw(excludeSnapshotRaw *bool) *EndpointInspectParams {
-	o.SetExcludeSnapshotRaw(excludeSnapshotRaw)
-	return o
-}
-
-// SetExcludeSnapshotRaw adds the excludeSnapshotRaw to the endpoint inspect params
-func (o *EndpointInspectParams) SetExcludeSnapshotRaw(excludeSnapshotRaw *bool) {
-	o.ExcludeSnapshotRaw = excludeSnapshotRaw
-}
-
 // WithID adds the id to the endpoint inspect params
 func (o *EndpointInspectParams) WithID(id int64) *EndpointInspectParams {
 	o.SetID(id)
@@ -186,23 +169,6 @@ func (o *EndpointInspectParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		if qExcludeSnapshot != "" {
 
 			if err := r.SetQueryParam("excludeSnapshot", qExcludeSnapshot); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.ExcludeSnapshotRaw != nil {
-
-		// query param excludeSnapshotRaw
-		var qrExcludeSnapshotRaw bool
-
-		if o.ExcludeSnapshotRaw != nil {
-			qrExcludeSnapshotRaw = *o.ExcludeSnapshotRaw
-		}
-		qExcludeSnapshotRaw := swag.FormatBool(qrExcludeSnapshotRaw)
-		if qExcludeSnapshotRaw != "" {
-
-			if err := r.SetQueryParam("excludeSnapshotRaw", qExcludeSnapshotRaw); err != nil {
 				return err
 			}
 		}
