@@ -1,6 +1,6 @@
 # Portainer Client GO SDK
 
-Swagger-generated client SDK in Golang for Portainer.
+Swagger-generated client SDK in Golang for the [Portainer Business Edition](https://www.portainer.io/features) API.
 
 ## Installation
 
@@ -105,14 +105,12 @@ See the `example/swagger/client.go` file for a complete example using the Swagge
 
 To use the latest version of the Portainer API, you must regenerate the underlying API client using Swagger.
 
-1. Install the Swagger CLI:
+The Swagger CLI version is pinned in [`tools/go.mod`](./tools/go.mod) and invoked transparently by the `Makefile` — there is no need to install it manually. The pinned version is downloaded on first use and cached by the Go build cache for subsequent runs.
 
-```sh
-go install github.com/go-swagger/go-swagger/cmd/swagger@latest
-```
-
-2. Generate the client (adjust the VERSION parameter as needed):
+Generate the client (adjust the VERSION parameter as needed):
 
 ```sh
 make generate-client VERSION=2.31.2
 ```
+
+To bump the pinned Swagger CLI version, run `go get github.com/go-swagger/go-swagger/cmd/swagger@vX.Y.Z` from inside `tools/` and commit the resulting `tools/go.mod` and `tools/go.sum`.

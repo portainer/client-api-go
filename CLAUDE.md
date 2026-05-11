@@ -28,11 +28,7 @@ make test
 go test ./...
 ```
 
-Regenerating requires `go-swagger` on `$PATH`:
-
-```sh
-go install github.com/go-swagger/go-swagger/cmd/swagger@latest
-```
+The Swagger CLI is pinned in `tools/go.mod` (a separate submodule, so its dependency graph does not leak into the SDK's runtime deps) and invoked by the Makefile via `go run -modfile=tools/go.mod ...`. No manual install or `$PATH` setup is required.
 
 ## Architecture
 

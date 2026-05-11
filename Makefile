@@ -11,7 +11,10 @@ help:
 generate-client:
 	@echo "Generating client for Portainer API version $(VERSION)"
 	curl -o swagger.yaml https://api.swaggerhub.com/apis/portainer/portainer-ee/$(VERSION)/swagger.yaml
-	swagger generate client -f swagger.yaml -A portainer-client-api --principal portainer --skip-validation --target=pkg --client-package=client --model-package=models
+	# --skip-validation: the upstream Portainer EE swagger spec contains OpenAPI 2.0
+	# violations that abort `swagger generate` if validation runs. Remove this flag
+	# once the upstream spec has been cleaned up.
+	go run -modfile=tools/go.mod github.com/go-swagger/go-swagger/cmd/swagger generate client -f swagger.yaml -A portainer-client-api --principal portainer --skip-validation --target=pkg --client-package=client --model-package=models
 	@echo "Client generation complete"
 
 test:
