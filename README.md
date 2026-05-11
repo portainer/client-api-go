@@ -24,6 +24,13 @@ go get -u github.com/portainer/client-api-go/v2@v2.31.2
 
 Available versions can be found at: https://github.com/portainer/client-api-go/tags
 
+## Versioning
+
+Each SDK tag matches the Portainer server version it targets. Installing `v2.31.2` of the SDK gives you a client generated from the Portainer 2.31.2 swagger spec.
+
+The `/v2` in the module path is a Go [Semantic Import Versioning](https://go.dev/ref/mod#major-version-suffixes) requirement, not a marker of "SDK API v2".
+
+
 ## Using the Client SDK
 
 There are two ways to use the SDK:
