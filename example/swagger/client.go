@@ -17,7 +17,7 @@ import (
 func main() {
 	// Create a transport with TLS verification disabled
 	transport := httptransport.New(
-		"170.64.222.231:9443",
+		"portainer.dev.local",
 		"/api",
 		[]string{"https"},
 	)
@@ -32,7 +32,7 @@ func main() {
 
 	// API key authentication
 	apiKeyAuth := runtime.ClientAuthInfoWriterFunc(func(r runtime.ClientRequest, _ strfmt.Registry) error {
-		return r.SetHeaderParam("x-api-key", "ptr_ti2+v9lINWRIWqyKnWsg+ZU7mQ+i9vgJNp4eqvMIMNg=")
+		return r.SetHeaderParam("x-api-key", "ptr_XXXYYYZZZ")
 	})
 	transport.DefaultAuthentication = apiKeyAuth
 
